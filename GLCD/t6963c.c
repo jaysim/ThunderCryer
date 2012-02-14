@@ -367,9 +367,9 @@ void GLCD_Initalize(void)
 	GLCD_WriteData(0x00);
 	GLCD_WriteCommand(T6963_SET_TEXT_AREA);
 
-	//GLCD_WriteData(GLCD_OFFSET_REGISTER);
-	//GLCD_WriteData(0x00);
-	//GLCD_WriteCommand(T6963_SET_OFFSET_REGISTER);
+	GLCD_WriteData(GLCD_OFFSET_REGISTER);
+	GLCD_WriteData(0x00);
+	GLCD_WriteCommand(T6963_SET_OFFSET_REGISTER);
 
 	GLCD_WriteCommand(T6963_MODE_SET | 0);
 
