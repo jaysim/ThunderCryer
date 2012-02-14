@@ -5,6 +5,7 @@
   * @version   	V0.0.0
   * @date      	14.02.12
   * @brief		main program file for Project: ThunderCryer
+  ******************************************************************************
   */
 
 #include "FreeRTOS.h"
