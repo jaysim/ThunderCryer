@@ -8,6 +8,7 @@
   */
 
 #include "FreeRTOS.h"
+#include "task.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_conf.h"
@@ -37,6 +38,14 @@ void vLedTask(void* pvParameter);
   */
 int main(void){
 	vHardwareInit();
+
+	xTaskCreate( vLedTask, (const signed char*)"LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+
+
+	/**
+	 * now FreeRTOS takes control of execution
+	 */
+	vTaskStartScheduler();
 
 }
 
@@ -87,36 +96,37 @@ void vLedTask(void* pvParameter){
 		switch(ledState){
 		case LED_Up:
 			STM_EVAL_LEDOn(LED3);
-			STM_EVAL_LEDOff(LED4);
 			STM_EVAL_LEDOff(LED5);
 			STM_EVAL_LEDOff(LED6);
+			STM_EVAL_LEDOff(LED4);
 			ledState = LED_Right;
 			break;
 		case LED_Right:
-			STM_EVAL_LEDOn(LED5);
 			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOff(LED4);
+			STM_EVAL_LEDOn(LED5);
 			STM_EVAL_LEDOff(LED6);
+			STM_EVAL_LEDOff(LED4);
 			ledState = LED_Down;
 			break;
 		case LED_Down:
-			STM_EVAL_LEDOn(LED6);
 			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOff(LED4);
 			STM_EVAL_LEDOff(LED5);
+			STM_EVAL_LEDOn(LED6);
+			STM_EVAL_LEDOff(LED4);
 			ledState = LED_Left;
 			break;
 		case LED_Left:
-			STM_EVAL_LEDOn(LED4);
 			STM_EVAL_LEDOff(LED3);
 			STM_EVAL_LEDOff(LED5);
 			STM_EVAL_LEDOff(LED6);
+			STM_EVAL_LEDOn(LED4);
 			ledState = LED_Up;
 			break;
 		default:
 			ledState = LED_Up;
 			break;
 		}
+		vTaskDelay(500); // 500ms delay
 
 	}
 }
