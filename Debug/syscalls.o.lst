@@ -1,0 +1,938 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"syscalls.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._exit,"ax",%progbits
+  19              		.align	1
+  20              		.global	_exit
+  21              		.thumb
+  22              		.thumb_func
+  24              	_exit:
+  25              	.LFB110:
+  26              		.file 1 "../syscalls.c"
+   1:../syscalls.c **** #include "syscalls.h"
+   2:../syscalls.c **** #include "stm32f4xx.h"
+   3:../syscalls.c **** #include "FreeRTOS.h"
+   4:../syscalls.c **** #include <unistd.h>
+   5:../syscalls.c **** #include <stdlib.h>
+   6:../syscalls.c **** #include <errno.h>
+   7:../syscalls.c **** #include <string.h>
+   8:../syscalls.c **** #include <sys/stat.h>
+   9:../syscalls.c **** #include <sys/time.h>
+  10:../syscalls.c **** 
+  11:../syscalls.c **** size_t   __malloc_margin = 256;
+  12:../syscalls.c **** char    *__brkval;
+  13:../syscalls.c **** 
+  14:../syscalls.c **** void _exit(int code)
+  15:../syscalls.c **** {
+  27              		.loc 1 15 0
+  28              		.cfi_startproc
+  29              		@ Volatile: function does not return.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34              	.L2:
+  35 0000 FEE7     		b	.L2
+  36              		.cfi_endproc
+  37              	.LFE110:
+  39              		.section	.text._read_r,"ax",%progbits
+  40              		.align	1
+  41              		.global	_read_r
+  42              		.thumb
+  43              		.thumb_func
+  45              	_read_r:
+  46              	.LFB111:
+  16:../syscalls.c ****     for (;;);
+  17:../syscalls.c **** }
+  18:../syscalls.c **** 
+  19:../syscalls.c **** 
+  20:../syscalls.c **** ssize_t _read_r(struct _reent *r, int fd, void *ptr, size_t len)
+  21:../syscalls.c **** {
+  47              		.loc 1 21 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52              	.LVL1:
+  22:../syscalls.c ****     //return uart_read_r(r, fd, ptr, len);
+  23:../syscalls.c **** 	/**
+  24:../syscalls.c **** 	 * printf mapping function
+  25:../syscalls.c **** 	 */
+  26:../syscalls.c **** 	return 0;
+  27:../syscalls.c **** }
+  53              		.loc 1 27 0
+  54 0000 0020     		movs	r0, #0
+  55              	.LVL2:
+  56 0002 7047     		bx	lr
+  57              		.cfi_endproc
+  58              	.LFE111:
+  60              		.section	.text._write_r,"ax",%progbits
+  61              		.align	1
+  62              		.global	_write_r
+  63              		.thumb
+  64              		.thumb_func
+  66              	_write_r:
+  67              	.LFB112:
+  28:../syscalls.c **** 
+  29:../syscalls.c **** 
+  30:../syscalls.c **** ssize_t _write_r(struct _reent *r, int fd, const void *ptr, size_t len)
+  31:../syscalls.c **** {
+  68              		.loc 1 31 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73              	.LVL3:
+  32:../syscalls.c ****     //return uart_write_r(r, fd, ptr, len);
+  33:../syscalls.c **** 	/**
+  34:../syscalls.c **** 	 * printf maping function
+  35:../syscalls.c **** 	 */
+  36:../syscalls.c **** 	return 0;
+  37:../syscalls.c **** }
+  74              		.loc 1 37 0
+  75 0000 0020     		movs	r0, #0
+  76              	.LVL4:
+  77 0002 7047     		bx	lr
+  78              		.cfi_endproc
+  79              	.LFE112:
+  81              		.section	.text._lseek_r,"ax",%progbits
+  82              		.align	1
+  83              		.global	_lseek_r
+  84              		.thumb
+  85              		.thumb_func
+  87              	_lseek_r:
+  88              	.LFB113:
+  38:../syscalls.c **** 
+  39:../syscalls.c **** 
+  40:../syscalls.c **** off_t _lseek_r(struct _reent *r, int fd, _off_t ptr, int dir)
+  41:../syscalls.c **** {
+  89              		.loc 1 41 0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93              		@ link register save eliminated.
+  94              	.LVL5:
+  42:../syscalls.c **** 
+  43:../syscalls.c ****     r->_errno = ENOSYS;
+  95              		.loc 1 43 0
+  96 0000 5823     		movs	r3, #88
+  97              	.LVL6:
+  98 0002 0360     		str	r3, [r0, #0]
+  44:../syscalls.c ****     return -1;
+  45:../syscalls.c **** }
+  99              		.loc 1 45 0
+ 100 0004 4FF0FF30 		mov	r0, #-1
+ 101              	.LVL7:
+ 102 0008 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE113:
+ 106              		.section	.text._close_r,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	_close_r
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	_close_r:
+ 113              	.LFB114:
+  46:../syscalls.c **** 
+  47:../syscalls.c **** 
+  48:../syscalls.c **** int _close_r(struct _reent *r, int fd)
+  49:../syscalls.c **** {
+ 114              		.loc 1 49 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119              	.LVL8:
+  50:../syscalls.c ****     r->_errno = ENOSYS;
+ 120              		.loc 1 50 0
+ 121 0000 5823     		movs	r3, #88
+ 122 0002 0360     		str	r3, [r0, #0]
+  51:../syscalls.c ****     return -1;
+  52:../syscalls.c **** }
+ 123              		.loc 1 52 0
+ 124 0004 4FF0FF30 		mov	r0, #-1
+ 125              	.LVL9:
+ 126 0008 7047     		bx	lr
+ 127              		.cfi_endproc
+ 128              	.LFE114:
+ 130              		.section	.text._fstat_r,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	_fstat_r
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	_fstat_r:
+ 137              	.LFB115:
+  53:../syscalls.c **** 
+  54:../syscalls.c **** 
+  55:../syscalls.c **** int _fstat_r(struct _reent *r, int fd, struct stat *st)
+  56:../syscalls.c **** {
+ 138              		.loc 1 56 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143              	.LVL10:
+  57:../syscalls.c ****     if ((fd >= STDIN_FILENO) && (fd <= STDERR_FILENO)) {
+ 144              		.loc 1 57 0
+ 145 0000 0229     		cmp	r1, #2
+ 146 0002 04D8     		bhi	.L8
+  58:../syscalls.c ****       st->st_mode = S_IFCHR;
+ 147              		.loc 1 58 0
+ 148 0004 4FF40053 		mov	r3, #8192
+ 149 0008 5360     		str	r3, [r2, #4]
+  59:../syscalls.c ****       return 0;
+ 150              		.loc 1 59 0
+ 151 000a 0020     		movs	r0, #0
+ 152              	.LVL11:
+ 153 000c 7047     		bx	lr
+ 154              	.LVL12:
+ 155              	.L8:
+  60:../syscalls.c ****     }
+  61:../syscalls.c **** 
+  62:../syscalls.c ****     r->_errno = ENOSYS;
+ 156              		.loc 1 62 0
+ 157 000e 5823     		movs	r3, #88
+ 158 0010 0360     		str	r3, [r0, #0]
+  63:../syscalls.c ****     return -1;
+ 159              		.loc 1 63 0
+ 160 0012 4FF0FF30 		mov	r0, #-1
+ 161              	.LVL13:
+  64:../syscalls.c **** }
+ 162              		.loc 1 64 0
+ 163 0016 7047     		bx	lr
+ 164              		.cfi_endproc
+ 165              	.LFE115:
+ 167              		.section	.text._isatty_r,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	_isatty_r
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	_isatty_r:
+ 174              	.LFB116:
+  65:../syscalls.c **** 
+  66:../syscalls.c **** 
+  67:../syscalls.c **** int _isatty_r(struct _reent *r, int fd)
+  68:../syscalls.c **** {
+ 175              		.loc 1 68 0
+ 176              		.cfi_startproc
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              		@ link register save eliminated.
+ 180              	.LVL14:
+  69:../syscalls.c ****     return 1;
+  70:../syscalls.c **** }
+ 181              		.loc 1 70 0
+ 182 0000 0120     		movs	r0, #1
+ 183              	.LVL15:
+ 184 0002 7047     		bx	lr
+ 185              		.cfi_endproc
+ 186              	.LFE116:
+ 188              		.section	.text._sbrk_r,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	_sbrk_r
+ 191              		.thumb
+ 192              		.thumb_func
+ 194              	_sbrk_r:
+ 195              	.LFB117:
+  71:../syscalls.c **** 
+  72:../syscalls.c **** 
+  73:../syscalls.c **** void *_sbrk_r(struct _reent *r, ptrdiff_t incr)
+  74:../syscalls.c **** {
+ 196              		.loc 1 74 0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 0
+ 199              		@ frame_needed = 0, uses_anonymous_args = 0
+ 200              	.LVL16:
+  75:../syscalls.c ****     extern char end;   // provided by the linker script
+  76:../syscalls.c **** 
+  77:../syscalls.c ****     if (__brkval == 0)
+ 201              		.loc 1 77 0
+ 202 0000 0B4A     		ldr	r2, .L15
+  74:../syscalls.c **** {
+ 203              		.loc 1 74 0
+ 204 0002 0346     		mov	r3, r0
+ 205              		.loc 1 77 0
+ 206 0004 1068     		ldr	r0, [r2, #0]
+ 207              	.LVL17:
+  74:../syscalls.c **** {
+ 208              		.loc 1 74 0
+ 209 0006 10B5     		push	{r4, lr}
+ 210              	.LCFI0:
+ 211              		.cfi_def_cfa_offset 8
+ 212              		.cfi_offset 14, -4
+ 213              		.cfi_offset 4, -8
+ 214              		.loc 1 77 0
+ 215 0008 08B9     		cbnz	r0, .L12
+  78:../syscalls.c ****         __brkval = &end;
+ 216              		.loc 1 78 0
+ 217 000a 0A48     		ldr	r0, .L15+4
+ 218 000c 1060     		str	r0, [r2, #0]
+ 219              	.L12:
+  79:../syscalls.c **** 
+  80:../syscalls.c ****     if (__brkval + incr > (char*)__get_MSP() - __malloc_margin) {
+ 220              		.loc 1 80 0
+ 221 000e 1068     		ldr	r0, [r2, #0]
+ 222 0010 4118     		adds	r1, r0, r1
+ 223              	.LVL18:
+ 224              	.LBB4:
+ 225              	.LBB5:
+ 226              		.file 2 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cmFunc.h"
+   1:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /**************************************************************************//**
+   2:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @file     core_cmFunc.h
+   3:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @brief    CMSIS Cortex-M Core Function Access Header File
+   4:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @version  V2.10
+   5:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @date     26. July 2011
+   6:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  *
+   7:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @note
+   8:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
+   9:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  *
+  10:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @par
+  11:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+  12:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * processor based microcontrollers.  This file can be freely distributed 
+  13:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * within development tools that are supporting such ARM based processors. 
+  14:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  *
+  15:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * @par
+  16:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  *
+  22:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  ******************************************************************************/
+  23:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  24:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #ifndef __CORE_CMFUNC_H
+  25:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #define __CORE_CMFUNC_H
+  26:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  27:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  28:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /* ###########################  Core Function Access  ########################### */
+  29:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \ingroup  CMSIS_Core_FunctionInterface   
+  30:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+  31:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   @{
+  32:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+  33:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  34:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  35:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /* ARM armcc specific functions */
+  36:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  37:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #if (__ARMCC_VERSION < 400677)
+  38:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  39:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #endif
+  40:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  41:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /* intrinsic void __enable_irq();     */
+  42:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /* intrinsic void __disable_irq();    */
+  43:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  44:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Control Register
+  45:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  46:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the Control Register.
+  47:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  48:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               Control Register value
+  49:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+  50:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_CONTROL(void)
+  51:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+  52:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
+  53:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regControl);
+  54:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+  55:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  56:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  57:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Control Register
+  58:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  59:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function writes the given value to the Control Register.
+  60:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  61:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    control  Control Register value to set
+  62:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+  63:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_CONTROL(uint32_t control)
+  64:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+  65:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
+  66:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regControl = control;
+  67:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+  68:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  69:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  70:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get ISPR Register
+  71:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  72:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the ISPR Register.
+  73:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  74:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               ISPR Register value
+  75:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+  76:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_IPSR(void)
+  77:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+  78:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regIPSR          __ASM("ipsr");
+  79:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regIPSR);
+  80:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+  81:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  82:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  83:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get APSR Register
+  84:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  85:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the APSR Register.
+  86:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  87:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               APSR Register value
+  88:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+  89:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_APSR(void)
+  90:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+  91:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regAPSR          __ASM("apsr");
+  92:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regAPSR);
+  93:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+  94:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  95:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  96:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get xPSR Register
+  97:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+  98:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the xPSR Register.
+  99:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 100:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               xPSR Register value
+ 101:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 102:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_xPSR(void)
+ 103:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 104:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regXPSR          __ASM("xpsr");
+ 105:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regXPSR);
+ 106:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 107:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 108:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 109:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Process Stack Pointer
+ 110:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 111:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
+ 112:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 113:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               PSP Register value
+ 114:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 115:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_PSP(void)
+ 116:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 117:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
+ 118:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regProcessStackPointer);
+ 119:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 120:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 121:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 122:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Process Stack Pointer
+ 123:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 124:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
+ 125:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 126:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 127:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 128:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_PSP(uint32_t topOfProcStack)
+ 129:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 130:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
+ 131:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regProcessStackPointer = topOfProcStack;
+ 132:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 133:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 134:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 135:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Main Stack Pointer
+ 136:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 137:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
+ 138:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 139:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               MSP Register value
+ 140:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 141:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_MSP(void)
+ 142:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 143:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
+ 144:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regMainStackPointer);
+ 145:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 146:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 147:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 148:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Main Stack Pointer
+ 149:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 150:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Main Stack Pointer (MSP).
+ 151:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 152:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 153:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 154:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_MSP(uint32_t topOfMainStack)
+ 155:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 156:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
+ 157:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regMainStackPointer = topOfMainStack;
+ 158:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 159:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 160:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 161:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Priority Mask
+ 162:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 163:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current state of the priority mask bit from the Priority Mask Registe
+ 164:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 165:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               Priority Mask value
+ 166:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 167:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_PRIMASK(void)
+ 168:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 169:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 170:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regPriMask);
+ 171:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 172:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 173:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 174:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Priority Mask
+ 175:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 176:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Priority Mask Register.
+ 177:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 178:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    priMask  Priority Mask
+ 179:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 180:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_PRIMASK(uint32_t priMask)
+ 181:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 182:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 183:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regPriMask = (priMask);
+ 184:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 185:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  
+ 186:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 187:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #if       (__CORTEX_M >= 0x03)
+ 188:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 189:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Enable FIQ
+ 190:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 191:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function enables FIQ interrupts by clearing the F-bit in the CPSR.
+ 192:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 193:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 194:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #define __enable_fault_irq                __enable_fiq
+ 195:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 196:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 197:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Disable FIQ
+ 198:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 199:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function disables FIQ interrupts by setting the F-bit in the CPSR.
+ 200:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 201:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 202:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #define __disable_fault_irq               __disable_fiq
+ 203:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 204:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 205:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Base Priority
+ 206:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 207:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Base Priority register.
+ 208:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 209:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               Base Priority register value
+ 210:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 211:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t  __get_BASEPRI(void)
+ 212:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 213:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 214:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regBasePri);
+ 215:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 216:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 217:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 218:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Base Priority
+ 219:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 220:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Base Priority register.
+ 221:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 222:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    basePri  Base Priority value to set
+ 223:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 224:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_BASEPRI(uint32_t basePri)
+ 225:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 226:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 227:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regBasePri = (basePri & 0xff);
+ 228:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 229:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  
+ 230:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 231:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Fault Mask
+ 232:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 233:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Fault Mask register.
+ 234:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 235:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               Fault Mask register value
+ 236:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 237:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_FAULTMASK(void)
+ 238:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 239:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 240:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regFaultMask);
+ 241:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 242:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 243:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 244:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Fault Mask
+ 245:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 246:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Fault Mask register.
+ 247:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 248:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    faultMask  Fault Mask value to set
+ 249:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 250:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_FAULTMASK(uint32_t faultMask)
+ 251:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 252:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 253:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regFaultMask = (faultMask & (uint32_t)1);
+ 254:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 255:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 256:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 257:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 258:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 259:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #if       (__CORTEX_M == 0x04)
+ 260:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 261:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get FPSCR
+ 262:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 263:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Floating Point Status/Control register.
+ 264:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 265:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               Floating Point Status/Control register value
+ 266:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 267:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_FPSCR(void)
+ 268:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 269:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 270:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
+ 271:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(__regfpscr);
+ 272:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #else
+ 273:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****    return(0);
+ 274:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #endif
+ 275:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 276:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 277:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 278:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set FPSCR
+ 279:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 280:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Floating Point Status/Control register.
+ 281:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 282:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    fpscr  Floating Point Status/Control value to set
+ 283:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 284:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_FPSCR(uint32_t fpscr)
+ 285:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 286:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 287:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
+ 288:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __regfpscr = (fpscr);
+ 289:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #endif
+ 290:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 291:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 292:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #endif /* (__CORTEX_M == 0x04) */
+ 293:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 294:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 295:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 296:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /* IAR iccarm specific functions */
+ 297:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 298:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #include <cmsis_iar.h>
+ 299:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 300:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 301:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /* GNU gcc specific functions */
+ 302:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 303:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Enable IRQ Interrupts
+ 304:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 305:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   This function enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 306:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   Can only be executed in Privileged modes.
+ 307:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 308:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __enable_irq(void)
+ 309:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 310:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("cpsie i");
+ 311:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 312:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 313:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 314:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Disable IRQ Interrupts
+ 315:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 316:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   This function disables IRQ interrupts by setting the I-bit in the CPSR.
+ 317:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   Can only be executed in Privileged modes.
+ 318:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 319:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __disable_irq(void)
+ 320:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 321:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("cpsid i");
+ 322:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 323:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 324:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 325:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Control Register
+ 326:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 327:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the Control Register.
+ 328:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 329:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               Control Register value
+ 330:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 331:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_CONTROL(void)
+ 332:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 333:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
+ 334:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 335:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
+ 336:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(result);
+ 337:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 338:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 339:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 340:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Control Register
+ 341:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 342:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function writes the given value to the Control Register.
+ 343:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 344:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    control  Control Register value to set
+ 345:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 346:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __set_CONTROL(uint32_t control)
+ 347:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 348:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) );
+ 349:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 350:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 351:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 352:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get ISPR Register
+ 353:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 354:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the ISPR Register.
+ 355:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 356:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               ISPR Register value
+ 357:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 358:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_IPSR(void)
+ 359:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 360:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
+ 361:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 362:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
+ 363:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(result);
+ 364:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 365:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 366:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 367:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get APSR Register
+ 368:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 369:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the APSR Register.
+ 370:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 371:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               APSR Register value
+ 372:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 373:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_APSR(void)
+ 374:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 375:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
+ 376:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 377:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
+ 378:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(result);
+ 379:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 380:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 381:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 382:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get xPSR Register
+ 383:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 384:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the xPSR Register.
+ 385:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 386:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               xPSR Register value
+ 387:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 388:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_xPSR(void)
+ 389:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 390:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
+ 391:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 392:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
+ 393:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(result);
+ 394:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 395:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 396:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 397:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Process Stack Pointer
+ 398:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 399:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
+ 400:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 401:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               PSP Register value
+ 402:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 403:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_PSP(void)
+ 404:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 405:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t result;
+ 406:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 407:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, psp\n"  : "=r" (result) );
+ 408:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   return(result);
+ 409:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 410:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  
+ 411:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 412:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Process Stack Pointer
+ 413:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 414:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
+ 415:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 416:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 417:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 418:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __set_PSP(uint32_t topOfProcStack)
+ 419:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 420:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MSR psp, %0\n" : : "r" (topOfProcStack) );
+ 421:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** }
+ 422:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 423:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 424:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Main Stack Pointer
+ 425:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 426:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
+ 427:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 428:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****     \return               MSP Register value
+ 429:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****  */
+ 430:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_MSP(void)
+ 431:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** {
+ 432:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   register uint32_t result;
+ 433:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h **** 
+ 434:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, msp\n" : "=r" (result) );
+ 227              		.loc 2 434 0
+ 228              	@ 434 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmFunc.h" 1
+ 229 0012 EFF30884 		MRS r4, msp
+ 230              	
+ 231              	@ 0 "" 2
+ 232              	.LVL19:
+ 233              		.thumb
+ 234              	.LBE5:
+ 235              	.LBE4:
+ 236              		.loc 1 80 0
+ 237 0016 084A     		ldr	r2, .L15+8
+ 238 0018 1268     		ldr	r2, [r2, #0]
+ 239 001a A21A     		subs	r2, r4, r2
+ 240 001c 9142     		cmp	r1, r2
+ 241 001e 04D9     		bls	.L13
+  81:../syscalls.c ****         r->_errno = ENOMEM;
+ 242              		.loc 1 81 0
+ 243 0020 0C22     		movs	r2, #12
+ 244 0022 1A60     		str	r2, [r3, #0]
+  82:../syscalls.c ****         return (void*)-1;
+ 245              		.loc 1 82 0
+ 246 0024 4FF0FF30 		mov	r0, #-1
+ 247 0028 10BD     		pop	{r4, pc}
+ 248              	.L13:
+ 249              	.LVL20:
+  83:../syscalls.c ****     }
+  84:../syscalls.c **** 
+  85:../syscalls.c ****     void *ret = __brkval;
+  86:../syscalls.c ****     __brkval += incr;
+ 250              		.loc 1 86 0
+ 251 002a 014B     		ldr	r3, .L15
+ 252              	.LVL21:
+ 253 002c 1960     		str	r1, [r3, #0]
+  87:../syscalls.c **** 
+  88:../syscalls.c ****     return ret;
+  89:../syscalls.c **** }
+ 254              		.loc 1 89 0
+ 255 002e 10BD     		pop	{r4, pc}
+ 256              	.L16:
+ 257              		.align	2
+ 258              	.L15:
+ 259 0030 00000000 		.word	__brkval
+ 260 0034 00000000 		.word	end
+ 261 0038 00000000 		.word	.LANCHOR0
+ 262              		.cfi_endproc
+ 263              	.LFE117:
+ 265              		.section	.text._kill_r,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	_kill_r
+ 268              		.thumb
+ 269              		.thumb_func
+ 271              	_kill_r:
+ 272              	.LFB118:
+  90:../syscalls.c **** 
+  91:../syscalls.c **** 
+  92:../syscalls.c **** int _kill_r(struct _reent *r, int pid, int signal)
+  93:../syscalls.c **** {
+ 273              		.loc 1 93 0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 0
+ 276              		@ frame_needed = 0, uses_anonymous_args = 0
+ 277              		@ link register save eliminated.
+ 278              	.LVL22:
+  94:../syscalls.c ****     r->_errno = ENOSYS;
+ 279              		.loc 1 94 0
+ 280 0000 5823     		movs	r3, #88
+ 281 0002 0360     		str	r3, [r0, #0]
+  95:../syscalls.c ****     return -1;
+  96:../syscalls.c **** }
+ 282              		.loc 1 96 0
+ 283 0004 4FF0FF30 		mov	r0, #-1
+ 284              	.LVL23:
+ 285 0008 7047     		bx	lr
+ 286              		.cfi_endproc
+ 287              	.LFE118:
+ 289              		.section	.text._getpid_r,"ax",%progbits
+ 290              		.align	1
+ 291              		.global	_getpid_r
+ 292              		.thumb
+ 293              		.thumb_func
+ 295              	_getpid_r:
+ 296              	.LFB119:
+  97:../syscalls.c **** 
+  98:../syscalls.c **** 
+  99:../syscalls.c **** int _getpid_r(struct _reent *r)
+ 100:../syscalls.c **** {
+ 297              		.loc 1 100 0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301              		@ link register save eliminated.
+ 302              	.LVL24:
+ 101:../syscalls.c ****     r->_errno = ENOSYS;
+ 303              		.loc 1 101 0
+ 304 0000 5823     		movs	r3, #88
+ 305 0002 0360     		str	r3, [r0, #0]
+ 102:../syscalls.c ****     return -1;
+ 103:../syscalls.c **** }
+ 306              		.loc 1 103 0
+ 307 0004 4FF0FF30 		mov	r0, #-1
+ 308              	.LVL25:
+ 309 0008 7047     		bx	lr
+ 310              		.cfi_endproc
+ 311              	.LFE119:
+ 313              		.section	.text.__malloc_lock,"ax",%progbits
+ 314              		.align	1
+ 315              		.global	__malloc_lock
+ 316              		.thumb
+ 317              		.thumb_func
+ 319              	__malloc_lock:
+ 320              	.LFB120:
+ 104:../syscalls.c **** 
+ 105:../syscalls.c **** 
+ 106:../syscalls.c **** void __malloc_lock(struct _reent *r)
+ 107:../syscalls.c **** {
+ 321              		.loc 1 107 0
+ 322              		.cfi_startproc
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325              		@ link register save eliminated.
+ 326              	.LVL26:
+ 108:../syscalls.c ****     vPortEnterCritical();
+ 109:../syscalls.c **** }
+ 327              		.loc 1 109 0
+ 108:../syscalls.c ****     vPortEnterCritical();
+ 328              		.loc 1 108 0
+ 329 0000 FFF7FEBF 		b	vPortEnterCritical
+ 330              	.LVL27:
+ 331              		.cfi_endproc
+ 332              	.LFE120:
+ 334              		.section	.text.__malloc_unlock,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	__malloc_unlock
+ 337              		.thumb
+ 338              		.thumb_func
+ 340              	__malloc_unlock:
+ 341              	.LFB121:
+ 110:../syscalls.c **** 
+ 111:../syscalls.c **** 
+ 112:../syscalls.c **** void __malloc_unlock(struct _reent *r)
+ 113:../syscalls.c **** {
+ 342              		.loc 1 113 0
+ 343              		.cfi_startproc
+ 344              		@ args = 0, pretend = 0, frame = 0
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346              		@ link register save eliminated.
+ 347              	.LVL28:
+ 114:../syscalls.c ****     vPortExitCritical();
+ 115:../syscalls.c **** }
+ 348              		.loc 1 115 0
+ 114:../syscalls.c ****     vPortExitCritical();
+ 349              		.loc 1 114 0
+ 350 0000 FFF7FEBF 		b	vPortExitCritical
+ 351              	.LVL29:
+ 352              		.cfi_endproc
+ 353              	.LFE121:
+ 355              		.comm	__brkval,4,4
+ 356              		.global	__malloc_margin
+ 357              		.data
+ 358              		.align	2
+ 359              		.set	.LANCHOR0,. + 0
+ 362              	__malloc_margin:
+ 363 0000 00010000 		.word	256
+ 364              		.text
+ 365              	.Letext0:
+ 366              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/lock.h"
+ 367              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/_types.h"
+ 368              		.file 5 "d:\\elektronik\\ides\\eclipse\\yagarto\\bin\\../lib/gcc/arm-none-eabi/4.6.2/include/stdde
+ 369              		.file 6 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/reent.h"
+ 370              		.file 7 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 371              		.file 8 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/types.h"
+ 372              		.file 9 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/stat.h"
+ 373              		.file 10 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/reent.h"
+ 374              		.file 11 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/unistd.h"
+ 375              		.file 12 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 syscalls.c
+  C:\Temp\cc5nNfsR.s:19     .text._exit:00000000 $t
+  C:\Temp\cc5nNfsR.s:24     .text._exit:00000000 _exit
+  C:\Temp\cc5nNfsR.s:40     .text._read_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:45     .text._read_r:00000000 _read_r
+  C:\Temp\cc5nNfsR.s:61     .text._write_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:66     .text._write_r:00000000 _write_r
+  C:\Temp\cc5nNfsR.s:82     .text._lseek_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:87     .text._lseek_r:00000000 _lseek_r
+  C:\Temp\cc5nNfsR.s:107    .text._close_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:112    .text._close_r:00000000 _close_r
+  C:\Temp\cc5nNfsR.s:131    .text._fstat_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:136    .text._fstat_r:00000000 _fstat_r
+  C:\Temp\cc5nNfsR.s:168    .text._isatty_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:173    .text._isatty_r:00000000 _isatty_r
+  C:\Temp\cc5nNfsR.s:189    .text._sbrk_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:194    .text._sbrk_r:00000000 _sbrk_r
+  C:\Temp\cc5nNfsR.s:259    .text._sbrk_r:00000030 $d
+                            *COM*:00000004 __brkval
+  C:\Temp\cc5nNfsR.s:266    .text._kill_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:271    .text._kill_r:00000000 _kill_r
+  C:\Temp\cc5nNfsR.s:290    .text._getpid_r:00000000 $t
+  C:\Temp\cc5nNfsR.s:295    .text._getpid_r:00000000 _getpid_r
+  C:\Temp\cc5nNfsR.s:314    .text.__malloc_lock:00000000 $t
+  C:\Temp\cc5nNfsR.s:319    .text.__malloc_lock:00000000 __malloc_lock
+  C:\Temp\cc5nNfsR.s:335    .text.__malloc_unlock:00000000 $t
+  C:\Temp\cc5nNfsR.s:340    .text.__malloc_unlock:00000000 __malloc_unlock
+  C:\Temp\cc5nNfsR.s:362    .data:00000000 __malloc_margin
+  C:\Temp\cc5nNfsR.s:358    .data:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+end
+vPortEnterCritical
+vPortExitCritical

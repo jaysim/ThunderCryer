@@ -1,0 +1,1202 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_hash_md5.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.HASH_MD5,"ax",%progbits
+  19              		.align	1
+  20              		.global	HASH_MD5
+  21              		.thumb
+  22              		.thumb_func
+  24              	HASH_MD5:
+  25              	.LFB110:
+  26              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @file    stm32f4xx_hash_md5.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @version V1.0.0RC1
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @date    25-August-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @brief   This file provides high level functions to compute the HASH MD5 and
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          HMAC MD5 Digest of an input message.
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          It uses the stm32f4xx_hash.c/.h drivers to access the STM32F4xx HASH
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          peripheral.
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *  @verbatim
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *    
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          ===================================================================
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *                                   How to use this driver
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          ===================================================================
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          1. Enable The HASH controller clock using 
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *            RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_HASH, ENABLE); function.
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          2. Calculate the HASH MD5 Digest using HASH_MD5() function.
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          3. Calculate the HMAC MD5 Digest using HMAC_MD5() function.
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *  @endverbatim
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ******************************************************************************
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @attention
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ******************************************************************************
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Includes ------------------------------------------------------------------*/
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** #include "stm32f4xx_hash.h"
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @{
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /** @defgroup HASH 
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @brief HASH driver modules
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @{
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Private typedef -----------------------------------------------------------*/
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Private define ------------------------------------------------------------*/
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** #define MD5BUSY_TIMEOUT    ((uint32_t) 0x00010000)
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Private macro -------------------------------------------------------------*/
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Private variables ---------------------------------------------------------*/
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Private function prototypes -----------------------------------------------*/
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /* Private functions ---------------------------------------------------------*/
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /** @defgroup HASH_Private_Functions
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @{
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */ 
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /** @defgroup HASH_Group7 High Level MD5 functions
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****  *  @brief   High Level MD5 Hash and HMAC functions 
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****  *
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** @verbatim   
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****  ===============================================================================
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****                           High Level MD5 Hash and HMAC functions
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****  ===============================================================================
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** @endverbatim
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @{
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /**
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @brief  Compute the HASH MD5 digest.
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Input: pointer to the Input buffer to be treated.
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Ilen: length of the Input buffer.
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Output: the returned digest
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @retval An ErrorStatus enumeration value:
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          - SUCCESS: digest computation done
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          - ERROR: digest computation failed
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** ErrorStatus HASH_MD5(uint8_t *Input, uint32_t Ilen, uint8_t Output[16])
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** {
+  27              		.loc 1 88 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 48
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 20
+  35              		.cfi_offset 14, -4
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 5, -16
+  39              		.cfi_offset 4, -20
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_InitTypeDef MD5_HASH_InitStructure;
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_MsgDigest MD5_MessageDigest;
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitsdata = 0;
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t i = 0;
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint32_t counter = 0;
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t busystatus = 0;
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ErrorStatus status = SUCCESS;
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t inputaddr  = (uint32_t)Input;
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t outputaddr = (uint32_t)Output;
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Number of valid bits in last word of the Input data */
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   nbvalidbitsdata = 8 * (Ilen % 4);
+  40              		.loc 1 101 0
+  41 0002 01F00303 		and	r3, r1, #3
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** {
+  42              		.loc 1 88 0
+  43 0006 8DB0     		sub	sp, sp, #52
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_offset 72
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitsdata = 0;
+  46              		.loc 1 91 0
+  47 0008 0027     		movs	r7, #0
+  48              		.loc 1 101 0
+  49 000a DB00     		lsls	r3, r3, #3
+  50              	.LVL1:
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitsdata = 0;
+  51              		.loc 1 91 0
+  52 000c ADF82E70 		strh	r7, [sp, #46]	@ movhi
+  53              	.LVL2:
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** {
+  54              		.loc 1 88 0
+  55 0010 0446     		mov	r4, r0
+  56 0012 0D46     		mov	r5, r1
+  57 0014 1646     		mov	r6, r2
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint32_t counter = 0;
+  58              		.loc 1 93 0
+  59 0016 0A97     		str	r7, [sp, #40]
+  60              	.LVL3:
+  61              		.loc 1 101 0
+  62 0018 ADF82E30 		strh	r3, [sp, #46]	@ movhi
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* HASH peripheral initialization */
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_DeInit();
+  63              		.loc 1 104 0
+  64 001c FFF7FEFF 		bl	HASH_DeInit
+  65              	.LVL4:
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* HASH Configuration */
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_AlgoSelection = HASH_AlgoSelection_MD5;
+  66              		.loc 1 107 0
+  67 0020 8023     		movs	r3, #128
+  68 0022 0693     		str	r3, [sp, #24]
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_AlgoMode = HASH_AlgoMode_HASH;
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_DataType = HASH_DataType_8b;
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_Init(&MD5_HASH_InitStructure);
+  69              		.loc 1 110 0
+  70 0024 06A8     		add	r0, sp, #24
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_DataType = HASH_DataType_8b;
+  71              		.loc 1 109 0
+  72 0026 2023     		movs	r3, #32
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_AlgoMode = HASH_AlgoMode_HASH;
+  73              		.loc 1 108 0
+  74 0028 0797     		str	r7, [sp, #28]
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_DataType = HASH_DataType_8b;
+  75              		.loc 1 109 0
+  76 002a 0893     		str	r3, [sp, #32]
+  77              		.loc 1 110 0
+  78 002c FFF7FEFF 		bl	HASH_Init
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Configure the number of valid bits in last word of the data */
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_SetLastWordValidBitsNbr(nbvalidbitsdata);
+  79              		.loc 1 113 0
+  80 0030 BDF82E00 		ldrh	r0, [sp, #46]
+  81 0034 80B2     		uxth	r0, r0
+  82 0036 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Write the Input block in the IN FIFO */
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Ilen; i+=4)
+  83              		.loc 1 116 0
+  84 003a 03E0     		b	.L2
+  85              	.LVL5:
+  86              	.L3:
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_DataIn(*(uint32_t*)inputaddr);
+  87              		.loc 1 118 0 discriminator 2
+  88 003c E059     		ldr	r0, [r4, r7]
+  89 003e FFF7FEFF 		bl	HASH_DataIn
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Ilen; i+=4)
+  90              		.loc 1 116 0 discriminator 2
+  91 0042 0437     		adds	r7, r7, #4
+  92              	.LVL6:
+  93              	.L2:
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Ilen; i+=4)
+  94              		.loc 1 116 0 is_stmt 0 discriminator 1
+  95 0044 AF42     		cmp	r7, r5
+  96 0046 F9D3     		bcc	.L3
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     inputaddr+=4;
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Start the HASH processor */
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_StartDigest();
+  97              		.loc 1 123 0 is_stmt 1
+  98 0048 FFF7FEFF 		bl	HASH_StartDigest
+  99              	.LVL7:
+ 100              	.L5:
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* wait until the Busy flag is RESET */
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   do
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
+ 101              		.loc 1 128 0 discriminator 1
+ 102 004c 0820     		movs	r0, #8
+ 103 004e FFF7FEFF 		bl	HASH_GetFlagStatus
+ 104              	.LVL8:
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     counter++;
+ 105              		.loc 1 129 0 discriminator 1
+ 106 0052 0A9B     		ldr	r3, [sp, #40]
+ 107 0054 0133     		adds	r3, r3, #1
+ 108              	.LVL9:
+ 109 0056 0A93     		str	r3, [sp, #40]
+ 110              	.LVL10:
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
+ 111              		.loc 1 130 0 discriminator 1
+ 112 0058 0A9B     		ldr	r3, [sp, #40]
+ 113              	.LVL11:
+ 114 005a B3F5803F 		cmp	r3, #65536
+ 115 005e 02D0     		beq	.L4
+ 116 0060 0028     		cmp	r0, #0
+ 117 0062 F3D1     		bne	.L5
+ 118 0064 00E0     		b	.L6
+ 119              	.L4:
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   if (busystatus != RESET)
+ 120              		.loc 1 132 0
+ 121 0066 80B9     		cbnz	r0, .L8
+ 122              	.L6:
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****      status = ERROR;
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   else
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Read the message digest */
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_GetDigest(&MD5_MessageDigest);
+ 123              		.loc 1 139 0
+ 124 0068 01A8     		add	r0, sp, #4
+ 125              	.LVL12:
+ 126 006a FFF7FEFF 		bl	HASH_GetDigest
+ 127              	.LVL13:
+ 128              	.LBB18:
+ 129              	.LBB19:
+ 130              		.file 2 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cmInstr.h"
+   1:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /**************************************************************************//**
+   2:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @file     core_cmInstr.h
+   3:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
+   4:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @version  V2.10
+   5:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @date     19. July 2011
+   6:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  *
+   7:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @note
+   8:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
+   9:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  *
+  10:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @par
+  11:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+  12:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed 
+  13:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * within development tools that are supporting such ARM based processors. 
+  14:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  *
+  15:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * @par
+  16:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  *
+  22:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  ******************************************************************************/
+  23:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  24:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
+  25:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __CORE_CMINSTR_H
+  26:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  27:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  28:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
+  29:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+  30:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   Access to dedicated instructions
+  31:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   @{
+  32:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** */
+  33:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  34:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  35:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /* ARM armcc specific functions */
+  36:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  37:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
+  38:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  39:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #endif
+  40:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  41:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  42:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+  43:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  44:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+  45:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  46:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __NOP                             __nop
+  47:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  48:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  49:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+  50:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  51:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+  52:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+  53:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  54:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __WFI                             __wfi
+  55:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  56:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  57:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+  58:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  59:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+  60:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+  61:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  62:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __WFE                             __wfe
+  63:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  64:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  65:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+  66:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  67:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+  68:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  69:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __SEV                             __sev
+  70:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  71:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  72:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+  73:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  74:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+  75:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+  76:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+  77:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  78:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __ISB()                           __isb(0xF)
+  79:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  80:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  81:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+  82:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  83:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+  84:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+  85:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  86:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
+  87:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  88:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  89:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+  90:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  91:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+  92:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+  93:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+  94:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
+  95:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  96:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  97:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+  98:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+  99:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 100:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 101:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 102:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 103:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 104:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __REV                             __rev
+ 105:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 106:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 107:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
+ 108:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 109:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
+ 110:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 111:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 112:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 113:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 114:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM uint32_t __REV16(uint32_t value)
+ 115:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 116:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   rev16 r0, r0
+ 117:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 118:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 119:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 120:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 121:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
+ 122:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 123:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
+ 124:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 125:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 126:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 127:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 128:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM int32_t __REVSH(int32_t value)
+ 129:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 130:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   revsh r0, r0
+ 131:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 132:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 133:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 134:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 135:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
+ 136:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 137:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse bit order of value
+ 138:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 139:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function reverses the bit order of the given value.
+ 140:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 141:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 142:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 143:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 144:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __RBIT                            __rbit
+ 145:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 146:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 147:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
+ 148:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 149:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
+ 150:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 151:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 152:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
+ 153:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 154:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
+ 155:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 156:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 157:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
+ 158:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 159:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
+ 160:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 161:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 162:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
+ 163:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 164:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
+ 165:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 166:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 167:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
+ 168:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 169:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
+ 170:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 171:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 172:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
+ 173:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 174:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
+ 175:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 176:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 177:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
+ 178:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 179:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
+ 180:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 181:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 182:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 183:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 184:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 185:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 186:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
+ 187:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 188:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 189:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
+ 190:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 191:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
+ 192:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 193:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 194:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 195:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 196:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 197:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 198:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
+ 199:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 200:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 201:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
+ 202:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 203:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
+ 204:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 205:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 206:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 207:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 208:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 209:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 210:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
+ 211:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 212:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 213:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Remove the exclusive lock
+ 214:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 215:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
+ 216:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 217:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 218:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __CLREX                           __clrex
+ 219:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 220:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 221:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Signed Saturate
+ 222:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 223:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function saturates a signed value.
+ 224:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 225:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 226:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
+ 227:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 228:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 229:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __SSAT                            __ssat
+ 230:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 231:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 232:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Unsigned Saturate
+ 233:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 234:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function saturates an unsigned value.
+ 235:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 236:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 237:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
+ 238:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 239:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 240:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __USAT                            __usat
+ 241:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 242:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 243:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Count leading zeros
+ 244:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 245:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
+ 246:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 247:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
+ 248:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return             number of leading zeros in value
+ 249:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 250:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #define __CLZ                             __clz 
+ 251:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 252:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 253:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 254:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 255:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 256:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 257:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /* IAR iccarm specific functions */
+ 258:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 259:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #include <cmsis_iar.h>
+ 260:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 261:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 262:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 263:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /* GNU gcc specific functions */
+ 264:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 265:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+ 266:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 267:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+ 268:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 269:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
+ 270:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 271:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("nop");
+ 272:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 273:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 274:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 275:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+ 276:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 277:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+ 278:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+ 279:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 280:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFI(void)
+ 281:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 282:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
+ 283:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 284:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 285:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 286:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+ 287:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 288:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+ 289:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+ 290:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 291:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFE(void)
+ 292:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 293:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfe");
+ 294:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 295:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 296:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 297:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+ 298:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 299:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+ 300:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 301:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __SEV(void)
+ 302:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 303:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("sev");
+ 304:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 305:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 306:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 307:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+ 308:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 309:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+ 310:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+ 311:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+ 312:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 313:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __ISB(void)
+ 314:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 315:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("isb");
+ 316:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 317:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 318:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 319:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+ 320:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 321:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+ 322:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+ 323:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 324:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DSB(void)
+ 325:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 326:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dsb");
+ 327:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 328:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 329:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 330:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+ 331:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 332:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+ 333:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+ 334:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 335:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DMB(void)
+ 336:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 337:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dmb");
+ 338:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** }
+ 339:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 340:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 341:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+ 342:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 343:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 344:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** 
+ 345:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 346:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 347:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****  */
+ 348:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __REV(uint32_t value)
+ 349:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h **** {
+ 350:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   uint32_t result;
+ 351:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   
+ 352:D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("rev %0, %1" : "=r" (result) : "r" (value) );
+ 131              		.loc 2 352 0
+ 132 006e 019B     		ldr	r3, [sp, #4]
+ 133              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 134 0070 1BBA     		rev r3, r3
+ 135              	@ 0 "" 2
+ 136              	.LVL14:
+ 137              		.thumb
+ 138              	.LBE19:
+ 139              	.LBE18:
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[0]);
+ 140              		.loc 1 140 0
+ 141 0072 3360     		str	r3, [r6, #0]
+ 142              	.LVL15:
+ 143              	.LBB20:
+ 144              	.LBB21:
+ 145              		.loc 2 352 0
+ 146 0074 029B     		ldr	r3, [sp, #8]
+ 147              	.LVL16:
+ 148              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 149 0076 1BBA     		rev r3, r3
+ 150              	@ 0 "" 2
+ 151              	.LVL17:
+ 152              		.thumb
+ 153              	.LBE21:
+ 154              	.LBE20:
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     outputaddr+=4;
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[1]);
+ 155              		.loc 1 142 0
+ 156 0078 7360     		str	r3, [r6, #4]
+ 157              	.LVL18:
+ 158              	.LBB22:
+ 159              	.LBB23:
+ 160              		.loc 2 352 0
+ 161 007a 039B     		ldr	r3, [sp, #12]
+ 162              	.LVL19:
+ 163              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 164 007c 1BBA     		rev r3, r3
+ 165              	@ 0 "" 2
+ 166              	.LVL20:
+ 167              		.thumb
+ 168              	.LBE23:
+ 169              	.LBE22:
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     outputaddr+=4;
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[2]);
+ 170              		.loc 1 144 0
+ 171 007e B360     		str	r3, [r6, #8]
+ 172              	.LVL21:
+ 173              	.LBB24:
+ 174              	.LBB25:
+ 175              		.loc 2 352 0
+ 176 0080 049B     		ldr	r3, [sp, #16]
+ 177              	.LVL22:
+ 178              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 179 0082 1BBA     		rev r3, r3
+ 180              	@ 0 "" 2
+ 181              	.LVL23:
+ 182              		.thumb
+ 183              	.LBE25:
+ 184              	.LBE24:
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ErrorStatus status = SUCCESS;
+ 185              		.loc 1 95 0
+ 186 0084 0120     		movs	r0, #1
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     outputaddr+=4;
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[3]);
+ 187              		.loc 1 146 0
+ 188 0086 F360     		str	r3, [r6, #12]
+ 189 0088 00E0     		b	.L7
+ 190              	.LVL24:
+ 191              	.L8:
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****      status = ERROR;
+ 192              		.loc 1 134 0
+ 193 008a 0020     		movs	r0, #0
+ 194              	.LVL25:
+ 195              	.L7:
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   return status; 
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** }
+ 196              		.loc 1 149 0
+ 197 008c 0DB0     		add	sp, sp, #52
+ 198 008e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 199              		.cfi_endproc
+ 200              	.LFE110:
+ 202              		.section	.text.HMAC_MD5,"ax",%progbits
+ 203              		.align	1
+ 204              		.global	HMAC_MD5
+ 205              		.thumb
+ 206              		.thumb_func
+ 208              	HMAC_MD5:
+ 209              	.LFB111:
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** /**
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @brief  Compute the HMAC MD5 digest.
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Key: pointer to the Key used for HMAC.
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Keylen: length of the Key used for HMAC.
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Input: pointer to the Input buffer to be treated.
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Ilen: length of the Input buffer.
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @param  Output: the returned digest  
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   * @retval An ErrorStatus enumeration value:
+ 159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          - SUCCESS: digest computation done
+ 160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   *          - ERROR: digest computation failed
+ 161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   */
+ 162:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** ErrorStatus HMAC_MD5(uint8_t *Key, uint32_t Keylen, uint8_t *Input, 
+ 163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****                      uint32_t Ilen, uint8_t Output[16])
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** {
+ 210              		.loc 1 164 0
+ 211              		.cfi_startproc
+ 212              		@ args = 4, pretend = 0, frame = 48
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214              	.LVL26:
+ 215 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 216              	.LCFI2:
+ 217              		.cfi_def_cfa_offset 28
+ 218              		.cfi_offset 14, -4
+ 219              		.cfi_offset 9, -8
+ 220              		.cfi_offset 8, -12
+ 221              		.cfi_offset 7, -16
+ 222              		.cfi_offset 6, -20
+ 223              		.cfi_offset 5, -24
+ 224              		.cfi_offset 4, -28
+ 225 0004 9946     		mov	r9, r3
+ 226 0006 8DB0     		sub	sp, sp, #52
+ 227              	.LCFI3:
+ 228              		.cfi_def_cfa_offset 80
+ 165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_InitTypeDef MD5_HASH_InitStructure;
+ 166:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_MsgDigest MD5_MessageDigest;
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitsdata = 0;
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitskey = 0;
+ 169:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t i = 0;
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint32_t counter = 0;
+ 171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t busystatus = 0;
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ErrorStatus status = SUCCESS;
+ 173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t keyaddr    = (uint32_t)Key;
+ 174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t inputaddr  = (uint32_t)Input;
+ 175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   uint32_t outputaddr = (uint32_t)Output;
+ 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Number of valid bits in last word of the Input data */
+ 178:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   nbvalidbitsdata = 8 * (Ilen % 4);
+ 229              		.loc 1 178 0
+ 230 0008 03F00303 		and	r3, r3, #3
+ 231              	.LVL27:
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitsdata = 0;
+ 232              		.loc 1 167 0
+ 233 000c 4FF00008 		mov	r8, #0
+ 234              		.loc 1 178 0
+ 235 0010 DB00     		lsls	r3, r3, #3
+ 236              	.LVL28:
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitsdata = 0;
+ 237              		.loc 1 167 0
+ 238 0012 ADF82C80 		strh	r8, [sp, #44]	@ movhi
+ 239              	.LVL29:
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint16_t nbvalidbitskey = 0;
+ 240              		.loc 1 168 0
+ 241 0016 ADF82E80 		strh	r8, [sp, #46]	@ movhi
+ 242              	.LVL30:
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   __IO uint32_t counter = 0;
+ 243              		.loc 1 170 0
+ 244 001a CDF82880 		str	r8, [sp, #40]
+ 245              	.LVL31:
+ 246              		.loc 1 178 0
+ 247 001e ADF82C30 		strh	r3, [sp, #44]	@ movhi
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Number of valid bits in last word of the Key */
+ 181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   nbvalidbitskey = 8 * (Keylen % 4);
+ 248              		.loc 1 181 0
+ 249 0022 01F00303 		and	r3, r1, #3
+ 250 0026 DB00     		lsls	r3, r3, #3
+ 251              	.LVL32:
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** {
+ 252              		.loc 1 164 0
+ 253 0028 0D46     		mov	r5, r1
+ 254 002a 0446     		mov	r4, r0
+ 255              	.LVL33:
+ 256 002c 1646     		mov	r6, r2
+ 257              	.LVL34:
+ 258              		.loc 1 181 0
+ 259 002e ADF82E30 		strh	r3, [sp, #46]	@ movhi
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** {
+ 260              		.loc 1 164 0
+ 261 0032 149F     		ldr	r7, [sp, #80]
+ 262              	.LVL35:
+ 182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****    
+ 183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* HASH peripheral initialization */
+ 184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_DeInit();
+ 263              		.loc 1 184 0
+ 264 0034 FFF7FEFF 		bl	HASH_DeInit
+ 265              	.LVL36:
+ 185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* HASH Configuration */
+ 187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_AlgoSelection = HASH_AlgoSelection_MD5;
+ 266              		.loc 1 187 0
+ 267 0038 8023     		movs	r3, #128
+ 268 003a 0693     		str	r3, [sp, #24]
+ 188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_AlgoMode = HASH_AlgoMode_HMAC;
+ 269              		.loc 1 188 0
+ 270 003c 4023     		movs	r3, #64
+ 271 003e 0793     		str	r3, [sp, #28]
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   MD5_HASH_InitStructure.HASH_DataType = HASH_DataType_8b;
+ 272              		.loc 1 189 0
+ 273 0040 2023     		movs	r3, #32
+ 274 0042 0893     		str	r3, [sp, #32]
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   if(Keylen > 64)
+ 191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* HMAC long Key */
+ 193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     MD5_HASH_InitStructure.HASH_HMACKeyType = HASH_HMACKeyType_LongKey;
+ 194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   else
+ 196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* HMAC short Key */
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     MD5_HASH_InitStructure.HASH_HMACKeyType = HASH_HMACKeyType_ShortKey;
+ 199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_Init(&MD5_HASH_InitStructure);
+ 275              		.loc 1 200 0
+ 276 0044 06A8     		add	r0, sp, #24
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     MD5_HASH_InitStructure.HASH_HMACKeyType = HASH_HMACKeyType_ShortKey;
+ 277              		.loc 1 198 0
+ 278 0046 402D     		cmp	r5, #64
+ 279 0048 8CBF     		ite	hi
+ 280 004a 4FF48033 		movhi	r3, #65536
+ 281 004e 4346     		movls	r3, r8
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   if(Keylen > 64)
+ 282              		.loc 1 190 0
+ 283 0050 0993     		str	r3, [sp, #36]
+ 284              		.loc 1 200 0
+ 285 0052 FFF7FEFF 		bl	HASH_Init
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Configure the number of valid bits in last word of the Key */
+ 203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_SetLastWordValidBitsNbr(nbvalidbitskey);
+ 286              		.loc 1 203 0
+ 287 0056 BDF82E00 		ldrh	r0, [sp, #46]
+ 288 005a 80B2     		uxth	r0, r0
+ 289 005c FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Write the Key */
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Keylen; i+=4)
+ 290              		.loc 1 206 0
+ 291 0060 05E0     		b	.L12
+ 292              	.LVL37:
+ 293              	.L13:
+ 207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_DataIn(*(uint32_t*)keyaddr);
+ 294              		.loc 1 208 0 discriminator 2
+ 295 0062 54F80800 		ldr	r0, [r4, r8]
+ 296 0066 FFF7FEFF 		bl	HASH_DataIn
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Keylen; i+=4)
+ 297              		.loc 1 206 0 discriminator 2
+ 298 006a 08F10408 		add	r8, r8, #4
+ 299              	.LVL38:
+ 300              	.L12:
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Keylen; i+=4)
+ 301              		.loc 1 206 0 is_stmt 0 discriminator 1
+ 302 006e A845     		cmp	r8, r5
+ 303 0070 F7D3     		bcc	.L13
+ 209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     keyaddr+=4;
+ 210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   
+ 212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Start the HASH processor */
+ 213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_StartDigest();
+ 304              		.loc 1 213 0 is_stmt 1
+ 305 0072 FFF7FEFF 		bl	HASH_StartDigest
+ 306              	.LVL39:
+ 307              	.L15:
+ 214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* wait until the Busy flag is RESET */
+ 216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   do
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
+ 308              		.loc 1 218 0 discriminator 1
+ 309 0076 0820     		movs	r0, #8
+ 310 0078 FFF7FEFF 		bl	HASH_GetFlagStatus
+ 311              	.LVL40:
+ 219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     counter++;
+ 312              		.loc 1 219 0 discriminator 1
+ 313 007c 0A9B     		ldr	r3, [sp, #40]
+ 314 007e 0133     		adds	r3, r3, #1
+ 315              	.LVL41:
+ 316 0080 0A93     		str	r3, [sp, #40]
+ 317              	.LVL42:
+ 220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
+ 318              		.loc 1 220 0 discriminator 1
+ 319 0082 0A9B     		ldr	r3, [sp, #40]
+ 320              	.LVL43:
+ 321 0084 B3F5803F 		cmp	r3, #65536
+ 322 0088 02D0     		beq	.L14
+ 323 008a 0028     		cmp	r0, #0
+ 324 008c F3D1     		bne	.L15
+ 325 008e 01E0     		b	.L16
+ 326              	.L14:
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   if (busystatus != RESET)
+ 327              		.loc 1 222 0
+ 328 0090 0028     		cmp	r0, #0
+ 329 0092 52D1     		bne	.L31
+ 330              	.L16:
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****      status = ERROR;
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   else
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Configure the number of valid bits in last word of the Input data */
+ 229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_SetLastWordValidBitsNbr(nbvalidbitsdata);
+ 331              		.loc 1 229 0
+ 332 0094 BDF82C00 		ldrh	r0, [sp, #44]
+ 333              	.LVL44:
+ 334 0098 80B2     		uxth	r0, r0
+ 335 009a FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 336              	.LVL45:
+ 230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Write the Input block in the IN FIFO */
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     for(i=0; i<Ilen; i+=4)
+ 337              		.loc 1 232 0
+ 338 009e 4FF00008 		mov	r8, #0
+ 339 00a2 05E0     		b	.L18
+ 340              	.LVL46:
+ 341              	.L19:
+ 233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {
+ 234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       HASH_DataIn(*(uint32_t*)inputaddr);
+ 342              		.loc 1 234 0 discriminator 2
+ 343 00a4 56F80800 		ldr	r0, [r6, r8]
+ 344 00a8 FFF7FEFF 		bl	HASH_DataIn
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     for(i=0; i<Ilen; i+=4)
+ 345              		.loc 1 232 0 discriminator 2
+ 346 00ac 08F10408 		add	r8, r8, #4
+ 347              	.LVL47:
+ 348              	.L18:
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     for(i=0; i<Ilen; i+=4)
+ 349              		.loc 1 232 0 is_stmt 0 discriminator 1
+ 350 00b0 C845     		cmp	r8, r9
+ 351 00b2 F7D3     		bcc	.L19
+ 235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       inputaddr+=4;
+ 236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }
+ 237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Start the HASH processor */
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_StartDigest();
+ 352              		.loc 1 239 0 is_stmt 1
+ 353 00b4 FFF7FEFF 		bl	HASH_StartDigest
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* wait until the Busy flag is RESET */
+ 242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     counter =0;
+ 354              		.loc 1 242 0
+ 355 00b8 0023     		movs	r3, #0
+ 356 00ba 0A93     		str	r3, [sp, #40]
+ 357              	.L21:
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     do
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {
+ 245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
+ 358              		.loc 1 245 0 discriminator 1
+ 359 00bc 0820     		movs	r0, #8
+ 360 00be FFF7FEFF 		bl	HASH_GetFlagStatus
+ 361              	.LVL48:
+ 246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        counter++;
+ 362              		.loc 1 246 0 discriminator 1
+ 363 00c2 0A9B     		ldr	r3, [sp, #40]
+ 364 00c4 0133     		adds	r3, r3, #1
+ 365              	.LVL49:
+ 366 00c6 0A93     		str	r3, [sp, #40]
+ 367              	.LVL50:
+ 247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
+ 368              		.loc 1 247 0 discriminator 1
+ 369 00c8 0A9B     		ldr	r3, [sp, #40]
+ 370              	.LVL51:
+ 371 00ca B3F5803F 		cmp	r3, #65536
+ 372 00ce 02D0     		beq	.L20
+ 373 00d0 0028     		cmp	r0, #0
+ 374 00d2 F3D1     		bne	.L21
+ 375 00d4 01E0     		b	.L22
+ 376              	.L20:
+ 248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     if (busystatus != RESET)
+ 377              		.loc 1 249 0
+ 378 00d6 0028     		cmp	r0, #0
+ 379 00d8 2FD1     		bne	.L31
+ 380              	.L22:
+ 250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {
+ 251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       status = ERROR;
+ 252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }
+ 253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     else
+ 254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {  
+ 255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       /* Configure the number of valid bits in last word of the Key */
+ 256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       HASH_SetLastWordValidBitsNbr(nbvalidbitskey);
+ 381              		.loc 1 256 0
+ 382 00da BDF82E00 		ldrh	r0, [sp, #46]
+ 383              	.LVL52:
+ 384 00de 80B2     		uxth	r0, r0
+ 385 00e0 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 386              	.LVL53:
+ 257:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 258:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       /* Write the Key */
+ 259:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       keyaddr = (uint32_t)Key;
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       for(i=0; i<Keylen; i+=4)
+ 387              		.loc 1 260 0
+ 388 00e4 0026     		movs	r6, #0
+ 389              	.LVL54:
+ 390 00e6 03E0     		b	.L23
+ 391              	.LVL55:
+ 392              	.L24:
+ 261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       {
+ 262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****         HASH_DataIn(*(uint32_t*)keyaddr);
+ 393              		.loc 1 262 0 discriminator 2
+ 394 00e8 A059     		ldr	r0, [r4, r6]
+ 395 00ea FFF7FEFF 		bl	HASH_DataIn
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       for(i=0; i<Keylen; i+=4)
+ 396              		.loc 1 260 0 discriminator 2
+ 397 00ee 0436     		adds	r6, r6, #4
+ 398              	.LVL56:
+ 399              	.L23:
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       for(i=0; i<Keylen; i+=4)
+ 400              		.loc 1 260 0 is_stmt 0 discriminator 1
+ 401 00f0 AE42     		cmp	r6, r5
+ 402 00f2 F9D3     		bcc	.L24
+ 263:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****         keyaddr+=4;
+ 264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }
+ 265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   
+ 266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        /* Start the HASH processor */
+ 267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        HASH_StartDigest();
+ 403              		.loc 1 267 0 is_stmt 1
+ 404 00f4 FFF7FEFF 		bl	HASH_StartDigest
+ 268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        /* wait until the Busy flag is RESET */
+ 270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        counter =0;
+ 405              		.loc 1 270 0
+ 406 00f8 0023     		movs	r3, #0
+ 407 00fa 0A93     		str	r3, [sp, #40]
+ 408              	.L26:
+ 271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        do
+ 272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        {
+ 273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****           busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
+ 409              		.loc 1 273 0 discriminator 1
+ 410 00fc 0820     		movs	r0, #8
+ 411 00fe FFF7FEFF 		bl	HASH_GetFlagStatus
+ 412              	.LVL57:
+ 274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****           counter++;
+ 413              		.loc 1 274 0 discriminator 1
+ 414 0102 0A9B     		ldr	r3, [sp, #40]
+ 415 0104 0133     		adds	r3, r3, #1
+ 416              	.LVL58:
+ 417 0106 0A93     		str	r3, [sp, #40]
+ 418              	.LVL59:
+ 275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
+ 419              		.loc 1 275 0 discriminator 1
+ 420 0108 0A9B     		ldr	r3, [sp, #40]
+ 421              	.LVL60:
+ 422 010a B3F5803F 		cmp	r3, #65536
+ 423 010e 02D0     		beq	.L25
+ 424 0110 0028     		cmp	r0, #0
+ 425 0112 F3D1     		bne	.L26
+ 426 0114 00E0     		b	.L27
+ 427              	.L25:
+ 276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
+ 277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       if (busystatus != RESET)
+ 428              		.loc 1 277 0
+ 429 0116 80B9     		cbnz	r0, .L31
+ 430              	.L27:
+ 278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       {
+ 279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          status = ERROR;
+ 280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }
+ 281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       else
+ 282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       {
+ 283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          /* Read the message digest */
+ 284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          HASH_GetDigest(&MD5_MessageDigest);
+ 431              		.loc 1 284 0
+ 432 0118 01A8     		add	r0, sp, #4
+ 433              	.LVL61:
+ 434 011a FFF7FEFF 		bl	HASH_GetDigest
+ 435              	.LVL62:
+ 436              	.LBB26:
+ 437              	.LBB27:
+ 438              		.loc 2 352 0
+ 439 011e 019B     		ldr	r3, [sp, #4]
+ 440              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 441 0120 1BBA     		rev r3, r3
+ 442              	@ 0 "" 2
+ 443              	.LVL63:
+ 444              		.thumb
+ 445              	.LBE27:
+ 446              	.LBE26:
+ 285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[0]);
+ 447              		.loc 1 285 0
+ 448 0122 3B60     		str	r3, [r7, #0]
+ 449              	.LVL64:
+ 450              	.LBB28:
+ 451              	.LBB29:
+ 452              		.loc 2 352 0
+ 453 0124 029B     		ldr	r3, [sp, #8]
+ 454              	.LVL65:
+ 455              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 456 0126 1BBA     		rev r3, r3
+ 457              	@ 0 "" 2
+ 458              	.LVL66:
+ 459              		.thumb
+ 460              	.LBE29:
+ 461              	.LBE28:
+ 286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          outputaddr+=4;
+ 287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[1]);
+ 462              		.loc 1 287 0
+ 463 0128 7B60     		str	r3, [r7, #4]
+ 464              	.LVL67:
+ 465              	.LBB30:
+ 466              	.LBB31:
+ 467              		.loc 2 352 0
+ 468 012a 039B     		ldr	r3, [sp, #12]
+ 469              	.LVL68:
+ 470              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 471 012c 1BBA     		rev r3, r3
+ 472              	@ 0 "" 2
+ 473              	.LVL69:
+ 474              		.thumb
+ 475              	.LBE31:
+ 476              	.LBE30:
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          outputaddr+=4;
+ 289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[2]);
+ 477              		.loc 1 289 0
+ 478 012e BB60     		str	r3, [r7, #8]
+ 479              	.LVL70:
+ 480              	.LBB32:
+ 481              	.LBB33:
+ 482              		.loc 2 352 0
+ 483 0130 049B     		ldr	r3, [sp, #16]
+ 484              	.LVL71:
+ 485              	@ 352 "D:\Elektronik\WorspaceEclipse\ThunderCryer\CMSIS\Include/core_cmInstr.h" 1
+ 486 0132 1BBA     		rev r3, r3
+ 487              	@ 0 "" 2
+ 488              	.LVL72:
+ 489              		.thumb
+ 490              	.LBE33:
+ 491              	.LBE32:
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ErrorStatus status = SUCCESS;
+ 492              		.loc 1 172 0
+ 493 0134 0120     		movs	r0, #1
+ 290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          outputaddr+=4;
+ 291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[3]);
+ 494              		.loc 1 291 0
+ 495 0136 FB60     		str	r3, [r7, #12]
+ 496 0138 00E0     		b	.L17
+ 497              	.LVL73:
+ 498              	.L31:
+ 279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          status = ERROR;
+ 499              		.loc 1 279 0
+ 500 013a 0020     		movs	r0, #0
+ 501              	.LVL74:
+ 502              	.L17:
+ 292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }
+ 293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }
+ 294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
+ 295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   return status;  
+ 296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** }
+ 503              		.loc 1 296 0
+ 504 013c 0DB0     		add	sp, sp, #52
+ 505 013e BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 506              		.cfi_endproc
+ 507              	.LFE111:
+ 509              		.text
+ 510              	.Letext0:
+ 511              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 512              		.file 4 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4x
+ 513              		.file 5 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_
+ 514              		.file 6 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hash_md5.c
+  C:\Temp\cc01WEC3.s:19     .text.HASH_MD5:00000000 $t
+  C:\Temp\cc01WEC3.s:24     .text.HASH_MD5:00000000 HASH_MD5
+  C:\Temp\cc01WEC3.s:203    .text.HMAC_MD5:00000000 $t
+  C:\Temp\cc01WEC3.s:208    .text.HMAC_MD5:00000000 HMAC_MD5
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HASH_DeInit
+HASH_Init
+HASH_SetLastWordValidBitsNbr
+HASH_DataIn
+HASH_StartDigest
+HASH_GetFlagStatus
+HASH_GetDigest

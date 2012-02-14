@@ -1,0 +1,670 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_rng.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.RNG_DeInit,"ax",%progbits
+  19              		.align	1
+  20              		.global	RNG_DeInit
+  21              		.thumb
+  22              		.thumb_func
+  24              	RNG_DeInit:
+  25              	.LFB110:
+  26              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @file    stm32f4xx_rng.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @version V1.0.0RC1
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @date    25-August-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     * @brief This file provides firmware functions to manage the following 
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          functionalities of the Random Number Generator (RNG) peripheral:           
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           - Initialization and Configuration 
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           - Get 32 bit Random number      
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           - Interrupts and flags management       
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *  @verbatim
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *                               
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          ===================================================================      
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *                                   How to use this driver
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          ===================================================================          
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          1. Enable The RNG controller clock using 
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_RNG, ENABLE) function.
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *              
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          2. Activate the RNG peripheral using RNG_Cmd() function.
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          3. Wait until the 32 bit Random number Generator contains a valid 
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            random data (using polling/interrupt mode). For more details, 
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            refer to "Interrupts and flags management functions" module 
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            description.
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          4. Get the 32 bit Random number using RNG_GetRandomNumber() function
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          5. To get another 32 bit Random number, go to step 3.       
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *              
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *  @endverbatim
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ******************************************************************************
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @attention
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ******************************************************************************  
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Includes ------------------------------------------------------------------*/
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** #include "stm32f4xx_rng.h"
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** #include "stm32f4xx_rcc.h"
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @{
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /** @defgroup RNG 
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief RNG driver modules
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @{
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */ 
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Private typedef -----------------------------------------------------------*/
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Private define ------------------------------------------------------------*/
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Private macro -------------------------------------------------------------*/
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Private variables ---------------------------------------------------------*/
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Private function prototypes -----------------------------------------------*/
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /* Private functions ---------------------------------------------------------*/
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /** @defgroup RNG_Private_Functions
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @{
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */ 
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /** @defgroup RNG_Group1 Initialization and Configuration functions
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  *  @brief    Initialization and Configuration functions 
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  *
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** @verbatim    
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  ===============================================================================
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****                       Initialization and Configuration functions
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  ===============================================================================  
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   This section provides functions allowing to 
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    - Initialize the RNG peripheral
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    - Enable or disable the RNG peripheral
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** @endverbatim
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @{
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Deinitializes the RNG peripheral registers to their default reset values.
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  None
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval None
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** void RNG_DeInit(void)
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+  27              		.loc 1 95 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 14, -4
+  35              		.cfi_offset 3, -8
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Enable RNG reset state */
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_RNG, ENABLE);
+  36              		.loc 1 97 0
+  37 0002 4020     		movs	r0, #64
+  38 0004 0121     		movs	r1, #1
+  39 0006 FFF7FEFF 		bl	RCC_AHB2PeriphResetCmd
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Release RNG from reset state */
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_RNG, DISABLE);
+  40              		.loc 1 100 0
+  41 000a 4020     		movs	r0, #64
+  42 000c 0021     		movs	r1, #0
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+  43              		.loc 1 101 0
+  44 000e BDE80840 		pop	{r3, lr}
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_RNG, DISABLE);
+  45              		.loc 1 100 0
+  46 0012 FFF7FEBF 		b	RCC_AHB2PeriphResetCmd
+  47              		.cfi_endproc
+  48              	.LFE110:
+  50              		.section	.text.RNG_Cmd,"ax",%progbits
+  51              		.align	1
+  52              		.global	RNG_Cmd
+  53              		.thumb
+  54              		.thumb_func
+  56              	RNG_Cmd:
+  57              	.LFB111:
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Enables or disables the RNG peripheral.
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  NewState: new state of the RNG peripheral.
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          This parameter can be: ENABLE or DISABLE.
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval None
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** void RNG_Cmd(FunctionalState NewState)
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+  58              		.loc 1 110 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63              	.LVL0:
+  64 0000 044B     		ldr	r3, .L6
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the parameters */
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   if (NewState != DISABLE)
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* Enable the RNG */
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     RNG->CR |= RNG_CR_RNGEN;
+  65              		.loc 1 117 0
+  66 0002 1A68     		ldr	r2, [r3, #0]
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   if (NewState != DISABLE)
+  67              		.loc 1 114 0
+  68 0004 10B1     		cbz	r0, .L3
+  69              		.loc 1 117 0
+  70 0006 42F00402 		orr	r2, r2, #4
+  71 000a 01E0     		b	.L5
+  72              	.L3:
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   else
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* Disable the RNG */
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     RNG->CR &= ~RNG_CR_RNGEN;
+  73              		.loc 1 122 0
+  74 000c 22F00402 		bic	r2, r2, #4
+  75              	.L5:
+  76 0010 1A60     		str	r2, [r3, #0]
+  77 0012 7047     		bx	lr
+  78              	.L7:
+  79              		.align	2
+  80              	.L6:
+  81 0014 00080650 		.word	1342572544
+  82              		.cfi_endproc
+  83              	.LFE111:
+  85              		.section	.text.RNG_GetRandomNumber,"ax",%progbits
+  86              		.align	1
+  87              		.global	RNG_GetRandomNumber
+  88              		.thumb
+  89              		.thumb_func
+  91              	RNG_GetRandomNumber:
+  92              	.LFB112:
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @}
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /** @defgroup RNG_Group2 Get 32 bit Random number function
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  *  @brief    Get 32 bit Random number function 
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  *
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** @verbatim    
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  ===============================================================================
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****                       Get 32 bit Random number function
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  ===============================================================================  
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   This section provides a function allowing to get the 32 bit Random number  
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   @note  Before to call this function you have to wait till DRDY flag is set,
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****          using RNG_GetFlagStatus(RNG_FLAG_DRDY) function. 
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** @endverbatim
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @{
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Returns a 32-bit random number.
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *   
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @note   Before to call this function you have to wait till DRDY (data ready)
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         flag is set, using RNG_GetFlagStatus(RNG_FLAG_DRDY) function.
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @note   Each time the the Random number data is read (using RNG_GetRandomNumber()
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         function), the RNG_FLAG_DRDY flag is automatically cleared.
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @note   In the case of a seed error, the generation of random numbers is 
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         interrupted for as long as the SECS bit is '1'. If a number is 
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         available in the RNG_DR register, it must not be used because it may 
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         not have enough entropy. In this case, it is recommended to clear the 
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         SEIS bit(using RNG_ClearFlag(RNG_FLAG_SECS) function), then disable 
+ 159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         and enable the RNG peripheral (using RNG_Cmd() function) to 
+ 160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         reinitialize and restart the RNG.
+ 161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @note   In the case of a clock error, the RNG is no more able to generate 
+ 162:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         random numbers because the PLL48CLK clock is not correct. User have 
+ 163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         to check that the clock controller is correctly configured to provide
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         the RNG clock and clear the CEIS bit (using RNG_ClearFlag(RNG_FLAG_CECS) 
+ 165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         function) . The clock error has no impact on the previously generated 
+ 166:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         random numbers, and the RNG_DR register contents can be used.
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  None
+ 169:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval 32-bit random number.
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** uint32_t RNG_GetRandomNumber(void)
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+  93              		.loc 1 172 0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97              		@ link register save eliminated.
+ 173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Return the 32 bit random number from the DR register */
+ 174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   return RNG->DR;
+  98              		.loc 1 174 0
+  99 0000 014B     		ldr	r3, .L9
+ 100 0002 9868     		ldr	r0, [r3, #8]
+ 175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 101              		.loc 1 175 0
+ 102 0004 7047     		bx	lr
+ 103              	.L10:
+ 104 0006 00BF     		.align	2
+ 105              	.L9:
+ 106 0008 00080650 		.word	1342572544
+ 107              		.cfi_endproc
+ 108              	.LFE112:
+ 110              		.section	.text.RNG_ITConfig,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	RNG_ITConfig
+ 113              		.thumb
+ 114              		.thumb_func
+ 116              	RNG_ITConfig:
+ 117              	.LFB113:
+ 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 178:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @}
+ 180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /** @defgroup RNG_Group3 Interrupts and flags management functions
+ 183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  *  @brief   Interrupts and flags management functions
+ 184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  *
+ 185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** @verbatim   
+ 186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  ===============================================================================
+ 187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****                    Interrupts and flags management functions
+ 188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****  ===============================================================================  
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   This section provides functions allowing to configure the RNG Interrupts and 
+ 191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   to get the status and clear flags and Interrupts pending bits.
+ 192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   The RNG provides 3 Interrupts sources and 3 Flags:
+ 194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   Flags :
+ 196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ---------- 
+ 197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****      1. RNG_FLAG_DRDY :  In the case of the RNG_DR register contains valid 
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****                          random data. it is cleared by reading the valid data 
+ 199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****                          (using RNG_GetRandomNumber() function).
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****      2. RNG_FLAG_CECS : In the case of a seed error detection. 
+ 202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       
+ 203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****      3. RNG_FLAG_SECS : In the case of a clock error detection.
+ 204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****               
+ 205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   Interrupts :
+ 207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ------------
+ 208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    if enabled, an RNG interrupt is pending :
+ 209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     
+ 210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    1.  In the case of the RNG_DR register contains valid random data. 
+ 211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****        This interrupt source is cleared once the RNG_DR register has been read 
+ 212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****        (using RNG_GetRandomNumber() function) until a new valid value is 
+ 213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****        computed. 
+ 214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    
+ 215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    or 
+ 216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    2. In the case of a seed error : One of the following faulty sequences has 
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       been detected:
+ 218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - More than 64 consecutive bits at the same value (0 or 1)
+ 219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - More than 32 consecutive alternance of 0 and 1 (0101010101...01)
+ 220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       This interrupt source is cleared using RNG_ClearITPendingBit(RNG_IT_SEI)
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       function.
+ 222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    or
+ 224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****    3. In the case of a clock error : the PLL48CLK (RNG peripheral clock source) 
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       was not correctly detected (fPLL48CLK< fHCLK/16).
+ 226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       This interrupt source is cleared using RNG_ClearITPendingBit(RNG_IT_CEI)
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       function.
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       @note In this case, User have to check that the clock controller is 
+ 229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****             correctly configured to provide the RNG clock. 
+ 230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   Managing the RNG controller events :
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ------------------------------------ 
+ 233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   The user should identify which mode will be used in his application to manage 
+ 234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   the RNG controller events: Polling mode or Interrupt mode.
+ 235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   1.  In the Polling Mode it is advised to use the following functions:
+ 237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - RNG_GetFlagStatus() : to check if flags events occur. 
+ 238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - RNG_ClearFlag()     : to clear the flags events.
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   @note RNG_FLAG_DRDY can not be cleared by RNG_ClearFlag(). it is cleared only 
+ 241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****         by reading the Random number data.      
+ 242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   2.  In the Interrupt Mode it is advised to use the following functions:
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - RNG_ITConfig()       : to enable or disable the interrupt source.
+ 245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - RNG_GetITStatus()    : to check if Interrupt occurs.
+ 246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****       - RNG_ClearITPendingBit() : to clear the Interrupt pending Bit 
+ 247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****                                 (corresponding Flag). 
+ 248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   
+ 249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** @endverbatim
+ 251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @{
+ 252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */ 
+ 253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Enables or disables the RNG interrupt.
+ 256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @note   The RNG provides 3 interrupt sources,
+ 257:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           - Computed data is ready event (DRDY), and           
+ 258:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           - Seed error Interrupt (SEI) and 
+ 259:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *           - Clock error Interrupt (CEI), 
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         all these interrupts sources are enabled by setting the IE bit in 
+ 261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         CR register. However, each interrupt have its specific status bit
+ 262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         (see RNG_GetITStatus() function) and clear bit except the DRDY event
+ 263:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         (see RNG_ClearITPendingBit() function).
+ 264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  NewState: new state of the RNG interrupt.
+ 265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          This parameter can be: ENABLE or DISABLE.
+ 266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval None
+ 267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** void RNG_ITConfig(FunctionalState NewState)
+ 269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+ 118              		.loc 1 269 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123              	.LVL1:
+ 124 0000 044B     		ldr	r3, .L15
+ 270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the parameters */
+ 271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   if (NewState != DISABLE)
+ 274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* Enable the RNG interrupt */
+ 276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     RNG->CR |= RNG_CR_IE;
+ 125              		.loc 1 276 0
+ 126 0002 1A68     		ldr	r2, [r3, #0]
+ 273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   if (NewState != DISABLE)
+ 127              		.loc 1 273 0
+ 128 0004 10B1     		cbz	r0, .L12
+ 129              		.loc 1 276 0
+ 130 0006 42F00802 		orr	r2, r2, #8
+ 131 000a 01E0     		b	.L14
+ 132              	.L12:
+ 277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   else
+ 279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* Disable the RNG interrupt */
+ 281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     RNG->CR &= ~RNG_CR_IE;
+ 133              		.loc 1 281 0
+ 134 000c 22F00802 		bic	r2, r2, #8
+ 135              	.L14:
+ 136 0010 1A60     		str	r2, [r3, #0]
+ 137 0012 7047     		bx	lr
+ 138              	.L16:
+ 139              		.align	2
+ 140              	.L15:
+ 141 0014 00080650 		.word	1342572544
+ 142              		.cfi_endproc
+ 143              	.LFE113:
+ 145              		.section	.text.RNG_GetFlagStatus,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	RNG_GetFlagStatus
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	RNG_GetFlagStatus:
+ 152              	.LFB114:
+ 282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Checks whether the specified RNG flag is set or not.
+ 287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  RNG_FLAG: specifies the RNG flag to check.
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          This parameter can be one of the following values:
+ 289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_FLAG_DRDY: Data Ready flag.
+ 290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_FLAG_CECS: Clock Error Current flag.
+ 291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_FLAG_SECS: Seed Error Current flag.
+ 292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval The new state of RNG_FLAG (SET or RESET).
+ 293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** FlagStatus RNG_GetFlagStatus(uint8_t RNG_FLAG)
+ 295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+ 153              		.loc 1 295 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158              	.LVL2:
+ 296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   FlagStatus bitstatus = RESET;
+ 297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the parameters */
+ 298:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   assert_param(IS_RNG_GET_FLAG(RNG_FLAG));
+ 299:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the status of the specified RNG flag */
+ 301:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   if ((RNG->SR & RNG_FLAG) != (uint8_t)RESET)
+ 159              		.loc 1 301 0
+ 160 0000 034B     		ldr	r3, .L18
+ 161 0002 5B68     		ldr	r3, [r3, #4]
+ 162              	.LVL3:
+ 302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 303:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* RNG_FLAG is set */
+ 304:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     bitstatus = SET;
+ 163              		.loc 1 304 0
+ 164 0004 1842     		tst	r0, r3
+ 305:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   else
+ 307:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 308:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* RNG_FLAG is reset */
+ 309:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     bitstatus = RESET;
+ 310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 311:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Return the RNG_FLAG status */
+ 312:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   return  bitstatus;
+ 165              		.loc 1 312 0
+ 166 0006 0CBF     		ite	eq
+ 167 0008 0020     		moveq	r0, #0
+ 168 000a 0120     		movne	r0, #1
+ 169              	.LVL4:
+ 313:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 170              		.loc 1 313 0
+ 171 000c 7047     		bx	lr
+ 172              	.L19:
+ 173 000e 00BF     		.align	2
+ 174              	.L18:
+ 175 0010 00080650 		.word	1342572544
+ 176              		.cfi_endproc
+ 177              	.LFE114:
+ 179              		.section	.text.RNG_ClearFlag,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	RNG_ClearFlag
+ 182              		.thumb
+ 183              		.thumb_func
+ 185              	RNG_ClearFlag:
+ 186              	.LFB115:
+ 314:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 315:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 316:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 317:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Clears the RNG flags.
+ 318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  RNG_FLAG: specifies the flag to clear. 
+ 319:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          This parameter can be any combination of the following values:
+ 320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_FLAG_CECS: Clock Error Current flag.
+ 321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_FLAG_SECS: Seed Error Current flag.
+ 322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @note   RNG_FLAG_DRDY can not be cleared by RNG_ClearFlag() function. 
+ 323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         This flag is cleared only by reading the Random number data (using 
+ 324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *         RNG_GetRandomNumber() function).                           
+ 325:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval None
+ 326:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 327:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** void RNG_ClearFlag(uint8_t RNG_FLAG)
+ 328:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+ 187              		.loc 1 328 0
+ 188              		.cfi_startproc
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191              		@ link register save eliminated.
+ 192              	.LVL5:
+ 329:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the parameters */
+ 330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   assert_param(IS_RNG_CLEAR_FLAG(RNG_FLAG));
+ 331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Clear the selected RNG flags */
+ 332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   RNG->SR = ~(uint32_t)(((uint32_t)RNG_FLAG) << 4);
+ 193              		.loc 1 332 0
+ 194 0000 024B     		ldr	r3, .L21
+ 195 0002 6FEA0010 		mvn	r0, r0, lsl #4
+ 196              	.LVL6:
+ 197 0006 5860     		str	r0, [r3, #4]
+ 333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 198              		.loc 1 333 0
+ 199 0008 7047     		bx	lr
+ 200              	.L22:
+ 201 000a 00BF     		.align	2
+ 202              	.L21:
+ 203 000c 00080650 		.word	1342572544
+ 204              		.cfi_endproc
+ 205              	.LFE115:
+ 207              		.section	.text.RNG_GetITStatus,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	RNG_GetITStatus
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	RNG_GetITStatus:
+ 214              	.LFB116:
+ 334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 335:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Checks whether the specified RNG interrupt has occurred or not.
+ 337:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  RNG_IT: specifies the RNG interrupt source to check.
+ 338:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          This parameter can be one of the following values:
+ 339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_IT_CEI: Clock Error Interrupt.
+ 340:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_IT_SEI: Seed Error Interrupt.                   
+ 341:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval The new state of RNG_IT (SET or RESET).
+ 342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 343:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** ITStatus RNG_GetITStatus(uint8_t RNG_IT)
+ 344:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+ 215              		.loc 1 344 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 220              	.LVL7:
+ 345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   ITStatus bitstatus = RESET;
+ 346:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the parameters */
+ 347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   assert_param(IS_RNG_GET_IT(RNG_IT));
+ 348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the status of the specified RNG interrupt */
+ 350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   if ((RNG->SR & RNG_IT) != (uint8_t)RESET)
+ 221              		.loc 1 350 0
+ 222 0000 034B     		ldr	r3, .L24
+ 223 0002 5B68     		ldr	r3, [r3, #4]
+ 224              	.LVL8:
+ 351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* RNG_IT is set */
+ 353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     bitstatus = SET;
+ 225              		.loc 1 353 0
+ 226 0004 1842     		tst	r0, r3
+ 354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   else
+ 356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   {
+ 357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     /* RNG_IT is reset */
+ 358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****     bitstatus = RESET;
+ 359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   }
+ 360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Return the RNG_IT status */
+ 361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   return bitstatus;
+ 227              		.loc 1 361 0
+ 228 0006 0CBF     		ite	eq
+ 229 0008 0020     		moveq	r0, #0
+ 230 000a 0120     		movne	r0, #1
+ 231              	.LVL9:
+ 362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 232              		.loc 1 362 0
+ 233 000c 7047     		bx	lr
+ 234              	.L25:
+ 235 000e 00BF     		.align	2
+ 236              	.L24:
+ 237 0010 00080650 		.word	1342572544
+ 238              		.cfi_endproc
+ 239              	.LFE116:
+ 241              		.section	.text.RNG_ClearITPendingBit,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	RNG_ClearITPendingBit
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	RNG_ClearITPendingBit:
+ 248              	.LFB117:
+ 363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** /**
+ 366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @brief  Clears the RNG interrupt pending bit(s).
+ 367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @param  RNG_IT: specifies the RNG interrupt pending bit(s) to clear.
+ 368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *          This parameter can be any combination of the following values:
+ 369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_IT_CEI: Clock Error Interrupt.
+ 370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   *            @arg RNG_IT_SEI: Seed Error Interrupt.
+ 371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   * @retval None
+ 372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   */
+ 373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** void RNG_ClearITPendingBit(uint8_t RNG_IT)
+ 374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** {
+ 249              		.loc 1 374 0
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 253              		@ link register save eliminated.
+ 254              	.LVL10:
+ 375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Check the parameters */
+ 376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   assert_param(IS_RNG_IT(RNG_IT));
+ 377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** 
+ 378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   /* Clear the selected RNG interrupt pending bit */
+ 379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c ****   RNG->SR = (uint8_t)~RNG_IT;
+ 255              		.loc 1 379 0
+ 256 0000 C043     		mvns	r0, r0
+ 257              	.LVL11:
+ 258 0002 024B     		ldr	r3, .L27
+ 259 0004 C0B2     		uxtb	r0, r0
+ 260 0006 5860     		str	r0, [r3, #4]
+ 380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c **** }
+ 261              		.loc 1 380 0
+ 262 0008 7047     		bx	lr
+ 263              	.L28:
+ 264 000a 00BF     		.align	2
+ 265              	.L27:
+ 266 000c 00080650 		.word	1342572544
+ 267              		.cfi_endproc
+ 268              	.LFE117:
+ 270              		.text
+ 271              	.Letext0:
+ 272              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 273              		.file 3 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4x
+ 274              		.file 4 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_rng.c
+  C:\Temp\ccNXBwhh.s:19     .text.RNG_DeInit:00000000 $t
+  C:\Temp\ccNXBwhh.s:24     .text.RNG_DeInit:00000000 RNG_DeInit
+  C:\Temp\ccNXBwhh.s:51     .text.RNG_Cmd:00000000 $t
+  C:\Temp\ccNXBwhh.s:56     .text.RNG_Cmd:00000000 RNG_Cmd
+  C:\Temp\ccNXBwhh.s:81     .text.RNG_Cmd:00000014 $d
+  C:\Temp\ccNXBwhh.s:86     .text.RNG_GetRandomNumber:00000000 $t
+  C:\Temp\ccNXBwhh.s:91     .text.RNG_GetRandomNumber:00000000 RNG_GetRandomNumber
+  C:\Temp\ccNXBwhh.s:106    .text.RNG_GetRandomNumber:00000008 $d
+  C:\Temp\ccNXBwhh.s:111    .text.RNG_ITConfig:00000000 $t
+  C:\Temp\ccNXBwhh.s:116    .text.RNG_ITConfig:00000000 RNG_ITConfig
+  C:\Temp\ccNXBwhh.s:141    .text.RNG_ITConfig:00000014 $d
+  C:\Temp\ccNXBwhh.s:146    .text.RNG_GetFlagStatus:00000000 $t
+  C:\Temp\ccNXBwhh.s:151    .text.RNG_GetFlagStatus:00000000 RNG_GetFlagStatus
+  C:\Temp\ccNXBwhh.s:175    .text.RNG_GetFlagStatus:00000010 $d
+  C:\Temp\ccNXBwhh.s:180    .text.RNG_ClearFlag:00000000 $t
+  C:\Temp\ccNXBwhh.s:185    .text.RNG_ClearFlag:00000000 RNG_ClearFlag
+  C:\Temp\ccNXBwhh.s:203    .text.RNG_ClearFlag:0000000c $d
+  C:\Temp\ccNXBwhh.s:208    .text.RNG_GetITStatus:00000000 $t
+  C:\Temp\ccNXBwhh.s:213    .text.RNG_GetITStatus:00000000 RNG_GetITStatus
+  C:\Temp\ccNXBwhh.s:237    .text.RNG_GetITStatus:00000010 $d
+  C:\Temp\ccNXBwhh.s:242    .text.RNG_ClearITPendingBit:00000000 $t
+  C:\Temp\ccNXBwhh.s:247    .text.RNG_ClearITPendingBit:00000000 RNG_ClearITPendingBit
+  C:\Temp\ccNXBwhh.s:266    .text.RNG_ClearITPendingBit:0000000c $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+RCC_AHB2PeriphResetCmd

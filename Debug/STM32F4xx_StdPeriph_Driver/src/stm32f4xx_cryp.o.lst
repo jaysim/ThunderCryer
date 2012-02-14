@@ -1,0 +1,1656 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_cryp.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.CRYP_DeInit,"ax",%progbits
+  19              		.align	1
+  20              		.global	CRYP_DeInit
+  21              		.thumb
+  22              		.thumb_func
+  24              	CRYP_DeInit:
+  25              	.LFB110:
+  26              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @file    stm32f4xx_cryp.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @version V1.0.0RC1
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @date    25-August-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief   This file provides firmware functions to manage the following 
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          functionalities of the  Cryptographic processor (CRYP) peripheral:           
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           - Initialization and Configuration functions
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           - Data treatment functions 
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           - Context swapping functions     
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           - DMA interface function       
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           - Interrupts and flags management       
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *  @verbatim
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *                               
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          ===================================================================      
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *                                 How to use this driver
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          =================================================================== 
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          1. Enable the CRYP controller clock using 
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *              RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_CRYP, ENABLE); function.
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          2. Initialise the CRYP using CRYP_Init(), CRYP_KeyInit() and if 
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *             needed CRYP_IVInit(). 
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          3. Flush the IN and OUT FIFOs by using CRYP_FIFOFlush() function.
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          4. Enable the CRYP controller using the CRYP_Cmd() function. 
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          5. If using DMA for Data input and output transfer, 
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *             Activate the needed DMA Requests using CRYP_DMACmd() function 
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          6. If DMA is not used for data transfer, use CRYP_DataIn() and 
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *             CRYP_DataOut() functions to enter data to IN FIFO and get result
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *             from OUT FIFO.
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          7. To control CRYP events you can use one of the following 
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *              two methods:
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *               - Check on CRYP flags using the CRYP_GetFlagStatus() function.  
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *               - Use CRYP interrupts through the function CRYP_ITConfig() at 
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *                 initialization phase and CRYP_GetITStatus() function into 
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *                 interrupt routines in processing phase.
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          8. Save and restore Cryptographic processor context using  
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *             CRYP_SaveContext() and CRYP_RestoreContext() functions.     
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          ===================================================================  
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *                Procedure to perform an encryption or a decryption
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          ===================================================================  
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *      Initialization
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *      ===============  
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *     1. Initialize the peripheral using CRYP_Init(), CRYP_KeyInit() and 
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        CRYP_IVInit functions:
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        - Configure the key size (128-, 192- or 256-bit, in the AES only) 
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        - Enter the symmetric key 
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        - Configure the data type
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        - In case of decryption in AES-ECB or AES-CBC, you must prepare 
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          the key: configure the key preparation mode. Then Enable the CRYP 
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          peripheral using CRYP_Cmd() function: the BUSY flag is set. 
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          Wait until BUSY flag is reset : the key is prepared for decryption
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       - Configure the algorithm and chaining (the DES/TDES in ECB/CBC, the 
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          AES in ECB/CBC/CTR) 
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       - Configure the direction (encryption/decryption).
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       - Write the initialization vectors (in CBC or CTR modes only)
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    2. Flush the IN and OUT FIFOs using the CRYP_FIFOFlush() function
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    Basic Processing mode (polling mode) 
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    ====================================  
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    1. Enable the cryptographic processor using CRYP_Cmd() function.
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    2. Write the first blocks in the input FIFO (2 to 8 words) using 
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       CRYP_DataIn() function.
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    3. Repeat the following sequence until the complete message has been 
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       processed:
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       a) Wait for flag CRYP_FLAG_OFNE occurs (using CRYP_GetFlagStatus() 
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          function), then read the OUT-FIFO using CRYP_DataOut() function
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          (1 block or until the FIFO is empty)
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       b) Wait for flag CRYP_FLAG_IFNF occurs, (using CRYP_GetFlagStatus() 
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          function then write the IN FIFO using CRYP_DataIn() function 
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          (1 block or until the FIFO is full)
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    4. At the end of the processing, CRYP_FLAG_BUSY flag will be reset and 
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        both FIFOs are empty (CRYP_FLAG_IFEM is set and CRYP_FLAG_OFNE is 
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *        reset). You can disable the peripheral using CRYP_Cmd() function.
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    Interrupts Processing mode 
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    ===========================
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    In this mode, Processing is done when the data are transferred by the 
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    CPU during interrupts.
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    1. Enable the interrupts CRYP_IT_INI and CRYP_IT_OUTI using 
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       CRYP_ITConfig() function.
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    2. Enable the cryptographic processor using CRYP_Cmd() function.
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    3. In the CRYP_IT_INI interrupt handler : load the input message into the 
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       IN FIFO using CRYP_DataIn() function . You can load 2 or 4 words at a 
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       time, or load data until the IN FIFO is full. When the last word of
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       the message has been entered into the IN FIFO, disable the CRYP_IT_INI 
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       interrupt (using CRYP_ITConfig() function).
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    4. In the CRYP_IT_OUTI interrupt handler : read the output message from 
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       the OUT FIFO using CRYP_DataOut() function. You can read 1 block (2 or 
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       4 words) at a time or read data until the FIFO is empty.
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       When the last word has been read, INIM=0, BUSY=0 and both FIFOs are 
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       empty (CRYP_FLAG_IFEM is set and CRYP_FLAG_OFNE is reset). 
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       You can disable the CRYP_IT_OUTI interrupt (using CRYP_ITConfig() 
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       function) and you can disable the peripheral using CRYP_Cmd() function.
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    DMA Processing mode 
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    ====================
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    In this mode, Processing is done when the DMA is used to transfer the 
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    data from/to the memory.
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    1. Configure the DMA controller to transfer the input data from the 
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       memory using DMA_Init() function. 
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       The transfer length is the length of the message. 
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       As message padding is not managed by the peripheral, the message 
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       length must be an entire number of blocks. The data are transferred 
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       in burst mode. The burst length is 4 words in the AES and 2 or 4 
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       words in the DES/TDES. The DMA should be configured to set an 
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       interrupt on transfer completion of the output data to indicate that 
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       the processing is finished. 
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       Refer to DMA peripheral driver for more details.  
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    2. Enable the cryptographic processor using CRYP_Cmd() function. 
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       Enable the DMA requests CRYP_DMAReq_DataIN and CRYP_DMAReq_DataOUT 
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       using CRYP_DMACmd() function.
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *    3. All the transfers and processing are managed by the DMA and the 
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       cryptographic processor. The DMA transfer complete interrupt indicates 
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       that the processing is complete. Both FIFOs are normally empty and 
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *       CRYP_FLAG_BUSY flag is reset.
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *  @endverbatim
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ******************************************************************************
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @attention
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ******************************************************************************  
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Includes ------------------------------------------------------------------*/
+ 159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** #include "stm32f4xx_cryp.h"
+ 160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** #include "stm32f4xx_rcc.h"
+ 161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 162:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+ 163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 166:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP 
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief CRYP driver modules
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 169:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */ 
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Private typedef -----------------------------------------------------------*/
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Private define ------------------------------------------------------------*/
+ 173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** #define FLAG_MASK     ((uint8_t)0x20)
+ 174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** #define MAX_TIMEOUT   ((uint16_t)0xFFFF)
+ 175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Private macro -------------------------------------------------------------*/
+ 177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Private variables ---------------------------------------------------------*/
+ 178:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Private function prototypes -----------------------------------------------*/
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /* Private functions ---------------------------------------------------------*/
+ 180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP_Private_Functions
+ 182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */ 
+ 184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP_Group1 Initialization and Configuration functions
+ 186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *  @brief    Initialization and Configuration functions 
+ 187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *
+ 188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @verbatim    
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       Initialization and Configuration functions
+ 191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================  
+ 192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   This section provides functions allowing to 
+ 193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    - Initialize the cryptographic Processor using CRYP_Init() function 
+ 194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       -  Encrypt or Decrypt 
+ 195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       -  mode : TDES-ECB, TDES-CBC, 
+ 196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                 DES-ECB, DES-CBC, 
+ 197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                 AES-ECB, AES-CBC, AES-CTR, AES-Key 
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       - DataType :  32-bit data, 16-bit data, bit data or bit-string
+ 199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       - Key Size (only in AES modes)
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    - Configure the Encrypt or Decrypt Key using CRYP_KeyInit() function 
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    - Configure the Initialization Vectors(IV) for CBC and CTR modes using 
+ 202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      CRYP_IVInit() function.  
+ 203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    - Flushes the IN and OUT FIFOs : using CRYP_FIFOFlush() function.                         
+ 204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    - Enable or disable the CRYP Processor using CRYP_Cmd() function 
+ 205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    
+ 207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @endverbatim
+ 208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Deinitializes the CRYP peripheral registers to their default reset values
+ 212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  None
+ 213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_DeInit(void)
+ 216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+  27              		.loc 1 216 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 14, -4
+  35              		.cfi_offset 3, -8
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Enable CRYP reset state */
+ 218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_CRYP, ENABLE);
+  36              		.loc 1 218 0
+  37 0002 1020     		movs	r0, #16
+  38 0004 0121     		movs	r1, #1
+  39 0006 FFF7FEFF 		bl	RCC_AHB2PeriphResetCmd
+ 219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Release CRYP from reset state */
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_CRYP, DISABLE);
+  40              		.loc 1 221 0
+  41 000a 1020     		movs	r0, #16
+  42 000c 0021     		movs	r1, #0
+ 222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+  43              		.loc 1 222 0
+  44 000e BDE80840 		pop	{r3, lr}
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_CRYP, DISABLE);
+  45              		.loc 1 221 0
+  46 0012 FFF7FEBF 		b	RCC_AHB2PeriphResetCmd
+  47              		.cfi_endproc
+  48              	.LFE110:
+  50              		.section	.text.CRYP_Init,"ax",%progbits
+  51              		.align	1
+  52              		.global	CRYP_Init
+  53              		.thumb
+  54              		.thumb_func
+  56              	CRYP_Init:
+  57              	.LFB111:
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Initializes the CRYP peripheral according to the specified parameters
+ 226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         in the CRYP_InitStruct.
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_InitStruct: pointer to a CRYP_InitTypeDef structure that contains
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the configuration information for the CRYP peripheral.
+ 229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_Init(CRYP_InitTypeDef* CRYP_InitStruct)
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+  58              		.loc 1 232 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              	.LVL0:
+  63 0000 10B5     		push	{r4, lr}
+  64              	.LCFI1:
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 14, -4
+  67              		.cfi_offset 4, -8
+ 233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the parameters */
+ 234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_ALGOMODE(CRYP_InitStruct->CRYP_AlgoMode));
+ 235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_DATATYPE(CRYP_InitStruct->CRYP_DataType));
+ 236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_ALGODIR(CRYP_InitStruct->CRYP_AlgoDir));
+ 237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Select Algorithm mode*/  
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR &= ~CRYP_CR_ALGOMODE;
+  68              		.loc 1 239 0
+  69 0002 194B     		ldr	r3, .L5
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_InitStruct->CRYP_AlgoMode;
+ 241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Select dataType */ 
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR &= ~CRYP_CR_DATATYPE;
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_InitStruct->CRYP_DataType;
+  70              		.loc 1 244 0
+  71 0004 8488     		ldrh	r4, [r0, #4]
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR &= ~CRYP_CR_ALGOMODE;
+  72              		.loc 1 239 0
+  73 0006 1A68     		ldr	r2, [r3, #0]
+  74 0008 22F03802 		bic	r2, r2, #56
+  75 000c 1A60     		str	r2, [r3, #0]
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_InitStruct->CRYP_AlgoMode;
+  76              		.loc 1 240 0
+  77 000e 1968     		ldr	r1, [r3, #0]
+  78 0010 4288     		ldrh	r2, [r0, #2]
+  79 0012 1143     		orrs	r1, r1, r2
+  80 0014 1960     		str	r1, [r3, #0]
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR &= ~CRYP_CR_DATATYPE;
+  81              		.loc 1 243 0
+  82 0016 1968     		ldr	r1, [r3, #0]
+  83 0018 21F0C001 		bic	r1, r1, #192
+  84 001c 1960     		str	r1, [r3, #0]
+  85              		.loc 1 244 0
+  86 001e 1968     		ldr	r1, [r3, #0]
+ 245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* select Key size (used only with AES algorithm) */
+ 247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if ((CRYP_InitStruct->CRYP_AlgoMode == CRYP_AlgoMode_AES_ECB) ||
+  87              		.loc 1 247 0
+  88 0020 A2F1200C 		sub	ip, r2, #32
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_InitStruct->CRYP_DataType;
+  89              		.loc 1 244 0
+  90 0024 2143     		orrs	r1, r1, r4
+  91 0026 1960     		str	r1, [r3, #0]
+  92              		.loc 1 247 0
+  93 0028 DCF10001 		rsbs	r1, ip, #0
+  94 002c 41EB0C01 		adc	r1, r1, ip
+  95 0030 282A     		cmp	r2, #40
+  96 0032 08BF     		it	eq
+  97 0034 41F00101 		orreq	r1, r1, #1
+  98 0038 19B9     		cbnz	r1, .L3
+ 248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       (CRYP_InitStruct->CRYP_AlgoMode == CRYP_AlgoMode_AES_CBC) ||
+  99              		.loc 1 248 0
+ 100 003a 302A     		cmp	r2, #48
+ 101 003c 01D0     		beq	.L3
+ 249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       (CRYP_InitStruct->CRYP_AlgoMode == CRYP_AlgoMode_AES_CTR) ||
+ 102              		.loc 1 249 0
+ 103 003e 382A     		cmp	r2, #56
+ 104 0040 07D1     		bne	.L4
+ 105              	.L3:
+ 250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       (CRYP_InitStruct->CRYP_AlgoMode == CRYP_AlgoMode_AES_Key))
+ 251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     assert_param(IS_CRYP_KEYSIZE(CRYP_InitStruct->CRYP_KeySize));
+ 253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->CR &= ~CRYP_CR_KEYSIZE;
+ 106              		.loc 1 253 0
+ 107 0042 1A68     		ldr	r2, [r3, #0]
+ 254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->CR |= CRYP_InitStruct->CRYP_KeySize; /* Key size and value must be 
+ 108              		.loc 1 254 0
+ 109 0044 C188     		ldrh	r1, [r0, #6]
+ 253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->CR &= ~CRYP_CR_KEYSIZE;
+ 110              		.loc 1 253 0
+ 111 0046 22F44072 		bic	r2, r2, #768
+ 112 004a 1A60     		str	r2, [r3, #0]
+ 113              		.loc 1 254 0
+ 114 004c 1A68     		ldr	r2, [r3, #0]
+ 115 004e 0A43     		orrs	r2, r2, r1
+ 116 0050 1A60     		str	r2, [r3, #0]
+ 117              	.L4:
+ 255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                                                   configured once the key has 
+ 256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                                                   been prepared */
+ 257:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 258:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 259:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Select data Direction */ 
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR &= ~CRYP_CR_ALGODIR;
+ 118              		.loc 1 260 0
+ 119 0052 054B     		ldr	r3, .L5
+ 261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_InitStruct->CRYP_AlgoDir;
+ 120              		.loc 1 261 0
+ 121 0054 0188     		ldrh	r1, [r0, #0]
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR &= ~CRYP_CR_ALGODIR;
+ 122              		.loc 1 260 0
+ 123 0056 1A68     		ldr	r2, [r3, #0]
+ 124 0058 22F00402 		bic	r2, r2, #4
+ 125 005c 1A60     		str	r2, [r3, #0]
+ 126              		.loc 1 261 0
+ 127 005e 1A68     		ldr	r2, [r3, #0]
+ 128 0060 0A43     		orrs	r2, r2, r1
+ 129 0062 1A60     		str	r2, [r3, #0]
+ 262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 130              		.loc 1 262 0
+ 131 0064 10BD     		pop	{r4, pc}
+ 132              	.L6:
+ 133 0066 00BF     		.align	2
+ 134              	.L5:
+ 135 0068 00000650 		.word	1342570496
+ 136              		.cfi_endproc
+ 137              	.LFE111:
+ 139              		.section	.text.CRYP_StructInit,"ax",%progbits
+ 140              		.align	1
+ 141              		.global	CRYP_StructInit
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	CRYP_StructInit:
+ 146              	.LFB112:
+ 263:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Fills each CRYP_InitStruct member with its default value.
+ 266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_InitStruct: pointer to a CRYP_InitTypeDef structure which will
+ 267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         be initialized.
+ 268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_StructInit(CRYP_InitTypeDef* CRYP_InitStruct)
+ 271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 147              		.loc 1 271 0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151              		@ link register save eliminated.
+ 152              	.LVL1:
+ 272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Initialize the CRYP_AlgoDir member */
+ 273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_InitStruct->CRYP_AlgoDir = CRYP_AlgoDir_Encrypt;
+ 153              		.loc 1 273 0
+ 154 0000 0023     		movs	r3, #0
+ 155 0002 0380     		strh	r3, [r0, #0]	@ movhi
+ 274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* initialize the CRYP_AlgoMode member */
+ 276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_InitStruct->CRYP_AlgoMode = CRYP_AlgoMode_TDES_ECB;
+ 156              		.loc 1 276 0
+ 157 0004 4380     		strh	r3, [r0, #2]	@ movhi
+ 277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* initialize the CRYP_DataType member */
+ 279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_InitStruct->CRYP_DataType = CRYP_DataType_32b;
+ 158              		.loc 1 279 0
+ 159 0006 8380     		strh	r3, [r0, #4]	@ movhi
+ 280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   
+ 281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Initialize the CRYP_KeySize member */
+ 282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_InitStruct->CRYP_KeySize = CRYP_KeySize_128b;
+ 160              		.loc 1 282 0
+ 161 0008 C380     		strh	r3, [r0, #6]	@ movhi
+ 283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 162              		.loc 1 283 0
+ 163 000a 7047     		bx	lr
+ 164              		.cfi_endproc
+ 165              	.LFE112:
+ 167              		.section	.text.CRYP_KeyInit,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	CRYP_KeyInit
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	CRYP_KeyInit:
+ 174              	.LFB113:
+ 284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Initializes the CRYP Keys according to the specified parameters in
+ 287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the CRYP_KeyInitStruct.
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_KeyInitStruct: pointer to a CRYP_KeyInitTypeDef structure that
+ 289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         contains the configuration information for the CRYP Keys.
+ 290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_KeyInit(CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
+ 293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 175              		.loc 1 293 0
+ 176              		.cfi_startproc
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              		@ link register save eliminated.
+ 180              	.LVL2:
+ 294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Key Initialisation */
+ 295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K0LR = CRYP_KeyInitStruct->CRYP_Key0Left;
+ 181              		.loc 1 295 0
+ 182 0000 0268     		ldr	r2, [r0, #0]
+ 183 0002 084B     		ldr	r3, .L9
+ 184 0004 1A62     		str	r2, [r3, #32]
+ 296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K0RR = CRYP_KeyInitStruct->CRYP_Key0Right;
+ 185              		.loc 1 296 0
+ 186 0006 4268     		ldr	r2, [r0, #4]
+ 187 0008 5A62     		str	r2, [r3, #36]
+ 297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K1LR = CRYP_KeyInitStruct->CRYP_Key1Left;
+ 188              		.loc 1 297 0
+ 189 000a 8268     		ldr	r2, [r0, #8]
+ 190 000c 9A62     		str	r2, [r3, #40]
+ 298:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K1RR = CRYP_KeyInitStruct->CRYP_Key1Right;
+ 191              		.loc 1 298 0
+ 192 000e C268     		ldr	r2, [r0, #12]
+ 193 0010 DA62     		str	r2, [r3, #44]
+ 299:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K2LR = CRYP_KeyInitStruct->CRYP_Key2Left;
+ 194              		.loc 1 299 0
+ 195 0012 0269     		ldr	r2, [r0, #16]
+ 196 0014 1A63     		str	r2, [r3, #48]
+ 300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K2RR = CRYP_KeyInitStruct->CRYP_Key2Right;
+ 197              		.loc 1 300 0
+ 198 0016 4269     		ldr	r2, [r0, #20]
+ 199 0018 5A63     		str	r2, [r3, #52]
+ 301:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K3LR = CRYP_KeyInitStruct->CRYP_Key3Left;
+ 200              		.loc 1 301 0
+ 201 001a 8269     		ldr	r2, [r0, #24]
+ 202 001c 9A63     		str	r2, [r3, #56]
+ 302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K3RR = CRYP_KeyInitStruct->CRYP_Key3Right;
+ 203              		.loc 1 302 0
+ 204 001e C269     		ldr	r2, [r0, #28]
+ 205 0020 DA63     		str	r2, [r3, #60]
+ 303:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 206              		.loc 1 303 0
+ 207 0022 7047     		bx	lr
+ 208              	.L10:
+ 209              		.align	2
+ 210              	.L9:
+ 211 0024 00000650 		.word	1342570496
+ 212              		.cfi_endproc
+ 213              	.LFE113:
+ 215              		.section	.text.CRYP_KeyStructInit,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	CRYP_KeyStructInit
+ 218              		.thumb
+ 219              		.thumb_func
+ 221              	CRYP_KeyStructInit:
+ 222              	.LFB114:
+ 304:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 305:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Fills each CRYP_KeyInitStruct member with its default value.
+ 307:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_KeyInitStruct: pointer to a CRYP_KeyInitTypeDef structure 
+ 308:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         which will be initialized.
+ 309:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 311:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_KeyStructInit(CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
+ 312:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 223              		.loc 1 312 0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 228              	.LVL3:
+ 313:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key0Left  = 0;
+ 229              		.loc 1 313 0
+ 230 0000 0023     		movs	r3, #0
+ 231 0002 0360     		str	r3, [r0, #0]
+ 314:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key0Right = 0;
+ 232              		.loc 1 314 0
+ 233 0004 4360     		str	r3, [r0, #4]
+ 315:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key1Left  = 0;
+ 234              		.loc 1 315 0
+ 235 0006 8360     		str	r3, [r0, #8]
+ 316:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key1Right = 0;
+ 236              		.loc 1 316 0
+ 237 0008 C360     		str	r3, [r0, #12]
+ 317:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key2Left  = 0;
+ 238              		.loc 1 317 0
+ 239 000a 0361     		str	r3, [r0, #16]
+ 318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key2Right = 0;
+ 240              		.loc 1 318 0
+ 241 000c 4361     		str	r3, [r0, #20]
+ 319:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key3Left  = 0;
+ 242              		.loc 1 319 0
+ 243 000e 8361     		str	r3, [r0, #24]
+ 320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_KeyInitStruct->CRYP_Key3Right = 0;
+ 244              		.loc 1 320 0
+ 245 0010 C361     		str	r3, [r0, #28]
+ 321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 246              		.loc 1 321 0
+ 247 0012 7047     		bx	lr
+ 248              		.cfi_endproc
+ 249              	.LFE114:
+ 251              		.section	.text.CRYP_IVInit,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	CRYP_IVInit
+ 254              		.thumb
+ 255              		.thumb_func
+ 257              	CRYP_IVInit:
+ 258              	.LFB115:
+ 322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Initializes the CRYP Initialization Vectors(IV) according to the
+ 324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         specified parameters in the CRYP_IVInitStruct.
+ 325:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_IVInitStruct: pointer to a CRYP_IVInitTypeDef structure that contains
+ 326:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the configuration information for the CRYP Initialization Vectors(IV).
+ 327:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 328:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 329:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_IVInit(CRYP_IVInitTypeDef* CRYP_IVInitStruct)
+ 330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 259              		.loc 1 330 0
+ 260              		.cfi_startproc
+ 261              		@ args = 0, pretend = 0, frame = 0
+ 262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 263              		@ link register save eliminated.
+ 264              	.LVL4:
+ 331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV0LR = CRYP_IVInitStruct->CRYP_IV0Left;
+ 265              		.loc 1 331 0
+ 266 0000 0268     		ldr	r2, [r0, #0]
+ 267 0002 044B     		ldr	r3, .L13
+ 268 0004 1A64     		str	r2, [r3, #64]
+ 332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV0RR = CRYP_IVInitStruct->CRYP_IV0Right;
+ 269              		.loc 1 332 0
+ 270 0006 4268     		ldr	r2, [r0, #4]
+ 271 0008 5A64     		str	r2, [r3, #68]
+ 333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV1LR = CRYP_IVInitStruct->CRYP_IV1Left;
+ 272              		.loc 1 333 0
+ 273 000a 8268     		ldr	r2, [r0, #8]
+ 274 000c 9A64     		str	r2, [r3, #72]
+ 334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV1RR = CRYP_IVInitStruct->CRYP_IV1Right;
+ 275              		.loc 1 334 0
+ 276 000e C268     		ldr	r2, [r0, #12]
+ 277 0010 DA64     		str	r2, [r3, #76]
+ 335:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 278              		.loc 1 335 0
+ 279 0012 7047     		bx	lr
+ 280              	.L14:
+ 281              		.align	2
+ 282              	.L13:
+ 283 0014 00000650 		.word	1342570496
+ 284              		.cfi_endproc
+ 285              	.LFE115:
+ 287              		.section	.text.CRYP_IVStructInit,"ax",%progbits
+ 288              		.align	1
+ 289              		.global	CRYP_IVStructInit
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	CRYP_IVStructInit:
+ 294              	.LFB116:
+ 336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 337:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 338:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Fills each CRYP_IVInitStruct member with its default value.
+ 339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_IVInitStruct: pointer to a CRYP_IVInitTypeDef Initialization 
+ 340:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         Vectors(IV) structure which will be initialized.
+ 341:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 343:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_IVStructInit(CRYP_IVInitTypeDef* CRYP_IVInitStruct)
+ 344:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 295              		.loc 1 344 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 0
+ 298              		@ frame_needed = 0, uses_anonymous_args = 0
+ 299              		@ link register save eliminated.
+ 300              	.LVL5:
+ 345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_IVInitStruct->CRYP_IV0Left  = 0;
+ 301              		.loc 1 345 0
+ 302 0000 0023     		movs	r3, #0
+ 303 0002 0360     		str	r3, [r0, #0]
+ 346:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_IVInitStruct->CRYP_IV0Right = 0;
+ 304              		.loc 1 346 0
+ 305 0004 4360     		str	r3, [r0, #4]
+ 347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_IVInitStruct->CRYP_IV1Left  = 0;
+ 306              		.loc 1 347 0
+ 307 0006 8360     		str	r3, [r0, #8]
+ 348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP_IVInitStruct->CRYP_IV1Right = 0;
+ 308              		.loc 1 348 0
+ 309 0008 C360     		str	r3, [r0, #12]
+ 349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 310              		.loc 1 349 0
+ 311 000a 7047     		bx	lr
+ 312              		.cfi_endproc
+ 313              	.LFE116:
+ 315              		.section	.text.CRYP_FIFOFlush,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	CRYP_FIFOFlush
+ 318              		.thumb
+ 319              		.thumb_func
+ 321              	CRYP_FIFOFlush:
+ 322              	.LFB117:
+ 350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Flushes the IN and OUT FIFOs (that is read and write pointers of the 
+ 353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         FIFOs are reset)
+ 354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @note   The FIFOs must be flushed only when BUSY flag is reset.  
+ 355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  None
+ 356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_FIFOFlush(void)
+ 359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 323              		.loc 1 359 0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 327              		@ link register save eliminated.
+ 360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Reset the read and write pointers of the FIFOs */
+ 361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_CR_FFLUSH;
+ 328              		.loc 1 361 0
+ 329 0000 024B     		ldr	r3, .L17
+ 330 0002 1A68     		ldr	r2, [r3, #0]
+ 331 0004 42F48042 		orr	r2, r2, #16384
+ 332 0008 1A60     		str	r2, [r3, #0]
+ 362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 333              		.loc 1 362 0
+ 334 000a 7047     		bx	lr
+ 335              	.L18:
+ 336              		.align	2
+ 337              	.L17:
+ 338 000c 00000650 		.word	1342570496
+ 339              		.cfi_endproc
+ 340              	.LFE117:
+ 342              		.section	.text.CRYP_Cmd,"ax",%progbits
+ 343              		.align	1
+ 344              		.global	CRYP_Cmd
+ 345              		.thumb
+ 346              		.thumb_func
+ 348              	CRYP_Cmd:
+ 349              	.LFB118:
+ 363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Enables or disables the CRYP peripheral.
+ 366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  NewState: new state of the CRYP peripheral.
+ 367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          This parameter can be: ENABLE or DISABLE.
+ 368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_Cmd(FunctionalState NewState)
+ 371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 350              		.loc 1 371 0
+ 351              		.cfi_startproc
+ 352              		@ args = 0, pretend = 0, frame = 0
+ 353              		@ frame_needed = 0, uses_anonymous_args = 0
+ 354              		@ link register save eliminated.
+ 355              	.LVL6:
+ 356 0000 044B     		ldr	r3, .L23
+ 372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the parameters */
+ 373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if (NewState != DISABLE)
+ 376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Enable the Cryptographic processor */
+ 378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->CR |= CRYP_CR_CRYPEN;
+ 357              		.loc 1 378 0
+ 358 0002 1A68     		ldr	r2, [r3, #0]
+ 375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if (NewState != DISABLE)
+ 359              		.loc 1 375 0
+ 360 0004 10B1     		cbz	r0, .L20
+ 361              		.loc 1 378 0
+ 362 0006 42F40042 		orr	r2, r2, #32768
+ 363 000a 01E0     		b	.L22
+ 364              	.L20:
+ 379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else
+ 381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Disable the Cryptographic processor */
+ 383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->CR &= ~CRYP_CR_CRYPEN;
+ 365              		.loc 1 383 0
+ 366 000c 22F40042 		bic	r2, r2, #32768
+ 367              	.L22:
+ 368 0010 1A60     		str	r2, [r3, #0]
+ 369 0012 7047     		bx	lr
+ 370              	.L24:
+ 371              		.align	2
+ 372              	.L23:
+ 373 0014 00000650 		.word	1342570496
+ 374              		.cfi_endproc
+ 375              	.LFE118:
+ 377              		.section	.text.CRYP_DataIn,"ax",%progbits
+ 378              		.align	1
+ 379              		.global	CRYP_DataIn
+ 380              		.thumb
+ 381              		.thumb_func
+ 383              	CRYP_DataIn:
+ 384              	.LFB119:
+ 384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 385:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 386:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @}
+ 388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   
+ 390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP_Group2 CRYP Data processing functions
+ 391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *  @brief    CRYP Data processing functions
+ 392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *
+ 393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @verbatim    
+ 394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================
+ 395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       CRYP Data processing functions
+ 396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================  
+ 397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   This section provides functions allowing the encryption and decryption 
+ 398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   operations: 
+ 399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   - Enter data to be treated in the IN FIFO : using CRYP_DataIn() function.
+ 400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   - Get the data result from the OUT FIFO : using CRYP_DataOut() function.
+ 401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @endverbatim
+ 403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 405:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 406:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Writes data in the Data Input register (DIN).
+ 408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @note   After the DIN register has been read once or several times, 
+ 409:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the FIFO must be flushed (using CRYP_FIFOFlush() function).  
+ 410:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  Data: data to write in Data Input register
+ 411:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_DataIn(uint32_t Data)
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 385              		.loc 1 414 0
+ 386              		.cfi_startproc
+ 387              		@ args = 0, pretend = 0, frame = 0
+ 388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 389              		@ link register save eliminated.
+ 390              	.LVL7:
+ 415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->DR = Data;
+ 391              		.loc 1 415 0
+ 392 0000 014B     		ldr	r3, .L26
+ 393 0002 9860     		str	r0, [r3, #8]
+ 416:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 394              		.loc 1 416 0
+ 395 0004 7047     		bx	lr
+ 396              	.L27:
+ 397 0006 00BF     		.align	2
+ 398              	.L26:
+ 399 0008 00000650 		.word	1342570496
+ 400              		.cfi_endproc
+ 401              	.LFE119:
+ 403              		.section	.text.CRYP_DataOut,"ax",%progbits
+ 404              		.align	1
+ 405              		.global	CRYP_DataOut
+ 406              		.thumb
+ 407              		.thumb_func
+ 409              	CRYP_DataOut:
+ 410              	.LFB120:
+ 417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Returns the last data entered into the output FIFO.
+ 420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  None
+ 421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval Last data entered into the output FIFO.
+ 422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** uint32_t CRYP_DataOut(void)
+ 424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 411              		.loc 1 424 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 415              		@ link register save eliminated.
+ 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   return CRYP->DOUT;
+ 416              		.loc 1 425 0
+ 417 0000 014B     		ldr	r3, .L29
+ 418 0002 D868     		ldr	r0, [r3, #12]
+ 426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 419              		.loc 1 426 0
+ 420 0004 7047     		bx	lr
+ 421              	.L30:
+ 422 0006 00BF     		.align	2
+ 423              	.L29:
+ 424 0008 00000650 		.word	1342570496
+ 425              		.cfi_endproc
+ 426              	.LFE120:
+ 428              		.section	.text.CRYP_SaveContext,"ax",%progbits
+ 429              		.align	1
+ 430              		.global	CRYP_SaveContext
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	CRYP_SaveContext:
+ 435              	.LFB121:
+ 427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @}
+ 429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   
+ 431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP_Group3 Context swapping functions
+ 432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *  @brief   Context swapping functions
+ 433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *
+ 434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @verbatim   
+ 435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================
+ 436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                              Context swapping functions
+ 437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================  
+ 438:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 439:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   This section provides functions allowing to save and store CRYP Context
+ 440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   It is possible to interrupt an encryption/ decryption/ key generation process 
+ 442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   to perform another processing with a higher priority, and to complete the 
+ 443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   interrupted process later on, when the higher-priority task is complete. To do 
+ 444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   so, the context of the interrupted task must be saved from the CRYP registers 
+ 445:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   to memory, and then be restored from memory to the CRYP registers.
+ 446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    
+ 447:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   1. To save the current context, use CRYP_SaveContext() function
+ 448:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   2. To restore the saved context, use CRYP_RestoreContext() function 
+ 449:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 450:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 451:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @endverbatim
+ 452:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 453:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 454:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   
+ 455:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 456:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Saves the CRYP peripheral Context. 
+ 457:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @note   This function stops DMA transfer before to save the context. After 
+ 458:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         restoring the context, you have to enable the DMA again (if the DMA
+ 459:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         was previously used).
+ 460:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_ContextSave: pointer to a CRYP_Context structure that contains
+ 461:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the repository for current context.
+ 462:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_KeyInitStruct: pointer to a CRYP_KeyInitTypeDef structure that 
+ 463:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         contains the configuration information for the CRYP Keys.  
+ 464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 465:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 466:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** ErrorStatus CRYP_SaveContext(CRYP_Context* CRYP_ContextSave,
+ 467:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                              CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
+ 468:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 436              		.loc 1 468 0
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 8
+ 439              		@ frame_needed = 0, uses_anonymous_args = 0
+ 440              	.LVL8:
+ 441 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 442              	.LCFI2:
+ 443              		.cfi_def_cfa_offset 24
+ 444              		.cfi_offset 14, -4
+ 445              		.cfi_offset 6, -8
+ 446              		.cfi_offset 5, -12
+ 447              		.cfi_offset 4, -16
+ 448              		.cfi_offset 1, -20
+ 449              		.cfi_offset 0, -24
+ 469:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   __IO uint32_t timeout = 0;
+ 450              		.loc 1 469 0
+ 451 0002 0023     		movs	r3, #0
+ 452 0004 0193     		str	r3, [sp, #4]
+ 453              	.LVL9:
+ 470:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   uint32_t ckeckmask = 0, bitstatus;    
+ 471:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ErrorStatus status = ERROR;
+ 472:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 473:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Stop DMA transfers on the IN FIFO by clearing the DIEN bit in the CRYP_DMACR */
+ 474:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->DMACR &= ~(uint32_t)CRYP_DMACR_DIEN;
+ 454              		.loc 1 474 0
+ 455 0006 224B     		ldr	r3, .L39
+ 456 0008 1A69     		ldr	r2, [r3, #16]
+ 457 000a 22F00102 		bic	r2, r2, #1
+ 458 000e 1A61     		str	r2, [r3, #16]
+ 475:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     
+ 476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Wait until both the IN and OUT FIFOs are empty  
+ 477:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     (IFEM=1 and OFNE=0 in the CRYP_SR register) and the 
+ 478:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      BUSY bit is cleared. */
+ 479:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 480:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if ((CRYP->CR & (uint32_t)(CRYP_CR_ALGOMODE_TDES_ECB | CRYP_CR_ALGOMODE_TDES_CBC)) != (uint32_t)0
+ 459              		.loc 1 480 0
+ 460 0010 1A68     		ldr	r2, [r3, #0]
+ 481:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   { 
+ 482:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     ckeckmask =  CRYP_SR_IFEM | CRYP_SR_BUSY ;
+ 461              		.loc 1 482 0
+ 462 0012 12F0080F 		tst	r2, #8
+ 463 0016 0CBF     		ite	eq
+ 464 0018 1522     		moveq	r2, #21
+ 465 001a 1122     		movne	r2, #17
+ 483:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 484:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else /* AES or DES */
+ 485:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 486:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     ckeckmask =  CRYP_SR_IFEM | CRYP_SR_BUSY | CRYP_SR_OFNE;
+ 487:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }           
+ 488:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    
+ 489:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   do 
+ 490:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 491:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = CRYP->SR & ckeckmask;
+ 492:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     timeout++;
+ 493:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 494:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   while ((timeout != MAX_TIMEOUT) && (bitstatus != CRYP_SR_IFEM));
+ 466              		.loc 1 494 0
+ 467 001c 4FF6FF74 		movw	r4, #65535
+ 468              	.LVL10:
+ 469              	.L34:
+ 491:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = CRYP->SR & ckeckmask;
+ 470              		.loc 1 491 0 discriminator 1
+ 471 0020 5D68     		ldr	r5, [r3, #4]
+ 472              	.LVL11:
+ 492:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     timeout++;
+ 473              		.loc 1 492 0 discriminator 1
+ 474 0022 019E     		ldr	r6, [sp, #4]
+ 475 0024 0136     		adds	r6, r6, #1
+ 476              	.LVL12:
+ 477 0026 0196     		str	r6, [sp, #4]
+ 478              	.LVL13:
+ 479              		.loc 1 494 0 discriminator 1
+ 480 0028 019E     		ldr	r6, [sp, #4]
+ 481              	.LVL14:
+ 482 002a A642     		cmp	r6, r4
+ 483 002c 02D0     		beq	.L33
+ 491:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = CRYP->SR & ckeckmask;
+ 484              		.loc 1 491 0 discriminator 1
+ 485 002e 1540     		ands	r5, r5, r2
+ 486              	.LVL15:
+ 487              		.loc 1 494 0 discriminator 1
+ 488 0030 012D     		cmp	r5, #1
+ 489 0032 F5D1     		bne	.L34
+ 490              	.LVL16:
+ 491              	.L33:
+ 495:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      
+ 496:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if ((CRYP->SR & ckeckmask) != CRYP_SR_IFEM)
+ 492              		.loc 1 496 0
+ 493 0034 164B     		ldr	r3, .L39
+ 494 0036 5C68     		ldr	r4, [r3, #4]
+ 495 0038 2240     		ands	r2, r2, r4
+ 496              	.LVL17:
+ 497 003a 012A     		cmp	r2, #1
+ 498 003c 25D1     		bne	.L37
+ 497:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     status = ERROR;
+ 499:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 500:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else
+ 501:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {      
+ 502:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Stop DMA transfers on the OUT FIFO by 
+ 503:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****        - writing the DOEN bit to 0 in the CRYP_DMACR register 
+ 504:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****        - and clear the CRYPEN bit. */
+ 505:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 506:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->DMACR &= ~(uint32_t)CRYP_DMACR_DOEN;
+ 499              		.loc 1 506 0
+ 500 003e 1C69     		ldr	r4, [r3, #16]
+ 501 0040 24F00204 		bic	r4, r4, #2
+ 502 0044 1C61     		str	r4, [r3, #16]
+ 507:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->CR &= ~(uint32_t)CRYP_CR_CRYPEN;
+ 503              		.loc 1 507 0
+ 504 0046 1C68     		ldr	r4, [r3, #0]
+ 505 0048 24F40044 		bic	r4, r4, #32768
+ 506 004c 1C60     		str	r4, [r3, #0]
+ 508:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 509:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Save the current configuration (bits [9:2] in the CRYP_CR register) */
+ 510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CR_bits9to2  = CRYP->CR & (CRYP_CR_KEYSIZE  | 
+ 507              		.loc 1 510 0
+ 508 004e 1C68     		ldr	r4, [r3, #0]
+ 509 0050 04F47F74 		and	r4, r4, #1020
+ 510 0054 0460     		str	r4, [r0, #0]
+ 511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                                                  CRYP_CR_DATATYPE | 
+ 512:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                                                  CRYP_CR_ALGOMODE |
+ 513:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                                                  CRYP_CR_ALGODIR); 
+ 514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 515:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* and, if not in ECB mode, the initialization vectors. */
+ 516:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_IV0LR = CRYP->IV0LR;
+ 511              		.loc 1 516 0
+ 512 0056 1C6C     		ldr	r4, [r3, #64]
+ 513 0058 4460     		str	r4, [r0, #4]
+ 517:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_IV0RR = CRYP->IV0RR;
+ 514              		.loc 1 517 0
+ 515 005a 5C6C     		ldr	r4, [r3, #68]
+ 516 005c 8460     		str	r4, [r0, #8]
+ 518:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_IV1LR = CRYP->IV1LR;
+ 517              		.loc 1 518 0
+ 518 005e 9C6C     		ldr	r4, [r3, #72]
+ 519 0060 C460     		str	r4, [r0, #12]
+ 519:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_IV1RR = CRYP->IV1RR;
+ 520              		.loc 1 519 0
+ 521 0062 DB6C     		ldr	r3, [r3, #76]
+ 522 0064 0361     		str	r3, [r0, #16]
+ 520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 521:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* save The key value */
+ 522:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K0LR = CRYP_KeyInitStruct->CRYP_Key0Left; 
+ 523              		.loc 1 522 0
+ 524 0066 0B68     		ldr	r3, [r1, #0]
+ 525 0068 4361     		str	r3, [r0, #20]
+ 523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K0RR = CRYP_KeyInitStruct->CRYP_Key0Right; 
+ 526              		.loc 1 523 0
+ 527 006a 4B68     		ldr	r3, [r1, #4]
+ 528 006c 8361     		str	r3, [r0, #24]
+ 524:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K1LR = CRYP_KeyInitStruct->CRYP_Key1Left; 
+ 529              		.loc 1 524 0
+ 530 006e 8B68     		ldr	r3, [r1, #8]
+ 531 0070 C361     		str	r3, [r0, #28]
+ 525:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K1RR = CRYP_KeyInitStruct->CRYP_Key1Right; 
+ 532              		.loc 1 525 0
+ 533 0072 CB68     		ldr	r3, [r1, #12]
+ 534 0074 0362     		str	r3, [r0, #32]
+ 526:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K2LR = CRYP_KeyInitStruct->CRYP_Key2Left; 
+ 535              		.loc 1 526 0
+ 536 0076 0B69     		ldr	r3, [r1, #16]
+ 537 0078 4362     		str	r3, [r0, #36]
+ 527:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K2RR = CRYP_KeyInitStruct->CRYP_Key2Right; 
+ 538              		.loc 1 527 0
+ 539 007a 4B69     		ldr	r3, [r1, #20]
+ 540 007c 8362     		str	r3, [r0, #40]
+ 528:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K3LR = CRYP_KeyInitStruct->CRYP_Key3Left; 
+ 541              		.loc 1 528 0
+ 542 007e 8B69     		ldr	r3, [r1, #24]
+ 543 0080 C362     		str	r3, [r0, #44]
+ 529:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP_ContextSave->CRYP_K3RR = CRYP_KeyInitStruct->CRYP_Key3Right; 
+ 544              		.loc 1 529 0
+ 545 0082 CB69     		ldr	r3, [r1, #28]
+ 546 0084 0363     		str	r3, [r0, #48]
+ 547              	.LVL18:
+ 530:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 531:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    /* When needed, save the DMA status (pointers for IN and OUT messages, 
+ 532:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       number of remaining bytes, etc.) */
+ 533:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      
+ 534:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     status = SUCCESS;
+ 548              		.loc 1 534 0
+ 549 0086 1046     		mov	r0, r2
+ 550              	.LVL19:
+ 551 0088 00E0     		b	.L35
+ 552              	.LVL20:
+ 553              	.L37:
+ 498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     status = ERROR;
+ 554              		.loc 1 498 0
+ 555 008a 0020     		movs	r0, #0
+ 556              	.LVL21:
+ 557              	.L35:
+ 535:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 536:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 537:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    return status;
+ 538:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 558              		.loc 1 538 0
+ 559 008c 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
+ 560              	.L40:
+ 561 008e 00BF     		.align	2
+ 562              	.L39:
+ 563 0090 00000650 		.word	1342570496
+ 564              		.cfi_endproc
+ 565              	.LFE121:
+ 567              		.section	.text.CRYP_RestoreContext,"ax",%progbits
+ 568              		.align	1
+ 569              		.global	CRYP_RestoreContext
+ 570              		.thumb
+ 571              		.thumb_func
+ 573              	CRYP_RestoreContext:
+ 574              	.LFB122:
+ 539:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 540:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 541:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Restores the CRYP peripheral Context.
+ 542:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @note   Since teh DMA transfer is stopped in CRYP_SaveContext() function,
+ 543:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         after restoring the context, you have to enable the DMA again (if the
+ 544:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         DMA was previously used).  
+ 545:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_ContextRestore: pointer to a CRYP_Context structure that contains
+ 546:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the repository for saved context.
+ 547:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @note   The data that were saved during context saving must be rewrited into
+ 548:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         the IN FIFO.
+ 549:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 551:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_RestoreContext(CRYP_Context* CRYP_ContextRestore)  
+ 552:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 575              		.loc 1 552 0
+ 576              		.cfi_startproc
+ 577              		@ args = 0, pretend = 0, frame = 0
+ 578              		@ frame_needed = 0, uses_anonymous_args = 0
+ 579              		@ link register save eliminated.
+ 580              	.LVL22:
+ 553:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 554:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Configure the processor with the saved configuration */
+ 555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR = CRYP_ContextRestore->CR_bits9to2;
+ 581              		.loc 1 555 0
+ 582 0000 0268     		ldr	r2, [r0, #0]
+ 583 0002 0F4B     		ldr	r3, .L42
+ 584 0004 1A60     		str	r2, [r3, #0]
+ 556:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 557:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* restore The key value */
+ 558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K0LR = CRYP_ContextRestore->CRYP_K0LR; 
+ 585              		.loc 1 558 0
+ 586 0006 4269     		ldr	r2, [r0, #20]
+ 587 0008 1A62     		str	r2, [r3, #32]
+ 559:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K0RR = CRYP_ContextRestore->CRYP_K0RR;
+ 588              		.loc 1 559 0
+ 589 000a 8269     		ldr	r2, [r0, #24]
+ 590 000c 5A62     		str	r2, [r3, #36]
+ 560:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K1LR = CRYP_ContextRestore->CRYP_K1LR;
+ 591              		.loc 1 560 0
+ 592 000e C269     		ldr	r2, [r0, #28]
+ 593 0010 9A62     		str	r2, [r3, #40]
+ 561:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K1RR = CRYP_ContextRestore->CRYP_K1RR;
+ 594              		.loc 1 561 0
+ 595 0012 026A     		ldr	r2, [r0, #32]
+ 596 0014 DA62     		str	r2, [r3, #44]
+ 562:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K2LR = CRYP_ContextRestore->CRYP_K2LR;
+ 597              		.loc 1 562 0
+ 598 0016 426A     		ldr	r2, [r0, #36]
+ 599 0018 1A63     		str	r2, [r3, #48]
+ 563:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K2RR = CRYP_ContextRestore->CRYP_K2RR;
+ 600              		.loc 1 563 0
+ 601 001a 826A     		ldr	r2, [r0, #40]
+ 602 001c 5A63     		str	r2, [r3, #52]
+ 564:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K3LR = CRYP_ContextRestore->CRYP_K3LR;
+ 603              		.loc 1 564 0
+ 604 001e C26A     		ldr	r2, [r0, #44]
+ 605 0020 9A63     		str	r2, [r3, #56]
+ 565:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->K3RR = CRYP_ContextRestore->CRYP_K3RR;
+ 606              		.loc 1 565 0
+ 607 0022 026B     		ldr	r2, [r0, #48]
+ 608 0024 DA63     		str	r2, [r3, #60]
+ 566:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 567:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* and the initialization vectors. */
+ 568:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV0LR = CRYP_ContextRestore->CRYP_IV0LR;
+ 609              		.loc 1 568 0
+ 610 0026 4268     		ldr	r2, [r0, #4]
+ 611 0028 1A64     		str	r2, [r3, #64]
+ 569:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV0RR = CRYP_ContextRestore->CRYP_IV0RR;
+ 612              		.loc 1 569 0
+ 613 002a 8268     		ldr	r2, [r0, #8]
+ 614 002c 5A64     		str	r2, [r3, #68]
+ 570:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV1LR = CRYP_ContextRestore->CRYP_IV1LR;
+ 615              		.loc 1 570 0
+ 616 002e C268     		ldr	r2, [r0, #12]
+ 617 0030 9A64     		str	r2, [r3, #72]
+ 571:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->IV1RR = CRYP_ContextRestore->CRYP_IV1RR;
+ 618              		.loc 1 571 0
+ 619 0032 0269     		ldr	r2, [r0, #16]
+ 620 0034 DA64     		str	r2, [r3, #76]
+ 572:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 573:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Enable the cryptographic processor */
+ 574:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP->CR |= CRYP_CR_CRYPEN;
+ 621              		.loc 1 574 0
+ 622 0036 1A68     		ldr	r2, [r3, #0]
+ 623 0038 42F40042 		orr	r2, r2, #32768
+ 624 003c 1A60     		str	r2, [r3, #0]
+ 575:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 625              		.loc 1 575 0
+ 626 003e 7047     		bx	lr
+ 627              	.L43:
+ 628              		.align	2
+ 629              	.L42:
+ 630 0040 00000650 		.word	1342570496
+ 631              		.cfi_endproc
+ 632              	.LFE122:
+ 634              		.section	.text.CRYP_DMACmd,"ax",%progbits
+ 635              		.align	1
+ 636              		.global	CRYP_DMACmd
+ 637              		.thumb
+ 638              		.thumb_func
+ 640              	CRYP_DMACmd:
+ 641              	.LFB123:
+ 576:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 577:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @}
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 579:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 580:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP_Group4 CRYP's DMA interface Configuration function
+ 581:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *  @brief   CRYP's DMA interface Configuration function 
+ 582:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *
+ 583:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @verbatim   
+ 584:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================
+ 585:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                    CRYP's DMA interface Configuration function
+ 586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================  
+ 587:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   This section provides functions allowing to configure the DMA interface for 
+ 589:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   CRYP data input and output transfer.
+ 590:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    
+ 591:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   When the DMA mode is enabled (using the CRYP_DMACmd() function), data can be 
+ 592:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   transferred:
+ 593:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   - From memory to the CRYP IN FIFO using the DMA peripheral by enabling 
+ 594:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     the CRYP_DMAReq_DataIN request.
+ 595:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   - From the CRYP OUT FIFO to the memory using the DMA peripheral by enabling 
+ 596:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     the CRYP_DMAReq_DataOUT request.
+ 597:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 598:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @endverbatim
+ 599:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 600:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 601:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 602:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 603:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Enables or disables the CRYP DMA interface.
+ 604:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_DMAReq: specifies the CRYP DMA transfer request to be enabled or disabled.
+ 605:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           This parameter can be any combination of the following values:
+ 606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_DMAReq_DataOUT: DMA for outgoing(Tx) data transfer
+ 607:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_DMAReq_DataIN: DMA for incoming(Rx) data transfer
+ 608:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  NewState: new state of the selected CRYP DMA transfer request.
+ 609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          This parameter can be: ENABLE or DISABLE.
+ 610:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 611:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_DMACmd(uint8_t CRYP_DMAReq, FunctionalState NewState)
+ 613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 642              		.loc 1 613 0
+ 643              		.cfi_startproc
+ 644              		@ args = 0, pretend = 0, frame = 0
+ 645              		@ frame_needed = 0, uses_anonymous_args = 0
+ 646              		@ link register save eliminated.
+ 647              	.LVL23:
+ 648 0000 054B     		ldr	r3, .L48
+ 614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the parameters */
+ 615:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_DMAREQ(CRYP_DMAReq));
+ 616:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 617:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if (NewState != DISABLE)
+ 619:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 620:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Enable the selected CRYP DMA request */
+ 621:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->DMACR |= CRYP_DMAReq;
+ 649              		.loc 1 621 0
+ 650 0002 1A69     		ldr	r2, [r3, #16]
+ 618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if (NewState != DISABLE)
+ 651              		.loc 1 618 0
+ 652 0004 09B1     		cbz	r1, .L45
+ 653              		.loc 1 621 0
+ 654 0006 1043     		orrs	r0, r0, r2
+ 655              	.LVL24:
+ 656 0008 03E0     		b	.L47
+ 657              	.LVL25:
+ 658              	.L45:
+ 622:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else
+ 624:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Disable the selected CRYP DMA request */
+ 626:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->DMACR &= (uint8_t)~CRYP_DMAReq;
+ 659              		.loc 1 626 0
+ 660 000a 22EA0000 		bic	r0, r2, r0
+ 661              	.LVL26:
+ 662 000e 00F0FF00 		and	r0, r0, #255
+ 663              	.L47:
+ 664 0012 1861     		str	r0, [r3, #16]
+ 665 0014 7047     		bx	lr
+ 666              	.L49:
+ 667 0016 00BF     		.align	2
+ 668              	.L48:
+ 669 0018 00000650 		.word	1342570496
+ 670              		.cfi_endproc
+ 671              	.LFE123:
+ 673              		.section	.text.CRYP_ITConfig,"ax",%progbits
+ 674              		.align	1
+ 675              		.global	CRYP_ITConfig
+ 676              		.thumb
+ 677              		.thumb_func
+ 679              	CRYP_ITConfig:
+ 680              	.LFB124:
+ 627:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 628:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 629:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 630:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @}
+ 631:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 632:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 633:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /** @defgroup CRYP_Group5 Interrupts and flags management functions
+ 634:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *  @brief   Interrupts and flags management functions
+ 635:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  *
+ 636:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @verbatim   
+ 637:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================
+ 638:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                    Interrupts and flags management functions
+ 639:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****  ===============================================================================  
+ 640:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 641:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   This section provides functions allowing to configure the CRYP Interrupts and 
+ 642:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   to get the status and Interrupts pending bits.
+ 643:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 644:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   The CRYP provides 2 Interrupts sources and 7 Flags:
+ 645:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 646:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   Flags :
+ 647:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ------- 
+ 648:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                           
+ 649:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      1. CRYP_FLAG_IFEM :  Set when Input FIFO is empty.
+ 650:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                           This Flag is cleared only by hardware.
+ 651:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       
+ 652:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      2. CRYP_FLAG_IFNF :  Set when Input FIFO is not full.
+ 653:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                           This Flag is cleared only by hardware.
+ 654:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 655:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 656:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      3. CRYP_FLAG_INRIS  : Set when Input FIFO Raw interrupt is pending 
+ 657:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            it gives the raw interrupt state prior to masking 
+ 658:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            of the input FIFO service interrupt.
+ 659:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            This Flag is cleared only by hardware.
+ 660:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      
+ 661:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      4. CRYP_FLAG_OFNE   : Set when Output FIFO not empty.
+ 662:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            This Flag is cleared only by hardware.
+ 663:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****         
+ 664:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      5. CRYP_FLAG_OFFU   : Set when Output FIFO is full.
+ 665:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            This Flag is cleared only by hardware.
+ 666:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            
+ 667:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      6. CRYP_FLAG_OUTRIS : Set when Output FIFO Raw interrupt is pending 
+ 668:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            it gives the raw interrupt state prior to masking 
+ 669:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            of the output FIFO service interrupt.
+ 670:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            This Flag is cleared only by hardware.
+ 671:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                                
+ 672:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****      7. CRYP_FLAG_BUSY   : Set when the CRYP core is currently processing a 
+ 673:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            block of data or a key preparation (for AES 
+ 674:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            decryption).
+ 675:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            This Flag is cleared only by hardware.
+ 676:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            To clear it, the CRYP core must be disabled and the 
+ 677:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                            last processing has completed. 
+ 678:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 679:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   Interrupts :
+ 680:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ------------
+ 681:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 682:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    1. CRYP_IT_INI   : The input FIFO service interrupt is asserted when there 
+ 683:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       are less than 4 words in the input FIFO.
+ 684:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       This interrupt is associated to CRYP_FLAG_INRIS flag.
+ 685:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 686:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                 @note This interrupt is cleared by performing write operations 
+ 687:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       to the input FIFO until it holds 4 or more words. The 
+ 688:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       input FIFO service interrupt INMIS is enabled with the 
+ 689:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       CRYP enable bit. Consequently, when CRYP is disabled, the 
+ 690:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       INMIS signal is low even if the input FIFO is empty.
+ 691:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 692:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 693:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 694:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****    2. CRYP_IT_OUTI  : The output FIFO service interrupt is asserted when there 
+ 695:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       is one or more (32-bit word) data items in the output FIFO.
+ 696:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       This interrupt is associated to CRYP_FLAG_OUTRIS flag.
+ 697:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 698:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                 @note This interrupt is cleared by reading data from the output 
+ 699:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       FIFO until there is no valid (32-bit) word left (that is, 
+ 700:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       the interrupt follows the state of the OFNE (output FIFO 
+ 701:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****                       not empty) flag).
+ 702:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 703:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 704:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   Managing the CRYP controller events :
+ 705:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ------------------------------------ 
+ 706:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   The user should identify which mode will be used in his application to manage 
+ 707:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   the CRYP controller events: Polling mode or Interrupt mode.
+ 708:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 709:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   1.  In the Polling Mode it is advised to use the following functions:
+ 710:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       - CRYP_GetFlagStatus() : to check if flags events occur. 
+ 711:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 712:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   @note  The CRYPT flags do not need to be cleared since they are cleared as 
+ 713:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****          soon as the associated event are reset.   
+ 714:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 715:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 716:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   2.  In the Interrupt Mode it is advised to use the following functions:
+ 717:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       - CRYP_ITConfig()       : to enable or disable the interrupt source.
+ 718:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****       - CRYP_GetITStatus()    : to check if Interrupt occurs.
+ 719:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 720:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   @note  The CRYPT interrupts have no pending bits, the interrupt is cleared as 
+ 721:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****          soon as the associated event is reset. 
+ 722:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 723:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** @endverbatim
+ 724:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @{
+ 725:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */ 
+ 726:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 727:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 728:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Enables or disables the specified CRYP interrupts.
+ 729:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_IT: specifies the CRYP interrupt source to be enabled or disabled.
+ 730:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          This parameter can be any combination of the following values:
+ 731:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_IT_INI: Input FIFO interrupt
+ 732:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_IT_OUTI: Output FIFO interrupt
+ 733:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  NewState: new state of the specified CRYP interrupt.
+ 734:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           This parameter can be: ENABLE or DISABLE.
+ 735:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval None
+ 736:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 737:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** void CRYP_ITConfig(uint8_t CRYP_IT, FunctionalState NewState)
+ 738:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 681              		.loc 1 738 0
+ 682              		.cfi_startproc
+ 683              		@ args = 0, pretend = 0, frame = 0
+ 684              		@ frame_needed = 0, uses_anonymous_args = 0
+ 685              		@ link register save eliminated.
+ 686              	.LVL27:
+ 687 0000 054B     		ldr	r3, .L54
+ 739:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the parameters */
+ 740:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_CONFIG_IT(CRYP_IT));
+ 741:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 742:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 743:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if (NewState != DISABLE)
+ 744:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 745:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Enable the selected CRYP interrupt */
+ 746:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->IMSCR |= CRYP_IT;
+ 688              		.loc 1 746 0
+ 689 0002 5A69     		ldr	r2, [r3, #20]
+ 743:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if (NewState != DISABLE)
+ 690              		.loc 1 743 0
+ 691 0004 09B1     		cbz	r1, .L51
+ 692              		.loc 1 746 0
+ 693 0006 1043     		orrs	r0, r0, r2
+ 694              	.LVL28:
+ 695 0008 03E0     		b	.L53
+ 696              	.LVL29:
+ 697              	.L51:
+ 747:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 748:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else
+ 749:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 750:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* Disable the selected CRYP interrupt */
+ 751:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     CRYP->IMSCR &= (uint8_t)~CRYP_IT;
+ 698              		.loc 1 751 0
+ 699 000a 22EA0000 		bic	r0, r2, r0
+ 700              	.LVL30:
+ 701 000e 00F0FF00 		and	r0, r0, #255
+ 702              	.L53:
+ 703 0012 5861     		str	r0, [r3, #20]
+ 704 0014 7047     		bx	lr
+ 705              	.L55:
+ 706 0016 00BF     		.align	2
+ 707              	.L54:
+ 708 0018 00000650 		.word	1342570496
+ 709              		.cfi_endproc
+ 710              	.LFE124:
+ 712              		.section	.text.CRYP_GetITStatus,"ax",%progbits
+ 713              		.align	1
+ 714              		.global	CRYP_GetITStatus
+ 715              		.thumb
+ 716              		.thumb_func
+ 718              	CRYP_GetITStatus:
+ 719              	.LFB125:
+ 752:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 753:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 754:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 755:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 756:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Checks whether the specified CRYP interrupt has occurred or not.
+ 757:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @note   This function checks the status of the masked interrupt (i.e the 
+ 758:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *         interrupt should be previously enabled).     
+ 759:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_IT: specifies the CRYP (masked) interrupt source to check.
+ 760:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *           This parameter can be one of the following values:
+ 761:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_IT_INI: Input FIFO interrupt
+ 762:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_IT_OUTI: Output FIFO interrupt
+ 763:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval The new state of CRYP_IT (SET or RESET).
+ 764:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 765:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** ITStatus CRYP_GetITStatus(uint8_t CRYP_IT)
+ 766:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 720              		.loc 1 766 0
+ 721              		.cfi_startproc
+ 722              		@ args = 0, pretend = 0, frame = 0
+ 723              		@ frame_needed = 0, uses_anonymous_args = 0
+ 724              		@ link register save eliminated.
+ 725              	.LVL31:
+ 767:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   ITStatus bitstatus = RESET;
+ 768:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the parameters */
+ 769:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_GET_IT(CRYP_IT));
+ 770:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 771:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the status of the specified CRYP interrupt */
+ 772:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if ((CRYP->MISR &  CRYP_IT) != (uint8_t)RESET)
+ 726              		.loc 1 772 0
+ 727 0000 034B     		ldr	r3, .L57
+ 728 0002 DB69     		ldr	r3, [r3, #28]
+ 729              	.LVL32:
+ 773:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 774:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* CRYP_IT is set */
+ 775:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = SET;
+ 730              		.loc 1 775 0
+ 731 0004 1842     		tst	r0, r3
+ 776:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 777:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else
+ 778:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 779:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* CRYP_IT is reset */
+ 780:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = RESET;
+ 781:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 782:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Return the CRYP_IT status */
+ 783:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   return bitstatus;
+ 732              		.loc 1 783 0
+ 733 0006 0CBF     		ite	eq
+ 734 0008 0020     		moveq	r0, #0
+ 735 000a 0120     		movne	r0, #1
+ 736              	.LVL33:
+ 784:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 737              		.loc 1 784 0
+ 738 000c 7047     		bx	lr
+ 739              	.L58:
+ 740 000e 00BF     		.align	2
+ 741              	.L57:
+ 742 0010 00000650 		.word	1342570496
+ 743              		.cfi_endproc
+ 744              	.LFE125:
+ 746              		.section	.text.CRYP_GetFlagStatus,"ax",%progbits
+ 747              		.align	1
+ 748              		.global	CRYP_GetFlagStatus
+ 749              		.thumb
+ 750              		.thumb_func
+ 752              	CRYP_GetFlagStatus:
+ 753              	.LFB126:
+ 785:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 786:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** /**
+ 787:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @brief  Checks whether the specified CRYP flag is set or not.
+ 788:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @param  CRYP_FLAG: specifies the CRYP flag to check.
+ 789:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *          This parameter can be one of the following values:
+ 790:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_IFEM: Input FIFO Empty flag.
+ 791:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_IFNF: Input FIFO Not Full flag.
+ 792:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_OFNE: Output FIFO Not Empty flag.
+ 793:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_OFFU: Output FIFO Full flag.
+ 794:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_BUSY: Busy flag.
+ 795:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_OUTRIS: Output FIFO raw interrupt flag.
+ 796:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   *            @arg CRYP_FLAG_INRIS: Input FIFO raw interrupt flag.
+ 797:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   * @retval The new state of CRYP_FLAG (SET or RESET).
+ 798:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   */
+ 799:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** FlagStatus CRYP_GetFlagStatus(uint8_t CRYP_FLAG)
+ 800:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** {
+ 754              		.loc 1 800 0
+ 755              		.cfi_startproc
+ 756              		@ args = 0, pretend = 0, frame = 0
+ 757              		@ frame_needed = 0, uses_anonymous_args = 0
+ 758              		@ link register save eliminated.
+ 759              	.LVL34:
+ 760 0000 054B     		ldr	r3, .L62
+ 801:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   FlagStatus bitstatus = RESET;
+ 802:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   uint32_t tempreg = 0;
+ 803:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 804:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the parameters */
+ 805:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   assert_param(IS_CRYP_GET_FLAG(CRYP_FLAG));
+ 806:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 807:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* check if the FLAG is in RISR register */
+ 808:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if ((CRYP_FLAG & FLAG_MASK) != 0x00) 
+ 761              		.loc 1 808 0
+ 762 0002 10F0200F 		tst	r0, #32
+ 809:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 810:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     tempreg = CRYP->RISR;
+ 763              		.loc 1 810 0
+ 764 0006 14BF     		ite	ne
+ 765 0008 9B69     		ldrne	r3, [r3, #24]
+ 766              	.LVL35:
+ 811:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 812:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else  /* The FLAG is in SR register */
+ 813:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 814:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     tempreg = CRYP->SR;
+ 767              		.loc 1 814 0
+ 768 000a 5B68     		ldreq	r3, [r3, #4]
+ 769              	.LVL36:
+ 815:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 816:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 817:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 818:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Check the status of the specified CRYP flag */
+ 819:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   if ((tempreg & CRYP_FLAG ) != (uint8_t)RESET)
+ 820:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 821:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* CRYP_FLAG is set */
+ 822:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = SET;
+ 770              		.loc 1 822 0
+ 771 000c 0342     		tst	r3, r0
+ 823:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 824:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   else
+ 825:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   {
+ 826:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     /* CRYP_FLAG is reset */
+ 827:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****     bitstatus = RESET;
+ 828:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   }
+ 829:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** 
+ 830:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   /* Return the CRYP_FLAG status */
+ 831:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c ****   return  bitstatus;
+ 772              		.loc 1 831 0
+ 773 000e 0CBF     		ite	eq
+ 774 0010 0020     		moveq	r0, #0
+ 775 0012 0120     		movne	r0, #1
+ 776              	.LVL37:
+ 832:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c **** }
+ 777              		.loc 1 832 0
+ 778 0014 7047     		bx	lr
+ 779              	.L63:
+ 780 0016 00BF     		.align	2
+ 781              	.L62:
+ 782 0018 00000650 		.word	1342570496
+ 783              		.cfi_endproc
+ 784              	.LFE126:
+ 786              		.text
+ 787              	.Letext0:
+ 788              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 789              		.file 3 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4x
+ 790              		.file 4 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_
+ 791              		.file 5 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_cryp.c
+  C:\Temp\ccDYQYK1.s:19     .text.CRYP_DeInit:00000000 $t
+  C:\Temp\ccDYQYK1.s:24     .text.CRYP_DeInit:00000000 CRYP_DeInit
+  C:\Temp\ccDYQYK1.s:51     .text.CRYP_Init:00000000 $t
+  C:\Temp\ccDYQYK1.s:56     .text.CRYP_Init:00000000 CRYP_Init
+  C:\Temp\ccDYQYK1.s:135    .text.CRYP_Init:00000068 $d
+  C:\Temp\ccDYQYK1.s:140    .text.CRYP_StructInit:00000000 $t
+  C:\Temp\ccDYQYK1.s:145    .text.CRYP_StructInit:00000000 CRYP_StructInit
+  C:\Temp\ccDYQYK1.s:168    .text.CRYP_KeyInit:00000000 $t
+  C:\Temp\ccDYQYK1.s:173    .text.CRYP_KeyInit:00000000 CRYP_KeyInit
+  C:\Temp\ccDYQYK1.s:211    .text.CRYP_KeyInit:00000024 $d
+  C:\Temp\ccDYQYK1.s:216    .text.CRYP_KeyStructInit:00000000 $t
+  C:\Temp\ccDYQYK1.s:221    .text.CRYP_KeyStructInit:00000000 CRYP_KeyStructInit
+  C:\Temp\ccDYQYK1.s:252    .text.CRYP_IVInit:00000000 $t
+  C:\Temp\ccDYQYK1.s:257    .text.CRYP_IVInit:00000000 CRYP_IVInit
+  C:\Temp\ccDYQYK1.s:283    .text.CRYP_IVInit:00000014 $d
+  C:\Temp\ccDYQYK1.s:288    .text.CRYP_IVStructInit:00000000 $t
+  C:\Temp\ccDYQYK1.s:293    .text.CRYP_IVStructInit:00000000 CRYP_IVStructInit
+  C:\Temp\ccDYQYK1.s:316    .text.CRYP_FIFOFlush:00000000 $t
+  C:\Temp\ccDYQYK1.s:321    .text.CRYP_FIFOFlush:00000000 CRYP_FIFOFlush
+  C:\Temp\ccDYQYK1.s:338    .text.CRYP_FIFOFlush:0000000c $d
+  C:\Temp\ccDYQYK1.s:343    .text.CRYP_Cmd:00000000 $t
+  C:\Temp\ccDYQYK1.s:348    .text.CRYP_Cmd:00000000 CRYP_Cmd
+  C:\Temp\ccDYQYK1.s:373    .text.CRYP_Cmd:00000014 $d
+  C:\Temp\ccDYQYK1.s:378    .text.CRYP_DataIn:00000000 $t
+  C:\Temp\ccDYQYK1.s:383    .text.CRYP_DataIn:00000000 CRYP_DataIn
+  C:\Temp\ccDYQYK1.s:399    .text.CRYP_DataIn:00000008 $d
+  C:\Temp\ccDYQYK1.s:404    .text.CRYP_DataOut:00000000 $t
+  C:\Temp\ccDYQYK1.s:409    .text.CRYP_DataOut:00000000 CRYP_DataOut
+  C:\Temp\ccDYQYK1.s:424    .text.CRYP_DataOut:00000008 $d
+  C:\Temp\ccDYQYK1.s:429    .text.CRYP_SaveContext:00000000 $t
+  C:\Temp\ccDYQYK1.s:434    .text.CRYP_SaveContext:00000000 CRYP_SaveContext
+  C:\Temp\ccDYQYK1.s:563    .text.CRYP_SaveContext:00000090 $d
+  C:\Temp\ccDYQYK1.s:568    .text.CRYP_RestoreContext:00000000 $t
+  C:\Temp\ccDYQYK1.s:573    .text.CRYP_RestoreContext:00000000 CRYP_RestoreContext
+  C:\Temp\ccDYQYK1.s:630    .text.CRYP_RestoreContext:00000040 $d
+  C:\Temp\ccDYQYK1.s:635    .text.CRYP_DMACmd:00000000 $t
+  C:\Temp\ccDYQYK1.s:640    .text.CRYP_DMACmd:00000000 CRYP_DMACmd
+  C:\Temp\ccDYQYK1.s:669    .text.CRYP_DMACmd:00000018 $d
+  C:\Temp\ccDYQYK1.s:674    .text.CRYP_ITConfig:00000000 $t
+  C:\Temp\ccDYQYK1.s:679    .text.CRYP_ITConfig:00000000 CRYP_ITConfig
+  C:\Temp\ccDYQYK1.s:708    .text.CRYP_ITConfig:00000018 $d
+  C:\Temp\ccDYQYK1.s:713    .text.CRYP_GetITStatus:00000000 $t
+  C:\Temp\ccDYQYK1.s:718    .text.CRYP_GetITStatus:00000000 CRYP_GetITStatus
+  C:\Temp\ccDYQYK1.s:742    .text.CRYP_GetITStatus:00000010 $d
+  C:\Temp\ccDYQYK1.s:747    .text.CRYP_GetFlagStatus:00000000 $t
+  C:\Temp\ccDYQYK1.s:752    .text.CRYP_GetFlagStatus:00000000 CRYP_GetFlagStatus
+  C:\Temp\ccDYQYK1.s:782    .text.CRYP_GetFlagStatus:00000018 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+RCC_AHB2PeriphResetCmd
