@@ -42,6 +42,7 @@ int main(void){
 
 	xTaskCreate( vLedTask, (const signed char*)"LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
+	asm volatile ("nop");
 
 	/**
 	 * now FreeRTOS takes control of execution
