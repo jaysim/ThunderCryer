@@ -8,13 +8,13 @@
   ******************************************************************************
   */
 
+/* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
 #include "task.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_conf.h"
 #include "stm32f4_discovery.h"
-
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {
 	LED_Up,
