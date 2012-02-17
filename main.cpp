@@ -9,25 +9,21 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "FreeRTOS.h"
-#include "task.h"
-#include "stm32f4xx.h"
-#include "stm32f4xx_it.h"
+#include "CFreeRTOS.h"
+#include "CTask.h"
+#include "CLedHeartBeatSTM32F4Disc.h"
 #include "stm32f4xx_conf.h"
-#include "stm32f4_discovery.h"
+#include "stm32f4xx.h"
+
 /* Private typedef -----------------------------------------------------------*/
-typedef enum {
-	LED_Up,
-	LED_Right,
-	LED_Down,
-	LED_Left
-}eLedState;
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
 /* Private function prototypes -----------------------------------------------*/
-void vHardwareInit(void);
-void vLedTask(void* pvParameter);
+void vApplicationTickHook( void );
+void vApplicationIdleHook( void );
+void vApplicationMallocFailedHook( void );
 /* Private functions ---------------------------------------------------------*/
 
 
@@ -38,23 +34,27 @@ void vLedTask(void* pvParameter);
   * @retval None
   */
 int main(void){
-	vHardwareInit();
-
-	xTaskCreate( vLedTask, (const signed char*)"LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-
-	asm volatile ("nop");
 
 	/**
-	 * now FreeRTOS takes control of execution
+	 * create Led Heartbeat task with minimal stack size and priority
+	 * 1 higher than idle task
 	 */
-	vTaskStartScheduler();
+	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+1);
+
+	/**
+	 * Initialise the hardware for all Tasks and
+	 * then FreeRTOS takes control of execution
+	 */
+	CFreeRTOS::InitHardwareForManagedTasks();
+	CFreeRTOS::StartScheduler();
 
 }
 
 // This FreeRTOS callback function gets called once per tick (default = 1000Hz).
 // ----------------------------------------------------------------------------
 void vApplicationTickHook( void ) {
-
+	// for display delays needs 65ms call rate to prevent overflow
+	get_us_time();
 }
 
 // This FreeRTOS call-back function gets when no other task is ready to execute.
@@ -70,67 +70,24 @@ void vApplicationMallocFailedHook( void ) {
     configASSERT( 0 );  // Latch on any failure / error.
 }
 
-/**
-  * @brief  hardware initialisation
-  * @param  None
-  * @retval None
-  */
-void vHardwareInit(void){
 
+/*
+  * Callback used by stm32f4_discovery_audio_codec.c.
+  * Refer to stm32f4_discovery_audio_codec.h for more info.
+  */
+void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
+   /* TODO, implement your code here */
+   return;
 }
 
-/**
-  * @brief  led blinking task
-  * @param  task parameter
-  * @retval None
+/*
+  * Callback used by stm324xg_eval_audio_codec.c.
+  * Refer to stm324xg_eval_audio_codec.h for more info.
   */
-void vLedTask(void* pvParameter){
-	eLedState ledState = LED_Up;
-
-	// GPIO init
-	STM_EVAL_LEDInit(LED3);
-	STM_EVAL_LEDInit(LED4);
-	STM_EVAL_LEDInit(LED5);
-	STM_EVAL_LEDInit(LED6);
-
-
-	while(1){
-		switch(ledState){
-		case LED_Up:
-			STM_EVAL_LEDOn(LED3);
-			STM_EVAL_LEDOff(LED5);
-			STM_EVAL_LEDOff(LED6);
-			STM_EVAL_LEDOff(LED4);
-			ledState = LED_Right;
-			break;
-		case LED_Right:
-			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOn(LED5);
-			STM_EVAL_LEDOff(LED6);
-			STM_EVAL_LEDOff(LED4);
-			ledState = LED_Down;
-			break;
-		case LED_Down:
-			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOff(LED5);
-			STM_EVAL_LEDOn(LED6);
-			STM_EVAL_LEDOff(LED4);
-			ledState = LED_Left;
-			break;
-		case LED_Left:
-			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOff(LED5);
-			STM_EVAL_LEDOff(LED6);
-			STM_EVAL_LEDOn(LED4);
-			ledState = LED_Up;
-			break;
-		default:
-			ledState = LED_Up;
-			break;
-		}
-		vTaskDelay(500); // 500ms delay
-
-	}
+uint16_t EVAL_AUDIO_GetSampleCallBack(void){
+   /* TODO, implement your code here */
+   return -1;
 }
+
 
 
