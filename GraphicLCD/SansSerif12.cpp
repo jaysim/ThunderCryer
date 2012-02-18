@@ -11,8 +11,7 @@
   ******************************************************************************
   */
 
-#include <SansSerif12.h>
-
+#include "SansSerif12.h"
 
 const unsigned char Microsoft_Sans_Serif__12_char_table[]  = {
 // ' ' Width:5 Height:18, Bytes:1

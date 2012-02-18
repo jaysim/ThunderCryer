@@ -8,21 +8,20 @@
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 30, 6
   12              		.eabi_attribute 18, 4
   13              		.thumb
   14              		.file	"stm32f4xx_hash.c"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.HASH_DeInit,"ax",%progbits
-  19              		.align	1
-  20              		.global	HASH_DeInit
-  21              		.thumb
-  22              		.thumb_func
-  24              	HASH_DeInit:
-  25              	.LFB110:
-  26              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c"
+  18              		.align	2
+  19              		.global	HASH_DeInit
+  20              		.thumb
+  21              		.thumb_func
+  23              	HASH_DeInit:
+  24              	.LFB110:
+  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c"
    1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
    2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   ******************************************************************************
    3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @file    stm32f4xx_hash.c
@@ -195,36 +194,36 @@
  170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_DeInit(void)
  172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
-  27              		.loc 1 172 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31 0000 08B5     		push	{r3, lr}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 8
-  34              		.cfi_offset 14, -4
-  35              		.cfi_offset 3, -8
+  26              		.loc 1 172 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 1, uses_anonymous_args = 0
+  30 0000 80B5     		push	{r7, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 14, -4
+  34              		.cfi_offset 7, -8
+  35 0002 00AF     		add	r7, sp, #0
+  36              	.LCFI1:
+  37              		.cfi_def_cfa_register 7
  173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Enable HASH reset state */
  174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_HASH, ENABLE);
-  36              		.loc 1 174 0
-  37 0002 2020     		movs	r0, #32
-  38 0004 0121     		movs	r1, #1
-  39 0006 FFF7FEFF 		bl	RCC_AHB2PeriphResetCmd
+  38              		.loc 1 174 0
+  39 0004 4FF02000 		mov	r0, #32
+  40 0008 4FF00101 		mov	r1, #1
+  41 000c FFF7FEFF 		bl	RCC_AHB2PeriphResetCmd
  175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Release HASH from reset state */
  176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_HASH, DISABLE);
-  40              		.loc 1 176 0
-  41 000a 2020     		movs	r0, #32
-  42 000c 0021     		movs	r1, #0
+  42              		.loc 1 176 0
+  43 0010 4FF02000 		mov	r0, #32
+  44 0014 4FF00001 		mov	r1, #0
+  45 0018 FFF7FEFF 		bl	RCC_AHB2PeriphResetCmd
  177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
-  43              		.loc 1 177 0
-  44 000e BDE80840 		pop	{r3, lr}
- 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   RCC_AHB2PeriphResetCmd(RCC_AHB2Periph_HASH, DISABLE);
-  45              		.loc 1 176 0
-  46 0012 FFF7FEBF 		b	RCC_AHB2PeriphResetCmd
-  47              		.cfi_endproc
-  48              	.LFE110:
-  50              		.section	.text.HASH_Init,"ax",%progbits
-  51              		.align	1
+  46              		.loc 1 177 0
+  47 001c 80BD     		pop	{r7, pc}
+  48              		.cfi_endproc
+  49              	.LFE110:
+  51 001e 00BF     		.align	2
   52              		.global	HASH_Init
   53              		.thumb
   54              		.thumb_func
@@ -247,14 +246,20 @@
  192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
   58              		.loc 1 192 0
   59              		.cfi_startproc
-  60              		@ args = 0, pretend = 0, frame = 0
-  61              		@ frame_needed = 0, uses_anonymous_args = 0
-  62              	.LVL0:
-  63 0000 10B5     		push	{r4, lr}
-  64              	.LCFI1:
-  65              		.cfi_def_cfa_offset 8
-  66              		.cfi_offset 14, -4
-  67              		.cfi_offset 4, -8
+  60              		@ args = 0, pretend = 0, frame = 8
+  61              		@ frame_needed = 1, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63 0020 80B4     		push	{r7}
+  64              	.LCFI2:
+  65              		.cfi_def_cfa_offset 4
+  66              		.cfi_offset 7, -4
+  67 0022 83B0     		sub	sp, sp, #12
+  68              	.LCFI3:
+  69              		.cfi_def_cfa_offset 16
+  70 0024 00AF     		add	r7, sp, #0
+  71              	.LCFI4:
+  72              		.cfi_def_cfa_register 7
+  73 0026 7860     		str	r0, [r7, #4]
  193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_ALGOSELECTION(HASH_InitStruct->HASH_AlgoSelection));
  195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_DATATYPE(HASH_InitStruct->HASH_DataType));
@@ -262,73 +267,101 @@
  197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Configure the Algorithm used, algorithm mode and the datatype */
  199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR &= ~ (HASH_CR_ALGO | HASH_CR_DATATYPE | HASH_CR_MODE);
-  68              		.loc 1 199 0
-  69 0002 0E4B     		ldr	r3, .L4
-  70 0004 1A68     		ldr	r2, [r3, #0]
-  71 0006 22F0F002 		bic	r2, r2, #240
-  72 000a 1A60     		str	r2, [r3, #0]
+  74              		.loc 1 199 0
+  75 0028 4FF48063 		mov	r3, #1024
+  76 002c C5F20603 		movt	r3, 20486
+  77 0030 4FF48062 		mov	r2, #1024
+  78 0034 C5F20602 		movt	r2, 20486
+  79 0038 1268     		ldr	r2, [r2, #0]
+  80 003a 22F0F002 		bic	r2, r2, #240
+  81 003e 1A60     		str	r2, [r3, #0]
  200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= (HASH_InitStruct->HASH_AlgoSelection | \
-  73              		.loc 1 200 0
-  74 000c 90E80600 		ldmia	r0, {r1, r2}
-  75 0010 1C68     		ldr	r4, [r3, #0]
-  76 0012 2143     		orrs	r1, r1, r4
+  82              		.loc 1 200 0
+  83 0040 4FF48063 		mov	r3, #1024
+  84 0044 C5F20603 		movt	r3, 20486
+  85 0048 4FF48062 		mov	r2, #1024
+  86 004c C5F20602 		movt	r2, 20486
+  87 0050 1268     		ldr	r2, [r2, #0]
+  88 0052 1146     		mov	r1, r2
+  89 0054 7A68     		ldr	r2, [r7, #4]
+  90 0056 1068     		ldr	r0, [r2, #0]
  201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****                HASH_InitStruct->HASH_DataType | \
-  77              		.loc 1 201 0
-  78 0014 8468     		ldr	r4, [r0, #8]
-  79 0016 2143     		orrs	r1, r1, r4
+  91              		.loc 1 201 0
+  92 0058 7A68     		ldr	r2, [r7, #4]
+  93 005a 9268     		ldr	r2, [r2, #8]
  200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= (HASH_InitStruct->HASH_AlgoSelection | \
-  80              		.loc 1 200 0
-  81 0018 1143     		orrs	r1, r1, r2
+  94              		.loc 1 200 0
+  95 005c 1043     		orrs	r0, r0, r2
  202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****                HASH_InitStruct->HASH_AlgoMode);
+  96              		.loc 1 202 0
+  97 005e 7A68     		ldr	r2, [r7, #4]
+  98 0060 5268     		ldr	r2, [r2, #4]
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****                HASH_InitStruct->HASH_DataType | \
+  99              		.loc 1 201 0
+ 100 0062 0243     		orrs	r2, r2, r0
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= (HASH_InitStruct->HASH_AlgoSelection | \
+ 101              		.loc 1 200 0
+ 102 0064 0A43     		orrs	r2, r2, r1
+ 103 0066 1A60     		str	r2, [r3, #0]
  203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* if algorithm mode is HMAC, set the Key */  
  205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if(HASH_InitStruct->HASH_AlgoMode == HASH_AlgoMode_HMAC) 
-  82              		.loc 1 205 0
-  83 001a 402A     		cmp	r2, #64
- 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= (HASH_InitStruct->HASH_AlgoSelection | \
-  84              		.loc 1 200 0
-  85 001c 1960     		str	r1, [r3, #0]
-  86              		.loc 1 205 0
-  87 001e 07D1     		bne	.L3
+ 104              		.loc 1 205 0
+ 105 0068 7B68     		ldr	r3, [r7, #4]
+ 106 006a 5B68     		ldr	r3, [r3, #4]
+ 107 006c 402B     		cmp	r3, #64
+ 108 006e 19D1     		bne	.L3
  206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     assert_param(IS_HASH_HMAC_KEYTYPE(HASH_InitStruct->HASH_HMACKeyType));
  208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     HASH->CR &= ~HASH_CR_LKEY;
-  88              		.loc 1 208 0
-  89 0020 1A68     		ldr	r2, [r3, #0]
-  90 0022 22F48032 		bic	r2, r2, #65536
-  91 0026 1A60     		str	r2, [r3, #0]
+ 109              		.loc 1 208 0
+ 110 0070 4FF48063 		mov	r3, #1024
+ 111 0074 C5F20603 		movt	r3, 20486
+ 112 0078 4FF48062 		mov	r2, #1024
+ 113 007c C5F20602 		movt	r2, 20486
+ 114 0080 1268     		ldr	r2, [r2, #0]
+ 115 0082 22F48032 		bic	r2, r2, #65536
+ 116 0086 1A60     		str	r2, [r3, #0]
  209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     HASH->CR |= HASH_InitStruct->HASH_HMACKeyType;
-  92              		.loc 1 209 0
-  93 0028 1968     		ldr	r1, [r3, #0]
-  94 002a C268     		ldr	r2, [r0, #12]
-  95 002c 0A43     		orrs	r2, r2, r1
-  96 002e 1A60     		str	r2, [r3, #0]
-  97              	.L3:
+ 117              		.loc 1 209 0
+ 118 0088 4FF48063 		mov	r3, #1024
+ 119 008c C5F20603 		movt	r3, 20486
+ 120 0090 4FF48062 		mov	r2, #1024
+ 121 0094 C5F20602 		movt	r2, 20486
+ 122 0098 1268     		ldr	r2, [r2, #0]
+ 123 009a 1146     		mov	r1, r2
+ 124 009c 7A68     		ldr	r2, [r7, #4]
+ 125 009e D268     		ldr	r2, [r2, #12]
+ 126 00a0 0A43     		orrs	r2, r2, r1
+ 127 00a2 1A60     		str	r2, [r3, #0]
+ 128              	.L3:
  210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Reset the HASH processor core, so that the HASH will be ready to compute 
  213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****      the message digest of a new message */
  214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= HASH_CR_INIT;  
-  98              		.loc 1 214 0
-  99 0030 1A68     		ldr	r2, [r3, #0]
- 100 0032 42F00402 		orr	r2, r2, #4
- 101 0036 1A60     		str	r2, [r3, #0]
+ 129              		.loc 1 214 0
+ 130 00a4 4FF48063 		mov	r3, #1024
+ 131 00a8 C5F20603 		movt	r3, 20486
+ 132 00ac 4FF48062 		mov	r2, #1024
+ 133 00b0 C5F20602 		movt	r2, 20486
+ 134 00b4 1268     		ldr	r2, [r2, #0]
+ 135 00b6 42F00402 		orr	r2, r2, #4
+ 136 00ba 1A60     		str	r2, [r3, #0]
  215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 102              		.loc 1 215 0
- 103 0038 10BD     		pop	{r4, pc}
- 104              	.L5:
- 105 003a 00BF     		.align	2
- 106              	.L4:
- 107 003c 00040650 		.word	1342571520
- 108              		.cfi_endproc
- 109              	.LFE111:
- 111              		.section	.text.HASH_StructInit,"ax",%progbits
- 112              		.align	1
- 113              		.global	HASH_StructInit
- 114              		.thumb
- 115              		.thumb_func
- 117              	HASH_StructInit:
- 118              	.LFB112:
+ 137              		.loc 1 215 0
+ 138 00bc 07F10C07 		add	r7, r7, #12
+ 139 00c0 BD46     		mov	sp, r7
+ 140 00c2 80BC     		pop	{r7}
+ 141 00c4 7047     		bx	lr
+ 142              		.cfi_endproc
+ 143              	.LFE111:
+ 145 00c6 00BF     		.align	2
+ 146              		.global	HASH_StructInit
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	HASH_StructInit:
+ 151              	.LFB112:
  216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Fills each HASH_InitStruct member with its default value.
@@ -340,44 +373,63 @@
  224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_StructInit(HASH_InitTypeDef* HASH_InitStruct)
  226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 119              		.loc 1 226 0
- 120              		.cfi_startproc
- 121              		@ args = 0, pretend = 0, frame = 0
- 122              		@ frame_needed = 0, uses_anonymous_args = 0
- 123              		@ link register save eliminated.
- 124              	.LVL1:
+ 152              		.loc 1 226 0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 8
+ 155              		@ frame_needed = 1, uses_anonymous_args = 0
+ 156              		@ link register save eliminated.
+ 157 00c8 80B4     		push	{r7}
+ 158              	.LCFI5:
+ 159              		.cfi_def_cfa_offset 4
+ 160              		.cfi_offset 7, -4
+ 161 00ca 83B0     		sub	sp, sp, #12
+ 162              	.LCFI6:
+ 163              		.cfi_def_cfa_offset 16
+ 164 00cc 00AF     		add	r7, sp, #0
+ 165              	.LCFI7:
+ 166              		.cfi_def_cfa_register 7
+ 167 00ce 7860     		str	r0, [r7, #4]
  227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Initialize the HASH_AlgoSelection member */
  228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_InitStruct->HASH_AlgoSelection = HASH_AlgoSelection_SHA1;
- 125              		.loc 1 228 0
- 126 0000 0023     		movs	r3, #0
- 127 0002 0360     		str	r3, [r0, #0]
+ 168              		.loc 1 228 0
+ 169 00d0 7B68     		ldr	r3, [r7, #4]
+ 170 00d2 4FF00002 		mov	r2, #0
+ 171 00d6 1A60     		str	r2, [r3, #0]
  229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Initialize the HASH_AlgoMode member */
  231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_InitStruct->HASH_AlgoMode = HASH_AlgoMode_HASH;
- 128              		.loc 1 231 0
- 129 0004 4360     		str	r3, [r0, #4]
+ 172              		.loc 1 231 0
+ 173 00d8 7B68     		ldr	r3, [r7, #4]
+ 174 00da 4FF00002 		mov	r2, #0
+ 175 00de 5A60     		str	r2, [r3, #4]
  232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Initialize the HASH_DataType member */
  234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_InitStruct->HASH_DataType = HASH_DataType_32b;
- 130              		.loc 1 234 0
- 131 0006 8360     		str	r3, [r0, #8]
+ 176              		.loc 1 234 0
+ 177 00e0 7B68     		ldr	r3, [r7, #4]
+ 178 00e2 4FF00002 		mov	r2, #0
+ 179 00e6 9A60     		str	r2, [r3, #8]
  235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Initialize the HASH_HMACKeyType member */
  237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_InitStruct->HASH_HMACKeyType = HASH_HMACKeyType_ShortKey;
- 132              		.loc 1 237 0
- 133 0008 C360     		str	r3, [r0, #12]
+ 180              		.loc 1 237 0
+ 181 00e8 7B68     		ldr	r3, [r7, #4]
+ 182 00ea 4FF00002 		mov	r2, #0
+ 183 00ee DA60     		str	r2, [r3, #12]
  238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 134              		.loc 1 238 0
- 135 000a 7047     		bx	lr
- 136              		.cfi_endproc
- 137              	.LFE112:
- 139              		.section	.text.HASH_Reset,"ax",%progbits
- 140              		.align	1
- 141              		.global	HASH_Reset
- 142              		.thumb
- 143              		.thumb_func
- 145              	HASH_Reset:
- 146              	.LFB113:
+ 184              		.loc 1 238 0
+ 185 00f0 07F10C07 		add	r7, r7, #12
+ 186 00f4 BD46     		mov	sp, r7
+ 187 00f6 80BC     		pop	{r7}
+ 188 00f8 7047     		bx	lr
+ 189              		.cfi_endproc
+ 190              	.LFE112:
+ 192 00fa 00BF     		.align	2
+ 193              		.global	HASH_Reset
+ 194              		.thumb
+ 195              		.thumb_func
+ 197              	HASH_Reset:
+ 198              	.LFB113:
  239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Resets the HASH processor core, so that the HASH will be ready
@@ -390,34 +442,41 @@
  248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_Reset(void)
  250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 147              		.loc 1 250 0
- 148              		.cfi_startproc
- 149              		@ args = 0, pretend = 0, frame = 0
- 150              		@ frame_needed = 0, uses_anonymous_args = 0
- 151              		@ link register save eliminated.
+ 199              		.loc 1 250 0
+ 200              		.cfi_startproc
+ 201              		@ args = 0, pretend = 0, frame = 0
+ 202              		@ frame_needed = 1, uses_anonymous_args = 0
+ 203              		@ link register save eliminated.
+ 204 00fc 80B4     		push	{r7}
+ 205              	.LCFI8:
+ 206              		.cfi_def_cfa_offset 4
+ 207              		.cfi_offset 7, -4
+ 208 00fe 00AF     		add	r7, sp, #0
+ 209              	.LCFI9:
+ 210              		.cfi_def_cfa_register 7
  251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Reset the HASH processor core */
  252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= HASH_CR_INIT;
- 152              		.loc 1 252 0
- 153 0000 024B     		ldr	r3, .L8
- 154 0002 1A68     		ldr	r2, [r3, #0]
- 155 0004 42F00402 		orr	r2, r2, #4
- 156 0008 1A60     		str	r2, [r3, #0]
+ 211              		.loc 1 252 0
+ 212 0100 4FF48063 		mov	r3, #1024
+ 213 0104 C5F20603 		movt	r3, 20486
+ 214 0108 4FF48062 		mov	r2, #1024
+ 215 010c C5F20602 		movt	r2, 20486
+ 216 0110 1268     		ldr	r2, [r2, #0]
+ 217 0112 42F00402 		orr	r2, r2, #4
+ 218 0116 1A60     		str	r2, [r3, #0]
  253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 157              		.loc 1 253 0
- 158 000a 7047     		bx	lr
- 159              	.L9:
- 160              		.align	2
- 161              	.L8:
- 162 000c 00040650 		.word	1342571520
- 163              		.cfi_endproc
- 164              	.LFE113:
- 166              		.section	.text.HASH_SetLastWordValidBitsNbr,"ax",%progbits
- 167              		.align	1
- 168              		.global	HASH_SetLastWordValidBitsNbr
- 169              		.thumb
- 170              		.thumb_func
- 172              	HASH_SetLastWordValidBitsNbr:
- 173              	.LFB114:
+ 219              		.loc 1 253 0
+ 220 0118 BD46     		mov	sp, r7
+ 221 011a 80BC     		pop	{r7}
+ 222 011c 7047     		bx	lr
+ 223              		.cfi_endproc
+ 224              	.LFE113:
+ 226 011e 00BF     		.align	2
+ 227              		.global	HASH_SetLastWordValidBitsNbr
+ 228              		.thumb
+ 229              		.thumb_func
+ 231              	HASH_SetLastWordValidBitsNbr:
+ 232              	.LFB114:
  254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @}
  256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
@@ -457,44 +516,61 @@
  290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_SetLastWordValidBitsNbr(uint16_t ValidNumber)
  292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 174              		.loc 1 292 0
- 175              		.cfi_startproc
- 176              		@ args = 0, pretend = 0, frame = 0
- 177              		@ frame_needed = 0, uses_anonymous_args = 0
- 178              		@ link register save eliminated.
- 179              	.LVL2:
+ 233              		.loc 1 292 0
+ 234              		.cfi_startproc
+ 235              		@ args = 0, pretend = 0, frame = 8
+ 236              		@ frame_needed = 1, uses_anonymous_args = 0
+ 237              		@ link register save eliminated.
+ 238 0120 80B4     		push	{r7}
+ 239              	.LCFI10:
+ 240              		.cfi_def_cfa_offset 4
+ 241              		.cfi_offset 7, -4
+ 242 0122 83B0     		sub	sp, sp, #12
+ 243              	.LCFI11:
+ 244              		.cfi_def_cfa_offset 16
+ 245 0124 00AF     		add	r7, sp, #0
+ 246              	.LCFI12:
+ 247              		.cfi_def_cfa_register 7
+ 248 0126 0346     		mov	r3, r0
+ 249 0128 FB80     		strh	r3, [r7, #6]	@ movhi
  293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_VALIDBITSNUMBER(ValidNumber));
  295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Configure the Number of valid bits in last word of the message */
  297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->STR &= ~(HASH_STR_NBW);
- 180              		.loc 1 297 0
- 181 0000 044B     		ldr	r3, .L11
- 182 0002 9A68     		ldr	r2, [r3, #8]
- 183 0004 22F01F02 		bic	r2, r2, #31
- 184 0008 9A60     		str	r2, [r3, #8]
+ 250              		.loc 1 297 0
+ 251 012a 4FF48063 		mov	r3, #1024
+ 252 012e C5F20603 		movt	r3, 20486
+ 253 0132 4FF48062 		mov	r2, #1024
+ 254 0136 C5F20602 		movt	r2, 20486
+ 255 013a 9268     		ldr	r2, [r2, #8]
+ 256 013c 22F01F02 		bic	r2, r2, #31
+ 257 0140 9A60     		str	r2, [r3, #8]
  298:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->STR |= ValidNumber;
- 185              		.loc 1 298 0
- 186 000a 9A68     		ldr	r2, [r3, #8]
- 187 000c 1043     		orrs	r0, r0, r2
- 188              	.LVL3:
- 189 000e 9860     		str	r0, [r3, #8]
+ 258              		.loc 1 298 0
+ 259 0142 4FF48063 		mov	r3, #1024
+ 260 0146 C5F20603 		movt	r3, 20486
+ 261 014a 4FF48062 		mov	r2, #1024
+ 262 014e C5F20602 		movt	r2, 20486
+ 263 0152 9268     		ldr	r2, [r2, #8]
+ 264 0154 1146     		mov	r1, r2
+ 265 0156 FA88     		ldrh	r2, [r7, #6]
+ 266 0158 0A43     		orrs	r2, r2, r1
+ 267 015a 9A60     		str	r2, [r3, #8]
  299:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 190              		.loc 1 299 0
- 191 0010 7047     		bx	lr
- 192              	.L12:
- 193 0012 00BF     		.align	2
- 194              	.L11:
- 195 0014 00040650 		.word	1342571520
- 196              		.cfi_endproc
- 197              	.LFE114:
- 199              		.section	.text.HASH_DataIn,"ax",%progbits
- 200              		.align	1
- 201              		.global	HASH_DataIn
- 202              		.thumb
- 203              		.thumb_func
- 205              	HASH_DataIn:
- 206              	.LFB115:
+ 268              		.loc 1 299 0
+ 269 015c 07F10C07 		add	r7, r7, #12
+ 270 0160 BD46     		mov	sp, r7
+ 271 0162 80BC     		pop	{r7}
+ 272 0164 7047     		bx	lr
+ 273              		.cfi_endproc
+ 274              	.LFE114:
+ 276 0166 00BF     		.align	2
+ 277              		.global	HASH_DataIn
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	HASH_DataIn:
+ 282              	.LFB115:
  300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  301:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Writes data in the Data Input FIFO
@@ -503,33 +579,43 @@
  305:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_DataIn(uint32_t Data)
  307:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 207              		.loc 1 307 0
- 208              		.cfi_startproc
- 209              		@ args = 0, pretend = 0, frame = 0
- 210              		@ frame_needed = 0, uses_anonymous_args = 0
- 211              		@ link register save eliminated.
- 212              	.LVL4:
+ 283              		.loc 1 307 0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 8
+ 286              		@ frame_needed = 1, uses_anonymous_args = 0
+ 287              		@ link register save eliminated.
+ 288 0168 80B4     		push	{r7}
+ 289              	.LCFI13:
+ 290              		.cfi_def_cfa_offset 4
+ 291              		.cfi_offset 7, -4
+ 292 016a 83B0     		sub	sp, sp, #12
+ 293              	.LCFI14:
+ 294              		.cfi_def_cfa_offset 16
+ 295 016c 00AF     		add	r7, sp, #0
+ 296              	.LCFI15:
+ 297              		.cfi_def_cfa_register 7
+ 298 016e 7860     		str	r0, [r7, #4]
  308:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Write in the DIN register a new data */
  309:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->DIN = Data;
- 213              		.loc 1 309 0
- 214 0000 014B     		ldr	r3, .L14
- 215 0002 5860     		str	r0, [r3, #4]
+ 299              		.loc 1 309 0
+ 300 0170 4FF48063 		mov	r3, #1024
+ 301 0174 C5F20603 		movt	r3, 20486
+ 302 0178 7A68     		ldr	r2, [r7, #4]
+ 303 017a 5A60     		str	r2, [r3, #4]
  310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 216              		.loc 1 310 0
- 217 0004 7047     		bx	lr
- 218              	.L15:
- 219 0006 00BF     		.align	2
- 220              	.L14:
- 221 0008 00040650 		.word	1342571520
- 222              		.cfi_endproc
- 223              	.LFE115:
- 225              		.section	.text.HASH_GetInFIFOWordsNbr,"ax",%progbits
- 226              		.align	1
- 227              		.global	HASH_GetInFIFOWordsNbr
- 228              		.thumb
- 229              		.thumb_func
- 231              	HASH_GetInFIFOWordsNbr:
- 232              	.LFB116:
+ 304              		.loc 1 310 0
+ 305 017c 07F10C07 		add	r7, r7, #12
+ 306 0180 BD46     		mov	sp, r7
+ 307 0182 80BC     		pop	{r7}
+ 308 0184 7047     		bx	lr
+ 309              		.cfi_endproc
+ 310              	.LFE115:
+ 312 0186 00BF     		.align	2
+ 313              		.global	HASH_GetInFIFOWordsNbr
+ 314              		.thumb
+ 315              		.thumb_func
+ 317              	HASH_GetInFIFOWordsNbr:
+ 318              	.LFB116:
  311:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  312:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  313:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Returns the number of words already pushed into the IN FIFO.
@@ -538,33 +624,41 @@
  316:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  317:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** uint8_t HASH_GetInFIFOWordsNbr(void)
  318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 233              		.loc 1 318 0
- 234              		.cfi_startproc
- 235              		@ args = 0, pretend = 0, frame = 0
- 236              		@ frame_needed = 0, uses_anonymous_args = 0
- 237              		@ link register save eliminated.
+ 319              		.loc 1 318 0
+ 320              		.cfi_startproc
+ 321              		@ args = 0, pretend = 0, frame = 0
+ 322              		@ frame_needed = 1, uses_anonymous_args = 0
+ 323              		@ link register save eliminated.
+ 324 0188 80B4     		push	{r7}
+ 325              	.LCFI16:
+ 326              		.cfi_def_cfa_offset 4
+ 327              		.cfi_offset 7, -4
+ 328 018a 00AF     		add	r7, sp, #0
+ 329              	.LCFI17:
+ 330              		.cfi_def_cfa_register 7
  319:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Return the value of NBW bits */
  320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   return ((HASH->CR & HASH_CR_NBW) >> 8);
- 238              		.loc 1 320 0
- 239 0000 024B     		ldr	r3, .L17
- 240 0002 1868     		ldr	r0, [r3, #0]
- 241 0004 C0F30320 		ubfx	r0, r0, #8, #4
+ 331              		.loc 1 320 0
+ 332 018c 4FF48063 		mov	r3, #1024
+ 333 0190 C5F20603 		movt	r3, 20486
+ 334 0194 1B68     		ldr	r3, [r3, #0]
+ 335 0196 03F47063 		and	r3, r3, #3840
+ 336 019a 4FEA1323 		lsr	r3, r3, #8
+ 337 019e DBB2     		uxtb	r3, r3
  321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 242              		.loc 1 321 0
- 243 0008 7047     		bx	lr
- 244              	.L18:
- 245 000a 00BF     		.align	2
- 246              	.L17:
- 247 000c 00040650 		.word	1342571520
- 248              		.cfi_endproc
- 249              	.LFE116:
- 251              		.section	.text.HASH_GetDigest,"ax",%progbits
- 252              		.align	1
- 253              		.global	HASH_GetDigest
- 254              		.thumb
- 255              		.thumb_func
- 257              	HASH_GetDigest:
- 258              	.LFB117:
+ 338              		.loc 1 321 0
+ 339 01a0 1846     		mov	r0, r3
+ 340 01a2 BD46     		mov	sp, r7
+ 341 01a4 80BC     		pop	{r7}
+ 342 01a6 7047     		bx	lr
+ 343              		.cfi_endproc
+ 344              	.LFE116:
+ 346              		.align	2
+ 347              		.global	HASH_GetDigest
+ 348              		.thumb
+ 349              		.thumb_func
+ 351              	HASH_GetDigest:
+ 352              	.LFB117:
  322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Provides the message digest result.
@@ -576,50 +670,77 @@
  330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_GetDigest(HASH_MsgDigest* HASH_MessageDigest)
  332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 259              		.loc 1 332 0
- 260              		.cfi_startproc
- 261              		@ args = 0, pretend = 0, frame = 0
- 262              		@ frame_needed = 0, uses_anonymous_args = 0
- 263              		@ link register save eliminated.
- 264              	.LVL5:
+ 353              		.loc 1 332 0
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 8
+ 356              		@ frame_needed = 1, uses_anonymous_args = 0
+ 357              		@ link register save eliminated.
+ 358 01a8 80B4     		push	{r7}
+ 359              	.LCFI18:
+ 360              		.cfi_def_cfa_offset 4
+ 361              		.cfi_offset 7, -4
+ 362 01aa 83B0     		sub	sp, sp, #12
+ 363              	.LCFI19:
+ 364              		.cfi_def_cfa_offset 16
+ 365 01ac 00AF     		add	r7, sp, #0
+ 366              	.LCFI20:
+ 367              		.cfi_def_cfa_register 7
+ 368 01ae 7860     		str	r0, [r7, #4]
  333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Get the data field */
  334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_MessageDigest->Data[0] = HASH->HR[0];
- 265              		.loc 1 334 0
- 266 0000 054B     		ldr	r3, .L20
- 267 0002 DA68     		ldr	r2, [r3, #12]
- 268 0004 0260     		str	r2, [r0, #0]
+ 369              		.loc 1 334 0
+ 370 01b0 4FF48063 		mov	r3, #1024
+ 371 01b4 C5F20603 		movt	r3, 20486
+ 372 01b8 DB68     		ldr	r3, [r3, #12]
+ 373 01ba 1A46     		mov	r2, r3
+ 374 01bc 7B68     		ldr	r3, [r7, #4]
+ 375 01be 1A60     		str	r2, [r3, #0]
  335:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_MessageDigest->Data[1] = HASH->HR[1];
- 269              		.loc 1 335 0
- 270 0006 1A69     		ldr	r2, [r3, #16]
- 271 0008 4260     		str	r2, [r0, #4]
+ 376              		.loc 1 335 0
+ 377 01c0 4FF48063 		mov	r3, #1024
+ 378 01c4 C5F20603 		movt	r3, 20486
+ 379 01c8 1B69     		ldr	r3, [r3, #16]
+ 380 01ca 1A46     		mov	r2, r3
+ 381 01cc 7B68     		ldr	r3, [r7, #4]
+ 382 01ce 5A60     		str	r2, [r3, #4]
  336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_MessageDigest->Data[2] = HASH->HR[2];
- 272              		.loc 1 336 0
- 273 000a 5A69     		ldr	r2, [r3, #20]
- 274 000c 8260     		str	r2, [r0, #8]
+ 383              		.loc 1 336 0
+ 384 01d0 4FF48063 		mov	r3, #1024
+ 385 01d4 C5F20603 		movt	r3, 20486
+ 386 01d8 5B69     		ldr	r3, [r3, #20]
+ 387 01da 1A46     		mov	r2, r3
+ 388 01dc 7B68     		ldr	r3, [r7, #4]
+ 389 01de 9A60     		str	r2, [r3, #8]
  337:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_MessageDigest->Data[3] = HASH->HR[3];
- 275              		.loc 1 337 0
- 276 000e 9A69     		ldr	r2, [r3, #24]
- 277 0010 C260     		str	r2, [r0, #12]
+ 390              		.loc 1 337 0
+ 391 01e0 4FF48063 		mov	r3, #1024
+ 392 01e4 C5F20603 		movt	r3, 20486
+ 393 01e8 9B69     		ldr	r3, [r3, #24]
+ 394 01ea 1A46     		mov	r2, r3
+ 395 01ec 7B68     		ldr	r3, [r7, #4]
+ 396 01ee DA60     		str	r2, [r3, #12]
  338:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_MessageDigest->Data[4] = HASH->HR[4];
- 278              		.loc 1 338 0
- 279 0012 DB69     		ldr	r3, [r3, #28]
- 280 0014 0361     		str	r3, [r0, #16]
+ 397              		.loc 1 338 0
+ 398 01f0 4FF48063 		mov	r3, #1024
+ 399 01f4 C5F20603 		movt	r3, 20486
+ 400 01f8 DB69     		ldr	r3, [r3, #28]
+ 401 01fa 1A46     		mov	r2, r3
+ 402 01fc 7B68     		ldr	r3, [r7, #4]
+ 403 01fe 1A61     		str	r2, [r3, #16]
  339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 281              		.loc 1 339 0
- 282 0016 7047     		bx	lr
- 283              	.L21:
- 284              		.align	2
- 285              	.L20:
- 286 0018 00040650 		.word	1342571520
- 287              		.cfi_endproc
- 288              	.LFE117:
- 290              		.section	.text.HASH_StartDigest,"ax",%progbits
- 291              		.align	1
- 292              		.global	HASH_StartDigest
- 293              		.thumb
- 294              		.thumb_func
- 296              	HASH_StartDigest:
- 297              	.LFB118:
+ 404              		.loc 1 339 0
+ 405 0200 07F10C07 		add	r7, r7, #12
+ 406 0204 BD46     		mov	sp, r7
+ 407 0206 80BC     		pop	{r7}
+ 408 0208 7047     		bx	lr
+ 409              		.cfi_endproc
+ 410              	.LFE117:
+ 412 020a 00BF     		.align	2
+ 413              		.global	HASH_StartDigest
+ 414              		.thumb
+ 415              		.thumb_func
+ 417              	HASH_StartDigest:
+ 418              	.LFB118:
  340:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  341:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Starts the message padding and calculation of the final message     
@@ -628,34 +749,41 @@
  345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  346:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_StartDigest(void)
  347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 298              		.loc 1 347 0
- 299              		.cfi_startproc
- 300              		@ args = 0, pretend = 0, frame = 0
- 301              		@ frame_needed = 0, uses_anonymous_args = 0
- 302              		@ link register save eliminated.
+ 419              		.loc 1 347 0
+ 420              		.cfi_startproc
+ 421              		@ args = 0, pretend = 0, frame = 0
+ 422              		@ frame_needed = 1, uses_anonymous_args = 0
+ 423              		@ link register save eliminated.
+ 424 020c 80B4     		push	{r7}
+ 425              	.LCFI21:
+ 426              		.cfi_def_cfa_offset 4
+ 427              		.cfi_offset 7, -4
+ 428 020e 00AF     		add	r7, sp, #0
+ 429              	.LCFI22:
+ 430              		.cfi_def_cfa_register 7
  348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Start the Digest calculation */
  349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->STR |= HASH_STR_DCAL;
- 303              		.loc 1 349 0
- 304 0000 024B     		ldr	r3, .L23
- 305 0002 9A68     		ldr	r2, [r3, #8]
- 306 0004 42F48072 		orr	r2, r2, #256
- 307 0008 9A60     		str	r2, [r3, #8]
+ 431              		.loc 1 349 0
+ 432 0210 4FF48063 		mov	r3, #1024
+ 433 0214 C5F20603 		movt	r3, 20486
+ 434 0218 4FF48062 		mov	r2, #1024
+ 435 021c C5F20602 		movt	r2, 20486
+ 436 0220 9268     		ldr	r2, [r2, #8]
+ 437 0222 42F48072 		orr	r2, r2, #256
+ 438 0226 9A60     		str	r2, [r3, #8]
  350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 308              		.loc 1 350 0
- 309 000a 7047     		bx	lr
- 310              	.L24:
- 311              		.align	2
- 312              	.L23:
- 313 000c 00040650 		.word	1342571520
- 314              		.cfi_endproc
- 315              	.LFE118:
- 317              		.section	.text.HASH_SaveContext,"ax",%progbits
- 318              		.align	1
- 319              		.global	HASH_SaveContext
- 320              		.thumb
- 321              		.thumb_func
- 323              	HASH_SaveContext:
- 324              	.LFB119:
+ 439              		.loc 1 350 0
+ 440 0228 BD46     		mov	sp, r7
+ 441 022a 80BC     		pop	{r7}
+ 442 022c 7047     		bx	lr
+ 443              		.cfi_endproc
+ 444              	.LFE118:
+ 446 022e 00BF     		.align	2
+ 447              		.global	HASH_SaveContext
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	HASH_SaveContext:
+ 452              	.LFB119:
  351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @}
  353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
@@ -696,61 +824,99 @@
  388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_SaveContext(HASH_Context* HASH_ContextSave)
  390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 325              		.loc 1 390 0
- 326              		.cfi_startproc
- 327              		@ args = 0, pretend = 0, frame = 0
- 328              		@ frame_needed = 0, uses_anonymous_args = 0
- 329              		@ link register save eliminated.
- 330              	.LVL6:
+ 453              		.loc 1 390 0
+ 454              		.cfi_startproc
+ 455              		@ args = 0, pretend = 0, frame = 16
+ 456              		@ frame_needed = 1, uses_anonymous_args = 0
+ 457              		@ link register save eliminated.
+ 458 0230 80B4     		push	{r7}
+ 459              	.LCFI23:
+ 460              		.cfi_def_cfa_offset 4
+ 461              		.cfi_offset 7, -4
+ 462 0232 85B0     		sub	sp, sp, #20
+ 463              	.LCFI24:
+ 464              		.cfi_def_cfa_offset 24
+ 465 0234 00AF     		add	r7, sp, #0
+ 466              	.LCFI25:
+ 467              		.cfi_def_cfa_register 7
+ 468 0236 7860     		str	r0, [r7, #4]
  391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   uint8_t i = 0;
+ 469              		.loc 1 391 0
+ 470 0238 4FF00003 		mov	r3, #0
+ 471 023c FB73     		strb	r3, [r7, #15]
  392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* save context registers */
  394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_ContextSave->HASH_IMR = HASH->IMR;  
- 331              		.loc 1 394 0
- 332 0000 084B     		ldr	r3, .L28
- 333 0002 1A6A     		ldr	r2, [r3, #32]
- 334 0004 0260     		str	r2, [r0, #0]
+ 472              		.loc 1 394 0
+ 473 023e 4FF48063 		mov	r3, #1024
+ 474 0242 C5F20603 		movt	r3, 20486
+ 475 0246 1B6A     		ldr	r3, [r3, #32]
+ 476 0248 1A46     		mov	r2, r3
+ 477 024a 7B68     		ldr	r3, [r7, #4]
+ 478 024c 1A60     		str	r2, [r3, #0]
  395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_ContextSave->HASH_STR = HASH->STR;      
- 335              		.loc 1 395 0
- 336 0006 9A68     		ldr	r2, [r3, #8]
- 337 0008 4260     		str	r2, [r0, #4]
+ 479              		.loc 1 395 0
+ 480 024e 4FF48063 		mov	r3, #1024
+ 481 0252 C5F20603 		movt	r3, 20486
+ 482 0256 9B68     		ldr	r3, [r3, #8]
+ 483 0258 1A46     		mov	r2, r3
+ 484 025a 7B68     		ldr	r3, [r7, #4]
+ 485 025c 5A60     		str	r2, [r3, #4]
  396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH_ContextSave->HASH_CR  = HASH->CR;     
- 338              		.loc 1 396 0
- 339 000a 1A68     		ldr	r2, [r3, #0]
- 340 000c 8260     		str	r2, [r0, #8]
- 341 000e 0022     		movs	r2, #0
- 342              	.LVL7:
- 343              	.L26:
+ 486              		.loc 1 396 0
+ 487 025e 4FF48063 		mov	r3, #1024
+ 488 0262 C5F20603 		movt	r3, 20486
+ 489 0266 1B68     		ldr	r3, [r3, #0]
+ 490 0268 1A46     		mov	r2, r3
+ 491 026a 7B68     		ldr	r3, [r7, #4]
+ 492 026c 9A60     		str	r2, [r3, #8]
  397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   for(i=0; i<=50;i++)
+ 493              		.loc 1 397 0
+ 494 026e 4FF00003 		mov	r3, #0
+ 495 0272 FB73     		strb	r3, [r7, #15]
+ 496 0274 15E0     		b	.L12
+ 497              	.L13:
  398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****      HASH_ContextSave->HASH_CSR[i] = HASH->CSR[i];
- 344              		.loc 1 399 0 discriminator 2
- 345 0010 02F13E01 		add	r1, r2, #62
- 346 0014 0132     		adds	r2, r2, #1
- 347 0016 53F82110 		ldr	r1, [r3, r1, lsl #2]
- 348 001a C160     		str	r1, [r0, #12]
- 349 001c 0430     		adds	r0, r0, #4
+ 498              		.loc 1 399 0 discriminator 2
+ 499 0276 F87B     		ldrb	r0, [r7, #15]	@ zero_extendqisi2
+ 500 0278 4FF48063 		mov	r3, #1024
+ 501 027c C5F20603 		movt	r3, 20486
+ 502 0280 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 503 0282 02F13E02 		add	r2, r2, #62
+ 504 0286 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 505 028a 1A46     		mov	r2, r3
+ 506 028c 7968     		ldr	r1, [r7, #4]
+ 507 028e 00F10203 		add	r3, r0, #2
+ 508 0292 4FEA8303 		lsl	r3, r3, #2
+ 509 0296 CB18     		adds	r3, r1, r3
+ 510 0298 5A60     		str	r2, [r3, #4]
  397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   for(i=0; i<=50;i++)
- 350              		.loc 1 397 0 discriminator 2
- 351 001e 332A     		cmp	r2, #51
- 352 0020 F6D1     		bne	.L26
+ 511              		.loc 1 397 0 discriminator 2
+ 512 029a FB7B     		ldrb	r3, [r7, #15]
+ 513 029c 03F10103 		add	r3, r3, #1
+ 514 02a0 FB73     		strb	r3, [r7, #15]
+ 515              	.L12:
+ 397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   for(i=0; i<=50;i++)
+ 516              		.loc 1 397 0 is_stmt 0 discriminator 1
+ 517 02a2 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 518 02a4 322B     		cmp	r3, #50
+ 519 02a6 E6D9     		bls	.L13
  400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }   
  401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 353              		.loc 1 401 0
- 354 0022 7047     		bx	lr
- 355              	.L29:
- 356              		.align	2
- 357              	.L28:
- 358 0024 00040650 		.word	1342571520
- 359              		.cfi_endproc
- 360              	.LFE119:
- 362              		.section	.text.HASH_RestoreContext,"ax",%progbits
- 363              		.align	1
- 364              		.global	HASH_RestoreContext
- 365              		.thumb
- 366              		.thumb_func
- 368              	HASH_RestoreContext:
- 369              	.LFB120:
+ 520              		.loc 1 401 0 is_stmt 1
+ 521 02a8 07F11407 		add	r7, r7, #20
+ 522 02ac BD46     		mov	sp, r7
+ 523 02ae 80BC     		pop	{r7}
+ 524 02b0 7047     		bx	lr
+ 525              		.cfi_endproc
+ 526              	.LFE119:
+ 528 02b2 00BF     		.align	2
+ 529              		.global	HASH_RestoreContext
+ 530              		.thumb
+ 531              		.thumb_func
+ 533              	HASH_RestoreContext:
+ 534              	.LFB120:
  402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Restore the Hash peripheral Context.  
@@ -762,80 +928,108 @@
  410:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  411:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_RestoreContext(HASH_Context* HASH_ContextRestore)  
  412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 370              		.loc 1 412 0
- 371              		.cfi_startproc
- 372              		@ args = 0, pretend = 0, frame = 0
- 373              		@ frame_needed = 0, uses_anonymous_args = 0
- 374              	.LVL8:
+ 535              		.loc 1 412 0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 16
+ 538              		@ frame_needed = 1, uses_anonymous_args = 0
+ 539              		@ link register save eliminated.
+ 540 02b4 80B4     		push	{r7}
+ 541              	.LCFI26:
+ 542              		.cfi_def_cfa_offset 4
+ 543              		.cfi_offset 7, -4
+ 544 02b6 85B0     		sub	sp, sp, #20
+ 545              	.LCFI27:
+ 546              		.cfi_def_cfa_offset 24
+ 547 02b8 00AF     		add	r7, sp, #0
+ 548              	.LCFI28:
+ 549              		.cfi_def_cfa_register 7
+ 550 02ba 7860     		str	r0, [r7, #4]
  413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   uint8_t i = 0;
+ 551              		.loc 1 413 0
+ 552 02bc 4FF00003 		mov	r3, #0
+ 553 02c0 FB73     		strb	r3, [r7, #15]
  414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* restore context registers */
  416:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->IMR = HASH_ContextRestore->HASH_IMR;   
- 375              		.loc 1 416 0
- 376 0000 0268     		ldr	r2, [r0, #0]
- 377 0002 0B4B     		ldr	r3, .L33
- 412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 378              		.loc 1 412 0
- 379 0004 10B5     		push	{r4, lr}
- 380              	.LCFI2:
- 381              		.cfi_def_cfa_offset 8
- 382              		.cfi_offset 14, -4
- 383              		.cfi_offset 4, -8
- 384              		.loc 1 416 0
- 385 0006 1A62     		str	r2, [r3, #32]
+ 554              		.loc 1 416 0
+ 555 02c2 4FF48063 		mov	r3, #1024
+ 556 02c6 C5F20603 		movt	r3, 20486
+ 557 02ca 7A68     		ldr	r2, [r7, #4]
+ 558 02cc 1268     		ldr	r2, [r2, #0]
+ 559 02ce 1A62     		str	r2, [r3, #32]
  417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->STR = HASH_ContextRestore->HASH_STR;     
- 386              		.loc 1 417 0
- 387 0008 4268     		ldr	r2, [r0, #4]
- 388 000a 9A60     		str	r2, [r3, #8]
+ 560              		.loc 1 417 0
+ 561 02d0 4FF48063 		mov	r3, #1024
+ 562 02d4 C5F20603 		movt	r3, 20486
+ 563 02d8 7A68     		ldr	r2, [r7, #4]
+ 564 02da 5268     		ldr	r2, [r2, #4]
+ 565 02dc 9A60     		str	r2, [r3, #8]
  418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR = HASH_ContextRestore->HASH_CR;
- 389              		.loc 1 418 0
- 390 000c 8268     		ldr	r2, [r0, #8]
- 391 000e 1A60     		str	r2, [r3, #0]
+ 566              		.loc 1 418 0
+ 567 02de 4FF48063 		mov	r3, #1024
+ 568 02e2 C5F20603 		movt	r3, 20486
+ 569 02e6 7A68     		ldr	r2, [r7, #4]
+ 570 02e8 9268     		ldr	r2, [r2, #8]
+ 571 02ea 1A60     		str	r2, [r3, #0]
  419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Initialize the hash processor */
  421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->CR |= HASH_CR_INIT; 
- 392              		.loc 1 421 0
- 393 0010 1A68     		ldr	r2, [r3, #0]
- 394 0012 42F00402 		orr	r2, r2, #4
- 395 0016 1A60     		str	r2, [r3, #0]
- 396 0018 0022     		movs	r2, #0
- 397              	.LVL9:
- 398              	.L31:
+ 572              		.loc 1 421 0
+ 573 02ec 4FF48063 		mov	r3, #1024
+ 574 02f0 C5F20603 		movt	r3, 20486
+ 575 02f4 4FF48062 		mov	r2, #1024
+ 576 02f8 C5F20602 		movt	r2, 20486
+ 577 02fc 1268     		ldr	r2, [r2, #0]
+ 578 02fe 42F00402 		orr	r2, r2, #4
+ 579 0302 1A60     		str	r2, [r3, #0]
  422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****    /* continue restoring context registers */     
  424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   for(i=0; i<=50;i++)
+ 580              		.loc 1 424 0
+ 581 0304 4FF00003 		mov	r3, #0
+ 582 0308 FB73     		strb	r3, [r7, #15]
+ 583 030a 14E0     		b	.L15
+ 584              	.L16:
  425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****      HASH->CSR[i] = HASH_ContextRestore->HASH_CSR[i];
- 399              		.loc 1 426 0 discriminator 2
- 400 001a C468     		ldr	r4, [r0, #12]
- 401 001c 02F13E01 		add	r1, r2, #62
- 402 0020 0132     		adds	r2, r2, #1
- 403 0022 0430     		adds	r0, r0, #4
+ 585              		.loc 1 426 0 discriminator 2
+ 586 030c 4FF48063 		mov	r3, #1024
+ 587 0310 C5F20603 		movt	r3, 20486
+ 588 0314 F87B     		ldrb	r0, [r7, #15]	@ zero_extendqisi2
+ 589 0316 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 590 0318 7968     		ldr	r1, [r7, #4]
+ 591 031a 02F10202 		add	r2, r2, #2
+ 592 031e 4FEA8202 		lsl	r2, r2, #2
+ 593 0322 8A18     		adds	r2, r1, r2
+ 594 0324 5168     		ldr	r1, [r2, #4]
+ 595 0326 00F13E02 		add	r2, r0, #62
+ 596 032a 43F82210 		str	r1, [r3, r2, lsl #2]
  424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   for(i=0; i<=50;i++)
- 404              		.loc 1 424 0 discriminator 2
- 405 0024 332A     		cmp	r2, #51
- 406              		.loc 1 426 0 discriminator 2
- 407 0026 43F82140 		str	r4, [r3, r1, lsl #2]
+ 597              		.loc 1 424 0 discriminator 2
+ 598 032e FB7B     		ldrb	r3, [r7, #15]
+ 599 0330 03F10103 		add	r3, r3, #1
+ 600 0334 FB73     		strb	r3, [r7, #15]
+ 601              	.L15:
  424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   for(i=0; i<=50;i++)
- 408              		.loc 1 424 0 discriminator 2
- 409 002a F6D1     		bne	.L31
+ 602              		.loc 1 424 0 is_stmt 0 discriminator 1
+ 603 0336 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 604 0338 322B     		cmp	r3, #50
+ 605 033a E7D9     		bls	.L16
  427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }   
  428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 410              		.loc 1 428 0
- 411 002c 10BD     		pop	{r4, pc}
- 412              	.L34:
- 413 002e 00BF     		.align	2
- 414              	.L33:
- 415 0030 00040650 		.word	1342571520
- 416              		.cfi_endproc
- 417              	.LFE120:
- 419              		.section	.text.HASH_DMACmd,"ax",%progbits
- 420              		.align	1
- 421              		.global	HASH_DMACmd
- 422              		.thumb
- 423              		.thumb_func
- 425              	HASH_DMACmd:
- 426              	.LFB121:
+ 606              		.loc 1 428 0 is_stmt 1
+ 607 033c 07F11407 		add	r7, r7, #20
+ 608 0340 BD46     		mov	sp, r7
+ 609 0342 80BC     		pop	{r7}
+ 610 0344 7047     		bx	lr
+ 611              		.cfi_endproc
+ 612              	.LFE120:
+ 614 0346 00BF     		.align	2
+ 615              		.global	HASH_DMACmd
+ 616              		.thumb
+ 617              		.thumb_func
+ 619              	HASH_DMACmd:
+ 620              	.LFB121:
  429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @}
  431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
@@ -869,54 +1063,73 @@
  459:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  460:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_DMACmd(FunctionalState NewState)
  461:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 427              		.loc 1 461 0
- 428              		.cfi_startproc
- 429              		@ args = 0, pretend = 0, frame = 0
- 430              		@ frame_needed = 0, uses_anonymous_args = 0
- 431              		@ link register save eliminated.
- 432              	.LVL10:
- 433 0000 044B     		ldr	r3, .L39
+ 621              		.loc 1 461 0
+ 622              		.cfi_startproc
+ 623              		@ args = 0, pretend = 0, frame = 8
+ 624              		@ frame_needed = 1, uses_anonymous_args = 0
+ 625              		@ link register save eliminated.
+ 626 0348 80B4     		push	{r7}
+ 627              	.LCFI29:
+ 628              		.cfi_def_cfa_offset 4
+ 629              		.cfi_offset 7, -4
+ 630 034a 83B0     		sub	sp, sp, #12
+ 631              	.LCFI30:
+ 632              		.cfi_def_cfa_offset 16
+ 633 034c 00AF     		add	r7, sp, #0
+ 634              	.LCFI31:
+ 635              		.cfi_def_cfa_register 7
+ 636 034e 0346     		mov	r3, r0
+ 637 0350 FB71     		strb	r3, [r7, #7]
  462:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  463:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  465:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if (NewState != DISABLE)
+ 638              		.loc 1 465 0
+ 639 0352 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 640 0354 002B     		cmp	r3, #0
+ 641 0356 0CD0     		beq	.L18
  466:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  467:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* Enable the HASH DMA request */
  468:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     HASH->CR |= HASH_CR_DMAE;
- 434              		.loc 1 468 0
- 435 0002 1A68     		ldr	r2, [r3, #0]
- 465:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if (NewState != DISABLE)
- 436              		.loc 1 465 0
- 437 0004 10B1     		cbz	r0, .L36
- 438              		.loc 1 468 0
- 439 0006 42F00802 		orr	r2, r2, #8
- 440 000a 01E0     		b	.L38
- 441              	.L36:
+ 642              		.loc 1 468 0
+ 643 0358 4FF48063 		mov	r3, #1024
+ 644 035c C5F20603 		movt	r3, 20486
+ 645 0360 4FF48062 		mov	r2, #1024
+ 646 0364 C5F20602 		movt	r2, 20486
+ 647 0368 1268     		ldr	r2, [r2, #0]
+ 648 036a 42F00802 		orr	r2, r2, #8
+ 649 036e 1A60     		str	r2, [r3, #0]
+ 650 0370 0BE0     		b	.L17
+ 651              	.L18:
  469:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  470:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   else
  471:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  472:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* Disable the HASH DMA request */
  473:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     HASH->CR &= ~HASH_CR_DMAE;
- 442              		.loc 1 473 0
- 443 000c 22F00802 		bic	r2, r2, #8
- 444              	.L38:
- 445 0010 1A60     		str	r2, [r3, #0]
- 446 0012 7047     		bx	lr
- 447              	.L40:
- 448              		.align	2
- 449              	.L39:
- 450 0014 00040650 		.word	1342571520
- 451              		.cfi_endproc
- 452              	.LFE121:
- 454              		.section	.text.HASH_ITConfig,"ax",%progbits
- 455              		.align	1
- 456              		.global	HASH_ITConfig
- 457              		.thumb
- 458              		.thumb_func
- 460              	HASH_ITConfig:
- 461              	.LFB122:
+ 652              		.loc 1 473 0
+ 653 0372 4FF48063 		mov	r3, #1024
+ 654 0376 C5F20603 		movt	r3, 20486
+ 655 037a 4FF48062 		mov	r2, #1024
+ 656 037e C5F20602 		movt	r2, 20486
+ 657 0382 1268     		ldr	r2, [r2, #0]
+ 658 0384 22F00802 		bic	r2, r2, #8
+ 659 0388 1A60     		str	r2, [r3, #0]
+ 660              	.L17:
  474:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  475:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
+ 661              		.loc 1 475 0
+ 662 038a 07F10C07 		add	r7, r7, #12
+ 663 038e BD46     		mov	sp, r7
+ 664 0390 80BC     		pop	{r7}
+ 665 0392 7047     		bx	lr
+ 666              		.cfi_endproc
+ 667              	.LFE121:
+ 669              		.align	2
+ 670              		.global	HASH_ITConfig
+ 671              		.thumb
+ 672              		.thumb_func
+ 674              	HASH_ITConfig:
+ 675              	.LFB122:
  476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  477:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @}
  478:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
@@ -998,59 +1211,82 @@
  554:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_ITConfig(uint8_t HASH_IT, FunctionalState NewState)
  556:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 462              		.loc 1 556 0
- 463              		.cfi_startproc
- 464              		@ args = 0, pretend = 0, frame = 0
- 465              		@ frame_needed = 0, uses_anonymous_args = 0
- 466              		@ link register save eliminated.
- 467              	.LVL11:
- 468 0000 054B     		ldr	r3, .L45
+ 676              		.loc 1 556 0
+ 677              		.cfi_startproc
+ 678              		@ args = 0, pretend = 0, frame = 8
+ 679              		@ frame_needed = 1, uses_anonymous_args = 0
+ 680              		@ link register save eliminated.
+ 681 0394 80B4     		push	{r7}
+ 682              	.LCFI32:
+ 683              		.cfi_def_cfa_offset 4
+ 684              		.cfi_offset 7, -4
+ 685 0396 83B0     		sub	sp, sp, #12
+ 686              	.LCFI33:
+ 687              		.cfi_def_cfa_offset 16
+ 688 0398 00AF     		add	r7, sp, #0
+ 689              	.LCFI34:
+ 690              		.cfi_def_cfa_register 7
+ 691 039a 0246     		mov	r2, r0
+ 692 039c 0B46     		mov	r3, r1
+ 693 039e FA71     		strb	r2, [r7, #7]
+ 694 03a0 BB71     		strb	r3, [r7, #6]
  557:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_IT(HASH_IT));
  559:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  560:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  561:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if (NewState != DISABLE)
+ 695              		.loc 1 561 0
+ 696 03a2 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 697 03a4 002B     		cmp	r3, #0
+ 698 03a6 0DD0     		beq	.L21
  562:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  563:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* Enable the selected HASH interrupt */
  564:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     HASH->IMR |= HASH_IT;
- 469              		.loc 1 564 0
- 470 0002 1A6A     		ldr	r2, [r3, #32]
- 561:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if (NewState != DISABLE)
- 471              		.loc 1 561 0
- 472 0004 09B1     		cbz	r1, .L42
- 473              		.loc 1 564 0
- 474 0006 1043     		orrs	r0, r0, r2
- 475              	.LVL12:
- 476 0008 03E0     		b	.L44
- 477              	.LVL13:
- 478              	.L42:
+ 699              		.loc 1 564 0
+ 700 03a8 4FF48063 		mov	r3, #1024
+ 701 03ac C5F20603 		movt	r3, 20486
+ 702 03b0 4FF48062 		mov	r2, #1024
+ 703 03b4 C5F20602 		movt	r2, 20486
+ 704 03b8 126A     		ldr	r2, [r2, #32]
+ 705 03ba 1146     		mov	r1, r2
+ 706 03bc FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 707 03be 0A43     		orrs	r2, r2, r1
+ 708 03c0 1A62     		str	r2, [r3, #32]
+ 709 03c2 0FE0     		b	.L20
+ 710              	.L21:
  565:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  566:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   else
  567:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  568:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* Disable the selected HASH interrupt */
  569:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     HASH->IMR &= (uint8_t) ~HASH_IT;
- 479              		.loc 1 569 0
- 480 000a 22EA0000 		bic	r0, r2, r0
- 481              	.LVL14:
- 482 000e 00F0FF00 		and	r0, r0, #255
- 483              	.L44:
- 484 0012 1862     		str	r0, [r3, #32]
- 485 0014 7047     		bx	lr
- 486              	.L46:
- 487 0016 00BF     		.align	2
- 488              	.L45:
- 489 0018 00040650 		.word	1342571520
- 490              		.cfi_endproc
- 491              	.LFE122:
- 493              		.section	.text.HASH_GetFlagStatus,"ax",%progbits
- 494              		.align	1
- 495              		.global	HASH_GetFlagStatus
- 496              		.thumb
- 497              		.thumb_func
- 499              	HASH_GetFlagStatus:
- 500              	.LFB123:
+ 711              		.loc 1 569 0
+ 712 03c4 4FF48063 		mov	r3, #1024
+ 713 03c8 C5F20603 		movt	r3, 20486
+ 714 03cc 4FF48062 		mov	r2, #1024
+ 715 03d0 C5F20602 		movt	r2, 20486
+ 716 03d4 126A     		ldr	r2, [r2, #32]
+ 717 03d6 1146     		mov	r1, r2
+ 718 03d8 FA79     		ldrb	r2, [r7, #7]
+ 719 03da 6FEA0202 		mvn	r2, r2
+ 720 03de D2B2     		uxtb	r2, r2
+ 721 03e0 0A40     		ands	r2, r2, r1
+ 722 03e2 1A62     		str	r2, [r3, #32]
+ 723              	.L20:
  570:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  571:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
+ 724              		.loc 1 571 0
+ 725 03e4 07F10C07 		add	r7, r7, #12
+ 726 03e8 BD46     		mov	sp, r7
+ 727 03ea 80BC     		pop	{r7}
+ 728 03ec 7047     		bx	lr
+ 729              		.cfi_endproc
+ 730              	.LFE122:
+ 732 03ee 00BF     		.align	2
+ 733              		.global	HASH_GetFlagStatus
+ 734              		.thumb
+ 735              		.thumb_func
+ 737              	HASH_GetFlagStatus:
+ 738              	.LFB123:
  572:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  573:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  574:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Checks whether the specified HASH flag is set or not.
@@ -1065,75 +1301,109 @@
  583:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  584:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** FlagStatus HASH_GetFlagStatus(uint16_t HASH_FLAG)
  585:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 501              		.loc 1 585 0
- 502              		.cfi_startproc
- 503              		@ args = 0, pretend = 0, frame = 0
- 504              		@ frame_needed = 0, uses_anonymous_args = 0
- 505              		@ link register save eliminated.
- 506              	.LVL15:
- 507 0000 054B     		ldr	r3, .L50
+ 739              		.loc 1 585 0
+ 740              		.cfi_startproc
+ 741              		@ args = 0, pretend = 0, frame = 16
+ 742              		@ frame_needed = 1, uses_anonymous_args = 0
+ 743              		@ link register save eliminated.
+ 744 03f0 80B4     		push	{r7}
+ 745              	.LCFI35:
+ 746              		.cfi_def_cfa_offset 4
+ 747              		.cfi_offset 7, -4
+ 748 03f2 85B0     		sub	sp, sp, #20
+ 749              	.LCFI36:
+ 750              		.cfi_def_cfa_offset 24
+ 751 03f4 00AF     		add	r7, sp, #0
+ 752              	.LCFI37:
+ 753              		.cfi_def_cfa_register 7
+ 754 03f6 0346     		mov	r3, r0
+ 755 03f8 FB80     		strh	r3, [r7, #6]	@ movhi
  586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   FlagStatus bitstatus = RESET;
+ 756              		.loc 1 586 0
+ 757 03fa 4FF00003 		mov	r3, #0
+ 758 03fe FB73     		strb	r3, [r7, #15]
  587:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   uint32_t tempreg = 0;
+ 759              		.loc 1 587 0
+ 760 0400 4FF00003 		mov	r3, #0
+ 761 0404 BB60     		str	r3, [r7, #8]
  588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  589:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  590:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_GET_FLAG(HASH_FLAG));
  591:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  592:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* check if the FLAG is in CR register */
  593:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if ((HASH_FLAG & HASH_FLAG_DINNE) != (uint16_t)RESET ) 
- 508              		.loc 1 593 0
- 509 0002 10F4805F 		tst	r0, #4096
+ 762              		.loc 1 593 0
+ 763 0406 FB88     		ldrh	r3, [r7, #6]
+ 764 0408 03F48053 		and	r3, r3, #4096
+ 765 040c 002B     		cmp	r3, #0
+ 766 040e 06D0     		beq	.L24
  594:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  595:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     tempreg = HASH->CR;
- 510              		.loc 1 595 0
- 511 0006 14BF     		ite	ne
- 512 0008 1B68     		ldrne	r3, [r3, #0]
- 513              	.LVL16:
+ 767              		.loc 1 595 0
+ 768 0410 4FF48063 		mov	r3, #1024
+ 769 0414 C5F20603 		movt	r3, 20486
+ 770 0418 1B68     		ldr	r3, [r3, #0]
+ 771 041a BB60     		str	r3, [r7, #8]
+ 772 041c 05E0     		b	.L25
+ 773              	.L24:
  596:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  597:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   else /* The FLAG is in SR register */
  598:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  599:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     tempreg = HASH->SR;
- 514              		.loc 1 599 0
- 515 000a 5B6A     		ldreq	r3, [r3, #36]
- 516              	.LVL17:
+ 774              		.loc 1 599 0
+ 775 041e 4FF48063 		mov	r3, #1024
+ 776 0422 C5F20603 		movt	r3, 20486
+ 777 0426 5B6A     		ldr	r3, [r3, #36]
+ 778 0428 BB60     		str	r3, [r7, #8]
+ 779              	.L25:
  600:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  601:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  602:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the status of the specified HASH flag */
  603:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if ((tempreg & HASH_FLAG) != (uint16_t)RESET)
+ 780              		.loc 1 603 0
+ 781 042a FA88     		ldrh	r2, [r7, #6]
+ 782 042c BB68     		ldr	r3, [r7, #8]
+ 783 042e 1340     		ands	r3, r3, r2
+ 784 0430 002B     		cmp	r3, #0
+ 785 0432 03D0     		beq	.L26
  604:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  605:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* HASH is set */
  606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     bitstatus = SET;
- 517              		.loc 1 606 0
- 518 000c 0342     		tst	r3, r0
+ 786              		.loc 1 606 0
+ 787 0434 4FF00103 		mov	r3, #1
+ 788 0438 FB73     		strb	r3, [r7, #15]
+ 789 043a 02E0     		b	.L27
+ 790              	.L26:
  607:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  608:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   else
  609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  610:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* HASH_FLAG is reset */
  611:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     bitstatus = RESET;
+ 791              		.loc 1 611 0
+ 792 043c 4FF00003 		mov	r3, #0
+ 793 0440 FB73     		strb	r3, [r7, #15]
+ 794              	.L27:
  612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Return the HASH_FLAG status */
  615:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   return  bitstatus;
- 519              		.loc 1 615 0
- 520 000e 0CBF     		ite	eq
- 521 0010 0020     		moveq	r0, #0
- 522 0012 0120     		movne	r0, #1
- 523              	.LVL18:
+ 795              		.loc 1 615 0
+ 796 0442 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  616:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 524              		.loc 1 616 0
- 525 0014 7047     		bx	lr
- 526              	.L51:
- 527 0016 00BF     		.align	2
- 528              	.L50:
- 529 0018 00040650 		.word	1342571520
- 530              		.cfi_endproc
- 531              	.LFE123:
- 533              		.section	.text.HASH_ClearFlag,"ax",%progbits
- 534              		.align	1
- 535              		.global	HASH_ClearFlag
- 536              		.thumb
- 537              		.thumb_func
- 539              	HASH_ClearFlag:
- 540              	.LFB124:
+ 797              		.loc 1 616 0
+ 798 0444 1846     		mov	r0, r3
+ 799 0446 07F11407 		add	r7, r7, #20
+ 800 044a BD46     		mov	sp, r7
+ 801 044c 80BC     		pop	{r7}
+ 802 044e 7047     		bx	lr
+ 803              		.cfi_endproc
+ 804              	.LFE123:
+ 806              		.align	2
+ 807              		.global	HASH_ClearFlag
+ 808              		.thumb
+ 809              		.thumb_func
+ 811              	HASH_ClearFlag:
+ 812              	.LFB124:
  617:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Clears the HASH flags.
  619:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @param  HASH_FLAG: specifies the flag to clear. 
@@ -1144,38 +1414,48 @@
  624:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_ClearFlag(uint16_t HASH_FLAG)
  626:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 541              		.loc 1 626 0
- 542              		.cfi_startproc
- 543              		@ args = 0, pretend = 0, frame = 0
- 544              		@ frame_needed = 0, uses_anonymous_args = 0
- 545              		@ link register save eliminated.
- 546              	.LVL19:
+ 813              		.loc 1 626 0
+ 814              		.cfi_startproc
+ 815              		@ args = 0, pretend = 0, frame = 8
+ 816              		@ frame_needed = 1, uses_anonymous_args = 0
+ 817              		@ link register save eliminated.
+ 818 0450 80B4     		push	{r7}
+ 819              	.LCFI38:
+ 820              		.cfi_def_cfa_offset 4
+ 821              		.cfi_offset 7, -4
+ 822 0452 83B0     		sub	sp, sp, #12
+ 823              	.LCFI39:
+ 824              		.cfi_def_cfa_offset 16
+ 825 0454 00AF     		add	r7, sp, #0
+ 826              	.LCFI40:
+ 827              		.cfi_def_cfa_register 7
+ 828 0456 0346     		mov	r3, r0
+ 829 0458 FB80     		strh	r3, [r7, #6]	@ movhi
  627:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  628:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_CLEAR_FLAG(HASH_FLAG));
  629:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   
  630:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Clear the selected HASH flags */
  631:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->SR = ~(uint32_t)HASH_FLAG;
- 547              		.loc 1 631 0
- 548 0000 014B     		ldr	r3, .L53
- 549 0002 C043     		mvns	r0, r0
- 550              	.LVL20:
- 551 0004 5862     		str	r0, [r3, #36]
+ 830              		.loc 1 631 0
+ 831 045a 4FF48063 		mov	r3, #1024
+ 832 045e C5F20603 		movt	r3, 20486
+ 833 0462 FA88     		ldrh	r2, [r7, #6]
+ 834 0464 6FEA0202 		mvn	r2, r2
+ 835 0468 5A62     		str	r2, [r3, #36]
  632:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 552              		.loc 1 632 0
- 553 0006 7047     		bx	lr
- 554              	.L54:
- 555              		.align	2
- 556              	.L53:
- 557 0008 00040650 		.word	1342571520
- 558              		.cfi_endproc
- 559              	.LFE124:
- 561              		.section	.text.HASH_GetITStatus,"ax",%progbits
- 562              		.align	1
- 563              		.global	HASH_GetITStatus
- 564              		.thumb
- 565              		.thumb_func
- 567              	HASH_GetITStatus:
- 568              	.LFB125:
+ 836              		.loc 1 632 0
+ 837 046a 07F10C07 		add	r7, r7, #12
+ 838 046e BD46     		mov	sp, r7
+ 839 0470 80BC     		pop	{r7}
+ 840 0472 7047     		bx	lr
+ 841              		.cfi_endproc
+ 842              	.LFE124:
+ 844              		.align	2
+ 845              		.global	HASH_GetITStatus
+ 846              		.thumb
+ 847              		.thumb_func
+ 849              	HASH_GetITStatus:
+ 850              	.LFB125:
  633:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  634:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Checks whether the specified HASH interrupt has occurred or not.
  635:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @param  HASH_IT: specifies the HASH interrupt source to check.
@@ -1186,14 +1466,31 @@
  640:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  641:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** ITStatus HASH_GetITStatus(uint8_t HASH_IT)
  642:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 569              		.loc 1 642 0
- 570              		.cfi_startproc
- 571              		@ args = 0, pretend = 0, frame = 0
- 572              		@ frame_needed = 0, uses_anonymous_args = 0
- 573              		@ link register save eliminated.
- 574              	.LVL21:
+ 851              		.loc 1 642 0
+ 852              		.cfi_startproc
+ 853              		@ args = 0, pretend = 0, frame = 16
+ 854              		@ frame_needed = 1, uses_anonymous_args = 0
+ 855              		@ link register save eliminated.
+ 856 0474 80B4     		push	{r7}
+ 857              	.LCFI41:
+ 858              		.cfi_def_cfa_offset 4
+ 859              		.cfi_offset 7, -4
+ 860 0476 85B0     		sub	sp, sp, #20
+ 861              	.LCFI42:
+ 862              		.cfi_def_cfa_offset 24
+ 863 0478 00AF     		add	r7, sp, #0
+ 864              	.LCFI43:
+ 865              		.cfi_def_cfa_register 7
+ 866 047a 0346     		mov	r3, r0
+ 867 047c FB71     		strb	r3, [r7, #7]
  643:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   ITStatus bitstatus = RESET;
+ 868              		.loc 1 643 0
+ 869 047e 4FF00003 		mov	r3, #0
+ 870 0482 FB73     		strb	r3, [r7, #15]
  644:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   uint32_t tmpreg = 0;
+ 871              		.loc 1 644 0
+ 872 0484 4FF00003 		mov	r3, #0
+ 873 0488 BB60     		str	r3, [r7, #8]
  645:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  646:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  647:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_GET_IT(HASH_IT));  
@@ -1201,51 +1498,61 @@
  649:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  650:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the status of the specified HASH interrupt */
  651:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   tmpreg =  HASH->SR;
- 575              		.loc 1 651 0
- 576 0000 044B     		ldr	r3, .L56
- 577 0002 5A6A     		ldr	r2, [r3, #36]
- 578              	.LVL22:
+ 874              		.loc 1 651 0
+ 875 048a 4FF48063 		mov	r3, #1024
+ 876 048e C5F20603 		movt	r3, 20486
+ 877 0492 5B6A     		ldr	r3, [r3, #36]
+ 878 0494 BB60     		str	r3, [r7, #8]
  652:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  653:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   if (((HASH->IMR & tmpreg) & HASH_IT) != RESET)
- 579              		.loc 1 653 0
- 580 0004 1B6A     		ldr	r3, [r3, #32]
- 581              	.LVL23:
- 582 0006 1340     		ands	r3, r3, r2
- 583              	.LVL24:
+ 879              		.loc 1 653 0
+ 880 0496 4FF48063 		mov	r3, #1024
+ 881 049a C5F20603 		movt	r3, 20486
+ 882 049e 1B6A     		ldr	r3, [r3, #32]
+ 883 04a0 1A46     		mov	r2, r3
+ 884 04a2 BB68     		ldr	r3, [r7, #8]
+ 885 04a4 1A40     		ands	r2, r2, r3
+ 886 04a6 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 887 04a8 1340     		ands	r3, r3, r2
+ 888 04aa 002B     		cmp	r3, #0
+ 889 04ac 03D0     		beq	.L30
  654:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  655:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* HASH_IT is set */
  656:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     bitstatus = SET;
- 584              		.loc 1 656 0
- 585 0008 0342     		tst	r3, r0
+ 890              		.loc 1 656 0
+ 891 04ae 4FF00103 		mov	r3, #1
+ 892 04b2 FB73     		strb	r3, [r7, #15]
+ 893 04b4 02E0     		b	.L31
+ 894              	.L30:
  657:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  658:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   else
  659:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   {
  660:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     /* HASH_IT is reset */
  661:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****     bitstatus = RESET;
+ 895              		.loc 1 661 0
+ 896 04b6 4FF00003 		mov	r3, #0
+ 897 04ba FB73     		strb	r3, [r7, #15]
+ 898              	.L31:
  662:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   }
  663:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Return the HASH_IT status */
  664:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   return bitstatus;
- 586              		.loc 1 664 0
- 587 000a 0CBF     		ite	eq
- 588 000c 0020     		moveq	r0, #0
- 589 000e 0120     		movne	r0, #1
- 590              	.LVL25:
+ 899              		.loc 1 664 0
+ 900 04bc FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  665:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 591              		.loc 1 665 0
- 592 0010 7047     		bx	lr
- 593              	.L57:
- 594 0012 00BF     		.align	2
- 595              	.L56:
- 596 0014 00040650 		.word	1342571520
- 597              		.cfi_endproc
- 598              	.LFE125:
- 600              		.section	.text.HASH_ClearITPendingBit,"ax",%progbits
- 601              		.align	1
- 602              		.global	HASH_ClearITPendingBit
- 603              		.thumb
- 604              		.thumb_func
- 606              	HASH_ClearITPendingBit:
- 607              	.LFB126:
+ 901              		.loc 1 665 0
+ 902 04be 1846     		mov	r0, r3
+ 903 04c0 07F11407 		add	r7, r7, #20
+ 904 04c4 BD46     		mov	sp, r7
+ 905 04c6 80BC     		pop	{r7}
+ 906 04c8 7047     		bx	lr
+ 907              		.cfi_endproc
+ 908              	.LFE125:
+ 910 04ca 00BF     		.align	2
+ 911              		.global	HASH_ClearITPendingBit
+ 912              		.thumb
+ 913              		.thumb_func
+ 915              	HASH_ClearITPendingBit:
+ 916              	.LFB126:
  666:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  667:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** /**
  668:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   * @brief  Clears the HASH interrupt pending bit(s).
@@ -1257,89 +1564,68 @@
  674:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   */
  675:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** void HASH_ClearITPendingBit(uint8_t HASH_IT)
  676:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** {
- 608              		.loc 1 676 0
- 609              		.cfi_startproc
- 610              		@ args = 0, pretend = 0, frame = 0
- 611              		@ frame_needed = 0, uses_anonymous_args = 0
- 612              		@ link register save eliminated.
- 613              	.LVL26:
+ 917              		.loc 1 676 0
+ 918              		.cfi_startproc
+ 919              		@ args = 0, pretend = 0, frame = 8
+ 920              		@ frame_needed = 1, uses_anonymous_args = 0
+ 921              		@ link register save eliminated.
+ 922 04cc 80B4     		push	{r7}
+ 923              	.LCFI44:
+ 924              		.cfi_def_cfa_offset 4
+ 925              		.cfi_offset 7, -4
+ 926 04ce 83B0     		sub	sp, sp, #12
+ 927              	.LCFI45:
+ 928              		.cfi_def_cfa_offset 16
+ 929 04d0 00AF     		add	r7, sp, #0
+ 930              	.LCFI46:
+ 931              		.cfi_def_cfa_register 7
+ 932 04d2 0346     		mov	r3, r0
+ 933 04d4 FB71     		strb	r3, [r7, #7]
  677:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Check the parameters */
  678:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   assert_param(IS_HASH_IT(HASH_IT));
  679:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** 
  680:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   /* Clear the selected HASH interrupt pending bit */
  681:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c ****   HASH->SR = (uint8_t)~HASH_IT;
- 614              		.loc 1 681 0
- 615 0000 C043     		mvns	r0, r0
- 616              	.LVL27:
- 617 0002 024B     		ldr	r3, .L59
- 618 0004 C0B2     		uxtb	r0, r0
- 619 0006 5862     		str	r0, [r3, #36]
+ 934              		.loc 1 681 0
+ 935 04d6 4FF48063 		mov	r3, #1024
+ 936 04da C5F20603 		movt	r3, 20486
+ 937 04de FA79     		ldrb	r2, [r7, #7]
+ 938 04e0 6FEA0202 		mvn	r2, r2
+ 939 04e4 D2B2     		uxtb	r2, r2
+ 940 04e6 5A62     		str	r2, [r3, #36]
  682:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c **** }
- 620              		.loc 1 682 0
- 621 0008 7047     		bx	lr
- 622              	.L60:
- 623 000a 00BF     		.align	2
- 624              	.L59:
- 625 000c 00040650 		.word	1342571520
- 626              		.cfi_endproc
- 627              	.LFE126:
- 629              		.text
- 630              	.Letext0:
- 631              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 632              		.file 3 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4x
- 633              		.file 4 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_
- 634              		.file 5 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cm4.h"
+ 941              		.loc 1 682 0
+ 942 04e8 07F10C07 		add	r7, r7, #12
+ 943 04ec BD46     		mov	sp, r7
+ 944 04ee 80BC     		pop	{r7}
+ 945 04f0 7047     		bx	lr
+ 946              		.cfi_endproc
+ 947              	.LFE126:
+ 949              	.Letext0:
+ 950              		.file 2 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 951              		.file 3 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm3
+ 952              		.file 4 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f
+ 953              		.file 5 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hash.c
-  C:\Temp\ccUYB1aY.s:19     .text.HASH_DeInit:00000000 $t
-  C:\Temp\ccUYB1aY.s:24     .text.HASH_DeInit:00000000 HASH_DeInit
-  C:\Temp\ccUYB1aY.s:51     .text.HASH_Init:00000000 $t
-  C:\Temp\ccUYB1aY.s:56     .text.HASH_Init:00000000 HASH_Init
-  C:\Temp\ccUYB1aY.s:107    .text.HASH_Init:0000003c $d
-  C:\Temp\ccUYB1aY.s:112    .text.HASH_StructInit:00000000 $t
-  C:\Temp\ccUYB1aY.s:117    .text.HASH_StructInit:00000000 HASH_StructInit
-  C:\Temp\ccUYB1aY.s:140    .text.HASH_Reset:00000000 $t
-  C:\Temp\ccUYB1aY.s:145    .text.HASH_Reset:00000000 HASH_Reset
-  C:\Temp\ccUYB1aY.s:162    .text.HASH_Reset:0000000c $d
-  C:\Temp\ccUYB1aY.s:167    .text.HASH_SetLastWordValidBitsNbr:00000000 $t
-  C:\Temp\ccUYB1aY.s:172    .text.HASH_SetLastWordValidBitsNbr:00000000 HASH_SetLastWordValidBitsNbr
-  C:\Temp\ccUYB1aY.s:195    .text.HASH_SetLastWordValidBitsNbr:00000014 $d
-  C:\Temp\ccUYB1aY.s:200    .text.HASH_DataIn:00000000 $t
-  C:\Temp\ccUYB1aY.s:205    .text.HASH_DataIn:00000000 HASH_DataIn
-  C:\Temp\ccUYB1aY.s:221    .text.HASH_DataIn:00000008 $d
-  C:\Temp\ccUYB1aY.s:226    .text.HASH_GetInFIFOWordsNbr:00000000 $t
-  C:\Temp\ccUYB1aY.s:231    .text.HASH_GetInFIFOWordsNbr:00000000 HASH_GetInFIFOWordsNbr
-  C:\Temp\ccUYB1aY.s:247    .text.HASH_GetInFIFOWordsNbr:0000000c $d
-  C:\Temp\ccUYB1aY.s:252    .text.HASH_GetDigest:00000000 $t
-  C:\Temp\ccUYB1aY.s:257    .text.HASH_GetDigest:00000000 HASH_GetDigest
-  C:\Temp\ccUYB1aY.s:286    .text.HASH_GetDigest:00000018 $d
-  C:\Temp\ccUYB1aY.s:291    .text.HASH_StartDigest:00000000 $t
-  C:\Temp\ccUYB1aY.s:296    .text.HASH_StartDigest:00000000 HASH_StartDigest
-  C:\Temp\ccUYB1aY.s:313    .text.HASH_StartDigest:0000000c $d
-  C:\Temp\ccUYB1aY.s:318    .text.HASH_SaveContext:00000000 $t
-  C:\Temp\ccUYB1aY.s:323    .text.HASH_SaveContext:00000000 HASH_SaveContext
-  C:\Temp\ccUYB1aY.s:358    .text.HASH_SaveContext:00000024 $d
-  C:\Temp\ccUYB1aY.s:363    .text.HASH_RestoreContext:00000000 $t
-  C:\Temp\ccUYB1aY.s:368    .text.HASH_RestoreContext:00000000 HASH_RestoreContext
-  C:\Temp\ccUYB1aY.s:415    .text.HASH_RestoreContext:00000030 $d
-  C:\Temp\ccUYB1aY.s:420    .text.HASH_DMACmd:00000000 $t
-  C:\Temp\ccUYB1aY.s:425    .text.HASH_DMACmd:00000000 HASH_DMACmd
-  C:\Temp\ccUYB1aY.s:450    .text.HASH_DMACmd:00000014 $d
-  C:\Temp\ccUYB1aY.s:455    .text.HASH_ITConfig:00000000 $t
-  C:\Temp\ccUYB1aY.s:460    .text.HASH_ITConfig:00000000 HASH_ITConfig
-  C:\Temp\ccUYB1aY.s:489    .text.HASH_ITConfig:00000018 $d
-  C:\Temp\ccUYB1aY.s:494    .text.HASH_GetFlagStatus:00000000 $t
-  C:\Temp\ccUYB1aY.s:499    .text.HASH_GetFlagStatus:00000000 HASH_GetFlagStatus
-  C:\Temp\ccUYB1aY.s:529    .text.HASH_GetFlagStatus:00000018 $d
-  C:\Temp\ccUYB1aY.s:534    .text.HASH_ClearFlag:00000000 $t
-  C:\Temp\ccUYB1aY.s:539    .text.HASH_ClearFlag:00000000 HASH_ClearFlag
-  C:\Temp\ccUYB1aY.s:557    .text.HASH_ClearFlag:00000008 $d
-  C:\Temp\ccUYB1aY.s:562    .text.HASH_GetITStatus:00000000 $t
-  C:\Temp\ccUYB1aY.s:567    .text.HASH_GetITStatus:00000000 HASH_GetITStatus
-  C:\Temp\ccUYB1aY.s:596    .text.HASH_GetITStatus:00000014 $d
-  C:\Temp\ccUYB1aY.s:601    .text.HASH_ClearITPendingBit:00000000 $t
-  C:\Temp\ccUYB1aY.s:606    .text.HASH_ClearITPendingBit:00000000 HASH_ClearITPendingBit
-  C:\Temp\ccUYB1aY.s:625    .text.HASH_ClearITPendingBit:0000000c $d
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:18     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:23     .text:00000000 HASH_DeInit
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:56     .text:00000020 HASH_Init
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:150    .text:000000c8 HASH_StructInit
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:197    .text:000000fc HASH_Reset
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:231    .text:00000120 HASH_SetLastWordValidBitsNbr
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:281    .text:00000168 HASH_DataIn
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:317    .text:00000188 HASH_GetInFIFOWordsNbr
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:351    .text:000001a8 HASH_GetDigest
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:417    .text:0000020c HASH_StartDigest
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:451    .text:00000230 HASH_SaveContext
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:533    .text:000002b4 HASH_RestoreContext
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:619    .text:00000348 HASH_DMACmd
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:674    .text:00000394 HASH_ITConfig
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:737    .text:000003f0 HASH_GetFlagStatus
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:811    .text:00000450 HASH_ClearFlag
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:849    .text:00000474 HASH_GetITStatus
+C:\Users\Alex\AppData\Local\Temp\ccajyWE8.s:915    .text:000004cc HASH_ClearITPendingBit
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

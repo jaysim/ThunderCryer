@@ -11,7 +11,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "CFreeRTOS.h"
 #include "CTask.h"
+#include "ustime.h"
 #include "CLedHeartBeatSTM32F4Disc.h"
+#include "CT6963GPIOInterface.h"
 #include "stm32f4xx_conf.h"
 #include "stm32f4xx.h"
 
@@ -21,9 +23,12 @@
 /* Private variables ---------------------------------------------------------*/
 CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
 /* Private function prototypes -----------------------------------------------*/
-void vApplicationTickHook( void );
-void vApplicationIdleHook( void );
-void vApplicationMallocFailedHook( void );
+extern "C" {
+	void vApplicationTickHook( void );
+	void vApplicationIdleHook( void );
+	void vApplicationMallocFailedHook( void );
+	void vApplicationStackOverflowHook( xTaskHandle *pxTask, signed char *pcTaskName );
+} // extern "C"
 /* Private functions ---------------------------------------------------------*/
 
 
@@ -50,44 +55,51 @@ int main(void){
 
 }
 
-// This FreeRTOS callback function gets called once per tick (default = 1000Hz).
-// ----------------------------------------------------------------------------
-void vApplicationTickHook( void ) {
-	// for display delays needs 65ms call rate to prevent overflow
-	get_us_time();
-}
+extern "C" {
 
-// This FreeRTOS call-back function gets when no other task is ready to execute.
-// On a completely unloaded system this is getting called at over 2.5MHz!
-// ----------------------------------------------------------------------------
-void vApplicationIdleHook( void ) {
+	// This FreeRTOS callback function gets called once per tick (default = 1000Hz).
+	// ----------------------------------------------------------------------------
+	void vApplicationTickHook( void ) {
 
-}
+	}
 
-// A required FreeRTOS function.
-// ----------------------------------------------------------------------------
-void vApplicationMallocFailedHook( void ) {
-    configASSERT( 0 );  // Latch on any failure / error.
-}
+	// This FreeRTOS call-back function gets when no other task is ready to execute.
+	// On a completely unloaded system this is getting called at over 2.5MHz!
+	// ----------------------------------------------------------------------------
+	void vApplicationIdleHook( void ) {
 
+	}
 
-/*
-  * Callback used by stm32f4_discovery_audio_codec.c.
-  * Refer to stm32f4_discovery_audio_codec.h for more info.
-  */
-void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
-   /* TODO, implement your code here */
-   return;
-}
+	// A required FreeRTOS function.
+	// ----------------------------------------------------------------------------
+	void vApplicationMallocFailedHook( void ) {
+		configASSERT( 0 );  // Latch on any failure / error.
+	}
 
-/*
-  * Callback used by stm324xg_eval_audio_codec.c.
-  * Refer to stm324xg_eval_audio_codec.h for more info.
-  */
-uint16_t EVAL_AUDIO_GetSampleCallBack(void){
-   /* TODO, implement your code here */
-   return -1;
-}
+	// A required FreeRTOS function. gets called on stack overflow
+	// ----------------------------------------------------------------------------
+	void vApplicationStackOverflowHook( xTaskHandle *pxTask, signed char *pcTaskName ){
+		/* TODO, implement your code here */
+		while(1);
+	}
 
+	/*
+	  * Callback used by stm32f4_discovery_audio_codec.c.
+	  * Refer to stm32f4_discovery_audio_codec.h for more info.
+	  */
+	void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
+	   /* TODO, implement your code here */
+	   return;
+	}
+
+	/*
+	  * Callback used by stm324xg_eval_audio_codec.c.
+	  * Refer to stm324xg_eval_audio_codec.h for more info.
+	  */
+	uint16_t EVAL_AUDIO_GetSampleCallBack(void){
+	   /* TODO, implement your code here */
+	   return -1;
+	}
+} // extern "C"
 
 

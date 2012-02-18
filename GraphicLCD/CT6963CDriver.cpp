@@ -259,7 +259,8 @@ void CT6963CDriver::SetPixel(unsigned char x, unsigned char y)
   * http://en.radzio.dxp.pl/t6963/
   */
 void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsigned int y2){
-	int CurrentX, CurrentY, Xinc, Yinc,
+	unsigned int CurrentX, CurrentY;
+	int Xinc, Yinc,
 	Dx, Dy, TwoDx, TwoDy,
 	TwoDxAccumulatedError, TwoDyAccumulatedError;
 

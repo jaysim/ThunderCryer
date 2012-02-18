@@ -73,7 +73,7 @@
 
 #define configUSE_PREEMPTION		1
 #define configUSE_IDLE_HOOK			0
-#define configUSE_TICK_HOOK			1
+#define configUSE_TICK_HOOK			0
 #define configCPU_CLOCK_HZ			( SystemCoreClock )
 #define configTICK_RATE_HZ			( ( portTickType ) 100 )
 #define configMAX_PRIORITIES		( ( unsigned portBASE_TYPE ) 5 )
@@ -85,7 +85,7 @@
 #define configUSE_MUTEXES               1
 
 #define configCHECK_FOR_STACK_OVERFLOW  1
-#define configGENERATE_RUN_TIME_STATS               0
+#define configGENERATE_RUN_TIME_STATS               1
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS      init_us_timer
 #define portGET_RUN_TIME_COUNTER_VALUE              get_us_time
 
@@ -125,12 +125,7 @@ NVIC value of 255. */
 #define pvPortMalloc            malloc
 #define vPortFree               free
 
-/**
- * Define the traceTASK_SWITCHED_IN() macro to output the voltage
- * associated with the task being selected to run on DAC1.
- */
-#define traceTASK_SWITCHED_IN()  \
-    DAC->DHR12L1 = (unsigned)pxCurrentTCB->pxTaskTag
+
 
 #endif /* FREERTOS_CONFIG_H */
 

@@ -8,21 +8,20 @@
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 30, 6
   12              		.eabi_attribute 18, 4
   13              		.thumb
   14              		.file	"ustime.c"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.get_us_time,"ax",%progbits
-  19              		.align	1
-  20              		.global	get_us_time
-  21              		.thumb
-  22              		.thumb_func
-  24              	get_us_time:
-  25              	.LFB110:
-  26              		.file 1 "../ustime.c"
+  18              		.align	2
+  19              		.global	get_us_time
+  20              		.thumb
+  21              		.thumb_func
+  23              	get_us_time:
+  24              	.LFB110:
+  25              		.file 1 "../ustime.c"
    1:../ustime.c   **** #include "ustime.h"
    2:../ustime.c   **** #include <FreeRTOS.h>
    3:../ustime.c   **** #include "stm32f4xx.h"
@@ -37,79 +36,99 @@
   12:../ustime.c   ****  */
   13:../ustime.c   **** uint64_t get_us_time()
   14:../ustime.c   **** {
-  27              		.loc 1 14 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31 0000 10B5     		push	{r4, lr}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 8
-  34              		.cfi_offset 14, -4
-  35              		.cfi_offset 4, -8
+  26              		.loc 1 14 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 8
+  29              		@ frame_needed = 1, uses_anonymous_args = 0
+  30 0000 80B5     		push	{r7, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 14, -4
+  34              		.cfi_offset 7, -8
+  35 0002 82B0     		sub	sp, sp, #8
+  36              	.LCFI1:
+  37              		.cfi_def_cfa_offset 16
+  38 0004 00AF     		add	r7, sp, #0
+  39              	.LCFI2:
+  40              		.cfi_def_cfa_register 7
   15:../ustime.c   ****     static uint16_t t0;
   16:../ustime.c   ****     static uint64_t tickcount;
   17:../ustime.c   **** 
   18:../ustime.c   ****     vPortEnterCritical();
-  36              		.loc 1 18 0
-  37 0002 FFF7FEFF 		bl	vPortEnterCritical
+  41              		.loc 1 18 0
+  42 0006 FFF7FEFF 		bl	vPortEnterCritical
   19:../ustime.c   **** 
   20:../ustime.c   ****     int t = TIM7->CNT;
+  43              		.loc 1 20 0
+  44 000a 4FF4A053 		mov	r3, #5120
+  45 000e C4F20003 		movt	r3, 16384
+  46 0012 5B6A     		ldr	r3, [r3, #36]
+  47 0014 7B60     		str	r3, [r7, #4]
   21:../ustime.c   ****     if (t < t0)
-  38              		.loc 1 21 0
-  39 0006 0B4C     		ldr	r4, .L3
-  20:../ustime.c   ****     int t = TIM7->CNT;
-  40              		.loc 1 20 0
-  41 0008 0B4B     		ldr	r3, .L3+4
-  42 000a 596A     		ldr	r1, [r3, #36]
-  43              	.LVL0:
-  44              		.loc 1 21 0
-  45 000c 2388     		ldrh	r3, [r4, #0]
-  46 000e 9942     		cmp	r1, r3
+  48              		.loc 1 21 0
+  49 0016 40F20003 		movw	r3, #:lower16:t0.4537
+  50 001a C0F20003 		movt	r3, #:upper16:t0.4537
+  51 001e 1B88     		ldrh	r3, [r3, #0]
+  52 0020 1A46     		mov	r2, r3
+  53 0022 7B68     		ldr	r3, [r7, #4]
+  54 0024 9A42     		cmp	r2, r3
+  55 0026 03DD     		ble	.L2
   22:../ustime.c   ****         t += 0x10000;
-  47              		.loc 1 22 0
-  48 0010 B8BF     		it	lt
-  49 0012 01F58031 		addlt	r1, r1, #65536
-  50              	.LVL1:
+  56              		.loc 1 22 0
+  57 0028 7B68     		ldr	r3, [r7, #4]
+  58 002a 03F58033 		add	r3, r3, #65536
+  59 002e 7B60     		str	r3, [r7, #4]
+  60              	.L2:
   23:../ustime.c   **** 
   24:../ustime.c   ****     tickcount += t - t0;
-  51              		.loc 1 24 0
-  52 0016 C81A     		subs	r0, r1, r3
-  53 0018 D4E90223 		ldrd	r2, [r4, #8]
-  54 001c 1218     		adds	r2, r2, r0
-  55 001e 43EBE073 		adc	r3, r3, r0, asr #31
+  61              		.loc 1 24 0
+  62 0030 40F20003 		movw	r3, #:lower16:t0.4537
+  63 0034 C0F20003 		movt	r3, #:upper16:t0.4537
+  64 0038 1B88     		ldrh	r3, [r3, #0]
+  65 003a 7A68     		ldr	r2, [r7, #4]
+  66 003c D11A     		subs	r1, r2, r3
+  67 003e 0A46     		mov	r2, r1
+  68 0040 4FEAE273 		asr	r3, r2, #31
+  69 0044 40F20001 		movw	r1, #:lower16:tickcount.4538
+  70 0048 C0F20001 		movt	r1, #:upper16:tickcount.4538
+  71 004c D1E90001 		ldrd	r0, [r1]
+  72 0050 8018     		adds	r0, r0, r2
+  73 0052 41EB0301 		adc	r1, r1, r3
+  74 0056 40F20003 		movw	r3, #:lower16:tickcount.4538
+  75 005a C0F20003 		movt	r3, #:upper16:tickcount.4538
+  76 005e C3E90001 		strd	r0, [r3]
   25:../ustime.c   ****     t0 = t;
-  56              		.loc 1 25 0
-  57 0022 2180     		strh	r1, [r4, #0]	@ movhi
-  24:../ustime.c   ****     tickcount += t - t0;
-  58              		.loc 1 24 0
-  59 0024 C4E90223 		strd	r2, [r4, #8]
+  77              		.loc 1 25 0
+  78 0062 7B68     		ldr	r3, [r7, #4]
+  79 0064 9AB2     		uxth	r2, r3
+  80 0066 40F20003 		movw	r3, #:lower16:t0.4537
+  81 006a C0F20003 		movt	r3, #:upper16:t0.4537
+  82 006e 1A80     		strh	r2, [r3, #0]	@ movhi
   26:../ustime.c   **** 
   27:../ustime.c   ****     vPortExitCritical();
-  60              		.loc 1 27 0
-  61 0028 FFF7FEFF 		bl	vPortExitCritical
-  62              	.LVL2:
+  83              		.loc 1 27 0
+  84 0070 FFF7FEFF 		bl	vPortExitCritical
   28:../ustime.c   **** 
   29:../ustime.c   ****     return tickcount;
-  63              		.loc 1 29 0
-  64 002c A068     		ldr	r0, [r4, #8]
-  65 002e E168     		ldr	r1, [r4, #12]
+  85              		.loc 1 29 0
+  86 0074 40F20003 		movw	r3, #:lower16:tickcount.4538
+  87 0078 C0F20003 		movt	r3, #:upper16:tickcount.4538
+  88 007c D3E90023 		ldrd	r2, [r3]
   30:../ustime.c   **** }
-  66              		.loc 1 30 0
-  67 0030 10BD     		pop	{r4, pc}
-  68              	.L4:
-  69 0032 00BF     		.align	2
-  70              	.L3:
-  71 0034 00000000 		.word	.LANCHOR0
-  72 0038 00140040 		.word	1073746944
-  73              		.cfi_endproc
-  74              	.LFE110:
-  76              		.section	.text.delay_us,"ax",%progbits
-  77              		.align	1
-  78              		.global	delay_us
-  79              		.thumb
-  80              		.thumb_func
-  82              	delay_us:
-  83              	.LFB111:
+  89              		.loc 1 30 0
+  90 0080 1046     		mov	r0, r2
+  91 0082 1946     		mov	r1, r3
+  92 0084 07F10807 		add	r7, r7, #8
+  93 0088 BD46     		mov	sp, r7
+  94 008a 80BD     		pop	{r7, pc}
+  95              		.cfi_endproc
+  96              	.LFE110:
+  98              		.align	2
+  99              		.global	delay_us
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	delay_us:
+ 104              	.LFB111:
   31:../ustime.c   **** 
   32:../ustime.c   **** 
   33:../ustime.c   **** /**
@@ -121,81 +140,99 @@
   39:../ustime.c   ****  */
   40:../ustime.c   **** void delay_us(unsigned long us)
   41:../ustime.c   **** {
-  84              		.loc 1 41 0
-  85              		.cfi_startproc
-  86              		@ args = 0, pretend = 0, frame = 0
-  87              		@ frame_needed = 0, uses_anonymous_args = 0
-  88              	.LVL3:
-  89 0000 10B5     		push	{r4, lr}
-  90              	.LCFI1:
-  91              		.cfi_def_cfa_offset 8
-  92              		.cfi_offset 14, -4
-  93              		.cfi_offset 4, -8
+ 105              		.loc 1 41 0
+ 106              		.cfi_startproc
+ 107              		@ args = 0, pretend = 0, frame = 16
+ 108              		@ frame_needed = 1, uses_anonymous_args = 0
+ 109              		@ link register save eliminated.
+ 110 008c 80B4     		push	{r7}
+ 111              	.LCFI3:
+ 112              		.cfi_def_cfa_offset 4
+ 113              		.cfi_offset 7, -4
+ 114 008e 85B0     		sub	sp, sp, #20
+ 115              	.LCFI4:
+ 116              		.cfi_def_cfa_offset 24
+ 117 0090 00AF     		add	r7, sp, #0
+ 118              	.LCFI5:
+ 119              		.cfi_def_cfa_register 7
+ 120 0092 7860     		str	r0, [r7, #4]
   42:../ustime.c   ****     uint16_t  t0 = TIM7->CNT;
-  94              		.loc 1 42 0
-  95 0002 084B     		ldr	r3, .L9
-  96 0004 5A6A     		ldr	r2, [r3, #36]
-  97              	.LBB2:
+ 121              		.loc 1 42 0
+ 122 0094 4FF4A053 		mov	r3, #5120
+ 123 0098 C4F20003 		movt	r3, 16384
+ 124 009c 5B6A     		ldr	r3, [r3, #36]
+ 125 009e FB81     		strh	r3, [r7, #14]	@ movhi
+ 126              	.L6:
+ 127              	.LBB2:
   43:../ustime.c   ****     for (;;) {
   44:../ustime.c   ****         int  t = TIM7->CNT;
-  98              		.loc 1 44 0
-  99 0006 1946     		mov	r1, r3
- 100              	.LBE2:
-  42:../ustime.c   ****     uint16_t  t0 = TIM7->CNT;
- 101              		.loc 1 42 0
- 102 0008 92B2     		uxth	r2, r2
- 103              	.LVL4:
- 104              	.L8:
- 105              	.LBB3:
- 106              		.loc 1 44 0
- 107 000a 4B6A     		ldr	r3, [r1, #36]
- 108              	.LVL5:
+ 128              		.loc 1 44 0
+ 129 00a0 4FF4A053 		mov	r3, #5120
+ 130 00a4 C4F20003 		movt	r3, 16384
+ 131 00a8 5B6A     		ldr	r3, [r3, #36]
+ 132 00aa BB60     		str	r3, [r7, #8]
   45:../ustime.c   ****         if (t < t0)
- 109              		.loc 1 45 0
- 110 000c 9342     		cmp	r3, r2
+ 133              		.loc 1 45 0
+ 134 00ac FA89     		ldrh	r2, [r7, #14]
+ 135 00ae BB68     		ldr	r3, [r7, #8]
+ 136 00b0 9A42     		cmp	r2, r3
+ 137 00b2 03DD     		ble	.L4
   46:../ustime.c   ****             t += 0x10000;
- 111              		.loc 1 46 0
- 112 000e B8BF     		it	lt
- 113 0010 03F58033 		addlt	r3, r3, #65536
- 114              	.LVL6:
+ 138              		.loc 1 46 0
+ 139 00b4 BB68     		ldr	r3, [r7, #8]
+ 140 00b6 03F58033 		add	r3, r3, #65536
+ 141 00ba BB60     		str	r3, [r7, #8]
+ 142              	.L4:
   47:../ustime.c   **** 
   48:../ustime.c   ****         if (us < t - t0)
- 115              		.loc 1 48 0
- 116 0014 9C1A     		subs	r4, r3, r2
- 117 0016 A042     		cmp	r0, r4
- 118 0018 03D3     		bcc	.L5
+ 143              		.loc 1 48 0
+ 144 00bc FB89     		ldrh	r3, [r7, #14]
+ 145 00be BA68     		ldr	r2, [r7, #8]
+ 146 00c0 D31A     		subs	r3, r2, r3
+ 147 00c2 1A46     		mov	r2, r3
+ 148 00c4 7B68     		ldr	r3, [r7, #4]
+ 149 00c6 9A42     		cmp	r2, r3
+ 150 00c8 08D8     		bhi	.L8
+ 151              	.L5:
   49:../ustime.c   ****             return;
   50:../ustime.c   **** 
   51:../ustime.c   ****         us -= t - t0;
- 119              		.loc 1 51 0
- 120 001a D21A     		subs	r2, r2, r3
- 121              	.LVL7:
- 122 001c 8018     		adds	r0, r0, r2
- 123              	.LVL8:
+ 152              		.loc 1 51 0
+ 153 00ca FA89     		ldrh	r2, [r7, #14]
+ 154 00cc BB68     		ldr	r3, [r7, #8]
+ 155 00ce D31A     		subs	r3, r2, r3
+ 156 00d0 7A68     		ldr	r2, [r7, #4]
+ 157 00d2 D318     		adds	r3, r2, r3
+ 158 00d4 7B60     		str	r3, [r7, #4]
   52:../ustime.c   ****         t0  = t;
- 124              		.loc 1 52 0
- 125 001e 9AB2     		uxth	r2, r3
- 126              	.LVL9:
- 127              	.LBE3:
+ 159              		.loc 1 52 0
+ 160 00d6 BB68     		ldr	r3, [r7, #8]
+ 161 00d8 FB81     		strh	r3, [r7, #14]	@ movhi
+ 162              	.LBE2:
   53:../ustime.c   ****     }
- 128              		.loc 1 53 0
- 129 0020 F3E7     		b	.L8
- 130              	.L5:
- 131 0022 10BD     		pop	{r4, pc}
- 132              	.L10:
- 133              		.align	2
- 134              	.L9:
- 135 0024 00140040 		.word	1073746944
- 136              		.cfi_endproc
- 137              	.LFE111:
- 139              		.section	.text.delay_ms,"ax",%progbits
- 140              		.align	1
- 141              		.global	delay_ms
- 142              		.thumb
- 143              		.thumb_func
- 145              	delay_ms:
- 146              	.LFB112:
+ 163              		.loc 1 53 0
+ 164 00da E1E7     		b	.L6
+ 165              	.L8:
+ 166              	.LBB3:
+  49:../ustime.c   ****             return;
+ 167              		.loc 1 49 0
+ 168 00dc 00BF     		nop
+ 169              	.L7:
+ 170              	.LBE3:
   54:../ustime.c   **** }
+ 171              		.loc 1 54 0
+ 172 00de 07F11407 		add	r7, r7, #20
+ 173 00e2 BD46     		mov	sp, r7
+ 174 00e4 80BC     		pop	{r7}
+ 175 00e6 7047     		bx	lr
+ 176              		.cfi_endproc
+ 177              	.LFE111:
+ 179              		.align	2
+ 180              		.global	delay_ms
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	delay_ms:
+ 185              	.LFB112:
   55:../ustime.c   **** 
   56:../ustime.c   **** 
   57:../ustime.c   **** /**
@@ -205,31 +242,42 @@
   61:../ustime.c   ****  */
   62:../ustime.c   **** void delay_ms(unsigned long ms)
   63:../ustime.c   **** {
- 147              		.loc 1 63 0
- 148              		.cfi_startproc
- 149              		@ args = 0, pretend = 0, frame = 0
- 150              		@ frame_needed = 0, uses_anonymous_args = 0
- 151              		@ link register save eliminated.
- 152              	.LVL10:
+ 186              		.loc 1 63 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 8
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 00e8 80B5     		push	{r7, lr}
+ 191              	.LCFI6:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 14, -4
+ 194              		.cfi_offset 7, -8
+ 195 00ea 82B0     		sub	sp, sp, #8
+ 196              	.LCFI7:
+ 197              		.cfi_def_cfa_offset 16
+ 198 00ec 00AF     		add	r7, sp, #0
+ 199              	.LCFI8:
+ 200              		.cfi_def_cfa_register 7
+ 201 00ee 7860     		str	r0, [r7, #4]
   64:../ustime.c   ****     delay_us(ms * 1000);
- 153              		.loc 1 64 0
- 154 0000 4FF47A73 		mov	r3, #1000
- 155 0004 5843     		muls	r0, r3, r0
- 156              	.LVL11:
+ 202              		.loc 1 64 0
+ 203 00f0 7B68     		ldr	r3, [r7, #4]
+ 204 00f2 4FF47A72 		mov	r2, #1000
+ 205 00f6 02FB03F3 		mul	r3, r2, r3
+ 206 00fa 1846     		mov	r0, r3
+ 207 00fc FFF7FEFF 		bl	delay_us
   65:../ustime.c   **** }
- 157              		.loc 1 65 0
-  64:../ustime.c   ****     delay_us(ms * 1000);
- 158              		.loc 1 64 0
- 159 0006 FFF7FEBF 		b	delay_us
- 160              		.cfi_endproc
- 161              	.LFE112:
- 163              		.section	.text.init_us_timer,"ax",%progbits
- 164              		.align	1
- 165              		.global	init_us_timer
- 166              		.thumb
- 167              		.thumb_func
- 169              	init_us_timer:
- 170              	.LFB113:
+ 208              		.loc 1 65 0
+ 209 0100 07F10807 		add	r7, r7, #8
+ 210 0104 BD46     		mov	sp, r7
+ 211 0106 80BD     		pop	{r7, pc}
+ 212              		.cfi_endproc
+ 213              	.LFE112:
+ 215              		.align	2
+ 216              		.global	init_us_timer
+ 217              		.thumb
+ 218              		.thumb_func
+ 220              	init_us_timer:
+ 221              	.LFB113:
   66:../ustime.c   **** 
   67:../ustime.c   **** 
   68:../ustime.c   **** /**
@@ -238,92 +286,94 @@
   71:../ustime.c   ****  */
   72:../ustime.c   **** void init_us_timer()
   73:../ustime.c   **** {
- 171              		.loc 1 73 0
- 172              		.cfi_startproc
- 173              		@ args = 0, pretend = 0, frame = 16
- 174              		@ frame_needed = 0, uses_anonymous_args = 0
- 175 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
- 176              	.LCFI2:
- 177              		.cfi_def_cfa_offset 24
- 178              		.cfi_offset 14, -4
- 179              		.cfi_offset 4, -8
- 180              		.cfi_offset 3, -12
- 181              		.cfi_offset 2, -16
- 182              		.cfi_offset 1, -20
- 183              		.cfi_offset 0, -24
+ 222              		.loc 1 73 0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 16
+ 225              		@ frame_needed = 1, uses_anonymous_args = 0
+ 226 0108 80B5     		push	{r7, lr}
+ 227              	.LCFI9:
+ 228              		.cfi_def_cfa_offset 8
+ 229              		.cfi_offset 14, -4
+ 230              		.cfi_offset 7, -8
+ 231 010a 84B0     		sub	sp, sp, #16
+ 232              	.LCFI10:
+ 233              		.cfi_def_cfa_offset 24
+ 234 010c 00AF     		add	r7, sp, #0
+ 235              	.LCFI11:
+ 236              		.cfi_def_cfa_register 7
   74:../ustime.c   ****     RCC_ClocksTypeDef RCC_Clocks;
   75:../ustime.c   ****     RCC_GetClocksFreq(&RCC_Clocks);
- 184              		.loc 1 75 0
- 185 0002 6846     		mov	r0, sp
- 186 0004 FFF7FEFF 		bl	RCC_GetClocksFreq
+ 237              		.loc 1 75 0
+ 238 010e 3B46     		mov	r3, r7
+ 239 0110 1846     		mov	r0, r3
+ 240 0112 FFF7FEFF 		bl	RCC_GetClocksFreq
   76:../ustime.c   **** 
   77:../ustime.c   ****     RCC->APB1ENR |= RCC_APB1Periph_TIM7;
- 187              		.loc 1 77 0
- 188 0008 094B     		ldr	r3, .L13
- 189 000a 1A6C     		ldr	r2, [r3, #64]
- 190 000c 42F02002 		orr	r2, r2, #32
- 191 0010 1A64     		str	r2, [r3, #64]
+ 241              		.loc 1 77 0
+ 242 0116 4FF46053 		mov	r3, #14336
+ 243 011a C4F20203 		movt	r3, 16386
+ 244 011e 4FF46052 		mov	r2, #14336
+ 245 0122 C4F20202 		movt	r2, 16386
+ 246 0126 126C     		ldr	r2, [r2, #64]
+ 247 0128 42F02002 		orr	r2, r2, #32
+ 248 012c 1A64     		str	r2, [r3, #64]
   78:../ustime.c   ****     TIM7->PSC = (RCC_Clocks.PCLK2_Frequency / 1000000) - 1;
- 192              		.loc 1 78 0
- 193 0012 039A     		ldr	r2, [sp, #12]
- 194 0014 074B     		ldr	r3, .L13+4
- 195 0016 B2FBF3F2 		udiv	r2, r2, r3
- 196 001a 013A     		subs	r2, r2, #1
- 197 001c 064B     		ldr	r3, .L13+8
- 198 001e 92B2     		uxth	r2, r2
- 199 0020 1A85     		strh	r2, [r3, #40]	@ movhi
+ 249              		.loc 1 78 0
+ 250 012e 4FF4A053 		mov	r3, #5120
+ 251 0132 C4F20003 		movt	r3, 16384
+ 252 0136 F968     		ldr	r1, [r7, #12]
+ 253 0138 4DF68362 		movw	r2, #56963
+ 254 013c C4F21B32 		movt	r2, 17179
+ 255 0140 A2FB0102 		umull	r0, r2, r2, r1
+ 256 0144 4FEA9242 		lsr	r2, r2, #18
+ 257 0148 92B2     		uxth	r2, r2
+ 258 014a 02F1FF32 		add	r2, r2, #-1
+ 259 014e 92B2     		uxth	r2, r2
+ 260 0150 1A85     		strh	r2, [r3, #40]	@ movhi
   79:../ustime.c   ****     TIM7->ARR = 0xFFFF;
- 200              		.loc 1 79 0
- 201 0022 4FF6FF72 		movw	r2, #65535
- 202 0026 DA62     		str	r2, [r3, #44]
+ 261              		.loc 1 79 0
+ 262 0152 4FF4A053 		mov	r3, #5120
+ 263 0156 C4F20003 		movt	r3, 16384
+ 264 015a 4FF6FF72 		movw	r2, #65535
+ 265 015e DA62     		str	r2, [r3, #44]
   80:../ustime.c   ****     TIM7->CR1 = TIM_CR1_CEN;
- 203              		.loc 1 80 0
- 204 0028 0122     		movs	r2, #1
- 205 002a 1A80     		strh	r2, [r3, #0]	@ movhi
+ 266              		.loc 1 80 0
+ 267 0160 4FF4A053 		mov	r3, #5120
+ 268 0164 C4F20003 		movt	r3, 16384
+ 269 0168 4FF00102 		mov	r2, #1
+ 270 016c 1A80     		strh	r2, [r3, #0]	@ movhi
   81:../ustime.c   **** }
- 206              		.loc 1 81 0
- 207 002c 05B0     		add	sp, sp, #20
- 208 002e 00BD     		pop	{pc}
- 209              	.L14:
- 210              		.align	2
- 211              	.L13:
- 212 0030 00380240 		.word	1073887232
- 213 0034 40420F00 		.word	1000000
- 214 0038 00140040 		.word	1073746944
- 215              		.cfi_endproc
- 216              	.LFE113:
- 218              		.bss
- 219              		.align	3
- 220              		.set	.LANCHOR0,. + 0
- 223              	t0.4537:
- 224 0000 0000     		.space	2
- 225 0002 00000000 		.space	6
- 225      0000
- 228              	tickcount.4538:
- 229 0008 00000000 		.space	8
- 229      00000000 
- 230              		.text
- 231              	.Letext0:
- 232              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 233              		.file 3 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4x
- 234              		.file 4 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_
- 235              		.file 5 "D:\\Elektronik\\WorspaceEclipse\\ThunderCryer\\CMSIS\\Include/core_cm4.h"
+ 271              		.loc 1 81 0
+ 272 016e 07F11007 		add	r7, r7, #16
+ 273 0172 BD46     		mov	sp, r7
+ 274 0174 80BD     		pop	{r7, pc}
+ 275              		.cfi_endproc
+ 276              	.LFE113:
+ 278              		.bss
+ 279              		.align	1
+ 280              	t0.4537:
+ 281 0000 0000     		.space	2
+ 282 0002 00000000 		.align	3
+ 282      0000
+ 283              	tickcount.4538:
+ 284 0008 00000000 		.space	8
+ 284      00000000 
+ 285              		.text
+ 286              	.Letext0:
+ 287              		.file 2 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 288              		.file 3 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm3
+ 289              		.file 4 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f
+ 290              		.file 5 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 ustime.c
-  C:\Temp\ccLLs6Z4.s:19     .text.get_us_time:00000000 $t
-  C:\Temp\ccLLs6Z4.s:24     .text.get_us_time:00000000 get_us_time
-  C:\Temp\ccLLs6Z4.s:71     .text.get_us_time:00000034 $d
-  C:\Temp\ccLLs6Z4.s:77     .text.delay_us:00000000 $t
-  C:\Temp\ccLLs6Z4.s:82     .text.delay_us:00000000 delay_us
-  C:\Temp\ccLLs6Z4.s:135    .text.delay_us:00000024 $d
-  C:\Temp\ccLLs6Z4.s:140    .text.delay_ms:00000000 $t
-  C:\Temp\ccLLs6Z4.s:145    .text.delay_ms:00000000 delay_ms
-  C:\Temp\ccLLs6Z4.s:164    .text.init_us_timer:00000000 $t
-  C:\Temp\ccLLs6Z4.s:169    .text.init_us_timer:00000000 init_us_timer
-  C:\Temp\ccLLs6Z4.s:212    .text.init_us_timer:00000030 $d
-  C:\Temp\ccLLs6Z4.s:219    .bss:00000000 $d
-  C:\Temp\ccLLs6Z4.s:223    .bss:00000000 t0.4537
-  C:\Temp\ccLLs6Z4.s:228    .bss:00000008 tickcount.4538
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:18     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:23     .text:00000000 get_us_time
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:280    .bss:00000000 t0.4537
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:283    .bss:00000008 tickcount.4538
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:103    .text:0000008c delay_us
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:184    .text:000000e8 delay_ms
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:220    .text:00000108 init_us_timer
+C:\Users\Alex\AppData\Local\Temp\cc3kMqYa.s:279    .bss:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

@@ -11,6 +11,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "CT6963GPIOInterface.h"
 #include "FreeRTOS.h"
+#include "task.h"
 #include "ustime.h"
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
@@ -57,6 +58,19 @@ CT6963_GPIO_Interface::~CT6963_GPIO_Interface() {
 }
 
 /**
+  * @brief  delay for us
+  * @param  number of us
+  * @retval None
+  */
+void delay_us(unsigned int us){
+	unsigned int i;
+
+	for(i=0; i< (SystemCoreClock/1000000) * us; i++){
+		asm volatile ("nop");
+	}
+}
+
+/**
   * @brief  reads T6963C status byte
   * @param  None
   * @retval true for display ready
@@ -79,7 +93,7 @@ bool CheckStatus(void)
 
 	delay_us(c_iDelayAfter);
 
-	return (tmp&0x03==0x03);
+	return ((tmp&0x03)==0x03);
 }
 
 
