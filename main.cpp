@@ -13,6 +13,7 @@
 #include "CTask.h"
 #include "ustime.h"
 #include "CLedHeartBeatSTM32F4Disc.h"
+#include "CMenue.h"
 #include "CT6963GPIOInterface.h"
 #include "stm32f4xx_conf.h"
 #include "stm32f4xx.h"
@@ -22,6 +23,8 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
+CT6963_GPIO_Interface g_Display;
+CMenue	g_Menue(g_Display);
 /* Private function prototypes -----------------------------------------------*/
 extern "C" {
 	void vApplicationTickHook( void );
@@ -44,8 +47,8 @@ int main(void){
 	 * create Led Heartbeat task with minimal stack size and priority
 	 * 1 higher than idle task
 	 */
-	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+1);
-
+	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+2);
+	g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+1);
 	/**
 	 * Initialise the hardware for all Tasks and
 	 * then FreeRTOS takes control of execution

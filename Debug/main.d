@@ -47,6 +47,8 @@ main.d: ../main.cpp \
  ../ustime.h ../CLedHeartBeatSTM32F4Disc.h \
  C:\Users\Alex\git\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/AManagedTask.h \
  C:\Users\Alex\git\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h \
+ C:\Users\Alex\git\thundercyer-the-alarm-clock\Menue/CMenue.h \
+ C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
  C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h \
  C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h \
  C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
@@ -149,6 +151,10 @@ C:\Users\Alex\git\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/IFreeRTOSProtoc
 C:\Users\Alex\git\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/AManagedTask.h:
 
 C:\Users\Alex\git\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h:
+
+C:\Users\Alex\git\thundercyer-the-alarm-clock\Menue/CMenue.h:
+
+C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
 
 C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h:
 

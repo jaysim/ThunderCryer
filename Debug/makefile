@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include STM32F4xx_StdPeriph_Driver/src/subdir.mk
 -include STM32F4-Discovery/subdir.mk
+-include Menue/subdir.mk
 -include GraphicLCD/subdir.mk
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk

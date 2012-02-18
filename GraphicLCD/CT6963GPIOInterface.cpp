@@ -112,8 +112,6 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC , ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE , ENABLE);
 
-	init_us_timer();
-
 	// all pins as pp outputs with no pull
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;

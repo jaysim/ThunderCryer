@@ -401,6 +401,56 @@ void CT6963CDriver::Rectangle(unsigned int x,unsigned int y,unsigned int width,u
 	}
 }
 
+/**
+  * @brief  clear sector from upper left (x,y) with specified width and height
+  * @param  x1,y1,width, height
+  * @retval None
+  */
+void CT6963CDriver::SectorClear(unsigned int x,unsigned int y,unsigned int width,unsigned int height){
+	bool oldInverse;
+
+	oldInverse = Inverse();
+	Inverse(!oldInverse);
+
+	Rectangle(x,y,width,height,true);
+
+	Inverse(oldInverse);
+}
+
+/**
+  * @brief  draw a circle with center at (cx,cy) and specified radius
+  * @param  x1,y1,width,
+  * @retval None
+  */
+void CT6963CDriver::Circle(unsigned char cx, unsigned char cy ,unsigned char radius)
+{
+	int x, y, xchange, ychange, radiusError;
+	x = radius;
+	y = 0;
+	xchange = 1 - 2 * radius;
+	ychange = 1;
+	radiusError = 0;
+	while(x >= y)
+	{
+		SetPixel(cx+x, cy+y);
+		SetPixel(cx-x, cy+y );
+		SetPixel(cx-x, cy-y );
+		SetPixel(cx+x, cy-y );
+		SetPixel(cx+y, cy+x );
+		SetPixel(cx-y, cy+x );
+		SetPixel(cx-y, cy-x );
+		SetPixel(cx+y, cy-x );
+		y++;
+		radiusError += ychange;
+		ychange += 2;
+		if ( 2*radiusError + xchange > 0 )
+		{
+			x--;
+			radiusError += xchange;
+			xchange += 2;
+		}
+	}
+}
 
 /**
   * @brief  writes a bitmap to graphics ram

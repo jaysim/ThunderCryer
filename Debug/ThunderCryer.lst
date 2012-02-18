@@ -25,23 +25,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  10 .comment      00000011  00000000  00000000  00020943  2**0
                   CONTENTS, READONLY
- 11 .debug_line   00022372  00000000  00000000  00020954  2**0
+ 11 .debug_line   00022a40  00000000  00000000  00020954  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_info   000469b1  00000000  00000000  00042cc6  2**0
+ 12 .debug_info   00046f47  00000000  00000000  00043394  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 0000ebae  00000000  00000000  00089677  2**0
+ 13 .debug_abbrev 0000ee07  00000000  00000000  0008a2db  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 000015b8  00000000  00000000  00098228  2**3
+ 14 .debug_aranges 000015f0  00000000  00000000  000990e8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 000014a0  00000000  00000000  000997e0  2**3
+ 15 .debug_ranges 000014c8  00000000  00000000  0009a6d8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_loc    0001f2e5  00000000  00000000  0009ac80  2**0
+ 16 .debug_loc    0001f4a5  00000000  00000000  0009bba0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_macinfo 01483d1f  00000000  00000000  000b9f65  2**0
+ 17 .debug_macinfo 014df269  00000000  00000000  000bb045  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    0000f96d  00000000  00000000  0153dc84  2**0
+ 18 .debug_str    0000f9c2  00000000  00000000  0159a2ae  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_frame  000092e0  00000000  00000000  0154d5f4  2**2
+ 19 .debug_frame  000093e4  00000000  00000000  015a9c70  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -4666,7 +4666,7 @@ void AManagedTask::AddToManagedTask(AManagedTask *pTaskToAdd) {
  8001d32:	6078      	str	r0, [r7, #4]
  8001d34:	6039      	str	r1, [r7, #0]
 	EnterCritical();
- 8001d36:	f010 f91b 	bl	8011f70 <_ZN5CTask13EnterCriticalEv>
+ 8001d36:	f010 f95b 	bl	8011ff0 <_ZN5CTask13EnterCriticalEv>
 	// is the first element?
 	if (s_pManagedTaskListHead == NULL) {
  8001d3a:	f640 132c 	movw	r3, #2348	; 0x92c
@@ -4696,7 +4696,7 @@ void AManagedTask::AddToManagedTask(AManagedTask *pTaskToAdd) {
  8001d6e:	601a      	str	r2, [r3, #0]
 	}
 	ExitCritical();
- 8001d70:	f010 f906 	bl	8011f80 <_ZN5CTask12ExitCriticalEv>
+ 8001d70:	f010 f946 	bl	8012000 <_ZN5CTask12ExitCriticalEv>
 }
  8001d74:	f107 0708 	add.w	r7, r7, #8
  8001d78:	46bd      	mov	sp, r7
@@ -4713,7 +4713,7 @@ void AManagedTask::RemoveFromManagedTask(AManagedTask *pTaskToRemove) {
 	// search for the task to remove in the managed task list
 	// is it the first element?
 	EnterCritical();
- 8001d86:	f010 f8f3 	bl	8011f70 <_ZN5CTask13EnterCriticalEv>
+ 8001d86:	f010 f933 	bl	8011ff0 <_ZN5CTask13EnterCriticalEv>
 	if (pTaskToRemove == s_pManagedTaskListHead) {
  8001d8a:	f640 132c 	movw	r3, #2348	; 0x92c
  8001d8e:	f2c2 0300 	movt	r3, #8192	; 0x2000
@@ -4728,12 +4728,12 @@ void AManagedTask::RemoveFromManagedTask(AManagedTask *pTaskToRemove) {
  8001da2:	f2c2 0300 	movt	r3, #8192	; 0x2000
  8001da6:	601a      	str	r2, [r3, #0]
 		ExitCritical();
- 8001da8:	f010 f8ea 	bl	8011f80 <_ZN5CTask12ExitCriticalEv>
+ 8001da8:	f010 f92a 	bl	8012000 <_ZN5CTask12ExitCriticalEv>
  8001dac:	e025      	b.n	8001dfa <_ZN12AManagedTask21RemoveFromManagedTaskEPS_+0x7e>
 	}
 	else {
 		ExitCritical();
- 8001dae:	f010 f8e7 	bl	8011f80 <_ZN5CTask12ExitCriticalEv>
+ 8001dae:	f010 f927 	bl	8012000 <_ZN5CTask12ExitCriticalEv>
 		CFreeRTOS::SuspendAllTasks();
  8001db2:	f010 f93d 	bl	8012030 <_ZN9CFreeRTOS15SuspendAllTasksEv>
 		AManagedTask *pTask = s_pManagedTaskListHead;
@@ -4966,7 +4966,7 @@ CTask::~CTask() {
  8001f0c:	601a      	str	r2, [r3, #0]
 	if (IsValid())
  8001f0e:	6878      	ldr	r0, [r7, #4]
- 8001f10:	f010 f83e 	bl	8011f90 <_ZNK5CTask7IsValidEv>
+ 8001f10:	f010 f82e 	bl	8011f70 <_ZNK5CTask7IsValidEv>
  8001f14:	4603      	mov	r3, r0
  8001f16:	2b00      	cmp	r3, #0
  8001f18:	d002      	beq.n	8001f20 <_ZN5CTaskD1Ev+0x20>
@@ -33070,129 +33070,129 @@ void init_us_timer()
  8011f6c:	4770      	bx	lr
  8011f6e:	bf00      	nop
 
-08011f70 <_ZN5CTask13EnterCriticalEv>:
-    inline static void Yeld() { taskYIELD(); }
-
-    /**
-     * \sa <a href="http://www.freertos.org/a00020.html#taskENTER_CRITICAL">taskENTER_CRITICAL</a>  FreeRTOS API function.
-     */
-    inline static void EnterCritical() { taskENTER_CRITICAL(); }
- 8011f70:	b580      	push	{r7, lr}
- 8011f72:	af00      	add	r7, sp, #0
- 8011f74:	f7f0 f8fc 	bl	8002170 <vPortEnterCritical>
- 8011f78:	bd80      	pop	{r7, pc}
- 8011f7a:	bf00      	nop
- 8011f7c:	0000      	movs	r0, r0
-	...
-
-08011f80 <_ZN5CTask12ExitCriticalEv>:
-
-    /**
-     * \sa <a href="http://www.freertos.org/a00020.html#taskEXIT_CRITICAL">taskEXIT_CRITICAL</a>  FreeRTOS API function.
-     */
-    inline static void ExitCritical() { taskEXIT_CRITICAL(); }
- 8011f80:	b580      	push	{r7, lr}
- 8011f82:	af00      	add	r7, sp, #0
- 8011f84:	f7f0 f90a 	bl	800219c <vPortExitCritical>
- 8011f88:	bd80      	pop	{r7, pc}
- 8011f8a:	bf00      	nop
- 8011f8c:	0000      	movs	r0, r0
-	...
-
-08011f90 <_ZNK5CTask7IsValidEv>:
+08011f70 <_ZNK5CTask7IsValidEv>:
 	vTaskAllocateMPURegions(m_handleTask, xRegions);
 #endif
 }
 
 inline
 bool CTask::IsValid() const{
- 8011f90:	b480      	push	{r7}
- 8011f92:	b083      	sub	sp, #12
- 8011f94:	af00      	add	r7, sp, #0
- 8011f96:	6078      	str	r0, [r7, #4]
+ 8011f70:	b480      	push	{r7}
+ 8011f72:	b083      	sub	sp, #12
+ 8011f74:	af00      	add	r7, sp, #0
+ 8011f76:	6078      	str	r0, [r7, #4]
 	return m_handleTask != NULL;
- 8011f98:	687b      	ldr	r3, [r7, #4]
- 8011f9a:	685b      	ldr	r3, [r3, #4]
- 8011f9c:	2b00      	cmp	r3, #0
- 8011f9e:	bf0c      	ite	eq
- 8011fa0:	2300      	moveq	r3, #0
- 8011fa2:	2301      	movne	r3, #1
- 8011fa4:	b2db      	uxtb	r3, r3
+ 8011f78:	687b      	ldr	r3, [r7, #4]
+ 8011f7a:	685b      	ldr	r3, [r3, #4]
+ 8011f7c:	2b00      	cmp	r3, #0
+ 8011f7e:	bf0c      	ite	eq
+ 8011f80:	2300      	moveq	r3, #0
+ 8011f82:	2301      	movne	r3, #1
+ 8011f84:	b2db      	uxtb	r3, r3
 }
- 8011fa6:	4618      	mov	r0, r3
- 8011fa8:	f107 070c 	add.w	r7, r7, #12
- 8011fac:	46bd      	mov	sp, r7
- 8011fae:	bc80      	pop	{r7}
- 8011fb0:	4770      	bx	lr
- 8011fb2:	bf00      	nop
+ 8011f86:	4618      	mov	r0, r3
+ 8011f88:	f107 070c 	add.w	r7, r7, #12
+ 8011f8c:	46bd      	mov	sp, r7
+ 8011f8e:	bc80      	pop	{r7}
+ 8011f90:	4770      	bx	lr
+ 8011f92:	bf00      	nop
 	...
 
-08011fc0 <_ZN5CTask6DetachEv>:
+08011fa0 <_ZN5CTask6DetachEv>:
 
 inline
 xGenericHandle CTask::Detach() {
- 8011fc0:	b480      	push	{r7}
- 8011fc2:	b085      	sub	sp, #20
- 8011fc4:	af00      	add	r7, sp, #0
- 8011fc6:	6078      	str	r0, [r7, #4]
+ 8011fa0:	b480      	push	{r7}
+ 8011fa2:	b085      	sub	sp, #20
+ 8011fa4:	af00      	add	r7, sp, #0
+ 8011fa6:	6078      	str	r0, [r7, #4]
 	xTaskHandle res = m_handleTask;
- 8011fc8:	687b      	ldr	r3, [r7, #4]
- 8011fca:	685b      	ldr	r3, [r3, #4]
- 8011fcc:	60fb      	str	r3, [r7, #12]
+ 8011fa8:	687b      	ldr	r3, [r7, #4]
+ 8011faa:	685b      	ldr	r3, [r3, #4]
+ 8011fac:	60fb      	str	r3, [r7, #12]
 	m_handleTask = NULL;
- 8011fce:	687b      	ldr	r3, [r7, #4]
- 8011fd0:	f04f 0200 	mov.w	r2, #0
- 8011fd4:	605a      	str	r2, [r3, #4]
+ 8011fae:	687b      	ldr	r3, [r7, #4]
+ 8011fb0:	f04f 0200 	mov.w	r2, #0
+ 8011fb4:	605a      	str	r2, [r3, #4]
 	return res;
- 8011fd6:	68fb      	ldr	r3, [r7, #12]
+ 8011fb6:	68fb      	ldr	r3, [r7, #12]
 }
- 8011fd8:	4618      	mov	r0, r3
- 8011fda:	f107 0714 	add.w	r7, r7, #20
- 8011fde:	46bd      	mov	sp, r7
- 8011fe0:	bc80      	pop	{r7}
- 8011fe2:	4770      	bx	lr
+ 8011fb8:	4618      	mov	r0, r3
+ 8011fba:	f107 0714 	add.w	r7, r7, #20
+ 8011fbe:	46bd      	mov	sp, r7
+ 8011fc0:	bc80      	pop	{r7}
+ 8011fc2:	4770      	bx	lr
 	...
 
-08011ff0 <_ZN12AManagedTask12HardwareInitEv>:
-	 * The framework calls this function before the scheduler start. The default implementation simply return true.
-	 * Override this method to perform task specific hardware initialization that does not use FreeRTOS API.
-	 *
-	 * @return true if success, false otherwise.
-	 */
-	virtual bool HardwareInit() { return true; }
- 8011ff0:	b480      	push	{r7}
- 8011ff2:	b083      	sub	sp, #12
- 8011ff4:	af00      	add	r7, sp, #0
- 8011ff6:	6078      	str	r0, [r7, #4]
- 8011ff8:	f04f 0301 	mov.w	r3, #1
- 8011ffc:	4618      	mov	r0, r3
- 8011ffe:	f107 070c 	add.w	r7, r7, #12
- 8012002:	46bd      	mov	sp, r7
- 8012004:	bc80      	pop	{r7}
- 8012006:	4770      	bx	lr
-	...
-
-08012010 <_ZN12AManagedTask8OnCreateEPKctm>:
+08011fd0 <_ZN12AManagedTask8OnCreateEPKctm>:
 	 * @param uxPriority specifies the task priority.
 	 *
 	 * @return pdTRUE if success, pdFALSE otherwise. If the method return pdFALSE the task creation process
 	 * is stopped and no FreeRTOS resource are allocated.
 	 */
 	virtual portBASE_TYPE OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth, unsigned portBASE_TYPE uxPriority) { return pdTRUE; }
+ 8011fd0:	b480      	push	{r7}
+ 8011fd2:	b085      	sub	sp, #20
+ 8011fd4:	af00      	add	r7, sp, #0
+ 8011fd6:	60f8      	str	r0, [r7, #12]
+ 8011fd8:	60b9      	str	r1, [r7, #8]
+ 8011fda:	603b      	str	r3, [r7, #0]
+ 8011fdc:	4613      	mov	r3, r2
+ 8011fde:	80fb      	strh	r3, [r7, #6]
+ 8011fe0:	f04f 0301 	mov.w	r3, #1
+ 8011fe4:	4618      	mov	r0, r3
+ 8011fe6:	f107 0714 	add.w	r7, r7, #20
+ 8011fea:	46bd      	mov	sp, r7
+ 8011fec:	bc80      	pop	{r7}
+ 8011fee:	4770      	bx	lr
+
+08011ff0 <_ZN5CTask13EnterCriticalEv>:
+    inline static void Yeld() { taskYIELD(); }
+
+    /**
+     * \sa <a href="http://www.freertos.org/a00020.html#taskENTER_CRITICAL">taskENTER_CRITICAL</a>  FreeRTOS API function.
+     */
+    inline static void EnterCritical() { taskENTER_CRITICAL(); }
+ 8011ff0:	b580      	push	{r7, lr}
+ 8011ff2:	af00      	add	r7, sp, #0
+ 8011ff4:	f7f0 f8bc 	bl	8002170 <vPortEnterCritical>
+ 8011ff8:	bd80      	pop	{r7, pc}
+ 8011ffa:	bf00      	nop
+ 8011ffc:	0000      	movs	r0, r0
+	...
+
+08012000 <_ZN5CTask12ExitCriticalEv>:
+
+    /**
+     * \sa <a href="http://www.freertos.org/a00020.html#taskEXIT_CRITICAL">taskEXIT_CRITICAL</a>  FreeRTOS API function.
+     */
+    inline static void ExitCritical() { taskEXIT_CRITICAL(); }
+ 8012000:	b580      	push	{r7, lr}
+ 8012002:	af00      	add	r7, sp, #0
+ 8012004:	f7f0 f8ca 	bl	800219c <vPortExitCritical>
+ 8012008:	bd80      	pop	{r7, pc}
+ 801200a:	bf00      	nop
+ 801200c:	0000      	movs	r0, r0
+	...
+
+08012010 <_ZN12AManagedTask12HardwareInitEv>:
+	 * The framework calls this function before the scheduler start. The default implementation simply return true.
+	 * Override this method to perform task specific hardware initialization that does not use FreeRTOS API.
+	 *
+	 * @return true if success, false otherwise.
+	 */
+	virtual bool HardwareInit() { return true; }
  8012010:	b480      	push	{r7}
- 8012012:	b085      	sub	sp, #20
+ 8012012:	b083      	sub	sp, #12
  8012014:	af00      	add	r7, sp, #0
- 8012016:	60f8      	str	r0, [r7, #12]
- 8012018:	60b9      	str	r1, [r7, #8]
- 801201a:	603b      	str	r3, [r7, #0]
- 801201c:	4613      	mov	r3, r2
- 801201e:	80fb      	strh	r3, [r7, #6]
- 8012020:	f04f 0301 	mov.w	r3, #1
- 8012024:	4618      	mov	r0, r3
- 8012026:	f107 0714 	add.w	r7, r7, #20
- 801202a:	46bd      	mov	sp, r7
- 801202c:	bc80      	pop	{r7}
- 801202e:	4770      	bx	lr
+ 8012016:	6078      	str	r0, [r7, #4]
+ 8012018:	f04f 0301 	mov.w	r3, #1
+ 801201c:	4618      	mov	r0, r3
+ 801201e:	f107 070c 	add.w	r7, r7, #12
+ 8012022:	46bd      	mov	sp, r7
+ 8012024:	bc80      	pop	{r7}
+ 8012026:	4770      	bx	lr
+	...
 
 08012030 <_ZN9CFreeRTOS15SuspendAllTasksEv>:
 	static void EndScheduler() { vTaskEndScheduler(); }
@@ -35335,8 +35335,8 @@ class IFreeRTOSObj {
 
 08013480 <_ZTV12AManagedTask>:
 	...
- 8013488:	1f91 0801 1f65 0800 1fc1 0801 1c49 0800     ....e.......I...
- 8013498:	1c89 0800 1ff1 0801 20a1 0801 2011 0801     ......... ... ..
+ 8013488:	1f71 0801 1f65 0800 1fa1 0801 1c49 0800     q...e.......I...
+ 8013498:	1c89 0800 2011 0801 20a1 0801 1fd1 0801     ..... ... ......
 	...
  80134b0:	2e2e 462f 6572 5265 4f54 5f53 4345 532f     ../FreeRTOS_EC/S
  80134c0:	756f 6372 2f65 5443 7361 2e6b 7063 0070     ource/CTask.cpp.
@@ -35344,7 +35344,7 @@ class IFreeRTOSObj {
 
 080134e0 <_ZTV5CTask>:
 	...
- 80134e8:	1f91 0801 1f65 0800 1fc1 0801 1f01 0800     ....e...........
+ 80134e8:	1f71 0801 1f65 0800 1fa1 0801 1f01 0800     q...e...........
  80134f8:	1f45 0800                                   E...
 
 080134fc <_ZZN5CTask6AttachEPvE19__PRETTY_FUNCTION__>:
@@ -35363,8 +35363,8 @@ class IFreeRTOSObj {
 
 080135b0 <_ZTV24CLedHeartBeatSTM32F4Disc>:
 	...
- 80135b8:	1f91 0801 1f65 0800 1fc1 0801 3c29 0800     ....e.......)<..
- 80135c8:	3c61 0800 3c81 0800 3cb9 0800 2011 0801     a<...<...<... ..
+ 80135b8:	1f71 0801 1f65 0800 1fa1 0801 3c29 0800     q...e.......)<..
+ 80135c8:	3c61 0800 3c81 0800 3cb9 0800 1fd1 0801     a<...<...<......
 	...
  80135e0:	654c 2064 6548 7261 6274 6165 0074 0000     Led Heartbeat...
 

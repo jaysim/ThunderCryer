@@ -32,6 +32,7 @@ SUBDIRS := \
 . \
 STM32F4xx_StdPeriph_Driver/src \
 STM32F4-Discovery \
+Menue \
 GraphicLCD \
 FreeRTOS_EC/Source \
 FreeRTOS/Source \

@@ -24,6 +24,7 @@ CGraphicLCD::CGraphicLCD() {
 CGraphicLCD::CGraphicLCD(bool inverse) {
 	bInverse=inverse;
 }
+
 CGraphicLCD::~CGraphicLCD() {
 	// TODO Auto-generated destructor stub
 }

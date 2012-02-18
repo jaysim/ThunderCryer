@@ -60,7 +60,7 @@ private:
 
 public:
 	CT6963_GPIO_Interface();
-	virtual ~CT6963_GPIO_Interface();
+	~CT6963_GPIO_Interface();
 };
 
 #endif /* CT6963GPIOINTERFACE_H_ */
