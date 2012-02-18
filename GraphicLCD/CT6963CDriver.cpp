@@ -254,59 +254,62 @@ void CT6963CDriver::SetPixel(unsigned char x, unsigned char y)
   * @brief  draw a line from (x1,y1) to (x2,y2)
   * @param  x1,y1,x2,y2
   * @retval None
+  *
+  * Copyright (c) Radoslaw Kwiecien, 2007r
+  * http://en.radzio.dxp.pl/t6963/
   */
 void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsigned int y2){
 	int CurrentX, CurrentY, Xinc, Yinc,
 	Dx, Dy, TwoDx, TwoDy,
 	TwoDxAccumulatedError, TwoDyAccumulatedError;
 
-	Dx = (x2-x1); // obliczenie sk³adowej poziomej
-	Dy = (y2-y1); // obliczenie sk³adowej pionowej
+	Dx = (x2-x1);
+	Dy = (y2-y1);
 
-	TwoDx = Dx + Dx; // podwojona sk³adowa pozioma
-	TwoDy = Dy + Dy; // podwojona sk³adowa pionowa
+	TwoDx = Dx + Dx;
+	TwoDy = Dy + Dy;
 
-	CurrentX = x1; // zaczynamy od X1
-	CurrentY = y1; // oraz Y1
+	CurrentX = x1;
+	CurrentY = y1;
 
-	Xinc = 1; // ustalamy krok zwiêkszania pozycji w poziomie
-	Yinc = 1; // ustalamy krok zwiêkszania pozycji w pionie
+	Xinc = 1;
+	Yinc = 1;
 
-	if(Dx < 0) // jesli sk³adowa pozioma jest ujemna
+	if(Dx < 0)	// line from right to left
 	{
-		Xinc = -1; // to bêdziemy siê "cofaæ" (krok ujemny)
-		Dx = -Dx;  // zmieniamy znak sk³adowej na dodatni
-		TwoDx = -TwoDx; // jak równie¿ podwojonej sk³adowej
+		Xinc = -1;
+		Dx = -Dx;
+		TwoDx = -TwoDx;
 	}
 
-	if (Dy < 0) // jeœli sk³adowa pionowa jest ujemna
+	if (Dy < 0) // line from bottom to top
 	{
-		Yinc = -1; // to bêdziemy siê "cofaæ" (krok ujemny)
-		Dy = -Dy; // zmieniamy znak sk³adowej na dodatki
-		TwoDy = -TwoDy; // jak równiez podwojonej sk³adowej
+		Yinc = -1;
+		Dy = -Dy;
+		TwoDy = -TwoDy;
 	}
 
-	SetPixel(x1,y1); // stawiamy pierwszy krok (zapalamy pierwszy piksel)
+	SetPixel(x1,y1); // starting point
 
-	if ((Dx != 0) || (Dy != 0)) // sprawdzamy czy linia sk³ada siê z wiêcej ni¿ jednego punktu ;)
+	if ((Dx != 0) || (Dy != 0)) // line is vertical or horizontal
 	{
-		// sprawdzamy czy sk³adowa pionowa jest mniejsza lub równa sk³adowej poziomej
-		if (Dy <= Dx) // jeœli tak, to idziemy "po iksach"
+
+		if (Dy <= Dx) // x is running var
 		{
-			TwoDxAccumulatedError = 0; // zerujemy zmienn¹
-			do // ruszamy w drogê
+			TwoDxAccumulatedError = 0;
+			do
 			{
-				CurrentX += Xinc; // do aktualnej pozycji dodajemy krok
-				TwoDxAccumulatedError += TwoDy; // a tu dodajemy podwojon¹ sk³adow¹ pionow¹
-				if(TwoDxAccumulatedError > Dx)  // jeœli TwoDxAccumulatedError jest wiêkszy od Dx
+				CurrentX += Xinc; // step X
+				TwoDxAccumulatedError += TwoDy;
+				if(TwoDxAccumulatedError > Dx)  // Increase Y
 				{
-					CurrentY += Yinc; // zwiêkszamy aktualn¹ pozycjê w pionie
-					TwoDxAccumulatedError -= TwoDx; // i odejmujemy TwoDx
+					CurrentY += Yinc;
+					TwoDxAccumulatedError -= TwoDx;
 				}
-				SetPixel(CurrentX,CurrentY);// stawiamy nastêpny krok (zapalamy piksel)
-			}while (CurrentX != x2); // idziemy tak d³ugo, a¿ osi¹gniemy punkt docelowy
+				SetPixel(CurrentX,CurrentY);
+			}while (CurrentX != x2); // line finished
 		}
-		else // w przeciwnym razie idziemy "po igrekach"
+		else // y is runnig var
 		{
 			TwoDyAccumulatedError = 0;
 			do
@@ -319,7 +322,7 @@ void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsig
 					TwoDyAccumulatedError -= TwoDy;
 				}
 				SetPixel(CurrentX,CurrentY);
-			}while (CurrentY != y2);
+			}while (CurrentY != y2); // line finished
 		}
 	}
 }
@@ -329,7 +332,40 @@ void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsig
   * @param  x1,y1,width,heigth, edge type enum
   * @retval None
   */
-void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height, eRectEdge edge){
+void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height){
+	unsigned int i;
+
+	Rectangle(x+4,y,x+width-4,4,true); // filled top bar
+	Line(x,y-4,x,y+height-4);			// left border
+	Line(x+width,y-4,x+width,y+height-4);// right border
+	Line(x+4,y+height,x+width-4,y+height);// bottom border
+
+	for(i=1;i<4;i++){
+		SetPixel(x+i,y+3);		// upper left
+		SetPixel(x+i,y+2);
+		SetPixel(x+i,y+1);
+
+		SetPixel(x+width-i,y+3); // upper right
+		SetPixel(x+width-i,y+2);
+		SetPixel(x+width-i,y+1);
+	}
+
+	SetPixel(x+1,y+height-3);		// bottom left
+	SetPixel(x+1,y+height-2);
+	SetPixel(x+1,y+height-1);
+
+	SetPixel(x+1,y+height-1);		// bottom left
+	SetPixel(x+2,y+height-1);
+	SetPixel(x+3,y+height-1);
+
+	SetPixel(x+width-1,y+height-3);		// bottom right
+	SetPixel(x+width-1,y+height-2);
+	SetPixel(x+width-1,y+height-1);
+
+	SetPixel(x+width-1,y+height-1);		// bottom right
+	SetPixel(x+width-2,y+height-1);
+	SetPixel(x+width-3,y+height-1);
+
 
 }
 

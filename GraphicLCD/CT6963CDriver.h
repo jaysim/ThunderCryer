@@ -122,14 +122,28 @@ public:
 	  * @param  x1,y1,width,height, edge type enum
 	  * @retval None
 	  */
-	void Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height, eRectEdge edge);
+	void Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height);
 
 	/**
 	  * @brief  draw an rectangle with upper left corner at (x,y) and specified width and height, edges round or square
-	  * @param  x1,y1,width,height, edge type enum, true for filled rect
+	  * @param  x1,y1,width,height, true for filled rect
 	  * @retval None
 	  */
-	void Rectangle(unsigned int x,unsigned int y,unsigned int width,unsigned int height, eRectEdge edge, bool fill);
+	void Rectangle(unsigned int x,unsigned int y,unsigned int width,unsigned int height, bool fill);
+
+	/**
+	  * @brief  clear sector from upper left (x,y) with specified width and height
+	  * @param  x1,y1,width, height
+	  * @retval None
+	  */
+	virtual void SectorClear(unsigned int x,unsigned int y,unsigned int width,unsigned int height);
+
+	/**
+	  * @brief  draw a circle with center at (cx,cy) and specified radius
+	  * @param  x1,y1,width,
+	  * @retval None
+	  */
+	virtual void Circle(unsigned char cx, unsigned char cy ,unsigned char radius);
 
 	/**
 	  * @brief  writes a string starting at upper left corner on (x,y) and specified font
