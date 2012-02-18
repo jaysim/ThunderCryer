@@ -202,7 +202,7 @@ void CT6963_GPIO_Interface::WriteData(const unsigned char data){
   * @param  None
   * @retval data from display
   */
-unsigned char CT6963_GPIO_Interface::ReadData() const{
+unsigned char CT6963_GPIO_Interface::ReadData(){
 	uint16_t tmp;
 	while(!CheckStatus());
 

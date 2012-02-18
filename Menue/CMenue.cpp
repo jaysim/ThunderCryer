@@ -18,7 +18,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 
-CMenue::CMenue(CGraphicLCD display) : glcd(display){
+CMenue::CMenue(CGraphicLCD *display) : glcd(display){
 }
 
 CMenue::~CMenue() {
@@ -42,15 +42,15 @@ bool CMenue::HardwareInit(void){
   * @retval None
   */
 void CMenue::Run(void){
-	glcd.Init();
-	glcd.Inverse(true);
-	glcd.Clear();
+	glcd->Init();
+	glcd->Inverse(true);
+	glcd->Clear();
 
 
-	glcd.Window(0,0,119,63);
-	glcd.Window(121,0,119,63);
-	glcd.Window(0,65,119,63);
-	glcd.Window(121,65,119,63);
+	glcd->Window(0,0,119,63);
+	glcd->Window(121,0,119,63);
+	glcd->Window(0,65,119,63);
+	glcd->Window(121,65,119,63);
 
 
 	while(1){

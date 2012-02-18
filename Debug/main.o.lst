@@ -103,113 +103,32 @@
   56              	g_Display:
   57 0014 00000000 		.space	8
   57      00000000 
-  58              		.section	.text._ZN11CGraphicLCDC2ERKS_,"axG",%progbits,_ZN11CGraphicLCDC5ERKS_,comdat
+  58              		.global	g_Menue
   59              		.align	2
-  60              		.weak	_ZN11CGraphicLCDC2ERKS_
-  61              		.thumb
-  62              		.thumb_func
-  64              	_ZN11CGraphicLCDC2ERKS_:
-  65              	.LFB141:
-  66              		.file 2 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\GraphicLCD/CGraphicLCD.h"
-   1:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /**
-   2:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   ******************************************************************************
-   3:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   * @file      	CGraphicLCD.h
-   4:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   * @author    	Tecnologic86
-   5:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   * @version   	V0.0.0
-   6:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   * @date      	17.02.12
-   7:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   * @brief		a general graphics LCD interface for various controller drivers
-   8:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   ******************************************************************************
-   9:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****   */
-  10:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** 
-  11:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Define to prevent recursive inclusion -------------------------------------*/
-  12:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** #ifndef CGRAPHICLCD_H_
-  13:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** #define CGRAPHICLCD_H_
-  14:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Includes ------------------------------------------------------------------*/
-  15:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Exported types ------------------------------------------------------------*/
-  16:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** typedef struct {
-  17:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****    const unsigned int glyph_width;           /* glyph width in pixels              */
-  18:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****                                              /*     0 for variable width fonts     */
-  19:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****    const unsigned int glyph_height;          /* glyph height for storage           */
-  20:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****    const unsigned char *glyph_table;         /* font table start address in memory */
-  21:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****    const unsigned char *mapping_table;       /* used to find the index of a glyph  */
-  22:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****    const unsigned char *width_table;         /* width table start adress           */
-  23:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****                                              /*        NULL for fixed width fonts  */
-  24:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****    const unsigned int *offset_table;         /* ks the offsets of the first byte   */
-  25:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h ****                                              /*                      of each glyph */
-  26:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** } tFont;
-  27:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** 
-  28:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Exported constants --------------------------------------------------------*/
-  29:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Exported macro ------------------------------------------------------------*/
-  30:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Exported functions ------------------------------------------------------- */
-  31:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** /* Class definitions -------------------------------------------------------- */
-  32:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** 
-  33:C:\Users\Alex\git\thundercyer-the-alarm-clock\GraphicLCD\CGraphicLCD.h **** class CGraphicLCD {
-  67              		.loc 2 33 0
-  68              		.cfi_startproc
-  69              		@ args = 0, pretend = 0, frame = 8
-  70              		@ frame_needed = 1, uses_anonymous_args = 0
-  71              		@ link register save eliminated.
-  72 0000 80B4     		push	{r7}
-  73              	.LCFI2:
-  74              		.cfi_def_cfa_offset 4
-  75              		.cfi_offset 7, -4
-  76 0002 83B0     		sub	sp, sp, #12
-  77              	.LCFI3:
-  78              		.cfi_def_cfa_offset 16
-  79 0004 00AF     		add	r7, sp, #0
-  80              	.LCFI4:
-  81              		.cfi_def_cfa_register 7
-  82 0006 7860     		str	r0, [r7, #4]
-  83 0008 3960     		str	r1, [r7, #0]
-  84              	.LBB2:
-  85              		.loc 2 33 0
-  86 000a 7B68     		ldr	r3, [r7, #4]
-  87 000c 064A     		ldr	r2, .L4
-  88 000e 1A60     		str	r2, [r3, #0]
-  89 0010 3B68     		ldr	r3, [r7, #0]
-  90 0012 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
-  91 0014 7B68     		ldr	r3, [r7, #4]
-  92 0016 1A71     		strb	r2, [r3, #4]
-  93              	.LBE2:
-  94 0018 7B68     		ldr	r3, [r7, #4]
-  95 001a 1846     		mov	r0, r3
-  96 001c 07F10C07 		add	r7, r7, #12
-  97 0020 BD46     		mov	sp, r7
-  98 0022 80BC     		pop	{r7}
-  99 0024 7047     		bx	lr
- 100              	.L5:
- 101 0026 00BF     		.align	2
- 102              	.L4:
- 103 0028 08000000 		.word	_ZTV11CGraphicLCD+8
- 104              		.cfi_endproc
- 105              	.LFE141:
- 107              		.global	g_Menue
- 108              		.bss
- 109              		.align	2
- 112              	g_Menue:
- 113 001c 00000000 		.space	16
- 113      00000000 
- 113      00000000 
- 113      00000000 
- 114              		.section	.rodata
- 115              		.align	2
- 116              	.LC0:
- 117 0000 4C656420 		.ascii	"Led Heartbeat\000"
- 117      48656172 
- 117      74626561 
- 117      7400
- 118 000e 0000     		.align	2
- 119              	.LC1:
- 120 0010 4D656E75 		.ascii	"Menue\000"
- 120      6500
- 121              		.text
- 122              		.align	2
- 123              		.global	main
- 124              		.thumb
- 125              		.thumb_func
- 127              	main:
- 128              	.LFB143:
- 129              		.file 3 "../main.cpp"
+  62              	g_Menue:
+  63 001c 00000000 		.space	16
+  63      00000000 
+  63      00000000 
+  63      00000000 
+  64              		.section	.rodata
+  65              		.align	2
+  66              	.LC0:
+  67 0000 4C656420 		.ascii	"Led Heartbeat\000"
+  67      48656172 
+  67      74626561 
+  67      7400
+  68 000e 0000     		.align	2
+  69              	.LC1:
+  70 0010 4D656E75 		.ascii	"Menue\000"
+  70      6500
+  71              		.text
+  72              		.align	2
+  73              		.global	main
+  74              		.thumb
+  75              		.thumb_func
+  77              	main:
+  78              	.LFB140:
+  79              		.file 2 "../main.cpp"
    1:../main.cpp   **** /**
    2:../main.cpp   ****   ******************************************************************************
    3:../main.cpp   ****   * @file      	main.cpp
@@ -236,7 +155,7 @@
   24:../main.cpp   **** /* Private variables ---------------------------------------------------------*/
   25:../main.cpp   **** CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
   26:../main.cpp   **** CT6963_GPIO_Interface g_Display;
-  27:../main.cpp   **** CMenue	g_Menue(g_Display);
+  27:../main.cpp   **** CMenue	g_Menue(&g_Display);
   28:../main.cpp   **** /* Private function prototypes -----------------------------------------------*/
   29:../main.cpp   **** extern "C" {
   30:../main.cpp   **** 	void vApplicationTickHook( void );
@@ -254,192 +173,192 @@
   42:../main.cpp   ****   * @retval None
   43:../main.cpp   ****   */
   44:../main.cpp   **** int main(void){
- 130              		.loc 3 44 0
- 131              		.cfi_startproc
- 132              		@ args = 0, pretend = 0, frame = 0
- 133              		@ frame_needed = 1, uses_anonymous_args = 0
- 134 0000 80B5     		push	{r7, lr}
- 135              	.LCFI5:
- 136              		.cfi_def_cfa_offset 8
- 137              		.cfi_offset 14, -4
- 138              		.cfi_offset 7, -8
- 139 0002 00AF     		add	r7, sp, #0
- 140              	.LCFI6:
- 141              		.cfi_def_cfa_register 7
+  80              		.loc 2 44 0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 1, uses_anonymous_args = 0
+  84 0000 80B5     		push	{r7, lr}
+  85              	.LCFI2:
+  86              		.cfi_def_cfa_offset 8
+  87              		.cfi_offset 14, -4
+  88              		.cfi_offset 7, -8
+  89 0002 00AF     		add	r7, sp, #0
+  90              	.LCFI3:
+  91              		.cfi_def_cfa_register 7
   45:../main.cpp   **** 
   46:../main.cpp   **** 	/**
   47:../main.cpp   **** 	 * create Led Heartbeat task with minimal stack size and priority
   48:../main.cpp   **** 	 * 1 higher than idle task
   49:../main.cpp   **** 	 */
   50:../main.cpp   **** 	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+2);
- 142              		.loc 3 50 0
- 143 0004 40F20000 		movw	r0, #:lower16:g_LedTast
- 144 0008 C0F20000 		movt	r0, #:upper16:g_LedTast
- 145 000c 40F20001 		movw	r1, #:lower16:.LC0
- 146 0010 C0F20001 		movt	r1, #:upper16:.LC0
- 147 0014 4FF48072 		mov	r2, #256
- 148 0018 4FF00203 		mov	r3, #2
- 149 001c FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
+  92              		.loc 2 50 0
+  93 0004 40F20000 		movw	r0, #:lower16:g_LedTast
+  94 0008 C0F20000 		movt	r0, #:upper16:g_LedTast
+  95 000c 40F20001 		movw	r1, #:lower16:.LC0
+  96 0010 C0F20001 		movt	r1, #:upper16:.LC0
+  97 0014 4FF48072 		mov	r2, #256
+  98 0018 4FF00203 		mov	r3, #2
+  99 001c FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
   51:../main.cpp   **** 	g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+1);
- 150              		.loc 3 51 0
- 151 0020 40F20000 		movw	r0, #:lower16:g_Menue
- 152 0024 C0F20000 		movt	r0, #:upper16:g_Menue
- 153 0028 40F20001 		movw	r1, #:lower16:.LC1
- 154 002c C0F20001 		movt	r1, #:upper16:.LC1
- 155 0030 4FF40072 		mov	r2, #512
- 156 0034 4FF00103 		mov	r3, #1
- 157 0038 FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
+ 100              		.loc 2 51 0
+ 101 0020 40F20000 		movw	r0, #:lower16:g_Menue
+ 102 0024 C0F20000 		movt	r0, #:upper16:g_Menue
+ 103 0028 40F20001 		movw	r1, #:lower16:.LC1
+ 104 002c C0F20001 		movt	r1, #:upper16:.LC1
+ 105 0030 4FF40072 		mov	r2, #512
+ 106 0034 4FF00103 		mov	r3, #1
+ 107 0038 FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
   52:../main.cpp   **** 	/**
   53:../main.cpp   **** 	 * Initialise the hardware for all Tasks and
   54:../main.cpp   **** 	 * then FreeRTOS takes control of execution
   55:../main.cpp   **** 	 */
   56:../main.cpp   **** 	CFreeRTOS::InitHardwareForManagedTasks();
- 158              		.loc 3 56 0
- 159 003c FFF7FEFF 		bl	_ZN9CFreeRTOS27InitHardwareForManagedTasksEv
+ 108              		.loc 2 56 0
+ 109 003c FFF7FEFF 		bl	_ZN9CFreeRTOS27InitHardwareForManagedTasksEv
   57:../main.cpp   **** 	CFreeRTOS::StartScheduler();
- 160              		.loc 3 57 0
- 161 0040 FFF7FEFF 		bl	_ZN9CFreeRTOS14StartSchedulerEv
- 162 0044 4FF00003 		mov	r3, #0
+ 110              		.loc 2 57 0
+ 111 0040 FFF7FEFF 		bl	_ZN9CFreeRTOS14StartSchedulerEv
+ 112 0044 4FF00003 		mov	r3, #0
   58:../main.cpp   **** 
   59:../main.cpp   **** }
- 163              		.loc 3 59 0
- 164 0048 1846     		mov	r0, r3
- 165 004a 80BD     		pop	{r7, pc}
- 166              		.cfi_endproc
- 167              	.LFE143:
- 169              		.align	2
- 170              		.global	vApplicationTickHook
- 171              		.thumb
- 172              		.thumb_func
- 174              	vApplicationTickHook:
- 175              	.LFB144:
+ 113              		.loc 2 59 0
+ 114 0048 1846     		mov	r0, r3
+ 115 004a 80BD     		pop	{r7, pc}
+ 116              		.cfi_endproc
+ 117              	.LFE140:
+ 119              		.align	2
+ 120              		.global	vApplicationTickHook
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	vApplicationTickHook:
+ 125              	.LFB141:
   60:../main.cpp   **** 
   61:../main.cpp   **** extern "C" {
   62:../main.cpp   **** 
   63:../main.cpp   **** 	// This FreeRTOS callback function gets called once per tick (default = 1000Hz).
   64:../main.cpp   **** 	// ----------------------------------------------------------------------------
   65:../main.cpp   **** 	void vApplicationTickHook( void ) {
- 176              		.loc 3 65 0
- 177              		.cfi_startproc
- 178              		@ args = 0, pretend = 0, frame = 0
- 179              		@ frame_needed = 1, uses_anonymous_args = 0
- 180              		@ link register save eliminated.
- 181 004c 80B4     		push	{r7}
- 182              	.LCFI7:
- 183              		.cfi_def_cfa_offset 4
- 184              		.cfi_offset 7, -4
- 185 004e 00AF     		add	r7, sp, #0
- 186              	.LCFI8:
- 187              		.cfi_def_cfa_register 7
+ 126              		.loc 2 65 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 1, uses_anonymous_args = 0
+ 130              		@ link register save eliminated.
+ 131 004c 80B4     		push	{r7}
+ 132              	.LCFI4:
+ 133              		.cfi_def_cfa_offset 4
+ 134              		.cfi_offset 7, -4
+ 135 004e 00AF     		add	r7, sp, #0
+ 136              	.LCFI5:
+ 137              		.cfi_def_cfa_register 7
   66:../main.cpp   **** 
   67:../main.cpp   **** 	}
- 188              		.loc 3 67 0
- 189 0050 BD46     		mov	sp, r7
- 190 0052 80BC     		pop	{r7}
- 191 0054 7047     		bx	lr
- 192              		.cfi_endproc
- 193              	.LFE144:
- 195 0056 00BF     		.align	2
- 196              		.global	vApplicationIdleHook
- 197              		.thumb
- 198              		.thumb_func
- 200              	vApplicationIdleHook:
- 201              	.LFB145:
+ 138              		.loc 2 67 0
+ 139 0050 BD46     		mov	sp, r7
+ 140 0052 80BC     		pop	{r7}
+ 141 0054 7047     		bx	lr
+ 142              		.cfi_endproc
+ 143              	.LFE141:
+ 145 0056 00BF     		.align	2
+ 146              		.global	vApplicationIdleHook
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	vApplicationIdleHook:
+ 151              	.LFB142:
   68:../main.cpp   **** 
   69:../main.cpp   **** 	// This FreeRTOS call-back function gets when no other task is ready to execute.
   70:../main.cpp   **** 	// On a completely unloaded system this is getting called at over 2.5MHz!
   71:../main.cpp   **** 	// ----------------------------------------------------------------------------
   72:../main.cpp   **** 	void vApplicationIdleHook( void ) {
- 202              		.loc 3 72 0
- 203              		.cfi_startproc
- 204              		@ args = 0, pretend = 0, frame = 0
- 205              		@ frame_needed = 1, uses_anonymous_args = 0
- 206              		@ link register save eliminated.
- 207 0058 80B4     		push	{r7}
- 208              	.LCFI9:
- 209              		.cfi_def_cfa_offset 4
- 210              		.cfi_offset 7, -4
- 211 005a 00AF     		add	r7, sp, #0
- 212              	.LCFI10:
- 213              		.cfi_def_cfa_register 7
+ 152              		.loc 2 72 0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 1, uses_anonymous_args = 0
+ 156              		@ link register save eliminated.
+ 157 0058 80B4     		push	{r7}
+ 158              	.LCFI6:
+ 159              		.cfi_def_cfa_offset 4
+ 160              		.cfi_offset 7, -4
+ 161 005a 00AF     		add	r7, sp, #0
+ 162              	.LCFI7:
+ 163              		.cfi_def_cfa_register 7
   73:../main.cpp   **** 
   74:../main.cpp   **** 	}
- 214              		.loc 3 74 0
- 215 005c BD46     		mov	sp, r7
- 216 005e 80BC     		pop	{r7}
- 217 0060 7047     		bx	lr
- 218              		.cfi_endproc
- 219              	.LFE145:
- 221 0062 00BF     		.align	2
- 222              		.global	vApplicationMallocFailedHook
- 223              		.thumb
- 224              		.thumb_func
- 226              	vApplicationMallocFailedHook:
- 227              	.LFB146:
+ 164              		.loc 2 74 0
+ 165 005c BD46     		mov	sp, r7
+ 166 005e 80BC     		pop	{r7}
+ 167 0060 7047     		bx	lr
+ 168              		.cfi_endproc
+ 169              	.LFE142:
+ 171 0062 00BF     		.align	2
+ 172              		.global	vApplicationMallocFailedHook
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	vApplicationMallocFailedHook:
+ 177              	.LFB143:
   75:../main.cpp   **** 
   76:../main.cpp   **** 	// A required FreeRTOS function.
   77:../main.cpp   **** 	// ----------------------------------------------------------------------------
   78:../main.cpp   **** 	void vApplicationMallocFailedHook( void ) {
- 228              		.loc 3 78 0
- 229              		.cfi_startproc
- 230              		@ args = 0, pretend = 0, frame = 0
- 231              		@ frame_needed = 1, uses_anonymous_args = 0
- 232              		@ link register save eliminated.
- 233 0064 80B4     		push	{r7}
- 234              	.LCFI11:
- 235              		.cfi_def_cfa_offset 4
- 236              		.cfi_offset 7, -4
- 237 0066 00AF     		add	r7, sp, #0
- 238              	.LCFI12:
- 239              		.cfi_def_cfa_register 7
+ 178              		.loc 2 78 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 1, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 183 0064 80B4     		push	{r7}
+ 184              	.LCFI8:
+ 185              		.cfi_def_cfa_offset 4
+ 186              		.cfi_offset 7, -4
+ 187 0066 00AF     		add	r7, sp, #0
+ 188              	.LCFI9:
+ 189              		.cfi_def_cfa_register 7
   79:../main.cpp   **** 		configASSERT( 0 );  // Latch on any failure / error.
   80:../main.cpp   **** 	}
- 240              		.loc 3 80 0
- 241 0068 BD46     		mov	sp, r7
- 242 006a 80BC     		pop	{r7}
- 243 006c 7047     		bx	lr
- 244              		.cfi_endproc
- 245              	.LFE146:
- 247 006e 00BF     		.align	2
- 248              		.global	vApplicationStackOverflowHook
- 249              		.thumb
- 250              		.thumb_func
- 252              	vApplicationStackOverflowHook:
- 253              	.LFB147:
+ 190              		.loc 2 80 0
+ 191 0068 BD46     		mov	sp, r7
+ 192 006a 80BC     		pop	{r7}
+ 193 006c 7047     		bx	lr
+ 194              		.cfi_endproc
+ 195              	.LFE143:
+ 197 006e 00BF     		.align	2
+ 198              		.global	vApplicationStackOverflowHook
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	vApplicationStackOverflowHook:
+ 203              	.LFB144:
   81:../main.cpp   **** 
   82:../main.cpp   **** 	// A required FreeRTOS function. gets called on stack overflow
   83:../main.cpp   **** 	// ----------------------------------------------------------------------------
   84:../main.cpp   **** 	void vApplicationStackOverflowHook( xTaskHandle *pxTask, signed char *pcTaskName ){
- 254              		.loc 3 84 0
- 255              		.cfi_startproc
- 256              		@ args = 0, pretend = 0, frame = 8
- 257              		@ frame_needed = 1, uses_anonymous_args = 0
- 258              		@ link register save eliminated.
- 259 0070 80B4     		push	{r7}
- 260              	.LCFI13:
- 261              		.cfi_def_cfa_offset 4
- 262              		.cfi_offset 7, -4
- 263 0072 83B0     		sub	sp, sp, #12
- 264              	.LCFI14:
- 265              		.cfi_def_cfa_offset 16
- 266 0074 00AF     		add	r7, sp, #0
- 267              	.LCFI15:
- 268              		.cfi_def_cfa_register 7
- 269 0076 7860     		str	r0, [r7, #4]
- 270 0078 3960     		str	r1, [r7, #0]
- 271              	.L11:
+ 204              		.loc 2 84 0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 8
+ 207              		@ frame_needed = 1, uses_anonymous_args = 0
+ 208              		@ link register save eliminated.
+ 209 0070 80B4     		push	{r7}
+ 210              	.LCFI10:
+ 211              		.cfi_def_cfa_offset 4
+ 212              		.cfi_offset 7, -4
+ 213 0072 83B0     		sub	sp, sp, #12
+ 214              	.LCFI11:
+ 215              		.cfi_def_cfa_offset 16
+ 216 0074 00AF     		add	r7, sp, #0
+ 217              	.LCFI12:
+ 218              		.cfi_def_cfa_register 7
+ 219 0076 7860     		str	r0, [r7, #4]
+ 220 0078 3960     		str	r1, [r7, #0]
+ 221              	.L7:
   85:../main.cpp   **** 		/* TODO, implement your code here */
   86:../main.cpp   **** 		while(1);
- 272              		.loc 3 86 0 discriminator 1
- 273 007a FEE7     		b	.L11
- 274              		.cfi_endproc
- 275              	.LFE147:
- 277              		.align	2
- 278              		.global	EVAL_AUDIO_TransferComplete_CallBack
- 279              		.thumb
- 280              		.thumb_func
- 282              	EVAL_AUDIO_TransferComplete_CallBack:
- 283              	.LFB148:
+ 222              		.loc 2 86 0 discriminator 1
+ 223 007a FEE7     		b	.L7
+ 224              		.cfi_endproc
+ 225              	.LFE144:
+ 227              		.align	2
+ 228              		.global	EVAL_AUDIO_TransferComplete_CallBack
+ 229              		.thumb
+ 230              		.thumb_func
+ 232              	EVAL_AUDIO_TransferComplete_CallBack:
+ 233              	.LFB145:
   87:../main.cpp   **** 	}
   88:../main.cpp   **** 
   89:../main.cpp   **** 	/*
@@ -447,236 +366,221 @@
   91:../main.cpp   **** 	  * Refer to stm32f4_discovery_audio_codec.h for more info.
   92:../main.cpp   **** 	  */
   93:../main.cpp   **** 	void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
- 284              		.loc 3 93 0
- 285              		.cfi_startproc
- 286              		@ args = 0, pretend = 0, frame = 8
- 287              		@ frame_needed = 1, uses_anonymous_args = 0
- 288              		@ link register save eliminated.
- 289 007c 80B4     		push	{r7}
- 290              	.LCFI16:
- 291              		.cfi_def_cfa_offset 4
- 292              		.cfi_offset 7, -4
- 293 007e 83B0     		sub	sp, sp, #12
- 294              	.LCFI17:
- 295              		.cfi_def_cfa_offset 16
- 296 0080 00AF     		add	r7, sp, #0
- 297              	.LCFI18:
- 298              		.cfi_def_cfa_register 7
- 299 0082 7860     		str	r0, [r7, #4]
- 300 0084 3960     		str	r1, [r7, #0]
+ 234              		.loc 2 93 0
+ 235              		.cfi_startproc
+ 236              		@ args = 0, pretend = 0, frame = 8
+ 237              		@ frame_needed = 1, uses_anonymous_args = 0
+ 238              		@ link register save eliminated.
+ 239 007c 80B4     		push	{r7}
+ 240              	.LCFI13:
+ 241              		.cfi_def_cfa_offset 4
+ 242              		.cfi_offset 7, -4
+ 243 007e 83B0     		sub	sp, sp, #12
+ 244              	.LCFI14:
+ 245              		.cfi_def_cfa_offset 16
+ 246 0080 00AF     		add	r7, sp, #0
+ 247              	.LCFI15:
+ 248              		.cfi_def_cfa_register 7
+ 249 0082 7860     		str	r0, [r7, #4]
+ 250 0084 3960     		str	r1, [r7, #0]
   94:../main.cpp   **** 	   /* TODO, implement your code here */
   95:../main.cpp   **** 	   return;
   96:../main.cpp   **** 	}
- 301              		.loc 3 96 0
- 302 0086 07F10C07 		add	r7, r7, #12
- 303 008a BD46     		mov	sp, r7
- 304 008c 80BC     		pop	{r7}
- 305 008e 7047     		bx	lr
- 306              		.cfi_endproc
- 307              	.LFE148:
- 309              		.align	2
- 310              		.global	EVAL_AUDIO_GetSampleCallBack
- 311              		.thumb
- 312              		.thumb_func
- 314              	EVAL_AUDIO_GetSampleCallBack:
- 315              	.LFB149:
+ 251              		.loc 2 96 0
+ 252 0086 07F10C07 		add	r7, r7, #12
+ 253 008a BD46     		mov	sp, r7
+ 254 008c 80BC     		pop	{r7}
+ 255 008e 7047     		bx	lr
+ 256              		.cfi_endproc
+ 257              	.LFE145:
+ 259              		.align	2
+ 260              		.global	EVAL_AUDIO_GetSampleCallBack
+ 261              		.thumb
+ 262              		.thumb_func
+ 264              	EVAL_AUDIO_GetSampleCallBack:
+ 265              	.LFB146:
   97:../main.cpp   **** 
   98:../main.cpp   **** 	/*
   99:../main.cpp   **** 	  * Callback used by stm324xg_eval_audio_codec.c.
  100:../main.cpp   **** 	  * Refer to stm324xg_eval_audio_codec.h for more info.
  101:../main.cpp   **** 	  */
  102:../main.cpp   **** 	uint16_t EVAL_AUDIO_GetSampleCallBack(void){
- 316              		.loc 3 102 0
- 317              		.cfi_startproc
- 318              		@ args = 0, pretend = 0, frame = 0
- 319              		@ frame_needed = 1, uses_anonymous_args = 0
- 320              		@ link register save eliminated.
- 321 0090 80B4     		push	{r7}
- 322              	.LCFI19:
- 323              		.cfi_def_cfa_offset 4
- 324              		.cfi_offset 7, -4
- 325 0092 00AF     		add	r7, sp, #0
- 326              	.LCFI20:
- 327              		.cfi_def_cfa_register 7
+ 266              		.loc 2 102 0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 0
+ 269              		@ frame_needed = 1, uses_anonymous_args = 0
+ 270              		@ link register save eliminated.
+ 271 0090 80B4     		push	{r7}
+ 272              	.LCFI16:
+ 273              		.cfi_def_cfa_offset 4
+ 274              		.cfi_offset 7, -4
+ 275 0092 00AF     		add	r7, sp, #0
+ 276              	.LCFI17:
+ 277              		.cfi_def_cfa_register 7
  103:../main.cpp   **** 	   /* TODO, implement your code here */
  104:../main.cpp   **** 	   return -1;
- 328              		.loc 3 104 0
- 329 0094 4FF6FF73 		movw	r3, #65535
+ 278              		.loc 2 104 0
+ 279 0094 4FF6FF73 		movw	r3, #65535
  105:../main.cpp   **** 	}
- 330              		.loc 3 105 0
- 331 0098 1846     		mov	r0, r3
- 332 009a BD46     		mov	sp, r7
- 333 009c 80BC     		pop	{r7}
- 334 009e 7047     		bx	lr
- 335              		.cfi_endproc
- 336              	.LFE149:
- 338              		.align	2
- 339              		.thumb
- 340              		.thumb_func
- 342              	_Z41__static_initialization_and_destruction_0ii:
- 343              	.LFB150:
+ 280              		.loc 2 105 0
+ 281 0098 1846     		mov	r0, r3
+ 282 009a BD46     		mov	sp, r7
+ 283 009c 80BC     		pop	{r7}
+ 284 009e 7047     		bx	lr
+ 285              		.cfi_endproc
+ 286              	.LFE146:
+ 288              		.align	2
+ 289              		.thumb
+ 290              		.thumb_func
+ 292              	_Z41__static_initialization_and_destruction_0ii:
+ 293              	.LFB147:
  106:../main.cpp   **** } // extern "C"
- 344              		.loc 3 106 0
- 345              		.cfi_startproc
- 346              		@ args = 0, pretend = 0, frame = 16
- 347              		@ frame_needed = 1, uses_anonymous_args = 0
- 348 00a0 80B5     		push	{r7, lr}
- 349              	.LCFI21:
- 350              		.cfi_def_cfa_offset 8
- 351              		.cfi_offset 14, -4
- 352              		.cfi_offset 7, -8
- 353 00a2 84B0     		sub	sp, sp, #16
- 354              	.LCFI22:
- 355              		.cfi_def_cfa_offset 24
- 356 00a4 00AF     		add	r7, sp, #0
- 357              	.LCFI23:
- 358              		.cfi_def_cfa_register 7
- 359 00a6 7860     		str	r0, [r7, #4]
- 360 00a8 3960     		str	r1, [r7, #0]
- 361              		.loc 3 106 0
- 362 00aa 7B68     		ldr	r3, [r7, #4]
- 363 00ac 012B     		cmp	r3, #1
- 364 00ae 56D1     		bne	.L14
- 365              		.loc 3 106 0 is_stmt 0 discriminator 1
- 366 00b0 3A68     		ldr	r2, [r7, #0]
- 367 00b2 4FF6FF73 		movw	r3, #65535
- 368 00b6 9A42     		cmp	r2, r3
- 369 00b8 51D1     		bne	.L14
+ 294              		.loc 2 106 0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 8
+ 297              		@ frame_needed = 1, uses_anonymous_args = 0
+ 298 00a0 80B5     		push	{r7, lr}
+ 299              	.LCFI18:
+ 300              		.cfi_def_cfa_offset 8
+ 301              		.cfi_offset 14, -4
+ 302              		.cfi_offset 7, -8
+ 303 00a2 82B0     		sub	sp, sp, #8
+ 304              	.LCFI19:
+ 305              		.cfi_def_cfa_offset 16
+ 306 00a4 00AF     		add	r7, sp, #0
+ 307              	.LCFI20:
+ 308              		.cfi_def_cfa_register 7
+ 309 00a6 7860     		str	r0, [r7, #4]
+ 310 00a8 3960     		str	r1, [r7, #0]
+ 311              		.loc 2 106 0
+ 312 00aa 7B68     		ldr	r3, [r7, #4]
+ 313 00ac 012B     		cmp	r3, #1
+ 314 00ae 49D1     		bne	.L10
+ 315              		.loc 2 106 0 is_stmt 0 discriminator 1
+ 316 00b0 3A68     		ldr	r2, [r7, #0]
+ 317 00b2 4FF6FF73 		movw	r3, #65535
+ 318 00b6 9A42     		cmp	r2, r3
+ 319 00b8 44D1     		bne	.L10
   25:../main.cpp   **** CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
- 370              		.loc 3 25 0 is_stmt 1
- 371 00ba 40F20000 		movw	r0, #:lower16:g_LedTast
- 372 00be C0F20000 		movt	r0, #:upper16:g_LedTast
- 373 00c2 4FF03201 		mov	r1, #50
- 374 00c6 FFF7FEFF 		bl	_ZN24CLedHeartBeatSTM32F4DiscC1Em
- 375 00ca 40F20003 		movw	r3, #:lower16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
- 376 00ce C0F20003 		movt	r3, #:upper16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
- 377 00d2 40F20000 		movw	r0, #:lower16:g_LedTast
- 378 00d6 C0F20000 		movt	r0, #:upper16:g_LedTast
- 379 00da 1946     		mov	r1, r3
- 380 00dc 40F20002 		movw	r2, #:lower16:__dso_handle
- 381 00e0 C0F20002 		movt	r2, #:upper16:__dso_handle
- 382 00e4 FFF7FEFF 		bl	__aeabi_atexit
+ 320              		.loc 2 25 0 is_stmt 1
+ 321 00ba 40F20000 		movw	r0, #:lower16:g_LedTast
+ 322 00be C0F20000 		movt	r0, #:upper16:g_LedTast
+ 323 00c2 4FF03201 		mov	r1, #50
+ 324 00c6 FFF7FEFF 		bl	_ZN24CLedHeartBeatSTM32F4DiscC1Em
+ 325 00ca 40F20003 		movw	r3, #:lower16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
+ 326 00ce C0F20003 		movt	r3, #:upper16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
+ 327 00d2 40F20000 		movw	r0, #:lower16:g_LedTast
+ 328 00d6 C0F20000 		movt	r0, #:upper16:g_LedTast
+ 329 00da 1946     		mov	r1, r3
+ 330 00dc 40F20002 		movw	r2, #:lower16:__dso_handle
+ 331 00e0 C0F20002 		movt	r2, #:upper16:__dso_handle
+ 332 00e4 FFF7FEFF 		bl	__aeabi_atexit
   26:../main.cpp   **** CT6963_GPIO_Interface g_Display;
- 383              		.loc 3 26 0
- 384 00e8 40F20000 		movw	r0, #:lower16:g_Display
- 385 00ec C0F20000 		movt	r0, #:upper16:g_Display
- 386 00f0 FFF7FEFF 		bl	_ZN21CT6963_GPIO_InterfaceC1Ev
- 387 00f4 40F20003 		movw	r3, #:lower16:_ZN21CT6963_GPIO_InterfaceD1Ev
- 388 00f8 C0F20003 		movt	r3, #:upper16:_ZN21CT6963_GPIO_InterfaceD1Ev
- 389 00fc 40F20000 		movw	r0, #:lower16:g_Display
- 390 0100 C0F20000 		movt	r0, #:upper16:g_Display
- 391 0104 1946     		mov	r1, r3
- 392 0106 40F20002 		movw	r2, #:lower16:__dso_handle
- 393 010a C0F20002 		movt	r2, #:upper16:__dso_handle
- 394 010e FFF7FEFF 		bl	__aeabi_atexit
-  27:../main.cpp   **** CMenue	g_Menue(g_Display);
- 395              		.loc 3 27 0
- 396 0112 07F10803 		add	r3, r7, #8
- 397 0116 1846     		mov	r0, r3
- 398 0118 40F20001 		movw	r1, #:lower16:g_Display
- 399 011c C0F20001 		movt	r1, #:upper16:g_Display
- 400 0120 FFF7FEFF 		bl	_ZN11CGraphicLCDC1ERKS_
- 401 0124 07F10803 		add	r3, r7, #8
- 402 0128 40F20000 		movw	r0, #:lower16:g_Menue
- 403 012c C0F20000 		movt	r0, #:upper16:g_Menue
- 404 0130 1946     		mov	r1, r3
- 405 0132 FFF7FEFF 		bl	_ZN6CMenueC1E11CGraphicLCD
- 406 0136 07F10803 		add	r3, r7, #8
- 407 013a 1846     		mov	r0, r3
- 408 013c FFF7FEFF 		bl	_ZN11CGraphicLCDD1Ev
- 409 0140 40F20003 		movw	r3, #:lower16:_ZN6CMenueD1Ev
- 410 0144 C0F20003 		movt	r3, #:upper16:_ZN6CMenueD1Ev
- 411 0148 40F20000 		movw	r0, #:lower16:g_Menue
- 412 014c C0F20000 		movt	r0, #:upper16:g_Menue
- 413 0150 1946     		mov	r1, r3
- 414 0152 40F20002 		movw	r2, #:lower16:__dso_handle
- 415 0156 C0F20002 		movt	r2, #:upper16:__dso_handle
- 416 015a FFF7FEFF 		bl	__aeabi_atexit
- 417              	.L14:
- 418              		.loc 3 106 0
- 419 015e 07F11007 		add	r7, r7, #16
- 420 0162 BD46     		mov	sp, r7
- 421 0164 80BD     		pop	{r7, pc}
- 422              		.cfi_endproc
- 423              	.LFE150:
- 425              		.section	.rodata
- 426 0016 0000     		.align	2
- 429              	_ZL12c_FontNative:
- 430 0018 00000000 		.space	24
- 430      00000000 
- 430      00000000 
- 430      00000000 
- 430      00000000 
- 431              		.text
- 432 0166 00BF     		.align	2
- 433              		.thumb
- 434              		.thumb_func
- 436              	_GLOBAL__sub_I_g_LedTast:
- 437              	.LFB151:
- 438              		.loc 3 106 0
- 439              		.cfi_startproc
- 440              		@ args = 0, pretend = 0, frame = 0
- 441              		@ frame_needed = 1, uses_anonymous_args = 0
- 442 0168 80B5     		push	{r7, lr}
- 443              	.LCFI24:
- 444              		.cfi_def_cfa_offset 8
- 445              		.cfi_offset 14, -4
- 446              		.cfi_offset 7, -8
- 447 016a 00AF     		add	r7, sp, #0
- 448              	.LCFI25:
- 449              		.cfi_def_cfa_register 7
- 450              		.loc 3 106 0
- 451 016c 4FF00100 		mov	r0, #1
- 452 0170 4FF6FF71 		movw	r1, #65535
- 453 0174 FFF794FF 		bl	_Z41__static_initialization_and_destruction_0ii
- 454 0178 80BD     		pop	{r7, pc}
- 455              		.cfi_endproc
- 456              	.LFE151:
- 458              		.section	.init_array,"aw",%init_array
- 459              		.align	2
- 460 0000 00000000 		.word	_GLOBAL__sub_I_g_LedTast(target1)
- 461              		.weak	_ZN11CGraphicLCDC1ERKS_
- 462              		.thumb_set _ZN11CGraphicLCDC1ERKS_,_ZN11CGraphicLCDC2ERKS_
- 463              		.text
- 464              	.Letext0:
- 465              		.file 4 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 466              		.file 5 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source
- 467              		.file 6 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
- 468              		.file 7 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
- 469              		.file 8 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\GraphicLCD/CT6963CDriver.h"
+ 333              		.loc 2 26 0
+ 334 00e8 40F20000 		movw	r0, #:lower16:g_Display
+ 335 00ec C0F20000 		movt	r0, #:upper16:g_Display
+ 336 00f0 FFF7FEFF 		bl	_ZN21CT6963_GPIO_InterfaceC1Ev
+ 337 00f4 40F20003 		movw	r3, #:lower16:_ZN21CT6963_GPIO_InterfaceD1Ev
+ 338 00f8 C0F20003 		movt	r3, #:upper16:_ZN21CT6963_GPIO_InterfaceD1Ev
+ 339 00fc 40F20000 		movw	r0, #:lower16:g_Display
+ 340 0100 C0F20000 		movt	r0, #:upper16:g_Display
+ 341 0104 1946     		mov	r1, r3
+ 342 0106 40F20002 		movw	r2, #:lower16:__dso_handle
+ 343 010a C0F20002 		movt	r2, #:upper16:__dso_handle
+ 344 010e FFF7FEFF 		bl	__aeabi_atexit
+  27:../main.cpp   **** CMenue	g_Menue(&g_Display);
+ 345              		.loc 2 27 0
+ 346 0112 40F20000 		movw	r0, #:lower16:g_Menue
+ 347 0116 C0F20000 		movt	r0, #:upper16:g_Menue
+ 348 011a 40F20001 		movw	r1, #:lower16:g_Display
+ 349 011e C0F20001 		movt	r1, #:upper16:g_Display
+ 350 0122 FFF7FEFF 		bl	_ZN6CMenueC1EP11CGraphicLCD
+ 351 0126 40F20003 		movw	r3, #:lower16:_ZN6CMenueD1Ev
+ 352 012a C0F20003 		movt	r3, #:upper16:_ZN6CMenueD1Ev
+ 353 012e 40F20000 		movw	r0, #:lower16:g_Menue
+ 354 0132 C0F20000 		movt	r0, #:upper16:g_Menue
+ 355 0136 1946     		mov	r1, r3
+ 356 0138 40F20002 		movw	r2, #:lower16:__dso_handle
+ 357 013c C0F20002 		movt	r2, #:upper16:__dso_handle
+ 358 0140 FFF7FEFF 		bl	__aeabi_atexit
+ 359              	.L10:
+ 360              		.loc 2 106 0
+ 361 0144 07F10807 		add	r7, r7, #8
+ 362 0148 BD46     		mov	sp, r7
+ 363 014a 80BD     		pop	{r7, pc}
+ 364              		.cfi_endproc
+ 365              	.LFE147:
+ 367              		.section	.rodata
+ 368 0016 0000     		.align	2
+ 371              	_ZL12c_FontNative:
+ 372 0018 00000000 		.space	24
+ 372      00000000 
+ 372      00000000 
+ 372      00000000 
+ 372      00000000 
+ 373              		.text
+ 374              		.align	2
+ 375              		.thumb
+ 376              		.thumb_func
+ 378              	_GLOBAL__sub_I_g_LedTast:
+ 379              	.LFB148:
+ 380              		.loc 2 106 0
+ 381              		.cfi_startproc
+ 382              		@ args = 0, pretend = 0, frame = 0
+ 383              		@ frame_needed = 1, uses_anonymous_args = 0
+ 384 014c 80B5     		push	{r7, lr}
+ 385              	.LCFI21:
+ 386              		.cfi_def_cfa_offset 8
+ 387              		.cfi_offset 14, -4
+ 388              		.cfi_offset 7, -8
+ 389 014e 00AF     		add	r7, sp, #0
+ 390              	.LCFI22:
+ 391              		.cfi_def_cfa_register 7
+ 392              		.loc 2 106 0
+ 393 0150 4FF00100 		mov	r0, #1
+ 394 0154 4FF6FF71 		movw	r1, #65535
+ 395 0158 FFF7A2FF 		bl	_Z41__static_initialization_and_destruction_0ii
+ 396 015c 80BD     		pop	{r7, pc}
+ 397              		.cfi_endproc
+ 398              	.LFE148:
+ 400              		.section	.init_array,"aw",%init_array
+ 401              		.align	2
+ 402 0000 00000000 		.word	_GLOBAL__sub_I_g_LedTast(target1)
+ 403              		.text
+ 404              	.Letext0:
+ 405              		.file 3 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 406              		.file 4 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source
+ 407              		.file 5 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
+ 408              		.file 6 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\GraphicLCD/CGraphicLCD.h"
+ 409              		.file 7 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 410              		.file 8 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\GraphicLCD/CT6963CDriver.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.cpp
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:50     .bss:00000000 g_LedTast
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:47     .bss:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:56     .bss:00000014 g_Display
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:59     .text._ZN11CGraphicLCDC2ERKS_:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:64     .text._ZN11CGraphicLCDC2ERKS_:00000000 _ZN11CGraphicLCDC2ERKS_
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:103    .text._ZN11CGraphicLCDC2ERKS_:00000028 $d
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:112    .bss:0000001c g_Menue
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:115    .rodata:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:116    .rodata:00000000 .LC0
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:119    .rodata:00000010 .LC1
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:122    .text:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:127    .text:00000000 main
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:174    .text:0000004c vApplicationTickHook
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:200    .text:00000058 vApplicationIdleHook
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:226    .text:00000064 vApplicationMallocFailedHook
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:252    .text:00000070 vApplicationStackOverflowHook
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:282    .text:0000007c EVAL_AUDIO_TransferComplete_CallBack
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:314    .text:00000090 EVAL_AUDIO_GetSampleCallBack
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:342    .text:000000a0 _Z41__static_initialization_and_destruction_0ii
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:64     .text._ZN11CGraphicLCDC2ERKS_:00000000 _ZN11CGraphicLCDC1ERKS_
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:429    .rodata:00000018 _ZL12c_FontNative
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:436    .text:00000168 _GLOBAL__sub_I_g_LedTast
-C:\Users\Alex\AppData\Local\Temp\ccDq0fwq.s:459    .init_array:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:50     .bss:00000000 g_LedTast
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:47     .bss:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:56     .bss:00000014 g_Display
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:62     .bss:0000001c g_Menue
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:65     .rodata:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:66     .rodata:00000000 .LC0
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:69     .rodata:00000010 .LC1
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:72     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:77     .text:00000000 main
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:124    .text:0000004c vApplicationTickHook
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:150    .text:00000058 vApplicationIdleHook
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:176    .text:00000064 vApplicationMallocFailedHook
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:202    .text:00000070 vApplicationStackOverflowHook
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:232    .text:0000007c EVAL_AUDIO_TransferComplete_CallBack
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:264    .text:00000090 EVAL_AUDIO_GetSampleCallBack
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:292    .text:000000a0 _Z41__static_initialization_and_destruction_0ii
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:371    .rodata:00000018 _ZL12c_FontNative
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:378    .text:0000014c _GLOBAL__sub_I_g_LedTast
+C:\Users\Alex\AppData\Local\Temp\ccVD1Vxb.s:401    .init_array:00000000 $d
                      .debug_frame:00000010 $d
-                           .group:00000000 _ZN11CGraphicLCDC5ERKS_
 
 UNDEFINED SYMBOLS
 vTaskStartScheduler
-_ZTV11CGraphicLCD
 _ZN12AManagedTask6CreateEPKctm
 _ZN9CFreeRTOS27InitHardwareForManagedTasksEv
 _ZN24CLedHeartBeatSTM32F4DiscC1Em
@@ -685,6 +589,5 @@ __dso_handle
 __aeabi_atexit
 _ZN21CT6963_GPIO_InterfaceC1Ev
 _ZN21CT6963_GPIO_InterfaceD1Ev
-_ZN6CMenueC1E11CGraphicLCD
-_ZN11CGraphicLCDD1Ev
+_ZN6CMenueC1EP11CGraphicLCD
 _ZN6CMenueD1Ev

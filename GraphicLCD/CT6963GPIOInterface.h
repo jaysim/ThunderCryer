@@ -56,7 +56,7 @@ private:
 	  * @param  None
 	  * @retval data from display
 	  */
-	unsigned char ReadData() const;
+	unsigned char ReadData();
 
 public:
 	CT6963_GPIO_Interface();

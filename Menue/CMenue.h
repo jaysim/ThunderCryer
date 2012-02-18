@@ -22,13 +22,13 @@
 
 class CMenue: public AManagedTask {
 private:
-	CGraphicLCD &glcd;
+	CGraphicLCD *glcd;
 public:
 	bool HardwareInit(void);
 	void Run(void);
 
-	CMenue(CGraphicLCD display);
-	virtual ~CMenue();
+	CMenue(CGraphicLCD *display);
+	~CMenue();
 };
 
 #endif /* CMENUE_H_ */

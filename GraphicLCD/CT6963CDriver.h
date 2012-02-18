@@ -29,35 +29,35 @@ private:
 	  * @param  None
 	  * @retval None
 	  */
-	virtual void HardwareInit(void);
+	virtual void HardwareInit(void) = 0;
 
 	/**
 	  * @brief  Reset the Display
 	  * @param  None
 	  * @retval None
 	  */
-	virtual void Reset(void);
+	virtual void Reset(void) = 0;
 
 	/**
 	  * @brief  writes a command
 	  * @param  command
 	  * @retval None
 	  */
-	virtual void WriteCommand(const unsigned char command);
+	virtual void WriteCommand(const unsigned char command) = 0;
 
 	/**
 	  * @brief  writes a data
 	  * @param  data
 	  * @retval None
 	  */
-	virtual void WriteData(const unsigned char data);
+	virtual void WriteData(const unsigned char data) = 0;
 
 	/**
 	  * @brief  reads data from display
 	  * @param  None
 	  * @retval data from display
 	  */
-	virtual unsigned char ReadData() const;
+	virtual unsigned char ReadData() = 0;
 
 	/**
 	  * @brief  set address pointer in T6963C
@@ -136,14 +136,14 @@ public:
 	  * @param  x1,y1,width, height
 	  * @retval None
 	  */
-	virtual void SectorClear(unsigned int x,unsigned int y,unsigned int width,unsigned int height);
+	void SectorClear(unsigned int x,unsigned int y,unsigned int width,unsigned int height);
 
 	/**
 	  * @brief  draw a circle with center at (cx,cy) and specified radius
 	  * @param  x1,y1,width,
 	  * @retval None
 	  */
-	virtual void Circle(unsigned char cx, unsigned char cy ,unsigned char radius);
+	void Circle(unsigned char cx, unsigned char cy ,unsigned char radius);
 
 	/**
 	  * @brief  writes a string starting at upper left corner on (x,y) and specified font
