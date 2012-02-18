@@ -10,10 +10,36 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "CT6963GPIOInterface.h"
+#include "FreeRTOS.h"
+#include "ustime.h"
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+
+// data port
+#define GLCD_DATA_PORT 			GPIOE
+#define GLCD_DATA_PORT_MASK 	0xff00
+#define GLCD_DATA_MODE_MASK_IN 	0xffff0000
+#define GLCD_DATA_MODE_MASK_OUT	0x55550000
+#define GLCD_DATA_OFFSET		8
+#define GLCD_DATA_INPUT 		GLCD_DATA_PORT->MODER &= ~GLCD_DATA_MODE_MASK_IN;
+#define GLCD_DATA_OUTPUT		GLCD_DATA_PORT->MODER |= GLCD_DATA_MODE_MASK_OUT;
+
+// control port
+#define GLCD_CTRL_PORT_CD_RD	GPIOC
+#define GLCD_CTRL_PORT_WR_CE	GPIOB
+
+// control signals
+#define GLCD_WR			GPIO_Pin_0
+#define GLCD_RD			GPIO_Pin_5
+#define GLCD_CE			GPIO_Pin_1
+#define GLCD_CD			GPIO_Pin_4
+#define GLCD_RESET		GPIO_Pin_11
+
+const unsigned int c_iDelayFore = 3;
+const unsigned int c_iDelayAfter = 1;
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -31,60 +57,11 @@ CT6963_GPIO_Interface::~CT6963_GPIO_Interface() {
 }
 
 /**
-  * @brief  delay function
-  * @param  None
-  * @retval None
-  *
-  * considering several approaches FSMC interface is beautiful but has one drawback R50 on the Discovery has to be removed
-  * the next approach was to realize the delay with an Timer an binary semaphore but with 2 to 5µs Delay and approximately 1µs
-  * for one context switch and maybe 10 commands in between 2 delays the Os would be switched to death.
-  * longer delays for 1 tick or something in this region would slow down the display interface by factor 500 or more
-  */
-
-
-
-
-GPIO_InitTypeDef GPIO_InitStructure;
-// activate Clock for Io Ports used
-RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB , ENABLE);
-RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC , ENABLE);
-RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE , ENABLE);
-
-init_us_timer();
-
-// all pins as pp outouts with no pull
-GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-GPIO_InitStructure.GPIO_Speed = GPIO_Speed_25MHz;
-
-//Controlpins CD and RD
-GPIO_InitStructure.GPIO_Pin = GLCD_CD | GLCD_RD;
-GPIO_Init(GLCD_CTRL_PORT_CD_RD,&GPIO_InitStructure);
-//Conrolpins WR, CE and RST
-GPIO_InitStructure.GPIO_Pin = GLCD_WR | GLCD_CE | GLCD_RESET;
-GPIO_Init(GLCD_CTRL_PORT_WR_CE,&GPIO_InitStructure);
-
-// data pins are highbyte
-GPIO_InitStructure.GPIO_Pin = GLCD_DATA_PORT_MASK;
-GPIO_Init(GLCD_DATA_PORT,&GPIO_InitStructure);
-
-//Set all Controlpins to high level
-GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR | GLCD_CE );
-
-GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
-
-vTaskDelay(5);  // sleep 5 ms
-
-GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
-
-
-/**
   * @brief  reads T6963C status byte
   * @param  None
   * @retval true for display ready
   */
-bool CGraphicLCD::CheckStatus(void)
+bool CheckStatus(void)
 {
 
 	uint16_t tmp;
@@ -93,16 +70,71 @@ bool CGraphicLCD::CheckStatus(void)
 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD);
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
 
-	delay();
+	delay_us(c_iDelayFore);
 
 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD);GLCD_DATA_OUTPUT;
 
-	delay();
+	delay_us(c_iDelayAfter);
 
 	return (tmp&0x03==0x03);
+}
+
+
+
+/**
+  * @brief  initialize Hardware to drive the display
+  * @param  None
+  * @retval None
+  */
+void CT6963_GPIO_Interface::HardwareInit(void){
+
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+	// activate Clock for Io Ports used
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB , ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC , ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE , ENABLE);
+
+	init_us_timer();
+
+	// all pins as pp outputs with no pull
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_25MHz;
+
+	//Control pins CD and RD
+	GPIO_InitStructure.GPIO_Pin = GLCD_CD | GLCD_RD;
+	GPIO_Init(GLCD_CTRL_PORT_CD_RD,&GPIO_InitStructure);
+	//Control pins WR, CE and RST
+	GPIO_InitStructure.GPIO_Pin = GLCD_WR | GLCD_CE | GLCD_RESET;
+	GPIO_Init(GLCD_CTRL_PORT_WR_CE,&GPIO_InitStructure);
+
+	// data pins are high byte
+	GPIO_InitStructure.GPIO_Pin = GLCD_DATA_PORT_MASK;
+	GPIO_Init(GLCD_DATA_PORT,&GPIO_InitStructure);
+
+	//Set all Control pins to high level
+	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR | GLCD_CE );
+
+}
+
+/**
+  * @brief  Reset the Display
+  * @param  None
+  * @retval None
+  */
+void CT6963_GPIO_Interface::Reset(void){
+
+	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
+
+	vTaskDelay(20);  // sleep 20 ms
+
+	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
+
 }
 
 /**
@@ -110,8 +142,8 @@ bool CGraphicLCD::CheckStatus(void)
   * @param  command
   * @retval None
   */
-void CGraphicLCD::WriteCommand(unsigned char command)
-{
+void CT6963_GPIO_Interface::WriteCommand(const unsigned char command){
+
 	while(!CheckStatus());
 
 	GLCD_DATA_PORT->ODR &= ~GLCD_DATA_PORT_MASK;  //Clear Data pins
@@ -120,22 +152,21 @@ void CGraphicLCD::WriteCommand(unsigned char command)
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
 
-	Delay();   // time for display to read the data
+	delay_us(c_iDelayFore);   // time for display to read the data
 
-	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
 
-	Delay();
 
+	delay_us(c_iDelayAfter);
 }
 
 /**
-  * @brief  writes data
+  * @brief  writes a data
   * @param  data
   * @retval None
   */
-void CGraphicLCD::WriteData(unsigned char data)
-{
+void CT6963_GPIO_Interface::WriteData(const unsigned char data){
 	while(!CheckStatus());
 
 	GLCD_DATA_PORT->ODR &= ~GLCD_DATA_PORT_MASK;  //Clear Data pins
@@ -145,38 +176,37 @@ void CGraphicLCD::WriteData(unsigned char data)
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
 
-	Delay();
+	delay_us(c_iDelayFore);
 
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD);
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
 
-	Delay();
+	delay_us(c_iDelayAfter);
 }
 
-
 /**
-  * @brief  reads data from T6963c
+  * @brief  reads data from display
   * @param  None
-  * @retval data byte
+  * @retval data from display
   */
-unsigned char CGraphicLCD::ReadData(void){
+unsigned char CT6963_GPIO_Interface::ReadData() const{
 	uint16_t tmp;
-	while(!GLCD_CheckStatus());
+	while(!CheckStatus());
 
 	GLCD_DATA_INPUT;
 
 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
 
-	Delay();
+	delay_us(c_iDelayFore);
 
 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);
 
-	Delay();
+	delay_us(c_iDelayAfter);
 
 	GLCD_DATA_OUTPUT;
 	return (unsigned char)tmp;
