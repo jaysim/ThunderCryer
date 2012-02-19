@@ -15,13 +15,14 @@
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.align	2
-  19              		.global	DBGMCU_GetREVID
-  20              		.thumb
-  21              		.thumb_func
-  23              	DBGMCU_GetREVID:
-  24              	.LFB110:
-  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c"
+  18              		.section	.text.DBGMCU_GetREVID,"ax",%progbits
+  19              		.align	2
+  20              		.global	DBGMCU_GetREVID
+  21              		.thumb
+  22              		.thumb_func
+  24              	DBGMCU_GetREVID:
+  25              	.LFB110:
+  26              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c"
    1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
    2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   ******************************************************************************
    3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @file    stm32f4xx_dbgmcu.c
@@ -75,38 +76,39 @@
   51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
   52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** uint32_t DBGMCU_GetREVID(void)
   53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
-  26              		.loc 1 53 0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 0
-  29              		@ frame_needed = 1, uses_anonymous_args = 0
-  30              		@ link register save eliminated.
-  31 0000 80B4     		push	{r7}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 4
-  34              		.cfi_offset 7, -4
-  35 0002 00AF     		add	r7, sp, #0
-  36              	.LCFI1:
-  37              		.cfi_def_cfa_register 7
+  27              		.loc 1 53 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_register 7
   54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****    return(DBGMCU->IDCODE >> 16);
-  38              		.loc 1 54 0
-  39 0004 4FF40053 		mov	r3, #8192
-  40 0008 CEF20403 		movt	r3, 57348
-  41 000c 1B68     		ldr	r3, [r3, #0]
-  42 000e 4FEA1343 		lsr	r3, r3, #16
+  39              		.loc 1 54 0
+  40 0004 4FF40053 		mov	r3, #8192
+  41 0008 CEF20403 		movt	r3, 57348
+  42 000c 1B68     		ldr	r3, [r3, #0]
+  43 000e 4FEA1343 		lsr	r3, r3, #16
   55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
-  43              		.loc 1 55 0
-  44 0012 1846     		mov	r0, r3
-  45 0014 BD46     		mov	sp, r7
-  46 0016 80BC     		pop	{r7}
-  47 0018 7047     		bx	lr
-  48              		.cfi_endproc
-  49              	.LFE110:
-  51 001a 00BF     		.align	2
-  52              		.global	DBGMCU_GetDEVID
-  53              		.thumb
-  54              		.thumb_func
-  56              	DBGMCU_GetDEVID:
-  57              	.LFB111:
+  44              		.loc 1 55 0
+  45 0012 1846     		mov	r0, r3
+  46 0014 BD46     		mov	sp, r7
+  47 0016 80BC     		pop	{r7}
+  48 0018 7047     		bx	lr
+  49              		.cfi_endproc
+  50              	.LFE110:
+  52 001a 00BF     		.section	.text.DBGMCU_GetDEVID,"ax",%progbits
+  53              		.align	2
+  54              		.global	DBGMCU_GetDEVID
+  55              		.thumb
+  56              		.thumb_func
+  58              	DBGMCU_GetDEVID:
+  59              	.LFB111:
   56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
   57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
   58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Returns the device identifier.
@@ -115,39 +117,40 @@
   61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
   62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** uint32_t DBGMCU_GetDEVID(void)
   63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
-  58              		.loc 1 63 0
-  59              		.cfi_startproc
-  60              		@ args = 0, pretend = 0, frame = 0
-  61              		@ frame_needed = 1, uses_anonymous_args = 0
-  62              		@ link register save eliminated.
-  63 001c 80B4     		push	{r7}
-  64              	.LCFI2:
-  65              		.cfi_def_cfa_offset 4
-  66              		.cfi_offset 7, -4
-  67 001e 00AF     		add	r7, sp, #0
-  68              	.LCFI3:
-  69              		.cfi_def_cfa_register 7
+  60              		.loc 1 63 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 1, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  65 0000 80B4     		push	{r7}
+  66              	.LCFI2:
+  67              		.cfi_def_cfa_offset 4
+  68              		.cfi_offset 7, -4
+  69 0002 00AF     		add	r7, sp, #0
+  70              	.LCFI3:
+  71              		.cfi_def_cfa_register 7
   64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****    return(DBGMCU->IDCODE & IDCODE_DEVID_MASK);
-  70              		.loc 1 64 0
-  71 0020 4FF40053 		mov	r3, #8192
-  72 0024 CEF20403 		movt	r3, 57348
-  73 0028 1B68     		ldr	r3, [r3, #0]
-  74 002a 4FEA0353 		lsl	r3, r3, #20
-  75 002e 4FEA1353 		lsr	r3, r3, #20
+  72              		.loc 1 64 0
+  73 0004 4FF40053 		mov	r3, #8192
+  74 0008 CEF20403 		movt	r3, 57348
+  75 000c 1B68     		ldr	r3, [r3, #0]
+  76 000e 4FEA0353 		lsl	r3, r3, #20
+  77 0012 4FEA1353 		lsr	r3, r3, #20
   65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
-  76              		.loc 1 65 0
-  77 0032 1846     		mov	r0, r3
-  78 0034 BD46     		mov	sp, r7
-  79 0036 80BC     		pop	{r7}
-  80 0038 7047     		bx	lr
-  81              		.cfi_endproc
-  82              	.LFE111:
-  84 003a 00BF     		.align	2
-  85              		.global	DBGMCU_Config
-  86              		.thumb
-  87              		.thumb_func
-  89              	DBGMCU_Config:
-  90              	.LFB112:
+  78              		.loc 1 65 0
+  79 0016 1846     		mov	r0, r3
+  80 0018 BD46     		mov	sp, r7
+  81 001a 80BC     		pop	{r7}
+  82 001c 7047     		bx	lr
+  83              		.cfi_endproc
+  84              	.LFE111:
+  86 001e 00BF     		.section	.text.DBGMCU_Config,"ax",%progbits
+  87              		.align	2
+  88              		.global	DBGMCU_Config
+  89              		.thumb
+  90              		.thumb_func
+  92              	DBGMCU_Config:
+  93              	.LFB112:
   66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
   67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
   68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Configures low power mode behavior when the MCU is in Debug mode.
@@ -162,77 +165,78 @@
   77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
   78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState)
   79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
-  91              		.loc 1 79 0
-  92              		.cfi_startproc
-  93              		@ args = 0, pretend = 0, frame = 8
-  94              		@ frame_needed = 1, uses_anonymous_args = 0
-  95              		@ link register save eliminated.
-  96 003c 80B4     		push	{r7}
-  97              	.LCFI4:
-  98              		.cfi_def_cfa_offset 4
-  99              		.cfi_offset 7, -4
- 100 003e 83B0     		sub	sp, sp, #12
- 101              	.LCFI5:
- 102              		.cfi_def_cfa_offset 16
- 103 0040 00AF     		add	r7, sp, #0
- 104              	.LCFI6:
- 105              		.cfi_def_cfa_register 7
- 106 0042 7860     		str	r0, [r7, #4]
- 107 0044 0B46     		mov	r3, r1
- 108 0046 FB70     		strb	r3, [r7, #3]
+  94              		.loc 1 79 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 8
+  97              		@ frame_needed = 1, uses_anonymous_args = 0
+  98              		@ link register save eliminated.
+  99 0000 80B4     		push	{r7}
+ 100              	.LCFI4:
+ 101              		.cfi_def_cfa_offset 4
+ 102              		.cfi_offset 7, -4
+ 103 0002 83B0     		sub	sp, sp, #12
+ 104              	.LCFI5:
+ 105              		.cfi_def_cfa_offset 16
+ 106 0004 00AF     		add	r7, sp, #0
+ 107              	.LCFI6:
+ 108              		.cfi_def_cfa_register 7
+ 109 0006 7860     		str	r0, [r7, #4]
+ 110 0008 0B46     		mov	r3, r1
+ 111 000a FB70     		strb	r3, [r7, #3]
   80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   /* Check the parameters */
   81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_DBGMCU_PERIPH(DBGMCU_Periph));
   82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
   83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   if (NewState != DISABLE)
- 109              		.loc 1 83 0
- 110 0048 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 111 004a 002B     		cmp	r3, #0
- 112 004c 0DD0     		beq	.L4
+ 112              		.loc 1 83 0
+ 113 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 114 000e 002B     		cmp	r3, #0
+ 115 0010 0DD0     		beq	.L4
   84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
   85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->CR |= DBGMCU_Periph;
- 113              		.loc 1 85 0
- 114 004e 4FF40053 		mov	r3, #8192
- 115 0052 CEF20403 		movt	r3, 57348
- 116 0056 4FF40052 		mov	r2, #8192
- 117 005a CEF20402 		movt	r2, 57348
- 118 005e 5268     		ldr	r2, [r2, #4]
- 119 0060 1146     		mov	r1, r2
- 120 0062 7A68     		ldr	r2, [r7, #4]
- 121 0064 0A43     		orrs	r2, r2, r1
- 122 0066 5A60     		str	r2, [r3, #4]
- 123 0068 0EE0     		b	.L3
- 124              	.L4:
+ 116              		.loc 1 85 0
+ 117 0012 4FF40053 		mov	r3, #8192
+ 118 0016 CEF20403 		movt	r3, 57348
+ 119 001a 4FF40052 		mov	r2, #8192
+ 120 001e CEF20402 		movt	r2, 57348
+ 121 0022 5268     		ldr	r2, [r2, #4]
+ 122 0024 1146     		mov	r1, r2
+ 123 0026 7A68     		ldr	r2, [r7, #4]
+ 124 0028 0A43     		orrs	r2, r2, r1
+ 125 002a 5A60     		str	r2, [r3, #4]
+ 126 002c 0EE0     		b	.L3
+ 127              	.L4:
   86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
   87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   else
   88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
   89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->CR &= ~DBGMCU_Periph;
- 125              		.loc 1 89 0
- 126 006a 4FF40053 		mov	r3, #8192
- 127 006e CEF20403 		movt	r3, 57348
- 128 0072 4FF40052 		mov	r2, #8192
- 129 0076 CEF20402 		movt	r2, 57348
- 130 007a 5268     		ldr	r2, [r2, #4]
- 131 007c 1146     		mov	r1, r2
- 132 007e 7A68     		ldr	r2, [r7, #4]
- 133 0080 6FEA0202 		mvn	r2, r2
- 134 0084 0A40     		ands	r2, r2, r1
- 135 0086 5A60     		str	r2, [r3, #4]
- 136              	.L3:
+ 128              		.loc 1 89 0
+ 129 002e 4FF40053 		mov	r3, #8192
+ 130 0032 CEF20403 		movt	r3, 57348
+ 131 0036 4FF40052 		mov	r2, #8192
+ 132 003a CEF20402 		movt	r2, 57348
+ 133 003e 5268     		ldr	r2, [r2, #4]
+ 134 0040 1146     		mov	r1, r2
+ 135 0042 7A68     		ldr	r2, [r7, #4]
+ 136 0044 6FEA0202 		mvn	r2, r2
+ 137 0048 0A40     		ands	r2, r2, r1
+ 138 004a 5A60     		str	r2, [r3, #4]
+ 139              	.L3:
   90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
   91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
- 137              		.loc 1 91 0
- 138 0088 07F10C07 		add	r7, r7, #12
- 139 008c BD46     		mov	sp, r7
- 140 008e 80BC     		pop	{r7}
- 141 0090 7047     		bx	lr
- 142              		.cfi_endproc
- 143              	.LFE112:
- 145 0092 00BF     		.align	2
- 146              		.global	DBGMCU_APB1PeriphConfig
- 147              		.thumb
- 148              		.thumb_func
- 150              	DBGMCU_APB1PeriphConfig:
- 151              	.LFB113:
+ 140              		.loc 1 91 0
+ 141 004c 07F10C07 		add	r7, r7, #12
+ 142 0050 BD46     		mov	sp, r7
+ 143 0052 80BC     		pop	{r7}
+ 144 0054 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE112:
+ 148 0056 00BF     		.section	.text.DBGMCU_APB1PeriphConfig,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	DBGMCU_APB1PeriphConfig
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	DBGMCU_APB1PeriphConfig:
+ 155              	.LFB113:
   92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
   93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
   94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Configures APB1 peripheral behavior when the MCU is in Debug mode.
@@ -260,78 +264,79 @@
  116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
  117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** void DBGMCU_APB1PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
  118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
- 152              		.loc 1 118 0
- 153              		.cfi_startproc
- 154              		@ args = 0, pretend = 0, frame = 8
- 155              		@ frame_needed = 1, uses_anonymous_args = 0
- 156              		@ link register save eliminated.
- 157 0094 80B4     		push	{r7}
- 158              	.LCFI7:
- 159              		.cfi_def_cfa_offset 4
- 160              		.cfi_offset 7, -4
- 161 0096 83B0     		sub	sp, sp, #12
- 162              	.LCFI8:
- 163              		.cfi_def_cfa_offset 16
- 164 0098 00AF     		add	r7, sp, #0
- 165              	.LCFI9:
- 166              		.cfi_def_cfa_register 7
- 167 009a 7860     		str	r0, [r7, #4]
- 168 009c 0B46     		mov	r3, r1
- 169 009e FB70     		strb	r3, [r7, #3]
+ 156              		.loc 1 118 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 8
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
+ 161 0000 80B4     		push	{r7}
+ 162              	.LCFI7:
+ 163              		.cfi_def_cfa_offset 4
+ 164              		.cfi_offset 7, -4
+ 165 0002 83B0     		sub	sp, sp, #12
+ 166              	.LCFI8:
+ 167              		.cfi_def_cfa_offset 16
+ 168 0004 00AF     		add	r7, sp, #0
+ 169              	.LCFI9:
+ 170              		.cfi_def_cfa_register 7
+ 171 0006 7860     		str	r0, [r7, #4]
+ 172 0008 0B46     		mov	r3, r1
+ 173 000a FB70     		strb	r3, [r7, #3]
  119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   /* Check the parameters */
  120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_DBGMCU_APB1PERIPH(DBGMCU_Periph));
  121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
  123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   if (NewState != DISABLE)
- 170              		.loc 1 123 0
- 171 00a0 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 172 00a2 002B     		cmp	r3, #0
- 173 00a4 0DD0     		beq	.L7
+ 174              		.loc 1 123 0
+ 175 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 176 000e 002B     		cmp	r3, #0
+ 177 0010 0DD0     		beq	.L7
  124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
  125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB1FZ |= DBGMCU_Periph;
- 174              		.loc 1 125 0
- 175 00a6 4FF40053 		mov	r3, #8192
- 176 00aa CEF20403 		movt	r3, 57348
- 177 00ae 4FF40052 		mov	r2, #8192
- 178 00b2 CEF20402 		movt	r2, 57348
- 179 00b6 9268     		ldr	r2, [r2, #8]
- 180 00b8 1146     		mov	r1, r2
- 181 00ba 7A68     		ldr	r2, [r7, #4]
- 182 00bc 0A43     		orrs	r2, r2, r1
- 183 00be 9A60     		str	r2, [r3, #8]
- 184 00c0 0EE0     		b	.L6
- 185              	.L7:
+ 178              		.loc 1 125 0
+ 179 0012 4FF40053 		mov	r3, #8192
+ 180 0016 CEF20403 		movt	r3, 57348
+ 181 001a 4FF40052 		mov	r2, #8192
+ 182 001e CEF20402 		movt	r2, 57348
+ 183 0022 9268     		ldr	r2, [r2, #8]
+ 184 0024 1146     		mov	r1, r2
+ 185 0026 7A68     		ldr	r2, [r7, #4]
+ 186 0028 0A43     		orrs	r2, r2, r1
+ 187 002a 9A60     		str	r2, [r3, #8]
+ 188 002c 0EE0     		b	.L6
+ 189              	.L7:
  126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
  127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   else
  128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
  129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB1FZ &= ~DBGMCU_Periph;
- 186              		.loc 1 129 0
- 187 00c2 4FF40053 		mov	r3, #8192
- 188 00c6 CEF20403 		movt	r3, 57348
- 189 00ca 4FF40052 		mov	r2, #8192
- 190 00ce CEF20402 		movt	r2, 57348
- 191 00d2 9268     		ldr	r2, [r2, #8]
- 192 00d4 1146     		mov	r1, r2
- 193 00d6 7A68     		ldr	r2, [r7, #4]
- 194 00d8 6FEA0202 		mvn	r2, r2
- 195 00dc 0A40     		ands	r2, r2, r1
- 196 00de 9A60     		str	r2, [r3, #8]
- 197              	.L6:
+ 190              		.loc 1 129 0
+ 191 002e 4FF40053 		mov	r3, #8192
+ 192 0032 CEF20403 		movt	r3, 57348
+ 193 0036 4FF40052 		mov	r2, #8192
+ 194 003a CEF20402 		movt	r2, 57348
+ 195 003e 9268     		ldr	r2, [r2, #8]
+ 196 0040 1146     		mov	r1, r2
+ 197 0042 7A68     		ldr	r2, [r7, #4]
+ 198 0044 6FEA0202 		mvn	r2, r2
+ 199 0048 0A40     		ands	r2, r2, r1
+ 200 004a 9A60     		str	r2, [r3, #8]
+ 201              	.L6:
  130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
  131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
- 198              		.loc 1 131 0
- 199 00e0 07F10C07 		add	r7, r7, #12
- 200 00e4 BD46     		mov	sp, r7
- 201 00e6 80BC     		pop	{r7}
- 202 00e8 7047     		bx	lr
- 203              		.cfi_endproc
- 204              	.LFE113:
- 206 00ea 00BF     		.align	2
- 207              		.global	DBGMCU_APB2PeriphConfig
- 208              		.thumb
- 209              		.thumb_func
- 211              	DBGMCU_APB2PeriphConfig:
- 212              	.LFB114:
+ 202              		.loc 1 131 0
+ 203 004c 07F10C07 		add	r7, r7, #12
+ 204 0050 BD46     		mov	sp, r7
+ 205 0052 80BC     		pop	{r7}
+ 206 0054 7047     		bx	lr
+ 207              		.cfi_endproc
+ 208              	.LFE113:
+ 210 0056 00BF     		.section	.text.DBGMCU_APB2PeriphConfig,"ax",%progbits
+ 211              		.align	2
+ 212              		.global	DBGMCU_APB2PeriphConfig
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	DBGMCU_APB2PeriphConfig:
+ 217              	.LFB114:
  132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
  133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
  134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Configures APB2 peripheral behavior when the MCU is in Debug mode.
@@ -348,84 +353,89 @@
  145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
  146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** void DBGMCU_APB2PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
  147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
- 213              		.loc 1 147 0
- 214              		.cfi_startproc
- 215              		@ args = 0, pretend = 0, frame = 8
- 216              		@ frame_needed = 1, uses_anonymous_args = 0
- 217              		@ link register save eliminated.
- 218 00ec 80B4     		push	{r7}
- 219              	.LCFI10:
- 220              		.cfi_def_cfa_offset 4
- 221              		.cfi_offset 7, -4
- 222 00ee 83B0     		sub	sp, sp, #12
- 223              	.LCFI11:
- 224              		.cfi_def_cfa_offset 16
- 225 00f0 00AF     		add	r7, sp, #0
- 226              	.LCFI12:
- 227              		.cfi_def_cfa_register 7
- 228 00f2 7860     		str	r0, [r7, #4]
- 229 00f4 0B46     		mov	r3, r1
- 230 00f6 FB70     		strb	r3, [r7, #3]
+ 218              		.loc 1 147 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 8
+ 221              		@ frame_needed = 1, uses_anonymous_args = 0
+ 222              		@ link register save eliminated.
+ 223 0000 80B4     		push	{r7}
+ 224              	.LCFI10:
+ 225              		.cfi_def_cfa_offset 4
+ 226              		.cfi_offset 7, -4
+ 227 0002 83B0     		sub	sp, sp, #12
+ 228              	.LCFI11:
+ 229              		.cfi_def_cfa_offset 16
+ 230 0004 00AF     		add	r7, sp, #0
+ 231              	.LCFI12:
+ 232              		.cfi_def_cfa_register 7
+ 233 0006 7860     		str	r0, [r7, #4]
+ 234 0008 0B46     		mov	r3, r1
+ 235 000a FB70     		strb	r3, [r7, #3]
  148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   /* Check the parameters */
  149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_DBGMCU_APB2PERIPH(DBGMCU_Periph));
  150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
  152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   if (NewState != DISABLE)
- 231              		.loc 1 152 0
- 232 00f8 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 233 00fa 002B     		cmp	r3, #0
- 234 00fc 0DD0     		beq	.L10
+ 236              		.loc 1 152 0
+ 237 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 238 000e 002B     		cmp	r3, #0
+ 239 0010 0DD0     		beq	.L10
  153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
  154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB2FZ |= DBGMCU_Periph;
- 235              		.loc 1 154 0
- 236 00fe 4FF40053 		mov	r3, #8192
- 237 0102 CEF20403 		movt	r3, 57348
- 238 0106 4FF40052 		mov	r2, #8192
- 239 010a CEF20402 		movt	r2, 57348
- 240 010e D268     		ldr	r2, [r2, #12]
- 241 0110 1146     		mov	r1, r2
- 242 0112 7A68     		ldr	r2, [r7, #4]
- 243 0114 0A43     		orrs	r2, r2, r1
- 244 0116 DA60     		str	r2, [r3, #12]
- 245 0118 0EE0     		b	.L9
- 246              	.L10:
+ 240              		.loc 1 154 0
+ 241 0012 4FF40053 		mov	r3, #8192
+ 242 0016 CEF20403 		movt	r3, 57348
+ 243 001a 4FF40052 		mov	r2, #8192
+ 244 001e CEF20402 		movt	r2, 57348
+ 245 0022 D268     		ldr	r2, [r2, #12]
+ 246 0024 1146     		mov	r1, r2
+ 247 0026 7A68     		ldr	r2, [r7, #4]
+ 248 0028 0A43     		orrs	r2, r2, r1
+ 249 002a DA60     		str	r2, [r3, #12]
+ 250 002c 0EE0     		b	.L9
+ 251              	.L10:
  155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
  156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   else
  157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
  158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB2FZ &= ~DBGMCU_Periph;
- 247              		.loc 1 158 0
- 248 011a 4FF40053 		mov	r3, #8192
- 249 011e CEF20403 		movt	r3, 57348
- 250 0122 4FF40052 		mov	r2, #8192
- 251 0126 CEF20402 		movt	r2, 57348
- 252 012a D268     		ldr	r2, [r2, #12]
- 253 012c 1146     		mov	r1, r2
- 254 012e 7A68     		ldr	r2, [r7, #4]
- 255 0130 6FEA0202 		mvn	r2, r2
- 256 0134 0A40     		ands	r2, r2, r1
- 257 0136 DA60     		str	r2, [r3, #12]
- 258              	.L9:
+ 252              		.loc 1 158 0
+ 253 002e 4FF40053 		mov	r3, #8192
+ 254 0032 CEF20403 		movt	r3, 57348
+ 255 0036 4FF40052 		mov	r2, #8192
+ 256 003a CEF20402 		movt	r2, 57348
+ 257 003e D268     		ldr	r2, [r2, #12]
+ 258 0040 1146     		mov	r1, r2
+ 259 0042 7A68     		ldr	r2, [r7, #4]
+ 260 0044 6FEA0202 		mvn	r2, r2
+ 261 0048 0A40     		ands	r2, r2, r1
+ 262 004a DA60     		str	r2, [r3, #12]
+ 263              	.L9:
  159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
  160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
- 259              		.loc 1 160 0
- 260 0138 07F10C07 		add	r7, r7, #12
- 261 013c BD46     		mov	sp, r7
- 262 013e 80BC     		pop	{r7}
- 263 0140 7047     		bx	lr
- 264              		.cfi_endproc
- 265              	.LFE114:
- 267              	.Letext0:
- 268              		.file 2 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 269              		.file 3 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm3
- 270              		.file 4 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 264              		.loc 1 160 0
+ 265 004c 07F10C07 		add	r7, r7, #12
+ 266 0050 BD46     		mov	sp, r7
+ 267 0052 80BC     		pop	{r7}
+ 268 0054 7047     		bx	lr
+ 269              		.cfi_endproc
+ 270              	.LFE114:
+ 272 0056 00BF     		.text
+ 273              	.Letext0:
+ 274              		.file 2 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 275              		.file 3 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm3
+ 276              		.file 4 "C:\\Users\\Alex\\git\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_dbgmcu.c
-C:\Users\Alex\AppData\Local\Temp\ccmVJX6g.s:18     .text:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccmVJX6g.s:23     .text:00000000 DBGMCU_GetREVID
-C:\Users\Alex\AppData\Local\Temp\ccmVJX6g.s:56     .text:0000001c DBGMCU_GetDEVID
-C:\Users\Alex\AppData\Local\Temp\ccmVJX6g.s:89     .text:0000003c DBGMCU_Config
-C:\Users\Alex\AppData\Local\Temp\ccmVJX6g.s:150    .text:00000094 DBGMCU_APB1PeriphConfig
-C:\Users\Alex\AppData\Local\Temp\ccmVJX6g.s:211    .text:000000ec DBGMCU_APB2PeriphConfig
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:19     .text.DBGMCU_GetREVID:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:24     .text.DBGMCU_GetREVID:00000000 DBGMCU_GetREVID
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:53     .text.DBGMCU_GetDEVID:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:58     .text.DBGMCU_GetDEVID:00000000 DBGMCU_GetDEVID
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:87     .text.DBGMCU_Config:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:92     .text.DBGMCU_Config:00000000 DBGMCU_Config
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:149    .text.DBGMCU_APB1PeriphConfig:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:154    .text.DBGMCU_APB1PeriphConfig:00000000 DBGMCU_APB1PeriphConfig
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:211    .text.DBGMCU_APB2PeriphConfig:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccf2SjkY.s:216    .text.DBGMCU_APB2PeriphConfig:00000000 DBGMCU_APB2PeriphConfig
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

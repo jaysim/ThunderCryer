@@ -42,6 +42,7 @@ extern "C" {
   * @retval None
   */
 int main(void){
+	unsigned int u;
 
 	/**
 	 * create Led Heartbeat task with minimal stack size and priority
@@ -55,6 +56,12 @@ int main(void){
 	 */
 	CFreeRTOS::InitHardwareForManagedTasks();
 	CFreeRTOS::StartScheduler();
+
+	while(1){
+		u++;
+	}
+
+	return 0;
 
 }
 
