@@ -93,22 +93,55 @@ extern "C" {
 		while(1);
 	}
 
-	/*
-	  * Callback used by stm32f4_discovery_audio_codec.c.
-	  * Refer to stm32f4_discovery_audio_codec.h for more info.
-	  */
-	void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
-	   /* TODO, implement your code here */
-	   return;
+	/* User Callbacks: user has to implement these functions in his code if
+	  they are needed. -----------------------------------------------------------*/
+
+	uint16_t EVAL_AUDIO_GetSampleCallBack(void){
+		return -1;
 	}
 
-	/*
-	  * Callback used by stm324xg_eval_audio_codec.c.
-	  * Refer to stm324xg_eval_audio_codec.h for more info.
-	  */
-	uint16_t EVAL_AUDIO_GetSampleCallBack(void){
-	   /* TODO, implement your code here */
-	   return -1;
+	/* This function is called when the requested data has been completely transferred.
+	   In Normal mode (when  the define AUDIO_MAL_MODE_NORMAL is enabled) this function
+	   is called at the end of the whole audio file.
+	   In circular mode (when  the define AUDIO_MAL_MODE_CIRCULAR is enabled) this
+	   function is called at the end of the current buffer transmission. */
+	void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
+
+	}
+
+	/* This function is called when half of the requested buffer has been transferred
+	   This callback is useful in Circular mode only (when AUDIO_MAL_MODE_CIRCULAR
+	   define is enabled)*/
+	void EVAL_AUDIO_HalfTransfer_CallBack(uint32_t pBuffer, uint32_t Size){
+
+	}
+
+	/* This function is called when an Interrupt due to transfer error on or peripheral
+	   error occurs. */
+	void EVAL_AUDIO_Error_CallBack(void* pData){
+
+	}
+
+	/* Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition
+	   occurs during communication (waiting on an event that doesn't occur, bus
+	   errors, busy devices ...) on the Codec control interface (I2C).
+	   You can use the default timeout callback implementation by uncommenting the
+	   define USE_DEFAULT_TIMEOUT_CALLBACK in stm32f4_discovery_audio_codec.h file.
+	   Typically the user implementation of this callback should reset I2C peripheral
+	   and re-initialize communication or in worst case reset all the application. */
+	uint32_t Codec_TIMEOUT_UserCallback(void){
+		return -1;
+	}
+
+	/* LIS302DL_TIMEOUT_UserCallback() function is called whenever a timeout condition
+	   occure during communication (waiting transmit data register empty flag(TXE)
+	   or waiting receive data register is not empty flag (RXNE)).
+	   You can use the default timeout callback implementation by uncommenting the
+	   define USE_DEFAULT_TIMEOUT_CALLBACK in stm32f4_discovery_lis302dl.h file.
+	   Typically the user implementation of this callback should reset MEMS peripheral
+	   and re-initialize communication or in worst case reset all the application. */
+	uint32_t LIS302DL_TIMEOUT_UserCallback(void){
+		return -1;
 	}
 } // extern "C"
 
