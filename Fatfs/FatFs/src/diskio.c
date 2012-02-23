@@ -55,12 +55,12 @@ DSTATUS disk_initialize (
       {
         status = SD_EnableWideBusOperation(SDIO_BusWide_4b);
       }
-      
-      if (status == SD_OK)
+      //set in stm32f4_sdio.h
+      /*if (status == SD_OK)
       {  
         // Set Device Transfer Mode to DMA
         status = SD_SetDeviceMode(SD_DMA_MODE);
-      }
+      }*/
       
       if (status != SD_OK)
         return STA_NOINIT;
@@ -193,6 +193,7 @@ DRESULT disk_ioctl (
         case GET_BLOCK_SIZE:
           *(DWORD*)buff = 512;
           return RES_OK;
+          break;
       }
     }
   }

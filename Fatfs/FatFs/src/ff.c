@@ -73,10 +73,6 @@
 #include "ff.h"			/* FatFs configurations and declarations */
 #include "diskio.h"		/* Declarations of low level disk I/O functions */
 
-//mcg added includes
-#include <cross_studio_io.h>
-
-
 /*--------------------------------------------------------------------------
 
    Module Private Definitions
@@ -407,6 +403,7 @@ FRESULT put_fat (
 
 		default :
 			res = FR_INT_ERR;
+			break;
 		}
 		fs->wflag = 1;
 	}
@@ -2855,6 +2852,7 @@ FRESULT f_mkfs (
 		n_fat = ((n_clst * 4) + 8 + SS(fs) - 1) / SS(fs);
 		n_rsv = 33 - partition;
 		n_dir = 0;
+		break;
 	}
 	b_fat = b_part + n_rsv;			/* FATs start sector */
 	b_dir = b_fat + n_fat * N_FATS;	/* Directory start sector */
