@@ -113,6 +113,7 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 	GPIO_Init(GLCD_CTRL_PORT_WR_CE,&GPIO_InitStructure);
 
 	// data pins are high byte
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_InitStructure.GPIO_Pin = GLCD_DATA_PORT_MASK;
 	GPIO_Init(GLCD_DATA_PORT,&GPIO_InitStructure);
 
