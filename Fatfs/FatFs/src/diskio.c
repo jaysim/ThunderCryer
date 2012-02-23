@@ -9,7 +9,7 @@
 
 #include "diskio.h"
 
-#include "sdcard.h"    // for SDIO peripheral device implementation
+#include "stm32f4_sdio.h"   // for SDIO peripheral device implementation
 #include "fattime.h" // for get_fattime implementation
 
 
@@ -183,19 +183,18 @@ DRESULT disk_ioctl (
       {
         case CTRL_SYNC:
           // no synchronization to do since not buffering in this module
-          break;
+          return RES_OK;
         case GET_SECTOR_SIZE:
           *(WORD*)buff = 512;
-          break;
+          return RES_OK;
         case GET_SECTOR_COUNT:
           *(DWORD*)buff = SDCardInfo.CardCapacity / 512;
-          break;
+          return RES_OK;
         case GET_BLOCK_SIZE:
           *(DWORD*)buff = 512;
-          break;
+          return RES_OK;
       }
     }
-    return RES_OK;
   }
   return RES_PARERR;
 }
