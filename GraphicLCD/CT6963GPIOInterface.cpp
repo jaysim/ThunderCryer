@@ -198,8 +198,8 @@ unsigned char CT6963_GPIO_Interface::ReadData(){
 
 	GLCD_DATA_INPUT;
 
-	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD );
 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD );
+	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD );
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
 
 	delay_us(c_iDelayFore);
@@ -207,10 +207,10 @@ unsigned char CT6963_GPIO_Interface::ReadData(){
 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
+	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD );
+	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD );
+
 	delay_us(c_iDelayAfter);
-	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);
-
-
 
 	GLCD_DATA_OUTPUT;
 	return (unsigned char)tmp;
