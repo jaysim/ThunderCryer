@@ -121,7 +121,7 @@ void CT6963CDriver::Init(){
 	WriteCommand(T6963_SET_OFFSET_REGISTER);
 
 	// display in XOR Mode
-	WriteCommand(T6963_MODE_SET | 1);
+	WriteCommand(T6963_MODE_SET | 0);
 
 	//Graphic and Text mode
 	WriteCommand(T6963_DISPLAY_MODE  | T6963_TEXT_DISPLAY_ON | T6963_GRAPHIC_DISPLAY_ON );
@@ -133,8 +133,8 @@ void CT6963CDriver::Init(){
   * @retval None
   */
 void CT6963CDriver::SetAddressPointer(unsigned int address){
-	WriteData(address & 0xFF);
-	WriteData(address >> 8);
+	WriteData((address+2) & 0xFF);
+	WriteData((address+2) >> 8);
 	WriteCommand(T6963_SET_ADDRESS_POINTER);
 }
 

@@ -10,6 +10,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "CMenue.h"
+#include "CT6963CDriver.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -43,9 +44,10 @@ bool CMenue::HardwareInit(void){
   */
 void CMenue::Run(void){
 	glcd->Init();
-	glcd->Inverse(true);
+	//glcd->Inverse(true);
 	glcd->Clear();
 
+	glcd->WriteString("Hallo",c_FontNative,16,16);
 
 	glcd->Window(0,0,119,63);
 	glcd->Window(121,0,119,63);

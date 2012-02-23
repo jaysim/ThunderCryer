@@ -38,8 +38,8 @@
 #define GLCD_CD			GPIO_Pin_4
 #define GLCD_RESET		GPIO_Pin_11
 
-const unsigned int c_iDelayFore = 5;
-const unsigned int c_iDelayAfter = 3;
+const unsigned long c_iDelayFore = 5;
+const unsigned long c_iDelayAfter = 3;
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -55,19 +55,6 @@ CT6963_GPIO_Interface::CT6963_GPIO_Interface() {
 
 CT6963_GPIO_Interface::~CT6963_GPIO_Interface() {
 	// TODO Auto-generated destructor stub
-}
-
-/**
-  * @brief  delay for us
-  * @param  number of us
-  * @retval None
-  */
-void delay_us(unsigned int us){
-	unsigned int i;
-
-	for(i=0; i< (SystemCoreClock/1000000) * us; i++){
-		asm volatile ("nop");
-	}
 }
 
 /**
@@ -131,6 +118,8 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 
 	//Set all Control pins to high level
 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR | GLCD_CE );
+
+	init_us_timer(); //delay timer init
 
 }
 
@@ -208,7 +197,8 @@ unsigned char CT6963_GPIO_Interface::ReadData(){
 
 	GLCD_DATA_INPUT;
 
-	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);
+	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD );
+	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD );
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
 
 	delay_us(c_iDelayFore);
@@ -216,9 +206,10 @@ unsigned char CT6963_GPIO_Interface::ReadData(){
 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
+	delay_us(c_iDelayAfter);
 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);
 
-	delay_us(c_iDelayAfter);
+
 
 	GLCD_DATA_OUTPUT;
 	return (unsigned char)tmp;
