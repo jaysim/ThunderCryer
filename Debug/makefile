@@ -68,7 +68,7 @@ all: ThunderCryer.elf secondary-outputs
 ThunderCryer.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Yagarto Windows GCC C++ Linker'
-	arm-none-eabi-g++ -T"stm32_flash.ld" -L"C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock" -Wl,-Map,ThunderCryer.map -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "ThunderCryer.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -T"stm32_flash.ld" -Xlinker --gc-sections -L"C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock" -Wl,-Map,ThunderCryer.map -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "ThunderCryer.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
