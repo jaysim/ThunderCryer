@@ -15,18 +15,22 @@ RM := rm -rf
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
 -include FreeRTOS/Source/subdir.mk
+-include Fatfs/FatFs/src/option/subdir.mk
+-include Fatfs/FatFs/src/subdir.mk
+-include Fatfs/FatFs/subdir.mk
+-include Fatfs/subdir.mk
 -include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(C++_DEPS)),)
--include $(C++_DEPS)
-endif
-ifneq ($(strip $(C_DEPS)),)
--include $(C_DEPS)
-endif
 ifneq ($(strip $(ASM_DEPS)),)
 -include $(ASM_DEPS)
+endif
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
 endif
 ifneq ($(strip $(CC_DEPS)),)
 -include $(CC_DEPS)
@@ -34,14 +38,14 @@ endif
 ifneq ($(strip $(CPP_DEPS)),)
 -include $(CPP_DEPS)
 endif
+ifneq ($(strip $(C_DEPS)),)
+-include $(C_DEPS)
+endif
 ifneq ($(strip $(CXX_DEPS)),)
 -include $(CXX_DEPS)
 endif
 ifneq ($(strip $(C_UPPER_DEPS)),)
 -include $(C_UPPER_DEPS)
-endif
-ifneq ($(strip $(S_UPPER_DEPS)),)
--include $(S_UPPER_DEPS)
 endif
 endif
 
@@ -65,7 +69,7 @@ all: ThunderCryer.elf secondary-outputs
 ThunderCryer.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Yagarto Windows GCC C++ Linker'
-	arm-none-eabi-g++ -T"stm32_flash.ld" -L"C:\Users\Alex\git\thundercyer-the-alarm-clock" -Wl,-Map,ThunderCryer.map -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "ThunderCryer.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -T"stm32_flash.ld" -L"C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock" -Wl,-Map,ThunderCryer.map -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "ThunderCryer.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -89,7 +93,7 @@ ThunderCryer.siz: ThunderCryer.elf
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C_DEPS)$(SECONDARY_FLASH)$(CXX_DEPS)$(S_UPPER_DEPS)$(SECONDARY_LIST)$(C++_DEPS)$(SECONDARY_SIZE)$(ASM_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS) ThunderCryer.elf
+	-$(RM) $(ASM_DEPS)$(SECONDARY_SIZE)$(S_UPPER_DEPS)$(C++_DEPS)$(EXECUTABLES)$(CC_DEPS)$(CPP_DEPS)$(SECONDARY_LIST)$(CXX_DEPS)$(OBJS)$(C_DEPS)$(SECONDARY_FLASH)$(C_UPPER_DEPS) ThunderCryer.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_LIST) $(SECONDARY_SIZE)

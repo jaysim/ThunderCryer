@@ -10,7 +10,7 @@
 #include "diskio.h"
 
 #include "sdcard.h"    // for SDIO peripheral device implementation
-#include "timestamp.h" // for get_fattime implementation
+#include "fattime.h" // for get_fattime implementation
 
 
 /*-----------------------------------------------------------------------*/
