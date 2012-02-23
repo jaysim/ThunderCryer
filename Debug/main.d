@@ -52,6 +52,10 @@ main.d: ../main.cpp \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/CFileHandler.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs\FatFs\src/ff.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs\FatFs\src/integer.h \
  ../stm32f4xx_conf.h
 
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CFreeRTOS.h:
@@ -161,5 +165,13 @@ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Graph
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h:
 
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/CFileHandler.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs\FatFs\src/ff.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs\FatFs\src/integer.h:
 
 ../stm32f4xx_conf.h:

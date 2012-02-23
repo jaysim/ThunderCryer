@@ -9,6 +9,9 @@
 #ifndef _FFCONF
 #define _FFCONF 6502	/* Revision ID */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*---------------------------------------------------------------------------/
 / Functions and Buffer Configurations
@@ -188,5 +191,8 @@
 /* To enable file shareing feature, set _FS_SHARE to 1 or greater. The value
    defines how many files can be opened simultaneously. */
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _FFCONFIG */

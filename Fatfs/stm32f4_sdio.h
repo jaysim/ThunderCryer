@@ -234,9 +234,9 @@ typedef struct
 /**
   * @brief  SD FLASH SDIO Interface
   */
-#define SD_DETECT_PIN                    GPIO_Pin_13                 /* PH.13 */
-#define SD_DETECT_GPIO_PORT              GPIOH                       /* GPIOH */
-#define SD_DETECT_GPIO_CLK               RCC_AHB1Periph_GPIOH
+#define SD_DETECT_PIN                    GPIO_Pin_3                 /* PD.3 */
+#define SD_DETECT_GPIO_PORT              GPIOD                       /* GPIOD */
+#define SD_DETECT_GPIO_CLK               RCC_AHB1Periph_GPIOD
 
 #define SDIO_FIFO_ADDRESS                ((uint32_t)0x40012C80)
 /**
@@ -246,7 +246,7 @@ typedef struct
 /**
   * @brief  SDIO Data Transfer Frequency (25MHz max)
   */
-#define SDIO_TRANSFER_CLK_DIV            ((uint8_t)0x0)
+#define SDIO_TRANSFER_CLK_DIV            ((uint8_t)0x76)
 
 #define SD_SDIO_DMA                   DMA2
 #define SD_SDIO_DMA_CLK               RCC_AHB1Periph_DMA2

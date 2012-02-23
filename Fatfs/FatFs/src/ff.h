@@ -12,6 +12,10 @@
 /   personal, non-profit or commercial product UNDER YOUR RESPONSIBILITY.
 / * Redistributions of source code must retain the above copyright notice.
 /----------------------------------------------------------------------------*/
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 #include "integer.h"
 
@@ -722,5 +726,9 @@ void ff_rel_grant(_SYNC_t);
 #define	ST_DWORD(ptr,val)	*(BYTE*)(ptr)=(BYTE)(val); *(BYTE*)((ptr)+1)=(BYTE)((WORD)(val)>>8); *(BYTE*)((ptr)+2)=(BYTE)((DWORD)(val)>>16); *(BYTE*)((ptr)+3)=(BYTE)((DWORD)(val)>>24)
 #endif
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _FATFS */
