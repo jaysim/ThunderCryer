@@ -30,6 +30,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4_sdio.h"
+#include "stm32f4xx.h"
 
 /** @addtogroup Utilities
   * @{

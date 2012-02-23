@@ -31,7 +31,9 @@ stm32f4xx_it.d: ../stm32f4xx_it.c ../stm32f4xx_it.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_tim.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_usart.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h \
- C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h
 
 ../stm32f4xx_it.h:
 
@@ -100,3 +102,7 @@ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h:
 
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h:

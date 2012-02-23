@@ -27,8 +27,8 @@
    2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   ******************************************************************************
    3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @file    stm32f4xx_usart.c
    4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @author  MCD Application Team
-   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @version V1.0.0RC1
-   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @date    25-August-2011
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @version V1.0.0
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @date    30-September-2011
    7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @brief   This file provides firmware functions to manage the following 
    8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          functionalities of the Universal synchronous asynchronous receiver
    9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          transmitter (USART):           
@@ -3068,15 +3068,16 @@
 1345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_TC:   Transmission complete interrupt
 1346:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_RXNE: Receive Data register not empty interrupt
 1347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_IDLE: Idle line detection interrupt
-1348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_ORE:  OverRun Error interrupt
-1349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_NE:   Noise Error interrupt
-1350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_FE:   Framing Error interrupt
-1351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_PE:   Parity Error interrupt
-1352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @retval The new state of USART_IT (SET or RESET).
-1353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
-1354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** ITStatus USART_GetITStatus(USART_TypeDef* USARTx, uint16_t USART_IT)
-1355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
- 1777              		.loc 1 1355 0
+1348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_ORE_RX : OverRun Error interrupt if the RXNEIE bit is set
+1349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_ORE_ER : OverRun Error interrupt if the EIE bit is set  
+1350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_NE:   Noise Error interrupt
+1351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_FE:   Framing Error interrupt
+1352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_PE:   Parity Error interrupt
+1353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @retval The new state of USART_IT (SET or RESET).
+1354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
+1355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** ITStatus USART_GetITStatus(USART_TypeDef* USARTx, uint16_t USART_IT)
+1356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
+ 1777              		.loc 1 1356 0
  1778              		.cfi_startproc
  1779              		@ args = 0, pretend = 0, frame = 24
  1780              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -3094,57 +3095,57 @@
  1792 0006 7860     		str	r0, [r7, #4]
  1793 0008 0B46     		mov	r3, r1
  1794 000a 7B80     		strh	r3, [r7, #2]	@ movhi
-1356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   uint32_t bitpos = 0x00, itmask = 0x00, usartreg = 0x00;
- 1795              		.loc 1 1356 0
+1357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   uint32_t bitpos = 0x00, itmask = 0x00, usartreg = 0x00;
+ 1795              		.loc 1 1357 0
  1796 000c 4FF00003 		mov	r3, #0
  1797 0010 FB60     		str	r3, [r7, #12]
  1798 0012 4FF00003 		mov	r3, #0
  1799 0016 7B61     		str	r3, [r7, #20]
  1800 0018 4FF00003 		mov	r3, #0
  1801 001c BB60     		str	r3, [r7, #8]
-1357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   ITStatus bitstatus = RESET;
- 1802              		.loc 1 1357 0
+1358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   ITStatus bitstatus = RESET;
+ 1802              		.loc 1 1358 0
  1803 001e 4FF00003 		mov	r3, #0
  1804 0022 FB74     		strb	r3, [r7, #19]
-1358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
-1359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
-1360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_GET_IT(USART_IT)); 
-1361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
-1362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* The CTS interrupt is not available for UART4 and UART5 */ 
-1363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (USART_IT == USART_IT_CTS)
-1364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     assert_param(IS_USART_1236_PERIPH(USARTx));
-1366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
-1367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
-1368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Get the USART register index */
-1369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   usartreg = (((uint8_t)USART_IT) >> 0x05);
- 1805              		.loc 1 1369 0
+1359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
+1360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
+1361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_GET_IT(USART_IT)); 
+1362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
+1363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* The CTS interrupt is not available for UART4 and UART5 */ 
+1364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (USART_IT == USART_IT_CTS)
+1365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     assert_param(IS_USART_1236_PERIPH(USARTx));
+1367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
+1368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
+1369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Get the USART register index */
+1370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   usartreg = (((uint8_t)USART_IT) >> 0x05);
+ 1805              		.loc 1 1370 0
  1806 0024 7B88     		ldrh	r3, [r7, #2]	@ movhi
  1807 0026 DBB2     		uxtb	r3, r3
  1808 0028 4FEA5313 		lsr	r3, r3, #5
  1809 002c DBB2     		uxtb	r3, r3
  1810 002e BB60     		str	r3, [r7, #8]
-1370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Get the interrupt position */
-1371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = USART_IT & IT_MASK;
- 1811              		.loc 1 1371 0
+1371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Get the interrupt position */
+1372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = USART_IT & IT_MASK;
+ 1811              		.loc 1 1372 0
  1812 0030 7B88     		ldrh	r3, [r7, #2]
  1813 0032 03F01F03 		and	r3, r3, #31
  1814 0036 7B61     		str	r3, [r7, #20]
-1372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = (uint32_t)0x01 << itmask;
- 1815              		.loc 1 1372 0
+1373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = (uint32_t)0x01 << itmask;
+ 1815              		.loc 1 1373 0
  1816 0038 7B69     		ldr	r3, [r7, #20]
  1817 003a 4FF00102 		mov	r2, #1
  1818 003e 02FA03F3 		lsl	r3, r2, r3
  1819 0042 7B61     		str	r3, [r7, #20]
-1373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
-1374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (usartreg == 0x01) /* The IT  is in CR1 register */
- 1820              		.loc 1 1374 0
+1374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
+1375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (usartreg == 0x01) /* The IT  is in CR1 register */
+ 1820              		.loc 1 1375 0
  1821 0044 BB68     		ldr	r3, [r7, #8]
  1822 0046 012B     		cmp	r3, #1
  1823 0048 06D1     		bne	.L69
-1375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR1;
- 1824              		.loc 1 1376 0
+1376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR1;
+ 1824              		.loc 1 1377 0
  1825 004a 7B68     		ldr	r3, [r7, #4]
  1826 004c 9B89     		ldrh	r3, [r3, #12]	@ movhi
  1827 004e 9BB2     		uxth	r3, r3
@@ -3153,15 +3154,15 @@
  1830 0054 7B61     		str	r3, [r7, #20]
  1831 0056 0FE0     		b	.L70
  1832              	.L69:
-1377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
-1378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else if (usartreg == 0x02) /* The IT  is in CR2 register */
- 1833              		.loc 1 1378 0
+1378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
+1379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else if (usartreg == 0x02) /* The IT  is in CR2 register */
+ 1833              		.loc 1 1379 0
  1834 0058 BB68     		ldr	r3, [r7, #8]
  1835 005a 022B     		cmp	r3, #2
  1836 005c 06D1     		bne	.L71
-1379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR2;
- 1837              		.loc 1 1380 0
+1380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR2;
+ 1837              		.loc 1 1381 0
  1838 005e 7B68     		ldr	r3, [r7, #4]
  1839 0060 1B8A     		ldrh	r3, [r3, #16]	@ movhi
  1840 0062 9BB2     		uxth	r3, r3
@@ -3170,11 +3171,11 @@
  1843 0068 7B61     		str	r3, [r7, #20]
  1844 006a 05E0     		b	.L70
  1845              	.L71:
-1381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
-1382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else /* The IT  is in CR3 register */
-1383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR3;
- 1846              		.loc 1 1384 0
+1382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
+1383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else /* The IT  is in CR3 register */
+1384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1385:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR3;
+ 1846              		.loc 1 1385 0
  1847 006c 7B68     		ldr	r3, [r7, #4]
  1848 006e 9B8A     		ldrh	r3, [r3, #20]	@ movhi
  1849 0070 9BB2     		uxth	r3, r3
@@ -3182,59 +3183,59 @@
  1851 0074 1340     		ands	r3, r3, r2
  1852 0076 7B61     		str	r3, [r7, #20]
  1853              	.L70:
-1385:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
-1386:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
-1387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = USART_IT >> 0x08;
- 1854              		.loc 1 1387 0
+1386:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
+1387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
+1388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = USART_IT >> 0x08;
+ 1854              		.loc 1 1388 0
  1855 0078 7B88     		ldrh	r3, [r7, #2]
  1856 007a 4FEA1323 		lsr	r3, r3, #8
  1857 007e 9BB2     		uxth	r3, r3
  1858 0080 FB60     		str	r3, [r7, #12]
-1388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = (uint32_t)0x01 << bitpos;
- 1859              		.loc 1 1388 0
+1389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = (uint32_t)0x01 << bitpos;
+ 1859              		.loc 1 1389 0
  1860 0082 FB68     		ldr	r3, [r7, #12]
  1861 0084 4FF00102 		mov	r2, #1
  1862 0088 02FA03F3 		lsl	r3, r2, r3
  1863 008c FB60     		str	r3, [r7, #12]
-1389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos &= USARTx->SR;
- 1864              		.loc 1 1389 0
+1390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos &= USARTx->SR;
+ 1864              		.loc 1 1390 0
  1865 008e 7B68     		ldr	r3, [r7, #4]
  1866 0090 1B88     		ldrh	r3, [r3, #0]	@ movhi
  1867 0092 9BB2     		uxth	r3, r3
  1868 0094 FA68     		ldr	r2, [r7, #12]
  1869 0096 1340     		ands	r3, r3, r2
  1870 0098 FB60     		str	r3, [r7, #12]
-1390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if ((itmask != (uint16_t)RESET)&&(bitpos != (uint16_t)RESET))
- 1871              		.loc 1 1390 0
+1391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if ((itmask != (uint16_t)RESET)&&(bitpos != (uint16_t)RESET))
+ 1871              		.loc 1 1391 0
  1872 009a 7B69     		ldr	r3, [r7, #20]
  1873 009c 002B     		cmp	r3, #0
  1874 009e 06D0     		beq	.L72
- 1875              		.loc 1 1390 0 is_stmt 0 discriminator 1
+ 1875              		.loc 1 1391 0 is_stmt 0 discriminator 1
  1876 00a0 FB68     		ldr	r3, [r7, #12]
  1877 00a2 002B     		cmp	r3, #0
  1878 00a4 03D0     		beq	.L72
-1391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = SET;
- 1879              		.loc 1 1392 0 is_stmt 1
+1392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = SET;
+ 1879              		.loc 1 1393 0 is_stmt 1
  1880 00a6 4FF00103 		mov	r3, #1
  1881 00aa FB74     		strb	r3, [r7, #19]
  1882 00ac 02E0     		b	.L73
  1883              	.L72:
-1393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
-1394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else
-1395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = RESET;
- 1884              		.loc 1 1396 0
+1394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
+1395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else
+1396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = RESET;
+ 1884              		.loc 1 1397 0
  1885 00ae 4FF00003 		mov	r3, #0
  1886 00b2 FB74     		strb	r3, [r7, #19]
  1887              	.L73:
-1397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
-1398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
-1399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   return bitstatus;  
- 1888              		.loc 1 1399 0
+1398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
+1399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
+1400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   return bitstatus;  
+ 1888              		.loc 1 1400 0
  1889 00b4 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
-1400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
- 1890              		.loc 1 1400 0
+1401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
+ 1890              		.loc 1 1401 0
  1891 00b6 1846     		mov	r0, r3
  1892 00b8 07F11C07 		add	r7, r7, #28
  1893 00bc BD46     		mov	sp, r7
@@ -3249,36 +3250,36 @@
  1903              		.thumb_func
  1905              	USART_ClearITPendingBit:
  1906              	.LFB138:
-1401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
-1402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** /**
-1403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @brief  Clears the USARTx's interrupt pending bits.
-1404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @param  USARTx: where x can be 1, 2, 3, 4, 5 or 6 to select the USART or 
-1405:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *         UART peripheral.
-1406:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @param  USART_IT: specifies the interrupt pending bit to clear.
-1407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          This parameter can be one of the following values:
-1408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_CTS:  CTS change interrupt (not available for UART4 and UART5)
-1409:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_LBD:  LIN Break detection interrupt
-1410:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_TC:   Transmission complete interrupt. 
-1411:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_RXNE: Receive Data register not empty interrupt.
-1412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *
-1413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   PE (Parity error), FE (Framing error), NE (Noise error), ORE (OverRun 
-1414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          error) and IDLE (Idle line detected) pending bits are cleared by 
-1415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          software sequence: a read operation to USART_SR register 
-1416:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_GetITStatus()) followed by a read operation to USART_DR register 
-1417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_ReceiveData()).
-1418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   RXNE pending bit can be also cleared by a read to the USART_DR register 
-1419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_ReceiveData()).
-1420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   TC pending bit can be also cleared by software sequence: a read 
-1421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          operation to USART_SR register (USART_GetITStatus()) followed by a write 
-1422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          operation to USART_DR register (USART_SendData()).
-1423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   TXE pending bit is cleared only by a write to the USART_DR register 
-1424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_SendData()).
-1425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *  
-1426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @retval None
-1427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
-1428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT)
-1429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
- 1907              		.loc 1 1429 0
+1402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
+1403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** /**
+1404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @brief  Clears the USARTx's interrupt pending bits.
+1405:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @param  USARTx: where x can be 1, 2, 3, 4, 5 or 6 to select the USART or 
+1406:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *         UART peripheral.
+1407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @param  USART_IT: specifies the interrupt pending bit to clear.
+1408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          This parameter can be one of the following values:
+1409:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_CTS:  CTS change interrupt (not available for UART4 and UART5)
+1410:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_LBD:  LIN Break detection interrupt
+1411:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_TC:   Transmission complete interrupt. 
+1412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *            @arg USART_IT_RXNE: Receive Data register not empty interrupt.
+1413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *
+1414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   PE (Parity error), FE (Framing error), NE (Noise error), ORE (OverRun 
+1415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          error) and IDLE (Idle line detected) pending bits are cleared by 
+1416:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          software sequence: a read operation to USART_SR register 
+1417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_GetITStatus()) followed by a read operation to USART_DR register 
+1418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_ReceiveData()).
+1419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   RXNE pending bit can be also cleared by a read to the USART_DR register 
+1420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_ReceiveData()).
+1421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   TC pending bit can be also cleared by software sequence: a read 
+1422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          operation to USART_SR register (USART_GetITStatus()) followed by a write 
+1423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          operation to USART_DR register (USART_SendData()).
+1424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @note   TXE pending bit is cleared only by a write to the USART_DR register 
+1425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *          (USART_SendData()).
+1426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   *  
+1427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @retval None
+1428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
+1429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT)
+1430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
+ 1907              		.loc 1 1430 0
  1908              		.cfi_startproc
  1909              		@ args = 0, pretend = 0, frame = 16
  1910              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -3296,42 +3297,42 @@
  1922 0006 7860     		str	r0, [r7, #4]
  1923 0008 0B46     		mov	r3, r1
  1924 000a 7B80     		strh	r3, [r7, #2]	@ movhi
-1430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   uint16_t bitpos = 0x00, itmask = 0x00;
- 1925              		.loc 1 1430 0
+1431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   uint16_t bitpos = 0x00, itmask = 0x00;
+ 1925              		.loc 1 1431 0
  1926 000c 4FF00003 		mov	r3, #0
  1927 0010 FB81     		strh	r3, [r7, #14]	@ movhi
  1928 0012 4FF00003 		mov	r3, #0
  1929 0016 BB81     		strh	r3, [r7, #12]	@ movhi
-1431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
-1432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
-1433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_CLEAR_IT(USART_IT)); 
-1434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
-1435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* The CTS interrupt is not available for UART4 and UART5 */
-1436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (USART_IT == USART_IT_CTS)
-1437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
-1438:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     assert_param(IS_USART_1236_PERIPH(USARTx));
-1439:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
-1440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
-1441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = USART_IT >> 0x08;
- 1930              		.loc 1 1441 0
+1432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
+1433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
+1434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_CLEAR_IT(USART_IT)); 
+1435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
+1436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* The CTS interrupt is not available for UART4 and UART5 */
+1437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (USART_IT == USART_IT_CTS)
+1438:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
+1439:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     assert_param(IS_USART_1236_PERIPH(USARTx));
+1440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
+1441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
+1442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = USART_IT >> 0x08;
+ 1930              		.loc 1 1442 0
  1931 0018 7B88     		ldrh	r3, [r7, #2]
  1932 001a 4FEA1323 		lsr	r3, r3, #8
  1933 001e FB81     		strh	r3, [r7, #14]	@ movhi
-1442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = ((uint16_t)0x01 << (uint16_t)bitpos);
- 1934              		.loc 1 1442 0
+1443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = ((uint16_t)0x01 << (uint16_t)bitpos);
+ 1934              		.loc 1 1443 0
  1935 0020 FB89     		ldrh	r3, [r7, #14]
  1936 0022 4FF00102 		mov	r2, #1
  1937 0026 02FA03F3 		lsl	r3, r2, r3
  1938 002a BB81     		strh	r3, [r7, #12]	@ movhi
-1443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   USARTx->SR = (uint16_t)~itmask;
- 1939              		.loc 1 1443 0
+1444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   USARTx->SR = (uint16_t)~itmask;
+ 1939              		.loc 1 1444 0
  1940 002c BB89     		ldrh	r3, [r7, #12]	@ movhi
  1941 002e 6FEA0303 		mvn	r3, r3
  1942 0032 9AB2     		uxth	r2, r3
  1943 0034 7B68     		ldr	r3, [r7, #4]
  1944 0036 1A80     		strh	r2, [r3, #0]	@ movhi
-1444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
- 1945              		.loc 1 1444 0
+1445:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
+ 1945              		.loc 1 1445 0
  1946 0038 07F11407 		add	r7, r7, #20
  1947 003c BD46     		mov	sp, r7
  1948 003e 80BC     		pop	{r7}
@@ -3347,64 +3348,64 @@
  1959              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_usart.c
-  C:\Temp\ccGRIfji.s:19     .text.USART_DeInit:00000000 $t
-  C:\Temp\ccGRIfji.s:24     .text.USART_DeInit:00000000 USART_DeInit
-  C:\Temp\ccGRIfji.s:146    .text.USART_Init:00000000 $t
-  C:\Temp\ccGRIfji.s:151    .text.USART_Init:00000000 USART_Init
-  C:\Temp\ccGRIfji.s:377    .text.USART_StructInit:00000000 $t
-  C:\Temp\ccGRIfji.s:382    .text.USART_StructInit:00000000 USART_StructInit
-  C:\Temp\ccGRIfji.s:433    .text.USART_ClockInit:00000000 $t
-  C:\Temp\ccGRIfji.s:438    .text.USART_ClockInit:00000000 USART_ClockInit
-  C:\Temp\ccGRIfji.s:503    .text.USART_ClockStructInit:00000000 $t
-  C:\Temp\ccGRIfji.s:508    .text.USART_ClockStructInit:00000000 USART_ClockStructInit
-  C:\Temp\ccGRIfji.s:551    .text.USART_Cmd:00000000 $t
-  C:\Temp\ccGRIfji.s:556    .text.USART_Cmd:00000000 USART_Cmd
-  C:\Temp\ccGRIfji.s:608    .text.USART_SetPrescaler:00000000 $t
-  C:\Temp\ccGRIfji.s:613    .text.USART_SetPrescaler:00000000 USART_SetPrescaler
-  C:\Temp\ccGRIfji.s:660    .text.USART_OverSampling8Cmd:00000000 $t
-  C:\Temp\ccGRIfji.s:665    .text.USART_OverSampling8Cmd:00000000 USART_OverSampling8Cmd
-  C:\Temp\ccGRIfji.s:719    .text.USART_OneBitMethodCmd:00000000 $t
-  C:\Temp\ccGRIfji.s:724    .text.USART_OneBitMethodCmd:00000000 USART_OneBitMethodCmd
-  C:\Temp\ccGRIfji.s:776    .text.USART_SendData:00000000 $t
-  C:\Temp\ccGRIfji.s:781    .text.USART_SendData:00000000 USART_SendData
-  C:\Temp\ccGRIfji.s:817    .text.USART_ReceiveData:00000000 $t
-  C:\Temp\ccGRIfji.s:822    .text.USART_ReceiveData:00000000 USART_ReceiveData
-  C:\Temp\ccGRIfji.s:857    .text.USART_SetAddress:00000000 $t
-  C:\Temp\ccGRIfji.s:862    .text.USART_SetAddress:00000000 USART_SetAddress
-  C:\Temp\ccGRIfji.s:909    .text.USART_ReceiverWakeUpCmd:00000000 $t
-  C:\Temp\ccGRIfji.s:914    .text.USART_ReceiverWakeUpCmd:00000000 USART_ReceiverWakeUpCmd
-  C:\Temp\ccGRIfji.s:966    .text.USART_WakeUpConfig:00000000 $t
-  C:\Temp\ccGRIfji.s:971    .text.USART_WakeUpConfig:00000000 USART_WakeUpConfig
-  C:\Temp\ccGRIfji.s:1017   .text.USART_LINBreakDetectLengthConfig:00000000 $t
-  C:\Temp\ccGRIfji.s:1022   .text.USART_LINBreakDetectLengthConfig:00000000 USART_LINBreakDetectLengthConfig
-  C:\Temp\ccGRIfji.s:1068   .text.USART_LINCmd:00000000 $t
-  C:\Temp\ccGRIfji.s:1073   .text.USART_LINCmd:00000000 USART_LINCmd
-  C:\Temp\ccGRIfji.s:1125   .text.USART_SendBreak:00000000 $t
-  C:\Temp\ccGRIfji.s:1130   .text.USART_SendBreak:00000000 USART_SendBreak
-  C:\Temp\ccGRIfji.s:1165   .text.USART_HalfDuplexCmd:00000000 $t
-  C:\Temp\ccGRIfji.s:1170   .text.USART_HalfDuplexCmd:00000000 USART_HalfDuplexCmd
-  C:\Temp\ccGRIfji.s:1222   .text.USART_SetGuardTime:00000000 $t
-  C:\Temp\ccGRIfji.s:1227   .text.USART_SetGuardTime:00000000 USART_SetGuardTime
-  C:\Temp\ccGRIfji.s:1276   .text.USART_SmartCardCmd:00000000 $t
-  C:\Temp\ccGRIfji.s:1281   .text.USART_SmartCardCmd:00000000 USART_SmartCardCmd
-  C:\Temp\ccGRIfji.s:1333   .text.USART_SmartCardNACKCmd:00000000 $t
-  C:\Temp\ccGRIfji.s:1338   .text.USART_SmartCardNACKCmd:00000000 USART_SmartCardNACKCmd
-  C:\Temp\ccGRIfji.s:1390   .text.USART_IrDAConfig:00000000 $t
-  C:\Temp\ccGRIfji.s:1395   .text.USART_IrDAConfig:00000000 USART_IrDAConfig
-  C:\Temp\ccGRIfji.s:1441   .text.USART_IrDACmd:00000000 $t
-  C:\Temp\ccGRIfji.s:1446   .text.USART_IrDACmd:00000000 USART_IrDACmd
-  C:\Temp\ccGRIfji.s:1498   .text.USART_DMACmd:00000000 $t
-  C:\Temp\ccGRIfji.s:1503   .text.USART_DMACmd:00000000 USART_DMACmd
-  C:\Temp\ccGRIfji.s:1561   .text.USART_ITConfig:00000000 $t
-  C:\Temp\ccGRIfji.s:1566   .text.USART_ITConfig:00000000 USART_ITConfig
-  C:\Temp\ccGRIfji.s:1672   .text.USART_GetFlagStatus:00000000 $t
-  C:\Temp\ccGRIfji.s:1677   .text.USART_GetFlagStatus:00000000 USART_GetFlagStatus
-  C:\Temp\ccGRIfji.s:1730   .text.USART_ClearFlag:00000000 $t
-  C:\Temp\ccGRIfji.s:1735   .text.USART_ClearFlag:00000000 USART_ClearFlag
-  C:\Temp\ccGRIfji.s:1770   .text.USART_GetITStatus:00000000 $t
-  C:\Temp\ccGRIfji.s:1775   .text.USART_GetITStatus:00000000 USART_GetITStatus
-  C:\Temp\ccGRIfji.s:1900   .text.USART_ClearITPendingBit:00000000 $t
-  C:\Temp\ccGRIfji.s:1905   .text.USART_ClearITPendingBit:00000000 USART_ClearITPendingBit
+  C:\Temp\ccrqnDsh.s:19     .text.USART_DeInit:00000000 $t
+  C:\Temp\ccrqnDsh.s:24     .text.USART_DeInit:00000000 USART_DeInit
+  C:\Temp\ccrqnDsh.s:146    .text.USART_Init:00000000 $t
+  C:\Temp\ccrqnDsh.s:151    .text.USART_Init:00000000 USART_Init
+  C:\Temp\ccrqnDsh.s:377    .text.USART_StructInit:00000000 $t
+  C:\Temp\ccrqnDsh.s:382    .text.USART_StructInit:00000000 USART_StructInit
+  C:\Temp\ccrqnDsh.s:433    .text.USART_ClockInit:00000000 $t
+  C:\Temp\ccrqnDsh.s:438    .text.USART_ClockInit:00000000 USART_ClockInit
+  C:\Temp\ccrqnDsh.s:503    .text.USART_ClockStructInit:00000000 $t
+  C:\Temp\ccrqnDsh.s:508    .text.USART_ClockStructInit:00000000 USART_ClockStructInit
+  C:\Temp\ccrqnDsh.s:551    .text.USART_Cmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:556    .text.USART_Cmd:00000000 USART_Cmd
+  C:\Temp\ccrqnDsh.s:608    .text.USART_SetPrescaler:00000000 $t
+  C:\Temp\ccrqnDsh.s:613    .text.USART_SetPrescaler:00000000 USART_SetPrescaler
+  C:\Temp\ccrqnDsh.s:660    .text.USART_OverSampling8Cmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:665    .text.USART_OverSampling8Cmd:00000000 USART_OverSampling8Cmd
+  C:\Temp\ccrqnDsh.s:719    .text.USART_OneBitMethodCmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:724    .text.USART_OneBitMethodCmd:00000000 USART_OneBitMethodCmd
+  C:\Temp\ccrqnDsh.s:776    .text.USART_SendData:00000000 $t
+  C:\Temp\ccrqnDsh.s:781    .text.USART_SendData:00000000 USART_SendData
+  C:\Temp\ccrqnDsh.s:817    .text.USART_ReceiveData:00000000 $t
+  C:\Temp\ccrqnDsh.s:822    .text.USART_ReceiveData:00000000 USART_ReceiveData
+  C:\Temp\ccrqnDsh.s:857    .text.USART_SetAddress:00000000 $t
+  C:\Temp\ccrqnDsh.s:862    .text.USART_SetAddress:00000000 USART_SetAddress
+  C:\Temp\ccrqnDsh.s:909    .text.USART_ReceiverWakeUpCmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:914    .text.USART_ReceiverWakeUpCmd:00000000 USART_ReceiverWakeUpCmd
+  C:\Temp\ccrqnDsh.s:966    .text.USART_WakeUpConfig:00000000 $t
+  C:\Temp\ccrqnDsh.s:971    .text.USART_WakeUpConfig:00000000 USART_WakeUpConfig
+  C:\Temp\ccrqnDsh.s:1017   .text.USART_LINBreakDetectLengthConfig:00000000 $t
+  C:\Temp\ccrqnDsh.s:1022   .text.USART_LINBreakDetectLengthConfig:00000000 USART_LINBreakDetectLengthConfig
+  C:\Temp\ccrqnDsh.s:1068   .text.USART_LINCmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:1073   .text.USART_LINCmd:00000000 USART_LINCmd
+  C:\Temp\ccrqnDsh.s:1125   .text.USART_SendBreak:00000000 $t
+  C:\Temp\ccrqnDsh.s:1130   .text.USART_SendBreak:00000000 USART_SendBreak
+  C:\Temp\ccrqnDsh.s:1165   .text.USART_HalfDuplexCmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:1170   .text.USART_HalfDuplexCmd:00000000 USART_HalfDuplexCmd
+  C:\Temp\ccrqnDsh.s:1222   .text.USART_SetGuardTime:00000000 $t
+  C:\Temp\ccrqnDsh.s:1227   .text.USART_SetGuardTime:00000000 USART_SetGuardTime
+  C:\Temp\ccrqnDsh.s:1276   .text.USART_SmartCardCmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:1281   .text.USART_SmartCardCmd:00000000 USART_SmartCardCmd
+  C:\Temp\ccrqnDsh.s:1333   .text.USART_SmartCardNACKCmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:1338   .text.USART_SmartCardNACKCmd:00000000 USART_SmartCardNACKCmd
+  C:\Temp\ccrqnDsh.s:1390   .text.USART_IrDAConfig:00000000 $t
+  C:\Temp\ccrqnDsh.s:1395   .text.USART_IrDAConfig:00000000 USART_IrDAConfig
+  C:\Temp\ccrqnDsh.s:1441   .text.USART_IrDACmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:1446   .text.USART_IrDACmd:00000000 USART_IrDACmd
+  C:\Temp\ccrqnDsh.s:1498   .text.USART_DMACmd:00000000 $t
+  C:\Temp\ccrqnDsh.s:1503   .text.USART_DMACmd:00000000 USART_DMACmd
+  C:\Temp\ccrqnDsh.s:1561   .text.USART_ITConfig:00000000 $t
+  C:\Temp\ccrqnDsh.s:1566   .text.USART_ITConfig:00000000 USART_ITConfig
+  C:\Temp\ccrqnDsh.s:1672   .text.USART_GetFlagStatus:00000000 $t
+  C:\Temp\ccrqnDsh.s:1677   .text.USART_GetFlagStatus:00000000 USART_GetFlagStatus
+  C:\Temp\ccrqnDsh.s:1730   .text.USART_ClearFlag:00000000 $t
+  C:\Temp\ccrqnDsh.s:1735   .text.USART_ClearFlag:00000000 USART_ClearFlag
+  C:\Temp\ccrqnDsh.s:1770   .text.USART_GetITStatus:00000000 $t
+  C:\Temp\ccrqnDsh.s:1775   .text.USART_GetITStatus:00000000 USART_GetITStatus
+  C:\Temp\ccrqnDsh.s:1900   .text.USART_ClearITPendingBit:00000000 $t
+  C:\Temp\ccrqnDsh.s:1905   .text.USART_ClearITPendingBit:00000000 USART_ClearITPendingBit
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

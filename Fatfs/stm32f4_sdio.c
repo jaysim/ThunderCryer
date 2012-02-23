@@ -360,6 +360,10 @@ SDIO_DataInitTypeDef SDIO_DataInitStructure;
 /** @defgroup STM324xG_EVAL_SDIO_SD_Private_Function_Prototypes
   * @{
   */
+void SD_LowLevel_Init(void);
+void SD_LowLevel_DMA_TxConfig(uint32_t *BufferSRC, uint32_t BufferSize);
+void SD_LowLevel_DMA_RxConfig(uint32_t *BufferDST, uint32_t BufferSize);
+void SD_LowLevel_DeInit(void);
 static SD_Error CmdError(void);
 static SD_Error CmdResp1Error(uint8_t cmd);
 static SD_Error CmdResp7Error(void);
@@ -379,6 +383,50 @@ uint8_t convert_from_bytes_to_power_of_two(uint16_t NumberOfBytes);
 /** @defgroup STM324xG_EVAL_SDIO_SD_Private_Functions
   * @{
   */  
+
+/**
+  * @brief  DeInitializes the SDIO interface.
+  * @param  None
+  * @retval None
+  */
+void SD_LowLevel_DeInit(void)
+{
+  GPIO_InitTypeDef  GPIO_InitStructure;
+
+  /*!< Disable SDIO Clock */
+  SDIO_ClockCmd(DISABLE);
+
+  /*!< Set Power State to OFF */
+  SDIO_SetPowerState(SDIO_PowerState_OFF);
+
+  /*!< DeInitializes the SDIO peripheral */
+  SDIO_DeInit();
+
+  /* Disable the SDIO APB2 Clock */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SDIO, DISABLE);
+
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource8, GPIO_AF_MCO);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource9, GPIO_AF_MCO);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_MCO);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_MCO);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource12, GPIO_AF_MCO);
+  GPIO_PinAFConfig(GPIOD, GPIO_PinSource2, GPIO_AF_MCO);
+
+  /* Configure PC.08, PC.09, PC.10, PC.11 pins: D0, D1, D2, D3 pins */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+  /* Configure PD.02 CMD line */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+  GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+  /* Configure PC.12 pin: CLK pin */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+}
+
 
 
 /**
@@ -580,7 +628,7 @@ SD_Error SD_Init(void)
 
   if (errorstatus == SD_OK)
   {
-    errorstatus = SD_EnableWideBusOperation(SDIO_BusWide_4b);
+    errorstatus = SD_EnableWideBusOperation(SDIO_BusWide_1b);
   }  
 
   return(errorstatus);

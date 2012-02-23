@@ -41,6 +41,7 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void SDIO_IRQHandler(void);
+void SD_SDIO_DMA_IRQHANDLER(void);
 
 #endif /* __STM32F4xx_IT_H */
 

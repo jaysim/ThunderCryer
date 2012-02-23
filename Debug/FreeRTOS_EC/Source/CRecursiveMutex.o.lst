@@ -1,0 +1,632 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CRecursiveMutex.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
+  19              		.align	2
+  20              		.weak	_ZNK11ASyncObject7IsValidEv
+  21              		.thumb
+  22              		.thumb_func
+  24              	_ZNK11ASyncObject7IsValidEv:
+  25              	.LFB111:
+  26              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
+   1:../FreeRTOS_EC/Source/ASyncObject.h **** /**
+   2:../FreeRTOS_EC/Source/ASyncObject.h ****  * @file   ASyncObject.h
+   3:../FreeRTOS_EC/Source/ASyncObject.h ****  * @class  ASyncObject
+   4:../FreeRTOS_EC/Source/ASyncObject.h ****  * @ingroup FreeRTOS_Wrapper
+   5:../FreeRTOS_EC/Source/ASyncObject.h ****  *
+   6:../FreeRTOS_EC/Source/ASyncObject.h ****  * Abstract base class for all task synchronization object.
+   7:../FreeRTOS_EC/Source/ASyncObject.h ****  *
+   8:../FreeRTOS_EC/Source/ASyncObject.h ****  * @date   Jul 13, 2010
+   9:../FreeRTOS_EC/Source/ASyncObject.h ****  * @author Stefano Oliveri (STF12.net)
+  10:../FreeRTOS_EC/Source/ASyncObject.h ****  *         E-Mail: software@stf12.net
+  11:../FreeRTOS_EC/Source/ASyncObject.h ****  */
+  12:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  13:../FreeRTOS_EC/Source/ASyncObject.h **** #ifndef ASEMAPHORE_H_
+  14:../FreeRTOS_EC/Source/ASyncObject.h **** #define ASEMAPHORE_H_
+  15:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  16:../FreeRTOS_EC/Source/ASyncObject.h **** #include "FreeRTOS.h"
+  17:../FreeRTOS_EC/Source/ASyncObject.h **** #include "semphr.h"
+  18:../FreeRTOS_EC/Source/ASyncObject.h **** #include "IFreeRTOSProtocol.h"
+  19:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  20:../FreeRTOS_EC/Source/ASyncObject.h **** class ASyncObject: public IFreeRTOSObj {
+  21:../FreeRTOS_EC/Source/ASyncObject.h **** protected:
+  22:../FreeRTOS_EC/Source/ASyncObject.h ****     xSemaphoreHandle m_handleSemaphore;
+  23:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  24:../FreeRTOS_EC/Source/ASyncObject.h **** public:
+  25:../FreeRTOS_EC/Source/ASyncObject.h **** 	ASyncObject();
+  26:../FreeRTOS_EC/Source/ASyncObject.h **** 	virtual ~ASyncObject();
+  27:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  28:../FreeRTOS_EC/Source/ASyncObject.h **** 	inline operator xSemaphoreHandle() const { return m_handleSemaphore; }
+  29:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  30:../FreeRTOS_EC/Source/ASyncObject.h **** 	void Delete();
+  31:../FreeRTOS_EC/Source/ASyncObject.h **** 	inline bool IsValid()const;
+  32:../FreeRTOS_EC/Source/ASyncObject.h **** 	void Attach(xGenericHandle handle);
+  33:../FreeRTOS_EC/Source/ASyncObject.h **** 	inline xGenericHandle Detach();
+  34:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  35:../FreeRTOS_EC/Source/ASyncObject.h **** 	virtual portBASE_TYPE Take(portTickType xBlockTime) =0;
+  36:../FreeRTOS_EC/Source/ASyncObject.h **** 	virtual portBASE_TYPE Give() =0;
+  37:../FreeRTOS_EC/Source/ASyncObject.h **** };
+  38:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  39:../FreeRTOS_EC/Source/ASyncObject.h **** // inline method
+  40:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  41:../FreeRTOS_EC/Source/ASyncObject.h **** inline
+  42:../FreeRTOS_EC/Source/ASyncObject.h **** bool ASyncObject::IsValid() const {
+  27              		.loc 1 42 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43:../FreeRTOS_EC/Source/ASyncObject.h **** 	return m_handleSemaphore != NULL;
+  43              		.loc 1 43 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 5B68     		ldr	r3, [r3, #4]
+  46 000c 002B     		cmp	r3, #0
+  47 000e 0CBF     		ite	eq
+  48 0010 0023     		moveq	r3, #0
+  49 0012 0123     		movne	r3, #1
+  50 0014 DBB2     		uxtb	r3, r3
+  44:../FreeRTOS_EC/Source/ASyncObject.h **** }
+  51              		.loc 1 44 0
+  52 0016 1846     		mov	r0, r3
+  53 0018 07F10C07 		add	r7, r7, #12
+  54 001c BD46     		mov	sp, r7
+  55 001e 80BC     		pop	{r7}
+  56 0020 7047     		bx	lr
+  57              		.cfi_endproc
+  58              	.LFE111:
+  60 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
+  61              		.align	2
+  62              		.weak	_ZN11ASyncObject6DetachEv
+  63              		.thumb
+  64              		.thumb_func
+  66              	_ZN11ASyncObject6DetachEv:
+  67              	.LFB112:
+  45:../FreeRTOS_EC/Source/ASyncObject.h **** 
+  46:../FreeRTOS_EC/Source/ASyncObject.h **** inline
+  47:../FreeRTOS_EC/Source/ASyncObject.h **** xGenericHandle ASyncObject::Detach() {
+  68              		.loc 1 47 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 16
+  71              		@ frame_needed = 1, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 0000 80B4     		push	{r7}
+  74              	.LCFI3:
+  75              		.cfi_def_cfa_offset 4
+  76              		.cfi_offset 7, -4
+  77 0002 85B0     		sub	sp, sp, #20
+  78              	.LCFI4:
+  79              		.cfi_def_cfa_offset 24
+  80 0004 00AF     		add	r7, sp, #0
+  81              	.LCFI5:
+  82              		.cfi_def_cfa_register 7
+  83 0006 7860     		str	r0, [r7, #4]
+  84              	.LBB2:
+  48:../FreeRTOS_EC/Source/ASyncObject.h **** 	xSemaphoreHandle res = m_handleSemaphore;
+  85              		.loc 1 48 0
+  86 0008 7B68     		ldr	r3, [r7, #4]
+  87 000a 5B68     		ldr	r3, [r3, #4]
+  88 000c FB60     		str	r3, [r7, #12]
+  49:../FreeRTOS_EC/Source/ASyncObject.h **** 	m_handleSemaphore = NULL;
+  89              		.loc 1 49 0
+  90 000e 7B68     		ldr	r3, [r7, #4]
+  91 0010 4FF00002 		mov	r2, #0
+  92 0014 5A60     		str	r2, [r3, #4]
+  50:../FreeRTOS_EC/Source/ASyncObject.h **** 	return res;
+  93              		.loc 1 50 0
+  94 0016 FB68     		ldr	r3, [r7, #12]
+  95              	.LBE2:
+  51:../FreeRTOS_EC/Source/ASyncObject.h **** }
+  96              		.loc 1 51 0
+  97 0018 1846     		mov	r0, r3
+  98 001a 07F11407 		add	r7, r7, #20
+  99 001e BD46     		mov	sp, r7
+ 100 0020 80BC     		pop	{r7}
+ 101 0022 7047     		bx	lr
+ 102              		.cfi_endproc
+ 103              	.LFE112:
+ 105              		.section	.text._ZN15CRecursiveMutex4TakeEm,"axG",%progbits,_ZN15CRecursiveMutex4TakeEm,comdat
+ 106              		.align	2
+ 107              		.weak	_ZN15CRecursiveMutex4TakeEm
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	_ZN15CRecursiveMutex4TakeEm:
+ 112              	.LFB113:
+ 113              		.file 2 "../FreeRTOS_EC/Source/CRecursiveMutex.h"
+   1:../FreeRTOS_EC/Source/CRecursiveMutex.h **** /**
+   2:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * @file CRecursiveMutex.h
+   3:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * @class CRecursiveMutex
+   4:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * @ingroup FreeRTOS_Wrapper
+   5:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  *
+   6:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * The CRecursiveMutex class wraps a native FreeRTOS recursive mutex handle (xSemaphoreHandle).
+   7:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * To create a recursive mutex instance an object of this class and then call its CRecursiveMutex::
+   8:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * like showed in the following sample:
+   9:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * \code
+  10:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * CRecursiveMutex g_aRecursiveMutex // global mutex declaration.
+  11:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  *
+  12:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * void taskControlFunc(void *pParams)
+  13:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * {
+  14:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * 	g_aRecursiveMutex.Create();
+  15:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  *
+  16:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * 	for (;;) {
+  17:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * 		while (g_aRecursiveMutex.Take(portMAX_DELAY) != pdTRUE) {
+  18:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * 		// do something
+  19:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * 		}
+  20:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * }
+  21:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * \endcode
+  22:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  *
+  23:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * \sa <a href="http://www.freertos.org/Inter-Task-Communication.html#Recursive">recursive mutex do
+  24:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  *
+  25:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * @date Jul 14, 2010
+  26:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  * @author Stefano Oliveri (STF12.net)
+  27:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  *         E-Mail: software@stf12.net
+  28:../FreeRTOS_EC/Source/CRecursiveMutex.h ****  */
+  29:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  30:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  31:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #ifndef CRECURSIVEMUTEX_H_
+  32:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #define CRECURSIVEMUTEX_H_
+  33:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  34:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #include <assert.h>
+  35:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #include "ASyncObject.h"
+  36:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  37:../FreeRTOS_EC/Source/CRecursiveMutex.h **** class CRecursiveMutex: public ASyncObject {
+  38:../FreeRTOS_EC/Source/CRecursiveMutex.h **** public:
+  39:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	/**
+  40:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * Default constructor. It initializes the object without attaching it to a native FreeRTOS handle
+  41:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * Call the Create method to allocate a mutex handle and attach it to the object.
+  42:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 */
+  43:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	CRecursiveMutex();
+  44:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  45:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	/**
+  46:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * Create a recursive mutex instance and attach it to a valid handle.
+  47:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * @param handleSemaphore a valid mutex handle.
+  48:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 */
+  49:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	CRecursiveMutex(xSemaphoreHandle handleSemaphore);
+  50:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  51:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	/**
+  52:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * Delete the native FreeRTOS recursive mutex.
+  53:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 */
+  54:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	virtual ~CRecursiveMutex();
+  55:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  56:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	/**
+  57:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 *
+  58:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * @return true if the mutex was created with success, false otherwise.
+  59:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * \sa <a href="http://www.freertos.org/xSemaphoreCreateRecursiveMutex.html">xSemaphoreCreateRecur
+  60:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 */
+  61:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	bool Create();
+  62:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  63:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	/**
+  64:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * \sa <a href="http://www.freertos.org/xSemaphoreTakeRecursive.html">xSemaphoreTakeRecursive</a> 
+  65:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 */
+  66:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	inline portBASE_TYPE Take(portTickType xBlockTime);
+  67:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  68:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	/**
+  69:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 * \sa <a href="http://www.freertos.org/xSemaphoreGiveRecursive.html">xSemaphoreGiveRecursive</a> 
+  70:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	 */
+  71:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	inline portBASE_TYPE Give();
+  72:../FreeRTOS_EC/Source/CRecursiveMutex.h **** };
+  73:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  74:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  75:../FreeRTOS_EC/Source/CRecursiveMutex.h **** // inline methods implementation
+  76:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  77:../FreeRTOS_EC/Source/CRecursiveMutex.h **** inline
+  78:../FreeRTOS_EC/Source/CRecursiveMutex.h **** portBASE_TYPE CRecursiveMutex::Take(portTickType xBlockTime) {
+ 114              		.loc 2 78 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 8
+ 117              		@ frame_needed = 1, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119 0000 80B4     		push	{r7}
+ 120              	.LCFI6:
+ 121              		.cfi_def_cfa_offset 4
+ 122              		.cfi_offset 7, -4
+ 123 0002 83B0     		sub	sp, sp, #12
+ 124              	.LCFI7:
+ 125              		.cfi_def_cfa_offset 16
+ 126 0004 00AF     		add	r7, sp, #0
+ 127              	.LCFI8:
+ 128              		.cfi_def_cfa_register 7
+ 129 0006 7860     		str	r0, [r7, #4]
+ 130 0008 3960     		str	r1, [r7, #0]
+  79:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #if (configUSE_RECURSIVE_MUTEXES == 1)
+  80:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	assert(IsValid());
+  81:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  82:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	return xSemaphoreTakeRecursive(m_handleSemaphore, xBlockTime);
+  83:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #else
+  84:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	return  pdFALSE;
+ 131              		.loc 2 84 0
+ 132 000a 4FF00003 		mov	r3, #0
+  85:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #endif
+  86:../FreeRTOS_EC/Source/CRecursiveMutex.h **** }
+ 133              		.loc 2 86 0
+ 134 000e 1846     		mov	r0, r3
+ 135 0010 07F10C07 		add	r7, r7, #12
+ 136 0014 BD46     		mov	sp, r7
+ 137 0016 80BC     		pop	{r7}
+ 138 0018 7047     		bx	lr
+ 139              		.cfi_endproc
+ 140              	.LFE113:
+ 142 001a 00BF     		.section	.text._ZN15CRecursiveMutex4GiveEv,"axG",%progbits,_ZN15CRecursiveMutex4GiveEv,comdat
+ 143              		.align	2
+ 144              		.weak	_ZN15CRecursiveMutex4GiveEv
+ 145              		.thumb
+ 146              		.thumb_func
+ 148              	_ZN15CRecursiveMutex4GiveEv:
+ 149              	.LFB114:
+  87:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  88:../FreeRTOS_EC/Source/CRecursiveMutex.h **** inline
+  89:../FreeRTOS_EC/Source/CRecursiveMutex.h **** portBASE_TYPE CRecursiveMutex::Give() {
+ 150              		.loc 2 89 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 8
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154              		@ link register save eliminated.
+ 155 0000 80B4     		push	{r7}
+ 156              	.LCFI9:
+ 157              		.cfi_def_cfa_offset 4
+ 158              		.cfi_offset 7, -4
+ 159 0002 83B0     		sub	sp, sp, #12
+ 160              	.LCFI10:
+ 161              		.cfi_def_cfa_offset 16
+ 162 0004 00AF     		add	r7, sp, #0
+ 163              	.LCFI11:
+ 164              		.cfi_def_cfa_register 7
+ 165 0006 7860     		str	r0, [r7, #4]
+  90:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #if (configUSE_RECURSIVE_MUTEXES == 1)
+  91:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	assert(IsValid());
+  92:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 
+  93:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	return xSemaphoreGiveRecursive(m_handleSemaphore);
+  94:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #else
+  95:../FreeRTOS_EC/Source/CRecursiveMutex.h **** 	return  pdFALSE;
+ 166              		.loc 2 95 0
+ 167 0008 4FF00003 		mov	r3, #0
+  96:../FreeRTOS_EC/Source/CRecursiveMutex.h **** #endif
+  97:../FreeRTOS_EC/Source/CRecursiveMutex.h **** }
+ 168              		.loc 2 97 0
+ 169 000c 1846     		mov	r0, r3
+ 170 000e 07F10C07 		add	r7, r7, #12
+ 171 0012 BD46     		mov	sp, r7
+ 172 0014 80BC     		pop	{r7}
+ 173 0016 7047     		bx	lr
+ 174              		.cfi_endproc
+ 175              	.LFE114:
+ 177              		.section	.text._ZN15CRecursiveMutexC2Ev,"ax",%progbits
+ 178              		.align	2
+ 179              		.global	_ZN15CRecursiveMutexC2Ev
+ 180              		.thumb
+ 181              		.thumb_func
+ 183              	_ZN15CRecursiveMutexC2Ev:
+ 184              	.LFB116:
+ 185              		.file 3 "../FreeRTOS_EC/Source/CRecursiveMutex.cpp"
+   1:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** /**
+   2:../FreeRTOS_EC/Source/CRecursiveMutex.cpp ****  * CRecursiveMutex.cpp
+   3:../FreeRTOS_EC/Source/CRecursiveMutex.cpp ****  *
+   4:../FreeRTOS_EC/Source/CRecursiveMutex.cpp ****  *  Created on: Jul 14, 2010
+   5:../FreeRTOS_EC/Source/CRecursiveMutex.cpp ****  *      Author: Stefano Oliveri (STF12.net)
+   6:../FreeRTOS_EC/Source/CRecursiveMutex.cpp ****  *      E-Mail: software@stf12.net
+   7:../FreeRTOS_EC/Source/CRecursiveMutex.cpp ****  */
+   8:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+   9:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** #include "CRecursiveMutex.h"
+  10:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+  11:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::CRecursiveMutex() {
+ 186              		.loc 3 11 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 8
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 0000 80B5     		push	{r7, lr}
+ 191              	.LCFI12:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 14, -4
+ 194              		.cfi_offset 7, -8
+ 195 0002 82B0     		sub	sp, sp, #8
+ 196              	.LCFI13:
+ 197              		.cfi_def_cfa_offset 16
+ 198 0004 00AF     		add	r7, sp, #0
+ 199              	.LCFI14:
+ 200              		.cfi_def_cfa_register 7
+ 201 0006 7860     		str	r0, [r7, #4]
+ 202              	.LBB3:
+ 203              		.loc 3 11 0
+ 204 0008 7B68     		ldr	r3, [r7, #4]
+ 205 000a 1846     		mov	r0, r3
+ 206 000c FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 207 0010 7B68     		ldr	r3, [r7, #4]
+ 208 0012 044A     		ldr	r2, .L7
+ 209 0014 1A60     		str	r2, [r3, #0]
+ 210              	.LBE3:
+  12:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	// TODO Auto-generated constructor stub
+  13:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+  14:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
+ 211              		.loc 3 14 0
+ 212 0016 7B68     		ldr	r3, [r7, #4]
+ 213 0018 1846     		mov	r0, r3
+ 214 001a 07F10807 		add	r7, r7, #8
+ 215 001e BD46     		mov	sp, r7
+ 216 0020 80BD     		pop	{r7, pc}
+ 217              	.L8:
+ 218 0022 00BF     		.align	2
+ 219              	.L7:
+ 220 0024 08000000 		.word	_ZTV15CRecursiveMutex+8
+ 221              		.cfi_endproc
+ 222              	.LFE116:
+ 224              		.section	.text._ZN15CRecursiveMutexC2EPv,"ax",%progbits
+ 225              		.align	2
+ 226              		.global	_ZN15CRecursiveMutexC2EPv
+ 227              		.thumb
+ 228              		.thumb_func
+ 230              	_ZN15CRecursiveMutexC2EPv:
+ 231              	.LFB119:
+  15:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+  16:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::CRecursiveMutex(xSemaphoreHandle handleSemaphore) {
+ 232              		.loc 3 16 0
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 8
+ 235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 236 0000 80B5     		push	{r7, lr}
+ 237              	.LCFI15:
+ 238              		.cfi_def_cfa_offset 8
+ 239              		.cfi_offset 14, -4
+ 240              		.cfi_offset 7, -8
+ 241 0002 82B0     		sub	sp, sp, #8
+ 242              	.LCFI16:
+ 243              		.cfi_def_cfa_offset 16
+ 244 0004 00AF     		add	r7, sp, #0
+ 245              	.LCFI17:
+ 246              		.cfi_def_cfa_register 7
+ 247 0006 7860     		str	r0, [r7, #4]
+ 248 0008 3960     		str	r1, [r7, #0]
+ 249              	.LBB4:
+ 250              		.loc 3 16 0
+ 251 000a 7B68     		ldr	r3, [r7, #4]
+ 252 000c 1846     		mov	r0, r3
+ 253 000e FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 254 0012 7B68     		ldr	r3, [r7, #4]
+ 255 0014 064A     		ldr	r2, .L11
+ 256 0016 1A60     		str	r2, [r3, #0]
+  17:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	Attach(handleSemaphore);
+ 257              		.loc 3 17 0
+ 258 0018 7B68     		ldr	r3, [r7, #4]
+ 259 001a 1846     		mov	r0, r3
+ 260 001c 3968     		ldr	r1, [r7, #0]
+ 261 001e FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
+ 262              	.LBE4:
+  18:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
+ 263              		.loc 3 18 0
+ 264 0022 7B68     		ldr	r3, [r7, #4]
+ 265 0024 1846     		mov	r0, r3
+ 266 0026 07F10807 		add	r7, r7, #8
+ 267 002a BD46     		mov	sp, r7
+ 268 002c 80BD     		pop	{r7, pc}
+ 269              	.L12:
+ 270 002e 00BF     		.align	2
+ 271              	.L11:
+ 272 0030 08000000 		.word	_ZTV15CRecursiveMutex+8
+ 273              		.cfi_endproc
+ 274              	.LFE119:
+ 276              		.section	.text._ZN15CRecursiveMutexD2Ev,"ax",%progbits
+ 277              		.align	2
+ 278              		.global	_ZN15CRecursiveMutexD2Ev
+ 279              		.thumb
+ 280              		.thumb_func
+ 282              	_ZN15CRecursiveMutexD2Ev:
+ 283              	.LFB122:
+  19:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+  20:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::~CRecursiveMutex() {
+ 284              		.loc 3 20 0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 8
+ 287              		@ frame_needed = 1, uses_anonymous_args = 0
+ 288 0000 80B5     		push	{r7, lr}
+ 289              	.LCFI18:
+ 290              		.cfi_def_cfa_offset 8
+ 291              		.cfi_offset 14, -4
+ 292              		.cfi_offset 7, -8
+ 293 0002 82B0     		sub	sp, sp, #8
+ 294              	.LCFI19:
+ 295              		.cfi_def_cfa_offset 16
+ 296 0004 00AF     		add	r7, sp, #0
+ 297              	.LCFI20:
+ 298              		.cfi_def_cfa_register 7
+ 299 0006 7860     		str	r0, [r7, #4]
+ 300              	.LBB5:
+ 301              		.loc 3 20 0
+ 302 0008 7B68     		ldr	r3, [r7, #4]
+ 303 000a 0A4A     		ldr	r2, .L16
+ 304 000c 1A60     		str	r2, [r3, #0]
+  21:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	// TODO Auto-generated destructor stub
+  22:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
+ 305              		.loc 3 22 0
+ 306 000e 7868     		ldr	r0, [r7, #4]
+ 307 0010 FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
+ 308              	.LBE5:
+ 309 0014 4FF00003 		mov	r3, #0
+ 310 0018 03F00103 		and	r3, r3, #1
+ 311 001c DBB2     		uxtb	r3, r3
+ 312 001e 002B     		cmp	r3, #0
+ 313 0020 02D0     		beq	.L15
+ 314              		.loc 3 22 0 is_stmt 0 discriminator 2
+ 315 0022 7868     		ldr	r0, [r7, #4]
+ 316 0024 FFF7FEFF 		bl	_ZdlPv
+ 317              	.L15:
+ 318              		.loc 3 22 0 discriminator 3
+ 319 0028 7B68     		ldr	r3, [r7, #4]
+ 320 002a 1846     		mov	r0, r3
+ 321 002c 07F10807 		add	r7, r7, #8
+ 322 0030 BD46     		mov	sp, r7
+ 323 0032 80BD     		pop	{r7, pc}
+ 324              	.L17:
+ 325              		.align	2
+ 326              	.L16:
+ 327 0034 08000000 		.word	_ZTV15CRecursiveMutex+8
+ 328              		.cfi_endproc
+ 329              	.LFE122:
+ 331              		.section	.text._ZN15CRecursiveMutexD0Ev,"ax",%progbits
+ 332              		.align	2
+ 333              		.global	_ZN15CRecursiveMutexD0Ev
+ 334              		.thumb
+ 335              		.thumb_func
+ 337              	_ZN15CRecursiveMutexD0Ev:
+ 338              	.LFB124:
+  20:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::~CRecursiveMutex() {
+ 339              		.loc 3 20 0 is_stmt 1
+ 340              		.cfi_startproc
+ 341              		@ args = 0, pretend = 0, frame = 8
+ 342              		@ frame_needed = 1, uses_anonymous_args = 0
+ 343 0000 80B5     		push	{r7, lr}
+ 344              	.LCFI21:
+ 345              		.cfi_def_cfa_offset 8
+ 346              		.cfi_offset 14, -4
+ 347              		.cfi_offset 7, -8
+ 348 0002 82B0     		sub	sp, sp, #8
+ 349              	.LCFI22:
+ 350              		.cfi_def_cfa_offset 16
+ 351 0004 00AF     		add	r7, sp, #0
+ 352              	.LCFI23:
+ 353              		.cfi_def_cfa_register 7
+ 354 0006 7860     		str	r0, [r7, #4]
+ 355              		.loc 3 22 0
+ 356 0008 7868     		ldr	r0, [r7, #4]
+ 357 000a FFF7FEFF 		bl	_ZN15CRecursiveMutexD1Ev
+ 358 000e 7868     		ldr	r0, [r7, #4]
+ 359 0010 FFF7FEFF 		bl	_ZdlPv
+ 360 0014 7B68     		ldr	r3, [r7, #4]
+ 361 0016 1846     		mov	r0, r3
+ 362 0018 07F10807 		add	r7, r7, #8
+ 363 001c BD46     		mov	sp, r7
+ 364 001e 80BD     		pop	{r7, pc}
+ 365              		.cfi_endproc
+ 366              	.LFE124:
+ 368              		.section	.text._ZN15CRecursiveMutex6CreateEv,"ax",%progbits
+ 369              		.align	2
+ 370              		.global	_ZN15CRecursiveMutex6CreateEv
+ 371              		.thumb
+ 372              		.thumb_func
+ 374              	_ZN15CRecursiveMutex6CreateEv:
+ 375              	.LFB125:
+  23:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+  24:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** bool CRecursiveMutex::Create() {
+ 376              		.loc 3 24 0
+ 377              		.cfi_startproc
+ 378              		@ args = 0, pretend = 0, frame = 8
+ 379              		@ frame_needed = 1, uses_anonymous_args = 0
+ 380 0000 80B5     		push	{r7, lr}
+ 381              	.LCFI24:
+ 382              		.cfi_def_cfa_offset 8
+ 383              		.cfi_offset 14, -4
+ 384              		.cfi_offset 7, -8
+ 385 0002 82B0     		sub	sp, sp, #8
+ 386              	.LCFI25:
+ 387              		.cfi_def_cfa_offset 16
+ 388 0004 00AF     		add	r7, sp, #0
+ 389              	.LCFI26:
+ 390              		.cfi_def_cfa_register 7
+ 391 0006 7860     		str	r0, [r7, #4]
+  25:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** #if (configUSE_RECURSIVE_MUTEXES == 1 && configUSE_MUTEXES ==1)
+  26:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	xSemaphoreHandle handle = xSemaphoreCreateRecursiveMutex();
+  27:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	if (handle != NULL)
+  28:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 		Attach(handle);
+  29:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** #endif
+  30:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
+  31:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	return IsValid();
+ 392              		.loc 3 31 0
+ 393 0008 7B68     		ldr	r3, [r7, #4]
+ 394 000a 1B68     		ldr	r3, [r3, #0]
+ 395 000c 1B68     		ldr	r3, [r3, #0]
+ 396 000e 7A68     		ldr	r2, [r7, #4]
+ 397 0010 1046     		mov	r0, r2
+ 398 0012 9847     		blx	r3
+ 399 0014 0346     		mov	r3, r0
+  32:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
+ 400              		.loc 3 32 0
+ 401 0016 1846     		mov	r0, r3
+ 402 0018 07F10807 		add	r7, r7, #8
+ 403 001c BD46     		mov	sp, r7
+ 404 001e 80BD     		pop	{r7, pc}
+ 405              		.cfi_endproc
+ 406              	.LFE125:
+ 408              		.global	_ZTV15CRecursiveMutex
+ 409              		.section	.rodata._ZTV15CRecursiveMutex,"a",%progbits
+ 410              		.align	3
+ 413              	_ZTV15CRecursiveMutex:
+ 414 0000 00000000 		.word	0
+ 415 0004 00000000 		.word	0
+ 416 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
+ 417 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
+ 418 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
+ 419 0014 00000000 		.word	_ZN15CRecursiveMutexD1Ev
+ 420 0018 00000000 		.word	_ZN15CRecursiveMutexD0Ev
+ 421 001c 00000000 		.word	_ZN15CRecursiveMutex4TakeEm
+ 422 0020 00000000 		.word	_ZN15CRecursiveMutex4GiveEv
+ 423              		.global	_ZN15CRecursiveMutexC1Ev
+ 424              		.thumb_set _ZN15CRecursiveMutexC1Ev,_ZN15CRecursiveMutexC2Ev
+ 425              		.global	_ZN15CRecursiveMutexC1EPv
+ 426              		.thumb_set _ZN15CRecursiveMutexC1EPv,_ZN15CRecursiveMutexC2EPv
+ 427              		.global	_ZN15CRecursiveMutexD1Ev
+ 428              		.thumb_set _ZN15CRecursiveMutexD1Ev,_ZN15CRecursiveMutexD2Ev
+ 429 0024 00000000 		.text
+ 430              	.Letext0:
+ 431              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 432              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 433              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 434              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 435              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 436              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+DEFINED SYMBOLS
+                            *ABS*:00000000 CRecursiveMutex.cpp
+  C:\Temp\ccKqy9sh.s:19     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
+  C:\Temp\ccKqy9sh.s:24     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
+  C:\Temp\ccKqy9sh.s:61     .text._ZN11ASyncObject6DetachEv:00000000 $t
+  C:\Temp\ccKqy9sh.s:66     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
+  C:\Temp\ccKqy9sh.s:106    .text._ZN15CRecursiveMutex4TakeEm:00000000 $t
+  C:\Temp\ccKqy9sh.s:111    .text._ZN15CRecursiveMutex4TakeEm:00000000 _ZN15CRecursiveMutex4TakeEm
+  C:\Temp\ccKqy9sh.s:143    .text._ZN15CRecursiveMutex4GiveEv:00000000 $t
+  C:\Temp\ccKqy9sh.s:148    .text._ZN15CRecursiveMutex4GiveEv:00000000 _ZN15CRecursiveMutex4GiveEv
+  C:\Temp\ccKqy9sh.s:178    .text._ZN15CRecursiveMutexC2Ev:00000000 $t
+  C:\Temp\ccKqy9sh.s:183    .text._ZN15CRecursiveMutexC2Ev:00000000 _ZN15CRecursiveMutexC2Ev
+  C:\Temp\ccKqy9sh.s:220    .text._ZN15CRecursiveMutexC2Ev:00000024 $d
+  C:\Temp\ccKqy9sh.s:413    .rodata._ZTV15CRecursiveMutex:00000000 _ZTV15CRecursiveMutex
+  C:\Temp\ccKqy9sh.s:225    .text._ZN15CRecursiveMutexC2EPv:00000000 $t
+  C:\Temp\ccKqy9sh.s:230    .text._ZN15CRecursiveMutexC2EPv:00000000 _ZN15CRecursiveMutexC2EPv
+  C:\Temp\ccKqy9sh.s:272    .text._ZN15CRecursiveMutexC2EPv:00000030 $d
+  C:\Temp\ccKqy9sh.s:277    .text._ZN15CRecursiveMutexD2Ev:00000000 $t
+  C:\Temp\ccKqy9sh.s:282    .text._ZN15CRecursiveMutexD2Ev:00000000 _ZN15CRecursiveMutexD2Ev
+  C:\Temp\ccKqy9sh.s:327    .text._ZN15CRecursiveMutexD2Ev:00000034 $d
+  C:\Temp\ccKqy9sh.s:332    .text._ZN15CRecursiveMutexD0Ev:00000000 $t
+  C:\Temp\ccKqy9sh.s:337    .text._ZN15CRecursiveMutexD0Ev:00000000 _ZN15CRecursiveMutexD0Ev
+  C:\Temp\ccKqy9sh.s:282    .text._ZN15CRecursiveMutexD2Ev:00000000 _ZN15CRecursiveMutexD1Ev
+  C:\Temp\ccKqy9sh.s:369    .text._ZN15CRecursiveMutex6CreateEv:00000000 $t
+  C:\Temp\ccKqy9sh.s:374    .text._ZN15CRecursiveMutex6CreateEv:00000000 _ZN15CRecursiveMutex6CreateEv
+  C:\Temp\ccKqy9sh.s:410    .rodata._ZTV15CRecursiveMutex:00000000 $d
+  C:\Temp\ccKqy9sh.s:183    .text._ZN15CRecursiveMutexC2Ev:00000000 _ZN15CRecursiveMutexC1Ev
+  C:\Temp\ccKqy9sh.s:230    .text._ZN15CRecursiveMutexC2EPv:00000000 _ZN15CRecursiveMutexC1EPv
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+_ZN11ASyncObjectC2Ev
+_ZN11ASyncObject6AttachEPv
+_ZN11ASyncObjectD2Ev
+_ZdlPv

@@ -1,0 +1,370 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CGraphicLCD.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZN11CGraphicLCDC2Ev,"ax",%progbits
+  19              		.align	2
+  20              		.global	_ZN11CGraphicLCDC2Ev
+  21              		.thumb
+  22              		.thumb_func
+  24              	_ZN11CGraphicLCDC2Ev:
+  25              	.LFB1:
+  26              		.file 1 "../GraphicLCD/CGraphicLCD.cpp"
+   1:../GraphicLCD/CGraphicLCD.cpp **** /**
+   2:../GraphicLCD/CGraphicLCD.cpp ****   ******************************************************************************
+   3:../GraphicLCD/CGraphicLCD.cpp ****   * @file      	CGraphicLCD.cpp
+   4:../GraphicLCD/CGraphicLCD.cpp ****   * @author    	Tecnologic86
+   5:../GraphicLCD/CGraphicLCD.cpp ****   * @version   	V0.0.0
+   6:../GraphicLCD/CGraphicLCD.cpp ****   * @date      	17.02.12
+   7:../GraphicLCD/CGraphicLCD.cpp ****   * @brief		T6963C Graphics LCD driver Class
+   8:../GraphicLCD/CGraphicLCD.cpp ****   ******************************************************************************
+   9:../GraphicLCD/CGraphicLCD.cpp ****   */
+  10:../GraphicLCD/CGraphicLCD.cpp **** 
+  11:../GraphicLCD/CGraphicLCD.cpp **** /* Includes ------------------------------------------------------------------*/
+  12:../GraphicLCD/CGraphicLCD.cpp **** #include "CGraphicLCD.h"
+  13:../GraphicLCD/CGraphicLCD.cpp **** /* Private typedef -----------------------------------------------------------*/
+  14:../GraphicLCD/CGraphicLCD.cpp **** /* Private define ------------------------------------------------------------*/
+  15:../GraphicLCD/CGraphicLCD.cpp **** /* Private macro -------------------------------------------------------------*/
+  16:../GraphicLCD/CGraphicLCD.cpp **** /* Private variables ---------------------------------------------------------*/
+  17:../GraphicLCD/CGraphicLCD.cpp **** /* Private function prototypes -----------------------------------------------*/
+  18:../GraphicLCD/CGraphicLCD.cpp **** /* Private functions ---------------------------------------------------------*/
+  19:../GraphicLCD/CGraphicLCD.cpp **** 
+  20:../GraphicLCD/CGraphicLCD.cpp **** CGraphicLCD::CGraphicLCD() {
+  27              		.loc 1 20 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43              	.LBB2:
+  44              		.loc 1 20 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 064A     		ldr	r2, .L3
+  47 000c 1A60     		str	r2, [r3, #0]
+  21:../GraphicLCD/CGraphicLCD.cpp **** 	bInverse=false;
+  48              		.loc 1 21 0
+  49 000e 7B68     		ldr	r3, [r7, #4]
+  50 0010 4FF00002 		mov	r2, #0
+  51 0014 1A71     		strb	r2, [r3, #4]
+  52              	.LBE2:
+  22:../GraphicLCD/CGraphicLCD.cpp **** }
+  53              		.loc 1 22 0
+  54 0016 7B68     		ldr	r3, [r7, #4]
+  55 0018 1846     		mov	r0, r3
+  56 001a 07F10C07 		add	r7, r7, #12
+  57 001e BD46     		mov	sp, r7
+  58 0020 80BC     		pop	{r7}
+  59 0022 7047     		bx	lr
+  60              	.L4:
+  61              		.align	2
+  62              	.L3:
+  63 0024 08000000 		.word	_ZTV11CGraphicLCD+8
+  64              		.cfi_endproc
+  65              	.LFE1:
+  67              		.section	.text._ZN11CGraphicLCDC2Eb,"ax",%progbits
+  68              		.align	2
+  69              		.global	_ZN11CGraphicLCDC2Eb
+  70              		.thumb
+  71              		.thumb_func
+  73              	_ZN11CGraphicLCDC2Eb:
+  74              	.LFB4:
+  23:../GraphicLCD/CGraphicLCD.cpp **** 
+  24:../GraphicLCD/CGraphicLCD.cpp **** CGraphicLCD::CGraphicLCD(bool inverse) {
+  75              		.loc 1 24 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 8
+  78              		@ frame_needed = 1, uses_anonymous_args = 0
+  79              		@ link register save eliminated.
+  80 0000 80B4     		push	{r7}
+  81              	.LCFI3:
+  82              		.cfi_def_cfa_offset 4
+  83              		.cfi_offset 7, -4
+  84 0002 83B0     		sub	sp, sp, #12
+  85              	.LCFI4:
+  86              		.cfi_def_cfa_offset 16
+  87 0004 00AF     		add	r7, sp, #0
+  88              	.LCFI5:
+  89              		.cfi_def_cfa_register 7
+  90 0006 7860     		str	r0, [r7, #4]
+  91 0008 0B46     		mov	r3, r1
+  92 000a FB70     		strb	r3, [r7, #3]
+  93              	.LBB3:
+  94              		.loc 1 24 0
+  95 000c 7B68     		ldr	r3, [r7, #4]
+  96 000e 064A     		ldr	r2, .L7
+  97 0010 1A60     		str	r2, [r3, #0]
+  25:../GraphicLCD/CGraphicLCD.cpp **** 	bInverse=inverse;
+  98              		.loc 1 25 0
+  99 0012 7B68     		ldr	r3, [r7, #4]
+ 100 0014 FA78     		ldrb	r2, [r7, #3]
+ 101 0016 1A71     		strb	r2, [r3, #4]
+ 102              	.LBE3:
+  26:../GraphicLCD/CGraphicLCD.cpp **** }
+ 103              		.loc 1 26 0
+ 104 0018 7B68     		ldr	r3, [r7, #4]
+ 105 001a 1846     		mov	r0, r3
+ 106 001c 07F10C07 		add	r7, r7, #12
+ 107 0020 BD46     		mov	sp, r7
+ 108 0022 80BC     		pop	{r7}
+ 109 0024 7047     		bx	lr
+ 110              	.L8:
+ 111 0026 00BF     		.align	2
+ 112              	.L7:
+ 113 0028 08000000 		.word	_ZTV11CGraphicLCD+8
+ 114              		.cfi_endproc
+ 115              	.LFE4:
+ 117              		.section	.text._ZN11CGraphicLCDD2Ev,"ax",%progbits
+ 118              		.align	2
+ 119              		.global	_ZN11CGraphicLCDD2Ev
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	_ZN11CGraphicLCDD2Ev:
+ 124              	.LFB7:
+  27:../GraphicLCD/CGraphicLCD.cpp **** 
+  28:../GraphicLCD/CGraphicLCD.cpp **** CGraphicLCD::~CGraphicLCD() {
+ 125              		.loc 1 28 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 8
+ 128              		@ frame_needed = 1, uses_anonymous_args = 0
+ 129 0000 80B5     		push	{r7, lr}
+ 130              	.LCFI6:
+ 131              		.cfi_def_cfa_offset 8
+ 132              		.cfi_offset 14, -4
+ 133              		.cfi_offset 7, -8
+ 134 0002 82B0     		sub	sp, sp, #8
+ 135              	.LCFI7:
+ 136              		.cfi_def_cfa_offset 16
+ 137 0004 00AF     		add	r7, sp, #0
+ 138              	.LCFI8:
+ 139              		.cfi_def_cfa_register 7
+ 140 0006 7860     		str	r0, [r7, #4]
+ 141              	.LBB4:
+ 142              		.loc 1 28 0
+ 143 0008 7B68     		ldr	r3, [r7, #4]
+ 144 000a 094A     		ldr	r2, .L12
+ 145 000c 1A60     		str	r2, [r3, #0]
+ 146              	.LBE4:
+  29:../GraphicLCD/CGraphicLCD.cpp **** 	// TODO Auto-generated destructor stub
+  30:../GraphicLCD/CGraphicLCD.cpp **** }
+ 147              		.loc 1 30 0
+ 148 000e 4FF00003 		mov	r3, #0
+ 149 0012 03F00103 		and	r3, r3, #1
+ 150 0016 DBB2     		uxtb	r3, r3
+ 151 0018 002B     		cmp	r3, #0
+ 152 001a 02D0     		beq	.L11
+ 153              		.loc 1 30 0 is_stmt 0 discriminator 1
+ 154 001c 7868     		ldr	r0, [r7, #4]
+ 155 001e FFF7FEFF 		bl	_ZdlPv
+ 156              	.L11:
+ 157              		.loc 1 30 0 discriminator 2
+ 158 0022 7B68     		ldr	r3, [r7, #4]
+ 159 0024 1846     		mov	r0, r3
+ 160 0026 07F10807 		add	r7, r7, #8
+ 161 002a BD46     		mov	sp, r7
+ 162 002c 80BD     		pop	{r7, pc}
+ 163              	.L13:
+ 164 002e 00BF     		.align	2
+ 165              	.L12:
+ 166 0030 08000000 		.word	_ZTV11CGraphicLCD+8
+ 167              		.cfi_endproc
+ 168              	.LFE7:
+ 170              		.section	.text._ZN11CGraphicLCDD0Ev,"ax",%progbits
+ 171              		.align	2
+ 172              		.global	_ZN11CGraphicLCDD0Ev
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	_ZN11CGraphicLCDD0Ev:
+ 177              	.LFB9:
+  28:../GraphicLCD/CGraphicLCD.cpp **** CGraphicLCD::~CGraphicLCD() {
+ 178              		.loc 1 28 0 is_stmt 1
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 8
+ 181              		@ frame_needed = 1, uses_anonymous_args = 0
+ 182 0000 80B5     		push	{r7, lr}
+ 183              	.LCFI9:
+ 184              		.cfi_def_cfa_offset 8
+ 185              		.cfi_offset 14, -4
+ 186              		.cfi_offset 7, -8
+ 187 0002 82B0     		sub	sp, sp, #8
+ 188              	.LCFI10:
+ 189              		.cfi_def_cfa_offset 16
+ 190 0004 00AF     		add	r7, sp, #0
+ 191              	.LCFI11:
+ 192              		.cfi_def_cfa_register 7
+ 193 0006 7860     		str	r0, [r7, #4]
+ 194              		.loc 1 30 0
+ 195 0008 7868     		ldr	r0, [r7, #4]
+ 196 000a FFF7FEFF 		bl	_ZN11CGraphicLCDD1Ev
+ 197 000e 7868     		ldr	r0, [r7, #4]
+ 198 0010 FFF7FEFF 		bl	_ZdlPv
+ 199 0014 7B68     		ldr	r3, [r7, #4]
+ 200 0016 1846     		mov	r0, r3
+ 201 0018 07F10807 		add	r7, r7, #8
+ 202 001c BD46     		mov	sp, r7
+ 203 001e 80BD     		pop	{r7, pc}
+ 204              		.cfi_endproc
+ 205              	.LFE9:
+ 207              		.section	.text._ZN11CGraphicLCD7InverseEv,"ax",%progbits
+ 208              		.align	2
+ 209              		.global	_ZN11CGraphicLCD7InverseEv
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	_ZN11CGraphicLCD7InverseEv:
+ 214              	.LFB10:
+  31:../GraphicLCD/CGraphicLCD.cpp **** 
+  32:../GraphicLCD/CGraphicLCD.cpp **** /**
+  33:../GraphicLCD/CGraphicLCD.cpp ****   * @brief gives inverted draw status
+  34:../GraphicLCD/CGraphicLCD.cpp ****   * @param  None
+  35:../GraphicLCD/CGraphicLCD.cpp ****   * @retval true on inverse mode
+  36:../GraphicLCD/CGraphicLCD.cpp ****   */
+  37:../GraphicLCD/CGraphicLCD.cpp **** bool CGraphicLCD::Inverse(){
+ 215              		.loc 1 37 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 8
+ 218              		@ frame_needed = 1, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 220 0000 80B4     		push	{r7}
+ 221              	.LCFI12:
+ 222              		.cfi_def_cfa_offset 4
+ 223              		.cfi_offset 7, -4
+ 224 0002 83B0     		sub	sp, sp, #12
+ 225              	.LCFI13:
+ 226              		.cfi_def_cfa_offset 16
+ 227 0004 00AF     		add	r7, sp, #0
+ 228              	.LCFI14:
+ 229              		.cfi_def_cfa_register 7
+ 230 0006 7860     		str	r0, [r7, #4]
+  38:../GraphicLCD/CGraphicLCD.cpp **** 	return bInverse;
+ 231              		.loc 1 38 0
+ 232 0008 7B68     		ldr	r3, [r7, #4]
+ 233 000a 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+  39:../GraphicLCD/CGraphicLCD.cpp **** }
+ 234              		.loc 1 39 0
+ 235 000c 1846     		mov	r0, r3
+ 236 000e 07F10C07 		add	r7, r7, #12
+ 237 0012 BD46     		mov	sp, r7
+ 238 0014 80BC     		pop	{r7}
+ 239 0016 7047     		bx	lr
+ 240              		.cfi_endproc
+ 241              	.LFE10:
+ 243              		.section	.text._ZN11CGraphicLCD7InverseEb,"ax",%progbits
+ 244              		.align	2
+ 245              		.global	_ZN11CGraphicLCD7InverseEb
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	_ZN11CGraphicLCD7InverseEb:
+ 250              	.LFB11:
+  40:../GraphicLCD/CGraphicLCD.cpp **** 
+  41:../GraphicLCD/CGraphicLCD.cpp **** /**
+  42:../GraphicLCD/CGraphicLCD.cpp ****   * @brief  sets inverted draw mode
+  43:../GraphicLCD/CGraphicLCD.cpp ****   * @param  ture for inverted draw mode
+  44:../GraphicLCD/CGraphicLCD.cpp ****   * @retval None
+  45:../GraphicLCD/CGraphicLCD.cpp ****   */
+  46:../GraphicLCD/CGraphicLCD.cpp **** void CGraphicLCD::Inverse(bool inverse){
+ 251              		.loc 1 46 0
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 8
+ 254              		@ frame_needed = 1, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 256 0000 80B4     		push	{r7}
+ 257              	.LCFI15:
+ 258              		.cfi_def_cfa_offset 4
+ 259              		.cfi_offset 7, -4
+ 260 0002 83B0     		sub	sp, sp, #12
+ 261              	.LCFI16:
+ 262              		.cfi_def_cfa_offset 16
+ 263 0004 00AF     		add	r7, sp, #0
+ 264              	.LCFI17:
+ 265              		.cfi_def_cfa_register 7
+ 266 0006 7860     		str	r0, [r7, #4]
+ 267 0008 0B46     		mov	r3, r1
+ 268 000a FB70     		strb	r3, [r7, #3]
+  47:../GraphicLCD/CGraphicLCD.cpp **** 	bInverse = inverse;
+ 269              		.loc 1 47 0
+ 270 000c 7B68     		ldr	r3, [r7, #4]
+ 271 000e FA78     		ldrb	r2, [r7, #3]
+ 272 0010 1A71     		strb	r2, [r3, #4]
+  48:../GraphicLCD/CGraphicLCD.cpp **** }
+ 273              		.loc 1 48 0
+ 274 0012 07F10C07 		add	r7, r7, #12
+ 275 0016 BD46     		mov	sp, r7
+ 276 0018 80BC     		pop	{r7}
+ 277 001a 7047     		bx	lr
+ 278              		.cfi_endproc
+ 279              	.LFE11:
+ 281              		.global	_ZTV11CGraphicLCD
+ 282              		.section	.rodata._ZTV11CGraphicLCD,"a",%progbits
+ 283              		.align	3
+ 286              	_ZTV11CGraphicLCD:
+ 287 0000 00000000 		.word	0
+ 288 0004 00000000 		.word	0
+ 289 0008 00000000 		.word	__cxa_pure_virtual
+ 290 000c 00000000 		.word	__cxa_pure_virtual
+ 291 0010 00000000 		.word	__cxa_pure_virtual
+ 292 0014 00000000 		.word	__cxa_pure_virtual
+ 293 0018 00000000 		.word	__cxa_pure_virtual
+ 294 001c 00000000 		.word	__cxa_pure_virtual
+ 295 0020 00000000 		.word	__cxa_pure_virtual
+ 296 0024 00000000 		.word	__cxa_pure_virtual
+ 297 0028 00000000 		.word	__cxa_pure_virtual
+ 298 002c 00000000 		.word	_ZN11CGraphicLCDD1Ev
+ 299 0030 00000000 		.word	_ZN11CGraphicLCDD0Ev
+ 300              		.global	_ZN11CGraphicLCDC1Ev
+ 301              		.thumb_set _ZN11CGraphicLCDC1Ev,_ZN11CGraphicLCDC2Ev
+ 302              		.global	_ZN11CGraphicLCDC1Eb
+ 303              		.thumb_set _ZN11CGraphicLCDC1Eb,_ZN11CGraphicLCDC2Eb
+ 304              		.global	_ZN11CGraphicLCDD1Ev
+ 305              		.thumb_set _ZN11CGraphicLCDD1Ev,_ZN11CGraphicLCDD2Ev
+ 306 0034 00000000 		.text
+ 307              	.Letext0:
+ 308              		.file 2 "../GraphicLCD/CGraphicLCD.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 CGraphicLCD.cpp
+  C:\Temp\cc7wnTbR.s:19     .text._ZN11CGraphicLCDC2Ev:00000000 $t
+  C:\Temp\cc7wnTbR.s:24     .text._ZN11CGraphicLCDC2Ev:00000000 _ZN11CGraphicLCDC2Ev
+  C:\Temp\cc7wnTbR.s:63     .text._ZN11CGraphicLCDC2Ev:00000024 $d
+  C:\Temp\cc7wnTbR.s:286    .rodata._ZTV11CGraphicLCD:00000000 _ZTV11CGraphicLCD
+  C:\Temp\cc7wnTbR.s:68     .text._ZN11CGraphicLCDC2Eb:00000000 $t
+  C:\Temp\cc7wnTbR.s:73     .text._ZN11CGraphicLCDC2Eb:00000000 _ZN11CGraphicLCDC2Eb
+  C:\Temp\cc7wnTbR.s:113    .text._ZN11CGraphicLCDC2Eb:00000028 $d
+  C:\Temp\cc7wnTbR.s:118    .text._ZN11CGraphicLCDD2Ev:00000000 $t
+  C:\Temp\cc7wnTbR.s:123    .text._ZN11CGraphicLCDD2Ev:00000000 _ZN11CGraphicLCDD2Ev
+  C:\Temp\cc7wnTbR.s:166    .text._ZN11CGraphicLCDD2Ev:00000030 $d
+  C:\Temp\cc7wnTbR.s:171    .text._ZN11CGraphicLCDD0Ev:00000000 $t
+  C:\Temp\cc7wnTbR.s:176    .text._ZN11CGraphicLCDD0Ev:00000000 _ZN11CGraphicLCDD0Ev
+  C:\Temp\cc7wnTbR.s:123    .text._ZN11CGraphicLCDD2Ev:00000000 _ZN11CGraphicLCDD1Ev
+  C:\Temp\cc7wnTbR.s:208    .text._ZN11CGraphicLCD7InverseEv:00000000 $t
+  C:\Temp\cc7wnTbR.s:213    .text._ZN11CGraphicLCD7InverseEv:00000000 _ZN11CGraphicLCD7InverseEv
+  C:\Temp\cc7wnTbR.s:244    .text._ZN11CGraphicLCD7InverseEb:00000000 $t
+  C:\Temp\cc7wnTbR.s:249    .text._ZN11CGraphicLCD7InverseEb:00000000 _ZN11CGraphicLCD7InverseEb
+  C:\Temp\cc7wnTbR.s:283    .rodata._ZTV11CGraphicLCD:00000000 $d
+  C:\Temp\cc7wnTbR.s:24     .text._ZN11CGraphicLCDC2Ev:00000000 _ZN11CGraphicLCDC1Ev
+  C:\Temp\cc7wnTbR.s:73     .text._ZN11CGraphicLCDC2Eb:00000000 _ZN11CGraphicLCDC1Eb
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+_ZdlPv
+__cxa_pure_virtual

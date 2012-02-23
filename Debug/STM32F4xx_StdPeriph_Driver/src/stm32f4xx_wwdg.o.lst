@@ -27,8 +27,8 @@
    2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   ******************************************************************************
    3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @file    stm32f4xx_wwdg.c
    4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @author  MCD Application Team
-   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @version V1.0.0RC1
-   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @date    25-August-2011
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @version V1.0.0
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @date    30-September-2011
    7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @brief   This file provides firmware functions to manage the following 
    8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *          functionalities of the Window watchdog (WWDG) peripheral:           
    9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *           - Prescaler, Refresh window and Counter configuration
@@ -60,7 +60,7 @@
   35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *          WWDG counter clock = PCLK1 / Prescaler
   36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *          WWDG timeout = (WWDG counter clock) * (counter value)
   37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *                      
-  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *          Min-max timeout value @30 MHz(PCLK1): ~136.5 us / ~69.9 ms
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *          Min-max timeout value @42 MHz(PCLK1): ~97.5 us / ~49.9 ms
   39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *                            
   40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *          ===================================================================
   41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   *                                 How to use this driver
@@ -624,22 +624,22 @@
  355              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_wwdg.c
-  C:\Temp\ccHBIrqj.s:19     .text.WWDG_DeInit:00000000 $t
-  C:\Temp\ccHBIrqj.s:24     .text.WWDG_DeInit:00000000 WWDG_DeInit
-  C:\Temp\ccHBIrqj.s:53     .text.WWDG_SetPrescaler:00000000 $t
-  C:\Temp\ccHBIrqj.s:58     .text.WWDG_SetPrescaler:00000000 WWDG_SetPrescaler
-  C:\Temp\ccHBIrqj.s:104    .text.WWDG_SetWindowValue:00000000 $t
-  C:\Temp\ccHBIrqj.s:109    .text.WWDG_SetWindowValue:00000000 WWDG_SetWindowValue
-  C:\Temp\ccHBIrqj.s:157    .text.WWDG_EnableIT:00000000 $t
-  C:\Temp\ccHBIrqj.s:162    .text.WWDG_EnableIT:00000000 WWDG_EnableIT
-  C:\Temp\ccHBIrqj.s:189    .text.WWDG_SetCounter:00000000 $t
-  C:\Temp\ccHBIrqj.s:194    .text.WWDG_SetCounter:00000000 WWDG_SetCounter
-  C:\Temp\ccHBIrqj.s:228    .text.WWDG_Enable:00000000 $t
-  C:\Temp\ccHBIrqj.s:233    .text.WWDG_Enable:00000000 WWDG_Enable
-  C:\Temp\ccHBIrqj.s:268    .text.WWDG_GetFlagStatus:00000000 $t
-  C:\Temp\ccHBIrqj.s:273    .text.WWDG_GetFlagStatus:00000000 WWDG_GetFlagStatus
-  C:\Temp\ccHBIrqj.s:320    .text.WWDG_ClearFlag:00000000 $t
-  C:\Temp\ccHBIrqj.s:325    .text.WWDG_ClearFlag:00000000 WWDG_ClearFlag
+  C:\Temp\ccvykXn3.s:19     .text.WWDG_DeInit:00000000 $t
+  C:\Temp\ccvykXn3.s:24     .text.WWDG_DeInit:00000000 WWDG_DeInit
+  C:\Temp\ccvykXn3.s:53     .text.WWDG_SetPrescaler:00000000 $t
+  C:\Temp\ccvykXn3.s:58     .text.WWDG_SetPrescaler:00000000 WWDG_SetPrescaler
+  C:\Temp\ccvykXn3.s:104    .text.WWDG_SetWindowValue:00000000 $t
+  C:\Temp\ccvykXn3.s:109    .text.WWDG_SetWindowValue:00000000 WWDG_SetWindowValue
+  C:\Temp\ccvykXn3.s:157    .text.WWDG_EnableIT:00000000 $t
+  C:\Temp\ccvykXn3.s:162    .text.WWDG_EnableIT:00000000 WWDG_EnableIT
+  C:\Temp\ccvykXn3.s:189    .text.WWDG_SetCounter:00000000 $t
+  C:\Temp\ccvykXn3.s:194    .text.WWDG_SetCounter:00000000 WWDG_SetCounter
+  C:\Temp\ccvykXn3.s:228    .text.WWDG_Enable:00000000 $t
+  C:\Temp\ccvykXn3.s:233    .text.WWDG_Enable:00000000 WWDG_Enable
+  C:\Temp\ccvykXn3.s:268    .text.WWDG_GetFlagStatus:00000000 $t
+  C:\Temp\ccvykXn3.s:273    .text.WWDG_GetFlagStatus:00000000 WWDG_GetFlagStatus
+  C:\Temp\ccvykXn3.s:320    .text.WWDG_ClearFlag:00000000 $t
+  C:\Temp\ccvykXn3.s:325    .text.WWDG_ClearFlag:00000000 WWDG_ClearFlag
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

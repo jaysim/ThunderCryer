@@ -1,0 +1,1001 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CMenue.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZNK5CTask7IsValidEv,"axG",%progbits,_ZNK5CTask7IsValidEv,comdat
+  19              		.align	2
+  20              		.weak	_ZNK5CTask7IsValidEv
+  21              		.thumb
+  22              		.thumb_func
+  24              	_ZNK5CTask7IsValidEv:
+  25              	.LFB132:
+  26              		.file 1 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC
+   1:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** /**
+   2:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @file CTask.h
+   3:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @class CTask
+   4:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @ingroup FreeRTOS_Wrapper
+   5:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+   6:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * The CTask class wraps a native FreeRTOS task handle (xTaskHandle). To create a task instance
+   7:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * an object of this class and then call its CTask::Create method like showed in the following samp
+   8:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \code
+   9:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * CTask g_aTask // global task declaration.
+  10:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  11:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * void main()
+  12:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * {
+  13:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * 	g_aTask.Create(task_control_func, "Led2", configMINIMAL_STACK_SIZE, mainFLASH_TASK_PRIORITY);
+  14:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  15:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * 	CFreeRTOS::StartScheduler();
+  16:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * }
+  17:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \endcode
+  18:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  19:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * Usually the application subclass this class to create an application specific task object.
+  20:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * See the CHelloWorld class for an example.
+  21:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  22:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \sa <a href="http://www.freertos.org/taskandcr.html">task documentation</a> in the FreeRTOS web 
+  23:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  24:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @date Jul 5, 2010
+  25:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @author Stefano Oliveri (STF12.net)
+  26:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *         E-Mail: software@stf12.net
+  27:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  */
+  28:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  29:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #ifndef CTASK_H_
+  30:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #define CTASK_H_
+  31:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  32:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "FreeRTOS.h"
+  33:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "task.h"
+  34:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "IFreeRTOSProtocol.h"
+  35:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  36:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** class CTask: public IFreeRTOSObj {
+  37:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  38:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  39:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Specifies the native FreeRTOS handle managed by an instance of this class.
+  40:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  41:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	xTaskHandle m_handleTask;
+  42:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  43:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** public:
+  44:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  45:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * The default constructor. It initializes the object without attaching it to a native FreeRTOS ha
+  46:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Call the Create method to allocate a task handle and attach it to the object.
+  47:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  48:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	CTask();
+  49:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  50:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  51:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a CTask instance and attach it to a valid handle.
+  52:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  53:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * @param handleTask a valid task handle.
+  54:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  55:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	CTask(xTaskHandle handleTask);
+  56:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  57:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  58:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Delete the native FreeRTOS task.
+  59:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  60:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	virtual ~CTask();
+  61:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  62:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  63:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Retrieve the native FreeRTOS task handle attached to this object.
+  64:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  65:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * @return the native FreeRTOS task handle attached to this object.
+  66:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  67:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline operator xTaskHandle() const { return m_handleTask; }
+  68:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  69:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	// FreeRTOS API Wrappers
+  70:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  71:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  72:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a FreeRTOS task and attach its handle to the receiver object.
+  73:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  74:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00125.html">xTaskCreate</a> FreeRTOS API function.
+  75:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  76:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	portBASE_TYPE Create(pdTASK_CODE pvTaskCode, const portCHAR * const pcName, unsigned portSHORT usS
+  77:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  78:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  79:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a Memory Protection Unit (MPU) restricted task and attach its handle to the receiver obj
+  80:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  81:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/xTaskCreateRestricted.html">xTaskCreateRestricted</a> Free
+  82:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  83:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	portBASE_TYPE CreateRestricted(xTaskParameters *pxTaskDefinition);
+  84:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  85:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  86:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00126.html">vTaskDelete</a>  FreeRTOS API function.
+  87:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  88:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	void Delete();
+  89:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  90:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  91:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00127.html">vTaskDelay</a>  FreeRTOS API function.
+  92:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  93:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline static void Delay(portTickType xTicksToDelay);
+  94:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  95:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  96:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/vtaskdelayuntil.html">vTaskDelayUntil</a>  FreeRTOS API fu
+  97:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  98:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement);
+  99:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 100:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 101:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskYIELD">taskYIELD</a>  FreeRTOS API func
+ 102:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 103:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void Yeld() { taskYIELD(); }
+ 104:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 105:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 106:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENTER_CRITICAL">taskENTER_CRITICAL</a> 
+ 107:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 108:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void EnterCritical() { taskENTER_CRITICAL(); }
+ 109:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 110:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 111:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskEXIT_CRITICAL">taskEXIT_CRITICAL</a>  F
+ 112:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 113:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void ExitCritical() { taskEXIT_CRITICAL(); }
+ 114:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 115:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 116:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskDISABLE_INTERRUPTS">taskDISABLE_INTERRU
+ 117:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 118:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void DisableInterrupt() { taskDISABLE_INTERRUPTS(); }
+ 119:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 120:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 121:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENABLE_INTERRUPTS">taskENABLE_INTERRUPT
+ 122:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 123:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void EnableInterrupt() { taskENABLE_INTERRUPTS(); }
+ 124:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 125:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 126:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetCurrentTaskHandle">xTaskGetCurrentT
+ 127:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 128:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static xTaskHandle GetCurrentTaskHandle();
+ 129:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 130:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 131:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetTickCount">xTaskGetTickCount</a>  F
+ 132:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 133:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static portTickType GetTickCount();
+ 134:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 135:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 136:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetSchedulerState">xTaskGetSchedulerSt
+ 137:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 138:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static portBASE_TYPE GetSchedulerState();
+ 139:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 140:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 141:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#usTaskGetNumberOfTasks">uxTaskGetNumberOfTa
+ 142:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 143:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static unsigned portBASE_TYPE GetNumberOfTasks();
+ 144:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 145:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 146:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskList">vTaskList</a>  FreeRTOS API func
+ 147:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 148:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void GetTaskList(portCHAR *pcWriteBuffer);
+ 149:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 150:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 151:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskGetRunTimeStats">vTaskGetRunTimeStats<
+ 152:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 153:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void GetRunTimeStats(portCHAR *pcWriteBuffer);
+ 154:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 155:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 156:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00128.html">uxTaskPriorityGet</a>  FreeRTOS API functi
+ 157:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 158:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline unsigned portBASE_TYPE PriorityGet() const;
+ 159:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 160:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 161:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00129.html">vTaskPrioritySet</a>  FreeRTOS API functio
+ 162:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 163:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void PrioritySet(unsigned portBASE_TYPE uxNewPriority);
+ 164:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 165:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 166:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00130.html">vTaskSuspend</a>  FreeRTOS API function.
+ 167:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 168:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void Suspend();
+ 169:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 170:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 171:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00131.html">vTaskResume</a>  FreeRTOS API function.
+ 172:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 173:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void Resume();
+ 174:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 175:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 176:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/taskresumefromisr.html">xTaskResumeFromISR</a>  FreeRTO
+ 177:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 178:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline portBASE_TYPE ResumeFromISR();
+ 179:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 180:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 181:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskSetApplicationTag.html">vTaskSetApplicationTaskTag
+ 182:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 183:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void SetApplicationTag(pdTASK_HOOK_CODE pxTagValue);
+ 184:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 185:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 186:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/xTaskCallApplicationTaskHook.html">xTaskCallApplication
+ 187:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 188:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline portBASE_TYPE CallApplicationTaskHook(void *pvParameter);
+ 189:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 190:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 191:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskAllocateMPURegions.html">vTaskAllocateMPURegions</
+ 192:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 193:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void AllocateMPURegions(const xMemoryRegion * const xRegions);
+ 194:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 195:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     // FreeRTOS class extension.
+ 196:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline bool IsValid() const;
+ 197:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	void Attach(xGenericHandle handle);
+ 198:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline xGenericHandle Detach();
+ 199:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** };
+ 200:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 201:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** // inline method
+ 202:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** ////////////////
+ 203:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 204:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 205:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Delay(portTickType xTicksToDelay) {
+ 206:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskDelay == 1 )
+ 207:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskDelay(xTicksToDelay);
+ 208:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 209:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 210:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 211:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 212:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement) {
+ 213:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskDelayUntil == 1 )
+ 214:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
+ 215:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 216:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 217:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 218:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 219:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** xTaskHandle CTask::GetCurrentTaskHandle() {
+ 220:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetCurrentTaskHandle();
+ 221:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 222:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 223:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 224:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portTickType CTask::GetTickCount() {
+ 225:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetTickCount();
+ 226:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 227:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 228:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 229:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::GetSchedulerState() {
+ 230:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_xTaskGetSchedulerState == 1 )
+ 231:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetSchedulerState();
+ 232:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 233:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return 0;
+ 234:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 235:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 236:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 237:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 238:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** unsigned portBASE_TYPE CTask::GetNumberOfTasks() {
+ 239:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return uxTaskGetNumberOfTasks();
+ 240:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 241:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 242:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 243:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::GetTaskList(portCHAR *pcWriteBuffer) {
+ 244:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_TRACE_FACILITY == 1 )
+ 245:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskList((signed portCHAR*)pcWriteBuffer);
+ 246:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 247:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 248:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 249:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 250:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::GetRunTimeStats(portCHAR *pcWriteBuffer) {
+ 251:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if (configGENERATE_RUN_TIME_STATS == 1)
+ 252:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskGetRunTimeStats((signed portCHAR*)pcWriteBuffer);
+ 253:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 254:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 255:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 256:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 257:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** unsigned portBASE_TYPE CTask::PriorityGet() const {
+ 258:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_uxTaskPriorityGet == 1 )
+ 259:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return uxTaskPriorityGet(m_handleTask);
+ 260:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 261:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return -1;
+ 262:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 263:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 264:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 265:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 266:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::PrioritySet(unsigned portBASE_TYPE uxNewPriority) {
+ 267:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskPrioritySet == 1 )
+ 268:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskPrioritySet(m_handleTask, uxNewPriority);
+ 269:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 270:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 271:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 272:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 273:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Suspend() {
+ 274:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
+ 275:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskSuspend(m_handleTask);
+ 276:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 277:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 278:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 279:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 280:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Resume() {
+ 281:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
+ 282:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskResume(m_handleTask);
+ 283:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 284:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 285:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 286:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 287:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::ResumeFromISR() {
+ 288:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( ( INCLUDE_xTaskResumeFromISR == 1 ) && ( INCLUDE_vTaskSuspend == 1 ) )
+ 289:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskResumeFromISR(m_handleTask);
+ 290:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 291:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return pdFALSE;
+ 292:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 293:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 294:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 295:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 296:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::SetApplicationTag(pdTASK_HOOK_CODE pxTagValue) {
+ 297:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
+ 298:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskSetApplicationTaskTag(m_handleTask, pxTagValue);
+ 299:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 300:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 301:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 302:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 303:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::CallApplicationTaskHook(void *pvParameter) {
+ 304:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
+ 305:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskCallApplicationTaskHook(m_handleTask, pvParameter);
+ 306:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 307:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return 0;
+ 308:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 309:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 310:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 311:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 312:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::AllocateMPURegions(const xMemoryRegion * const xRegions) {
+ 313:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( portUSING_MPU_WRAPPERS == 1 )
+ 314:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskAllocateMPURegions(m_handleTask, xRegions);
+ 315:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 316:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 317:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 318:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 319:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** bool CTask::IsValid() const{
+  27              		.loc 1 319 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+ 320:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return m_handleTask != NULL;
+  43              		.loc 1 320 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 5B68     		ldr	r3, [r3, #4]
+  46 000c 002B     		cmp	r3, #0
+  47 000e 0CBF     		ite	eq
+  48 0010 0023     		moveq	r3, #0
+  49 0012 0123     		movne	r3, #1
+  50 0014 DBB2     		uxtb	r3, r3
+ 321:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+  51              		.loc 1 321 0
+  52 0016 1846     		mov	r0, r3
+  53 0018 07F10C07 		add	r7, r7, #12
+  54 001c BD46     		mov	sp, r7
+  55 001e 80BC     		pop	{r7}
+  56 0020 7047     		bx	lr
+  57              		.cfi_endproc
+  58              	.LFE132:
+  60 0022 00BF     		.section	.text._ZN5CTask6DetachEv,"axG",%progbits,_ZN5CTask6DetachEv,comdat
+  61              		.align	2
+  62              		.weak	_ZN5CTask6DetachEv
+  63              		.thumb
+  64              		.thumb_func
+  66              	_ZN5CTask6DetachEv:
+  67              	.LFB133:
+ 322:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 323:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 324:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** xGenericHandle CTask::Detach() {
+  68              		.loc 1 324 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 16
+  71              		@ frame_needed = 1, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 0000 80B4     		push	{r7}
+  74              	.LCFI3:
+  75              		.cfi_def_cfa_offset 4
+  76              		.cfi_offset 7, -4
+  77 0002 85B0     		sub	sp, sp, #20
+  78              	.LCFI4:
+  79              		.cfi_def_cfa_offset 24
+  80 0004 00AF     		add	r7, sp, #0
+  81              	.LCFI5:
+  82              		.cfi_def_cfa_register 7
+  83 0006 7860     		str	r0, [r7, #4]
+  84              	.LBB2:
+ 325:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	xTaskHandle res = m_handleTask;
+  85              		.loc 1 325 0
+  86 0008 7B68     		ldr	r3, [r7, #4]
+  87 000a 5B68     		ldr	r3, [r3, #4]
+  88 000c FB60     		str	r3, [r7, #12]
+ 326:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	m_handleTask = NULL;
+  89              		.loc 1 326 0
+  90 000e 7B68     		ldr	r3, [r7, #4]
+  91 0010 4FF00002 		mov	r2, #0
+  92 0014 5A60     		str	r2, [r3, #4]
+ 327:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return res;
+  93              		.loc 1 327 0
+  94 0016 FB68     		ldr	r3, [r7, #12]
+  95              	.LBE2:
+ 328:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+  96              		.loc 1 328 0
+  97 0018 1846     		mov	r0, r3
+  98 001a 07F11407 		add	r7, r7, #20
+  99 001e BD46     		mov	sp, r7
+ 100 0020 80BC     		pop	{r7}
+ 101 0022 7047     		bx	lr
+ 102              		.cfi_endproc
+ 103              	.LFE133:
+ 105              		.section	.text._ZN12AManagedTask8OnCreateEPKctm,"axG",%progbits,_ZN12AManagedTask8OnCreateEPKctm,c
+ 106              		.align	2
+ 107              		.weak	_ZN12AManagedTask8OnCreateEPKctm
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	_ZN12AManagedTask8OnCreateEPKctm:
+ 112              	.LFB135:
+ 113              		.file 2 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC
+   1:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** /**
+   2:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @file AManagedTask.h
+   3:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @class AManagedTask
+   4:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+   5:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * This class extend the CTask in order to provide a more structured and simple to use framework fo
+   6:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * FreeRTOS programming. All AManagedTask derived objects are grouped in linked list. Please note t
+   7:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * this data structure can be modified in a next release. The framework manage these task objects
+   8:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * by calling their methods during the application life cycle.
+   9:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+  10:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * The application extend this abstract class to create a managed task and provide its control loop
+  11:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * \code
+  12:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * class CMyPipe: public AManagedTask
+  13:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * {
+  14:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *   // Task private variables.
+  15:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+  16:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * public:
+  17:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *   void Run() {  task control loop  };
+  18:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * }
+  19:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * \endcode
+  20:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+  21:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @date Aug 3, 2010
+  22:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @author Stefano Oliveri
+  23:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *         E-Mail: software@stf12.net
+  24:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  */
+  25:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  26:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** /**
+  27:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @defgroup FreeRTOS_Managed FreeRTOS Managed Class Extension
+  28:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @ingroup FreeRTOS_CPP_EXT
+  29:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * The FreeRTOS Managed Class Extension are a set of class that provide a structured and
+  30:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * managed framework to develop a FreeRTOS application.
+  31:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @{
+  32:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  */
+  33:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  34:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #ifndef AMANAGEDTASK_H_
+  35:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #define AMANAGEDTASK_H_
+  36:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  37:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #include "CTask.h"
+  38:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  39:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** class AManagedTask: public CTask {
+  40:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	friend class CFreeRTOS;
+  41:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  42:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  43:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Specifies the head of the linked list used to group all application managed task.
+  44:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  45:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	static AManagedTask *s_pManagedTaskListHead;
+  46:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  47:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  48:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Specifies the next managed task in the list or NULL if this is the last managed task.
+  49:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  50:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	AManagedTask *m_pNextManagedTask;
+  51:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  52:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** public:
+  53:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  54:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  55:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Default constructor.
+  56:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  57:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	AManagedTask();
+  58:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  59:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  60:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Destructor.
+  61:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  62:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual ~AManagedTask();
+  63:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  64:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  65:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Create the FreeRTOS task attached to this object.
+  66:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  67:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param pcName name of the task. Need only for debug purpose.
+  68:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param usStackDepth size in word of the task stack.
+  69:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param uxPriority task priority. Valid value ar between taskIDLE_PRIORITY and configMAX_PRIORIT
+  70:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  71:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @sa CTask::Create
+  72:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  73:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	portBASE_TYPE Create(const portCHAR * const pcName, unsigned portSHORT usStackDepth, unsigned port
+  74:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  75:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  76:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * The framework calls this function before the scheduler start. The default implementation simply
+  77:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Override this method to perform task specific hardware initialization that does not use FreeRTO
+  78:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  79:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @return true if success, false otherwise.
+  80:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  81:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual bool HardwareInit() { return true; }
+  82:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  83:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  84:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Task control loop.
+  85:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  86:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual void Run() =0;
+  87:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  88:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  89:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * The framework calls this function before the task is created to give a chance to a managed task
+  90:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * own initialization code and stop the task creation process if needed.
+  91:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  92:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param pcName specifies the task name.
+  93:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param usStackDepth specifies the task stack depth.
+  94:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param uxPriority specifies the task priority.
+  95:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  96:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @return pdTRUE if success, pdFALSE otherwise. If the method return pdFALSE the task creation pr
+  97:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * is stopped and no FreeRTOS resource are allocated.
+  98:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  99:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual portBASE_TYPE OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth, uns
+ 114              		.loc 2 99 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 16
+ 117              		@ frame_needed = 1, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119 0000 80B4     		push	{r7}
+ 120              	.LCFI6:
+ 121              		.cfi_def_cfa_offset 4
+ 122              		.cfi_offset 7, -4
+ 123 0002 85B0     		sub	sp, sp, #20
+ 124              	.LCFI7:
+ 125              		.cfi_def_cfa_offset 24
+ 126 0004 00AF     		add	r7, sp, #0
+ 127              	.LCFI8:
+ 128              		.cfi_def_cfa_register 7
+ 129 0006 F860     		str	r0, [r7, #12]
+ 130 0008 B960     		str	r1, [r7, #8]
+ 131 000a 3B60     		str	r3, [r7, #0]
+ 132 000c 1346     		mov	r3, r2	@ movhi
+ 133 000e FB80     		strh	r3, [r7, #6]	@ movhi
+ 134              		.loc 2 99 0
+ 135 0010 4FF00103 		mov	r3, #1
+ 136 0014 1846     		mov	r0, r3
+ 137 0016 07F11407 		add	r7, r7, #20
+ 138 001a BD46     		mov	sp, r7
+ 139 001c 80BC     		pop	{r7}
+ 140 001e 7047     		bx	lr
+ 141              		.cfi_endproc
+ 142              	.LFE135:
+ 144              		.section	.text._ZN6CMenueC2EP11CGraphicLCD,"ax",%progbits
+ 145              		.align	2
+ 146              		.global	_ZN6CMenueC2EP11CGraphicLCD
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	_ZN6CMenueC2EP11CGraphicLCD:
+ 151              	.LFB137:
+ 152              		.file 3 "../Menue/CMenue.cpp"
+   1:../Menue/CMenue.cpp **** /**
+   2:../Menue/CMenue.cpp ****   ******************************************************************************
+   3:../Menue/CMenue.cpp ****   * @file      	CMenue.cpp
+   4:../Menue/CMenue.cpp ****   * @author    	Tecnologic86
+   5:../Menue/CMenue.cpp ****   * @version   	V0.0.0
+   6:../Menue/CMenue.cpp ****   * @date      	18.02.12
+   7:../Menue/CMenue.cpp ****   * @brief		Class for Menu displayed on GraphicsLCD
+   8:../Menue/CMenue.cpp ****   ******************************************************************************
+   9:../Menue/CMenue.cpp ****   */
+  10:../Menue/CMenue.cpp **** 
+  11:../Menue/CMenue.cpp **** /* Includes ------------------------------------------------------------------*/
+  12:../Menue/CMenue.cpp **** #include "CMenue.h"
+  13:../Menue/CMenue.cpp **** #include "CT6963CDriver.h"
+  14:../Menue/CMenue.cpp **** /* Private typedef -----------------------------------------------------------*/
+  15:../Menue/CMenue.cpp **** /* Private define ------------------------------------------------------------*/
+  16:../Menue/CMenue.cpp **** /* Private macro -------------------------------------------------------------*/
+  17:../Menue/CMenue.cpp **** /* Private variables ---------------------------------------------------------*/
+  18:../Menue/CMenue.cpp **** /* Private function prototypes -----------------------------------------------*/
+  19:../Menue/CMenue.cpp **** /* Private functions ---------------------------------------------------------*/
+  20:../Menue/CMenue.cpp **** 
+  21:../Menue/CMenue.cpp **** 
+  22:../Menue/CMenue.cpp **** CMenue::CMenue(CGraphicLCD *display) : glcd(display){
+ 153              		.loc 3 22 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 8
+ 156              		@ frame_needed = 1, uses_anonymous_args = 0
+ 157 0000 80B5     		push	{r7, lr}
+ 158              	.LCFI9:
+ 159              		.cfi_def_cfa_offset 8
+ 160              		.cfi_offset 14, -4
+ 161              		.cfi_offset 7, -8
+ 162 0002 82B0     		sub	sp, sp, #8
+ 163              	.LCFI10:
+ 164              		.cfi_def_cfa_offset 16
+ 165 0004 00AF     		add	r7, sp, #0
+ 166              	.LCFI11:
+ 167              		.cfi_def_cfa_register 7
+ 168 0006 7860     		str	r0, [r7, #4]
+ 169 0008 3960     		str	r1, [r7, #0]
+ 170              	.LBB3:
+ 171              		.loc 3 22 0
+ 172 000a 7B68     		ldr	r3, [r7, #4]
+ 173 000c 1846     		mov	r0, r3
+ 174 000e FFF7FEFF 		bl	_ZN12AManagedTaskC2Ev
+ 175 0012 7B68     		ldr	r3, [r7, #4]
+ 176 0014 054A     		ldr	r2, .L6
+ 177 0016 1A60     		str	r2, [r3, #0]
+ 178 0018 7B68     		ldr	r3, [r7, #4]
+ 179 001a 3A68     		ldr	r2, [r7, #0]
+ 180 001c DA60     		str	r2, [r3, #12]
+ 181              	.LBE3:
+  23:../Menue/CMenue.cpp **** }
+ 182              		.loc 3 23 0
+ 183 001e 7B68     		ldr	r3, [r7, #4]
+ 184 0020 1846     		mov	r0, r3
+ 185 0022 07F10807 		add	r7, r7, #8
+ 186 0026 BD46     		mov	sp, r7
+ 187 0028 80BD     		pop	{r7, pc}
+ 188              	.L7:
+ 189 002a 00BF     		.align	2
+ 190              	.L6:
+ 191 002c 08000000 		.word	_ZTV6CMenue+8
+ 192              		.cfi_endproc
+ 193              	.LFE137:
+ 195              		.section	.text._ZN6CMenueD2Ev,"ax",%progbits
+ 196              		.align	2
+ 197              		.global	_ZN6CMenueD2Ev
+ 198              		.thumb
+ 199              		.thumb_func
+ 201              	_ZN6CMenueD2Ev:
+ 202              	.LFB140:
+  24:../Menue/CMenue.cpp **** 
+  25:../Menue/CMenue.cpp **** CMenue::~CMenue() {
+ 203              		.loc 3 25 0
+ 204              		.cfi_startproc
+ 205              		@ args = 0, pretend = 0, frame = 8
+ 206              		@ frame_needed = 1, uses_anonymous_args = 0
+ 207 0000 80B5     		push	{r7, lr}
+ 208              	.LCFI12:
+ 209              		.cfi_def_cfa_offset 8
+ 210              		.cfi_offset 14, -4
+ 211              		.cfi_offset 7, -8
+ 212 0002 82B0     		sub	sp, sp, #8
+ 213              	.LCFI13:
+ 214              		.cfi_def_cfa_offset 16
+ 215 0004 00AF     		add	r7, sp, #0
+ 216              	.LCFI14:
+ 217              		.cfi_def_cfa_register 7
+ 218 0006 7860     		str	r0, [r7, #4]
+ 219              	.LBB4:
+ 220              		.loc 3 25 0
+ 221 0008 7B68     		ldr	r3, [r7, #4]
+ 222 000a 0A4A     		ldr	r2, .L11
+ 223 000c 1A60     		str	r2, [r3, #0]
+  26:../Menue/CMenue.cpp **** 	// TODO Auto-generated destructor stub
+  27:../Menue/CMenue.cpp **** }
+ 224              		.loc 3 27 0
+ 225 000e 7868     		ldr	r0, [r7, #4]
+ 226 0010 FFF7FEFF 		bl	_ZN12AManagedTaskD2Ev
+ 227              	.LBE4:
+ 228 0014 4FF00003 		mov	r3, #0
+ 229 0018 03F00103 		and	r3, r3, #1
+ 230 001c DBB2     		uxtb	r3, r3
+ 231 001e 002B     		cmp	r3, #0
+ 232 0020 02D0     		beq	.L10
+ 233              		.loc 3 27 0 is_stmt 0 discriminator 2
+ 234 0022 7868     		ldr	r0, [r7, #4]
+ 235 0024 FFF7FEFF 		bl	_ZdlPv
+ 236              	.L10:
+ 237              		.loc 3 27 0 discriminator 3
+ 238 0028 7B68     		ldr	r3, [r7, #4]
+ 239 002a 1846     		mov	r0, r3
+ 240 002c 07F10807 		add	r7, r7, #8
+ 241 0030 BD46     		mov	sp, r7
+ 242 0032 80BD     		pop	{r7, pc}
+ 243              	.L12:
+ 244              		.align	2
+ 245              	.L11:
+ 246 0034 08000000 		.word	_ZTV6CMenue+8
+ 247              		.cfi_endproc
+ 248              	.LFE140:
+ 250              		.section	.text._ZN6CMenueD0Ev,"ax",%progbits
+ 251              		.align	2
+ 252              		.global	_ZN6CMenueD0Ev
+ 253              		.thumb
+ 254              		.thumb_func
+ 256              	_ZN6CMenueD0Ev:
+ 257              	.LFB142:
+  25:../Menue/CMenue.cpp **** CMenue::~CMenue() {
+ 258              		.loc 3 25 0 is_stmt 1
+ 259              		.cfi_startproc
+ 260              		@ args = 0, pretend = 0, frame = 8
+ 261              		@ frame_needed = 1, uses_anonymous_args = 0
+ 262 0000 80B5     		push	{r7, lr}
+ 263              	.LCFI15:
+ 264              		.cfi_def_cfa_offset 8
+ 265              		.cfi_offset 14, -4
+ 266              		.cfi_offset 7, -8
+ 267 0002 82B0     		sub	sp, sp, #8
+ 268              	.LCFI16:
+ 269              		.cfi_def_cfa_offset 16
+ 270 0004 00AF     		add	r7, sp, #0
+ 271              	.LCFI17:
+ 272              		.cfi_def_cfa_register 7
+ 273 0006 7860     		str	r0, [r7, #4]
+ 274              		.loc 3 27 0
+ 275 0008 7868     		ldr	r0, [r7, #4]
+ 276 000a FFF7FEFF 		bl	_ZN6CMenueD1Ev
+ 277 000e 7868     		ldr	r0, [r7, #4]
+ 278 0010 FFF7FEFF 		bl	_ZdlPv
+ 279 0014 7B68     		ldr	r3, [r7, #4]
+ 280 0016 1846     		mov	r0, r3
+ 281 0018 07F10807 		add	r7, r7, #8
+ 282 001c BD46     		mov	sp, r7
+ 283 001e 80BD     		pop	{r7, pc}
+ 284              		.cfi_endproc
+ 285              	.LFE142:
+ 287              		.section	.text._ZN6CMenue12HardwareInitEv,"ax",%progbits
+ 288              		.align	2
+ 289              		.global	_ZN6CMenue12HardwareInitEv
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	_ZN6CMenue12HardwareInitEv:
+ 294              	.LFB143:
+  28:../Menue/CMenue.cpp **** 
+  29:../Menue/CMenue.cpp **** /**
+  30:../Menue/CMenue.cpp ****   * @brief  HardwareInit called before Scheduler starts
+  31:../Menue/CMenue.cpp ****   * @param  None
+  32:../Menue/CMenue.cpp ****   * @retval true on succsess
+  33:../Menue/CMenue.cpp ****   */
+  34:../Menue/CMenue.cpp **** bool CMenue::HardwareInit(void){
+ 295              		.loc 3 34 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 8
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299              		@ link register save eliminated.
+ 300 0000 80B4     		push	{r7}
+ 301              	.LCFI18:
+ 302              		.cfi_def_cfa_offset 4
+ 303              		.cfi_offset 7, -4
+ 304 0002 83B0     		sub	sp, sp, #12
+ 305              	.LCFI19:
+ 306              		.cfi_def_cfa_offset 16
+ 307 0004 00AF     		add	r7, sp, #0
+ 308              	.LCFI20:
+ 309              		.cfi_def_cfa_register 7
+ 310 0006 7860     		str	r0, [r7, #4]
+  35:../Menue/CMenue.cpp **** 
+  36:../Menue/CMenue.cpp **** 	return true;
+ 311              		.loc 3 36 0
+ 312 0008 4FF00103 		mov	r3, #1
+  37:../Menue/CMenue.cpp **** }
+ 313              		.loc 3 37 0
+ 314 000c 1846     		mov	r0, r3
+ 315 000e 07F10C07 		add	r7, r7, #12
+ 316 0012 BD46     		mov	sp, r7
+ 317 0014 80BC     		pop	{r7}
+ 318 0016 7047     		bx	lr
+ 319              		.cfi_endproc
+ 320              	.LFE143:
+ 322              		.section	.rodata
+ 323              		.align	2
+ 324              	.LC0:
+ 325 0000 48616C6C 		.ascii	"Hallo\000"
+ 325      6F00
+ 326 0006 0000     		.section	.text._ZN6CMenue3RunEv,"ax",%progbits
+ 327              		.align	2
+ 328              		.global	_ZN6CMenue3RunEv
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	_ZN6CMenue3RunEv:
+ 333              	.LFB144:
+  38:../Menue/CMenue.cpp **** 
+  39:../Menue/CMenue.cpp **** 
+  40:../Menue/CMenue.cpp **** /**
+  41:../Menue/CMenue.cpp ****   * @brief  task function for Menu
+  42:../Menue/CMenue.cpp ****   * @param  None
+  43:../Menue/CMenue.cpp ****   * @retval None
+  44:../Menue/CMenue.cpp ****   */
+  45:../Menue/CMenue.cpp **** void CMenue::Run(void){
+ 334              		.loc 3 45 0
+ 335              		.cfi_startproc
+ 336              		@ args = 0, pretend = 0, frame = 8
+ 337              		@ frame_needed = 1, uses_anonymous_args = 0
+ 338 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 339              	.LCFI21:
+ 340              		.cfi_def_cfa_offset 20
+ 341              		.cfi_offset 14, -4
+ 342              		.cfi_offset 7, -8
+ 343              		.cfi_offset 6, -12
+ 344              		.cfi_offset 5, -16
+ 345              		.cfi_offset 4, -20
+ 346 0002 89B0     		sub	sp, sp, #36
+ 347              	.LCFI22:
+ 348              		.cfi_def_cfa_offset 56
+ 349 0004 06AF     		add	r7, sp, #24
+ 350              	.LCFI23:
+ 351              		.cfi_def_cfa 7, 32
+ 352 0006 7860     		str	r0, [r7, #4]
+  46:../Menue/CMenue.cpp **** 	glcd->Init();
+ 353              		.loc 3 46 0
+ 354 0008 7B68     		ldr	r3, [r7, #4]
+ 355 000a DB68     		ldr	r3, [r3, #12]
+ 356 000c 1B68     		ldr	r3, [r3, #0]
+ 357 000e 03F12003 		add	r3, r3, #32
+ 358 0012 1B68     		ldr	r3, [r3, #0]
+ 359 0014 7A68     		ldr	r2, [r7, #4]
+ 360 0016 D268     		ldr	r2, [r2, #12]
+ 361 0018 1046     		mov	r0, r2
+ 362 001a 9847     		blx	r3
+  47:../Menue/CMenue.cpp **** 	//glcd->Inverse(true);
+  48:../Menue/CMenue.cpp **** 	glcd->Clear();
+ 363              		.loc 3 48 0
+ 364 001c 7B68     		ldr	r3, [r7, #4]
+ 365 001e DB68     		ldr	r3, [r3, #12]
+ 366 0020 1B68     		ldr	r3, [r3, #0]
+ 367 0022 1B68     		ldr	r3, [r3, #0]
+ 368 0024 7A68     		ldr	r2, [r7, #4]
+ 369 0026 D268     		ldr	r2, [r2, #12]
+ 370 0028 1046     		mov	r0, r2
+ 371 002a 9847     		blx	r3
+  49:../Menue/CMenue.cpp **** 
+  50:../Menue/CMenue.cpp **** 	glcd->WriteString("Hallo",c_FontNative,16,16);
+ 372              		.loc 3 50 0
+ 373 002c 7B68     		ldr	r3, [r7, #4]
+ 374 002e DB68     		ldr	r3, [r3, #12]
+ 375 0030 1B68     		ldr	r3, [r3, #0]
+ 376 0032 03F11803 		add	r3, r3, #24
+ 377 0036 1E68     		ldr	r6, [r3, #0]
+ 378 0038 7B68     		ldr	r3, [r7, #4]
+ 379 003a D3F80CE0 		ldr	lr, [r3, #12]
+ 380 003e 40F20004 		movw	r4, #:lower16:_ZL12c_FontNative
+ 381 0042 C0F20004 		movt	r4, #:upper16:_ZL12c_FontNative
+ 382 0046 4FF01003 		mov	r3, #16
+ 383 004a 0493     		str	r3, [sp, #16]
+ 384 004c 4FF01003 		mov	r3, #16
+ 385 0050 0593     		str	r3, [sp, #20]
+ 386 0052 6D46     		mov	r5, sp
+ 387 0054 04F10803 		add	r3, r4, #8
+ 388 0058 0FCB     		ldmia	r3, {r0, r1, r2, r3}
+ 389 005a 85E80F00 		stmia	r5, {r0, r1, r2, r3}
+ 390 005e 94E80C00 		ldmia	r4, {r2, r3}
+ 391 0062 7046     		mov	r0, lr
+ 392 0064 40F20001 		movw	r1, #:lower16:.LC0
+ 393 0068 C0F20001 		movt	r1, #:upper16:.LC0
+ 394 006c B047     		blx	r6
+  51:../Menue/CMenue.cpp **** 
+  52:../Menue/CMenue.cpp **** 	glcd->Window(0,0,119,63);
+ 395              		.loc 3 52 0
+ 396 006e 7B68     		ldr	r3, [r7, #4]
+ 397 0070 DB68     		ldr	r3, [r3, #12]
+ 398 0072 1B68     		ldr	r3, [r3, #0]
+ 399 0074 03F10803 		add	r3, r3, #8
+ 400 0078 1C68     		ldr	r4, [r3, #0]
+ 401 007a 7B68     		ldr	r3, [r7, #4]
+ 402 007c DB68     		ldr	r3, [r3, #12]
+ 403 007e 4FF03F02 		mov	r2, #63
+ 404 0082 0092     		str	r2, [sp, #0]
+ 405 0084 1846     		mov	r0, r3
+ 406 0086 4FF00001 		mov	r1, #0
+ 407 008a 4FF00002 		mov	r2, #0
+ 408 008e 4FF07703 		mov	r3, #119
+ 409 0092 A047     		blx	r4
+  53:../Menue/CMenue.cpp **** 	glcd->Window(121,0,119,63);
+ 410              		.loc 3 53 0
+ 411 0094 7B68     		ldr	r3, [r7, #4]
+ 412 0096 DB68     		ldr	r3, [r3, #12]
+ 413 0098 1B68     		ldr	r3, [r3, #0]
+ 414 009a 03F10803 		add	r3, r3, #8
+ 415 009e 1C68     		ldr	r4, [r3, #0]
+ 416 00a0 7B68     		ldr	r3, [r7, #4]
+ 417 00a2 DB68     		ldr	r3, [r3, #12]
+ 418 00a4 4FF03F02 		mov	r2, #63
+ 419 00a8 0092     		str	r2, [sp, #0]
+ 420 00aa 1846     		mov	r0, r3
+ 421 00ac 4FF07901 		mov	r1, #121
+ 422 00b0 4FF00002 		mov	r2, #0
+ 423 00b4 4FF07703 		mov	r3, #119
+ 424 00b8 A047     		blx	r4
+  54:../Menue/CMenue.cpp **** 	glcd->Window(0,65,119,63);
+ 425              		.loc 3 54 0
+ 426 00ba 7B68     		ldr	r3, [r7, #4]
+ 427 00bc DB68     		ldr	r3, [r3, #12]
+ 428 00be 1B68     		ldr	r3, [r3, #0]
+ 429 00c0 03F10803 		add	r3, r3, #8
+ 430 00c4 1C68     		ldr	r4, [r3, #0]
+ 431 00c6 7B68     		ldr	r3, [r7, #4]
+ 432 00c8 DB68     		ldr	r3, [r3, #12]
+ 433 00ca 4FF03F02 		mov	r2, #63
+ 434 00ce 0092     		str	r2, [sp, #0]
+ 435 00d0 1846     		mov	r0, r3
+ 436 00d2 4FF00001 		mov	r1, #0
+ 437 00d6 4FF04102 		mov	r2, #65
+ 438 00da 4FF07703 		mov	r3, #119
+ 439 00de A047     		blx	r4
+  55:../Menue/CMenue.cpp **** 	glcd->Window(121,65,119,63);
+ 440              		.loc 3 55 0
+ 441 00e0 7B68     		ldr	r3, [r7, #4]
+ 442 00e2 DB68     		ldr	r3, [r3, #12]
+ 443 00e4 1B68     		ldr	r3, [r3, #0]
+ 444 00e6 03F10803 		add	r3, r3, #8
+ 445 00ea 1C68     		ldr	r4, [r3, #0]
+ 446 00ec 7B68     		ldr	r3, [r7, #4]
+ 447 00ee DB68     		ldr	r3, [r3, #12]
+ 448 00f0 4FF03F02 		mov	r2, #63
+ 449 00f4 0092     		str	r2, [sp, #0]
+ 450 00f6 1846     		mov	r0, r3
+ 451 00f8 4FF07901 		mov	r1, #121
+ 452 00fc 4FF04102 		mov	r2, #65
+ 453 0100 4FF07703 		mov	r3, #119
+ 454 0104 A047     		blx	r4
+ 455              	.L17:
+  56:../Menue/CMenue.cpp **** 
+  57:../Menue/CMenue.cpp **** 
+  58:../Menue/CMenue.cpp **** 	while(1){
+ 456              		.loc 3 58 0 discriminator 1
+ 457 0106 FEE7     		b	.L17
+ 458              		.cfi_endproc
+ 459              	.LFE144:
+ 461              		.global	_ZTV6CMenue
+ 462              		.section	.rodata._ZTV6CMenue,"a",%progbits
+ 463              		.align	3
+ 466              	_ZTV6CMenue:
+ 467 0000 00000000 		.word	0
+ 468 0004 00000000 		.word	0
+ 469 0008 00000000 		.word	_ZNK5CTask7IsValidEv
+ 470 000c 00000000 		.word	_ZN5CTask6AttachEPv
+ 471 0010 00000000 		.word	_ZN5CTask6DetachEv
+ 472 0014 00000000 		.word	_ZN6CMenueD1Ev
+ 473 0018 00000000 		.word	_ZN6CMenueD0Ev
+ 474 001c 00000000 		.word	_ZN6CMenue12HardwareInitEv
+ 475 0020 00000000 		.word	_ZN6CMenue3RunEv
+ 476 0024 00000000 		.word	_ZN12AManagedTask8OnCreateEPKctm
+ 477              		.section	.rodata._ZL12c_FontNative,"a",%progbits
+ 478              		.align	2
+ 481              	_ZL12c_FontNative:
+ 482 0000 00000000 		.space	24
+ 482      00000000 
+ 482      00000000 
+ 482      00000000 
+ 482      00000000 
+ 483              		.global	_ZN6CMenueC1EP11CGraphicLCD
+ 484              		.thumb_set _ZN6CMenueC1EP11CGraphicLCD,_ZN6CMenueC2EP11CGraphicLCD
+ 485              		.global	_ZN6CMenueD1Ev
+ 486              		.thumb_set _ZN6CMenueD1Ev,_ZN6CMenueD2Ev
+ 487              		.text
+ 488              	.Letext0:
+ 489              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 490              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 491              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC
+ 492              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
+ 493              		.file 8 "../Menue/CMenue.h"
+ 494              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 495              		.file 10 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD
+DEFINED SYMBOLS
+                            *ABS*:00000000 CMenue.cpp
+  C:\Temp\ccUGksIf.s:19     .text._ZNK5CTask7IsValidEv:00000000 $t
+  C:\Temp\ccUGksIf.s:24     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
+  C:\Temp\ccUGksIf.s:61     .text._ZN5CTask6DetachEv:00000000 $t
+  C:\Temp\ccUGksIf.s:66     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
+  C:\Temp\ccUGksIf.s:106    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
+  C:\Temp\ccUGksIf.s:111    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
+  C:\Temp\ccUGksIf.s:145    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 $t
+  C:\Temp\ccUGksIf.s:150    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 _ZN6CMenueC2EP11CGraphicLCD
+  C:\Temp\ccUGksIf.s:191    .text._ZN6CMenueC2EP11CGraphicLCD:0000002c $d
+  C:\Temp\ccUGksIf.s:466    .rodata._ZTV6CMenue:00000000 _ZTV6CMenue
+  C:\Temp\ccUGksIf.s:196    .text._ZN6CMenueD2Ev:00000000 $t
+  C:\Temp\ccUGksIf.s:201    .text._ZN6CMenueD2Ev:00000000 _ZN6CMenueD2Ev
+  C:\Temp\ccUGksIf.s:246    .text._ZN6CMenueD2Ev:00000034 $d
+  C:\Temp\ccUGksIf.s:251    .text._ZN6CMenueD0Ev:00000000 $t
+  C:\Temp\ccUGksIf.s:256    .text._ZN6CMenueD0Ev:00000000 _ZN6CMenueD0Ev
+  C:\Temp\ccUGksIf.s:201    .text._ZN6CMenueD2Ev:00000000 _ZN6CMenueD1Ev
+  C:\Temp\ccUGksIf.s:288    .text._ZN6CMenue12HardwareInitEv:00000000 $t
+  C:\Temp\ccUGksIf.s:293    .text._ZN6CMenue12HardwareInitEv:00000000 _ZN6CMenue12HardwareInitEv
+  C:\Temp\ccUGksIf.s:323    .rodata:00000000 $d
+  C:\Temp\ccUGksIf.s:324    .rodata:00000000 .LC0
+  C:\Temp\ccUGksIf.s:327    .text._ZN6CMenue3RunEv:00000000 $t
+  C:\Temp\ccUGksIf.s:332    .text._ZN6CMenue3RunEv:00000000 _ZN6CMenue3RunEv
+  C:\Temp\ccUGksIf.s:481    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+  C:\Temp\ccUGksIf.s:463    .rodata._ZTV6CMenue:00000000 $d
+  C:\Temp\ccUGksIf.s:478    .rodata._ZL12c_FontNative:00000000 $d
+  C:\Temp\ccUGksIf.s:150    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 _ZN6CMenueC1EP11CGraphicLCD
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+_ZN12AManagedTaskC2Ev
+_ZN12AManagedTaskD2Ev
+_ZdlPv
+_ZN5CTask6AttachEPv

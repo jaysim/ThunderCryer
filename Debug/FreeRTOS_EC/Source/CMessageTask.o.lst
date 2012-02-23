@@ -1,0 +1,2134 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CMessageTask.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZNK5CTask7IsValidEv,"axG",%progbits,_ZNK5CTask7IsValidEv,comdat
+  19              		.align	2
+  20              		.weak	_ZNK5CTask7IsValidEv
+  21              		.thumb
+  22              		.thumb_func
+  24              	_ZNK5CTask7IsValidEv:
+  25              	.LFB132:
+  26              		.file 1 "../FreeRTOS_EC/Source/CTask.h"
+   1:../FreeRTOS_EC/Source/CTask.h **** /**
+   2:../FreeRTOS_EC/Source/CTask.h ****  * @file CTask.h
+   3:../FreeRTOS_EC/Source/CTask.h ****  * @class CTask
+   4:../FreeRTOS_EC/Source/CTask.h ****  * @ingroup FreeRTOS_Wrapper
+   5:../FreeRTOS_EC/Source/CTask.h ****  *
+   6:../FreeRTOS_EC/Source/CTask.h ****  * The CTask class wraps a native FreeRTOS task handle (xTaskHandle). To create a task instance
+   7:../FreeRTOS_EC/Source/CTask.h ****  * an object of this class and then call its CTask::Create method like showed in the following samp
+   8:../FreeRTOS_EC/Source/CTask.h ****  * \code
+   9:../FreeRTOS_EC/Source/CTask.h ****  * CTask g_aTask // global task declaration.
+  10:../FreeRTOS_EC/Source/CTask.h ****  *
+  11:../FreeRTOS_EC/Source/CTask.h ****  * void main()
+  12:../FreeRTOS_EC/Source/CTask.h ****  * {
+  13:../FreeRTOS_EC/Source/CTask.h ****  * 	g_aTask.Create(task_control_func, "Led2", configMINIMAL_STACK_SIZE, mainFLASH_TASK_PRIORITY);
+  14:../FreeRTOS_EC/Source/CTask.h ****  *
+  15:../FreeRTOS_EC/Source/CTask.h ****  * 	CFreeRTOS::StartScheduler();
+  16:../FreeRTOS_EC/Source/CTask.h ****  * }
+  17:../FreeRTOS_EC/Source/CTask.h ****  * \endcode
+  18:../FreeRTOS_EC/Source/CTask.h ****  *
+  19:../FreeRTOS_EC/Source/CTask.h ****  * Usually the application subclass this class to create an application specific task object.
+  20:../FreeRTOS_EC/Source/CTask.h ****  * See the CHelloWorld class for an example.
+  21:../FreeRTOS_EC/Source/CTask.h ****  *
+  22:../FreeRTOS_EC/Source/CTask.h ****  * \sa <a href="http://www.freertos.org/taskandcr.html">task documentation</a> in the FreeRTOS web 
+  23:../FreeRTOS_EC/Source/CTask.h ****  *
+  24:../FreeRTOS_EC/Source/CTask.h ****  * @date Jul 5, 2010
+  25:../FreeRTOS_EC/Source/CTask.h ****  * @author Stefano Oliveri (STF12.net)
+  26:../FreeRTOS_EC/Source/CTask.h ****  *         E-Mail: software@stf12.net
+  27:../FreeRTOS_EC/Source/CTask.h ****  */
+  28:../FreeRTOS_EC/Source/CTask.h **** 
+  29:../FreeRTOS_EC/Source/CTask.h **** #ifndef CTASK_H_
+  30:../FreeRTOS_EC/Source/CTask.h **** #define CTASK_H_
+  31:../FreeRTOS_EC/Source/CTask.h **** 
+  32:../FreeRTOS_EC/Source/CTask.h **** #include "FreeRTOS.h"
+  33:../FreeRTOS_EC/Source/CTask.h **** #include "task.h"
+  34:../FreeRTOS_EC/Source/CTask.h **** #include "IFreeRTOSProtocol.h"
+  35:../FreeRTOS_EC/Source/CTask.h **** 
+  36:../FreeRTOS_EC/Source/CTask.h **** class CTask: public IFreeRTOSObj {
+  37:../FreeRTOS_EC/Source/CTask.h **** 
+  38:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  39:../FreeRTOS_EC/Source/CTask.h **** 	 * Specifies the native FreeRTOS handle managed by an instance of this class.
+  40:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  41:../FreeRTOS_EC/Source/CTask.h **** 	xTaskHandle m_handleTask;
+  42:../FreeRTOS_EC/Source/CTask.h **** 
+  43:../FreeRTOS_EC/Source/CTask.h **** public:
+  44:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  45:../FreeRTOS_EC/Source/CTask.h **** 	 * The default constructor. It initializes the object without attaching it to a native FreeRTOS ha
+  46:../FreeRTOS_EC/Source/CTask.h **** 	 * Call the Create method to allocate a task handle and attach it to the object.
+  47:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  48:../FreeRTOS_EC/Source/CTask.h **** 	CTask();
+  49:../FreeRTOS_EC/Source/CTask.h **** 
+  50:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  51:../FreeRTOS_EC/Source/CTask.h **** 	 * Create a CTask instance and attach it to a valid handle.
+  52:../FreeRTOS_EC/Source/CTask.h **** 	 *
+  53:../FreeRTOS_EC/Source/CTask.h **** 	 * @param handleTask a valid task handle.
+  54:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  55:../FreeRTOS_EC/Source/CTask.h **** 	CTask(xTaskHandle handleTask);
+  56:../FreeRTOS_EC/Source/CTask.h **** 
+  57:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  58:../FreeRTOS_EC/Source/CTask.h **** 	 * Delete the native FreeRTOS task.
+  59:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  60:../FreeRTOS_EC/Source/CTask.h **** 	virtual ~CTask();
+  61:../FreeRTOS_EC/Source/CTask.h **** 
+  62:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  63:../FreeRTOS_EC/Source/CTask.h **** 	 * Retrieve the native FreeRTOS task handle attached to this object.
+  64:../FreeRTOS_EC/Source/CTask.h **** 	 *
+  65:../FreeRTOS_EC/Source/CTask.h **** 	 * @return the native FreeRTOS task handle attached to this object.
+  66:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  67:../FreeRTOS_EC/Source/CTask.h **** 	inline operator xTaskHandle() const { return m_handleTask; }
+  68:../FreeRTOS_EC/Source/CTask.h **** 
+  69:../FreeRTOS_EC/Source/CTask.h **** 	// FreeRTOS API Wrappers
+  70:../FreeRTOS_EC/Source/CTask.h **** 
+  71:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  72:../FreeRTOS_EC/Source/CTask.h **** 	 * Create a FreeRTOS task and attach its handle to the receiver object.
+  73:../FreeRTOS_EC/Source/CTask.h **** 	 *
+  74:../FreeRTOS_EC/Source/CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00125.html">xTaskCreate</a> FreeRTOS API function.
+  75:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  76:../FreeRTOS_EC/Source/CTask.h **** 	portBASE_TYPE Create(pdTASK_CODE pvTaskCode, const portCHAR * const pcName, unsigned portSHORT usS
+  77:../FreeRTOS_EC/Source/CTask.h **** 
+  78:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  79:../FreeRTOS_EC/Source/CTask.h **** 	 * Create a Memory Protection Unit (MPU) restricted task and attach its handle to the receiver obj
+  80:../FreeRTOS_EC/Source/CTask.h **** 	 *
+  81:../FreeRTOS_EC/Source/CTask.h **** 	 * \sa <a href="http://www.freertos.org/xTaskCreateRestricted.html">xTaskCreateRestricted</a> Free
+  82:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  83:../FreeRTOS_EC/Source/CTask.h **** 	portBASE_TYPE CreateRestricted(xTaskParameters *pxTaskDefinition);
+  84:../FreeRTOS_EC/Source/CTask.h **** 
+  85:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  86:../FreeRTOS_EC/Source/CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00126.html">vTaskDelete</a>  FreeRTOS API function.
+  87:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  88:../FreeRTOS_EC/Source/CTask.h **** 	void Delete();
+  89:../FreeRTOS_EC/Source/CTask.h **** 
+  90:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  91:../FreeRTOS_EC/Source/CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00127.html">vTaskDelay</a>  FreeRTOS API function.
+  92:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  93:../FreeRTOS_EC/Source/CTask.h **** 	inline static void Delay(portTickType xTicksToDelay);
+  94:../FreeRTOS_EC/Source/CTask.h **** 
+  95:../FreeRTOS_EC/Source/CTask.h **** 	/**
+  96:../FreeRTOS_EC/Source/CTask.h **** 	 * \sa <a href="http://www.freertos.org/vtaskdelayuntil.html">vTaskDelayUntil</a>  FreeRTOS API fu
+  97:../FreeRTOS_EC/Source/CTask.h **** 	 */
+  98:../FreeRTOS_EC/Source/CTask.h ****     inline static void DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement);
+  99:../FreeRTOS_EC/Source/CTask.h **** 
+ 100:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 101:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskYIELD">taskYIELD</a>  FreeRTOS API func
+ 102:../FreeRTOS_EC/Source/CTask.h ****      */
+ 103:../FreeRTOS_EC/Source/CTask.h ****     inline static void Yeld() { taskYIELD(); }
+ 104:../FreeRTOS_EC/Source/CTask.h **** 
+ 105:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 106:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENTER_CRITICAL">taskENTER_CRITICAL</a> 
+ 107:../FreeRTOS_EC/Source/CTask.h ****      */
+ 108:../FreeRTOS_EC/Source/CTask.h ****     inline static void EnterCritical() { taskENTER_CRITICAL(); }
+ 109:../FreeRTOS_EC/Source/CTask.h **** 
+ 110:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 111:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskEXIT_CRITICAL">taskEXIT_CRITICAL</a>  F
+ 112:../FreeRTOS_EC/Source/CTask.h ****      */
+ 113:../FreeRTOS_EC/Source/CTask.h ****     inline static void ExitCritical() { taskEXIT_CRITICAL(); }
+ 114:../FreeRTOS_EC/Source/CTask.h **** 
+ 115:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 116:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskDISABLE_INTERRUPTS">taskDISABLE_INTERRU
+ 117:../FreeRTOS_EC/Source/CTask.h ****      */
+ 118:../FreeRTOS_EC/Source/CTask.h ****     inline static void DisableInterrupt() { taskDISABLE_INTERRUPTS(); }
+ 119:../FreeRTOS_EC/Source/CTask.h **** 
+ 120:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 121:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENABLE_INTERRUPTS">taskENABLE_INTERRUPT
+ 122:../FreeRTOS_EC/Source/CTask.h ****      */
+ 123:../FreeRTOS_EC/Source/CTask.h ****     inline static void EnableInterrupt() { taskENABLE_INTERRUPTS(); }
+ 124:../FreeRTOS_EC/Source/CTask.h **** 
+ 125:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 126:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetCurrentTaskHandle">xTaskGetCurrentT
+ 127:../FreeRTOS_EC/Source/CTask.h ****      */
+ 128:../FreeRTOS_EC/Source/CTask.h ****     inline static xTaskHandle GetCurrentTaskHandle();
+ 129:../FreeRTOS_EC/Source/CTask.h **** 
+ 130:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 131:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetTickCount">xTaskGetTickCount</a>  F
+ 132:../FreeRTOS_EC/Source/CTask.h ****      */
+ 133:../FreeRTOS_EC/Source/CTask.h ****     inline static portTickType GetTickCount();
+ 134:../FreeRTOS_EC/Source/CTask.h **** 
+ 135:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 136:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetSchedulerState">xTaskGetSchedulerSt
+ 137:../FreeRTOS_EC/Source/CTask.h ****      */
+ 138:../FreeRTOS_EC/Source/CTask.h ****     inline static portBASE_TYPE GetSchedulerState();
+ 139:../FreeRTOS_EC/Source/CTask.h **** 
+ 140:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 141:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#usTaskGetNumberOfTasks">uxTaskGetNumberOfTa
+ 142:../FreeRTOS_EC/Source/CTask.h ****      */
+ 143:../FreeRTOS_EC/Source/CTask.h ****     inline static unsigned portBASE_TYPE GetNumberOfTasks();
+ 144:../FreeRTOS_EC/Source/CTask.h **** 
+ 145:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 146:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskList">vTaskList</a>  FreeRTOS API func
+ 147:../FreeRTOS_EC/Source/CTask.h ****      */
+ 148:../FreeRTOS_EC/Source/CTask.h ****     inline static void GetTaskList(portCHAR *pcWriteBuffer);
+ 149:../FreeRTOS_EC/Source/CTask.h **** 
+ 150:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 151:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskGetRunTimeStats">vTaskGetRunTimeStats<
+ 152:../FreeRTOS_EC/Source/CTask.h ****      */
+ 153:../FreeRTOS_EC/Source/CTask.h ****     inline static void GetRunTimeStats(portCHAR *pcWriteBuffer);
+ 154:../FreeRTOS_EC/Source/CTask.h **** 
+ 155:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 156:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00128.html">uxTaskPriorityGet</a>  FreeRTOS API functi
+ 157:../FreeRTOS_EC/Source/CTask.h ****      */
+ 158:../FreeRTOS_EC/Source/CTask.h ****     inline unsigned portBASE_TYPE PriorityGet() const;
+ 159:../FreeRTOS_EC/Source/CTask.h **** 
+ 160:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 161:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00129.html">vTaskPrioritySet</a>  FreeRTOS API functio
+ 162:../FreeRTOS_EC/Source/CTask.h ****      */
+ 163:../FreeRTOS_EC/Source/CTask.h ****     inline void PrioritySet(unsigned portBASE_TYPE uxNewPriority);
+ 164:../FreeRTOS_EC/Source/CTask.h **** 
+ 165:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 166:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00130.html">vTaskSuspend</a>  FreeRTOS API function.
+ 167:../FreeRTOS_EC/Source/CTask.h ****      */
+ 168:../FreeRTOS_EC/Source/CTask.h ****     inline void Suspend();
+ 169:../FreeRTOS_EC/Source/CTask.h **** 
+ 170:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 171:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/a00131.html">vTaskResume</a>  FreeRTOS API function.
+ 172:../FreeRTOS_EC/Source/CTask.h ****      */
+ 173:../FreeRTOS_EC/Source/CTask.h ****     inline void Resume();
+ 174:../FreeRTOS_EC/Source/CTask.h **** 
+ 175:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 176:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/taskresumefromisr.html">xTaskResumeFromISR</a>  FreeRTO
+ 177:../FreeRTOS_EC/Source/CTask.h ****      */
+ 178:../FreeRTOS_EC/Source/CTask.h ****     inline portBASE_TYPE ResumeFromISR();
+ 179:../FreeRTOS_EC/Source/CTask.h **** 
+ 180:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 181:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskSetApplicationTag.html">vTaskSetApplicationTaskTag
+ 182:../FreeRTOS_EC/Source/CTask.h ****      */
+ 183:../FreeRTOS_EC/Source/CTask.h ****     inline void SetApplicationTag(pdTASK_HOOK_CODE pxTagValue);
+ 184:../FreeRTOS_EC/Source/CTask.h **** 
+ 185:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 186:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/xTaskCallApplicationTaskHook.html">xTaskCallApplication
+ 187:../FreeRTOS_EC/Source/CTask.h ****      */
+ 188:../FreeRTOS_EC/Source/CTask.h ****     inline portBASE_TYPE CallApplicationTaskHook(void *pvParameter);
+ 189:../FreeRTOS_EC/Source/CTask.h **** 
+ 190:../FreeRTOS_EC/Source/CTask.h ****     /**
+ 191:../FreeRTOS_EC/Source/CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskAllocateMPURegions.html">vTaskAllocateMPURegions</
+ 192:../FreeRTOS_EC/Source/CTask.h ****      */
+ 193:../FreeRTOS_EC/Source/CTask.h ****     inline void AllocateMPURegions(const xMemoryRegion * const xRegions);
+ 194:../FreeRTOS_EC/Source/CTask.h **** 
+ 195:../FreeRTOS_EC/Source/CTask.h ****     // FreeRTOS class extension.
+ 196:../FreeRTOS_EC/Source/CTask.h **** 	inline bool IsValid() const;
+ 197:../FreeRTOS_EC/Source/CTask.h **** 	void Attach(xGenericHandle handle);
+ 198:../FreeRTOS_EC/Source/CTask.h **** 	inline xGenericHandle Detach();
+ 199:../FreeRTOS_EC/Source/CTask.h **** };
+ 200:../FreeRTOS_EC/Source/CTask.h **** 
+ 201:../FreeRTOS_EC/Source/CTask.h **** // inline method
+ 202:../FreeRTOS_EC/Source/CTask.h **** ////////////////
+ 203:../FreeRTOS_EC/Source/CTask.h **** 
+ 204:../FreeRTOS_EC/Source/CTask.h **** inline
+ 205:../FreeRTOS_EC/Source/CTask.h **** void CTask::Delay(portTickType xTicksToDelay) {
+ 206:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_vTaskDelay == 1 )
+ 207:../FreeRTOS_EC/Source/CTask.h **** 	vTaskDelay(xTicksToDelay);
+ 208:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 209:../FreeRTOS_EC/Source/CTask.h **** }
+ 210:../FreeRTOS_EC/Source/CTask.h **** 
+ 211:../FreeRTOS_EC/Source/CTask.h **** inline
+ 212:../FreeRTOS_EC/Source/CTask.h **** void CTask::DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement) {
+ 213:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_vTaskDelayUntil == 1 )
+ 214:../FreeRTOS_EC/Source/CTask.h **** 	vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
+ 215:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 216:../FreeRTOS_EC/Source/CTask.h **** }
+ 217:../FreeRTOS_EC/Source/CTask.h **** 
+ 218:../FreeRTOS_EC/Source/CTask.h **** inline
+ 219:../FreeRTOS_EC/Source/CTask.h **** xTaskHandle CTask::GetCurrentTaskHandle() {
+ 220:../FreeRTOS_EC/Source/CTask.h **** 	return xTaskGetCurrentTaskHandle();
+ 221:../FreeRTOS_EC/Source/CTask.h **** }
+ 222:../FreeRTOS_EC/Source/CTask.h **** 
+ 223:../FreeRTOS_EC/Source/CTask.h **** inline
+ 224:../FreeRTOS_EC/Source/CTask.h **** portTickType CTask::GetTickCount() {
+ 225:../FreeRTOS_EC/Source/CTask.h **** 	return xTaskGetTickCount();
+ 226:../FreeRTOS_EC/Source/CTask.h **** }
+ 227:../FreeRTOS_EC/Source/CTask.h **** 
+ 228:../FreeRTOS_EC/Source/CTask.h **** inline
+ 229:../FreeRTOS_EC/Source/CTask.h **** portBASE_TYPE CTask::GetSchedulerState() {
+ 230:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_xTaskGetSchedulerState == 1 )
+ 231:../FreeRTOS_EC/Source/CTask.h **** 	return xTaskGetSchedulerState();
+ 232:../FreeRTOS_EC/Source/CTask.h **** #else
+ 233:../FreeRTOS_EC/Source/CTask.h **** 	return 0;
+ 234:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 235:../FreeRTOS_EC/Source/CTask.h **** }
+ 236:../FreeRTOS_EC/Source/CTask.h **** 
+ 237:../FreeRTOS_EC/Source/CTask.h **** inline
+ 238:../FreeRTOS_EC/Source/CTask.h **** unsigned portBASE_TYPE CTask::GetNumberOfTasks() {
+ 239:../FreeRTOS_EC/Source/CTask.h **** 	return uxTaskGetNumberOfTasks();
+ 240:../FreeRTOS_EC/Source/CTask.h **** }
+ 241:../FreeRTOS_EC/Source/CTask.h **** 
+ 242:../FreeRTOS_EC/Source/CTask.h **** inline
+ 243:../FreeRTOS_EC/Source/CTask.h **** void CTask::GetTaskList(portCHAR *pcWriteBuffer) {
+ 244:../FreeRTOS_EC/Source/CTask.h **** #if ( configUSE_TRACE_FACILITY == 1 )
+ 245:../FreeRTOS_EC/Source/CTask.h **** 	vTaskList((signed portCHAR*)pcWriteBuffer);
+ 246:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 247:../FreeRTOS_EC/Source/CTask.h **** }
+ 248:../FreeRTOS_EC/Source/CTask.h **** 
+ 249:../FreeRTOS_EC/Source/CTask.h **** inline
+ 250:../FreeRTOS_EC/Source/CTask.h **** void CTask::GetRunTimeStats(portCHAR *pcWriteBuffer) {
+ 251:../FreeRTOS_EC/Source/CTask.h **** #if (configGENERATE_RUN_TIME_STATS == 1)
+ 252:../FreeRTOS_EC/Source/CTask.h **** 	vTaskGetRunTimeStats((signed portCHAR*)pcWriteBuffer);
+ 253:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 254:../FreeRTOS_EC/Source/CTask.h **** }
+ 255:../FreeRTOS_EC/Source/CTask.h **** 
+ 256:../FreeRTOS_EC/Source/CTask.h **** inline
+ 257:../FreeRTOS_EC/Source/CTask.h **** unsigned portBASE_TYPE CTask::PriorityGet() const {
+ 258:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_uxTaskPriorityGet == 1 )
+ 259:../FreeRTOS_EC/Source/CTask.h **** 	return uxTaskPriorityGet(m_handleTask);
+ 260:../FreeRTOS_EC/Source/CTask.h **** #else
+ 261:../FreeRTOS_EC/Source/CTask.h **** 	return -1;
+ 262:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 263:../FreeRTOS_EC/Source/CTask.h **** }
+ 264:../FreeRTOS_EC/Source/CTask.h **** 
+ 265:../FreeRTOS_EC/Source/CTask.h **** inline
+ 266:../FreeRTOS_EC/Source/CTask.h **** void CTask::PrioritySet(unsigned portBASE_TYPE uxNewPriority) {
+ 267:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_vTaskPrioritySet == 1 )
+ 268:../FreeRTOS_EC/Source/CTask.h **** 	vTaskPrioritySet(m_handleTask, uxNewPriority);
+ 269:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 270:../FreeRTOS_EC/Source/CTask.h **** }
+ 271:../FreeRTOS_EC/Source/CTask.h **** 
+ 272:../FreeRTOS_EC/Source/CTask.h **** inline
+ 273:../FreeRTOS_EC/Source/CTask.h **** void CTask::Suspend() {
+ 274:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
+ 275:../FreeRTOS_EC/Source/CTask.h **** 	vTaskSuspend(m_handleTask);
+ 276:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 277:../FreeRTOS_EC/Source/CTask.h **** }
+ 278:../FreeRTOS_EC/Source/CTask.h **** 
+ 279:../FreeRTOS_EC/Source/CTask.h **** inline
+ 280:../FreeRTOS_EC/Source/CTask.h **** void CTask::Resume() {
+ 281:../FreeRTOS_EC/Source/CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
+ 282:../FreeRTOS_EC/Source/CTask.h **** 	vTaskResume(m_handleTask);
+ 283:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 284:../FreeRTOS_EC/Source/CTask.h **** }
+ 285:../FreeRTOS_EC/Source/CTask.h **** 
+ 286:../FreeRTOS_EC/Source/CTask.h **** inline
+ 287:../FreeRTOS_EC/Source/CTask.h **** portBASE_TYPE CTask::ResumeFromISR() {
+ 288:../FreeRTOS_EC/Source/CTask.h **** #if ( ( INCLUDE_xTaskResumeFromISR == 1 ) && ( INCLUDE_vTaskSuspend == 1 ) )
+ 289:../FreeRTOS_EC/Source/CTask.h **** 	return xTaskResumeFromISR(m_handleTask);
+ 290:../FreeRTOS_EC/Source/CTask.h **** #else
+ 291:../FreeRTOS_EC/Source/CTask.h **** 	return pdFALSE;
+ 292:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 293:../FreeRTOS_EC/Source/CTask.h **** }
+ 294:../FreeRTOS_EC/Source/CTask.h **** 
+ 295:../FreeRTOS_EC/Source/CTask.h **** inline
+ 296:../FreeRTOS_EC/Source/CTask.h **** void CTask::SetApplicationTag(pdTASK_HOOK_CODE pxTagValue) {
+ 297:../FreeRTOS_EC/Source/CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
+ 298:../FreeRTOS_EC/Source/CTask.h **** 	vTaskSetApplicationTaskTag(m_handleTask, pxTagValue);
+ 299:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 300:../FreeRTOS_EC/Source/CTask.h **** }
+ 301:../FreeRTOS_EC/Source/CTask.h **** 
+ 302:../FreeRTOS_EC/Source/CTask.h **** inline
+ 303:../FreeRTOS_EC/Source/CTask.h **** portBASE_TYPE CTask::CallApplicationTaskHook(void *pvParameter) {
+ 304:../FreeRTOS_EC/Source/CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
+ 305:../FreeRTOS_EC/Source/CTask.h **** 	return xTaskCallApplicationTaskHook(m_handleTask, pvParameter);
+ 306:../FreeRTOS_EC/Source/CTask.h **** #else
+ 307:../FreeRTOS_EC/Source/CTask.h **** 	return 0;
+ 308:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 309:../FreeRTOS_EC/Source/CTask.h **** }
+ 310:../FreeRTOS_EC/Source/CTask.h **** 
+ 311:../FreeRTOS_EC/Source/CTask.h **** inline
+ 312:../FreeRTOS_EC/Source/CTask.h **** void CTask::AllocateMPURegions(const xMemoryRegion * const xRegions) {
+ 313:../FreeRTOS_EC/Source/CTask.h **** #if ( portUSING_MPU_WRAPPERS == 1 )
+ 314:../FreeRTOS_EC/Source/CTask.h **** 	vTaskAllocateMPURegions(m_handleTask, xRegions);
+ 315:../FreeRTOS_EC/Source/CTask.h **** #endif
+ 316:../FreeRTOS_EC/Source/CTask.h **** }
+ 317:../FreeRTOS_EC/Source/CTask.h **** 
+ 318:../FreeRTOS_EC/Source/CTask.h **** inline
+ 319:../FreeRTOS_EC/Source/CTask.h **** bool CTask::IsValid() const{
+  27              		.loc 1 319 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+ 320:../FreeRTOS_EC/Source/CTask.h **** 	return m_handleTask != NULL;
+  43              		.loc 1 320 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 5B68     		ldr	r3, [r3, #4]
+  46 000c 002B     		cmp	r3, #0
+  47 000e 0CBF     		ite	eq
+  48 0010 0023     		moveq	r3, #0
+  49 0012 0123     		movne	r3, #1
+  50 0014 DBB2     		uxtb	r3, r3
+ 321:../FreeRTOS_EC/Source/CTask.h **** }
+  51              		.loc 1 321 0
+  52 0016 1846     		mov	r0, r3
+  53 0018 07F10C07 		add	r7, r7, #12
+  54 001c BD46     		mov	sp, r7
+  55 001e 80BC     		pop	{r7}
+  56 0020 7047     		bx	lr
+  57              		.cfi_endproc
+  58              	.LFE132:
+  60 0022 00BF     		.section	.text._ZN5CTask6DetachEv,"axG",%progbits,_ZN5CTask6DetachEv,comdat
+  61              		.align	2
+  62              		.weak	_ZN5CTask6DetachEv
+  63              		.thumb
+  64              		.thumb_func
+  66              	_ZN5CTask6DetachEv:
+  67              	.LFB133:
+ 322:../FreeRTOS_EC/Source/CTask.h **** 
+ 323:../FreeRTOS_EC/Source/CTask.h **** inline
+ 324:../FreeRTOS_EC/Source/CTask.h **** xGenericHandle CTask::Detach() {
+  68              		.loc 1 324 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 16
+  71              		@ frame_needed = 1, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 0000 80B4     		push	{r7}
+  74              	.LCFI3:
+  75              		.cfi_def_cfa_offset 4
+  76              		.cfi_offset 7, -4
+  77 0002 85B0     		sub	sp, sp, #20
+  78              	.LCFI4:
+  79              		.cfi_def_cfa_offset 24
+  80 0004 00AF     		add	r7, sp, #0
+  81              	.LCFI5:
+  82              		.cfi_def_cfa_register 7
+  83 0006 7860     		str	r0, [r7, #4]
+  84              	.LBB2:
+ 325:../FreeRTOS_EC/Source/CTask.h **** 	xTaskHandle res = m_handleTask;
+  85              		.loc 1 325 0
+  86 0008 7B68     		ldr	r3, [r7, #4]
+  87 000a 5B68     		ldr	r3, [r3, #4]
+  88 000c FB60     		str	r3, [r7, #12]
+ 326:../FreeRTOS_EC/Source/CTask.h **** 	m_handleTask = NULL;
+  89              		.loc 1 326 0
+  90 000e 7B68     		ldr	r3, [r7, #4]
+  91 0010 4FF00002 		mov	r2, #0
+  92 0014 5A60     		str	r2, [r3, #4]
+ 327:../FreeRTOS_EC/Source/CTask.h **** 	return res;
+  93              		.loc 1 327 0
+  94 0016 FB68     		ldr	r3, [r7, #12]
+  95              	.LBE2:
+ 328:../FreeRTOS_EC/Source/CTask.h **** }
+  96              		.loc 1 328 0
+  97 0018 1846     		mov	r0, r3
+  98 001a 07F11407 		add	r7, r7, #20
+  99 001e BD46     		mov	sp, r7
+ 100 0020 80BC     		pop	{r7}
+ 101 0022 7047     		bx	lr
+ 102              		.cfi_endproc
+ 103              	.LFE133:
+ 105              		.section	.text._ZN12AManagedTask12HardwareInitEv,"axG",%progbits,_ZN12AManagedTask12HardwareInitEv
+ 106              		.align	2
+ 107              		.weak	_ZN12AManagedTask12HardwareInitEv
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	_ZN12AManagedTask12HardwareInitEv:
+ 112              	.LFB134:
+ 113              		.file 2 "../FreeRTOS_EC/Source/AManagedTask.h"
+   1:../FreeRTOS_EC/Source/AManagedTask.h **** /**
+   2:../FreeRTOS_EC/Source/AManagedTask.h ****  * @file AManagedTask.h
+   3:../FreeRTOS_EC/Source/AManagedTask.h ****  * @class AManagedTask
+   4:../FreeRTOS_EC/Source/AManagedTask.h ****  *
+   5:../FreeRTOS_EC/Source/AManagedTask.h ****  * This class extend the CTask in order to provide a more structured and simple to use framework fo
+   6:../FreeRTOS_EC/Source/AManagedTask.h ****  * FreeRTOS programming. All AManagedTask derived objects are grouped in linked list. Please note t
+   7:../FreeRTOS_EC/Source/AManagedTask.h ****  * this data structure can be modified in a next release. The framework manage these task objects
+   8:../FreeRTOS_EC/Source/AManagedTask.h ****  * by calling their methods during the application life cycle.
+   9:../FreeRTOS_EC/Source/AManagedTask.h ****  *
+  10:../FreeRTOS_EC/Source/AManagedTask.h ****  * The application extend this abstract class to create a managed task and provide its control loop
+  11:../FreeRTOS_EC/Source/AManagedTask.h ****  * \code
+  12:../FreeRTOS_EC/Source/AManagedTask.h ****  * class CMyPipe: public AManagedTask
+  13:../FreeRTOS_EC/Source/AManagedTask.h ****  * {
+  14:../FreeRTOS_EC/Source/AManagedTask.h ****  *   // Task private variables.
+  15:../FreeRTOS_EC/Source/AManagedTask.h ****  *
+  16:../FreeRTOS_EC/Source/AManagedTask.h ****  * public:
+  17:../FreeRTOS_EC/Source/AManagedTask.h ****  *   void Run() {  task control loop  };
+  18:../FreeRTOS_EC/Source/AManagedTask.h ****  * }
+  19:../FreeRTOS_EC/Source/AManagedTask.h ****  * \endcode
+  20:../FreeRTOS_EC/Source/AManagedTask.h ****  *
+  21:../FreeRTOS_EC/Source/AManagedTask.h ****  * @date Aug 3, 2010
+  22:../FreeRTOS_EC/Source/AManagedTask.h ****  * @author Stefano Oliveri
+  23:../FreeRTOS_EC/Source/AManagedTask.h ****  *         E-Mail: software@stf12.net
+  24:../FreeRTOS_EC/Source/AManagedTask.h ****  */
+  25:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  26:../FreeRTOS_EC/Source/AManagedTask.h **** /**
+  27:../FreeRTOS_EC/Source/AManagedTask.h ****  * @defgroup FreeRTOS_Managed FreeRTOS Managed Class Extension
+  28:../FreeRTOS_EC/Source/AManagedTask.h ****  * @ingroup FreeRTOS_CPP_EXT
+  29:../FreeRTOS_EC/Source/AManagedTask.h ****  * The FreeRTOS Managed Class Extension are a set of class that provide a structured and
+  30:../FreeRTOS_EC/Source/AManagedTask.h ****  * managed framework to develop a FreeRTOS application.
+  31:../FreeRTOS_EC/Source/AManagedTask.h ****  * @{
+  32:../FreeRTOS_EC/Source/AManagedTask.h ****  */
+  33:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  34:../FreeRTOS_EC/Source/AManagedTask.h **** #ifndef AMANAGEDTASK_H_
+  35:../FreeRTOS_EC/Source/AManagedTask.h **** #define AMANAGEDTASK_H_
+  36:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  37:../FreeRTOS_EC/Source/AManagedTask.h **** #include "CTask.h"
+  38:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  39:../FreeRTOS_EC/Source/AManagedTask.h **** class AManagedTask: public CTask {
+  40:../FreeRTOS_EC/Source/AManagedTask.h **** 	friend class CFreeRTOS;
+  41:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  42:../FreeRTOS_EC/Source/AManagedTask.h **** 	/**
+  43:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * Specifies the head of the linked list used to group all application managed task.
+  44:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
+  45:../FreeRTOS_EC/Source/AManagedTask.h **** 	static AManagedTask *s_pManagedTaskListHead;
+  46:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  47:../FreeRTOS_EC/Source/AManagedTask.h **** 	/**
+  48:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * Specifies the next managed task in the list or NULL if this is the last managed task.
+  49:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
+  50:../FreeRTOS_EC/Source/AManagedTask.h **** 	AManagedTask *m_pNextManagedTask;
+  51:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  52:../FreeRTOS_EC/Source/AManagedTask.h **** public:
+  53:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  54:../FreeRTOS_EC/Source/AManagedTask.h **** 	/**
+  55:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * Default constructor.
+  56:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
+  57:../FreeRTOS_EC/Source/AManagedTask.h **** 	AManagedTask();
+  58:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  59:../FreeRTOS_EC/Source/AManagedTask.h **** 	/**
+  60:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * Destructor.
+  61:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
+  62:../FreeRTOS_EC/Source/AManagedTask.h **** 	virtual ~AManagedTask();
+  63:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  64:../FreeRTOS_EC/Source/AManagedTask.h **** 	/**
+  65:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * Create the FreeRTOS task attached to this object.
+  66:../FreeRTOS_EC/Source/AManagedTask.h **** 	 *
+  67:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * @param pcName name of the task. Need only for debug purpose.
+  68:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * @param usStackDepth size in word of the task stack.
+  69:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * @param uxPriority task priority. Valid value ar between taskIDLE_PRIORITY and configMAX_PRIORIT
+  70:../FreeRTOS_EC/Source/AManagedTask.h **** 	 *
+  71:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * @sa CTask::Create
+  72:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
+  73:../FreeRTOS_EC/Source/AManagedTask.h **** 	portBASE_TYPE Create(const portCHAR * const pcName, unsigned portSHORT usStackDepth, unsigned port
+  74:../FreeRTOS_EC/Source/AManagedTask.h **** 
+  75:../FreeRTOS_EC/Source/AManagedTask.h **** 	/**
+  76:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * The framework calls this function before the scheduler start. The default implementation simply
+  77:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * Override this method to perform task specific hardware initialization that does not use FreeRTO
+  78:../FreeRTOS_EC/Source/AManagedTask.h **** 	 *
+  79:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * @return true if success, false otherwise.
+  80:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
+  81:../FreeRTOS_EC/Source/AManagedTask.h **** 	virtual bool HardwareInit() { return true; }
+ 114              		.loc 2 81 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 8
+ 117              		@ frame_needed = 1, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119 0000 80B4     		push	{r7}
+ 120              	.LCFI6:
+ 121              		.cfi_def_cfa_offset 4
+ 122              		.cfi_offset 7, -4
+ 123 0002 83B0     		sub	sp, sp, #12
+ 124              	.LCFI7:
+ 125              		.cfi_def_cfa_offset 16
+ 126 0004 00AF     		add	r7, sp, #0
+ 127              	.LCFI8:
+ 128              		.cfi_def_cfa_register 7
+ 129 0006 7860     		str	r0, [r7, #4]
+ 130              		.loc 2 81 0
+ 131 0008 4FF00103 		mov	r3, #1
+ 132 000c 1846     		mov	r0, r3
+ 133 000e 07F10C07 		add	r7, r7, #12
+ 134 0012 BD46     		mov	sp, r7
+ 135 0014 80BC     		pop	{r7}
+ 136 0016 7047     		bx	lr
+ 137              		.cfi_endproc
+ 138              	.LFE134:
+ 140              		.section	.text._ZN6CQueue4SendEPKvm,"axG",%progbits,_ZN6CQueue4SendEPKvm,comdat
+ 141              		.align	2
+ 142              		.weak	_ZN6CQueue4SendEPKvm
+ 143              		.thumb
+ 144              		.thumb_func
+ 146              	_ZN6CQueue4SendEPKvm:
+ 147              	.LFB137:
+ 148              		.file 3 "../FreeRTOS_EC/Source/CQueue.h"
+   1:../FreeRTOS_EC/Source/CQueue.h **** /**
+   2:../FreeRTOS_EC/Source/CQueue.h ****  * @file CQueue.h
+   3:../FreeRTOS_EC/Source/CQueue.h ****  * @class CQueue
+   4:../FreeRTOS_EC/Source/CQueue.h ****  * @ingroup FreeRTOS_Wrapper
+   5:../FreeRTOS_EC/Source/CQueue.h ****  *
+   6:../FreeRTOS_EC/Source/CQueue.h ****  * The CQueue class wraps a native FreeRTOS queue handle (xQueueHandle).
+   7:../FreeRTOS_EC/Source/CQueue.h ****  * To create a queue instance an object of this class and then call its CQueue::Create method
+   8:../FreeRTOS_EC/Source/CQueue.h ****  * like showed in the following sample:
+   9:../FreeRTOS_EC/Source/CQueue.h ****  * \code
+  10:../FreeRTOS_EC/Source/CQueue.h ****  * CQueue g_aQueue // global task declaration.
+  11:../FreeRTOS_EC/Source/CQueue.h ****  *
+  12:../FreeRTOS_EC/Source/CQueue.h ****  * void taskControlFunc(void *pParams)
+  13:../FreeRTOS_EC/Source/CQueue.h ****  * {
+  14:../FreeRTOS_EC/Source/CQueue.h ****  * 	unsigned char *Message;
+  15:../FreeRTOS_EC/Source/CQueue.h ****  * 	g_aQueue.Create(nQueueSize, sizeof(queueItemT));
+  16:../FreeRTOS_EC/Source/CQueue.h ****  *
+  17:../FreeRTOS_EC/Source/CQueue.h ****  * 	for (;;) {
+  18:../FreeRTOS_EC/Source/CQueue.h ****  * 		g_aQueue.Receive(&Message, portMAX_DELAY ) != pdTRUE)
+  19:../FreeRTOS_EC/Source/CQueue.h ****  * 		// do something
+  20:../FreeRTOS_EC/Source/CQueue.h ****  * }
+  21:../FreeRTOS_EC/Source/CQueue.h ****  * \endcode
+  22:../FreeRTOS_EC/Source/CQueue.h ****  *
+  23:../FreeRTOS_EC/Source/CQueue.h ****  * See the CLcdTask for an example.
+  24:../FreeRTOS_EC/Source/CQueue.h ****  *
+  25:../FreeRTOS_EC/Source/CQueue.h ****  * \sa <a href="http://www.freertos.org/Inter-Task-Communication.html">queue documentation</a> in t
+  26:../FreeRTOS_EC/Source/CQueue.h ****  *
+  27:../FreeRTOS_EC/Source/CQueue.h ****  * @date Jul 12, 2010
+  28:../FreeRTOS_EC/Source/CQueue.h ****  * @author Stefano Oliveri (STF12.net)
+  29:../FreeRTOS_EC/Source/CQueue.h ****  *         E-Mail: software@stf12.net
+  30:../FreeRTOS_EC/Source/CQueue.h ****  */
+  31:../FreeRTOS_EC/Source/CQueue.h **** 
+  32:../FreeRTOS_EC/Source/CQueue.h **** 
+  33:../FreeRTOS_EC/Source/CQueue.h **** #ifndef CQUEUE_H_
+  34:../FreeRTOS_EC/Source/CQueue.h **** #define CQUEUE_H_
+  35:../FreeRTOS_EC/Source/CQueue.h **** 
+  36:../FreeRTOS_EC/Source/CQueue.h **** #include <assert.h>
+  37:../FreeRTOS_EC/Source/CQueue.h **** 
+  38:../FreeRTOS_EC/Source/CQueue.h **** #include "FreeRTOS.h"
+  39:../FreeRTOS_EC/Source/CQueue.h **** #include "queue.h"
+  40:../FreeRTOS_EC/Source/CQueue.h **** #include "IFreeRTOSProtocol.h"
+  41:../FreeRTOS_EC/Source/CQueue.h **** 
+  42:../FreeRTOS_EC/Source/CQueue.h **** 
+  43:../FreeRTOS_EC/Source/CQueue.h **** class CQueue: public IFreeRTOSObj {
+  44:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  45:../FreeRTOS_EC/Source/CQueue.h **** 	 * Specifies the native FreeRTOS handle managed by an instance of this class.
+  46:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  47:../FreeRTOS_EC/Source/CQueue.h **** 	xQueueHandle m_handleQueue;
+  48:../FreeRTOS_EC/Source/CQueue.h **** 
+  49:../FreeRTOS_EC/Source/CQueue.h **** public:
+  50:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  51:../FreeRTOS_EC/Source/CQueue.h **** 	 * The default constructor. It initializes the object without attaching it to a native FreeRTOS ha
+  52:../FreeRTOS_EC/Source/CQueue.h **** 	 * Call the Create method to allocate a queue handle and attach it to the object.
+  53:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  54:../FreeRTOS_EC/Source/CQueue.h **** 	CQueue();
+  55:../FreeRTOS_EC/Source/CQueue.h **** 
+  56:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  57:../FreeRTOS_EC/Source/CQueue.h **** 	 * Create a CQueue instance and attach it to a valid handle.
+  58:../FreeRTOS_EC/Source/CQueue.h **** 	 *
+  59:../FreeRTOS_EC/Source/CQueue.h **** 	 * @param handleQueue a valid queue handle.
+  60:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  61:../FreeRTOS_EC/Source/CQueue.h **** 	CQueue(xQueueHandle handleQueue);
+  62:../FreeRTOS_EC/Source/CQueue.h **** 
+  63:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  64:../FreeRTOS_EC/Source/CQueue.h **** 	 * Delete the native FreeRTOS queue.
+  65:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  66:../FreeRTOS_EC/Source/CQueue.h **** 	virtual ~CQueue();
+  67:../FreeRTOS_EC/Source/CQueue.h **** 
+  68:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  69:../FreeRTOS_EC/Source/CQueue.h **** 	 * Retrieve the native FreeRTOS queue handle attached to this object.
+  70:../FreeRTOS_EC/Source/CQueue.h **** 	 *
+  71:../FreeRTOS_EC/Source/CQueue.h **** 	 * @return the native FreeRTOS queue handle attached to this object.
+  72:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  73:../FreeRTOS_EC/Source/CQueue.h **** 	inline operator xQueueHandle() const { return m_handleQueue; }
+  74:../FreeRTOS_EC/Source/CQueue.h **** 
+  75:../FreeRTOS_EC/Source/CQueue.h **** 	inline bool IsValid() const;
+  76:../FreeRTOS_EC/Source/CQueue.h **** 	void Attach(xGenericHandle handle);
+  77:../FreeRTOS_EC/Source/CQueue.h **** 	inline xGenericHandle Detach();
+  78:../FreeRTOS_EC/Source/CQueue.h **** 
+  79:../FreeRTOS_EC/Source/CQueue.h **** 	// FreeRTOS API Wrappers
+  80:../FreeRTOS_EC/Source/CQueue.h **** 
+  81:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  82:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00116.html">xQueueCreate</a> FreeRTOS API function.
+  83:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  84:../FreeRTOS_EC/Source/CQueue.h **** 	CQueue &Create(unsigned portBASE_TYPE uxQueueLength, unsigned portBASE_TYPE uxItemSize);
+  85:../FreeRTOS_EC/Source/CQueue.h **** 
+  86:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  87:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00018.html#vQueueDelete">vQueueDelete</a> FreeRTOS API fu
+  88:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  89:../FreeRTOS_EC/Source/CQueue.h **** 	void Delete();
+  90:../FreeRTOS_EC/Source/CQueue.h **** 
+  91:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  92:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00018.html#ucQueueMessagesWaiting">uxQueueMessagesWaiting
+  93:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  94:../FreeRTOS_EC/Source/CQueue.h **** 	inline unsigned portBASE_TYPE MessagesWaiting();
+  95:../FreeRTOS_EC/Source/CQueue.h **** 
+  96:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+  97:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00117.html">xQueueSend</a> FreeRTOS API function.
+  98:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+  99:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE Send(const void * pvItemToQueue, portTickType xTicksToWait);
+ 100:../FreeRTOS_EC/Source/CQueue.h **** 
+ 101:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 102:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/xQueueSendToBack.html">SendToBack</a> FreeRTOS API functio
+ 103:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 104:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE SendToBack(const void * pvItemToQueue, portTickType xTicksToWait);
+ 105:../FreeRTOS_EC/Source/CQueue.h **** 
+ 106:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 107:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/xQueueSendToFront.html">xQueueSendToFront</a> FreeRTOS API
+ 108:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 109:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE SendToFront(const void * pvItemToQueue, portTickType xTicksToWait);
+ 110:../FreeRTOS_EC/Source/CQueue.h **** 
+ 111:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 112:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00118.html">xQueueReceive</a> FreeRTOS API function.
+ 113:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 114:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE Receive(void *pvBuffer, portTickType xTicksToWait);
+ 115:../FreeRTOS_EC/Source/CQueue.h **** 
+ 116:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 117:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/xQueuePeek.html">xQueuePeek</a> FreeRTOS API function.
+ 118:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 119:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE Peek(void *pvBuffer, portTickType xTicksToWait);
+ 120:../FreeRTOS_EC/Source/CQueue.h **** 
+ 121:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 122:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00119.html">xQueueSendFromISR</a> FreeRTOS API function.
+ 123:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 124:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE SendFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriorityTaskWo
+ 125:../FreeRTOS_EC/Source/CQueue.h **** 
+ 126:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 127:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/xQueueSendToBackFromISR.html">xQueueSendToBackFromISR</a> 
+ 128:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 129:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE SendToBackFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriority
+ 130:../FreeRTOS_EC/Source/CQueue.h **** 
+ 131:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 132:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/xQueueSendToFrontFromISR.html">xQueueSendToFrontFromISR</a
+ 133:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 134:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE SendToFrontFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriorit
+ 135:../FreeRTOS_EC/Source/CQueue.h **** 
+ 136:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 137:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/a00120.html">xQueueReceiveFromISR</a> FreeRTOS API functio
+ 138:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 139:../FreeRTOS_EC/Source/CQueue.h **** 	inline portBASE_TYPE ReceiveFromISR(void *pvBuffer, portBASE_TYPE *pxTaskWoken);
+ 140:../FreeRTOS_EC/Source/CQueue.h **** 
+ 141:../FreeRTOS_EC/Source/CQueue.h **** 	/**
+ 142:../FreeRTOS_EC/Source/CQueue.h **** 	 * \sa <a href="http://www.freertos.org/vQueueAddToRegistry.html">vQueueAddToRegistry</a> FreeRTOS
+ 143:../FreeRTOS_EC/Source/CQueue.h **** 	 */
+ 144:../FreeRTOS_EC/Source/CQueue.h **** 	inline void AddToRegistry(signed portCHAR *pcQueueName);
+ 145:../FreeRTOS_EC/Source/CQueue.h **** 
+ 146:../FreeRTOS_EC/Source/CQueue.h **** };
+ 147:../FreeRTOS_EC/Source/CQueue.h **** 
+ 148:../FreeRTOS_EC/Source/CQueue.h **** // inline method implementation
+ 149:../FreeRTOS_EC/Source/CQueue.h **** 
+ 150:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 151:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::Send(const void * pvItemToQueue, portTickType xTicksToWait) {
+ 149              		.loc 3 151 0
+ 150              		.cfi_startproc
+ 151              		@ args = 0, pretend = 0, frame = 16
+ 152              		@ frame_needed = 1, uses_anonymous_args = 0
+ 153 0000 80B5     		push	{r7, lr}
+ 154              	.LCFI9:
+ 155              		.cfi_def_cfa_offset 8
+ 156              		.cfi_offset 14, -4
+ 157              		.cfi_offset 7, -8
+ 158 0002 84B0     		sub	sp, sp, #16
+ 159              	.LCFI10:
+ 160              		.cfi_def_cfa_offset 24
+ 161 0004 00AF     		add	r7, sp, #0
+ 162              	.LCFI11:
+ 163              		.cfi_def_cfa_register 7
+ 164 0006 F860     		str	r0, [r7, #12]
+ 165 0008 B960     		str	r1, [r7, #8]
+ 166 000a 7A60     		str	r2, [r7, #4]
+ 152:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSend(m_handleQueue, pvItemToQueue, xTicksToWait);
+ 167              		.loc 3 152 0
+ 168 000c FB68     		ldr	r3, [r7, #12]
+ 169 000e 5B68     		ldr	r3, [r3, #4]
+ 170 0010 1846     		mov	r0, r3
+ 171 0012 B968     		ldr	r1, [r7, #8]
+ 172 0014 7A68     		ldr	r2, [r7, #4]
+ 173 0016 4FF00003 		mov	r3, #0
+ 174 001a FFF7FEFF 		bl	xQueueGenericSend
+ 175 001e 0346     		mov	r3, r0
+ 153:../FreeRTOS_EC/Source/CQueue.h **** }
+ 176              		.loc 3 153 0
+ 177 0020 1846     		mov	r0, r3
+ 178 0022 07F11007 		add	r7, r7, #16
+ 179 0026 BD46     		mov	sp, r7
+ 180 0028 80BD     		pop	{r7, pc}
+ 181              		.cfi_endproc
+ 182              	.LFE137:
+ 184 002a 00BF     		.section	.text._ZN6CQueue11SendFromISREPKvPl,"axG",%progbits,_ZN6CQueue11SendFromISREPKvPl,comdat
+ 185              		.align	2
+ 186              		.weak	_ZN6CQueue11SendFromISREPKvPl
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	_ZN6CQueue11SendFromISREPKvPl:
+ 191              	.LFB138:
+ 154:../FreeRTOS_EC/Source/CQueue.h **** 
+ 155:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 156:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriorityTaskWo
+ 192              		.loc 3 156 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 16
+ 195              		@ frame_needed = 1, uses_anonymous_args = 0
+ 196 0000 80B5     		push	{r7, lr}
+ 197              	.LCFI12:
+ 198              		.cfi_def_cfa_offset 8
+ 199              		.cfi_offset 14, -4
+ 200              		.cfi_offset 7, -8
+ 201 0002 84B0     		sub	sp, sp, #16
+ 202              	.LCFI13:
+ 203              		.cfi_def_cfa_offset 24
+ 204 0004 00AF     		add	r7, sp, #0
+ 205              	.LCFI14:
+ 206              		.cfi_def_cfa_register 7
+ 207 0006 F860     		str	r0, [r7, #12]
+ 208 0008 B960     		str	r1, [r7, #8]
+ 209 000a 7A60     		str	r2, [r7, #4]
+ 157:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendFromISR(m_handleQueue, pvItemToQueue, pxHigherPriorityTaskWoken);
+ 210              		.loc 3 157 0
+ 211 000c FB68     		ldr	r3, [r7, #12]
+ 212 000e 5B68     		ldr	r3, [r3, #4]
+ 213 0010 1846     		mov	r0, r3
+ 214 0012 B968     		ldr	r1, [r7, #8]
+ 215 0014 7A68     		ldr	r2, [r7, #4]
+ 216 0016 4FF00003 		mov	r3, #0
+ 217 001a FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 218 001e 0346     		mov	r3, r0
+ 158:../FreeRTOS_EC/Source/CQueue.h **** }
+ 219              		.loc 3 158 0
+ 220 0020 1846     		mov	r0, r3
+ 221 0022 07F11007 		add	r7, r7, #16
+ 222 0026 BD46     		mov	sp, r7
+ 223 0028 80BD     		pop	{r7, pc}
+ 224              		.cfi_endproc
+ 225              	.LFE138:
+ 227 002a 00BF     		.section	.rodata
+ 228              		.align	2
+ 229              	.LC0:
+ 230 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CQueue.h\000"
+ 230      72656552 
+ 230      544F535F 
+ 230      45432F53 
+ 230      6F757263 
+ 231 001f 00       		.align	2
+ 232              	.LC1:
+ 233 0020 49735661 		.ascii	"IsValid()\000"
+ 233      6C696428 
+ 233      2900
+ 234 002a 0000     		.section	.text._ZN6CQueue11SendToFrontEPKvm,"axG",%progbits,_ZN6CQueue11SendToFrontEPKvm,comdat
+ 235              		.align	2
+ 236              		.weak	_ZN6CQueue11SendToFrontEPKvm
+ 237              		.thumb
+ 238              		.thumb_func
+ 240              	_ZN6CQueue11SendToFrontEPKvm:
+ 241              	.LFB141:
+ 159:../FreeRTOS_EC/Source/CQueue.h **** 
+ 160:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 161:../FreeRTOS_EC/Source/CQueue.h **** unsigned portBASE_TYPE CQueue::MessagesWaiting() {
+ 162:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 163:../FreeRTOS_EC/Source/CQueue.h **** 
+ 164:../FreeRTOS_EC/Source/CQueue.h **** 	return uxQueueMessagesWaiting(m_handleQueue);
+ 165:../FreeRTOS_EC/Source/CQueue.h **** }
+ 166:../FreeRTOS_EC/Source/CQueue.h **** 
+ 167:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 168:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendToBack(const void * pvItemToQueue, portTickType xTicksToWait) {
+ 169:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 170:../FreeRTOS_EC/Source/CQueue.h **** 
+ 171:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendToBack(m_handleQueue, pvItemToQueue, xTicksToWait);
+ 172:../FreeRTOS_EC/Source/CQueue.h **** }
+ 173:../FreeRTOS_EC/Source/CQueue.h **** 
+ 174:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 175:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendToFront(const void * pvItemToQueue, portTickType xTicksToWait) {
+ 242              		.loc 3 175 0
+ 243              		.cfi_startproc
+ 244              		@ args = 0, pretend = 0, frame = 16
+ 245              		@ frame_needed = 1, uses_anonymous_args = 0
+ 246 0000 80B5     		push	{r7, lr}
+ 247              	.LCFI15:
+ 248              		.cfi_def_cfa_offset 8
+ 249              		.cfi_offset 14, -4
+ 250              		.cfi_offset 7, -8
+ 251 0002 84B0     		sub	sp, sp, #16
+ 252              	.LCFI16:
+ 253              		.cfi_def_cfa_offset 24
+ 254 0004 00AF     		add	r7, sp, #0
+ 255              	.LCFI17:
+ 256              		.cfi_def_cfa_register 7
+ 257 0006 F860     		str	r0, [r7, #12]
+ 258 0008 B960     		str	r1, [r7, #8]
+ 259 000a 7A60     		str	r2, [r7, #4]
+ 260              	.LBB3:
+ 176:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 261              		.loc 3 176 0
+ 262 000c FB68     		ldr	r3, [r7, #12]
+ 263 000e 1B68     		ldr	r3, [r3, #0]
+ 264 0010 1B68     		ldr	r3, [r3, #0]
+ 265 0012 F868     		ldr	r0, [r7, #12]
+ 266 0014 9847     		blx	r3
+ 267 0016 0346     		mov	r3, r0
+ 268 0018 002B     		cmp	r3, #0
+ 269 001a 0FD1     		bne	.L7
+ 270              		.loc 3 176 0 is_stmt 0 discriminator 1
+ 271 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 272 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 273 0024 4FF0B001 		mov	r1, #176
+ 274 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
+ 275 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
+ 276 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 277 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 278 0038 FFF7FEFF 		bl	__assert_func
+ 279              	.L7:
+ 177:../FreeRTOS_EC/Source/CQueue.h **** 
+ 178:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendToFront(m_handleQueue, pvItemToQueue, xTicksToWait);
+ 280              		.loc 3 178 0 is_stmt 1
+ 281 003c FB68     		ldr	r3, [r7, #12]
+ 282 003e 5B68     		ldr	r3, [r3, #4]
+ 283 0040 1846     		mov	r0, r3
+ 284 0042 B968     		ldr	r1, [r7, #8]
+ 285 0044 7A68     		ldr	r2, [r7, #4]
+ 286 0046 4FF00103 		mov	r3, #1
+ 287 004a FFF7FEFF 		bl	xQueueGenericSend
+ 288 004e 0346     		mov	r3, r0
+ 289              	.LBE3:
+ 179:../FreeRTOS_EC/Source/CQueue.h **** }
+ 290              		.loc 3 179 0
+ 291 0050 1846     		mov	r0, r3
+ 292 0052 07F11007 		add	r7, r7, #16
+ 293 0056 BD46     		mov	sp, r7
+ 294 0058 80BD     		pop	{r7, pc}
+ 295              		.cfi_endproc
+ 296              	.LFE141:
+ 298 005a 00BF     		.section	.text._ZN6CQueue7ReceiveEPvm,"axG",%progbits,_ZN6CQueue7ReceiveEPvm,comdat
+ 299              		.align	2
+ 300              		.weak	_ZN6CQueue7ReceiveEPvm
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	_ZN6CQueue7ReceiveEPvm:
+ 305              	.LFB142:
+ 180:../FreeRTOS_EC/Source/CQueue.h **** 
+ 181:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 182:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::Receive(void *pvBuffer, portTickType xTicksToWait) {
+ 306              		.loc 3 182 0
+ 307              		.cfi_startproc
+ 308              		@ args = 0, pretend = 0, frame = 16
+ 309              		@ frame_needed = 1, uses_anonymous_args = 0
+ 310 0000 80B5     		push	{r7, lr}
+ 311              	.LCFI18:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 14, -4
+ 314              		.cfi_offset 7, -8
+ 315 0002 84B0     		sub	sp, sp, #16
+ 316              	.LCFI19:
+ 317              		.cfi_def_cfa_offset 24
+ 318 0004 00AF     		add	r7, sp, #0
+ 319              	.LCFI20:
+ 320              		.cfi_def_cfa_register 7
+ 321 0006 F860     		str	r0, [r7, #12]
+ 322 0008 B960     		str	r1, [r7, #8]
+ 323 000a 7A60     		str	r2, [r7, #4]
+ 324              	.LBB4:
+ 183:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 325              		.loc 3 183 0
+ 326 000c FB68     		ldr	r3, [r7, #12]
+ 327 000e 1B68     		ldr	r3, [r3, #0]
+ 328 0010 1B68     		ldr	r3, [r3, #0]
+ 329 0012 F868     		ldr	r0, [r7, #12]
+ 330 0014 9847     		blx	r3
+ 331 0016 0346     		mov	r3, r0
+ 332 0018 002B     		cmp	r3, #0
+ 333 001a 0FD1     		bne	.L9
+ 334              		.loc 3 183 0 is_stmt 0 discriminator 1
+ 335 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 336 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 337 0024 4FF0B701 		mov	r1, #183
+ 338 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
+ 339 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
+ 340 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 341 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 342 0038 FFF7FEFF 		bl	__assert_func
+ 343              	.L9:
+ 184:../FreeRTOS_EC/Source/CQueue.h **** 
+ 185:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueReceive(m_handleQueue, pvBuffer, xTicksToWait);
+ 344              		.loc 3 185 0 is_stmt 1
+ 345 003c FB68     		ldr	r3, [r7, #12]
+ 346 003e 5B68     		ldr	r3, [r3, #4]
+ 347 0040 1846     		mov	r0, r3
+ 348 0042 B968     		ldr	r1, [r7, #8]
+ 349 0044 7A68     		ldr	r2, [r7, #4]
+ 350 0046 4FF00003 		mov	r3, #0
+ 351 004a FFF7FEFF 		bl	xQueueGenericReceive
+ 352 004e 0346     		mov	r3, r0
+ 353              	.LBE4:
+ 186:../FreeRTOS_EC/Source/CQueue.h **** }
+ 354              		.loc 3 186 0
+ 355 0050 1846     		mov	r0, r3
+ 356 0052 07F11007 		add	r7, r7, #16
+ 357 0056 BD46     		mov	sp, r7
+ 358 0058 80BD     		pop	{r7, pc}
+ 359              		.cfi_endproc
+ 360              	.LFE142:
+ 362 005a 00BF     		.section	.text._ZN6CQueue18SendToFrontFromISREPKvPl,"axG",%progbits,_ZN6CQueue18SendToFrontFromISR
+ 363              		.align	2
+ 364              		.weak	_ZN6CQueue18SendToFrontFromISREPKvPl
+ 365              		.thumb
+ 366              		.thumb_func
+ 368              	_ZN6CQueue18SendToFrontFromISREPKvPl:
+ 369              	.LFB145:
+ 187:../FreeRTOS_EC/Source/CQueue.h **** 
+ 188:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 189:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::Peek(void *pvBuffer, portTickType xTicksToWait) {
+ 190:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 191:../FreeRTOS_EC/Source/CQueue.h **** 
+ 192:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueuePeek(m_handleQueue, pvBuffer, xTicksToWait);
+ 193:../FreeRTOS_EC/Source/CQueue.h **** }
+ 194:../FreeRTOS_EC/Source/CQueue.h **** 
+ 195:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 196:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendToBackFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriority
+ 197:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 198:../FreeRTOS_EC/Source/CQueue.h **** 
+ 199:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendToBackFromISR(m_handleQueue, pvItemToQueue, pxHigherPriorityTaskWoken);
+ 200:../FreeRTOS_EC/Source/CQueue.h **** }
+ 201:../FreeRTOS_EC/Source/CQueue.h **** 
+ 202:../FreeRTOS_EC/Source/CQueue.h **** inline
+ 203:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendToFrontFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriorit
+ 370              		.loc 3 203 0
+ 371              		.cfi_startproc
+ 372              		@ args = 0, pretend = 0, frame = 16
+ 373              		@ frame_needed = 1, uses_anonymous_args = 0
+ 374 0000 80B5     		push	{r7, lr}
+ 375              	.LCFI21:
+ 376              		.cfi_def_cfa_offset 8
+ 377              		.cfi_offset 14, -4
+ 378              		.cfi_offset 7, -8
+ 379 0002 84B0     		sub	sp, sp, #16
+ 380              	.LCFI22:
+ 381              		.cfi_def_cfa_offset 24
+ 382 0004 00AF     		add	r7, sp, #0
+ 383              	.LCFI23:
+ 384              		.cfi_def_cfa_register 7
+ 385 0006 F860     		str	r0, [r7, #12]
+ 386 0008 B960     		str	r1, [r7, #8]
+ 387 000a 7A60     		str	r2, [r7, #4]
+ 388              	.LBB5:
+ 204:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
+ 389              		.loc 3 204 0
+ 390 000c FB68     		ldr	r3, [r7, #12]
+ 391 000e 1B68     		ldr	r3, [r3, #0]
+ 392 0010 1B68     		ldr	r3, [r3, #0]
+ 393 0012 F868     		ldr	r0, [r7, #12]
+ 394 0014 9847     		blx	r3
+ 395 0016 0346     		mov	r3, r0
+ 396 0018 002B     		cmp	r3, #0
+ 397 001a 0FD1     		bne	.L11
+ 398              		.loc 3 204 0 is_stmt 0 discriminator 1
+ 399 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 400 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 401 0024 4FF0CC01 		mov	r1, #204
+ 402 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
+ 403 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
+ 404 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 405 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 406 0038 FFF7FEFF 		bl	__assert_func
+ 407              	.L11:
+ 205:../FreeRTOS_EC/Source/CQueue.h **** 
+ 206:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendToFrontFromISR(m_handleQueue, pvItemToQueue, pxHigherPriorityTaskWoken);
+ 408              		.loc 3 206 0 is_stmt 1
+ 409 003c FB68     		ldr	r3, [r7, #12]
+ 410 003e 5B68     		ldr	r3, [r3, #4]
+ 411 0040 1846     		mov	r0, r3
+ 412 0042 B968     		ldr	r1, [r7, #8]
+ 413 0044 7A68     		ldr	r2, [r7, #4]
+ 414 0046 4FF00103 		mov	r3, #1
+ 415 004a FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 416 004e 0346     		mov	r3, r0
+ 417              	.LBE5:
+ 207:../FreeRTOS_EC/Source/CQueue.h **** }
+ 418              		.loc 3 207 0
+ 419 0050 1846     		mov	r0, r3
+ 420 0052 07F11007 		add	r7, r7, #16
+ 421 0056 BD46     		mov	sp, r7
+ 422 0058 80BD     		pop	{r7, pc}
+ 423              		.cfi_endproc
+ 424              	.LFE145:
+ 426 005a 00BF     		.section	.text._ZN12CMessageTask6OnInitEv,"axG",%progbits,_ZN12CMessageTask6OnInitEv,comdat
+ 427              		.align	2
+ 428              		.weak	_ZN12CMessageTask6OnInitEv
+ 429              		.thumb
+ 430              		.thumb_func
+ 432              	_ZN12CMessageTask6OnInitEv:
+ 433              	.LFB150:
+ 434              		.file 4 "../FreeRTOS_EC/Source/CMessageTask.h"
+   1:../FreeRTOS_EC/Source/CMessageTask.h **** /**
+   2:../FreeRTOS_EC/Source/CMessageTask.h ****  * @file CMessageTask.h
+   3:../FreeRTOS_EC/Source/CMessageTask.h ****  * @class CMessageTask
+   4:../FreeRTOS_EC/Source/CMessageTask.h ****  * @ingroup FreeRTOS_Managed
+   5:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+   6:../FreeRTOS_EC/Source/CMessageTask.h ****  * This class implements the Queued Message Handler (QMH) design pattern.
+   7:../FreeRTOS_EC/Source/CMessageTask.h ****  * \image html QMH.png "Queued Message Handler"
+   8:../FreeRTOS_EC/Source/CMessageTask.h ****  * The purpose of the QMH pattern is to allow asynchronous communication between tasks through
+   9:../FreeRTOS_EC/Source/CMessageTask.h ****  * a message passing paradigm.
+  10:../FreeRTOS_EC/Source/CMessageTask.h ****  * A message is defined by:
+  11:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	- a message identifier (id) that should be unique.
+  12:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	- a message handler method.
+  13:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  14:../FreeRTOS_EC/Source/CMessageTask.h ****  * The prototype of a message handler is: \code void className::MessageHandler(unsigned long wParam
+  15:../FreeRTOS_EC/Source/CMessageTask.h ****  * A derived class should not implement a task control loop (by overriding the AManagedTask::Run me
+  16:../FreeRTOS_EC/Source/CMessageTask.h ****  * that is provided by the CMessageTask class. This procedure implements the message dispatch routi
+  17:../FreeRTOS_EC/Source/CMessageTask.h ****  * When a message is received the message loop searches the derived class's message map for an entr
+  18:../FreeRTOS_EC/Source/CMessageTask.h ****  * id of the received message. If such an entry is found the associated message handler is performe
+  19:../FreeRTOS_EC/Source/CMessageTask.h ****  * message loop start processing the next message. Otherwise the message loop walk through the mess
+  20:../FreeRTOS_EC/Source/CMessageTask.h ****  * base class. If no entry able to handle the message is found, it is discarded.
+  21:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  22:../FreeRTOS_EC/Source/CMessageTask.h ****  * One delegate object, implementing the IMessageTaskDelegate interface, could be associated to a C
+  23:../FreeRTOS_EC/Source/CMessageTask.h ****  * using the method CMessageTask::SetDelegate. A delegate receive a notification from the task befo
+  24:../FreeRTOS_EC/Source/CMessageTask.h ****  * message is dispatched.
+  25:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  26:../FreeRTOS_EC/Source/CMessageTask.h ****  * The MessageMacro.h file export a set of macro in order to declare and define the message map in 
+  27:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  28:../FreeRTOS_EC/Source/CMessageTask.h ****  * <b>Use Cases</b>
+  29:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	- Gate keeper
+  30:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	- Command Handler Task.
+  31:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  32:../FreeRTOS_EC/Source/CMessageTask.h ****  * <b>Example</b>
+  33:../FreeRTOS_EC/Source/CMessageTask.h ****  * \code
+  34:../FreeRTOS_EC/Source/CMessageTask.h ****  * //In the header file
+  35:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  36:../FreeRTOS_EC/Source/CMessageTask.h ****  * #define MSG_1 APP_MSG + 1
+  37:../FreeRTOS_EC/Source/CMessageTask.h ****  * #define MSG_2 APP_MSG + 2
+  38:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  39:../FreeRTOS_EC/Source/CMessageTask.h ****  * class MyClass: public CMessageTask
+  40:../FreeRTOS_EC/Source/CMessageTask.h ****  * {
+  41:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	DECLARE_MESSAGE_MAP(CMessageTestTask)
+  42:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  43:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	public:
+  44:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	CMessageTestTask();
+  45:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	virtual ~CMessageTestTask();
+  46:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  47:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	void Message1Handler(unsigned long wParam);
+  48:../FreeRTOS_EC/Source/CMessageTask.h ****  * 	void Message2Handler(unsigned long wParam);
+  49:../FreeRTOS_EC/Source/CMessageTask.h ****  * };
+  50:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  51:../FreeRTOS_EC/Source/CMessageTask.h ****  * // In the implementation file
+  52:../FreeRTOS_EC/Source/CMessageTask.h ****  * BEGIN_MESSAGE_MAP(CMessageTask, MyClass)
+  53:../FreeRTOS_EC/Source/CMessageTask.h ****  *   MESSAGE_MAP_ENTRY(MyClass, MSG_1, Message1Handler)
+  54:../FreeRTOS_EC/Source/CMessageTask.h ****  *   MESSAGE_MAP_ENTRY(MyClass, MSG_2, Message2Handler)
+  55:../FreeRTOS_EC/Source/CMessageTask.h ****  * END_MESSAGE_MAP(CMessageTestTask)
+  56:../FreeRTOS_EC/Source/CMessageTask.h ****  * \endcode
+  57:../FreeRTOS_EC/Source/CMessageTask.h ****  *
+  58:../FreeRTOS_EC/Source/CMessageTask.h ****  * @date   Feb 28, 2011
+  59:../FreeRTOS_EC/Source/CMessageTask.h ****  * @author Stefano Oliveri (STF12.net)
+  60:../FreeRTOS_EC/Source/CMessageTask.h ****  *         E-mail: software@stf12.net
+  61:../FreeRTOS_EC/Source/CMessageTask.h ****  */
+  62:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  63:../FreeRTOS_EC/Source/CMessageTask.h **** #ifndef CMESSAGETASK_H_
+  64:../FreeRTOS_EC/Source/CMessageTask.h **** #define CMESSAGETASK_H_
+  65:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  66:../FreeRTOS_EC/Source/CMessageTask.h **** #include "AManagedTask.h"
+  67:../FreeRTOS_EC/Source/CMessageTask.h **** #include "MessageMacro.h"
+  68:../FreeRTOS_EC/Source/CMessageTask.h **** #include "Message.h"
+  69:../FreeRTOS_EC/Source/CMessageTask.h **** #include "IMessageTaskDelegate.h"
+  70:../FreeRTOS_EC/Source/CMessageTask.h **** #include "CQueue.h"
+  71:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  72:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  73:../FreeRTOS_EC/Source/CMessageTask.h **** class CMessageTask: public AManagedTask {
+  74:../FreeRTOS_EC/Source/CMessageTask.h **** public:
+  75:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  76:../FreeRTOS_EC/Source/CMessageTask.h **** 	enum {
+  77:../FreeRTOS_EC/Source/CMessageTask.h **** 		MESSAGE_QUEUE_SIZE = 5,
+  78:../FreeRTOS_EC/Source/CMessageTask.h **** 	};
+  79:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  80:../FreeRTOS_EC/Source/CMessageTask.h **** private:
+  81:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  82:../FreeRTOS_EC/Source/CMessageTask.h **** 	DECLARE_MESSAGE_MAP(CMessageTask);
+  83:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  84:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+  85:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Specify maximum amount of time the task should block waiting for an incoming message.
+  86:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * The default value is portMAX_DELAY and the task blocks indefinitely.
+  87:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+  88:../FreeRTOS_EC/Source/CMessageTask.h **** 	portTickType m_nTimeOut;
+  89:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  90:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+  91:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Specifies the synchronization queue used to serialize the access at the LCD.
+  92:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+  93:../FreeRTOS_EC/Source/CMessageTask.h **** 	CQueue m_queue;
+  94:../FreeRTOS_EC/Source/CMessageTask.h **** 
+  95:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+  96:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Specifies the task delegate object. It is the object that receive the notification
+  97:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * message from the task.
+  98:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+  99:../FreeRTOS_EC/Source/CMessageTask.h **** 	IMessageTaskDelegate *m_pDelegate;
+ 100:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 101:../FreeRTOS_EC/Source/CMessageTask.h **** public:
+ 102:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 103:../FreeRTOS_EC/Source/CMessageTask.h **** 	CMessageTask();
+ 104:../FreeRTOS_EC/Source/CMessageTask.h **** 	virtual ~CMessageTask();
+ 105:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 106:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 107:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+ 108:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * A subclass overriding this methods should call the base implementation.
+ 109:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * \sa AManagedTask::OnCreate
+ 110:../FreeRTOS_EC/Source/CMessageTask.h **** 	 *
+ 111:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * @param pcName specifies the name assigned to the task for debug purpose.
+ 112:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * @param usStackDepth specifies the task stack size in words.
+ 113:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * @param uxPriority specifies the task priority.
+ 114:../FreeRTOS_EC/Source/CMessageTask.h **** 	 *
+ 115:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+ 116:../FreeRTOS_EC/Source/CMessageTask.h **** 	portBASE_TYPE OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth, unsigned po
+ 117:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 118:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+ 119:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Task control function. It implements the message loop.
+ 120:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+ 121:../FreeRTOS_EC/Source/CMessageTask.h **** 	void Run();
+ 122:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 123:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+ 124:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Called by the framework after the scheduler is started, but before the task
+ 125:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * enter its message loop. Use this method to perform one shot task initialization.
+ 126:../FreeRTOS_EC/Source/CMessageTask.h **** 	 *
+ 127:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * @return <code>true</code> if success, <code>false</code> otherwise.
+ 128:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+ 129:../FreeRTOS_EC/Source/CMessageTask.h **** 	virtual bool OnInit() { return true; }
+ 435              		.loc 4 129 0
+ 436              		.cfi_startproc
+ 437              		@ args = 0, pretend = 0, frame = 8
+ 438              		@ frame_needed = 1, uses_anonymous_args = 0
+ 439              		@ link register save eliminated.
+ 440 0000 80B4     		push	{r7}
+ 441              	.LCFI24:
+ 442              		.cfi_def_cfa_offset 4
+ 443              		.cfi_offset 7, -4
+ 444 0002 83B0     		sub	sp, sp, #12
+ 445              	.LCFI25:
+ 446              		.cfi_def_cfa_offset 16
+ 447 0004 00AF     		add	r7, sp, #0
+ 448              	.LCFI26:
+ 449              		.cfi_def_cfa_register 7
+ 450 0006 7860     		str	r0, [r7, #4]
+ 451              		.loc 4 129 0
+ 452 0008 4FF00103 		mov	r3, #1
+ 453 000c 1846     		mov	r0, r3
+ 454 000e 07F10C07 		add	r7, r7, #12
+ 455 0012 BD46     		mov	sp, r7
+ 456 0014 80BC     		pop	{r7}
+ 457 0016 7047     		bx	lr
+ 458              		.cfi_endproc
+ 459              	.LFE150:
+ 461              		.section	.text._ZN12CMessageTask9OnTimeOutEv,"axG",%progbits,_ZN12CMessageTask9OnTimeOutEv,comdat
+ 462              		.align	2
+ 463              		.weak	_ZN12CMessageTask9OnTimeOutEv
+ 464              		.thumb
+ 465              		.thumb_func
+ 467              	_ZN12CMessageTask9OnTimeOutEv:
+ 468              	.LFB151:
+ 130:../FreeRTOS_EC/Source/CMessageTask.h **** 
+ 131:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
+ 132:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Called by the framework during the message loop when the timeout expire and no message are
+ 133:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * received.
+ 134:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
+ 135:../FreeRTOS_EC/Source/CMessageTask.h **** 	virtual void OnTimeOut() {};
+ 469              		.loc 4 135 0
+ 470              		.cfi_startproc
+ 471              		@ args = 0, pretend = 0, frame = 8
+ 472              		@ frame_needed = 1, uses_anonymous_args = 0
+ 473              		@ link register save eliminated.
+ 474 0000 80B4     		push	{r7}
+ 475              	.LCFI27:
+ 476              		.cfi_def_cfa_offset 4
+ 477              		.cfi_offset 7, -4
+ 478 0002 83B0     		sub	sp, sp, #12
+ 479              	.LCFI28:
+ 480              		.cfi_def_cfa_offset 16
+ 481 0004 00AF     		add	r7, sp, #0
+ 482              	.LCFI29:
+ 483              		.cfi_def_cfa_register 7
+ 484 0006 7860     		str	r0, [r7, #4]
+ 485              		.loc 4 135 0
+ 486 0008 07F10C07 		add	r7, r7, #12
+ 487 000c BD46     		mov	sp, r7
+ 488 000e 80BC     		pop	{r7}
+ 489 0010 7047     		bx	lr
+ 490              		.cfi_endproc
+ 491              	.LFE151:
+ 493              		.global	_ZN12CMessageTask13s_message_mapE
+ 494 0012 00BF     		.section	.rodata._ZN12CMessageTask13s_message_mapE,"a",%progbits
+ 495              		.align	2
+ 498              	_ZN12CMessageTask13s_message_mapE:
+ 499 0000 00000000 		.space	12
+ 499      00000000 
+ 499      00000000 
+ 500              		.section	.text._ZN12CMessageTaskC2Ev,"ax",%progbits
+ 501              		.align	2
+ 502              		.global	_ZN12CMessageTaskC2Ev
+ 503              		.thumb
+ 504              		.thumb_func
+ 506              	_ZN12CMessageTaskC2Ev:
+ 507              	.LFB155:
+ 508              		.file 5 "../FreeRTOS_EC/Source/CMessageTask.cpp"
+   1:../FreeRTOS_EC/Source/CMessageTask.cpp **** /*
+   2:../FreeRTOS_EC/Source/CMessageTask.cpp ****  * CMessageTask.cpp
+   3:../FreeRTOS_EC/Source/CMessageTask.cpp ****  *
+   4:../FreeRTOS_EC/Source/CMessageTask.cpp ****  *  Created on: Sep 20, 2010
+   5:../FreeRTOS_EC/Source/CMessageTask.cpp ****  *      Author: oliveris
+   6:../FreeRTOS_EC/Source/CMessageTask.cpp ****  */
+   7:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+   8:../FreeRTOS_EC/Source/CMessageTask.cpp **** #include <stdio.h>
+   9:../FreeRTOS_EC/Source/CMessageTask.cpp **** #include "CMessageTask.h"
+  10:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  11:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  12:../FreeRTOS_EC/Source/CMessageTask.cpp **** const CMessageTask::message_map_entry_t CMessageTask::s_message_map[] = {
+  13:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		{ NULL_MSG, NULL }
+  14:../FreeRTOS_EC/Source/CMessageTask.cpp **** };
+  15:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  16:../FreeRTOS_EC/Source/CMessageTask.cpp **** CMessageTask::CMessageTask()
+ 509              		.loc 5 16 0
+ 510              		.cfi_startproc
+ 511              		@ args = 0, pretend = 0, frame = 8
+ 512              		@ frame_needed = 1, uses_anonymous_args = 0
+ 513 0000 80B5     		push	{r7, lr}
+ 514              	.LCFI30:
+ 515              		.cfi_def_cfa_offset 8
+ 516              		.cfi_offset 14, -4
+ 517              		.cfi_offset 7, -8
+ 518 0002 82B0     		sub	sp, sp, #8
+ 519              	.LCFI31:
+ 520              		.cfi_def_cfa_offset 16
+ 521 0004 00AF     		add	r7, sp, #0
+ 522              	.LCFI32:
+ 523              		.cfi_def_cfa_register 7
+ 524 0006 7860     		str	r0, [r7, #4]
+ 525              	.LBB6:
+ 526              		.loc 5 16 0
+ 527 0008 7B68     		ldr	r3, [r7, #4]
+ 528 000a 1846     		mov	r0, r3
+ 529 000c FFF7FEFF 		bl	_ZN12AManagedTaskC2Ev
+ 530 0010 7B68     		ldr	r3, [r7, #4]
+ 531 0012 0B4A     		ldr	r2, .L16
+ 532 0014 1A60     		str	r2, [r3, #0]
+ 533 0016 7B68     		ldr	r3, [r7, #4]
+ 534 0018 03F11003 		add	r3, r3, #16
+ 535 001c 1846     		mov	r0, r3
+ 536 001e FFF7FEFF 		bl	_ZN6CQueueC1Ev
+  17:../FreeRTOS_EC/Source/CMessageTask.cpp **** {
+  18:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	m_pDelegate = NULL;
+ 537              		.loc 5 18 0
+ 538 0022 7B68     		ldr	r3, [r7, #4]
+ 539 0024 4FF00002 		mov	r2, #0
+ 540 0028 9A61     		str	r2, [r3, #24]
+  19:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	m_nTimeOut = portMAX_DELAY;
+ 541              		.loc 5 19 0
+ 542 002a 7B68     		ldr	r3, [r7, #4]
+ 543 002c 4FF0FF32 		mov	r2, #-1
+ 544 0030 DA60     		str	r2, [r3, #12]
+ 545              	.LBE6:
+  20:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 546              		.loc 5 20 0
+ 547 0032 7B68     		ldr	r3, [r7, #4]
+ 548 0034 1846     		mov	r0, r3
+ 549 0036 07F10807 		add	r7, r7, #8
+ 550 003a BD46     		mov	sp, r7
+ 551 003c 80BD     		pop	{r7, pc}
+ 552              	.L17:
+ 553 003e 00BF     		.align	2
+ 554              	.L16:
+ 555 0040 08000000 		.word	_ZTV12CMessageTask+8
+ 556              		.cfi_endproc
+ 557              	.LFE155:
+ 559              		.section	.text._ZN12CMessageTaskD2Ev,"ax",%progbits
+ 560              		.align	2
+ 561              		.global	_ZN12CMessageTaskD2Ev
+ 562              		.thumb
+ 563              		.thumb_func
+ 565              	_ZN12CMessageTaskD2Ev:
+ 566              	.LFB158:
+  21:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  22:../FreeRTOS_EC/Source/CMessageTask.cpp **** CMessageTask::~CMessageTask() {
+ 567              		.loc 5 22 0
+ 568              		.cfi_startproc
+ 569              		@ args = 0, pretend = 0, frame = 8
+ 570              		@ frame_needed = 1, uses_anonymous_args = 0
+ 571 0000 80B5     		push	{r7, lr}
+ 572              	.LCFI33:
+ 573              		.cfi_def_cfa_offset 8
+ 574              		.cfi_offset 14, -4
+ 575              		.cfi_offset 7, -8
+ 576 0002 82B0     		sub	sp, sp, #8
+ 577              	.LCFI34:
+ 578              		.cfi_def_cfa_offset 16
+ 579 0004 00AF     		add	r7, sp, #0
+ 580              	.LCFI35:
+ 581              		.cfi_def_cfa_register 7
+ 582 0006 7860     		str	r0, [r7, #4]
+ 583              	.LBB7:
+ 584              		.loc 5 22 0
+ 585 0008 7B68     		ldr	r3, [r7, #4]
+ 586 000a 0D4A     		ldr	r2, .L21
+ 587 000c 1A60     		str	r2, [r3, #0]
+ 588 000e 7B68     		ldr	r3, [r7, #4]
+ 589 0010 03F11003 		add	r3, r3, #16
+  23:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	// TODO Auto-generated destructor stub
+  24:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 590              		.loc 5 24 0
+ 591 0014 1846     		mov	r0, r3
+ 592 0016 FFF7FEFF 		bl	_ZN6CQueueD1Ev
+ 593 001a 7868     		ldr	r0, [r7, #4]
+ 594 001c FFF7FEFF 		bl	_ZN12AManagedTaskD2Ev
+ 595              	.LBE7:
+ 596 0020 4FF00003 		mov	r3, #0
+ 597 0024 03F00103 		and	r3, r3, #1
+ 598 0028 DBB2     		uxtb	r3, r3
+ 599 002a 002B     		cmp	r3, #0
+ 600 002c 02D0     		beq	.L20
+ 601              		.loc 5 24 0 is_stmt 0 discriminator 2
+ 602 002e 7868     		ldr	r0, [r7, #4]
+ 603 0030 FFF7FEFF 		bl	_ZdlPv
+ 604              	.L20:
+ 605              		.loc 5 24 0 discriminator 3
+ 606 0034 7B68     		ldr	r3, [r7, #4]
+ 607 0036 1846     		mov	r0, r3
+ 608 0038 07F10807 		add	r7, r7, #8
+ 609 003c BD46     		mov	sp, r7
+ 610 003e 80BD     		pop	{r7, pc}
+ 611              	.L22:
+ 612              		.align	2
+ 613              	.L21:
+ 614 0040 08000000 		.word	_ZTV12CMessageTask+8
+ 615              		.cfi_endproc
+ 616              	.LFE158:
+ 618              		.section	.text._ZN12CMessageTaskD0Ev,"ax",%progbits
+ 619              		.align	2
+ 620              		.global	_ZN12CMessageTaskD0Ev
+ 621              		.thumb
+ 622              		.thumb_func
+ 624              	_ZN12CMessageTaskD0Ev:
+ 625              	.LFB160:
+  22:../FreeRTOS_EC/Source/CMessageTask.cpp **** CMessageTask::~CMessageTask() {
+ 626              		.loc 5 22 0 is_stmt 1
+ 627              		.cfi_startproc
+ 628              		@ args = 0, pretend = 0, frame = 8
+ 629              		@ frame_needed = 1, uses_anonymous_args = 0
+ 630 0000 80B5     		push	{r7, lr}
+ 631              	.LCFI36:
+ 632              		.cfi_def_cfa_offset 8
+ 633              		.cfi_offset 14, -4
+ 634              		.cfi_offset 7, -8
+ 635 0002 82B0     		sub	sp, sp, #8
+ 636              	.LCFI37:
+ 637              		.cfi_def_cfa_offset 16
+ 638 0004 00AF     		add	r7, sp, #0
+ 639              	.LCFI38:
+ 640              		.cfi_def_cfa_register 7
+ 641 0006 7860     		str	r0, [r7, #4]
+ 642              		.loc 5 24 0
+ 643 0008 7868     		ldr	r0, [r7, #4]
+ 644 000a FFF7FEFF 		bl	_ZN12CMessageTaskD1Ev
+ 645 000e 7868     		ldr	r0, [r7, #4]
+ 646 0010 FFF7FEFF 		bl	_ZdlPv
+ 647 0014 7B68     		ldr	r3, [r7, #4]
+ 648 0016 1846     		mov	r0, r3
+ 649 0018 07F10807 		add	r7, r7, #8
+ 650 001c BD46     		mov	sp, r7
+ 651 001e 80BD     		pop	{r7, pc}
+ 652              		.cfi_endproc
+ 653              	.LFE160:
+ 655              		.section	.text._ZN12CMessageTask8OnCreateEPKctm,"ax",%progbits
+ 656              		.align	2
+ 657              		.global	_ZN12CMessageTask8OnCreateEPKctm
+ 658              		.thumb
+ 659              		.thumb_func
+ 661              	_ZN12CMessageTask8OnCreateEPKctm:
+ 662              	.LFB161:
+  25:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  26:../FreeRTOS_EC/Source/CMessageTask.cpp **** portBASE_TYPE CMessageTask::OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth
+ 663              		.loc 5 26 0
+ 664              		.cfi_startproc
+ 665              		@ args = 0, pretend = 0, frame = 24
+ 666              		@ frame_needed = 1, uses_anonymous_args = 0
+ 667 0000 80B5     		push	{r7, lr}
+ 668              	.LCFI39:
+ 669              		.cfi_def_cfa_offset 8
+ 670              		.cfi_offset 14, -4
+ 671              		.cfi_offset 7, -8
+ 672 0002 86B0     		sub	sp, sp, #24
+ 673              	.LCFI40:
+ 674              		.cfi_def_cfa_offset 32
+ 675 0004 00AF     		add	r7, sp, #0
+ 676              	.LCFI41:
+ 677              		.cfi_def_cfa_register 7
+ 678 0006 F860     		str	r0, [r7, #12]
+ 679 0008 B960     		str	r1, [r7, #8]
+ 680 000a 3B60     		str	r3, [r7, #0]
+ 681 000c 1346     		mov	r3, r2	@ movhi
+ 682 000e FB80     		strh	r3, [r7, #6]	@ movhi
+ 683              	.LBB8:
+  27:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	portBASE_TYPE res;
+  28:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	res = m_queue.Create(CMessageTask::MESSAGE_QUEUE_SIZE, sizeof(char[20])).IsValid();
+ 684              		.loc 5 28 0
+ 685 0010 FB68     		ldr	r3, [r7, #12]
+ 686 0012 03F11003 		add	r3, r3, #16
+ 687 0016 1846     		mov	r0, r3
+ 688 0018 4FF00501 		mov	r1, #5
+ 689 001c 4FF01402 		mov	r2, #20
+ 690 0020 FFF7FEFF 		bl	_ZN6CQueue6CreateEmm
+ 691 0024 0346     		mov	r3, r0
+ 692 0026 1A68     		ldr	r2, [r3, #0]
+ 693 0028 1268     		ldr	r2, [r2, #0]
+ 694 002a 1846     		mov	r0, r3
+ 695 002c 9047     		blx	r2
+ 696 002e 0346     		mov	r3, r0
+ 697 0030 7B61     		str	r3, [r7, #20]
+  29:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  30:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return res;
+ 698              		.loc 5 30 0
+ 699 0032 7B69     		ldr	r3, [r7, #20]
+ 700              	.LBE8:
+  31:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 701              		.loc 5 31 0
+ 702 0034 1846     		mov	r0, r3
+ 703 0036 07F11807 		add	r7, r7, #24
+ 704 003a BD46     		mov	sp, r7
+ 705 003c 80BD     		pop	{r7, pc}
+ 706              		.cfi_endproc
+ 707              	.LFE161:
+ 709 003e 00BF     		.section	.text._ZN12CMessageTask3RunEv,"ax",%progbits
+ 710              		.align	2
+ 711              		.global	_ZN12CMessageTask3RunEv
+ 712              		.thumb
+ 713              		.thumb_func
+ 715              	_ZN12CMessageTask3RunEv:
+ 716              	.LFB162:
+  32:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  33:../FreeRTOS_EC/Source/CMessageTask.cpp **** void CMessageTask::Run() {
+ 717              		.loc 5 33 0
+ 718              		.cfi_startproc
+ 719              		@ args = 0, pretend = 0, frame = 16
+ 720              		@ frame_needed = 1, uses_anonymous_args = 0
+ 721 0000 80B5     		push	{r7, lr}
+ 722              	.LCFI42:
+ 723              		.cfi_def_cfa_offset 8
+ 724              		.cfi_offset 14, -4
+ 725              		.cfi_offset 7, -8
+ 726 0002 84B0     		sub	sp, sp, #16
+ 727              	.LCFI43:
+ 728              		.cfi_def_cfa_offset 24
+ 729 0004 00AF     		add	r7, sp, #0
+ 730              	.LCFI44:
+ 731              		.cfi_def_cfa_register 7
+ 732 0006 7860     		str	r0, [r7, #4]
+ 733              	.LBB9:
+  34:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  35:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	// call task specific initialization code.
+  36:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	 if ( !OnInit() ) {
+ 734              		.loc 5 36 0
+ 735 0008 7B68     		ldr	r3, [r7, #4]
+ 736 000a 1B68     		ldr	r3, [r3, #0]
+ 737 000c 03F12403 		add	r3, r3, #36
+ 738 0010 1B68     		ldr	r3, [r3, #0]
+ 739 0012 7868     		ldr	r0, [r7, #4]
+ 740 0014 9847     		blx	r3
+ 741 0016 0346     		mov	r3, r0
+ 742 0018 83F00103 		eor	r3, r3, #1
+ 743 001c DBB2     		uxtb	r3, r3
+ 744 001e 002B     		cmp	r3, #0
+ 745 0020 08D0     		beq	.L27
+  37:../FreeRTOS_EC/Source/CMessageTask.cpp **** #if INCLUDE_vTaskDelete == 1
+  38:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		 Delete();
+ 746              		.loc 5 38 0
+ 747 0022 7B68     		ldr	r3, [r7, #4]
+ 748 0024 1846     		mov	r0, r3
+ 749 0026 FFF7FEFF 		bl	_ZN5CTask6DeleteEv
+ 750              	.LBE9:
+  39:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		 return;
+  40:../FreeRTOS_EC/Source/CMessageTask.cpp **** #else
+  41:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	 // The task must not start due to initialization problem, but the FreeRTOS
+  42:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	 // vTaskDelete function is not defined by configuration file. Suspend the task.
+  43:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		 Suspend();
+  44:../FreeRTOS_EC/Source/CMessageTask.cpp **** #endif
+  45:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	 }
+  46:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  47:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	CMessage msg;
+  48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
+  49:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  50:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		if ( m_queue.Receive(&msg, m_nTimeOut) == pdTRUE ) {
+  51:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			// Message Handling routine
+  52:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  53:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			// Call the delegate, if one, before try to dispatch the event
+  54:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->OnHandleEvent(msg);
+  55:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			DispatchMessage(msg);
+  56:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			// Call the delegate, if one, after tried to dispatch the event
+  57:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->DidHandleEvent(msg);
+  58:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		}
+  59:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		else {
+  60:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			// TODO: STF - timeout expired.
+  61:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			OnTimeOut();
+  62:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		}
+  63:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	}
+  64:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 751              		.loc 5 64 0
+ 752 002a 07F11007 		add	r7, r7, #16
+ 753 002e BD46     		mov	sp, r7
+ 754 0030 80BD     		pop	{r7, pc}
+ 755              	.L31:
+ 756              	.LBB10:
+  48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
+ 757              		.loc 5 48 0
+ 758 0032 00BF     		nop
+ 759              	.L27:
+  50:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		if ( m_queue.Receive(&msg, m_nTimeOut) == pdTRUE ) {
+ 760              		.loc 5 50 0
+ 761 0034 7B68     		ldr	r3, [r7, #4]
+ 762 0036 03F11001 		add	r1, r3, #16
+ 763 003a 7B68     		ldr	r3, [r7, #4]
+ 764 003c DB68     		ldr	r3, [r3, #12]
+ 765 003e 07F10802 		add	r2, r7, #8
+ 766 0042 0846     		mov	r0, r1
+ 767 0044 1146     		mov	r1, r2
+ 768 0046 1A46     		mov	r2, r3
+ 769 0048 FFF7FEFF 		bl	_ZN6CQueue7ReceiveEPvm
+ 770 004c 0346     		mov	r3, r0
+ 771 004e 012B     		cmp	r3, #1
+ 772 0050 14BF     		ite	ne
+ 773 0052 0023     		movne	r3, #0
+ 774 0054 0123     		moveq	r3, #1
+ 775 0056 DBB2     		uxtb	r3, r3
+ 776 0058 002B     		cmp	r3, #0
+ 777 005a 2AD0     		beq	.L28
+  54:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->OnHandleEvent(msg);
+ 778              		.loc 5 54 0
+ 779 005c 7B68     		ldr	r3, [r7, #4]
+ 780 005e 9B69     		ldr	r3, [r3, #24]
+ 781 0060 002B     		cmp	r3, #0
+ 782 0062 0AD0     		beq	.L29
+  54:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->OnHandleEvent(msg);
+ 783              		.loc 5 54 0 is_stmt 0 discriminator 1
+ 784 0064 7B68     		ldr	r3, [r7, #4]
+ 785 0066 9B69     		ldr	r3, [r3, #24]
+ 786 0068 1B68     		ldr	r3, [r3, #0]
+ 787 006a 1B68     		ldr	r3, [r3, #0]
+ 788 006c 7A68     		ldr	r2, [r7, #4]
+ 789 006e 9169     		ldr	r1, [r2, #24]
+ 790 0070 07F10802 		add	r2, r7, #8
+ 791 0074 0846     		mov	r0, r1
+ 792 0076 1146     		mov	r1, r2
+ 793 0078 9847     		blx	r3
+ 794              	.L29:
+  55:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			DispatchMessage(msg);
+ 795              		.loc 5 55 0 is_stmt 1
+ 796 007a 7B68     		ldr	r3, [r7, #4]
+ 797 007c 1B68     		ldr	r3, [r3, #0]
+ 798 007e 03F12003 		add	r3, r3, #32
+ 799 0082 1B68     		ldr	r3, [r3, #0]
+ 800 0084 07F10802 		add	r2, r7, #8
+ 801 0088 7868     		ldr	r0, [r7, #4]
+ 802 008a 1146     		mov	r1, r2
+ 803 008c 9847     		blx	r3
+  57:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->DidHandleEvent(msg);
+ 804              		.loc 5 57 0
+ 805 008e 7B68     		ldr	r3, [r7, #4]
+ 806 0090 9B69     		ldr	r3, [r3, #24]
+ 807 0092 002B     		cmp	r3, #0
+ 808 0094 CDD0     		beq	.L31
+  57:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->DidHandleEvent(msg);
+ 809              		.loc 5 57 0 is_stmt 0 discriminator 1
+ 810 0096 7B68     		ldr	r3, [r7, #4]
+ 811 0098 9B69     		ldr	r3, [r3, #24]
+ 812 009a 1B68     		ldr	r3, [r3, #0]
+ 813 009c 03F10403 		add	r3, r3, #4
+ 814 00a0 1B68     		ldr	r3, [r3, #0]
+ 815 00a2 7A68     		ldr	r2, [r7, #4]
+ 816 00a4 9169     		ldr	r1, [r2, #24]
+ 817 00a6 07F10802 		add	r2, r7, #8
+ 818 00aa 0846     		mov	r0, r1
+ 819 00ac 1146     		mov	r1, r2
+ 820 00ae 9847     		blx	r3
+  48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
+ 821              		.loc 5 48 0 is_stmt 1 discriminator 1
+ 822 00b0 BFE7     		b	.L31
+ 823              	.L28:
+  61:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			OnTimeOut();
+ 824              		.loc 5 61 0
+ 825 00b2 7B68     		ldr	r3, [r7, #4]
+ 826 00b4 1B68     		ldr	r3, [r3, #0]
+ 827 00b6 03F12803 		add	r3, r3, #40
+ 828 00ba 1B68     		ldr	r3, [r3, #0]
+ 829 00bc 7868     		ldr	r0, [r7, #4]
+ 830 00be 9847     		blx	r3
+  48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
+ 831              		.loc 5 48 0
+ 832 00c0 B7E7     		b	.L31
+ 833              	.LBE10:
+ 834              		.cfi_endproc
+ 835              	.LFE162:
+ 837 00c2 00BF     		.section	.text._ZN12CMessageTask15DispatchMessageERK8CMessage,"ax",%progbits
+ 838              		.align	2
+ 839              		.global	_ZN12CMessageTask15DispatchMessageERK8CMessage
+ 840              		.thumb
+ 841              		.thumb_func
+ 843              	_ZN12CMessageTask15DispatchMessageERK8CMessage:
+ 844              	.LFB163:
+  65:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  66:../FreeRTOS_EC/Source/CMessageTask.cpp **** void CMessageTask::DispatchMessage(const CMessage &msg) {
+ 845              		.loc 5 66 0
+ 846              		.cfi_startproc
+ 847              		@ args = 0, pretend = 0, frame = 16
+ 848              		@ frame_needed = 1, uses_anonymous_args = 0
+ 849 0000 90B5     		push	{r4, r7, lr}
+ 850              	.LCFI45:
+ 851              		.cfi_def_cfa_offset 12
+ 852              		.cfi_offset 14, -4
+ 853              		.cfi_offset 7, -8
+ 854              		.cfi_offset 4, -12
+ 855 0002 85B0     		sub	sp, sp, #20
+ 856              	.LCFI46:
+ 857              		.cfi_def_cfa_offset 32
+ 858 0004 00AF     		add	r7, sp, #0
+ 859              	.LCFI47:
+ 860              		.cfi_def_cfa_register 7
+ 861 0006 7860     		str	r0, [r7, #4]
+ 862 0008 3960     		str	r1, [r7, #0]
+ 863              	.LBB11:
+ 864              	.LBB12:
+  67:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (int i=0; s_message_map[i].id!=NULL_MSG; ++i) {
+ 865              		.loc 5 67 0
+ 866 000a 4FF00003 		mov	r3, #0
+ 867 000e FB60     		str	r3, [r7, #12]
+ 868 0010 77E0     		b	.L33
+ 869              	.L38:
+  68:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		if (s_message_map[i].id == msg.m_nId) {
+ 870              		.loc 5 68 0
+ 871 0012 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 872 0016 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 873 001a F968     		ldr	r1, [r7, #12]
+ 874 001c 0B46     		mov	r3, r1
+ 875 001e 4FEA4303 		lsl	r3, r3, #1
+ 876 0022 5B18     		adds	r3, r3, r1
+ 877 0024 4FEA8303 		lsl	r3, r3, #2
+ 878 0028 D318     		adds	r3, r2, r3
+ 879 002a 1A88     		ldrh	r2, [r3, #0]
+ 880 002c 3B68     		ldr	r3, [r7, #0]
+ 881 002e 1B88     		ldrh	r3, [r3, #0]
+ 882 0030 9A42     		cmp	r2, r3
+ 883 0032 62D1     		bne	.L34
+  69:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			(this->*s_message_map[i].MessageHandler)(msg.wParam);
+ 884              		.loc 5 69 0
+ 885 0034 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 886 0038 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 887 003c F968     		ldr	r1, [r7, #12]
+ 888 003e 0B46     		mov	r3, r1
+ 889 0040 4FEA4303 		lsl	r3, r3, #1
+ 890 0044 5B18     		adds	r3, r3, r1
+ 891 0046 4FEA8303 		lsl	r3, r3, #2
+ 892 004a D318     		adds	r3, r2, r3
+ 893 004c 03F10803 		add	r3, r3, #8
+ 894 0050 1B68     		ldr	r3, [r3, #0]
+ 895 0052 03F00103 		and	r3, r3, #1
+ 896 0056 DBB2     		uxtb	r3, r3
+ 897 0058 002B     		cmp	r3, #0
+ 898 005a 26D0     		beq	.L35
+ 899              		.loc 5 69 0 is_stmt 0 discriminator 1
+ 900 005c 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 901 0060 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 902 0064 F968     		ldr	r1, [r7, #12]
+ 903 0066 0B46     		mov	r3, r1
+ 904 0068 4FEA4303 		lsl	r3, r3, #1
+ 905 006c 5B18     		adds	r3, r3, r1
+ 906 006e 4FEA8303 		lsl	r3, r3, #2
+ 907 0072 D318     		adds	r3, r2, r3
+ 908 0074 03F10803 		add	r3, r3, #8
+ 909 0078 1B68     		ldr	r3, [r3, #0]
+ 910 007a 4FEA6303 		asr	r3, r3, #1
+ 911 007e 7A68     		ldr	r2, [r7, #4]
+ 912 0080 D318     		adds	r3, r2, r3
+ 913 0082 1868     		ldr	r0, [r3, #0]
+ 914 0084 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 915 0088 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 916 008c F968     		ldr	r1, [r7, #12]
+ 917 008e 0B46     		mov	r3, r1
+ 918 0090 4FEA4303 		lsl	r3, r3, #1
+ 919 0094 5B18     		adds	r3, r3, r1
+ 920 0096 4FEA8303 		lsl	r3, r3, #2
+ 921 009a D318     		adds	r3, r2, r3
+ 922 009c 03F10403 		add	r3, r3, #4
+ 923 00a0 1B68     		ldr	r3, [r3, #0]
+ 924 00a2 C318     		adds	r3, r0, r3
+ 925 00a4 1B68     		ldr	r3, [r3, #0]
+ 926 00a6 1C46     		mov	r4, r3
+ 927 00a8 0EE0     		b	.L36
+ 928              	.L35:
+ 929              		.loc 5 69 0 discriminator 2
+ 930 00aa 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 931 00ae C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 932 00b2 F968     		ldr	r1, [r7, #12]
+ 933 00b4 0B46     		mov	r3, r1
+ 934 00b6 4FEA4303 		lsl	r3, r3, #1
+ 935 00ba 5B18     		adds	r3, r3, r1
+ 936 00bc 4FEA8303 		lsl	r3, r3, #2
+ 937 00c0 D318     		adds	r3, r2, r3
+ 938 00c2 03F10403 		add	r3, r3, #4
+ 939 00c6 1C68     		ldr	r4, [r3, #0]
+ 940              	.L36:
+ 941              		.loc 5 69 0 discriminator 3
+ 942 00c8 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 943 00cc C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 944 00d0 F968     		ldr	r1, [r7, #12]
+ 945 00d2 0B46     		mov	r3, r1
+ 946 00d4 4FEA4303 		lsl	r3, r3, #1
+ 947 00d8 5B18     		adds	r3, r3, r1
+ 948 00da 4FEA8303 		lsl	r3, r3, #2
+ 949 00de D318     		adds	r3, r2, r3
+ 950 00e0 03F10803 		add	r3, r3, #8
+ 951 00e4 1B68     		ldr	r3, [r3, #0]
+ 952 00e6 4FEA6303 		asr	r3, r3, #1
+ 953 00ea 7A68     		ldr	r2, [r7, #4]
+ 954 00ec D218     		adds	r2, r2, r3
+ 955 00ee 3B68     		ldr	r3, [r7, #0]
+ 956 00f0 5B68     		ldr	r3, [r3, #4]
+ 957 00f2 1046     		mov	r0, r2
+ 958 00f4 1946     		mov	r1, r3
+ 959 00f6 A047     		blx	r4
+  70:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			break;
+ 960              		.loc 5 70 0 is_stmt 1 discriminator 3
+ 961 00f8 18E0     		b	.L32
+ 962              	.L34:
+  67:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (int i=0; s_message_map[i].id!=NULL_MSG; ++i) {
+ 963              		.loc 5 67 0
+ 964 00fa FB68     		ldr	r3, [r7, #12]
+ 965 00fc 03F10103 		add	r3, r3, #1
+ 966 0100 FB60     		str	r3, [r7, #12]
+ 967              	.L33:
+  67:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (int i=0; s_message_map[i].id!=NULL_MSG; ++i) {
+ 968              		.loc 5 67 0 is_stmt 0 discriminator 1
+ 969 0102 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 970 0106 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 971 010a F968     		ldr	r1, [r7, #12]
+ 972 010c 0B46     		mov	r3, r1
+ 973 010e 4FEA4303 		lsl	r3, r3, #1
+ 974 0112 5B18     		adds	r3, r3, r1
+ 975 0114 4FEA8303 		lsl	r3, r3, #2
+ 976 0118 D318     		adds	r3, r2, r3
+ 977 011a 1B88     		ldrh	r3, [r3, #0]
+ 978 011c 002B     		cmp	r3, #0
+ 979 011e 0CBF     		ite	eq
+ 980 0120 0023     		moveq	r3, #0
+ 981 0122 0123     		movne	r3, #1
+ 982 0124 DBB2     		uxtb	r3, r3
+ 983 0126 002B     		cmp	r3, #0
+ 984 0128 7FF473AF 		bne	.L38
+ 985              	.L32:
+ 986              	.LBE12:
+ 987              	.LBE11:
+  71:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		}
+  72:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	}
+  73:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 988              		.loc 5 73 0 is_stmt 1
+ 989 012c 07F11407 		add	r7, r7, #20
+ 990 0130 BD46     		mov	sp, r7
+ 991 0132 90BD     		pop	{r4, r7, pc}
+ 992              		.cfi_endproc
+ 993              	.LFE163:
+ 995              		.section	.text._ZN12CMessageTask11PostMessageEP8CMessagem,"ax",%progbits
+ 996              		.align	2
+ 997              		.global	_ZN12CMessageTask11PostMessageEP8CMessagem
+ 998              		.thumb
+ 999              		.thumb_func
+ 1001              	_ZN12CMessageTask11PostMessageEP8CMessagem:
+ 1002              	.LFB164:
+  74:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  75:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::PostMessage(CMessage *pMsg, portTickType nTicksToWait/*=portMAX_DELAY*/) {
+ 1003              		.loc 5 75 0
+ 1004              		.cfi_startproc
+ 1005              		@ args = 0, pretend = 0, frame = 16
+ 1006              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1007 0000 80B5     		push	{r7, lr}
+ 1008              	.LCFI48:
+ 1009              		.cfi_def_cfa_offset 8
+ 1010              		.cfi_offset 14, -4
+ 1011              		.cfi_offset 7, -8
+ 1012 0002 84B0     		sub	sp, sp, #16
+ 1013              	.LCFI49:
+ 1014              		.cfi_def_cfa_offset 24
+ 1015 0004 00AF     		add	r7, sp, #0
+ 1016              	.LCFI50:
+ 1017              		.cfi_def_cfa_register 7
+ 1018 0006 F860     		str	r0, [r7, #12]
+ 1019 0008 B960     		str	r1, [r7, #8]
+ 1020 000a 7A60     		str	r2, [r7, #4]
+  76:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.Send(pMsg, nTicksToWait);
+ 1021              		.loc 5 76 0
+ 1022 000c FB68     		ldr	r3, [r7, #12]
+ 1023 000e 03F11003 		add	r3, r3, #16
+ 1024 0012 1846     		mov	r0, r3
+ 1025 0014 B968     		ldr	r1, [r7, #8]
+ 1026 0016 7A68     		ldr	r2, [r7, #4]
+ 1027 0018 FFF7FEFF 		bl	_ZN6CQueue4SendEPKvm
+ 1028 001c 0346     		mov	r3, r0
+ 1029 001e 002B     		cmp	r3, #0
+ 1030 0020 0CBF     		ite	eq
+ 1031 0022 0023     		moveq	r3, #0
+ 1032 0024 0123     		movne	r3, #1
+ 1033 0026 DBB2     		uxtb	r3, r3
+  77:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 1034              		.loc 5 77 0
+ 1035 0028 1846     		mov	r0, r3
+ 1036 002a 07F11007 		add	r7, r7, #16
+ 1037 002e BD46     		mov	sp, r7
+ 1038 0030 80BD     		pop	{r7, pc}
+ 1039              		.cfi_endproc
+ 1040              	.LFE164:
+ 1042 0032 00BF     		.section	.text._ZN12CMessageTask18PostMessageFromISREP8CMessagePl,"ax",%progbits
+ 1043              		.align	2
+ 1044              		.global	_ZN12CMessageTask18PostMessageFromISREP8CMessagePl
+ 1045              		.thumb
+ 1046              		.thumb_func
+ 1048              	_ZN12CMessageTask18PostMessageFromISREP8CMessagePl:
+ 1049              	.LFB165:
+  78:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  79:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::PostMessageFromISR(CMessage *pMsg, portBASE_TYPE *pxHigherPriorityTaskWoken) {
+ 1050              		.loc 5 79 0
+ 1051              		.cfi_startproc
+ 1052              		@ args = 0, pretend = 0, frame = 16
+ 1053              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1054 0000 80B5     		push	{r7, lr}
+ 1055              	.LCFI51:
+ 1056              		.cfi_def_cfa_offset 8
+ 1057              		.cfi_offset 14, -4
+ 1058              		.cfi_offset 7, -8
+ 1059 0002 84B0     		sub	sp, sp, #16
+ 1060              	.LCFI52:
+ 1061              		.cfi_def_cfa_offset 24
+ 1062 0004 00AF     		add	r7, sp, #0
+ 1063              	.LCFI53:
+ 1064              		.cfi_def_cfa_register 7
+ 1065 0006 F860     		str	r0, [r7, #12]
+ 1066 0008 B960     		str	r1, [r7, #8]
+ 1067 000a 7A60     		str	r2, [r7, #4]
+  80:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.SendFromISR(pMsg, pxHigherPriorityTaskWoken);
+ 1068              		.loc 5 80 0
+ 1069 000c FB68     		ldr	r3, [r7, #12]
+ 1070 000e 03F11003 		add	r3, r3, #16
+ 1071 0012 1846     		mov	r0, r3
+ 1072 0014 B968     		ldr	r1, [r7, #8]
+ 1073 0016 7A68     		ldr	r2, [r7, #4]
+ 1074 0018 FFF7FEFF 		bl	_ZN6CQueue11SendFromISREPKvPl
+ 1075 001c 0346     		mov	r3, r0
+ 1076 001e 002B     		cmp	r3, #0
+ 1077 0020 0CBF     		ite	eq
+ 1078 0022 0023     		moveq	r3, #0
+ 1079 0024 0123     		movne	r3, #1
+ 1080 0026 DBB2     		uxtb	r3, r3
+  81:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 1081              		.loc 5 81 0
+ 1082 0028 1846     		mov	r0, r3
+ 1083 002a 07F11007 		add	r7, r7, #16
+ 1084 002e BD46     		mov	sp, r7
+ 1085 0030 80BD     		pop	{r7, pc}
+ 1086              		.cfi_endproc
+ 1087              	.LFE165:
+ 1089 0032 00BF     		.section	.text._ZN12CMessageTask11SendMessageEP8CMessagem,"ax",%progbits
+ 1090              		.align	2
+ 1091              		.global	_ZN12CMessageTask11SendMessageEP8CMessagem
+ 1092              		.thumb
+ 1093              		.thumb_func
+ 1095              	_ZN12CMessageTask11SendMessageEP8CMessagem:
+ 1096              	.LFB166:
+  82:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  83:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::SendMessage(CMessage *pMsg, portTickType nTicksToWait/*=portMAX_DELAY*/) {
+ 1097              		.loc 5 83 0
+ 1098              		.cfi_startproc
+ 1099              		@ args = 0, pretend = 0, frame = 16
+ 1100              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1101 0000 80B5     		push	{r7, lr}
+ 1102              	.LCFI54:
+ 1103              		.cfi_def_cfa_offset 8
+ 1104              		.cfi_offset 14, -4
+ 1105              		.cfi_offset 7, -8
+ 1106 0002 84B0     		sub	sp, sp, #16
+ 1107              	.LCFI55:
+ 1108              		.cfi_def_cfa_offset 24
+ 1109 0004 00AF     		add	r7, sp, #0
+ 1110              	.LCFI56:
+ 1111              		.cfi_def_cfa_register 7
+ 1112 0006 F860     		str	r0, [r7, #12]
+ 1113 0008 B960     		str	r1, [r7, #8]
+ 1114 000a 7A60     		str	r2, [r7, #4]
+  84:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.SendToFront(pMsg, nTicksToWait);
+ 1115              		.loc 5 84 0
+ 1116 000c FB68     		ldr	r3, [r7, #12]
+ 1117 000e 03F11003 		add	r3, r3, #16
+ 1118 0012 1846     		mov	r0, r3
+ 1119 0014 B968     		ldr	r1, [r7, #8]
+ 1120 0016 7A68     		ldr	r2, [r7, #4]
+ 1121 0018 FFF7FEFF 		bl	_ZN6CQueue11SendToFrontEPKvm
+ 1122 001c 0346     		mov	r3, r0
+ 1123 001e 002B     		cmp	r3, #0
+ 1124 0020 0CBF     		ite	eq
+ 1125 0022 0023     		moveq	r3, #0
+ 1126 0024 0123     		movne	r3, #1
+ 1127 0026 DBB2     		uxtb	r3, r3
+  85:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 1128              		.loc 5 85 0
+ 1129 0028 1846     		mov	r0, r3
+ 1130 002a 07F11007 		add	r7, r7, #16
+ 1131 002e BD46     		mov	sp, r7
+ 1132 0030 80BD     		pop	{r7, pc}
+ 1133              		.cfi_endproc
+ 1134              	.LFE166:
+ 1136 0032 00BF     		.section	.text._ZN12CMessageTask11SenfFromISREP8CMessagePl,"ax",%progbits
+ 1137              		.align	2
+ 1138              		.global	_ZN12CMessageTask11SenfFromISREP8CMessagePl
+ 1139              		.thumb
+ 1140              		.thumb_func
+ 1142              	_ZN12CMessageTask11SenfFromISREP8CMessagePl:
+ 1143              	.LFB167:
+  86:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
+  87:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::SenfFromISR(CMessage *pMsg, portBASE_TYPE * pxHigherPriorityTaskWoken) {
+ 1144              		.loc 5 87 0
+ 1145              		.cfi_startproc
+ 1146              		@ args = 0, pretend = 0, frame = 16
+ 1147              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1148 0000 80B5     		push	{r7, lr}
+ 1149              	.LCFI57:
+ 1150              		.cfi_def_cfa_offset 8
+ 1151              		.cfi_offset 14, -4
+ 1152              		.cfi_offset 7, -8
+ 1153 0002 84B0     		sub	sp, sp, #16
+ 1154              	.LCFI58:
+ 1155              		.cfi_def_cfa_offset 24
+ 1156 0004 00AF     		add	r7, sp, #0
+ 1157              	.LCFI59:
+ 1158              		.cfi_def_cfa_register 7
+ 1159 0006 F860     		str	r0, [r7, #12]
+ 1160 0008 B960     		str	r1, [r7, #8]
+ 1161 000a 7A60     		str	r2, [r7, #4]
+  88:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.SendToFrontFromISR(pMsg, pxHigherPriorityTaskWoken);
+ 1162              		.loc 5 88 0
+ 1163 000c FB68     		ldr	r3, [r7, #12]
+ 1164 000e 03F11003 		add	r3, r3, #16
+ 1165 0012 1846     		mov	r0, r3
+ 1166 0014 B968     		ldr	r1, [r7, #8]
+ 1167 0016 7A68     		ldr	r2, [r7, #4]
+ 1168 0018 FFF7FEFF 		bl	_ZN6CQueue18SendToFrontFromISREPKvPl
+ 1169 001c 0346     		mov	r3, r0
+ 1170 001e 002B     		cmp	r3, #0
+ 1171 0020 0CBF     		ite	eq
+ 1172 0022 0023     		moveq	r3, #0
+ 1173 0024 0123     		movne	r3, #1
+ 1174 0026 DBB2     		uxtb	r3, r3
+  89:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
+ 1175              		.loc 5 89 0
+ 1176 0028 1846     		mov	r0, r3
+ 1177 002a 07F11007 		add	r7, r7, #16
+ 1178 002e BD46     		mov	sp, r7
+ 1179 0030 80BD     		pop	{r7, pc}
+ 1180              		.cfi_endproc
+ 1181              	.LFE167:
+ 1183              		.global	_ZTV12CMessageTask
+ 1184 0032 00BF     		.section	.rodata._ZTV12CMessageTask,"a",%progbits
+ 1185              		.align	3
+ 1188              	_ZTV12CMessageTask:
+ 1189 0000 00000000 		.word	0
+ 1190 0004 00000000 		.word	0
+ 1191 0008 00000000 		.word	_ZNK5CTask7IsValidEv
+ 1192 000c 00000000 		.word	_ZN5CTask6AttachEPv
+ 1193 0010 00000000 		.word	_ZN5CTask6DetachEv
+ 1194 0014 00000000 		.word	_ZN12CMessageTaskD1Ev
+ 1195 0018 00000000 		.word	_ZN12CMessageTaskD0Ev
+ 1196 001c 00000000 		.word	_ZN12AManagedTask12HardwareInitEv
+ 1197 0020 00000000 		.word	_ZN12CMessageTask3RunEv
+ 1198 0024 00000000 		.word	_ZN12CMessageTask8OnCreateEPKctm
+ 1199 0028 00000000 		.word	_ZN12CMessageTask15DispatchMessageERK8CMessage
+ 1200 002c 00000000 		.word	_ZN12CMessageTask6OnInitEv
+ 1201 0030 00000000 		.word	_ZN12CMessageTask9OnTimeOutEv
+ 1202 0034 00000000 		.section	.rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__,"a",%progbits
+ 1203              		.align	2
+ 1206              	_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:
+ 1207 0000 6C6F6E67 		.ascii	"long int CQueue::SendToFrontFromISR(const void*, lo"
+ 1207      20696E74 
+ 1207      20435175 
+ 1207      6575653A 
+ 1207      3A53656E 
+ 1208 0033 6E672069 		.ascii	"ng int*)\000"
+ 1208      6E742A29 
+ 1208      00
+ 1209              		.section	.rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__,"a",%progbits
+ 1210              		.align	2
+ 1213              	_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:
+ 1214 0000 6C6F6E67 		.ascii	"long int CQueue::SendToFront(const void*, portTickT"
+ 1214      20696E74 
+ 1214      20435175 
+ 1214      6575653A 
+ 1214      3A53656E 
+ 1215 0033 79706529 		.ascii	"ype)\000"
+ 1215      00
+ 1216              		.section	.rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__,"a",%progbits
+ 1217              		.align	2
+ 1220              	_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:
+ 1221 0000 6C6F6E67 		.ascii	"long int CQueue::Receive(void*, portTickType)\000"
+ 1221      20696E74 
+ 1221      20435175 
+ 1221      6575653A 
+ 1221      3A526563 
+ 1222              		.global	_ZN12CMessageTaskC1Ev
+ 1223              		.thumb_set _ZN12CMessageTaskC1Ev,_ZN12CMessageTaskC2Ev
+ 1224              		.global	_ZN12CMessageTaskD1Ev
+ 1225              		.thumb_set _ZN12CMessageTaskD1Ev,_ZN12CMessageTaskD2Ev
+ 1226 002e 0000     		.text
+ 1227              	.Letext0:
+ 1228              		.file 6 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 1229              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 1230              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 1231              		.file 9 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 1232              		.file 10 "../FreeRTOS_EC/Source/MessageMacro.h"
+ 1233              		.file 11 "<built-in>"
+ 1234              		.file 12 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Inc
+DEFINED SYMBOLS
+                            *ABS*:00000000 CMessageTask.cpp
+  C:\Temp\cckzrFyc.s:19     .text._ZNK5CTask7IsValidEv:00000000 $t
+  C:\Temp\cckzrFyc.s:24     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
+  C:\Temp\cckzrFyc.s:61     .text._ZN5CTask6DetachEv:00000000 $t
+  C:\Temp\cckzrFyc.s:66     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
+  C:\Temp\cckzrFyc.s:106    .text._ZN12AManagedTask12HardwareInitEv:00000000 $t
+  C:\Temp\cckzrFyc.s:111    .text._ZN12AManagedTask12HardwareInitEv:00000000 _ZN12AManagedTask12HardwareInitEv
+  C:\Temp\cckzrFyc.s:141    .text._ZN6CQueue4SendEPKvm:00000000 $t
+  C:\Temp\cckzrFyc.s:146    .text._ZN6CQueue4SendEPKvm:00000000 _ZN6CQueue4SendEPKvm
+  C:\Temp\cckzrFyc.s:185    .text._ZN6CQueue11SendFromISREPKvPl:00000000 $t
+  C:\Temp\cckzrFyc.s:190    .text._ZN6CQueue11SendFromISREPKvPl:00000000 _ZN6CQueue11SendFromISREPKvPl
+  C:\Temp\cckzrFyc.s:228    .rodata:00000000 $d
+  C:\Temp\cckzrFyc.s:229    .rodata:00000000 .LC0
+  C:\Temp\cckzrFyc.s:232    .rodata:00000020 .LC1
+  C:\Temp\cckzrFyc.s:235    .text._ZN6CQueue11SendToFrontEPKvm:00000000 $t
+  C:\Temp\cckzrFyc.s:240    .text._ZN6CQueue11SendToFrontEPKvm:00000000 _ZN6CQueue11SendToFrontEPKvm
+  C:\Temp\cckzrFyc.s:1213   .rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
+  C:\Temp\cckzrFyc.s:299    .text._ZN6CQueue7ReceiveEPvm:00000000 $t
+  C:\Temp\cckzrFyc.s:304    .text._ZN6CQueue7ReceiveEPvm:00000000 _ZN6CQueue7ReceiveEPvm
+  C:\Temp\cckzrFyc.s:1220   .rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
+  C:\Temp\cckzrFyc.s:363    .text._ZN6CQueue18SendToFrontFromISREPKvPl:00000000 $t
+  C:\Temp\cckzrFyc.s:368    .text._ZN6CQueue18SendToFrontFromISREPKvPl:00000000 _ZN6CQueue18SendToFrontFromISREPKvPl
+  C:\Temp\cckzrFyc.s:1206   .rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
+  C:\Temp\cckzrFyc.s:427    .text._ZN12CMessageTask6OnInitEv:00000000 $t
+  C:\Temp\cckzrFyc.s:432    .text._ZN12CMessageTask6OnInitEv:00000000 _ZN12CMessageTask6OnInitEv
+  C:\Temp\cckzrFyc.s:462    .text._ZN12CMessageTask9OnTimeOutEv:00000000 $t
+  C:\Temp\cckzrFyc.s:467    .text._ZN12CMessageTask9OnTimeOutEv:00000000 _ZN12CMessageTask9OnTimeOutEv
+  C:\Temp\cckzrFyc.s:498    .rodata._ZN12CMessageTask13s_message_mapE:00000000 _ZN12CMessageTask13s_message_mapE
+  C:\Temp\cckzrFyc.s:495    .rodata._ZN12CMessageTask13s_message_mapE:00000000 $d
+  C:\Temp\cckzrFyc.s:501    .text._ZN12CMessageTaskC2Ev:00000000 $t
+  C:\Temp\cckzrFyc.s:506    .text._ZN12CMessageTaskC2Ev:00000000 _ZN12CMessageTaskC2Ev
+  C:\Temp\cckzrFyc.s:555    .text._ZN12CMessageTaskC2Ev:00000040 $d
+  C:\Temp\cckzrFyc.s:1188   .rodata._ZTV12CMessageTask:00000000 _ZTV12CMessageTask
+  C:\Temp\cckzrFyc.s:560    .text._ZN12CMessageTaskD2Ev:00000000 $t
+  C:\Temp\cckzrFyc.s:565    .text._ZN12CMessageTaskD2Ev:00000000 _ZN12CMessageTaskD2Ev
+  C:\Temp\cckzrFyc.s:614    .text._ZN12CMessageTaskD2Ev:00000040 $d
+  C:\Temp\cckzrFyc.s:619    .text._ZN12CMessageTaskD0Ev:00000000 $t
+  C:\Temp\cckzrFyc.s:624    .text._ZN12CMessageTaskD0Ev:00000000 _ZN12CMessageTaskD0Ev
+  C:\Temp\cckzrFyc.s:565    .text._ZN12CMessageTaskD2Ev:00000000 _ZN12CMessageTaskD1Ev
+  C:\Temp\cckzrFyc.s:656    .text._ZN12CMessageTask8OnCreateEPKctm:00000000 $t
+  C:\Temp\cckzrFyc.s:661    .text._ZN12CMessageTask8OnCreateEPKctm:00000000 _ZN12CMessageTask8OnCreateEPKctm
+  C:\Temp\cckzrFyc.s:710    .text._ZN12CMessageTask3RunEv:00000000 $t
+  C:\Temp\cckzrFyc.s:715    .text._ZN12CMessageTask3RunEv:00000000 _ZN12CMessageTask3RunEv
+  C:\Temp\cckzrFyc.s:838    .text._ZN12CMessageTask15DispatchMessageERK8CMessage:00000000 $t
+  C:\Temp\cckzrFyc.s:843    .text._ZN12CMessageTask15DispatchMessageERK8CMessage:00000000 _ZN12CMessageTask15DispatchMessageERK8CMessage
+  C:\Temp\cckzrFyc.s:996    .text._ZN12CMessageTask11PostMessageEP8CMessagem:00000000 $t
+  C:\Temp\cckzrFyc.s:1001   .text._ZN12CMessageTask11PostMessageEP8CMessagem:00000000 _ZN12CMessageTask11PostMessageEP8CMessagem
+  C:\Temp\cckzrFyc.s:1043   .text._ZN12CMessageTask18PostMessageFromISREP8CMessagePl:00000000 $t
+  C:\Temp\cckzrFyc.s:1048   .text._ZN12CMessageTask18PostMessageFromISREP8CMessagePl:00000000 _ZN12CMessageTask18PostMessageFromISREP8CMessagePl
+  C:\Temp\cckzrFyc.s:1090   .text._ZN12CMessageTask11SendMessageEP8CMessagem:00000000 $t
+  C:\Temp\cckzrFyc.s:1095   .text._ZN12CMessageTask11SendMessageEP8CMessagem:00000000 _ZN12CMessageTask11SendMessageEP8CMessagem
+  C:\Temp\cckzrFyc.s:1137   .text._ZN12CMessageTask11SenfFromISREP8CMessagePl:00000000 $t
+  C:\Temp\cckzrFyc.s:1142   .text._ZN12CMessageTask11SenfFromISREP8CMessagePl:00000000 _ZN12CMessageTask11SenfFromISREP8CMessagePl
+  C:\Temp\cckzrFyc.s:1185   .rodata._ZTV12CMessageTask:00000000 $d
+  C:\Temp\cckzrFyc.s:1203   .rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:00000000 $d
+  C:\Temp\cckzrFyc.s:1210   .rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:00000000 $d
+  C:\Temp\cckzrFyc.s:1217   .rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:00000000 $d
+  C:\Temp\cckzrFyc.s:506    .text._ZN12CMessageTaskC2Ev:00000000 _ZN12CMessageTaskC1Ev
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+xQueueGenericSend
+xQueueGenericSendFromISR
+__assert_func
+xQueueGenericReceive
+_ZN12AManagedTaskC2Ev
+_ZN6CQueueC1Ev
+_ZN6CQueueD1Ev
+_ZN12AManagedTaskD2Ev
+_ZdlPv
+_ZN6CQueue6CreateEmm
+_ZN5CTask6DeleteEv
+_ZN5CTask6AttachEPv

@@ -1,0 +1,155 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CFreeRTOS.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZN9CFreeRTOSC2Ev,"ax",%progbits
+  19              		.align	2
+  20              		.global	_ZN9CFreeRTOSC2Ev
+  21              		.thumb
+  22              		.thumb_func
+  24              	_ZN9CFreeRTOSC2Ev:
+  25              	.LFB141:
+  26              		.file 1 "../FreeRTOS_EC/Source/CFreeRTOS.cpp"
+   1:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** /**
+   2:../FreeRTOS_EC/Source/CFreeRTOS.cpp ****  * CFreeRTOS.cpp
+   3:../FreeRTOS_EC/Source/CFreeRTOS.cpp ****  *
+   4:../FreeRTOS_EC/Source/CFreeRTOS.cpp ****  *  Created on: Jul 14, 2010
+   5:../FreeRTOS_EC/Source/CFreeRTOS.cpp ****  *      Author: Stefano Oliveri (STF12.net)
+   6:../FreeRTOS_EC/Source/CFreeRTOS.cpp ****  *      E-Mail: software@stf12.net
+   7:../FreeRTOS_EC/Source/CFreeRTOS.cpp ****  */
+   8:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 
+   9:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** #include "CFreeRTOS.h"
+  10:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** #include "AManagedTask.h"
+  11:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 
+  12:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** CFreeRTOS::CFreeRTOS() {
+  27              		.loc 1 12 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  13:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 	// TODO Auto-generated constructor stub
+  14:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 
+  15:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** }
+  43              		.loc 1 15 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 1846     		mov	r0, r3
+  46 000c 07F10C07 		add	r7, r7, #12
+  47 0010 BD46     		mov	sp, r7
+  48 0012 80BC     		pop	{r7}
+  49 0014 7047     		bx	lr
+  50              		.cfi_endproc
+  51              	.LFE141:
+  53 0016 00BF     		.section	.text._ZN9CFreeRTOSD2Ev,"ax",%progbits
+  54              		.align	2
+  55              		.global	_ZN9CFreeRTOSD2Ev
+  56              		.thumb
+  57              		.thumb_func
+  59              	_ZN9CFreeRTOSD2Ev:
+  60              	.LFB144:
+  16:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 
+  17:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** CFreeRTOS::~CFreeRTOS() {
+  61              		.loc 1 17 0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 8
+  64              		@ frame_needed = 1, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66 0000 80B4     		push	{r7}
+  67              	.LCFI3:
+  68              		.cfi_def_cfa_offset 4
+  69              		.cfi_offset 7, -4
+  70 0002 83B0     		sub	sp, sp, #12
+  71              	.LCFI4:
+  72              		.cfi_def_cfa_offset 16
+  73 0004 00AF     		add	r7, sp, #0
+  74              	.LCFI5:
+  75              		.cfi_def_cfa_register 7
+  76 0006 7860     		str	r0, [r7, #4]
+  18:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 	// TODO Auto-generated destructor stub
+  19:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** }
+  77              		.loc 1 19 0
+  78 0008 7B68     		ldr	r3, [r7, #4]
+  79 000a 1846     		mov	r0, r3
+  80 000c 07F10C07 		add	r7, r7, #12
+  81 0010 BD46     		mov	sp, r7
+  82 0012 80BC     		pop	{r7}
+  83 0014 7047     		bx	lr
+  84              		.cfi_endproc
+  85              	.LFE144:
+  87 0016 00BF     		.section	.text._ZN9CFreeRTOS27InitHardwareForManagedTasksEv,"ax",%progbits
+  88              		.align	2
+  89              		.global	_ZN9CFreeRTOS27InitHardwareForManagedTasksEv
+  90              		.thumb
+  91              		.thumb_func
+  93              	_ZN9CFreeRTOS27InitHardwareForManagedTasksEv:
+  94              	.LFB146:
+  20:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 
+  21:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** bool CFreeRTOS::InitHardwareForManagedTasks() {
+  95              		.loc 1 21 0
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99 0000 80B5     		push	{r7, lr}
+ 100              	.LCFI6:
+ 101              		.cfi_def_cfa_offset 8
+ 102              		.cfi_offset 14, -4
+ 103              		.cfi_offset 7, -8
+ 104 0002 00AF     		add	r7, sp, #0
+ 105              	.LCFI7:
+ 106              		.cfi_def_cfa_register 7
+  22:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** 	return AManagedTask::InitHardwareForManagedTasks();
+ 107              		.loc 1 22 0
+ 108 0004 FFF7FEFF 		bl	_ZN12AManagedTask27InitHardwareForManagedTasksEv
+ 109 0008 0346     		mov	r3, r0
+  23:../FreeRTOS_EC/Source/CFreeRTOS.cpp **** }
+ 110              		.loc 1 23 0
+ 111 000a 1846     		mov	r0, r3
+ 112 000c 80BD     		pop	{r7, pc}
+ 113              		.cfi_endproc
+ 114              	.LFE146:
+ 116              		.global	_ZN9CFreeRTOSC1Ev
+ 117              		.thumb_set _ZN9CFreeRTOSC1Ev,_ZN9CFreeRTOSC2Ev
+ 118              		.global	_ZN9CFreeRTOSD1Ev
+ 119              		.thumb_set _ZN9CFreeRTOSD1Ev,_ZN9CFreeRTOSD2Ev
+ 120 000e 00BF     		.text
+ 121              	.Letext0:
+ 122              		.file 2 "../FreeRTOS_EC/Source/CFreeRTOS.h"
+ 123              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 124              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+DEFINED SYMBOLS
+                            *ABS*:00000000 CFreeRTOS.cpp
+  C:\Temp\ccOKVRZp.s:19     .text._ZN9CFreeRTOSC2Ev:00000000 $t
+  C:\Temp\ccOKVRZp.s:24     .text._ZN9CFreeRTOSC2Ev:00000000 _ZN9CFreeRTOSC2Ev
+  C:\Temp\ccOKVRZp.s:54     .text._ZN9CFreeRTOSD2Ev:00000000 $t
+  C:\Temp\ccOKVRZp.s:59     .text._ZN9CFreeRTOSD2Ev:00000000 _ZN9CFreeRTOSD2Ev
+  C:\Temp\ccOKVRZp.s:88     .text._ZN9CFreeRTOS27InitHardwareForManagedTasksEv:00000000 $t
+  C:\Temp\ccOKVRZp.s:93     .text._ZN9CFreeRTOS27InitHardwareForManagedTasksEv:00000000 _ZN9CFreeRTOS27InitHardwareForManagedTasksEv
+  C:\Temp\ccOKVRZp.s:24     .text._ZN9CFreeRTOSC2Ev:00000000 _ZN9CFreeRTOSC1Ev
+  C:\Temp\ccOKVRZp.s:59     .text._ZN9CFreeRTOSD2Ev:00000000 _ZN9CFreeRTOSD1Ev
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+_ZN12AManagedTask27InitHardwareForManagedTasksEv

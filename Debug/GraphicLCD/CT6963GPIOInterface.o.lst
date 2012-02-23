@@ -1,0 +1,980 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"CT6963GPIOInterface.cpp"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._ZN21CT6963_GPIO_InterfaceC2Ev,"ax",%progbits
+  19              		.align	2
+  20              		.global	_ZN21CT6963_GPIO_InterfaceC2Ev
+  21              		.thumb
+  22              		.thumb_func
+  24              	_ZN21CT6963_GPIO_InterfaceC2Ev:
+  25              	.LFB111:
+  26              		.file 1 "../GraphicLCD/CT6963GPIOInterface.cpp"
+   1:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+   2:../GraphicLCD/CT6963GPIOInterface.cpp ****   ******************************************************************************
+   3:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @file      	CT6963GPIOInterface.cpp
+   4:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @author    	Tecnologic86
+   5:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @version   	V0.0.0
+   6:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @date      	17.02.12
+   7:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief		implementation of T6963C Gpio Interface
+   8:../GraphicLCD/CT6963GPIOInterface.cpp ****   ******************************************************************************
+   9:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+  10:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  11:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Includes ------------------------------------------------------------------*/
+  12:../GraphicLCD/CT6963GPIOInterface.cpp **** #include "CT6963GPIOInterface.h"
+  13:../GraphicLCD/CT6963GPIOInterface.cpp **** #include "FreeRTOS.h"
+  14:../GraphicLCD/CT6963GPIOInterface.cpp **** #include "task.h"
+  15:../GraphicLCD/CT6963GPIOInterface.cpp **** #include "ustime.h"
+  16:../GraphicLCD/CT6963GPIOInterface.cpp **** #include "stm32f4xx.h"
+  17:../GraphicLCD/CT6963GPIOInterface.cpp **** #include "stm32f4_discovery.h"
+  18:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private typedef -----------------------------------------------------------*/
+  19:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private define ------------------------------------------------------------*/
+  20:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  21:../GraphicLCD/CT6963GPIOInterface.cpp **** // data port
+  22:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_PORT 			GPIOE
+  23:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_PORT_MASK 	0xff00
+  24:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_MODE_MASK_IN 	0xffff0000
+  25:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_MODE_MASK_OUT	0x55550000
+  26:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_OFFSET		8
+  27:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_INPUT 		GLCD_DATA_PORT->MODER &= ~GLCD_DATA_MODE_MASK_IN;
+  28:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_DATA_OUTPUT		GLCD_DATA_PORT->MODER |= GLCD_DATA_MODE_MASK_OUT;
+  29:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  30:../GraphicLCD/CT6963GPIOInterface.cpp **** // control port
+  31:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_CTRL_PORT_CD_RD	GPIOC
+  32:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_CTRL_PORT_WR_CE	GPIOB
+  33:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  34:../GraphicLCD/CT6963GPIOInterface.cpp **** // control signals
+  35:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_WR			GPIO_Pin_0
+  36:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_RD			GPIO_Pin_5
+  37:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_CE			GPIO_Pin_1
+  38:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_CD			GPIO_Pin_4
+  39:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_RESET		GPIO_Pin_11
+  40:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  41:../GraphicLCD/CT6963GPIOInterface.cpp **** const unsigned long c_iDelayFore = 5;
+  42:../GraphicLCD/CT6963GPIOInterface.cpp **** const unsigned long c_iDelayAfter = 3;
+  43:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  44:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private macro -------------------------------------------------------------*/
+  45:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private variables ---------------------------------------------------------*/
+  46:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private function prototypes -----------------------------------------------*/
+  47:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private functions ---------------------------------------------------------*/
+  48:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  49:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  50:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  51:../GraphicLCD/CT6963GPIOInterface.cpp **** CT6963_GPIO_Interface::CT6963_GPIO_Interface() {
+  27              		.loc 1 51 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 14, -4
+  35              		.cfi_offset 7, -8
+  36 0002 82B0     		sub	sp, sp, #8
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43              	.LBB2:
+  44              		.loc 1 51 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 1846     		mov	r0, r3
+  47 000c FFF7FEFF 		bl	_ZN13CT6963CDriverC2Ev
+  48 0010 7B68     		ldr	r3, [r7, #4]
+  49 0012 044A     		ldr	r2, .L3
+  50 0014 1A60     		str	r2, [r3, #0]
+  51              	.LBE2:
+  52:../GraphicLCD/CT6963GPIOInterface.cpp **** 	// TODO Auto-generated constructor stub
+  53:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  54:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+  52              		.loc 1 54 0
+  53 0016 7B68     		ldr	r3, [r7, #4]
+  54 0018 1846     		mov	r0, r3
+  55 001a 07F10807 		add	r7, r7, #8
+  56 001e BD46     		mov	sp, r7
+  57 0020 80BD     		pop	{r7, pc}
+  58              	.L4:
+  59 0022 00BF     		.align	2
+  60              	.L3:
+  61 0024 08000000 		.word	_ZTV21CT6963_GPIO_Interface+8
+  62              		.cfi_endproc
+  63              	.LFE111:
+  65              		.section	.text._ZN21CT6963_GPIO_InterfaceD2Ev,"ax",%progbits
+  66              		.align	2
+  67              		.global	_ZN21CT6963_GPIO_InterfaceD2Ev
+  68              		.thumb
+  69              		.thumb_func
+  71              	_ZN21CT6963_GPIO_InterfaceD2Ev:
+  72              	.LFB114:
+  55:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  56:../GraphicLCD/CT6963GPIOInterface.cpp **** CT6963_GPIO_Interface::~CT6963_GPIO_Interface() {
+  73              		.loc 1 56 0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 8
+  76              		@ frame_needed = 1, uses_anonymous_args = 0
+  77 0000 80B5     		push	{r7, lr}
+  78              	.LCFI3:
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 14, -4
+  81              		.cfi_offset 7, -8
+  82 0002 82B0     		sub	sp, sp, #8
+  83              	.LCFI4:
+  84              		.cfi_def_cfa_offset 16
+  85 0004 00AF     		add	r7, sp, #0
+  86              	.LCFI5:
+  87              		.cfi_def_cfa_register 7
+  88 0006 7860     		str	r0, [r7, #4]
+  89              	.LBB3:
+  90              		.loc 1 56 0
+  91 0008 7B68     		ldr	r3, [r7, #4]
+  92 000a 0A4A     		ldr	r2, .L8
+  93 000c 1A60     		str	r2, [r3, #0]
+  57:../GraphicLCD/CT6963GPIOInterface.cpp **** 	// TODO Auto-generated destructor stub
+  58:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+  94              		.loc 1 58 0
+  95 000e 7868     		ldr	r0, [r7, #4]
+  96 0010 FFF7FEFF 		bl	_ZN13CT6963CDriverD2Ev
+  97              	.LBE3:
+  98 0014 4FF00003 		mov	r3, #0
+  99 0018 03F00103 		and	r3, r3, #1
+ 100 001c DBB2     		uxtb	r3, r3
+ 101 001e 002B     		cmp	r3, #0
+ 102 0020 02D0     		beq	.L7
+ 103              		.loc 1 58 0 is_stmt 0 discriminator 2
+ 104 0022 7868     		ldr	r0, [r7, #4]
+ 105 0024 FFF7FEFF 		bl	_ZdlPv
+ 106              	.L7:
+ 107              		.loc 1 58 0 discriminator 3
+ 108 0028 7B68     		ldr	r3, [r7, #4]
+ 109 002a 1846     		mov	r0, r3
+ 110 002c 07F10807 		add	r7, r7, #8
+ 111 0030 BD46     		mov	sp, r7
+ 112 0032 80BD     		pop	{r7, pc}
+ 113              	.L9:
+ 114              		.align	2
+ 115              	.L8:
+ 116 0034 08000000 		.word	_ZTV21CT6963_GPIO_Interface+8
+ 117              		.cfi_endproc
+ 118              	.LFE114:
+ 120              		.section	.text._ZN21CT6963_GPIO_InterfaceD0Ev,"ax",%progbits
+ 121              		.align	2
+ 122              		.global	_ZN21CT6963_GPIO_InterfaceD0Ev
+ 123              		.thumb
+ 124              		.thumb_func
+ 126              	_ZN21CT6963_GPIO_InterfaceD0Ev:
+ 127              	.LFB116:
+  56:../GraphicLCD/CT6963GPIOInterface.cpp **** CT6963_GPIO_Interface::~CT6963_GPIO_Interface() {
+ 128              		.loc 1 56 0 is_stmt 1
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 8
+ 131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 132 0000 80B5     		push	{r7, lr}
+ 133              	.LCFI6:
+ 134              		.cfi_def_cfa_offset 8
+ 135              		.cfi_offset 14, -4
+ 136              		.cfi_offset 7, -8
+ 137 0002 82B0     		sub	sp, sp, #8
+ 138              	.LCFI7:
+ 139              		.cfi_def_cfa_offset 16
+ 140 0004 00AF     		add	r7, sp, #0
+ 141              	.LCFI8:
+ 142              		.cfi_def_cfa_register 7
+ 143 0006 7860     		str	r0, [r7, #4]
+ 144              		.loc 1 58 0
+ 145 0008 7868     		ldr	r0, [r7, #4]
+ 146 000a FFF7FEFF 		bl	_ZN21CT6963_GPIO_InterfaceD1Ev
+ 147 000e 7868     		ldr	r0, [r7, #4]
+ 148 0010 FFF7FEFF 		bl	_ZdlPv
+ 149 0014 7B68     		ldr	r3, [r7, #4]
+ 150 0016 1846     		mov	r0, r3
+ 151 0018 07F10807 		add	r7, r7, #8
+ 152 001c BD46     		mov	sp, r7
+ 153 001e 80BD     		pop	{r7, pc}
+ 154              		.cfi_endproc
+ 155              	.LFE116:
+ 157              		.section	.text._Z11CheckStatusv,"ax",%progbits
+ 158              		.align	2
+ 159              		.global	_Z11CheckStatusv
+ 160              		.thumb
+ 161              		.thumb_func
+ 163              	_Z11CheckStatusv:
+ 164              	.LFB117:
+  59:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  60:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+  61:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief  reads T6963C status byte
+  62:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @param  None
+  63:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @retval true for display ready
+  64:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+  65:../GraphicLCD/CT6963GPIOInterface.cpp **** bool CheckStatus(void)
+  66:../GraphicLCD/CT6963GPIOInterface.cpp **** {
+ 165              		.loc 1 66 0
+ 166              		.cfi_startproc
+ 167              		@ args = 0, pretend = 0, frame = 8
+ 168              		@ frame_needed = 1, uses_anonymous_args = 0
+ 169 0000 80B5     		push	{r7, lr}
+ 170              	.LCFI9:
+ 171              		.cfi_def_cfa_offset 8
+ 172              		.cfi_offset 14, -4
+ 173              		.cfi_offset 7, -8
+ 174 0002 82B0     		sub	sp, sp, #8
+ 175              	.LCFI10:
+ 176              		.cfi_def_cfa_offset 16
+ 177 0004 00AF     		add	r7, sp, #0
+ 178              	.LCFI11:
+ 179              		.cfi_def_cfa_register 7
+ 180              	.LBB4:
+  67:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  68:../GraphicLCD/CT6963GPIOInterface.cpp **** 	uint16_t tmp;
+  69:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_INPUT;
+ 181              		.loc 1 69 0
+ 182 0006 4FF48053 		mov	r3, #4096
+ 183 000a C4F20203 		movt	r3, 16386
+ 184 000e 4FF48052 		mov	r2, #4096
+ 185 0012 C4F20202 		movt	r2, 16386
+ 186 0016 1268     		ldr	r2, [r2, #0]
+ 187 0018 4FEA0242 		lsl	r2, r2, #16
+ 188 001c 4FEA1242 		lsr	r2, r2, #16
+ 189 0020 1A60     		str	r2, [r3, #0]
+  70:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  71:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD);
+ 190              		.loc 1 71 0
+ 191 0022 4FF40060 		mov	r0, #2048
+ 192 0026 C4F20200 		movt	r0, 16386
+ 193 002a 4FF02001 		mov	r1, #32
+ 194 002e FFF7FEFF 		bl	GPIO_ResetBits
+  72:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+ 195              		.loc 1 72 0
+ 196 0032 4FF48060 		mov	r0, #1024
+ 197 0036 C4F20200 		movt	r0, 16386
+ 198 003a 4FF00201 		mov	r1, #2
+ 199 003e FFF7FEFF 		bl	GPIO_ResetBits
+  73:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  74:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayFore);
+ 200              		.loc 1 74 0
+ 201 0042 4FF00500 		mov	r0, #5
+ 202 0046 FFF7FEFF 		bl	delay_us
+  75:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  76:../GraphicLCD/CT6963GPIOInterface.cpp **** 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
+ 203              		.loc 1 76 0
+ 204 004a 4FF48050 		mov	r0, #4096
+ 205 004e C4F20200 		movt	r0, 16386
+ 206 0052 FFF7FEFF 		bl	GPIO_ReadInputData
+ 207 0056 0346     		mov	r3, r0
+ 208 0058 4FEA1323 		lsr	r3, r3, #8
+ 209 005c FB80     		strh	r3, [r7, #6]	@ movhi
+  77:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  78:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+ 210              		.loc 1 78 0
+ 211 005e 4FF48060 		mov	r0, #1024
+ 212 0062 C4F20200 		movt	r0, 16386
+ 213 0066 4FF00201 		mov	r1, #2
+ 214 006a FFF7FEFF 		bl	GPIO_SetBits
+  79:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD);GLCD_DATA_OUTPUT;
+ 215              		.loc 1 79 0
+ 216 006e 4FF40060 		mov	r0, #2048
+ 217 0072 C4F20200 		movt	r0, 16386
+ 218 0076 4FF02001 		mov	r1, #32
+ 219 007a FFF7FEFF 		bl	GPIO_SetBits
+ 220 007e 4FF48053 		mov	r3, #4096
+ 221 0082 C4F20203 		movt	r3, 16386
+ 222 0086 4FF48052 		mov	r2, #4096
+ 223 008a C4F20202 		movt	r2, 16386
+ 224 008e 1268     		ldr	r2, [r2, #0]
+ 225 0090 42F0AA42 		orr	r2, r2, #1426063360
+ 226 0094 42F4AA02 		orr	r2, r2, #5570560
+ 227 0098 1A60     		str	r2, [r3, #0]
+  80:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  81:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
+ 228              		.loc 1 81 0
+ 229 009a 4FF00300 		mov	r0, #3
+ 230 009e FFF7FEFF 		bl	delay_us
+  82:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  83:../GraphicLCD/CT6963GPIOInterface.cpp **** 	return ((tmp&0x03)==0x03);
+ 231              		.loc 1 83 0
+ 232 00a2 FB88     		ldrh	r3, [r7, #6]
+ 233 00a4 03F00303 		and	r3, r3, #3
+ 234 00a8 032B     		cmp	r3, #3
+ 235 00aa 14BF     		ite	ne
+ 236 00ac 0023     		movne	r3, #0
+ 237 00ae 0123     		moveq	r3, #1
+ 238 00b0 DBB2     		uxtb	r3, r3
+ 239              	.LBE4:
+  84:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+ 240              		.loc 1 84 0
+ 241 00b2 1846     		mov	r0, r3
+ 242 00b4 07F10807 		add	r7, r7, #8
+ 243 00b8 BD46     		mov	sp, r7
+ 244 00ba 80BD     		pop	{r7, pc}
+ 245              		.cfi_endproc
+ 246              	.LFE117:
+ 248              		.section	.text._ZN21CT6963_GPIO_Interface12HardwareInitEv,"ax",%progbits
+ 249              		.align	2
+ 250              		.global	_ZN21CT6963_GPIO_Interface12HardwareInitEv
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	_ZN21CT6963_GPIO_Interface12HardwareInitEv:
+ 255              	.LFB118:
+  85:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  86:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  87:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  88:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+  89:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief  initialize Hardware to drive the display
+  90:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @param  None
+  91:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @retval None
+  92:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+  93:../GraphicLCD/CT6963GPIOInterface.cpp **** void CT6963_GPIO_Interface::HardwareInit(void){
+ 256              		.loc 1 93 0
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 16
+ 259              		@ frame_needed = 1, uses_anonymous_args = 0
+ 260 0000 80B5     		push	{r7, lr}
+ 261              	.LCFI12:
+ 262              		.cfi_def_cfa_offset 8
+ 263              		.cfi_offset 14, -4
+ 264              		.cfi_offset 7, -8
+ 265 0002 84B0     		sub	sp, sp, #16
+ 266              	.LCFI13:
+ 267              		.cfi_def_cfa_offset 24
+ 268 0004 00AF     		add	r7, sp, #0
+ 269              	.LCFI14:
+ 270              		.cfi_def_cfa_register 7
+ 271 0006 7860     		str	r0, [r7, #4]
+ 272              	.LBB5:
+  94:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  95:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+  96:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitTypeDef GPIO_InitStructure;
+  97:../GraphicLCD/CT6963GPIOInterface.cpp **** 	// activate Clock for Io Ports used
+  98:../GraphicLCD/CT6963GPIOInterface.cpp **** 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB , ENABLE);
+ 273              		.loc 1 98 0
+ 274 0008 4FF00200 		mov	r0, #2
+ 275 000c 4FF00101 		mov	r1, #1
+ 276 0010 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+  99:../GraphicLCD/CT6963GPIOInterface.cpp **** 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC , ENABLE);
+ 277              		.loc 1 99 0
+ 278 0014 4FF00400 		mov	r0, #4
+ 279 0018 4FF00101 		mov	r1, #1
+ 280 001c FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 100:../GraphicLCD/CT6963GPIOInterface.cpp **** 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE , ENABLE);
+ 281              		.loc 1 100 0
+ 282 0020 4FF01000 		mov	r0, #16
+ 283 0024 4FF00101 		mov	r1, #1
+ 284 0028 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 101:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 102:../GraphicLCD/CT6963GPIOInterface.cpp **** 	// all pins as pp outputs with no pull
+ 103:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+ 285              		.loc 1 103 0
+ 286 002c 4FF00103 		mov	r3, #1
+ 287 0030 3B73     		strb	r3, [r7, #12]
+ 104:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+ 288              		.loc 1 104 0
+ 289 0032 4FF00003 		mov	r3, #0
+ 290 0036 BB73     		strb	r3, [r7, #14]
+ 105:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 291              		.loc 1 105 0
+ 292 0038 4FF00003 		mov	r3, #0
+ 293 003c FB73     		strb	r3, [r7, #15]
+ 106:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_25MHz;
+ 294              		.loc 1 106 0
+ 295 003e 4FF00103 		mov	r3, #1
+ 296 0042 7B73     		strb	r3, [r7, #13]
+ 107:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 108:../GraphicLCD/CT6963GPIOInterface.cpp **** 	//Control pins CD and RD
+ 109:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_Pin = GLCD_CD | GLCD_RD;
+ 297              		.loc 1 109 0
+ 298 0044 4FF03003 		mov	r3, #48
+ 299 0048 BB60     		str	r3, [r7, #8]
+ 110:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_Init(GLCD_CTRL_PORT_CD_RD,&GPIO_InitStructure);
+ 300              		.loc 1 110 0
+ 301 004a 07F10803 		add	r3, r7, #8
+ 302 004e 4FF40060 		mov	r0, #2048
+ 303 0052 C4F20200 		movt	r0, 16386
+ 304 0056 1946     		mov	r1, r3
+ 305 0058 FFF7FEFF 		bl	GPIO_Init
+ 111:../GraphicLCD/CT6963GPIOInterface.cpp **** 	//Control pins WR, CE and RST
+ 112:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_Pin = GLCD_WR | GLCD_CE | GLCD_RESET;
+ 306              		.loc 1 112 0
+ 307 005c 40F60303 		movw	r3, #2051
+ 308 0060 BB60     		str	r3, [r7, #8]
+ 113:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_Init(GLCD_CTRL_PORT_WR_CE,&GPIO_InitStructure);
+ 309              		.loc 1 113 0
+ 310 0062 07F10803 		add	r3, r7, #8
+ 311 0066 4FF48060 		mov	r0, #1024
+ 312 006a C4F20200 		movt	r0, 16386
+ 313 006e 1946     		mov	r1, r3
+ 314 0070 FFF7FEFF 		bl	GPIO_Init
+ 114:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 115:../GraphicLCD/CT6963GPIOInterface.cpp **** 	// data pins are high byte
+ 116:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_InitStructure.GPIO_Pin = GLCD_DATA_PORT_MASK;
+ 315              		.loc 1 116 0
+ 316 0074 4FF47F43 		mov	r3, #65280
+ 317 0078 BB60     		str	r3, [r7, #8]
+ 117:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_Init(GLCD_DATA_PORT,&GPIO_InitStructure);
+ 318              		.loc 1 117 0
+ 319 007a 07F10803 		add	r3, r7, #8
+ 320 007e 4FF48050 		mov	r0, #4096
+ 321 0082 C4F20200 		movt	r0, 16386
+ 322 0086 1946     		mov	r1, r3
+ 323 0088 FFF7FEFF 		bl	GPIO_Init
+ 118:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 119:../GraphicLCD/CT6963GPIOInterface.cpp **** 	//Set all Control pins to high level
+ 120:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_W
+ 324              		.loc 1 120 0
+ 325 008c 4FF40060 		mov	r0, #2048
+ 326 0090 C4F20200 		movt	r0, 16386
+ 327 0094 4FF03001 		mov	r1, #48
+ 328 0098 FFF7FEFF 		bl	GPIO_SetBits
+ 329 009c 4FF48060 		mov	r0, #1024
+ 330 00a0 C4F20200 		movt	r0, 16386
+ 331 00a4 4FF00301 		mov	r1, #3
+ 332 00a8 FFF7FEFF 		bl	GPIO_SetBits
+ 121:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 122:../GraphicLCD/CT6963GPIOInterface.cpp **** 	init_us_timer(); //delay timer init
+ 333              		.loc 1 122 0
+ 334 00ac FFF7FEFF 		bl	init_us_timer
+ 335              	.LBE5:
+ 123:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 124:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+ 336              		.loc 1 124 0
+ 337 00b0 07F11007 		add	r7, r7, #16
+ 338 00b4 BD46     		mov	sp, r7
+ 339 00b6 80BD     		pop	{r7, pc}
+ 340              		.cfi_endproc
+ 341              	.LFE118:
+ 343              		.section	.text._ZN21CT6963_GPIO_Interface5ResetEv,"ax",%progbits
+ 344              		.align	2
+ 345              		.global	_ZN21CT6963_GPIO_Interface5ResetEv
+ 346              		.thumb
+ 347              		.thumb_func
+ 349              	_ZN21CT6963_GPIO_Interface5ResetEv:
+ 350              	.LFB119:
+ 125:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 126:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+ 127:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief  Reset the Display
+ 128:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @param  None
+ 129:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @retval None
+ 130:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+ 131:../GraphicLCD/CT6963GPIOInterface.cpp **** void CT6963_GPIO_Interface::Reset(void){
+ 351              		.loc 1 131 0
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 8
+ 354              		@ frame_needed = 1, uses_anonymous_args = 0
+ 355 0000 80B5     		push	{r7, lr}
+ 356              	.LCFI15:
+ 357              		.cfi_def_cfa_offset 8
+ 358              		.cfi_offset 14, -4
+ 359              		.cfi_offset 7, -8
+ 360 0002 82B0     		sub	sp, sp, #8
+ 361              	.LCFI16:
+ 362              		.cfi_def_cfa_offset 16
+ 363 0004 00AF     		add	r7, sp, #0
+ 364              	.LCFI17:
+ 365              		.cfi_def_cfa_register 7
+ 366 0006 7860     		str	r0, [r7, #4]
+ 132:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 133:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
+ 367              		.loc 1 133 0
+ 368 0008 4FF48060 		mov	r0, #1024
+ 369 000c C4F20200 		movt	r0, 16386
+ 370 0010 40F60201 		movw	r1, #2050
+ 371 0014 FFF7FEFF 		bl	GPIO_ResetBits
+ 134:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 135:../GraphicLCD/CT6963GPIOInterface.cpp **** 	vTaskDelay(20);  // sleep 20 ms
+ 372              		.loc 1 135 0
+ 373 0018 4FF01400 		mov	r0, #20
+ 374 001c FFF7FEFF 		bl	vTaskDelay
+ 136:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 137:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
+ 375              		.loc 1 137 0
+ 376 0020 4FF48060 		mov	r0, #1024
+ 377 0024 C4F20200 		movt	r0, 16386
+ 378 0028 40F60201 		movw	r1, #2050
+ 379 002c FFF7FEFF 		bl	GPIO_SetBits
+ 138:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 139:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+ 380              		.loc 1 139 0
+ 381 0030 07F10807 		add	r7, r7, #8
+ 382 0034 BD46     		mov	sp, r7
+ 383 0036 80BD     		pop	{r7, pc}
+ 384              		.cfi_endproc
+ 385              	.LFE119:
+ 387              		.section	.text._ZN21CT6963_GPIO_Interface12WriteCommandEh,"ax",%progbits
+ 388              		.align	2
+ 389              		.global	_ZN21CT6963_GPIO_Interface12WriteCommandEh
+ 390              		.thumb
+ 391              		.thumb_func
+ 393              	_ZN21CT6963_GPIO_Interface12WriteCommandEh:
+ 394              	.LFB120:
+ 140:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 141:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+ 142:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief  writes a command
+ 143:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @param  command
+ 144:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @retval None
+ 145:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+ 146:../GraphicLCD/CT6963GPIOInterface.cpp **** void CT6963_GPIO_Interface::WriteCommand(const unsigned char command){
+ 395              		.loc 1 146 0
+ 396              		.cfi_startproc
+ 397              		@ args = 0, pretend = 0, frame = 8
+ 398              		@ frame_needed = 1, uses_anonymous_args = 0
+ 399 0000 80B5     		push	{r7, lr}
+ 400              	.LCFI18:
+ 401              		.cfi_def_cfa_offset 8
+ 402              		.cfi_offset 14, -4
+ 403              		.cfi_offset 7, -8
+ 404 0002 82B0     		sub	sp, sp, #8
+ 405              	.LCFI19:
+ 406              		.cfi_def_cfa_offset 16
+ 407 0004 00AF     		add	r7, sp, #0
+ 408              	.LCFI20:
+ 409              		.cfi_def_cfa_register 7
+ 410 0006 7860     		str	r0, [r7, #4]
+ 411 0008 0B46     		mov	r3, r1
+ 412 000a FB70     		strb	r3, [r7, #3]
+ 147:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 148:../GraphicLCD/CT6963GPIOInterface.cpp **** 	while(!CheckStatus());
+ 413              		.loc 1 148 0
+ 414 000c 00BF     		nop
+ 415              	.L16:
+ 416              		.loc 1 148 0 is_stmt 0 discriminator 1
+ 417 000e FFF7FEFF 		bl	_Z11CheckStatusv
+ 418 0012 0346     		mov	r3, r0
+ 419 0014 83F00103 		eor	r3, r3, #1
+ 420 0018 DBB2     		uxtb	r3, r3
+ 421 001a 002B     		cmp	r3, #0
+ 422 001c F7D1     		bne	.L16
+ 149:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 150:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_PORT->ODR &= ~GLCD_DATA_PORT_MASK;  //Clear Data pins
+ 423              		.loc 1 150 0 is_stmt 1
+ 424 001e 4FF48053 		mov	r3, #4096
+ 425 0022 C4F20203 		movt	r3, 16386
+ 426 0026 4FF48052 		mov	r2, #4096
+ 427 002a C4F20202 		movt	r2, 16386
+ 428 002e 5269     		ldr	r2, [r2, #20]
+ 429 0030 22F47F42 		bic	r2, r2, #65280
+ 430 0034 5A61     		str	r2, [r3, #20]
+ 151:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_PORT->ODR |= (command << (GLCD_DATA_OFFSET)); // lowbyte will stay as is in this write
+ 431              		.loc 1 151 0
+ 432 0036 4FF48053 		mov	r3, #4096
+ 433 003a C4F20203 		movt	r3, 16386
+ 434 003e 4FF48052 		mov	r2, #4096
+ 435 0042 C4F20202 		movt	r2, 16386
+ 436 0046 5269     		ldr	r2, [r2, #20]
+ 437 0048 1146     		mov	r1, r2
+ 438 004a FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 439 004c 4FEA0222 		lsl	r2, r2, #8
+ 440 0050 0A43     		orrs	r2, r2, r1
+ 441 0052 5A61     		str	r2, [r3, #20]
+ 152:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 153:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
+ 442              		.loc 1 153 0
+ 443 0054 4FF48060 		mov	r0, #1024
+ 444 0058 C4F20200 		movt	r0, 16386
+ 445 005c 4FF00101 		mov	r1, #1
+ 446 0060 FFF7FEFF 		bl	GPIO_ResetBits
+ 154:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+ 447              		.loc 1 154 0
+ 448 0064 4FF48060 		mov	r0, #1024
+ 449 0068 C4F20200 		movt	r0, 16386
+ 450 006c 4FF00201 		mov	r1, #2
+ 451 0070 FFF7FEFF 		bl	GPIO_ResetBits
+ 155:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 156:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayFore);   // time for display to read the data
+ 452              		.loc 1 156 0
+ 453 0074 4FF00500 		mov	r0, #5
+ 454 0078 FFF7FEFF 		bl	delay_us
+ 157:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 158:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+ 455              		.loc 1 158 0
+ 456 007c 4FF48060 		mov	r0, #1024
+ 457 0080 C4F20200 		movt	r0, 16386
+ 458 0084 4FF00201 		mov	r1, #2
+ 459 0088 FFF7FEFF 		bl	GPIO_SetBits
+ 159:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
+ 460              		.loc 1 159 0
+ 461 008c 4FF48060 		mov	r0, #1024
+ 462 0090 C4F20200 		movt	r0, 16386
+ 463 0094 4FF00101 		mov	r1, #1
+ 464 0098 FFF7FEFF 		bl	GPIO_SetBits
+ 160:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 161:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 162:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
+ 465              		.loc 1 162 0
+ 466 009c 4FF00300 		mov	r0, #3
+ 467 00a0 FFF7FEFF 		bl	delay_us
+ 163:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+ 468              		.loc 1 163 0
+ 469 00a4 07F10807 		add	r7, r7, #8
+ 470 00a8 BD46     		mov	sp, r7
+ 471 00aa 80BD     		pop	{r7, pc}
+ 472              		.cfi_endproc
+ 473              	.LFE120:
+ 475              		.section	.text._ZN21CT6963_GPIO_Interface9WriteDataEh,"ax",%progbits
+ 476              		.align	2
+ 477              		.global	_ZN21CT6963_GPIO_Interface9WriteDataEh
+ 478              		.thumb
+ 479              		.thumb_func
+ 481              	_ZN21CT6963_GPIO_Interface9WriteDataEh:
+ 482              	.LFB121:
+ 164:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 165:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+ 166:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief  writes a data
+ 167:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @param  data
+ 168:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @retval None
+ 169:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+ 170:../GraphicLCD/CT6963GPIOInterface.cpp **** void CT6963_GPIO_Interface::WriteData(const unsigned char data){
+ 483              		.loc 1 170 0
+ 484              		.cfi_startproc
+ 485              		@ args = 0, pretend = 0, frame = 8
+ 486              		@ frame_needed = 1, uses_anonymous_args = 0
+ 487 0000 80B5     		push	{r7, lr}
+ 488              	.LCFI21:
+ 489              		.cfi_def_cfa_offset 8
+ 490              		.cfi_offset 14, -4
+ 491              		.cfi_offset 7, -8
+ 492 0002 82B0     		sub	sp, sp, #8
+ 493              	.LCFI22:
+ 494              		.cfi_def_cfa_offset 16
+ 495 0004 00AF     		add	r7, sp, #0
+ 496              	.LCFI23:
+ 497              		.cfi_def_cfa_register 7
+ 498 0006 7860     		str	r0, [r7, #4]
+ 499 0008 0B46     		mov	r3, r1
+ 500 000a FB70     		strb	r3, [r7, #3]
+ 171:../GraphicLCD/CT6963GPIOInterface.cpp **** 	while(!CheckStatus());
+ 501              		.loc 1 171 0
+ 502 000c 00BF     		nop
+ 503              	.L18:
+ 504              		.loc 1 171 0 is_stmt 0 discriminator 1
+ 505 000e FFF7FEFF 		bl	_Z11CheckStatusv
+ 506 0012 0346     		mov	r3, r0
+ 507 0014 83F00103 		eor	r3, r3, #1
+ 508 0018 DBB2     		uxtb	r3, r3
+ 509 001a 002B     		cmp	r3, #0
+ 510 001c F7D1     		bne	.L18
+ 172:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 173:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_PORT->ODR &= ~GLCD_DATA_PORT_MASK;  //Clear Data pins
+ 511              		.loc 1 173 0 is_stmt 1
+ 512 001e 4FF48053 		mov	r3, #4096
+ 513 0022 C4F20203 		movt	r3, 16386
+ 514 0026 4FF48052 		mov	r2, #4096
+ 515 002a C4F20202 		movt	r2, 16386
+ 516 002e 5269     		ldr	r2, [r2, #20]
+ 517 0030 22F47F42 		bic	r2, r2, #65280
+ 518 0034 5A61     		str	r2, [r3, #20]
+ 174:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_PORT->ODR |= ((uint16_t)data << GLCD_DATA_OFFSET); // lowbyte will stay as is in this wr
+ 519              		.loc 1 174 0
+ 520 0036 4FF48053 		mov	r3, #4096
+ 521 003a C4F20203 		movt	r3, 16386
+ 522 003e 4FF48052 		mov	r2, #4096
+ 523 0042 C4F20202 		movt	r2, 16386
+ 524 0046 5269     		ldr	r2, [r2, #20]
+ 525 0048 1146     		mov	r1, r2
+ 526 004a FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 527 004c 4FEA0222 		lsl	r2, r2, #8
+ 528 0050 0A43     		orrs	r2, r2, r1
+ 529 0052 5A61     		str	r2, [r3, #20]
+ 175:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 176:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD);
+ 530              		.loc 1 176 0
+ 531 0054 4FF40060 		mov	r0, #2048
+ 532 0058 C4F20200 		movt	r0, 16386
+ 533 005c 4FF01001 		mov	r1, #16
+ 534 0060 FFF7FEFF 		bl	GPIO_ResetBits
+ 177:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
+ 535              		.loc 1 177 0
+ 536 0064 4FF48060 		mov	r0, #1024
+ 537 0068 C4F20200 		movt	r0, 16386
+ 538 006c 4FF00101 		mov	r1, #1
+ 539 0070 FFF7FEFF 		bl	GPIO_ResetBits
+ 178:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+ 540              		.loc 1 178 0
+ 541 0074 4FF48060 		mov	r0, #1024
+ 542 0078 C4F20200 		movt	r0, 16386
+ 543 007c 4FF00201 		mov	r1, #2
+ 544 0080 FFF7FEFF 		bl	GPIO_ResetBits
+ 179:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 180:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayFore);
+ 545              		.loc 1 180 0
+ 546 0084 4FF00500 		mov	r0, #5
+ 547 0088 FFF7FEFF 		bl	delay_us
+ 181:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 182:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
+ 548              		.loc 1 182 0
+ 549 008c 4FF48060 		mov	r0, #1024
+ 550 0090 C4F20200 		movt	r0, 16386
+ 551 0094 4FF00201 		mov	r1, #2
+ 552 0098 FFF7FEFF 		bl	GPIO_SetBits
+ 183:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD);
+ 553              		.loc 1 183 0
+ 554 009c 4FF40060 		mov	r0, #2048
+ 555 00a0 C4F20200 		movt	r0, 16386
+ 556 00a4 4FF01001 		mov	r1, #16
+ 557 00a8 FFF7FEFF 		bl	GPIO_SetBits
+ 184:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR);
+ 558              		.loc 1 184 0
+ 559 00ac 4FF48060 		mov	r0, #1024
+ 560 00b0 C4F20200 		movt	r0, 16386
+ 561 00b4 4FF00101 		mov	r1, #1
+ 562 00b8 FFF7FEFF 		bl	GPIO_SetBits
+ 185:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 186:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
+ 563              		.loc 1 186 0
+ 564 00bc 4FF00300 		mov	r0, #3
+ 565 00c0 FFF7FEFF 		bl	delay_us
+ 187:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+ 566              		.loc 1 187 0
+ 567 00c4 07F10807 		add	r7, r7, #8
+ 568 00c8 BD46     		mov	sp, r7
+ 569 00ca 80BD     		pop	{r7, pc}
+ 570              		.cfi_endproc
+ 571              	.LFE121:
+ 573              		.section	.text._ZN21CT6963_GPIO_Interface8ReadDataEv,"ax",%progbits
+ 574              		.align	2
+ 575              		.global	_ZN21CT6963_GPIO_Interface8ReadDataEv
+ 576              		.thumb
+ 577              		.thumb_func
+ 579              	_ZN21CT6963_GPIO_Interface8ReadDataEv:
+ 580              	.LFB122:
+ 188:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 189:../GraphicLCD/CT6963GPIOInterface.cpp **** /**
+ 190:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @brief  reads data from display
+ 191:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @param  None
+ 192:../GraphicLCD/CT6963GPIOInterface.cpp ****   * @retval data from display
+ 193:../GraphicLCD/CT6963GPIOInterface.cpp ****   */
+ 194:../GraphicLCD/CT6963GPIOInterface.cpp **** unsigned char CT6963_GPIO_Interface::ReadData(){
+ 581              		.loc 1 194 0
+ 582              		.cfi_startproc
+ 583              		@ args = 0, pretend = 0, frame = 16
+ 584              		@ frame_needed = 1, uses_anonymous_args = 0
+ 585 0000 80B5     		push	{r7, lr}
+ 586              	.LCFI24:
+ 587              		.cfi_def_cfa_offset 8
+ 588              		.cfi_offset 14, -4
+ 589              		.cfi_offset 7, -8
+ 590 0002 84B0     		sub	sp, sp, #16
+ 591              	.LCFI25:
+ 592              		.cfi_def_cfa_offset 24
+ 593 0004 00AF     		add	r7, sp, #0
+ 594              	.LCFI26:
+ 595              		.cfi_def_cfa_register 7
+ 596 0006 7860     		str	r0, [r7, #4]
+ 597              	.LBB6:
+ 195:../GraphicLCD/CT6963GPIOInterface.cpp **** 	uint16_t tmp;
+ 196:../GraphicLCD/CT6963GPIOInterface.cpp **** 	while(!CheckStatus());
+ 598              		.loc 1 196 0
+ 599 0008 00BF     		nop
+ 600              	.L20:
+ 601              		.loc 1 196 0 is_stmt 0 discriminator 1
+ 602 000a FFF7FEFF 		bl	_Z11CheckStatusv
+ 603 000e 0346     		mov	r3, r0
+ 604 0010 83F00103 		eor	r3, r3, #1
+ 605 0014 DBB2     		uxtb	r3, r3
+ 606 0016 002B     		cmp	r3, #0
+ 607 0018 F7D1     		bne	.L20
+ 197:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 198:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_INPUT;
+ 608              		.loc 1 198 0 is_stmt 1
+ 609 001a 4FF48053 		mov	r3, #4096
+ 610 001e C4F20203 		movt	r3, 16386
+ 611 0022 4FF48052 		mov	r2, #4096
+ 612 0026 C4F20202 		movt	r2, 16386
+ 613 002a 1268     		ldr	r2, [r2, #0]
+ 614 002c 4FEA0242 		lsl	r2, r2, #16
+ 615 0030 4FEA1242 		lsr	r2, r2, #16
+ 616 0034 1A60     		str	r2, [r3, #0]
+ 199:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 200:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD );
+ 617              		.loc 1 200 0
+ 618 0036 4FF40060 		mov	r0, #2048
+ 619 003a C4F20200 		movt	r0, 16386
+ 620 003e 4FF01001 		mov	r1, #16
+ 621 0042 FFF7FEFF 		bl	GPIO_ResetBits
+ 201:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD );
+ 622              		.loc 1 201 0
+ 623 0046 4FF40060 		mov	r0, #2048
+ 624 004a C4F20200 		movt	r0, 16386
+ 625 004e 4FF02001 		mov	r1, #32
+ 626 0052 FFF7FEFF 		bl	GPIO_ResetBits
+ 202:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
+ 627              		.loc 1 202 0
+ 628 0056 4FF48060 		mov	r0, #1024
+ 629 005a C4F20200 		movt	r0, 16386
+ 630 005e 4FF00201 		mov	r1, #2
+ 631 0062 FFF7FEFF 		bl	GPIO_ResetBits
+ 203:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 204:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayFore);
+ 632              		.loc 1 204 0
+ 633 0066 4FF00500 		mov	r0, #5
+ 634 006a FFF7FEFF 		bl	delay_us
+ 205:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 206:../GraphicLCD/CT6963GPIOInterface.cpp **** 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
+ 635              		.loc 1 206 0
+ 636 006e 4FF48050 		mov	r0, #4096
+ 637 0072 C4F20200 		movt	r0, 16386
+ 638 0076 FFF7FEFF 		bl	GPIO_ReadInputData
+ 639 007a 0346     		mov	r3, r0
+ 640 007c 4FEA1323 		lsr	r3, r3, #8
+ 641 0080 FB81     		strh	r3, [r7, #14]	@ movhi
+ 207:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 208:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE );
+ 642              		.loc 1 208 0
+ 643 0082 4FF48060 		mov	r0, #1024
+ 644 0086 C4F20200 		movt	r0, 16386
+ 645 008a 4FF00201 		mov	r1, #2
+ 646 008e FFF7FEFF 		bl	GPIO_SetBits
+ 209:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
+ 647              		.loc 1 209 0
+ 648 0092 4FF00300 		mov	r0, #3
+ 649 0096 FFF7FEFF 		bl	delay_us
+ 210:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);
+ 650              		.loc 1 210 0
+ 651 009a 4FF40060 		mov	r0, #2048
+ 652 009e C4F20200 		movt	r0, 16386
+ 653 00a2 4FF03001 		mov	r1, #48
+ 654 00a6 FFF7FEFF 		bl	GPIO_SetBits
+ 211:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 212:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 213:../GraphicLCD/CT6963GPIOInterface.cpp **** 
+ 214:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_OUTPUT;
+ 655              		.loc 1 214 0
+ 656 00aa 4FF48053 		mov	r3, #4096
+ 657 00ae C4F20203 		movt	r3, 16386
+ 658 00b2 4FF48052 		mov	r2, #4096
+ 659 00b6 C4F20202 		movt	r2, 16386
+ 660 00ba 1268     		ldr	r2, [r2, #0]
+ 661 00bc 42F0AA42 		orr	r2, r2, #1426063360
+ 662 00c0 42F4AA02 		orr	r2, r2, #5570560
+ 663 00c4 1A60     		str	r2, [r3, #0]
+ 215:../GraphicLCD/CT6963GPIOInterface.cpp **** 	return (unsigned char)tmp;
+ 664              		.loc 1 215 0
+ 665 00c6 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 666 00c8 DBB2     		uxtb	r3, r3
+ 667              	.LBE6:
+ 216:../GraphicLCD/CT6963GPIOInterface.cpp **** }
+ 668              		.loc 1 216 0
+ 669 00ca 1846     		mov	r0, r3
+ 670 00cc 07F11007 		add	r7, r7, #16
+ 671 00d0 BD46     		mov	sp, r7
+ 672 00d2 80BD     		pop	{r7, pc}
+ 673              		.cfi_endproc
+ 674              	.LFE122:
+ 676              		.global	_ZTV21CT6963_GPIO_Interface
+ 677              		.section	.rodata._ZTV21CT6963_GPIO_Interface,"a",%progbits
+ 678              		.align	3
+ 681              	_ZTV21CT6963_GPIO_Interface:
+ 682 0000 00000000 		.word	0
+ 683 0004 00000000 		.word	0
+ 684 0008 00000000 		.word	_ZN13CT6963CDriver5ClearEv
+ 685 000c 00000000 		.word	_ZN13CT6963CDriver4LineEjjjj
+ 686 0010 00000000 		.word	_ZN13CT6963CDriver6WindowEjjjj
+ 687 0014 00000000 		.word	_ZN13CT6963CDriver9RectangleEjjjjb
+ 688 0018 00000000 		.word	_ZN13CT6963CDriver11SectorClearEjjjj
+ 689 001c 00000000 		.word	_ZN13CT6963CDriver6CircleEhhh
+ 690 0020 00000000 		.word	_ZN13CT6963CDriver11WriteStringEPc5tFontjj
+ 691 0024 00000000 		.word	_ZN13CT6963CDriver6BitmapEPhhhhh
+ 692 0028 00000000 		.word	_ZN13CT6963CDriver4InitEv
+ 693 002c 00000000 		.word	_ZN21CT6963_GPIO_InterfaceD1Ev
+ 694 0030 00000000 		.word	_ZN21CT6963_GPIO_InterfaceD0Ev
+ 695 0034 00000000 		.word	_ZN21CT6963_GPIO_Interface12HardwareInitEv
+ 696 0038 00000000 		.word	_ZN21CT6963_GPIO_Interface5ResetEv
+ 697 003c 00000000 		.word	_ZN21CT6963_GPIO_Interface12WriteCommandEh
+ 698 0040 00000000 		.word	_ZN21CT6963_GPIO_Interface9WriteDataEh
+ 699 0044 00000000 		.word	_ZN21CT6963_GPIO_Interface8ReadDataEv
+ 700              		.section	.rodata._ZL12c_FontNative,"a",%progbits
+ 701              		.align	2
+ 704              	_ZL12c_FontNative:
+ 705 0000 00000000 		.space	24
+ 705      00000000 
+ 705      00000000 
+ 705      00000000 
+ 705      00000000 
+ 706              		.section	.rodata._ZL12c_iDelayFore,"a",%progbits
+ 707              		.align	2
+ 710              	_ZL12c_iDelayFore:
+ 711 0000 05000000 		.word	5
+ 712              		.section	.rodata._ZL13c_iDelayAfter,"a",%progbits
+ 713              		.align	2
+ 716              	_ZL13c_iDelayAfter:
+ 717 0000 03000000 		.word	3
+ 718              		.global	_ZN21CT6963_GPIO_InterfaceC1Ev
+ 719              		.thumb_set _ZN21CT6963_GPIO_InterfaceC1Ev,_ZN21CT6963_GPIO_InterfaceC2Ev
+ 720              		.global	_ZN21CT6963_GPIO_InterfaceD1Ev
+ 721              		.thumb_set _ZN21CT6963_GPIO_InterfaceD1Ev,_ZN21CT6963_GPIO_InterfaceD2Ev
+ 722              		.text
+ 723              	.Letext0:
+ 724              		.file 2 "../GraphicLCD/CGraphicLCD.h"
+ 725              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 726              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Devi
+ 727              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
+ 728              		.file 6 "../GraphicLCD/CT6963CDriver.h"
+ 729              		.file 7 "../GraphicLCD/CT6963GPIOInterface.h"
+ 730              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+DEFINED SYMBOLS
+                            *ABS*:00000000 CT6963GPIOInterface.cpp
+  C:\Temp\ccM5fKcz.s:19     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 $t
+  C:\Temp\ccM5fKcz.s:24     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 _ZN21CT6963_GPIO_InterfaceC2Ev
+  C:\Temp\ccM5fKcz.s:61     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000024 $d
+  C:\Temp\ccM5fKcz.s:681    .rodata._ZTV21CT6963_GPIO_Interface:00000000 _ZTV21CT6963_GPIO_Interface
+  C:\Temp\ccM5fKcz.s:66     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 $t
+  C:\Temp\ccM5fKcz.s:71     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 _ZN21CT6963_GPIO_InterfaceD2Ev
+  C:\Temp\ccM5fKcz.s:116    .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000034 $d
+  C:\Temp\ccM5fKcz.s:121    .text._ZN21CT6963_GPIO_InterfaceD0Ev:00000000 $t
+  C:\Temp\ccM5fKcz.s:126    .text._ZN21CT6963_GPIO_InterfaceD0Ev:00000000 _ZN21CT6963_GPIO_InterfaceD0Ev
+  C:\Temp\ccM5fKcz.s:71     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 _ZN21CT6963_GPIO_InterfaceD1Ev
+  C:\Temp\ccM5fKcz.s:158    .text._Z11CheckStatusv:00000000 $t
+  C:\Temp\ccM5fKcz.s:163    .text._Z11CheckStatusv:00000000 _Z11CheckStatusv
+  C:\Temp\ccM5fKcz.s:249    .text._ZN21CT6963_GPIO_Interface12HardwareInitEv:00000000 $t
+  C:\Temp\ccM5fKcz.s:254    .text._ZN21CT6963_GPIO_Interface12HardwareInitEv:00000000 _ZN21CT6963_GPIO_Interface12HardwareInitEv
+  C:\Temp\ccM5fKcz.s:344    .text._ZN21CT6963_GPIO_Interface5ResetEv:00000000 $t
+  C:\Temp\ccM5fKcz.s:349    .text._ZN21CT6963_GPIO_Interface5ResetEv:00000000 _ZN21CT6963_GPIO_Interface5ResetEv
+  C:\Temp\ccM5fKcz.s:388    .text._ZN21CT6963_GPIO_Interface12WriteCommandEh:00000000 $t
+  C:\Temp\ccM5fKcz.s:393    .text._ZN21CT6963_GPIO_Interface12WriteCommandEh:00000000 _ZN21CT6963_GPIO_Interface12WriteCommandEh
+  C:\Temp\ccM5fKcz.s:476    .text._ZN21CT6963_GPIO_Interface9WriteDataEh:00000000 $t
+  C:\Temp\ccM5fKcz.s:481    .text._ZN21CT6963_GPIO_Interface9WriteDataEh:00000000 _ZN21CT6963_GPIO_Interface9WriteDataEh
+  C:\Temp\ccM5fKcz.s:574    .text._ZN21CT6963_GPIO_Interface8ReadDataEv:00000000 $t
+  C:\Temp\ccM5fKcz.s:579    .text._ZN21CT6963_GPIO_Interface8ReadDataEv:00000000 _ZN21CT6963_GPIO_Interface8ReadDataEv
+  C:\Temp\ccM5fKcz.s:678    .rodata._ZTV21CT6963_GPIO_Interface:00000000 $d
+  C:\Temp\ccM5fKcz.s:701    .rodata._ZL12c_FontNative:00000000 $d
+  C:\Temp\ccM5fKcz.s:704    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+  C:\Temp\ccM5fKcz.s:707    .rodata._ZL12c_iDelayFore:00000000 $d
+  C:\Temp\ccM5fKcz.s:710    .rodata._ZL12c_iDelayFore:00000000 _ZL12c_iDelayFore
+  C:\Temp\ccM5fKcz.s:713    .rodata._ZL13c_iDelayAfter:00000000 $d
+  C:\Temp\ccM5fKcz.s:716    .rodata._ZL13c_iDelayAfter:00000000 _ZL13c_iDelayAfter
+  C:\Temp\ccM5fKcz.s:24     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 _ZN21CT6963_GPIO_InterfaceC1Ev
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+_ZN13CT6963CDriverC2Ev
+_ZN13CT6963CDriverD2Ev
+_ZdlPv
+GPIO_ResetBits
+delay_us
+GPIO_ReadInputData
+GPIO_SetBits
+RCC_AHB1PeriphClockCmd
+GPIO_Init
+init_us_timer
+vTaskDelay
+_ZN13CT6963CDriver5ClearEv
+_ZN13CT6963CDriver4LineEjjjj
+_ZN13CT6963CDriver6WindowEjjjj
+_ZN13CT6963CDriver9RectangleEjjjjb
+_ZN13CT6963CDriver11SectorClearEjjjj
+_ZN13CT6963CDriver6CircleEhhh
+_ZN13CT6963CDriver11WriteStringEPc5tFontjj
+_ZN13CT6963CDriver6BitmapEPhhhhh
+_ZN13CT6963CDriver4InitEv
