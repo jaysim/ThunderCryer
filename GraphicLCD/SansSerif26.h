@@ -18,7 +18,7 @@
 #include "CGraphicLCD.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-extern const tFont c_FontSansSerif12;
+extern const tFont c_FontSansSerif26;
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 /* Class definitions -------------------------------------------------------- */

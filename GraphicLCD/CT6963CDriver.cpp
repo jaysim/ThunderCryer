@@ -124,7 +124,7 @@ void CT6963CDriver::Init(){
 	WriteCommand(T6963_SET_OFFSET_REGISTER);
 
 	// display in XOR Mode
-	WriteCommand(T6963_MODE_SET | 0);
+	WriteCommand(T6963_MODE_SET | 1);
 
 	//Graphic and Text mode
 	WriteCommand(T6963_DISPLAY_MODE  | T6963_TEXT_DISPLAY_ON | T6963_GRAPHIC_DISPLAY_ON );
@@ -137,8 +137,8 @@ void CT6963CDriver::Init(){
   */
 void CT6963CDriver::SetAddressPointer(unsigned int address){
 	address += 2; // display offset
-	WriteData((address) & 0xFF);
-	WriteData((address) >> 8);
+	WriteData(address & 0xFF);
+	WriteData(address >> 8);
 	WriteCommand(T6963_SET_ADDRESS_POINTER);
 }
 
@@ -180,19 +180,25 @@ void CT6963CDriver::Clear(){
 
 	for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
 	{
-		WriteDisplayData(0x00);
+		if(Inverse())
+			WriteDisplayData(0xFF);
+		else
+			WriteDisplayData(0x00);
 	}
 
 	SetAddressPointer(GLCD_TEXT_HOME);
 
 	for(i = 0; i < GLCD_TEXT_SIZE; i++)
 	{
-		WriteDisplayData(0);
+		if(Inverse())
+			WriteDisplayData(0xFF);
+		else
+			WriteDisplayData(0x00);
 	}
 }
 
 /**
-  * @brief  writes icremental data to display ram
+  * @brief  writes incremental data to display ram
   * @param  data byte
   * @retval None
   */
@@ -219,14 +225,18 @@ void CT6963CDriver::WriteChar(char charCode)
   */
 void CT6963CDriver::WriteString(const char * str, const tFont font,unsigned int x, unsigned int y)
 {
-	if(&c_FontNative == &font){
+	// use internal Character generator
+	if(c_FontNative == font){
 		TextGoTo(x/GLCD_FONT_WIDTH, y/8);
 
 		while(*str)
 		{
 			WriteChar(*str++);
 		}
-	} else {
+
+	}
+	// generate fonts
+	else {
 
 	}
 
