@@ -12,6 +12,7 @@
 #include "CFileHandler.h"
 #include "stm32f4xx.h"
 #include "stm32f4_sdio.h"
+#include "misc.h"
 #include "ff.h"
 #include "string.h"
 /* Private typedef -----------------------------------------------------------*/
@@ -39,9 +40,21 @@ CFileHandler::~CFileHandler() {
   * @retval true on succsess
   */
 bool CFileHandler::HardwareInit(){
+	NVIC_InitTypeDef NVIC_InitStructure;
 
 	/*-------------------------- SD Init ----------------------------- */
 	Status = SD_Init();
+
+	// SDIO Interrupt ENABLE
+	NVIC_InitStructure.NVIC_IRQChannel = SDIO_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	// DMA2 STREAMx Interrupt ENABLE
+	NVIC_InitStructure.NVIC_IRQChannel = SD_SDIO_DMA_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_Init(&NVIC_InitStructure);
 
 	if (Status == SD_OK)
 	{

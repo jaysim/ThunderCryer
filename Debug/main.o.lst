@@ -112,39 +112,25 @@
   65      00000000 
   65      00000000 
   65      00000000 
-  66              		.global	g_FileHandler
-  67              		.section	.bss.g_FileHandler,"aw",%nobits
-  68              		.align	2
-  71              	g_FileHandler:
-  72 0000 00000000 		.space	1212
-  72      00000000 
-  72      00000000 
-  72      00000000 
-  72      00000000 
-  73              		.section	.rodata
+  66              		.section	.rodata
+  67              		.align	2
+  68              	.LC0:
+  69 0000 4C656420 		.ascii	"Led Heartbeat\000"
+  69      48656172 
+  69      74626561 
+  69      7400
+  70 000e 0000     		.align	2
+  71              	.LC1:
+  72 0010 4D656E75 		.ascii	"Menue\000"
+  72      6500
+  73 0016 0000     		.section	.text.main,"ax",%progbits
   74              		.align	2
-  75              	.LC0:
-  76 0000 4C656420 		.ascii	"Led Heartbeat\000"
-  76      48656172 
-  76      74626561 
-  76      7400
-  77 000e 0000     		.align	2
-  78              	.LC1:
-  79 0010 4D656E75 		.ascii	"Menue\000"
-  79      6500
-  80 0016 0000     		.align	2
-  81              	.LC2:
-  82 0018 46696C65 		.ascii	"FileHandler\000"
-  82      48616E64 
-  82      6C657200 
-  83              		.section	.text.main,"ax",%progbits
-  84              		.align	2
-  85              		.global	main
-  86              		.thumb
-  87              		.thumb_func
-  89              	main:
-  90              	.LFB140:
-  91              		.file 2 "../main.cpp"
+  75              		.global	main
+  76              		.thumb
+  77              		.thumb_func
+  79              	main:
+  80              	.LFB140:
+  81              		.file 2 "../main.cpp"
    1:../main.cpp   **** /**
    2:../main.cpp   ****   ******************************************************************************
    3:../main.cpp   ****   * @file      	main.cpp
@@ -173,7 +159,7 @@
   26:../main.cpp   **** CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
   27:../main.cpp   **** CT6963_GPIO_Interface g_Display;
   28:../main.cpp   **** CMenue	g_Menue(&g_Display);
-  29:../main.cpp   **** CFileHandler g_FileHandler;
+  29:../main.cpp   **** //CFileHandler g_FileHandler;
   30:../main.cpp   **** 
   31:../main.cpp   **** /* Private function prototypes -----------------------------------------------*/
   32:../main.cpp   **** extern "C" {
@@ -192,22 +178,22 @@
   45:../main.cpp   ****   * @retval None
   46:../main.cpp   ****   */
   47:../main.cpp   **** int main(void){
-  92              		.loc 2 47 0
-  93              		.cfi_startproc
-  94              		@ args = 0, pretend = 0, frame = 8
-  95              		@ frame_needed = 1, uses_anonymous_args = 0
-  96 0000 80B5     		push	{r7, lr}
-  97              	.LCFI2:
-  98              		.cfi_def_cfa_offset 8
-  99              		.cfi_offset 14, -4
- 100              		.cfi_offset 7, -8
- 101 0002 82B0     		sub	sp, sp, #8
- 102              	.LCFI3:
- 103              		.cfi_def_cfa_offset 16
- 104 0004 00AF     		add	r7, sp, #0
- 105              	.LCFI4:
- 106              		.cfi_def_cfa_register 7
- 107              	.LBB2:
+  82              		.loc 2 47 0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 8
+  85              		@ frame_needed = 1, uses_anonymous_args = 0
+  86 0000 80B5     		push	{r7, lr}
+  87              	.LCFI2:
+  88              		.cfi_def_cfa_offset 8
+  89              		.cfi_offset 14, -4
+  90              		.cfi_offset 7, -8
+  91 0002 82B0     		sub	sp, sp, #8
+  92              	.LCFI3:
+  93              		.cfi_def_cfa_offset 16
+  94 0004 00AF     		add	r7, sp, #0
+  95              	.LCFI4:
+  96              		.cfi_def_cfa_register 7
+  97              	.LBB2:
   48:../main.cpp   **** 	unsigned int u;
   49:../main.cpp   **** 
   50:../main.cpp   **** 	/**
@@ -215,64 +201,56 @@
   52:../main.cpp   **** 	 * 1 higher than idle task
   53:../main.cpp   **** 	 */
   54:../main.cpp   **** 	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+5);
- 108              		.loc 2 54 0
- 109 0006 40F20000 		movw	r0, #:lower16:g_LedTast
- 110 000a C0F20000 		movt	r0, #:upper16:g_LedTast
- 111 000e 40F20001 		movw	r1, #:lower16:.LC0
- 112 0012 C0F20001 		movt	r1, #:upper16:.LC0
- 113 0016 4FF48072 		mov	r2, #256
- 114 001a 4FF00503 		mov	r3, #5
- 115 001e FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
+  98              		.loc 2 54 0
+  99 0006 40F20000 		movw	r0, #:lower16:g_LedTast
+ 100 000a C0F20000 		movt	r0, #:upper16:g_LedTast
+ 101 000e 40F20001 		movw	r1, #:lower16:.LC0
+ 102 0012 C0F20001 		movt	r1, #:upper16:.LC0
+ 103 0016 4FF48072 		mov	r2, #256
+ 104 001a 4FF00503 		mov	r3, #5
+ 105 001e FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
   55:../main.cpp   **** 	g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
- 116              		.loc 2 55 0
- 117 0022 40F20000 		movw	r0, #:lower16:g_Menue
- 118 0026 C0F20000 		movt	r0, #:upper16:g_Menue
- 119 002a 40F20001 		movw	r1, #:lower16:.LC1
- 120 002e C0F20001 		movt	r1, #:upper16:.LC1
- 121 0032 4FF40072 		mov	r2, #512
- 122 0036 4FF00303 		mov	r3, #3
- 123 003a FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
-  56:../main.cpp   **** 	g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
- 124              		.loc 2 56 0
- 125 003e 40F20000 		movw	r0, #:lower16:g_FileHandler
- 126 0042 C0F20000 		movt	r0, #:upper16:g_FileHandler
- 127 0046 40F20001 		movw	r1, #:lower16:.LC2
- 128 004a C0F20001 		movt	r1, #:upper16:.LC2
- 129 004e 4FF42062 		mov	r2, #2560
- 130 0052 4FF00103 		mov	r3, #1
- 131 0056 FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
+ 106              		.loc 2 55 0
+ 107 0022 40F20000 		movw	r0, #:lower16:g_Menue
+ 108 0026 C0F20000 		movt	r0, #:upper16:g_Menue
+ 109 002a 40F20001 		movw	r1, #:lower16:.LC1
+ 110 002e C0F20001 		movt	r1, #:upper16:.LC1
+ 111 0032 4FF40072 		mov	r2, #512
+ 112 0036 4FF00303 		mov	r3, #3
+ 113 003a FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
+  56:../main.cpp   **** 	//g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
   57:../main.cpp   **** 
   58:../main.cpp   **** 	/**
   59:../main.cpp   **** 	 * Initialise the hardware for all Tasks and
   60:../main.cpp   **** 	 * then FreeRTOS takes control of execution
   61:../main.cpp   **** 	 */
   62:../main.cpp   **** 	CFreeRTOS::InitHardwareForManagedTasks();
- 132              		.loc 2 62 0
- 133 005a FFF7FEFF 		bl	_ZN9CFreeRTOS27InitHardwareForManagedTasksEv
+ 114              		.loc 2 62 0
+ 115 003e FFF7FEFF 		bl	_ZN9CFreeRTOS27InitHardwareForManagedTasksEv
   63:../main.cpp   **** 	CFreeRTOS::StartScheduler();
- 134              		.loc 2 63 0
- 135 005e FFF7FEFF 		bl	_ZN9CFreeRTOS14StartSchedulerEv
- 136              	.L3:
+ 116              		.loc 2 63 0
+ 117 0042 FFF7FEFF 		bl	_ZN9CFreeRTOS14StartSchedulerEv
+ 118              	.L3:
   64:../main.cpp   **** 
   65:../main.cpp   **** 	while(1){
   66:../main.cpp   **** 		u++;
- 137              		.loc 2 66 0 discriminator 1
- 138 0062 7B68     		ldr	r3, [r7, #4]
- 139 0064 03F10103 		add	r3, r3, #1
- 140 0068 7B60     		str	r3, [r7, #4]
+ 119              		.loc 2 66 0 discriminator 1
+ 120 0046 7B68     		ldr	r3, [r7, #4]
+ 121 0048 03F10103 		add	r3, r3, #1
+ 122 004c 7B60     		str	r3, [r7, #4]
   65:../main.cpp   **** 	while(1){
- 141              		.loc 2 65 0 discriminator 1
- 142 006a FAE7     		b	.L3
- 143              	.LBE2:
- 144              		.cfi_endproc
- 145              	.LFE140:
- 147              		.section	.text.vApplicationTickHook,"ax",%progbits
- 148              		.align	2
- 149              		.global	vApplicationTickHook
- 150              		.thumb
- 151              		.thumb_func
- 153              	vApplicationTickHook:
- 154              	.LFB141:
+ 123              		.loc 2 65 0 discriminator 1
+ 124 004e FAE7     		b	.L3
+ 125              	.LBE2:
+ 126              		.cfi_endproc
+ 127              	.LFE140:
+ 129              		.section	.text.vApplicationTickHook,"ax",%progbits
+ 130              		.align	2
+ 131              		.global	vApplicationTickHook
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	vApplicationTickHook:
+ 136              	.LFB141:
   67:../main.cpp   **** 	}
   68:../main.cpp   **** 
   69:../main.cpp   **** 	return 0;
@@ -284,167 +262,167 @@
   75:../main.cpp   **** 	// This FreeRTOS callback function gets called once per tick (default = 1000Hz).
   76:../main.cpp   **** 	// ----------------------------------------------------------------------------
   77:../main.cpp   **** 	void vApplicationTickHook( void ) {
- 155              		.loc 2 77 0
- 156              		.cfi_startproc
- 157              		@ args = 0, pretend = 0, frame = 0
- 158              		@ frame_needed = 1, uses_anonymous_args = 0
- 159              		@ link register save eliminated.
- 160 0000 80B4     		push	{r7}
- 161              	.LCFI5:
- 162              		.cfi_def_cfa_offset 4
- 163              		.cfi_offset 7, -4
- 164 0002 00AF     		add	r7, sp, #0
- 165              	.LCFI6:
- 166              		.cfi_def_cfa_register 7
+ 137              		.loc 2 77 0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 1, uses_anonymous_args = 0
+ 141              		@ link register save eliminated.
+ 142 0000 80B4     		push	{r7}
+ 143              	.LCFI5:
+ 144              		.cfi_def_cfa_offset 4
+ 145              		.cfi_offset 7, -4
+ 146 0002 00AF     		add	r7, sp, #0
+ 147              	.LCFI6:
+ 148              		.cfi_def_cfa_register 7
   78:../main.cpp   **** 
   79:../main.cpp   **** 	}
- 167              		.loc 2 79 0
- 168 0004 BD46     		mov	sp, r7
- 169 0006 80BC     		pop	{r7}
- 170 0008 7047     		bx	lr
- 171              		.cfi_endproc
- 172              	.LFE141:
- 174 000a 00BF     		.section	.text.vApplicationIdleHook,"ax",%progbits
- 175              		.align	2
- 176              		.global	vApplicationIdleHook
- 177              		.thumb
- 178              		.thumb_func
- 180              	vApplicationIdleHook:
- 181              	.LFB142:
+ 149              		.loc 2 79 0
+ 150 0004 BD46     		mov	sp, r7
+ 151 0006 80BC     		pop	{r7}
+ 152 0008 7047     		bx	lr
+ 153              		.cfi_endproc
+ 154              	.LFE141:
+ 156 000a 00BF     		.section	.text.vApplicationIdleHook,"ax",%progbits
+ 157              		.align	2
+ 158              		.global	vApplicationIdleHook
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	vApplicationIdleHook:
+ 163              	.LFB142:
   80:../main.cpp   **** 
   81:../main.cpp   **** 	// This FreeRTOS call-back function gets when no other task is ready to execute.
   82:../main.cpp   **** 	// On a completely unloaded system this is getting called at over 2.5MHz!
   83:../main.cpp   **** 	// ----------------------------------------------------------------------------
   84:../main.cpp   **** 	void vApplicationIdleHook( void ) {
- 182              		.loc 2 84 0
- 183              		.cfi_startproc
- 184              		@ args = 0, pretend = 0, frame = 0
- 185              		@ frame_needed = 1, uses_anonymous_args = 0
- 186              		@ link register save eliminated.
- 187 0000 80B4     		push	{r7}
- 188              	.LCFI7:
- 189              		.cfi_def_cfa_offset 4
- 190              		.cfi_offset 7, -4
- 191 0002 00AF     		add	r7, sp, #0
- 192              	.LCFI8:
- 193              		.cfi_def_cfa_register 7
+ 164              		.loc 2 84 0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 1, uses_anonymous_args = 0
+ 168              		@ link register save eliminated.
+ 169 0000 80B4     		push	{r7}
+ 170              	.LCFI7:
+ 171              		.cfi_def_cfa_offset 4
+ 172              		.cfi_offset 7, -4
+ 173 0002 00AF     		add	r7, sp, #0
+ 174              	.LCFI8:
+ 175              		.cfi_def_cfa_register 7
   85:../main.cpp   **** 
   86:../main.cpp   **** 	}
- 194              		.loc 2 86 0
- 195 0004 BD46     		mov	sp, r7
- 196 0006 80BC     		pop	{r7}
- 197 0008 7047     		bx	lr
- 198              		.cfi_endproc
- 199              	.LFE142:
- 201 000a 00BF     		.section	.text.vApplicationMallocFailedHook,"ax",%progbits
- 202              		.align	2
- 203              		.global	vApplicationMallocFailedHook
- 204              		.thumb
- 205              		.thumb_func
- 207              	vApplicationMallocFailedHook:
- 208              	.LFB143:
+ 176              		.loc 2 86 0
+ 177 0004 BD46     		mov	sp, r7
+ 178 0006 80BC     		pop	{r7}
+ 179 0008 7047     		bx	lr
+ 180              		.cfi_endproc
+ 181              	.LFE142:
+ 183 000a 00BF     		.section	.text.vApplicationMallocFailedHook,"ax",%progbits
+ 184              		.align	2
+ 185              		.global	vApplicationMallocFailedHook
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	vApplicationMallocFailedHook:
+ 190              	.LFB143:
   87:../main.cpp   **** 
   88:../main.cpp   **** 	// A required FreeRTOS function.
   89:../main.cpp   **** 	// ----------------------------------------------------------------------------
   90:../main.cpp   **** 	void vApplicationMallocFailedHook( void ) {
- 209              		.loc 2 90 0
- 210              		.cfi_startproc
- 211              		@ args = 0, pretend = 0, frame = 0
- 212              		@ frame_needed = 1, uses_anonymous_args = 0
- 213              		@ link register save eliminated.
- 214 0000 80B4     		push	{r7}
- 215              	.LCFI9:
- 216              		.cfi_def_cfa_offset 4
- 217              		.cfi_offset 7, -4
- 218 0002 00AF     		add	r7, sp, #0
- 219              	.LCFI10:
- 220              		.cfi_def_cfa_register 7
+ 191              		.loc 2 90 0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 1, uses_anonymous_args = 0
+ 195              		@ link register save eliminated.
+ 196 0000 80B4     		push	{r7}
+ 197              	.LCFI9:
+ 198              		.cfi_def_cfa_offset 4
+ 199              		.cfi_offset 7, -4
+ 200 0002 00AF     		add	r7, sp, #0
+ 201              	.LCFI10:
+ 202              		.cfi_def_cfa_register 7
   91:../main.cpp   **** 		configASSERT( 0 );  // Latch on any failure / error.
   92:../main.cpp   **** 	}
- 221              		.loc 2 92 0
- 222 0004 BD46     		mov	sp, r7
- 223 0006 80BC     		pop	{r7}
- 224 0008 7047     		bx	lr
- 225              		.cfi_endproc
- 226              	.LFE143:
- 228 000a 00BF     		.section	.text.vApplicationStackOverflowHook,"ax",%progbits
- 229              		.align	2
- 230              		.global	vApplicationStackOverflowHook
- 231              		.thumb
- 232              		.thumb_func
- 234              	vApplicationStackOverflowHook:
- 235              	.LFB144:
+ 203              		.loc 2 92 0
+ 204 0004 BD46     		mov	sp, r7
+ 205 0006 80BC     		pop	{r7}
+ 206 0008 7047     		bx	lr
+ 207              		.cfi_endproc
+ 208              	.LFE143:
+ 210 000a 00BF     		.section	.text.vApplicationStackOverflowHook,"ax",%progbits
+ 211              		.align	2
+ 212              		.global	vApplicationStackOverflowHook
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	vApplicationStackOverflowHook:
+ 217              	.LFB144:
   93:../main.cpp   **** 
   94:../main.cpp   **** 	// A required FreeRTOS function. gets called on stack overflow
   95:../main.cpp   **** 	// ----------------------------------------------------------------------------
   96:../main.cpp   **** 	void vApplicationStackOverflowHook( xTaskHandle *pxTask, signed char *pcTaskName ){
- 236              		.loc 2 96 0
- 237              		.cfi_startproc
- 238              		@ args = 0, pretend = 0, frame = 8
- 239              		@ frame_needed = 1, uses_anonymous_args = 0
- 240              		@ link register save eliminated.
- 241 0000 80B4     		push	{r7}
- 242              	.LCFI11:
- 243              		.cfi_def_cfa_offset 4
- 244              		.cfi_offset 7, -4
- 245 0002 83B0     		sub	sp, sp, #12
- 246              	.LCFI12:
- 247              		.cfi_def_cfa_offset 16
- 248 0004 00AF     		add	r7, sp, #0
- 249              	.LCFI13:
- 250              		.cfi_def_cfa_register 7
- 251 0006 7860     		str	r0, [r7, #4]
- 252 0008 3960     		str	r1, [r7, #0]
- 253              	.L8:
+ 218              		.loc 2 96 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 8
+ 221              		@ frame_needed = 1, uses_anonymous_args = 0
+ 222              		@ link register save eliminated.
+ 223 0000 80B4     		push	{r7}
+ 224              	.LCFI11:
+ 225              		.cfi_def_cfa_offset 4
+ 226              		.cfi_offset 7, -4
+ 227 0002 83B0     		sub	sp, sp, #12
+ 228              	.LCFI12:
+ 229              		.cfi_def_cfa_offset 16
+ 230 0004 00AF     		add	r7, sp, #0
+ 231              	.LCFI13:
+ 232              		.cfi_def_cfa_register 7
+ 233 0006 7860     		str	r0, [r7, #4]
+ 234 0008 3960     		str	r1, [r7, #0]
+ 235              	.L8:
   97:../main.cpp   **** 		/* TODO, implement your code here */
   98:../main.cpp   **** 		while(1);
- 254              		.loc 2 98 0 discriminator 1
- 255 000a FEE7     		b	.L8
- 256              		.cfi_endproc
- 257              	.LFE144:
- 259              		.section	.text.EVAL_AUDIO_GetSampleCallBack,"ax",%progbits
- 260              		.align	2
- 261              		.global	EVAL_AUDIO_GetSampleCallBack
- 262              		.thumb
- 263              		.thumb_func
- 265              	EVAL_AUDIO_GetSampleCallBack:
- 266              	.LFB145:
+ 236              		.loc 2 98 0 discriminator 1
+ 237 000a FEE7     		b	.L8
+ 238              		.cfi_endproc
+ 239              	.LFE144:
+ 241              		.section	.text.EVAL_AUDIO_GetSampleCallBack,"ax",%progbits
+ 242              		.align	2
+ 243              		.global	EVAL_AUDIO_GetSampleCallBack
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	EVAL_AUDIO_GetSampleCallBack:
+ 248              	.LFB145:
   99:../main.cpp   **** 	}
  100:../main.cpp   **** 
  101:../main.cpp   **** 	/* User Callbacks: user has to implement these functions in his code if
  102:../main.cpp   **** 	  they are needed. -----------------------------------------------------------*/
  103:../main.cpp   **** 
  104:../main.cpp   **** 	uint16_t EVAL_AUDIO_GetSampleCallBack(void){
- 267              		.loc 2 104 0
- 268              		.cfi_startproc
- 269              		@ args = 0, pretend = 0, frame = 0
- 270              		@ frame_needed = 1, uses_anonymous_args = 0
- 271              		@ link register save eliminated.
- 272 0000 80B4     		push	{r7}
- 273              	.LCFI14:
- 274              		.cfi_def_cfa_offset 4
- 275              		.cfi_offset 7, -4
- 276 0002 00AF     		add	r7, sp, #0
- 277              	.LCFI15:
- 278              		.cfi_def_cfa_register 7
+ 249              		.loc 2 104 0
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 1, uses_anonymous_args = 0
+ 253              		@ link register save eliminated.
+ 254 0000 80B4     		push	{r7}
+ 255              	.LCFI14:
+ 256              		.cfi_def_cfa_offset 4
+ 257              		.cfi_offset 7, -4
+ 258 0002 00AF     		add	r7, sp, #0
+ 259              	.LCFI15:
+ 260              		.cfi_def_cfa_register 7
  105:../main.cpp   **** 		return -1;
- 279              		.loc 2 105 0
- 280 0004 4FF6FF73 		movw	r3, #65535
+ 261              		.loc 2 105 0
+ 262 0004 4FF6FF73 		movw	r3, #65535
  106:../main.cpp   **** 	}
- 281              		.loc 2 106 0
- 282 0008 1846     		mov	r0, r3
- 283 000a BD46     		mov	sp, r7
- 284 000c 80BC     		pop	{r7}
- 285 000e 7047     		bx	lr
- 286              		.cfi_endproc
- 287              	.LFE145:
- 289              		.section	.text.EVAL_AUDIO_TransferComplete_CallBack,"ax",%progbits
- 290              		.align	2
- 291              		.global	EVAL_AUDIO_TransferComplete_CallBack
- 292              		.thumb
- 293              		.thumb_func
- 295              	EVAL_AUDIO_TransferComplete_CallBack:
- 296              	.LFB146:
+ 263              		.loc 2 106 0
+ 264 0008 1846     		mov	r0, r3
+ 265 000a BD46     		mov	sp, r7
+ 266 000c 80BC     		pop	{r7}
+ 267 000e 7047     		bx	lr
+ 268              		.cfi_endproc
+ 269              	.LFE145:
+ 271              		.section	.text.EVAL_AUDIO_TransferComplete_CallBack,"ax",%progbits
+ 272              		.align	2
+ 273              		.global	EVAL_AUDIO_TransferComplete_CallBack
+ 274              		.thumb
+ 275              		.thumb_func
+ 277              	EVAL_AUDIO_TransferComplete_CallBack:
+ 278              	.LFB146:
  107:../main.cpp   **** 
  108:../main.cpp   **** 	/* This function is called when the requested data has been completely transferred.
  109:../main.cpp   **** 	   In Normal mode (when  the define AUDIO_MAL_MODE_NORMAL is enabled) this function
@@ -452,113 +430,113 @@
  111:../main.cpp   **** 	   In circular mode (when  the define AUDIO_MAL_MODE_CIRCULAR is enabled) this
  112:../main.cpp   **** 	   function is called at the end of the current buffer transmission. */
  113:../main.cpp   **** 	void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
- 297              		.loc 2 113 0
- 298              		.cfi_startproc
- 299              		@ args = 0, pretend = 0, frame = 8
- 300              		@ frame_needed = 1, uses_anonymous_args = 0
- 301              		@ link register save eliminated.
- 302 0000 80B4     		push	{r7}
- 303              	.LCFI16:
- 304              		.cfi_def_cfa_offset 4
- 305              		.cfi_offset 7, -4
- 306 0002 83B0     		sub	sp, sp, #12
- 307              	.LCFI17:
- 308              		.cfi_def_cfa_offset 16
- 309 0004 00AF     		add	r7, sp, #0
- 310              	.LCFI18:
- 311              		.cfi_def_cfa_register 7
- 312 0006 7860     		str	r0, [r7, #4]
- 313 0008 3960     		str	r1, [r7, #0]
+ 279              		.loc 2 113 0
+ 280              		.cfi_startproc
+ 281              		@ args = 0, pretend = 0, frame = 8
+ 282              		@ frame_needed = 1, uses_anonymous_args = 0
+ 283              		@ link register save eliminated.
+ 284 0000 80B4     		push	{r7}
+ 285              	.LCFI16:
+ 286              		.cfi_def_cfa_offset 4
+ 287              		.cfi_offset 7, -4
+ 288 0002 83B0     		sub	sp, sp, #12
+ 289              	.LCFI17:
+ 290              		.cfi_def_cfa_offset 16
+ 291 0004 00AF     		add	r7, sp, #0
+ 292              	.LCFI18:
+ 293              		.cfi_def_cfa_register 7
+ 294 0006 7860     		str	r0, [r7, #4]
+ 295 0008 3960     		str	r1, [r7, #0]
  114:../main.cpp   **** 
  115:../main.cpp   **** 	}
- 314              		.loc 2 115 0
- 315 000a 07F10C07 		add	r7, r7, #12
- 316 000e BD46     		mov	sp, r7
- 317 0010 80BC     		pop	{r7}
- 318 0012 7047     		bx	lr
- 319              		.cfi_endproc
- 320              	.LFE146:
- 322              		.section	.text.EVAL_AUDIO_HalfTransfer_CallBack,"ax",%progbits
- 323              		.align	2
- 324              		.global	EVAL_AUDIO_HalfTransfer_CallBack
- 325              		.thumb
- 326              		.thumb_func
- 328              	EVAL_AUDIO_HalfTransfer_CallBack:
- 329              	.LFB147:
+ 296              		.loc 2 115 0
+ 297 000a 07F10C07 		add	r7, r7, #12
+ 298 000e BD46     		mov	sp, r7
+ 299 0010 80BC     		pop	{r7}
+ 300 0012 7047     		bx	lr
+ 301              		.cfi_endproc
+ 302              	.LFE146:
+ 304              		.section	.text.EVAL_AUDIO_HalfTransfer_CallBack,"ax",%progbits
+ 305              		.align	2
+ 306              		.global	EVAL_AUDIO_HalfTransfer_CallBack
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	EVAL_AUDIO_HalfTransfer_CallBack:
+ 311              	.LFB147:
  116:../main.cpp   **** 
  117:../main.cpp   **** 	/* This function is called when half of the requested buffer has been transferred
  118:../main.cpp   **** 	   This callback is useful in Circular mode only (when AUDIO_MAL_MODE_CIRCULAR
  119:../main.cpp   **** 	   define is enabled)*/
  120:../main.cpp   **** 	void EVAL_AUDIO_HalfTransfer_CallBack(uint32_t pBuffer, uint32_t Size){
- 330              		.loc 2 120 0
- 331              		.cfi_startproc
- 332              		@ args = 0, pretend = 0, frame = 8
- 333              		@ frame_needed = 1, uses_anonymous_args = 0
- 334              		@ link register save eliminated.
- 335 0000 80B4     		push	{r7}
- 336              	.LCFI19:
- 337              		.cfi_def_cfa_offset 4
- 338              		.cfi_offset 7, -4
- 339 0002 83B0     		sub	sp, sp, #12
- 340              	.LCFI20:
- 341              		.cfi_def_cfa_offset 16
- 342 0004 00AF     		add	r7, sp, #0
- 343              	.LCFI21:
- 344              		.cfi_def_cfa_register 7
- 345 0006 7860     		str	r0, [r7, #4]
- 346 0008 3960     		str	r1, [r7, #0]
+ 312              		.loc 2 120 0
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 8
+ 315              		@ frame_needed = 1, uses_anonymous_args = 0
+ 316              		@ link register save eliminated.
+ 317 0000 80B4     		push	{r7}
+ 318              	.LCFI19:
+ 319              		.cfi_def_cfa_offset 4
+ 320              		.cfi_offset 7, -4
+ 321 0002 83B0     		sub	sp, sp, #12
+ 322              	.LCFI20:
+ 323              		.cfi_def_cfa_offset 16
+ 324 0004 00AF     		add	r7, sp, #0
+ 325              	.LCFI21:
+ 326              		.cfi_def_cfa_register 7
+ 327 0006 7860     		str	r0, [r7, #4]
+ 328 0008 3960     		str	r1, [r7, #0]
  121:../main.cpp   **** 
  122:../main.cpp   **** 	}
- 347              		.loc 2 122 0
- 348 000a 07F10C07 		add	r7, r7, #12
- 349 000e BD46     		mov	sp, r7
- 350 0010 80BC     		pop	{r7}
- 351 0012 7047     		bx	lr
- 352              		.cfi_endproc
- 353              	.LFE147:
- 355              		.section	.text.EVAL_AUDIO_Error_CallBack,"ax",%progbits
- 356              		.align	2
- 357              		.global	EVAL_AUDIO_Error_CallBack
- 358              		.thumb
- 359              		.thumb_func
- 361              	EVAL_AUDIO_Error_CallBack:
- 362              	.LFB148:
+ 329              		.loc 2 122 0
+ 330 000a 07F10C07 		add	r7, r7, #12
+ 331 000e BD46     		mov	sp, r7
+ 332 0010 80BC     		pop	{r7}
+ 333 0012 7047     		bx	lr
+ 334              		.cfi_endproc
+ 335              	.LFE147:
+ 337              		.section	.text.EVAL_AUDIO_Error_CallBack,"ax",%progbits
+ 338              		.align	2
+ 339              		.global	EVAL_AUDIO_Error_CallBack
+ 340              		.thumb
+ 341              		.thumb_func
+ 343              	EVAL_AUDIO_Error_CallBack:
+ 344              	.LFB148:
  123:../main.cpp   **** 
  124:../main.cpp   **** 	/* This function is called when an Interrupt due to transfer error on or peripheral
  125:../main.cpp   **** 	   error occurs. */
  126:../main.cpp   **** 	void EVAL_AUDIO_Error_CallBack(void* pData){
- 363              		.loc 2 126 0
- 364              		.cfi_startproc
- 365              		@ args = 0, pretend = 0, frame = 8
- 366              		@ frame_needed = 1, uses_anonymous_args = 0
- 367              		@ link register save eliminated.
- 368 0000 80B4     		push	{r7}
- 369              	.LCFI22:
- 370              		.cfi_def_cfa_offset 4
- 371              		.cfi_offset 7, -4
- 372 0002 83B0     		sub	sp, sp, #12
- 373              	.LCFI23:
- 374              		.cfi_def_cfa_offset 16
- 375 0004 00AF     		add	r7, sp, #0
- 376              	.LCFI24:
- 377              		.cfi_def_cfa_register 7
- 378 0006 7860     		str	r0, [r7, #4]
+ 345              		.loc 2 126 0
+ 346              		.cfi_startproc
+ 347              		@ args = 0, pretend = 0, frame = 8
+ 348              		@ frame_needed = 1, uses_anonymous_args = 0
+ 349              		@ link register save eliminated.
+ 350 0000 80B4     		push	{r7}
+ 351              	.LCFI22:
+ 352              		.cfi_def_cfa_offset 4
+ 353              		.cfi_offset 7, -4
+ 354 0002 83B0     		sub	sp, sp, #12
+ 355              	.LCFI23:
+ 356              		.cfi_def_cfa_offset 16
+ 357 0004 00AF     		add	r7, sp, #0
+ 358              	.LCFI24:
+ 359              		.cfi_def_cfa_register 7
+ 360 0006 7860     		str	r0, [r7, #4]
  127:../main.cpp   **** 
  128:../main.cpp   **** 	}
- 379              		.loc 2 128 0
- 380 0008 07F10C07 		add	r7, r7, #12
- 381 000c BD46     		mov	sp, r7
- 382 000e 80BC     		pop	{r7}
- 383 0010 7047     		bx	lr
- 384              		.cfi_endproc
- 385              	.LFE148:
- 387 0012 00BF     		.section	.text.Codec_TIMEOUT_UserCallback,"ax",%progbits
- 388              		.align	2
- 389              		.global	Codec_TIMEOUT_UserCallback
- 390              		.thumb
- 391              		.thumb_func
- 393              	Codec_TIMEOUT_UserCallback:
- 394              	.LFB149:
+ 361              		.loc 2 128 0
+ 362 0008 07F10C07 		add	r7, r7, #12
+ 363 000c BD46     		mov	sp, r7
+ 364 000e 80BC     		pop	{r7}
+ 365 0010 7047     		bx	lr
+ 366              		.cfi_endproc
+ 367              	.LFE148:
+ 369 0012 00BF     		.section	.text.Codec_TIMEOUT_UserCallback,"ax",%progbits
+ 370              		.align	2
+ 371              		.global	Codec_TIMEOUT_UserCallback
+ 372              		.thumb
+ 373              		.thumb_func
+ 375              	Codec_TIMEOUT_UserCallback:
+ 376              	.LFB149:
  129:../main.cpp   **** 
  130:../main.cpp   **** 	/* Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition
  131:../main.cpp   **** 	   occurs during communication (waiting on an event that doesn't occur, bus
@@ -568,36 +546,36 @@
  135:../main.cpp   **** 	   Typically the user implementation of this callback should reset I2C peripheral
  136:../main.cpp   **** 	   and re-initialize communication or in worst case reset all the application. */
  137:../main.cpp   **** 	uint32_t Codec_TIMEOUT_UserCallback(void){
- 395              		.loc 2 137 0
- 396              		.cfi_startproc
- 397              		@ args = 0, pretend = 0, frame = 0
- 398              		@ frame_needed = 1, uses_anonymous_args = 0
- 399              		@ link register save eliminated.
- 400 0000 80B4     		push	{r7}
- 401              	.LCFI25:
- 402              		.cfi_def_cfa_offset 4
- 403              		.cfi_offset 7, -4
- 404 0002 00AF     		add	r7, sp, #0
- 405              	.LCFI26:
- 406              		.cfi_def_cfa_register 7
+ 377              		.loc 2 137 0
+ 378              		.cfi_startproc
+ 379              		@ args = 0, pretend = 0, frame = 0
+ 380              		@ frame_needed = 1, uses_anonymous_args = 0
+ 381              		@ link register save eliminated.
+ 382 0000 80B4     		push	{r7}
+ 383              	.LCFI25:
+ 384              		.cfi_def_cfa_offset 4
+ 385              		.cfi_offset 7, -4
+ 386 0002 00AF     		add	r7, sp, #0
+ 387              	.LCFI26:
+ 388              		.cfi_def_cfa_register 7
  138:../main.cpp   **** 		return -1;
- 407              		.loc 2 138 0
- 408 0004 4FF0FF33 		mov	r3, #-1
+ 389              		.loc 2 138 0
+ 390 0004 4FF0FF33 		mov	r3, #-1
  139:../main.cpp   **** 	}
- 409              		.loc 2 139 0
- 410 0008 1846     		mov	r0, r3
- 411 000a BD46     		mov	sp, r7
- 412 000c 80BC     		pop	{r7}
- 413 000e 7047     		bx	lr
- 414              		.cfi_endproc
- 415              	.LFE149:
- 417              		.section	.text.LIS302DL_TIMEOUT_UserCallback,"ax",%progbits
- 418              		.align	2
- 419              		.global	LIS302DL_TIMEOUT_UserCallback
- 420              		.thumb
- 421              		.thumb_func
- 423              	LIS302DL_TIMEOUT_UserCallback:
- 424              	.LFB150:
+ 391              		.loc 2 139 0
+ 392 0008 1846     		mov	r0, r3
+ 393 000a BD46     		mov	sp, r7
+ 394 000c 80BC     		pop	{r7}
+ 395 000e 7047     		bx	lr
+ 396              		.cfi_endproc
+ 397              	.LFE149:
+ 399              		.section	.text.LIS302DL_TIMEOUT_UserCallback,"ax",%progbits
+ 400              		.align	2
+ 401              		.global	LIS302DL_TIMEOUT_UserCallback
+ 402              		.thumb
+ 403              		.thumb_func
+ 405              	LIS302DL_TIMEOUT_UserCallback:
+ 406              	.LFB150:
  140:../main.cpp   **** 
  141:../main.cpp   **** 	/* LIS302DL_TIMEOUT_UserCallback() function is called whenever a timeout condition
  142:../main.cpp   **** 	   occure during communication (waiting transmit data register empty flag(TXE)
@@ -607,213 +585,197 @@
  146:../main.cpp   **** 	   Typically the user implementation of this callback should reset MEMS peripheral
  147:../main.cpp   **** 	   and re-initialize communication or in worst case reset all the application. */
  148:../main.cpp   **** 	uint32_t LIS302DL_TIMEOUT_UserCallback(void){
- 425              		.loc 2 148 0
- 426              		.cfi_startproc
- 427              		@ args = 0, pretend = 0, frame = 0
- 428              		@ frame_needed = 1, uses_anonymous_args = 0
- 429              		@ link register save eliminated.
- 430 0000 80B4     		push	{r7}
- 431              	.LCFI27:
- 432              		.cfi_def_cfa_offset 4
- 433              		.cfi_offset 7, -4
- 434 0002 00AF     		add	r7, sp, #0
- 435              	.LCFI28:
- 436              		.cfi_def_cfa_register 7
+ 407              		.loc 2 148 0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 0
+ 410              		@ frame_needed = 1, uses_anonymous_args = 0
+ 411              		@ link register save eliminated.
+ 412 0000 80B4     		push	{r7}
+ 413              	.LCFI27:
+ 414              		.cfi_def_cfa_offset 4
+ 415              		.cfi_offset 7, -4
+ 416 0002 00AF     		add	r7, sp, #0
+ 417              	.LCFI28:
+ 418              		.cfi_def_cfa_register 7
  149:../main.cpp   **** 		return -1;
- 437              		.loc 2 149 0
- 438 0004 4FF0FF33 		mov	r3, #-1
+ 419              		.loc 2 149 0
+ 420 0004 4FF0FF33 		mov	r3, #-1
  150:../main.cpp   **** 	}
- 439              		.loc 2 150 0
- 440 0008 1846     		mov	r0, r3
- 441 000a BD46     		mov	sp, r7
- 442 000c 80BC     		pop	{r7}
- 443 000e 7047     		bx	lr
- 444              		.cfi_endproc
- 445              	.LFE150:
- 447              		.section	.text._Z41__static_initialization_and_destruction_0ii,"ax",%progbits
- 448              		.align	2
- 449              		.thumb
- 450              		.thumb_func
- 452              	_Z41__static_initialization_and_destruction_0ii:
- 453              	.LFB151:
+ 421              		.loc 2 150 0
+ 422 0008 1846     		mov	r0, r3
+ 423 000a BD46     		mov	sp, r7
+ 424 000c 80BC     		pop	{r7}
+ 425 000e 7047     		bx	lr
+ 426              		.cfi_endproc
+ 427              	.LFE150:
+ 429              		.section	.text._Z41__static_initialization_and_destruction_0ii,"ax",%progbits
+ 430              		.align	2
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	_Z41__static_initialization_and_destruction_0ii:
+ 435              	.LFB151:
  151:../main.cpp   **** } // extern "C"
- 454              		.loc 2 151 0
- 455              		.cfi_startproc
- 456              		@ args = 0, pretend = 0, frame = 8
- 457              		@ frame_needed = 1, uses_anonymous_args = 0
- 458 0000 80B5     		push	{r7, lr}
- 459              	.LCFI29:
- 460              		.cfi_def_cfa_offset 8
- 461              		.cfi_offset 14, -4
- 462              		.cfi_offset 7, -8
- 463 0002 82B0     		sub	sp, sp, #8
- 464              	.LCFI30:
- 465              		.cfi_def_cfa_offset 16
- 466 0004 00AF     		add	r7, sp, #0
- 467              	.LCFI31:
- 468              		.cfi_def_cfa_register 7
- 469 0006 7860     		str	r0, [r7, #4]
- 470 0008 3960     		str	r1, [r7, #0]
- 471              		.loc 2 151 0
- 472 000a 7B68     		ldr	r3, [r7, #4]
- 473 000c 012B     		cmp	r3, #1
- 474 000e 5ED1     		bne	.L15
- 475              		.loc 2 151 0 is_stmt 0 discriminator 1
- 476 0010 3A68     		ldr	r2, [r7, #0]
- 477 0012 4FF6FF73 		movw	r3, #65535
- 478 0016 9A42     		cmp	r2, r3
- 479 0018 59D1     		bne	.L15
+ 436              		.loc 2 151 0
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 8
+ 439              		@ frame_needed = 1, uses_anonymous_args = 0
+ 440 0000 80B5     		push	{r7, lr}
+ 441              	.LCFI29:
+ 442              		.cfi_def_cfa_offset 8
+ 443              		.cfi_offset 14, -4
+ 444              		.cfi_offset 7, -8
+ 445 0002 82B0     		sub	sp, sp, #8
+ 446              	.LCFI30:
+ 447              		.cfi_def_cfa_offset 16
+ 448 0004 00AF     		add	r7, sp, #0
+ 449              	.LCFI31:
+ 450              		.cfi_def_cfa_register 7
+ 451 0006 7860     		str	r0, [r7, #4]
+ 452 0008 3960     		str	r1, [r7, #0]
+ 453              		.loc 2 151 0
+ 454 000a 7B68     		ldr	r3, [r7, #4]
+ 455 000c 012B     		cmp	r3, #1
+ 456 000e 49D1     		bne	.L15
+ 457              		.loc 2 151 0 is_stmt 0 discriminator 1
+ 458 0010 3A68     		ldr	r2, [r7, #0]
+ 459 0012 4FF6FF73 		movw	r3, #65535
+ 460 0016 9A42     		cmp	r2, r3
+ 461 0018 44D1     		bne	.L15
   26:../main.cpp   **** CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
- 480              		.loc 2 26 0 is_stmt 1
- 481 001a 40F20000 		movw	r0, #:lower16:g_LedTast
- 482 001e C0F20000 		movt	r0, #:upper16:g_LedTast
- 483 0022 4FF03201 		mov	r1, #50
- 484 0026 FFF7FEFF 		bl	_ZN24CLedHeartBeatSTM32F4DiscC1Em
- 485 002a 40F20003 		movw	r3, #:lower16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
- 486 002e C0F20003 		movt	r3, #:upper16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
- 487 0032 40F20000 		movw	r0, #:lower16:g_LedTast
- 488 0036 C0F20000 		movt	r0, #:upper16:g_LedTast
- 489 003a 1946     		mov	r1, r3
- 490 003c 40F20002 		movw	r2, #:lower16:__dso_handle
- 491 0040 C0F20002 		movt	r2, #:upper16:__dso_handle
- 492 0044 FFF7FEFF 		bl	__aeabi_atexit
+ 462              		.loc 2 26 0 is_stmt 1
+ 463 001a 40F20000 		movw	r0, #:lower16:g_LedTast
+ 464 001e C0F20000 		movt	r0, #:upper16:g_LedTast
+ 465 0022 4FF03201 		mov	r1, #50
+ 466 0026 FFF7FEFF 		bl	_ZN24CLedHeartBeatSTM32F4DiscC1Em
+ 467 002a 40F20003 		movw	r3, #:lower16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
+ 468 002e C0F20003 		movt	r3, #:upper16:_ZN24CLedHeartBeatSTM32F4DiscD1Ev
+ 469 0032 40F20000 		movw	r0, #:lower16:g_LedTast
+ 470 0036 C0F20000 		movt	r0, #:upper16:g_LedTast
+ 471 003a 1946     		mov	r1, r3
+ 472 003c 40F20002 		movw	r2, #:lower16:__dso_handle
+ 473 0040 C0F20002 		movt	r2, #:upper16:__dso_handle
+ 474 0044 FFF7FEFF 		bl	__aeabi_atexit
   27:../main.cpp   **** CT6963_GPIO_Interface g_Display;
- 493              		.loc 2 27 0
- 494 0048 40F20000 		movw	r0, #:lower16:g_Display
- 495 004c C0F20000 		movt	r0, #:upper16:g_Display
- 496 0050 FFF7FEFF 		bl	_ZN21CT6963_GPIO_InterfaceC1Ev
- 497 0054 40F20003 		movw	r3, #:lower16:_ZN21CT6963_GPIO_InterfaceD1Ev
- 498 0058 C0F20003 		movt	r3, #:upper16:_ZN21CT6963_GPIO_InterfaceD1Ev
- 499 005c 40F20000 		movw	r0, #:lower16:g_Display
- 500 0060 C0F20000 		movt	r0, #:upper16:g_Display
- 501 0064 1946     		mov	r1, r3
- 502 0066 40F20002 		movw	r2, #:lower16:__dso_handle
- 503 006a C0F20002 		movt	r2, #:upper16:__dso_handle
- 504 006e FFF7FEFF 		bl	__aeabi_atexit
+ 475              		.loc 2 27 0
+ 476 0048 40F20000 		movw	r0, #:lower16:g_Display
+ 477 004c C0F20000 		movt	r0, #:upper16:g_Display
+ 478 0050 FFF7FEFF 		bl	_ZN21CT6963_GPIO_InterfaceC1Ev
+ 479 0054 40F20003 		movw	r3, #:lower16:_ZN21CT6963_GPIO_InterfaceD1Ev
+ 480 0058 C0F20003 		movt	r3, #:upper16:_ZN21CT6963_GPIO_InterfaceD1Ev
+ 481 005c 40F20000 		movw	r0, #:lower16:g_Display
+ 482 0060 C0F20000 		movt	r0, #:upper16:g_Display
+ 483 0064 1946     		mov	r1, r3
+ 484 0066 40F20002 		movw	r2, #:lower16:__dso_handle
+ 485 006a C0F20002 		movt	r2, #:upper16:__dso_handle
+ 486 006e FFF7FEFF 		bl	__aeabi_atexit
   28:../main.cpp   **** CMenue	g_Menue(&g_Display);
- 505              		.loc 2 28 0
- 506 0072 40F20000 		movw	r0, #:lower16:g_Menue
- 507 0076 C0F20000 		movt	r0, #:upper16:g_Menue
- 508 007a 40F20001 		movw	r1, #:lower16:g_Display
- 509 007e C0F20001 		movt	r1, #:upper16:g_Display
- 510 0082 FFF7FEFF 		bl	_ZN6CMenueC1EP11CGraphicLCD
- 511 0086 40F20003 		movw	r3, #:lower16:_ZN6CMenueD1Ev
- 512 008a C0F20003 		movt	r3, #:upper16:_ZN6CMenueD1Ev
- 513 008e 40F20000 		movw	r0, #:lower16:g_Menue
- 514 0092 C0F20000 		movt	r0, #:upper16:g_Menue
- 515 0096 1946     		mov	r1, r3
- 516 0098 40F20002 		movw	r2, #:lower16:__dso_handle
- 517 009c C0F20002 		movt	r2, #:upper16:__dso_handle
- 518 00a0 FFF7FEFF 		bl	__aeabi_atexit
-  29:../main.cpp   **** CFileHandler g_FileHandler;
- 519              		.loc 2 29 0
- 520 00a4 40F20000 		movw	r0, #:lower16:g_FileHandler
- 521 00a8 C0F20000 		movt	r0, #:upper16:g_FileHandler
- 522 00ac FFF7FEFF 		bl	_ZN12CFileHandlerC1Ev
- 523 00b0 40F20003 		movw	r3, #:lower16:_ZN12CFileHandlerD1Ev
- 524 00b4 C0F20003 		movt	r3, #:upper16:_ZN12CFileHandlerD1Ev
- 525 00b8 40F20000 		movw	r0, #:lower16:g_FileHandler
- 526 00bc C0F20000 		movt	r0, #:upper16:g_FileHandler
- 527 00c0 1946     		mov	r1, r3
- 528 00c2 40F20002 		movw	r2, #:lower16:__dso_handle
- 529 00c6 C0F20002 		movt	r2, #:upper16:__dso_handle
- 530 00ca FFF7FEFF 		bl	__aeabi_atexit
- 531              	.L15:
- 532              		.loc 2 151 0
- 533 00ce 07F10807 		add	r7, r7, #8
- 534 00d2 BD46     		mov	sp, r7
- 535 00d4 80BD     		pop	{r7, pc}
- 536              		.cfi_endproc
- 537              	.LFE151:
- 539 00d6 00BF     		.section	.rodata._ZL12c_FontNative,"a",%progbits
- 540              		.align	2
- 543              	_ZL12c_FontNative:
- 544 0000 00000000 		.space	24
- 544      00000000 
- 544      00000000 
- 544      00000000 
- 544      00000000 
- 545              		.section	.text._GLOBAL__sub_I_g_LedTast,"ax",%progbits
- 546              		.align	2
- 547              		.thumb
- 548              		.thumb_func
- 550              	_GLOBAL__sub_I_g_LedTast:
- 551              	.LFB152:
- 552              		.loc 2 151 0
- 553              		.cfi_startproc
- 554              		@ args = 0, pretend = 0, frame = 0
- 555              		@ frame_needed = 1, uses_anonymous_args = 0
- 556 0000 80B5     		push	{r7, lr}
- 557              	.LCFI32:
- 558              		.cfi_def_cfa_offset 8
- 559              		.cfi_offset 14, -4
- 560              		.cfi_offset 7, -8
- 561 0002 00AF     		add	r7, sp, #0
- 562              	.LCFI33:
- 563              		.cfi_def_cfa_register 7
- 564              		.loc 2 151 0
- 565 0004 4FF00100 		mov	r0, #1
- 566 0008 4FF6FF71 		movw	r1, #65535
- 567 000c FFF7FEFF 		bl	_Z41__static_initialization_and_destruction_0ii
- 568 0010 80BD     		pop	{r7, pc}
- 569              		.cfi_endproc
- 570              	.LFE152:
- 572 0012 00BF     		.section	.init_array,"aw",%init_array
- 573              		.align	2
- 574 0000 00000000 		.word	_GLOBAL__sub_I_g_LedTast(target1)
- 575              		.text
- 576              	.Letext0:
- 577              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 578              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 579              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 580              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
- 581              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
- 582              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
+ 487              		.loc 2 28 0
+ 488 0072 40F20000 		movw	r0, #:lower16:g_Menue
+ 489 0076 C0F20000 		movt	r0, #:upper16:g_Menue
+ 490 007a 40F20001 		movw	r1, #:lower16:g_Display
+ 491 007e C0F20001 		movt	r1, #:upper16:g_Display
+ 492 0082 FFF7FEFF 		bl	_ZN6CMenueC1EP11CGraphicLCD
+ 493 0086 40F20003 		movw	r3, #:lower16:_ZN6CMenueD1Ev
+ 494 008a C0F20003 		movt	r3, #:upper16:_ZN6CMenueD1Ev
+ 495 008e 40F20000 		movw	r0, #:lower16:g_Menue
+ 496 0092 C0F20000 		movt	r0, #:upper16:g_Menue
+ 497 0096 1946     		mov	r1, r3
+ 498 0098 40F20002 		movw	r2, #:lower16:__dso_handle
+ 499 009c C0F20002 		movt	r2, #:upper16:__dso_handle
+ 500 00a0 FFF7FEFF 		bl	__aeabi_atexit
+ 501              	.L15:
+ 502              		.loc 2 151 0
+ 503 00a4 07F10807 		add	r7, r7, #8
+ 504 00a8 BD46     		mov	sp, r7
+ 505 00aa 80BD     		pop	{r7, pc}
+ 506              		.cfi_endproc
+ 507              	.LFE151:
+ 509              		.section	.rodata._ZL12c_FontNative,"a",%progbits
+ 510              		.align	2
+ 513              	_ZL12c_FontNative:
+ 514 0000 00000000 		.space	24
+ 514      00000000 
+ 514      00000000 
+ 514      00000000 
+ 514      00000000 
+ 515              		.section	.text._GLOBAL__sub_I_g_LedTast,"ax",%progbits
+ 516              		.align	2
+ 517              		.thumb
+ 518              		.thumb_func
+ 520              	_GLOBAL__sub_I_g_LedTast:
+ 521              	.LFB152:
+ 522              		.loc 2 151 0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 0
+ 525              		@ frame_needed = 1, uses_anonymous_args = 0
+ 526 0000 80B5     		push	{r7, lr}
+ 527              	.LCFI32:
+ 528              		.cfi_def_cfa_offset 8
+ 529              		.cfi_offset 14, -4
+ 530              		.cfi_offset 7, -8
+ 531 0002 00AF     		add	r7, sp, #0
+ 532              	.LCFI33:
+ 533              		.cfi_def_cfa_register 7
+ 534              		.loc 2 151 0
+ 535 0004 4FF00100 		mov	r0, #1
+ 536 0008 4FF6FF71 		movw	r1, #65535
+ 537 000c FFF7FEFF 		bl	_Z41__static_initialization_and_destruction_0ii
+ 538 0010 80BD     		pop	{r7, pc}
+ 539              		.cfi_endproc
+ 540              	.LFE152:
+ 542 0012 00BF     		.section	.init_array,"aw",%init_array
+ 543              		.align	2
+ 544 0000 00000000 		.word	_GLOBAL__sub_I_g_LedTast(target1)
+ 545              		.text
+ 546              	.Letext0:
+ 547              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 548              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 549              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 550              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
+ 551              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 552              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
 DEFINED SYMBOLS
                             *ABS*:00000000 main.cpp
-  C:\Temp\ccFjIurI.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
-  C:\Temp\ccFjIurI.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
-  C:\Temp\ccFjIurI.s:50     .bss.g_LedTast:00000000 g_LedTast
-  C:\Temp\ccFjIurI.s:47     .bss.g_LedTast:00000000 $d
-  C:\Temp\ccFjIurI.s:57     .bss.g_Display:00000000 g_Display
-  C:\Temp\ccFjIurI.s:54     .bss.g_Display:00000000 $d
-  C:\Temp\ccFjIurI.s:64     .bss.g_Menue:00000000 g_Menue
-  C:\Temp\ccFjIurI.s:61     .bss.g_Menue:00000000 $d
-  C:\Temp\ccFjIurI.s:71     .bss.g_FileHandler:00000000 g_FileHandler
-  C:\Temp\ccFjIurI.s:68     .bss.g_FileHandler:00000000 $d
-  C:\Temp\ccFjIurI.s:74     .rodata:00000000 $d
-  C:\Temp\ccFjIurI.s:75     .rodata:00000000 .LC0
-  C:\Temp\ccFjIurI.s:78     .rodata:00000010 .LC1
-  C:\Temp\ccFjIurI.s:81     .rodata:00000018 .LC2
-  C:\Temp\ccFjIurI.s:84     .text.main:00000000 $t
-  C:\Temp\ccFjIurI.s:89     .text.main:00000000 main
-  C:\Temp\ccFjIurI.s:148    .text.vApplicationTickHook:00000000 $t
-  C:\Temp\ccFjIurI.s:153    .text.vApplicationTickHook:00000000 vApplicationTickHook
-  C:\Temp\ccFjIurI.s:175    .text.vApplicationIdleHook:00000000 $t
-  C:\Temp\ccFjIurI.s:180    .text.vApplicationIdleHook:00000000 vApplicationIdleHook
-  C:\Temp\ccFjIurI.s:202    .text.vApplicationMallocFailedHook:00000000 $t
-  C:\Temp\ccFjIurI.s:207    .text.vApplicationMallocFailedHook:00000000 vApplicationMallocFailedHook
-  C:\Temp\ccFjIurI.s:229    .text.vApplicationStackOverflowHook:00000000 $t
-  C:\Temp\ccFjIurI.s:234    .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
-  C:\Temp\ccFjIurI.s:260    .text.EVAL_AUDIO_GetSampleCallBack:00000000 $t
-  C:\Temp\ccFjIurI.s:265    .text.EVAL_AUDIO_GetSampleCallBack:00000000 EVAL_AUDIO_GetSampleCallBack
-  C:\Temp\ccFjIurI.s:290    .text.EVAL_AUDIO_TransferComplete_CallBack:00000000 $t
-  C:\Temp\ccFjIurI.s:295    .text.EVAL_AUDIO_TransferComplete_CallBack:00000000 EVAL_AUDIO_TransferComplete_CallBack
-  C:\Temp\ccFjIurI.s:323    .text.EVAL_AUDIO_HalfTransfer_CallBack:00000000 $t
-  C:\Temp\ccFjIurI.s:328    .text.EVAL_AUDIO_HalfTransfer_CallBack:00000000 EVAL_AUDIO_HalfTransfer_CallBack
-  C:\Temp\ccFjIurI.s:356    .text.EVAL_AUDIO_Error_CallBack:00000000 $t
-  C:\Temp\ccFjIurI.s:361    .text.EVAL_AUDIO_Error_CallBack:00000000 EVAL_AUDIO_Error_CallBack
-  C:\Temp\ccFjIurI.s:388    .text.Codec_TIMEOUT_UserCallback:00000000 $t
-  C:\Temp\ccFjIurI.s:393    .text.Codec_TIMEOUT_UserCallback:00000000 Codec_TIMEOUT_UserCallback
-  C:\Temp\ccFjIurI.s:418    .text.LIS302DL_TIMEOUT_UserCallback:00000000 $t
-  C:\Temp\ccFjIurI.s:423    .text.LIS302DL_TIMEOUT_UserCallback:00000000 LIS302DL_TIMEOUT_UserCallback
-  C:\Temp\ccFjIurI.s:448    .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
-  C:\Temp\ccFjIurI.s:452    .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
-  C:\Temp\ccFjIurI.s:540    .rodata._ZL12c_FontNative:00000000 $d
-  C:\Temp\ccFjIurI.s:543    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
-  C:\Temp\ccFjIurI.s:546    .text._GLOBAL__sub_I_g_LedTast:00000000 $t
-  C:\Temp\ccFjIurI.s:550    .text._GLOBAL__sub_I_g_LedTast:00000000 _GLOBAL__sub_I_g_LedTast
-  C:\Temp\ccFjIurI.s:573    .init_array:00000000 $d
+  C:\Temp\ccIJUT7d.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
+  C:\Temp\ccIJUT7d.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
+  C:\Temp\ccIJUT7d.s:50     .bss.g_LedTast:00000000 g_LedTast
+  C:\Temp\ccIJUT7d.s:47     .bss.g_LedTast:00000000 $d
+  C:\Temp\ccIJUT7d.s:57     .bss.g_Display:00000000 g_Display
+  C:\Temp\ccIJUT7d.s:54     .bss.g_Display:00000000 $d
+  C:\Temp\ccIJUT7d.s:64     .bss.g_Menue:00000000 g_Menue
+  C:\Temp\ccIJUT7d.s:61     .bss.g_Menue:00000000 $d
+  C:\Temp\ccIJUT7d.s:67     .rodata:00000000 $d
+  C:\Temp\ccIJUT7d.s:68     .rodata:00000000 .LC0
+  C:\Temp\ccIJUT7d.s:71     .rodata:00000010 .LC1
+  C:\Temp\ccIJUT7d.s:74     .text.main:00000000 $t
+  C:\Temp\ccIJUT7d.s:79     .text.main:00000000 main
+  C:\Temp\ccIJUT7d.s:130    .text.vApplicationTickHook:00000000 $t
+  C:\Temp\ccIJUT7d.s:135    .text.vApplicationTickHook:00000000 vApplicationTickHook
+  C:\Temp\ccIJUT7d.s:157    .text.vApplicationIdleHook:00000000 $t
+  C:\Temp\ccIJUT7d.s:162    .text.vApplicationIdleHook:00000000 vApplicationIdleHook
+  C:\Temp\ccIJUT7d.s:184    .text.vApplicationMallocFailedHook:00000000 $t
+  C:\Temp\ccIJUT7d.s:189    .text.vApplicationMallocFailedHook:00000000 vApplicationMallocFailedHook
+  C:\Temp\ccIJUT7d.s:211    .text.vApplicationStackOverflowHook:00000000 $t
+  C:\Temp\ccIJUT7d.s:216    .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
+  C:\Temp\ccIJUT7d.s:242    .text.EVAL_AUDIO_GetSampleCallBack:00000000 $t
+  C:\Temp\ccIJUT7d.s:247    .text.EVAL_AUDIO_GetSampleCallBack:00000000 EVAL_AUDIO_GetSampleCallBack
+  C:\Temp\ccIJUT7d.s:272    .text.EVAL_AUDIO_TransferComplete_CallBack:00000000 $t
+  C:\Temp\ccIJUT7d.s:277    .text.EVAL_AUDIO_TransferComplete_CallBack:00000000 EVAL_AUDIO_TransferComplete_CallBack
+  C:\Temp\ccIJUT7d.s:305    .text.EVAL_AUDIO_HalfTransfer_CallBack:00000000 $t
+  C:\Temp\ccIJUT7d.s:310    .text.EVAL_AUDIO_HalfTransfer_CallBack:00000000 EVAL_AUDIO_HalfTransfer_CallBack
+  C:\Temp\ccIJUT7d.s:338    .text.EVAL_AUDIO_Error_CallBack:00000000 $t
+  C:\Temp\ccIJUT7d.s:343    .text.EVAL_AUDIO_Error_CallBack:00000000 EVAL_AUDIO_Error_CallBack
+  C:\Temp\ccIJUT7d.s:370    .text.Codec_TIMEOUT_UserCallback:00000000 $t
+  C:\Temp\ccIJUT7d.s:375    .text.Codec_TIMEOUT_UserCallback:00000000 Codec_TIMEOUT_UserCallback
+  C:\Temp\ccIJUT7d.s:400    .text.LIS302DL_TIMEOUT_UserCallback:00000000 $t
+  C:\Temp\ccIJUT7d.s:405    .text.LIS302DL_TIMEOUT_UserCallback:00000000 LIS302DL_TIMEOUT_UserCallback
+  C:\Temp\ccIJUT7d.s:430    .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
+  C:\Temp\ccIJUT7d.s:434    .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
+  C:\Temp\ccIJUT7d.s:510    .rodata._ZL12c_FontNative:00000000 $d
+  C:\Temp\ccIJUT7d.s:513    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+  C:\Temp\ccIJUT7d.s:516    .text._GLOBAL__sub_I_g_LedTast:00000000 $t
+  C:\Temp\ccIJUT7d.s:520    .text._GLOBAL__sub_I_g_LedTast:00000000 _GLOBAL__sub_I_g_LedTast
+  C:\Temp\ccIJUT7d.s:543    .init_array:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -828,5 +790,3 @@ _ZN21CT6963_GPIO_InterfaceC1Ev
 _ZN21CT6963_GPIO_InterfaceD1Ev
 _ZN6CMenueC1EP11CGraphicLCD
 _ZN6CMenueD1Ev
-_ZN12CFileHandlerC1Ev
-_ZN12CFileHandlerD1Ev

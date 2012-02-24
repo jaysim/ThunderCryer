@@ -11,15 +11,10 @@ RM := rm -rf
 -include STM32F4xx_StdPeriph_Driver/src/subdir.mk
 -include STM32F4-Discovery/subdir.mk
 -include Menue/subdir.mk
--include HelixMP3/real/subdir.mk
--include HelixMP3/subdir.mk
 -include GraphicLCD/subdir.mk
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
 -include FreeRTOS/Source/subdir.mk
--include Fatfs/FatFs/src/option/subdir.mk
--include Fatfs/FatFs/src/subdir.mk
--include Fatfs/subdir.mk
 -include subdir.mk
 -include objects.mk
 

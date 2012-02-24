@@ -86,7 +86,7 @@ public:
 	  * @param  null terminated string, font structure, x, y
 	  * @retval None
 	  */
-	virtual void WriteString(char * str, const tFont font, unsigned int x, unsigned int y) = 0;
+	virtual void WriteString(const char * str, const tFont font, unsigned int x, unsigned int y) = 0;
 
 	/**
 	  * @brief  writes a bitmap to graphics ram

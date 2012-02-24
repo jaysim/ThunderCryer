@@ -217,7 +217,7 @@ void CT6963CDriver::WriteChar(char charCode)
   * @param  null terminated string, font structure, x, y
   * @retval None
   */
-void CT6963CDriver::WriteString(char * str, const tFont font,unsigned int x, unsigned int y)
+void CT6963CDriver::WriteString(const char * str, const tFont font,unsigned int x, unsigned int y)
 {
 	if(&c_FontNative == &font){
 		TextGoTo(x/GLCD_FONT_WIDTH, y/8);
@@ -338,37 +338,37 @@ void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsig
 void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height){
 	unsigned int i;
 
-	//Rectangle(x+4,y,x+width-4,4,true); // filled top bar
+	Rectangle(x+4,y,x+width-4,4,true); // filled top bar
 	Line(x,y-4,x,y+height-4);			// left border
 	Line(x+width,y-4,x+width,y+height-4);// right border
 	Line(x+4,y+height,x+width-4,y+height);// bottom border
 
 	for(i=1;i<4;i++){
-		SetPixel(x+i,y+3);		// upper left
+		// upper left
 		SetPixel(x+i,y+2);
 		SetPixel(x+i,y+1);
 
-		SetPixel(x+width-i,y+3); // upper right
+		// upper right
 		SetPixel(x+width-i,y+2);
 		SetPixel(x+width-i,y+1);
 	}
 
-	SetPixel(x+1,y+height-3);		// bottom left
+	// bottom left
 	SetPixel(x+1,y+height-2);
 	SetPixel(x+1,y+height-1);
 
-	SetPixel(x+1,y+height-1);		// bottom left
+	// bottom left
+	SetPixel(x+1,y+height-1);
 	SetPixel(x+2,y+height-1);
-	SetPixel(x+3,y+height-1);
 
-	SetPixel(x+width-1,y+height-3);		// bottom right
+
+	// bottom right
 	SetPixel(x+width-1,y+height-2);
 	SetPixel(x+width-1,y+height-1);
 
-	SetPixel(x+width-1,y+height-1);		// bottom right
+	// bottom right
+	SetPixel(x+width-1,y+height-1);
 	SetPixel(x+width-2,y+height-1);
-	SetPixel(x+width-3,y+height-1);
-
 
 }
 

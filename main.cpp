@@ -26,7 +26,7 @@
 CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
 CT6963_GPIO_Interface g_Display;
 CMenue	g_Menue(&g_Display);
-CFileHandler g_FileHandler;
+//CFileHandler g_FileHandler;
 
 /* Private function prototypes -----------------------------------------------*/
 extern "C" {
