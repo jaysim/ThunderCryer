@@ -583,16 +583,19 @@
   11:../Menue/CMenue.cpp **** /* Includes ------------------------------------------------------------------*/
   12:../Menue/CMenue.cpp **** #include "CMenue.h"
   13:../Menue/CMenue.cpp **** #include "CT6963CDriver.h"
-  14:../Menue/CMenue.cpp **** /* Private typedef -----------------------------------------------------------*/
-  15:../Menue/CMenue.cpp **** /* Private define ------------------------------------------------------------*/
-  16:../Menue/CMenue.cpp **** /* Private macro -------------------------------------------------------------*/
-  17:../Menue/CMenue.cpp **** /* Private variables ---------------------------------------------------------*/
-  18:../Menue/CMenue.cpp **** /* Private function prototypes -----------------------------------------------*/
-  19:../Menue/CMenue.cpp **** /* Private functions ---------------------------------------------------------*/
-  20:../Menue/CMenue.cpp **** 
-  21:../Menue/CMenue.cpp **** 
-  22:../Menue/CMenue.cpp **** CMenue::CMenue(CGraphicLCD *display) : glcd(display){
- 153              		.loc 3 22 0
+  14:../Menue/CMenue.cpp **** #include "SansSerif12.h"
+  15:../Menue/CMenue.cpp **** #include "SansSerif26.h"
+  16:../Menue/CMenue.cpp **** #include <cstdio>
+  17:../Menue/CMenue.cpp **** /* Private typedef -----------------------------------------------------------*/
+  18:../Menue/CMenue.cpp **** /* Private define ------------------------------------------------------------*/
+  19:../Menue/CMenue.cpp **** /* Private macro -------------------------------------------------------------*/
+  20:../Menue/CMenue.cpp **** /* Private variables ---------------------------------------------------------*/
+  21:../Menue/CMenue.cpp **** /* Private function prototypes -----------------------------------------------*/
+  22:../Menue/CMenue.cpp **** /* Private functions ---------------------------------------------------------*/
+  23:../Menue/CMenue.cpp **** 
+  24:../Menue/CMenue.cpp **** 
+  25:../Menue/CMenue.cpp **** CMenue::CMenue(CGraphicLCD *display) : glcd(display){
+ 153              		.loc 3 25 0
  154              		.cfi_startproc
  155              		@ args = 0, pretend = 0, frame = 8
  156              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -610,7 +613,7 @@
  168 0006 7860     		str	r0, [r7, #4]
  169 0008 3960     		str	r1, [r7, #0]
  170              	.LBB3:
- 171              		.loc 3 22 0
+ 171              		.loc 3 25 0
  172 000a 7B68     		ldr	r3, [r7, #4]
  173 000c 1846     		mov	r0, r3
  174 000e FFF7FEFF 		bl	_ZN12AManagedTaskC2Ev
@@ -621,8 +624,8 @@
  179 001a 3A68     		ldr	r2, [r7, #0]
  180 001c DA60     		str	r2, [r3, #12]
  181              	.LBE3:
-  23:../Menue/CMenue.cpp **** }
- 182              		.loc 3 23 0
+  26:../Menue/CMenue.cpp **** }
+ 182              		.loc 3 26 0
  183 001e 7B68     		ldr	r3, [r7, #4]
  184 0020 1846     		mov	r0, r3
  185 0022 07F10807 		add	r7, r7, #8
@@ -641,9 +644,9 @@
  199              		.thumb_func
  201              	_ZN6CMenueD2Ev:
  202              	.LFB140:
-  24:../Menue/CMenue.cpp **** 
-  25:../Menue/CMenue.cpp **** CMenue::~CMenue() {
- 203              		.loc 3 25 0
+  27:../Menue/CMenue.cpp **** 
+  28:../Menue/CMenue.cpp **** CMenue::~CMenue() {
+ 203              		.loc 3 28 0
  204              		.cfi_startproc
  205              		@ args = 0, pretend = 0, frame = 8
  206              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -660,13 +663,13 @@
  217              		.cfi_def_cfa_register 7
  218 0006 7860     		str	r0, [r7, #4]
  219              	.LBB4:
- 220              		.loc 3 25 0
+ 220              		.loc 3 28 0
  221 0008 7B68     		ldr	r3, [r7, #4]
  222 000a 0A4A     		ldr	r2, .L11
  223 000c 1A60     		str	r2, [r3, #0]
-  26:../Menue/CMenue.cpp **** 	// TODO Auto-generated destructor stub
-  27:../Menue/CMenue.cpp **** }
- 224              		.loc 3 27 0
+  29:../Menue/CMenue.cpp **** 	// TODO Auto-generated destructor stub
+  30:../Menue/CMenue.cpp **** }
+ 224              		.loc 3 30 0
  225 000e 7868     		ldr	r0, [r7, #4]
  226 0010 FFF7FEFF 		bl	_ZN12AManagedTaskD2Ev
  227              	.LBE4:
@@ -675,11 +678,11 @@
  230 001c DBB2     		uxtb	r3, r3
  231 001e 002B     		cmp	r3, #0
  232 0020 02D0     		beq	.L10
- 233              		.loc 3 27 0 is_stmt 0 discriminator 2
+ 233              		.loc 3 30 0 is_stmt 0 discriminator 2
  234 0022 7868     		ldr	r0, [r7, #4]
  235 0024 FFF7FEFF 		bl	_ZdlPv
  236              	.L10:
- 237              		.loc 3 27 0 discriminator 3
+ 237              		.loc 3 30 0 discriminator 3
  238 0028 7B68     		ldr	r3, [r7, #4]
  239 002a 1846     		mov	r0, r3
  240 002c 07F10807 		add	r7, r7, #8
@@ -698,8 +701,8 @@
  254              		.thumb_func
  256              	_ZN6CMenueD0Ev:
  257              	.LFB142:
-  25:../Menue/CMenue.cpp **** CMenue::~CMenue() {
- 258              		.loc 3 25 0 is_stmt 1
+  28:../Menue/CMenue.cpp **** CMenue::~CMenue() {
+ 258              		.loc 3 28 0 is_stmt 1
  259              		.cfi_startproc
  260              		@ args = 0, pretend = 0, frame = 8
  261              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -715,7 +718,7 @@
  271              	.LCFI17:
  272              		.cfi_def_cfa_register 7
  273 0006 7860     		str	r0, [r7, #4]
- 274              		.loc 3 27 0
+ 274              		.loc 3 30 0
  275 0008 7868     		ldr	r0, [r7, #4]
  276 000a FFF7FEFF 		bl	_ZN6CMenueD1Ev
  277 000e 7868     		ldr	r0, [r7, #4]
@@ -734,14 +737,14 @@
  291              		.thumb_func
  293              	_ZN6CMenue12HardwareInitEv:
  294              	.LFB143:
-  28:../Menue/CMenue.cpp **** 
-  29:../Menue/CMenue.cpp **** /**
-  30:../Menue/CMenue.cpp ****   * @brief  HardwareInit called before Scheduler starts
-  31:../Menue/CMenue.cpp ****   * @param  None
-  32:../Menue/CMenue.cpp ****   * @retval true on succsess
-  33:../Menue/CMenue.cpp ****   */
-  34:../Menue/CMenue.cpp **** bool CMenue::HardwareInit(void){
- 295              		.loc 3 34 0
+  31:../Menue/CMenue.cpp **** 
+  32:../Menue/CMenue.cpp **** /**
+  33:../Menue/CMenue.cpp ****   * @brief  HardwareInit called before Scheduler starts
+  34:../Menue/CMenue.cpp ****   * @param  None
+  35:../Menue/CMenue.cpp ****   * @retval true on success
+  36:../Menue/CMenue.cpp ****   */
+  37:../Menue/CMenue.cpp **** bool CMenue::HardwareInit(void){
+ 295              		.loc 3 37 0
  296              		.cfi_startproc
  297              		@ args = 0, pretend = 0, frame = 8
  298              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -757,12 +760,12 @@
  308              	.LCFI20:
  309              		.cfi_def_cfa_register 7
  310 0006 7860     		str	r0, [r7, #4]
-  35:../Menue/CMenue.cpp **** 
-  36:../Menue/CMenue.cpp **** 	return true;
- 311              		.loc 3 36 0
+  38:../Menue/CMenue.cpp **** 
+  39:../Menue/CMenue.cpp **** 	return true;
+ 311              		.loc 3 39 0
  312 0008 4FF00103 		mov	r3, #1
-  37:../Menue/CMenue.cpp **** }
- 313              		.loc 3 37 0
+  40:../Menue/CMenue.cpp **** }
+ 313              		.loc 3 40 0
  314 000c 1846     		mov	r0, r3
  315 000e 07F10C07 		add	r7, r7, #12
  316 0012 BD46     		mov	sp, r7
@@ -773,229 +776,399 @@
  322              		.section	.rodata
  323              		.align	2
  324              	.LC0:
- 325 0000 48616C6C 		.ascii	"Hallo\000"
- 325      6F00
- 326 0006 0000     		.section	.text._ZN6CMenue3RunEv,"ax",%progbits
- 327              		.align	2
- 328              		.global	_ZN6CMenue3RunEv
- 329              		.thumb
- 330              		.thumb_func
- 332              	_ZN6CMenue3RunEv:
- 333              	.LFB144:
-  38:../Menue/CMenue.cpp **** 
-  39:../Menue/CMenue.cpp **** 
-  40:../Menue/CMenue.cpp **** /**
-  41:../Menue/CMenue.cpp ****   * @brief  task function for Menu
-  42:../Menue/CMenue.cpp ****   * @param  None
-  43:../Menue/CMenue.cpp ****   * @retval None
-  44:../Menue/CMenue.cpp ****   */
-  45:../Menue/CMenue.cpp **** void CMenue::Run(void){
- 334              		.loc 3 45 0
- 335              		.cfi_startproc
- 336              		@ args = 0, pretend = 0, frame = 8
- 337              		@ frame_needed = 1, uses_anonymous_args = 0
- 338 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 339              	.LCFI21:
- 340              		.cfi_def_cfa_offset 20
- 341              		.cfi_offset 14, -4
- 342              		.cfi_offset 7, -8
- 343              		.cfi_offset 6, -12
- 344              		.cfi_offset 5, -16
- 345              		.cfi_offset 4, -20
- 346 0002 89B0     		sub	sp, sp, #36
- 347              	.LCFI22:
- 348              		.cfi_def_cfa_offset 56
- 349 0004 06AF     		add	r7, sp, #24
- 350              	.LCFI23:
- 351              		.cfi_def_cfa 7, 32
- 352 0006 7860     		str	r0, [r7, #4]
-  46:../Menue/CMenue.cpp **** 	glcd->Init();
- 353              		.loc 3 46 0
- 354 0008 7B68     		ldr	r3, [r7, #4]
- 355 000a DB68     		ldr	r3, [r3, #12]
- 356 000c 1B68     		ldr	r3, [r3, #0]
- 357 000e 03F12003 		add	r3, r3, #32
- 358 0012 1B68     		ldr	r3, [r3, #0]
- 359 0014 7A68     		ldr	r2, [r7, #4]
- 360 0016 D268     		ldr	r2, [r2, #12]
- 361 0018 1046     		mov	r0, r2
- 362 001a 9847     		blx	r3
-  47:../Menue/CMenue.cpp **** 	//glcd->Inverse(true);
-  48:../Menue/CMenue.cpp **** 	glcd->Clear();
- 363              		.loc 3 48 0
- 364 001c 7B68     		ldr	r3, [r7, #4]
- 365 001e DB68     		ldr	r3, [r3, #12]
- 366 0020 1B68     		ldr	r3, [r3, #0]
- 367 0022 1B68     		ldr	r3, [r3, #0]
- 368 0024 7A68     		ldr	r2, [r7, #4]
- 369 0026 D268     		ldr	r2, [r2, #12]
- 370 0028 1046     		mov	r0, r2
- 371 002a 9847     		blx	r3
-  49:../Menue/CMenue.cpp **** 
-  50:../Menue/CMenue.cpp **** 	glcd->WriteString("Hallo",c_FontNative,16,16);
- 372              		.loc 3 50 0
- 373 002c 7B68     		ldr	r3, [r7, #4]
- 374 002e DB68     		ldr	r3, [r3, #12]
- 375 0030 1B68     		ldr	r3, [r3, #0]
- 376 0032 03F11803 		add	r3, r3, #24
- 377 0036 1E68     		ldr	r6, [r3, #0]
- 378 0038 7B68     		ldr	r3, [r7, #4]
- 379 003a D3F80CE0 		ldr	lr, [r3, #12]
- 380 003e 40F20004 		movw	r4, #:lower16:_ZL12c_FontNative
- 381 0042 C0F20004 		movt	r4, #:upper16:_ZL12c_FontNative
- 382 0046 4FF01003 		mov	r3, #16
- 383 004a 0493     		str	r3, [sp, #16]
- 384 004c 4FF01003 		mov	r3, #16
- 385 0050 0593     		str	r3, [sp, #20]
- 386 0052 6D46     		mov	r5, sp
- 387 0054 04F10803 		add	r3, r4, #8
- 388 0058 0FCB     		ldmia	r3, {r0, r1, r2, r3}
- 389 005a 85E80F00 		stmia	r5, {r0, r1, r2, r3}
- 390 005e 94E80C00 		ldmia	r4, {r2, r3}
- 391 0062 7046     		mov	r0, lr
- 392 0064 40F20001 		movw	r1, #:lower16:.LC0
- 393 0068 C0F20001 		movt	r1, #:upper16:.LC0
- 394 006c B047     		blx	r6
+ 325 0000 496E7472 		.ascii	"Introducing\000"
+ 325      6F647563 
+ 325      696E6700 
+ 326              		.align	2
+ 327              	.LC1:
+ 328 000c 50726F6A 		.ascii	"Project:\000"
+ 328      6563743A 
+ 328      00
+ 329 0015 000000   		.align	2
+ 330              	.LC2:
+ 331 0018 5448554E 		.ascii	"THUNDERCRYER\000"
+ 331      44455243 
+ 331      52594552 
+ 331      00
+ 332 0025 000000   		.align	2
+ 333              	.LC3:
+ 334 0028 32313A31 		.ascii	"21:14\000"
+ 334      3400
+ 335 002e 0000     		.align	2
+ 336              	.LC4:
+ 337 0030 46722E20 		.ascii	"Fr. 24.02.12\000"
+ 337      32342E30 
+ 337      322E3132 
+ 337      00
+ 338 003d 000000   		.align	2
+ 339              	.LC5:
+ 340 0040 44657665 		.ascii	"Development in progress\000"
+ 340      6C6F706D 
+ 340      656E7420 
+ 340      696E2070 
+ 340      726F6772 
+ 341              		.align	2
+ 342              	.LC6:
+ 343 0058 25326400 		.ascii	"%2d\000"
+ 344              		.section	.text._ZN6CMenue3RunEv,"ax",%progbits
+ 345              		.align	2
+ 346              		.global	_ZN6CMenue3RunEv
+ 347              		.thumb
+ 348              		.thumb_func
+ 350              	_ZN6CMenue3RunEv:
+ 351              	.LFB144:
+  41:../Menue/CMenue.cpp **** 
+  42:../Menue/CMenue.cpp **** 
+  43:../Menue/CMenue.cpp **** /**
+  44:../Menue/CMenue.cpp ****   * @brief  task function for Menu
+  45:../Menue/CMenue.cpp ****   * @param  None
+  46:../Menue/CMenue.cpp ****   * @retval None
+  47:../Menue/CMenue.cpp ****   */
+  48:../Menue/CMenue.cpp **** void CMenue::Run(void){
+ 352              		.loc 3 48 0
+ 353              		.cfi_startproc
+ 354              		@ args = 0, pretend = 0, frame = 16
+ 355              		@ frame_needed = 1, uses_anonymous_args = 0
+ 356 0000 90B5     		push	{r4, r7, lr}
+ 357              	.LCFI21:
+ 358              		.cfi_def_cfa_offset 12
+ 359              		.cfi_offset 14, -4
+ 360              		.cfi_offset 7, -8
+ 361              		.cfi_offset 4, -12
+ 362 0002 87B0     		sub	sp, sp, #28
+ 363              	.LCFI22:
+ 364              		.cfi_def_cfa_offset 40
+ 365 0004 02AF     		add	r7, sp, #8
+ 366              	.LCFI23:
+ 367              		.cfi_def_cfa 7, 32
+ 368 0006 7860     		str	r0, [r7, #4]
+ 369              	.LBB5:
+  49:../Menue/CMenue.cpp **** 	char buffer[4];
+  50:../Menue/CMenue.cpp **** 	int x = 0;
+ 370              		.loc 3 50 0
+ 371 0008 4FF00003 		mov	r3, #0
+ 372 000c FB60     		str	r3, [r7, #12]
   51:../Menue/CMenue.cpp **** 
-  52:../Menue/CMenue.cpp **** 	glcd->Window(0,0,119,63);
- 395              		.loc 3 52 0
- 396 006e 7B68     		ldr	r3, [r7, #4]
- 397 0070 DB68     		ldr	r3, [r3, #12]
- 398 0072 1B68     		ldr	r3, [r3, #0]
- 399 0074 03F10803 		add	r3, r3, #8
- 400 0078 1C68     		ldr	r4, [r3, #0]
- 401 007a 7B68     		ldr	r3, [r7, #4]
- 402 007c DB68     		ldr	r3, [r3, #12]
- 403 007e 4FF03F02 		mov	r2, #63
- 404 0082 0092     		str	r2, [sp, #0]
- 405 0084 1846     		mov	r0, r3
- 406 0086 4FF00001 		mov	r1, #0
- 407 008a 4FF00002 		mov	r2, #0
- 408 008e 4FF07703 		mov	r3, #119
- 409 0092 A047     		blx	r4
-  53:../Menue/CMenue.cpp **** 	glcd->Window(121,0,119,63);
- 410              		.loc 3 53 0
- 411 0094 7B68     		ldr	r3, [r7, #4]
- 412 0096 DB68     		ldr	r3, [r3, #12]
- 413 0098 1B68     		ldr	r3, [r3, #0]
- 414 009a 03F10803 		add	r3, r3, #8
- 415 009e 1C68     		ldr	r4, [r3, #0]
- 416 00a0 7B68     		ldr	r3, [r7, #4]
- 417 00a2 DB68     		ldr	r3, [r3, #12]
- 418 00a4 4FF03F02 		mov	r2, #63
- 419 00a8 0092     		str	r2, [sp, #0]
- 420 00aa 1846     		mov	r0, r3
- 421 00ac 4FF07901 		mov	r1, #121
- 422 00b0 4FF00002 		mov	r2, #0
- 423 00b4 4FF07703 		mov	r3, #119
- 424 00b8 A047     		blx	r4
-  54:../Menue/CMenue.cpp **** 	glcd->Window(0,65,119,63);
- 425              		.loc 3 54 0
- 426 00ba 7B68     		ldr	r3, [r7, #4]
- 427 00bc DB68     		ldr	r3, [r3, #12]
- 428 00be 1B68     		ldr	r3, [r3, #0]
- 429 00c0 03F10803 		add	r3, r3, #8
- 430 00c4 1C68     		ldr	r4, [r3, #0]
- 431 00c6 7B68     		ldr	r3, [r7, #4]
- 432 00c8 DB68     		ldr	r3, [r3, #12]
- 433 00ca 4FF03F02 		mov	r2, #63
- 434 00ce 0092     		str	r2, [sp, #0]
- 435 00d0 1846     		mov	r0, r3
- 436 00d2 4FF00001 		mov	r1, #0
- 437 00d6 4FF04102 		mov	r2, #65
- 438 00da 4FF07703 		mov	r3, #119
- 439 00de A047     		blx	r4
-  55:../Menue/CMenue.cpp **** 	glcd->Window(121,65,119,63);
- 440              		.loc 3 55 0
- 441 00e0 7B68     		ldr	r3, [r7, #4]
- 442 00e2 DB68     		ldr	r3, [r3, #12]
- 443 00e4 1B68     		ldr	r3, [r3, #0]
- 444 00e6 03F10803 		add	r3, r3, #8
- 445 00ea 1C68     		ldr	r4, [r3, #0]
- 446 00ec 7B68     		ldr	r3, [r7, #4]
- 447 00ee DB68     		ldr	r3, [r3, #12]
- 448 00f0 4FF03F02 		mov	r2, #63
- 449 00f4 0092     		str	r2, [sp, #0]
- 450 00f6 1846     		mov	r0, r3
- 451 00f8 4FF07901 		mov	r1, #121
- 452 00fc 4FF04102 		mov	r2, #65
- 453 0100 4FF07703 		mov	r3, #119
- 454 0104 A047     		blx	r4
- 455              	.L17:
+  52:../Menue/CMenue.cpp **** 	glcd->Init();
+ 373              		.loc 3 52 0
+ 374 000e 7B68     		ldr	r3, [r7, #4]
+ 375 0010 DB68     		ldr	r3, [r3, #12]
+ 376 0012 1B68     		ldr	r3, [r3, #0]
+ 377 0014 03F12003 		add	r3, r3, #32
+ 378 0018 1B68     		ldr	r3, [r3, #0]
+ 379 001a 7A68     		ldr	r2, [r7, #4]
+ 380 001c D268     		ldr	r2, [r2, #12]
+ 381 001e 1046     		mov	r0, r2
+ 382 0020 9847     		blx	r3
+  53:../Menue/CMenue.cpp **** 	glcd->Inverse(true);
+ 383              		.loc 3 53 0
+ 384 0022 7B68     		ldr	r3, [r7, #4]
+ 385 0024 DB68     		ldr	r3, [r3, #12]
+ 386 0026 1846     		mov	r0, r3
+ 387 0028 4FF00101 		mov	r1, #1
+ 388 002c FFF7FEFF 		bl	_ZN11CGraphicLCD7InverseEb
+  54:../Menue/CMenue.cpp **** 	glcd->Clear();
+ 389              		.loc 3 54 0
+ 390 0030 7B68     		ldr	r3, [r7, #4]
+ 391 0032 DB68     		ldr	r3, [r3, #12]
+ 392 0034 1B68     		ldr	r3, [r3, #0]
+ 393 0036 1B68     		ldr	r3, [r3, #0]
+ 394 0038 7A68     		ldr	r2, [r7, #4]
+ 395 003a D268     		ldr	r2, [r2, #12]
+ 396 003c 1046     		mov	r0, r2
+ 397 003e 9847     		blx	r3
+  55:../Menue/CMenue.cpp **** 
   56:../Menue/CMenue.cpp **** 
-  57:../Menue/CMenue.cpp **** 
-  58:../Menue/CMenue.cpp **** 	while(1){
- 456              		.loc 3 58 0 discriminator 1
- 457 0106 FEE7     		b	.L17
- 458              		.cfi_endproc
- 459              	.LFE144:
- 461              		.global	_ZTV6CMenue
- 462              		.section	.rodata._ZTV6CMenue,"a",%progbits
- 463              		.align	3
- 466              	_ZTV6CMenue:
- 467 0000 00000000 		.word	0
- 468 0004 00000000 		.word	0
- 469 0008 00000000 		.word	_ZNK5CTask7IsValidEv
- 470 000c 00000000 		.word	_ZN5CTask6AttachEPv
- 471 0010 00000000 		.word	_ZN5CTask6DetachEv
- 472 0014 00000000 		.word	_ZN6CMenueD1Ev
- 473 0018 00000000 		.word	_ZN6CMenueD0Ev
- 474 001c 00000000 		.word	_ZN6CMenue12HardwareInitEv
- 475 0020 00000000 		.word	_ZN6CMenue3RunEv
- 476 0024 00000000 		.word	_ZN12AManagedTask8OnCreateEPKctm
- 477              		.section	.rodata._ZL12c_FontNative,"a",%progbits
- 478              		.align	2
- 481              	_ZL12c_FontNative:
- 482 0000 00000000 		.space	24
- 482      00000000 
- 482      00000000 
- 482      00000000 
- 482      00000000 
- 483              		.global	_ZN6CMenueC1EP11CGraphicLCD
- 484              		.thumb_set _ZN6CMenueC1EP11CGraphicLCD,_ZN6CMenueC2EP11CGraphicLCD
- 485              		.global	_ZN6CMenueD1Ev
- 486              		.thumb_set _ZN6CMenueD1Ev,_ZN6CMenueD2Ev
- 487              		.text
- 488              	.Letext0:
- 489              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 490              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 491              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC
- 492              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
- 493              		.file 8 "../Menue/CMenue.h"
- 494              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
- 495              		.file 10 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD
+  57:../Menue/CMenue.cpp **** 	vTaskDelay(500/portTICK_RATE_MS);
+ 398              		.loc 3 57 0
+ 399 0040 4FF03200 		mov	r0, #50
+ 400 0044 FFF7FEFF 		bl	vTaskDelay
+  58:../Menue/CMenue.cpp **** 	glcd->WriteString("Introducing",c_FontSansSerif12,65,5);
+ 401              		.loc 3 58 0
+ 402 0048 7B68     		ldr	r3, [r7, #4]
+ 403 004a DB68     		ldr	r3, [r3, #12]
+ 404 004c 1B68     		ldr	r3, [r3, #0]
+ 405 004e 03F11803 		add	r3, r3, #24
+ 406 0052 1C68     		ldr	r4, [r3, #0]
+ 407 0054 7B68     		ldr	r3, [r7, #4]
+ 408 0056 DB68     		ldr	r3, [r3, #12]
+ 409 0058 4FF00502 		mov	r2, #5
+ 410 005c 0092     		str	r2, [sp, #0]
+ 411 005e 1846     		mov	r0, r3
+ 412 0060 40F20001 		movw	r1, #:lower16:.LC0
+ 413 0064 C0F20001 		movt	r1, #:upper16:.LC0
+ 414 0068 40F20002 		movw	r2, #:lower16:c_FontSansSerif12
+ 415 006c C0F20002 		movt	r2, #:upper16:c_FontSansSerif12
+ 416 0070 4FF04103 		mov	r3, #65
+ 417 0074 A047     		blx	r4
+  59:../Menue/CMenue.cpp **** 
+  60:../Menue/CMenue.cpp **** 	vTaskDelay(500/portTICK_RATE_MS);
+ 418              		.loc 3 60 0
+ 419 0076 4FF03200 		mov	r0, #50
+ 420 007a FFF7FEFF 		bl	vTaskDelay
+  61:../Menue/CMenue.cpp **** 	glcd->WriteString("Project:",c_FontSansSerif12,85,20);
+ 421              		.loc 3 61 0
+ 422 007e 7B68     		ldr	r3, [r7, #4]
+ 423 0080 DB68     		ldr	r3, [r3, #12]
+ 424 0082 1B68     		ldr	r3, [r3, #0]
+ 425 0084 03F11803 		add	r3, r3, #24
+ 426 0088 1C68     		ldr	r4, [r3, #0]
+ 427 008a 7B68     		ldr	r3, [r7, #4]
+ 428 008c DB68     		ldr	r3, [r3, #12]
+ 429 008e 4FF01402 		mov	r2, #20
+ 430 0092 0092     		str	r2, [sp, #0]
+ 431 0094 1846     		mov	r0, r3
+ 432 0096 40F20001 		movw	r1, #:lower16:.LC1
+ 433 009a C0F20001 		movt	r1, #:upper16:.LC1
+ 434 009e 40F20002 		movw	r2, #:lower16:c_FontSansSerif12
+ 435 00a2 C0F20002 		movt	r2, #:upper16:c_FontSansSerif12
+ 436 00a6 4FF05503 		mov	r3, #85
+ 437 00aa A047     		blx	r4
+  62:../Menue/CMenue.cpp **** 
+  63:../Menue/CMenue.cpp **** 	vTaskDelay(1000/portTICK_RATE_MS);
+ 438              		.loc 3 63 0
+ 439 00ac 4FF06400 		mov	r0, #100
+ 440 00b0 FFF7FEFF 		bl	vTaskDelay
+  64:../Menue/CMenue.cpp **** 	glcd->WriteString("THUNDERCRYER",c_FontSansSerif12,0,35);
+ 441              		.loc 3 64 0
+ 442 00b4 7B68     		ldr	r3, [r7, #4]
+ 443 00b6 DB68     		ldr	r3, [r3, #12]
+ 444 00b8 1B68     		ldr	r3, [r3, #0]
+ 445 00ba 03F11803 		add	r3, r3, #24
+ 446 00be 1C68     		ldr	r4, [r3, #0]
+ 447 00c0 7B68     		ldr	r3, [r7, #4]
+ 448 00c2 DB68     		ldr	r3, [r3, #12]
+ 449 00c4 4FF02302 		mov	r2, #35
+ 450 00c8 0092     		str	r2, [sp, #0]
+ 451 00ca 1846     		mov	r0, r3
+ 452 00cc 40F20001 		movw	r1, #:lower16:.LC2
+ 453 00d0 C0F20001 		movt	r1, #:upper16:.LC2
+ 454 00d4 40F20002 		movw	r2, #:lower16:c_FontSansSerif12
+ 455 00d8 C0F20002 		movt	r2, #:upper16:c_FontSansSerif12
+ 456 00dc 4FF00003 		mov	r3, #0
+ 457 00e0 A047     		blx	r4
+  65:../Menue/CMenue.cpp **** 
+  66:../Menue/CMenue.cpp **** 	vTaskDelay(3000/portTICK_RATE_MS);
+ 458              		.loc 3 66 0
+ 459 00e2 4FF49670 		mov	r0, #300
+ 460 00e6 FFF7FEFF 		bl	vTaskDelay
+  67:../Menue/CMenue.cpp **** 	glcd->Window(0,0,117,50);
+ 461              		.loc 3 67 0
+ 462 00ea 7B68     		ldr	r3, [r7, #4]
+ 463 00ec DB68     		ldr	r3, [r3, #12]
+ 464 00ee 1B68     		ldr	r3, [r3, #0]
+ 465 00f0 03F10803 		add	r3, r3, #8
+ 466 00f4 1C68     		ldr	r4, [r3, #0]
+ 467 00f6 7B68     		ldr	r3, [r7, #4]
+ 468 00f8 DB68     		ldr	r3, [r3, #12]
+ 469 00fa 4FF03202 		mov	r2, #50
+ 470 00fe 0092     		str	r2, [sp, #0]
+ 471 0100 1846     		mov	r0, r3
+ 472 0102 4FF00001 		mov	r1, #0
+ 473 0106 4FF00002 		mov	r2, #0
+ 474 010a 4FF07503 		mov	r3, #117
+ 475 010e A047     		blx	r4
+  68:../Menue/CMenue.cpp **** 	glcd->WriteString("21:14",c_FontSansSerif26,10,5);
+ 476              		.loc 3 68 0
+ 477 0110 7B68     		ldr	r3, [r7, #4]
+ 478 0112 DB68     		ldr	r3, [r3, #12]
+ 479 0114 1B68     		ldr	r3, [r3, #0]
+ 480 0116 03F11803 		add	r3, r3, #24
+ 481 011a 1C68     		ldr	r4, [r3, #0]
+ 482 011c 7B68     		ldr	r3, [r7, #4]
+ 483 011e DB68     		ldr	r3, [r3, #12]
+ 484 0120 4FF00502 		mov	r2, #5
+ 485 0124 0092     		str	r2, [sp, #0]
+ 486 0126 1846     		mov	r0, r3
+ 487 0128 40F20001 		movw	r1, #:lower16:.LC3
+ 488 012c C0F20001 		movt	r1, #:upper16:.LC3
+ 489 0130 40F20002 		movw	r2, #:lower16:c_FontSansSerif26
+ 490 0134 C0F20002 		movt	r2, #:upper16:c_FontSansSerif26
+ 491 0138 4FF00A03 		mov	r3, #10
+ 492 013c A047     		blx	r4
+  69:../Menue/CMenue.cpp **** 	glcd->WriteString("Fr. 24.02.12",c_FontSansSerif12,10,35);
+ 493              		.loc 3 69 0
+ 494 013e 7B68     		ldr	r3, [r7, #4]
+ 495 0140 DB68     		ldr	r3, [r3, #12]
+ 496 0142 1B68     		ldr	r3, [r3, #0]
+ 497 0144 03F11803 		add	r3, r3, #24
+ 498 0148 1C68     		ldr	r4, [r3, #0]
+ 499 014a 7B68     		ldr	r3, [r7, #4]
+ 500 014c DB68     		ldr	r3, [r3, #12]
+ 501 014e 4FF02302 		mov	r2, #35
+ 502 0152 0092     		str	r2, [sp, #0]
+ 503 0154 1846     		mov	r0, r3
+ 504 0156 40F20001 		movw	r1, #:lower16:.LC4
+ 505 015a C0F20001 		movt	r1, #:upper16:.LC4
+ 506 015e 40F20002 		movw	r2, #:lower16:c_FontSansSerif12
+ 507 0162 C0F20002 		movt	r2, #:upper16:c_FontSansSerif12
+ 508 0166 4FF00A03 		mov	r3, #10
+ 509 016a A047     		blx	r4
+  70:../Menue/CMenue.cpp **** 
+  71:../Menue/CMenue.cpp **** 	glcd->WriteString("Development in progress",c_FontNative,1,120);
+ 510              		.loc 3 71 0
+ 511 016c 7B68     		ldr	r3, [r7, #4]
+ 512 016e DB68     		ldr	r3, [r3, #12]
+ 513 0170 1B68     		ldr	r3, [r3, #0]
+ 514 0172 03F11803 		add	r3, r3, #24
+ 515 0176 1C68     		ldr	r4, [r3, #0]
+ 516 0178 7B68     		ldr	r3, [r7, #4]
+ 517 017a DB68     		ldr	r3, [r3, #12]
+ 518 017c 4FF07802 		mov	r2, #120
+ 519 0180 0092     		str	r2, [sp, #0]
+ 520 0182 1846     		mov	r0, r3
+ 521 0184 40F20001 		movw	r1, #:lower16:.LC5
+ 522 0188 C0F20001 		movt	r1, #:upper16:.LC5
+ 523 018c 40F20002 		movw	r2, #:lower16:_ZL12c_FontNative
+ 524 0190 C0F20002 		movt	r2, #:upper16:_ZL12c_FontNative
+ 525 0194 4FF00103 		mov	r3, #1
+ 526 0198 A047     		blx	r4
+ 527              	.L19:
+  72:../Menue/CMenue.cpp **** 
+  73:../Menue/CMenue.cpp **** 	while(1){
+  74:../Menue/CMenue.cpp **** 		if(x<60) {
+ 528              		.loc 3 74 0
+ 529 019a FB68     		ldr	r3, [r7, #12]
+ 530 019c 3B2B     		cmp	r3, #59
+ 531 019e 28DC     		bgt	.L17
+  75:../Menue/CMenue.cpp **** 			sprintf(buffer,"%2d",x);
+ 532              		.loc 3 75 0
+ 533 01a0 07F10803 		add	r3, r7, #8
+ 534 01a4 1846     		mov	r0, r3
+ 535 01a6 40F20001 		movw	r1, #:lower16:.LC6
+ 536 01aa C0F20001 		movt	r1, #:upper16:.LC6
+ 537 01ae FA68     		ldr	r2, [r7, #12]
+ 538 01b0 FFF7FEFF 		bl	sprintf
+  76:../Menue/CMenue.cpp **** 			glcd->WriteString(buffer,c_FontSansSerif12,80,7);
+ 539              		.loc 3 76 0
+ 540 01b4 7B68     		ldr	r3, [r7, #4]
+ 541 01b6 DB68     		ldr	r3, [r3, #12]
+ 542 01b8 1B68     		ldr	r3, [r3, #0]
+ 543 01ba 03F11803 		add	r3, r3, #24
+ 544 01be 1C68     		ldr	r4, [r3, #0]
+ 545 01c0 7B68     		ldr	r3, [r7, #4]
+ 546 01c2 DA68     		ldr	r2, [r3, #12]
+ 547 01c4 07F10803 		add	r3, r7, #8
+ 548 01c8 4FF00701 		mov	r1, #7
+ 549 01cc 0091     		str	r1, [sp, #0]
+ 550 01ce 1046     		mov	r0, r2
+ 551 01d0 1946     		mov	r1, r3
+ 552 01d2 40F20002 		movw	r2, #:lower16:c_FontSansSerif12
+ 553 01d6 C0F20002 		movt	r2, #:upper16:c_FontSansSerif12
+ 554 01da 4FF05003 		mov	r3, #80
+ 555 01de A047     		blx	r4
+  77:../Menue/CMenue.cpp **** 			x++;
+ 556              		.loc 3 77 0
+ 557 01e0 FB68     		ldr	r3, [r7, #12]
+ 558 01e2 03F10103 		add	r3, r3, #1
+ 559 01e6 FB60     		str	r3, [r7, #12]
+  78:../Menue/CMenue.cpp **** 			vTaskDelay(1000/portTICK_RATE_MS);
+ 560              		.loc 3 78 0
+ 561 01e8 4FF06400 		mov	r0, #100
+ 562 01ec FFF7FEFF 		bl	vTaskDelay
+  73:../Menue/CMenue.cpp **** 	while(1){
+ 563              		.loc 3 73 0
+ 564 01f0 D3E7     		b	.L19
+ 565              	.L17:
+  79:../Menue/CMenue.cpp **** 		} else
+  80:../Menue/CMenue.cpp **** 			x = 0;
+ 566              		.loc 3 80 0
+ 567 01f2 4FF00003 		mov	r3, #0
+ 568 01f6 FB60     		str	r3, [r7, #12]
+  73:../Menue/CMenue.cpp **** 	while(1){
+ 569              		.loc 3 73 0
+ 570 01f8 CFE7     		b	.L19
+ 571              	.LBE5:
+ 572              		.cfi_endproc
+ 573              	.LFE144:
+ 575              		.global	_ZTV6CMenue
+ 576 01fa 00BF     		.section	.rodata._ZTV6CMenue,"a",%progbits
+ 577              		.align	3
+ 580              	_ZTV6CMenue:
+ 581 0000 00000000 		.word	0
+ 582 0004 00000000 		.word	0
+ 583 0008 00000000 		.word	_ZNK5CTask7IsValidEv
+ 584 000c 00000000 		.word	_ZN5CTask6AttachEPv
+ 585 0010 00000000 		.word	_ZN5CTask6DetachEv
+ 586 0014 00000000 		.word	_ZN6CMenueD1Ev
+ 587 0018 00000000 		.word	_ZN6CMenueD0Ev
+ 588 001c 00000000 		.word	_ZN6CMenue12HardwareInitEv
+ 589 0020 00000000 		.word	_ZN6CMenue3RunEv
+ 590 0024 00000000 		.word	_ZN12AManagedTask8OnCreateEPKctm
+ 591              		.section	.rodata._ZL12c_FontNative,"a",%progbits
+ 592              		.align	2
+ 595              	_ZL12c_FontNative:
+ 596 0000 00000000 		.space	24
+ 596      00000000 
+ 596      00000000 
+ 596      00000000 
+ 596      00000000 
+ 597              		.global	_ZN6CMenueC1EP11CGraphicLCD
+ 598              		.thumb_set _ZN6CMenueC1EP11CGraphicLCD,_ZN6CMenueC2EP11CGraphicLCD
+ 599              		.global	_ZN6CMenueD1Ev
+ 600              		.thumb_set _ZN6CMenueD1Ev,_ZN6CMenueD2Ev
+ 601              		.text
+ 602              	.Letext0:
+ 603              		.file 4 "d:\\elektronik\\ides\\eclipse\\yagarto\\bin\\../lib/gcc/arm-none-eabi/4.6.2/include/stdde
+ 604              		.file 5 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 605              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 606              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 607              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC
+ 608              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
+ 609              		.file 10 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/lock.h"
+ 610              		.file 11 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/_types.h"
+ 611              		.file 12 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/reent.h"
+ 612              		.file 13 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdio.h"
+ 613              		.file 14 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/include/c++/4.6.2/cstdio"
+ 614              		.file 15 "../Menue/CMenue.h"
+ 615              		.file 16 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD
+ 616              		.file 17 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Inc
+ 617              		.file 18 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD
+ 618              		.file 19 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD
+ 619              		.file 20 "<built-in>"
 DEFINED SYMBOLS
                             *ABS*:00000000 CMenue.cpp
-  C:\Temp\ccuGFQqq.s:19     .text._ZNK5CTask7IsValidEv:00000000 $t
-  C:\Temp\ccuGFQqq.s:24     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
-  C:\Temp\ccuGFQqq.s:61     .text._ZN5CTask6DetachEv:00000000 $t
-  C:\Temp\ccuGFQqq.s:66     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
-  C:\Temp\ccuGFQqq.s:106    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
-  C:\Temp\ccuGFQqq.s:111    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
-  C:\Temp\ccuGFQqq.s:145    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 $t
-  C:\Temp\ccuGFQqq.s:150    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 _ZN6CMenueC2EP11CGraphicLCD
-  C:\Temp\ccuGFQqq.s:191    .text._ZN6CMenueC2EP11CGraphicLCD:0000002c $d
-  C:\Temp\ccuGFQqq.s:466    .rodata._ZTV6CMenue:00000000 _ZTV6CMenue
-  C:\Temp\ccuGFQqq.s:196    .text._ZN6CMenueD2Ev:00000000 $t
-  C:\Temp\ccuGFQqq.s:201    .text._ZN6CMenueD2Ev:00000000 _ZN6CMenueD2Ev
-  C:\Temp\ccuGFQqq.s:246    .text._ZN6CMenueD2Ev:00000034 $d
-  C:\Temp\ccuGFQqq.s:251    .text._ZN6CMenueD0Ev:00000000 $t
-  C:\Temp\ccuGFQqq.s:256    .text._ZN6CMenueD0Ev:00000000 _ZN6CMenueD0Ev
-  C:\Temp\ccuGFQqq.s:201    .text._ZN6CMenueD2Ev:00000000 _ZN6CMenueD1Ev
-  C:\Temp\ccuGFQqq.s:288    .text._ZN6CMenue12HardwareInitEv:00000000 $t
-  C:\Temp\ccuGFQqq.s:293    .text._ZN6CMenue12HardwareInitEv:00000000 _ZN6CMenue12HardwareInitEv
-  C:\Temp\ccuGFQqq.s:323    .rodata:00000000 $d
-  C:\Temp\ccuGFQqq.s:324    .rodata:00000000 .LC0
-  C:\Temp\ccuGFQqq.s:327    .text._ZN6CMenue3RunEv:00000000 $t
-  C:\Temp\ccuGFQqq.s:332    .text._ZN6CMenue3RunEv:00000000 _ZN6CMenue3RunEv
-  C:\Temp\ccuGFQqq.s:481    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
-  C:\Temp\ccuGFQqq.s:463    .rodata._ZTV6CMenue:00000000 $d
-  C:\Temp\ccuGFQqq.s:478    .rodata._ZL12c_FontNative:00000000 $d
-  C:\Temp\ccuGFQqq.s:150    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 _ZN6CMenueC1EP11CGraphicLCD
+  C:\Temp\ccTQHToQ.s:19     .text._ZNK5CTask7IsValidEv:00000000 $t
+  C:\Temp\ccTQHToQ.s:24     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
+  C:\Temp\ccTQHToQ.s:61     .text._ZN5CTask6DetachEv:00000000 $t
+  C:\Temp\ccTQHToQ.s:66     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
+  C:\Temp\ccTQHToQ.s:106    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
+  C:\Temp\ccTQHToQ.s:111    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
+  C:\Temp\ccTQHToQ.s:145    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 $t
+  C:\Temp\ccTQHToQ.s:150    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 _ZN6CMenueC2EP11CGraphicLCD
+  C:\Temp\ccTQHToQ.s:191    .text._ZN6CMenueC2EP11CGraphicLCD:0000002c $d
+  C:\Temp\ccTQHToQ.s:580    .rodata._ZTV6CMenue:00000000 _ZTV6CMenue
+  C:\Temp\ccTQHToQ.s:196    .text._ZN6CMenueD2Ev:00000000 $t
+  C:\Temp\ccTQHToQ.s:201    .text._ZN6CMenueD2Ev:00000000 _ZN6CMenueD2Ev
+  C:\Temp\ccTQHToQ.s:246    .text._ZN6CMenueD2Ev:00000034 $d
+  C:\Temp\ccTQHToQ.s:251    .text._ZN6CMenueD0Ev:00000000 $t
+  C:\Temp\ccTQHToQ.s:256    .text._ZN6CMenueD0Ev:00000000 _ZN6CMenueD0Ev
+  C:\Temp\ccTQHToQ.s:201    .text._ZN6CMenueD2Ev:00000000 _ZN6CMenueD1Ev
+  C:\Temp\ccTQHToQ.s:288    .text._ZN6CMenue12HardwareInitEv:00000000 $t
+  C:\Temp\ccTQHToQ.s:293    .text._ZN6CMenue12HardwareInitEv:00000000 _ZN6CMenue12HardwareInitEv
+  C:\Temp\ccTQHToQ.s:323    .rodata:00000000 $d
+  C:\Temp\ccTQHToQ.s:324    .rodata:00000000 .LC0
+  C:\Temp\ccTQHToQ.s:327    .rodata:0000000c .LC1
+  C:\Temp\ccTQHToQ.s:330    .rodata:00000018 .LC2
+  C:\Temp\ccTQHToQ.s:333    .rodata:00000028 .LC3
+  C:\Temp\ccTQHToQ.s:336    .rodata:00000030 .LC4
+  C:\Temp\ccTQHToQ.s:339    .rodata:00000040 .LC5
+  C:\Temp\ccTQHToQ.s:342    .rodata:00000058 .LC6
+  C:\Temp\ccTQHToQ.s:345    .text._ZN6CMenue3RunEv:00000000 $t
+  C:\Temp\ccTQHToQ.s:350    .text._ZN6CMenue3RunEv:00000000 _ZN6CMenue3RunEv
+  C:\Temp\ccTQHToQ.s:595    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+  C:\Temp\ccTQHToQ.s:577    .rodata._ZTV6CMenue:00000000 $d
+  C:\Temp\ccTQHToQ.s:592    .rodata._ZL12c_FontNative:00000000 $d
+  C:\Temp\ccTQHToQ.s:150    .text._ZN6CMenueC2EP11CGraphicLCD:00000000 _ZN6CMenueC1EP11CGraphicLCD
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
 _ZN12AManagedTaskC2Ev
 _ZN12AManagedTaskD2Ev
 _ZdlPv
+_ZN11CGraphicLCD7InverseEb
+vTaskDelay
+c_FontSansSerif12
+c_FontSansSerif26
+sprintf
 _ZN5CTask6AttachEPv

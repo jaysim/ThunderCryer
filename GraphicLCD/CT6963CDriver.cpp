@@ -223,10 +223,13 @@ void CT6963CDriver::WriteChar(char charCode)
   * @param  null terminated string, font structure, x, y
   * @retval None
   */
-void CT6963CDriver::WriteString(const char * str, const tFont font,unsigned int x, unsigned int y)
+void CT6963CDriver::WriteString(const char * str, const tFont &font,unsigned int x, unsigned int y)
 {
+	unsigned int offset,width;
+	unsigned char i,j,map,height,allwidth=0;
+
 	// use internal Character generator
-	if(c_FontNative == font){
+	if(font.glyph_height == 0){
 		TextGoTo(x/GLCD_FONT_WIDTH, y/8);
 
 		while(*str)
@@ -237,6 +240,35 @@ void CT6963CDriver::WriteString(const char * str, const tFont font,unsigned int 
 	}
 	// generate fonts
 	else {
+		while((map = *str++))
+		{
+			// get char position in font table
+			map = font.mapping_table[map];
+			// determine char width
+			width = font.glyph_width;
+			// font has no constant width
+			if(width == 0)
+				width = font.width_table[map];
+
+			// char data offset
+			offset = font.offset_table[map];
+			// height is ever constant
+			height = font.glyph_height;
+
+			//step through all lines of an char
+			for(j=0 ; j<height * (((width-1)/8)+1) ; j+=(((width-1)/8)+1)    )
+			{   // step through every single point of a line of the char
+				for(i=0 ; i<width  ; i++)
+				{   //  the pixel needs to be set
+					if( font.glyph_table[ offset+j+(i/8) ] & (1 << ( 7 - ( i % 8 ) ) ) )
+						SetPixel( x+i+allwidth , y+j/ (((width-1)/8)+1)  );
+					else
+						SetPixel( x+i+allwidth , y+j/ (((width-1)/8)+1)  );
+				}//End i
+			}// End j
+			//remember string width to set the next char directly net to the previous
+			allwidth+=width;
+		}
 
 	}
 
@@ -251,6 +283,11 @@ void CT6963CDriver::WriteString(const char * str, const tFont font,unsigned int 
 void CT6963CDriver::SetPixel(unsigned char x, unsigned char y)
 {
 	unsigned char tmp;
+
+	// do nothing for pixel out of range
+	if(x > (GLCD_PIXELS_PER_LINE-1) || y > (GLCD_NUMBER_OF_LINES-1))
+		return;
+
 	GraphicGoTo(x,y);
 
 
@@ -322,7 +359,7 @@ void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsig
 				SetPixel(CurrentX,CurrentY);
 			}while (CurrentX != x2); // line finished
 		}
-		else // y is runnig var
+		else // y is running var
 		{
 			TwoDyAccumulatedError = 0;
 			do
@@ -353,31 +390,41 @@ void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsi
 	Line(x+width,y-4,x+width,y+height-4);// right border
 	Line(x+4,y+height,x+width-4,y+height);// bottom border
 
-	for(i=1;i<4;i++){
+	for(i=2;i<4;i++){
 		// upper left
+		SetPixel(x+i,y+3);
 		SetPixel(x+i,y+2);
 		SetPixel(x+i,y+1);
 
 		// upper right
+		SetPixel(x+width-i,y+3);
 		SetPixel(x+width-i,y+2);
 		SetPixel(x+width-i,y+1);
 	}
 
-	// bottom left
-	SetPixel(x+1,y+height-2);
-	SetPixel(x+1,y+height-1);
+	// upper left
+	SetPixel(x+1,y+3);
+	SetPixel(x+1,y+2);
+
+	// upper right
+	SetPixel(x+width-1,y+3);
+	SetPixel(x+width-1,y+2);
 
 	// bottom left
-	SetPixel(x+1,y+height-1);
+	SetPixel(x+1,y+height-2);
+	SetPixel(x+1,y+height-3);
+
+	// bottom left
+	SetPixel(x+3,y+height-1);
 	SetPixel(x+2,y+height-1);
 
 
 	// bottom right
 	SetPixel(x+width-1,y+height-2);
-	SetPixel(x+width-1,y+height-1);
+	SetPixel(x+width-1,y+height-3);
 
 	// bottom right
-	SetPixel(x+width-1,y+height-1);
+	SetPixel(x+width-3,y+height-1);
 	SetPixel(x+width-2,y+height-1);
 
 }

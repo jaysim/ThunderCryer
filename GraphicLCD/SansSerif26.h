@@ -12,8 +12,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef SANSSERIF12_H_
-#define SANSSERIF12_H_
+#ifndef SANSSERIF26_H_
+#define SANSSERIF26_H_
 /* Includes ------------------------------------------------------------------*/
 #include "CGraphicLCD.h"
 /* Exported types ------------------------------------------------------------*/
@@ -23,4 +23,4 @@ extern const tFont c_FontSansSerif26;
 /* Exported functions ------------------------------------------------------- */
 /* Class definitions -------------------------------------------------------- */
 
-#endif /* SANSSERIF12_H_ */
+#endif /* SANSSERIF26_H_ */

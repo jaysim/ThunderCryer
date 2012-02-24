@@ -150,7 +150,7 @@ public:
 	  * @param  null terminated string, font structure, x, y
 	  * @retval None
 	  */
-	void WriteString(const char * str, const tFont font,unsigned int x, unsigned int y);
+	void WriteString(const char * str, const tFont &font,unsigned int x, unsigned int y);
 
 	/**
 	  * @brief  writes a bitmap to graphics ram

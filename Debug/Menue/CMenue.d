@@ -46,7 +46,9 @@ Menue/CMenue.d: ../Menue/CMenue.cpp ../Menue/CMenue.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/IFreeRTOSProtocol.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
  C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h \
- C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/SansSerif12.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/SansSerif26.h
 
 ../Menue/CMenue.h:
 
@@ -145,3 +147,7 @@ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Graph
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h:
 
 C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/SansSerif12.h:
+
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/SansSerif26.h:

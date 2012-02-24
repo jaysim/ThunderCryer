@@ -7,19 +7,22 @@ CPP_SRCS += \
 ../GraphicLCD/CGraphicLCD.cpp \
 ../GraphicLCD/CT6963CDriver.cpp \
 ../GraphicLCD/CT6963GPIOInterface.cpp \
-../GraphicLCD/SansSerif12.cpp 
+../GraphicLCD/SansSerif12.cpp \
+../GraphicLCD/SansSerif26.cpp 
 
 CPP_DEPS += \
 ./GraphicLCD/CGraphicLCD.d \
 ./GraphicLCD/CT6963CDriver.d \
 ./GraphicLCD/CT6963GPIOInterface.d \
-./GraphicLCD/SansSerif12.d 
+./GraphicLCD/SansSerif12.d \
+./GraphicLCD/SansSerif26.d 
 
 OBJS += \
 ./GraphicLCD/CGraphicLCD.o \
 ./GraphicLCD/CT6963CDriver.o \
 ./GraphicLCD/CT6963GPIOInterface.o \
-./GraphicLCD/SansSerif12.o 
+./GraphicLCD/SansSerif12.o \
+./GraphicLCD/SansSerif26.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes

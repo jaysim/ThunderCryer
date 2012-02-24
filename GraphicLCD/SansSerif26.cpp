@@ -4421,7 +4421,7 @@ const unsigned int Microsoft_Sans_Serif__26_offset_table[]  = {
 10160 // >
 };
 
-const const tFont c_FontSansSerif12 = {
+const tFont c_FontSansSerif26 = {
    0, 	// glyph_width
    40, 	// glyph_height
    Microsoft_Sans_Serif__26_char_table, 	// ptr to glyph_table
