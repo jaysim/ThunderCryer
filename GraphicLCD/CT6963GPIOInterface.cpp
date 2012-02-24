@@ -76,9 +76,11 @@ bool CheckStatus(void)
 	tmp = ((GPIO_ReadInputData(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_CE);
-	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD);GLCD_DATA_OUTPUT;
+	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_RD);
 
 	delay_us(c_iDelayAfter);
+
+	GLCD_DATA_OUTPUT;
 
 	return ((tmp&0x03)==0x03);
 }

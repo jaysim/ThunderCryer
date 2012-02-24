@@ -69,6 +69,9 @@ const unsigned char T6963_DATA_READ_AND_NONVARIABLE	=	0xC5;
 const unsigned char T6963_SCREEN_PEEK				=	0xE0;
 const unsigned char T6963_SCREEN_COPY				=	0xE8;
 
+const unsigned char T6963_BIT_SET					=	0xF8;
+const unsigned char T6963_BIT_RESET					=	0xF0;
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -133,8 +136,9 @@ void CT6963CDriver::Init(){
   * @retval None
   */
 void CT6963CDriver::SetAddressPointer(unsigned int address){
-	WriteData((address+2) & 0xFF);
-	WriteData((address+2) >> 8);
+	address += 2; // display offset
+	WriteData((address) & 0xFF);
+	WriteData((address) >> 8);
 	WriteCommand(T6963_SET_ADDRESS_POINTER);
 }
 
@@ -239,15 +243,13 @@ void CT6963CDriver::SetPixel(unsigned char x, unsigned char y)
 	unsigned char tmp;
 	GraphicGoTo(x,y);
 
-	tmp = ReadData();
+
+	tmp = (GLCD_FONT_WIDTH - 1) - ((x-1) % GLCD_FONT_WIDTH);
 
 	if(Inverse())
-		tmp &=~ (1 <<  (GLCD_FONT_WIDTH - 1 - (x % GLCD_FONT_WIDTH)));
+		WriteCommand(T6963_BIT_RESET | tmp);
 	else
-		tmp |= (1 <<  (GLCD_FONT_WIDTH - 1 - (x % GLCD_FONT_WIDTH)));
-
-	WriteDisplayData(tmp);
-
+		WriteCommand(T6963_BIT_SET | tmp);
 }
 
 /**
@@ -336,7 +338,7 @@ void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsig
 void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height){
 	unsigned int i;
 
-	Rectangle(x+4,y,x+width-4,4,true); // filled top bar
+	//Rectangle(x+4,y,x+width-4,4,true); // filled top bar
 	Line(x,y-4,x,y+height-4);			// left border
 	Line(x+width,y-4,x+width,y+height-4);// right border
 	Line(x+4,y+height,x+width-4,y+height);// bottom border
