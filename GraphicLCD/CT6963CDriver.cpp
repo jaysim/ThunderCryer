@@ -386,9 +386,11 @@ void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsi
 	unsigned int i;
 
 	Rectangle(x+4,y,x+width-4,4,true); // filled top bar
-	Line(x,y-4,x,y+height-4);			// left border
-	Line(x+width,y-4,x+width,y+height-4);// right border
-	Line(x+4,y+height,x+width-4,y+height);// bottom border
+	Line(x,y+4,x,y+height-4);			// left border
+	Line(x+width-1,y+4,x+width-1,y+height-4);// right border
+	Line(x+width,y+5,x+width,y+height-3);// right border shadow
+	Line(x+4,y+height-1,x+width-5,y+height-1);// bottom border
+	Line(x+5,y+height,x+width-4,y+height);// bottom border shadow
 
 	for(i=2;i<4;i++){
 		// upper left
@@ -407,25 +409,36 @@ void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsi
 	SetPixel(x+1,y+2);
 
 	// upper right
-	SetPixel(x+width-1,y+3);
+	SetPixel(x+width-2,y+3);
+	SetPixel(x+width-2,y+2);
+	SetPixel(x+width-1,y+3);	//shadow
 	SetPixel(x+width-1,y+2);
+	SetPixel(x+width-2,y+1);
 
 	// bottom left
-	SetPixel(x+1,y+height-2);
+	SetPixel(x+1,y+height-4);
 	SetPixel(x+1,y+height-3);
 
 	// bottom left
-	SetPixel(x+3,y+height-1);
-	SetPixel(x+2,y+height-1);
+	SetPixel(x+3,y+height-2);
+	SetPixel(x+2,y+height-2);
 
 
 	// bottom right
-	SetPixel(x+width-1,y+height-2);
+	SetPixel(x+width-2,y+height-4);
+	SetPixel(x+width-2,y+height-3);
+
+	// bottom right
+	SetPixel(x+width-4,y+height-2);
+	SetPixel(x+width-3,y+height-2);
+
+	//bottom right shadow
 	SetPixel(x+width-1,y+height-3);
+	SetPixel(x+width-1,y+height-2);
 
-	// bottom right
-	SetPixel(x+width-3,y+height-1);
+	// bottom right shadow
 	SetPixel(x+width-2,y+height-1);
+	SetPixel(x+width-3,y+height-1);
 
 }
 
