@@ -15,6 +15,9 @@ RM := rm -rf
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
 -include FreeRTOS/Source/subdir.mk
+-include Fatfs/FatFs/src/option/subdir.mk
+-include Fatfs/FatFs/src/subdir.mk
+-include Fatfs/subdir.mk
 -include subdir.mk
 -include objects.mk
 

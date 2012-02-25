@@ -37,4 +37,7 @@ GraphicLCD \
 FreeRTOS_EC/Source \
 FreeRTOS/Source \
 FreeRTOS/Source/portable/GCC/ARM_CM4F \
+Fatfs \
+Fatfs/FatFs/src/option \
+Fatfs/FatFs/src \
 

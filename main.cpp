@@ -26,7 +26,7 @@
 CLedHeartBeatSTM32F4Disc g_LedTast(500/portTICK_RATE_MS);
 CT6963_GPIO_Interface g_Display;
 CMenue	g_Menue(&g_Display);
-//CFileHandler g_FileHandler;
+CFileHandler g_FileHandler;
 
 /* Private function prototypes -----------------------------------------------*/
 extern "C" {
@@ -51,16 +51,21 @@ int main(void){
 	 * create Led Heartbeat task with minimal stack size and priority
 	 * 1 higher than idle task
 	 */
-	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+5);
-	g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
+	//g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+5);
+	//g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
 	//g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
 
 	/**
 	 * Initialise the hardware for all Tasks and
 	 * then FreeRTOS takes control of execution
 	 */
-	CFreeRTOS::InitHardwareForManagedTasks();
-	CFreeRTOS::StartScheduler();
+	//CFreeRTOS::InitHardwareForManagedTasks();
+	//CFreeRTOS::StartScheduler();
+
+	g_FileHandler.HardwareInit();
+
+	g_FileHandler.Run();
+
 
 	while(1){
 		u++;
