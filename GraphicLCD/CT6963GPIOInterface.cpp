@@ -39,7 +39,7 @@
 #define GLCD_RESET		GPIO_Pin_11
 
 const unsigned long c_iDelayFore = 2;
-const unsigned long c_iDelayAfter = 2;
+const unsigned long c_iDelayAfter = 1;
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/

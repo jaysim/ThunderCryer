@@ -164,7 +164,7 @@ void CT6963CDriver::TextGoTo(unsigned char x, unsigned char y)
 void CT6963CDriver::GraphicGoTo(unsigned char x, unsigned char y)
 {
 	unsigned int address;
-	address = GLCD_GRAPHIC_HOME + (x / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y);
+	address = GLCD_GRAPHIC_HOME + ((x) / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y);
 	SetAddressPointer(address);
 }
 
@@ -190,9 +190,6 @@ void CT6963CDriver::Clear(){
 
 	for(i = 0; i < GLCD_TEXT_SIZE; i++)
 	{
-		if(Inverse())
-			WriteDisplayData(0xFF);
-		else
 			WriteDisplayData(0x00);
 	}
 }
@@ -220,13 +217,14 @@ void CT6963CDriver::WriteChar(char charCode)
 
 /**
   * @brief  writes a string starting at upper left corner on (x,y) and specified font
+  * 		ground must be cleared
   * @param  null terminated string, font structure, x, y
   * @retval None
   */
 void CT6963CDriver::WriteString(const char * str, const tFont &font,unsigned int x, unsigned int y)
 {
 	unsigned int offset,width;
-	unsigned char i,j,map,height,allwidth=0;
+	unsigned int i,j,map,height,allwidth=0;
 
 	// use internal Character generator
 	if(font.glyph_height == 0){
@@ -262,8 +260,6 @@ void CT6963CDriver::WriteString(const char * str, const tFont &font,unsigned int
 				{   //  the pixel needs to be set
 					if( font.glyph_table[ offset+j+(i/8) ] & (1 << ( 7 - ( i % 8 ) ) ) )
 						SetPixel( x+i+allwidth , y+j/ (((width-1)/8)+1)  );
-					else
-						SetPixel( x+i+allwidth , y+j/ (((width-1)/8)+1)  );
 				}//End i
 			}// End j
 			//remember string width to set the next char directly net to the previous
@@ -291,7 +287,7 @@ void CT6963CDriver::SetPixel(unsigned char x, unsigned char y)
 	GraphicGoTo(x,y);
 
 
-	tmp = (GLCD_FONT_WIDTH - 1) - ((x-1) % GLCD_FONT_WIDTH);
+	tmp = (GLCD_FONT_WIDTH - 1) - (x % GLCD_FONT_WIDTH);
 
 	if(Inverse())
 		WriteCommand(T6963_BIT_RESET | tmp);
@@ -385,60 +381,48 @@ void CT6963CDriver::Line(unsigned int x1, unsigned int y1,unsigned int x2, unsig
 void CT6963CDriver::Window(unsigned int x,unsigned int y,unsigned int width,unsigned int height){
 	unsigned int i;
 
-	Rectangle(x+4,y,x+width-4,4,true); // filled top bar
+	Rectangle(x+3,y,width-4,4,true); // filled top bar
 	Line(x,y+4,x,y+height-4);			// left border
-	Line(x+width-1,y+4,x+width-1,y+height-4);// right border
-	Line(x+width,y+5,x+width,y+height-3);// right border shadow
-	Line(x+4,y+height-1,x+width-5,y+height-1);// bottom border
-	Line(x+5,y+height,x+width-4,y+height);// bottom border shadow
+	Line(x+width,y+4,x+width,y+height-4);// right border
+	Line(x+4,y+height,x+width-5,y+height);// bottom border
 
-	for(i=2;i<4;i++){
+	for(i=1;i<3;i++){
 		// upper left
 		SetPixel(x+i,y+3);
 		SetPixel(x+i,y+2);
-		SetPixel(x+i,y+1);
 
 		// upper right
 		SetPixel(x+width-i,y+3);
 		SetPixel(x+width-i,y+2);
-		SetPixel(x+width-i,y+1);
 	}
 
 	// upper left
-	SetPixel(x+1,y+3);
-	SetPixel(x+1,y+2);
+	SetPixel(x+3,y+1);
+	SetPixel(x+2,y+1);
 
 	// upper right
-	SetPixel(x+width-2,y+3);
-	SetPixel(x+width-2,y+2);
-	SetPixel(x+width-1,y+3);	//shadow
-	SetPixel(x+width-1,y+2);
+	SetPixel(x+width-3,y+1);
 	SetPixel(x+width-2,y+1);
 
+
 	// bottom left
-	SetPixel(x+1,y+height-4);
+	SetPixel(x+1,y+height-2);
 	SetPixel(x+1,y+height-3);
 
 	// bottom left
-	SetPixel(x+3,y+height-2);
-	SetPixel(x+2,y+height-2);
+	SetPixel(x+3,y+height-1);
+	SetPixel(x+2,y+height-1);
 
 
 	// bottom right
-	SetPixel(x+width-2,y+height-4);
-	SetPixel(x+width-2,y+height-3);
-
-	// bottom right
-	SetPixel(x+width-4,y+height-2);
-	SetPixel(x+width-3,y+height-2);
-
-	//bottom right shadow
-	SetPixel(x+width-1,y+height-3);
 	SetPixel(x+width-1,y+height-2);
+	SetPixel(x+width-1,y+height-3);
 
-	// bottom right shadow
+	// bottom right
 	SetPixel(x+width-2,y+height-1);
 	SetPixel(x+width-3,y+height-1);
+
+
 
 }
 

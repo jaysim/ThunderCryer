@@ -64,7 +64,7 @@
   39:../GraphicLCD/CT6963GPIOInterface.cpp **** #define GLCD_RESET		GPIO_Pin_11
   40:../GraphicLCD/CT6963GPIOInterface.cpp **** 
   41:../GraphicLCD/CT6963GPIOInterface.cpp **** const unsigned long c_iDelayFore = 2;
-  42:../GraphicLCD/CT6963GPIOInterface.cpp **** const unsigned long c_iDelayAfter = 2;
+  42:../GraphicLCD/CT6963GPIOInterface.cpp **** const unsigned long c_iDelayAfter = 1;
   43:../GraphicLCD/CT6963GPIOInterface.cpp **** 
   44:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private macro -------------------------------------------------------------*/
   45:../GraphicLCD/CT6963GPIOInterface.cpp **** /* Private variables ---------------------------------------------------------*/
@@ -293,7 +293,7 @@
   80:../GraphicLCD/CT6963GPIOInterface.cpp **** 
   81:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
  220              		.loc 1 81 0
- 221 007e 4FF00200 		mov	r0, #2
+ 221 007e 4FF00100 		mov	r0, #1
  222 0082 FFF7FEFF 		bl	delay_us
   82:../GraphicLCD/CT6963GPIOInterface.cpp **** 
   83:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_OUTPUT;
@@ -620,7 +620,7 @@
  164:../GraphicLCD/CT6963GPIOInterface.cpp **** 
  165:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
  469              		.loc 1 165 0
- 470 009c 4FF00200 		mov	r0, #2
+ 470 009c 4FF00100 		mov	r0, #1
  471 00a0 FFF7FEFF 		bl	delay_us
  166:../GraphicLCD/CT6963GPIOInterface.cpp **** }
  472              		.loc 1 166 0
@@ -740,7 +740,7 @@
  188:../GraphicLCD/CT6963GPIOInterface.cpp **** 
  189:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
  567              		.loc 1 189 0
- 568 00bc 4FF00200 		mov	r0, #2
+ 568 00bc 4FF00100 		mov	r0, #1
  569 00c0 FFF7FEFF 		bl	delay_us
  190:../GraphicLCD/CT6963GPIOInterface.cpp **** }
  570              		.loc 1 190 0
@@ -858,7 +858,7 @@
  214:../GraphicLCD/CT6963GPIOInterface.cpp **** 
  215:../GraphicLCD/CT6963GPIOInterface.cpp **** 	delay_us(c_iDelayAfter);
  661              		.loc 1 215 0
- 662 00b2 4FF00200 		mov	r0, #2
+ 662 00b2 4FF00100 		mov	r0, #1
  663 00b6 FFF7FEFF 		bl	delay_us
  216:../GraphicLCD/CT6963GPIOInterface.cpp **** 
  217:../GraphicLCD/CT6963GPIOInterface.cpp **** 	GLCD_DATA_OUTPUT;
@@ -921,7 +921,7 @@
  721              		.section	.rodata._ZL13c_iDelayAfter,"a",%progbits
  722              		.align	2
  725              	_ZL13c_iDelayAfter:
- 726 0000 02000000 		.word	2
+ 726 0000 01000000 		.word	1
  727              		.global	_ZN21CT6963_GPIO_InterfaceC1Ev
  728              		.thumb_set _ZN21CT6963_GPIO_InterfaceC1Ev,_ZN21CT6963_GPIO_InterfaceC2Ev
  729              		.global	_ZN21CT6963_GPIO_InterfaceD1Ev
@@ -929,44 +929,44 @@
  731              		.text
  732              	.Letext0:
  733              		.file 2 "../GraphicLCD/CGraphicLCD.h"
- 734              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 735              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Devi
- 736              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
+ 734              		.file 3 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 735              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4xx.h"
+ 736              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_gpio.
  737              		.file 6 "../GraphicLCD/CT6963CDriver.h"
  738              		.file 7 "../GraphicLCD/CT6963GPIOInterface.h"
- 739              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 739              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CT6963GPIOInterface.cpp
-  C:\Temp\cccurSTe.s:19     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 $t
-  C:\Temp\cccurSTe.s:24     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 _ZN21CT6963_GPIO_InterfaceC2Ev
-  C:\Temp\cccurSTe.s:61     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000024 $d
-  C:\Temp\cccurSTe.s:690    .rodata._ZTV21CT6963_GPIO_Interface:00000000 _ZTV21CT6963_GPIO_Interface
-  C:\Temp\cccurSTe.s:66     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 $t
-  C:\Temp\cccurSTe.s:71     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 _ZN21CT6963_GPIO_InterfaceD2Ev
-  C:\Temp\cccurSTe.s:116    .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000034 $d
-  C:\Temp\cccurSTe.s:121    .text._ZN21CT6963_GPIO_InterfaceD0Ev:00000000 $t
-  C:\Temp\cccurSTe.s:126    .text._ZN21CT6963_GPIO_InterfaceD0Ev:00000000 _ZN21CT6963_GPIO_InterfaceD0Ev
-  C:\Temp\cccurSTe.s:71     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 _ZN21CT6963_GPIO_InterfaceD1Ev
-  C:\Temp\cccurSTe.s:158    .text._Z11CheckStatusv:00000000 $t
-  C:\Temp\cccurSTe.s:163    .text._Z11CheckStatusv:00000000 _Z11CheckStatusv
-  C:\Temp\cccurSTe.s:250    .text._ZN21CT6963_GPIO_Interface12HardwareInitEv:00000000 $t
-  C:\Temp\cccurSTe.s:255    .text._ZN21CT6963_GPIO_Interface12HardwareInitEv:00000000 _ZN21CT6963_GPIO_Interface12HardwareInitEv
-  C:\Temp\cccurSTe.s:348    .text._ZN21CT6963_GPIO_Interface5ResetEv:00000000 $t
-  C:\Temp\cccurSTe.s:353    .text._ZN21CT6963_GPIO_Interface5ResetEv:00000000 _ZN21CT6963_GPIO_Interface5ResetEv
-  C:\Temp\cccurSTe.s:392    .text._ZN21CT6963_GPIO_Interface12WriteCommandEh:00000000 $t
-  C:\Temp\cccurSTe.s:397    .text._ZN21CT6963_GPIO_Interface12WriteCommandEh:00000000 _ZN21CT6963_GPIO_Interface12WriteCommandEh
-  C:\Temp\cccurSTe.s:480    .text._ZN21CT6963_GPIO_Interface9WriteDataEh:00000000 $t
-  C:\Temp\cccurSTe.s:485    .text._ZN21CT6963_GPIO_Interface9WriteDataEh:00000000 _ZN21CT6963_GPIO_Interface9WriteDataEh
-  C:\Temp\cccurSTe.s:578    .text._ZN21CT6963_GPIO_Interface8ReadDataEv:00000000 $t
-  C:\Temp\cccurSTe.s:583    .text._ZN21CT6963_GPIO_Interface8ReadDataEv:00000000 _ZN21CT6963_GPIO_Interface8ReadDataEv
-  C:\Temp\cccurSTe.s:687    .rodata._ZTV21CT6963_GPIO_Interface:00000000 $d
-  C:\Temp\cccurSTe.s:710    .rodata._ZL12c_FontNative:00000000 $d
-  C:\Temp\cccurSTe.s:713    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
-  C:\Temp\cccurSTe.s:716    .rodata._ZL12c_iDelayFore:00000000 $d
-  C:\Temp\cccurSTe.s:719    .rodata._ZL12c_iDelayFore:00000000 _ZL12c_iDelayFore
-  C:\Temp\cccurSTe.s:722    .rodata._ZL13c_iDelayAfter:00000000 $d
-  C:\Temp\cccurSTe.s:725    .rodata._ZL13c_iDelayAfter:00000000 _ZL13c_iDelayAfter
-  C:\Temp\cccurSTe.s:24     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 _ZN21CT6963_GPIO_InterfaceC1Ev
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:19     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:24     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 _ZN21CT6963_GPIO_InterfaceC2Ev
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:61     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000024 $d
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:690    .rodata._ZTV21CT6963_GPIO_Interface:00000000 _ZTV21CT6963_GPIO_Interface
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:66     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:71     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 _ZN21CT6963_GPIO_InterfaceD2Ev
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:116    .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000034 $d
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:121    .text._ZN21CT6963_GPIO_InterfaceD0Ev:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:126    .text._ZN21CT6963_GPIO_InterfaceD0Ev:00000000 _ZN21CT6963_GPIO_InterfaceD0Ev
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:71     .text._ZN21CT6963_GPIO_InterfaceD2Ev:00000000 _ZN21CT6963_GPIO_InterfaceD1Ev
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:158    .text._Z11CheckStatusv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:163    .text._Z11CheckStatusv:00000000 _Z11CheckStatusv
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:250    .text._ZN21CT6963_GPIO_Interface12HardwareInitEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:255    .text._ZN21CT6963_GPIO_Interface12HardwareInitEv:00000000 _ZN21CT6963_GPIO_Interface12HardwareInitEv
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:348    .text._ZN21CT6963_GPIO_Interface5ResetEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:353    .text._ZN21CT6963_GPIO_Interface5ResetEv:00000000 _ZN21CT6963_GPIO_Interface5ResetEv
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:392    .text._ZN21CT6963_GPIO_Interface12WriteCommandEh:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:397    .text._ZN21CT6963_GPIO_Interface12WriteCommandEh:00000000 _ZN21CT6963_GPIO_Interface12WriteCommandEh
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:480    .text._ZN21CT6963_GPIO_Interface9WriteDataEh:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:485    .text._ZN21CT6963_GPIO_Interface9WriteDataEh:00000000 _ZN21CT6963_GPIO_Interface9WriteDataEh
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:578    .text._ZN21CT6963_GPIO_Interface8ReadDataEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:583    .text._ZN21CT6963_GPIO_Interface8ReadDataEv:00000000 _ZN21CT6963_GPIO_Interface8ReadDataEv
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:687    .rodata._ZTV21CT6963_GPIO_Interface:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:710    .rodata._ZL12c_FontNative:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:713    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:716    .rodata._ZL12c_iDelayFore:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:719    .rodata._ZL12c_iDelayFore:00000000 _ZL12c_iDelayFore
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:722    .rodata._ZL13c_iDelayAfter:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:725    .rodata._ZL13c_iDelayAfter:00000000 _ZL13c_iDelayAfter
+C:\Users\Alex\AppData\Local\Temp\ccfGvWJk.s:24     .text._ZN21CT6963_GPIO_InterfaceC2Ev:00000000 _ZN21CT6963_GPIO_InterfaceC1Ev
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

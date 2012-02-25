@@ -55,25 +55,24 @@ void CMenue::Run(void){
 
 
 	vTaskDelay(500/portTICK_RATE_MS);
-	glcd->WriteString("Introducing",c_FontSansSerif12,65,5);
-
-	vTaskDelay(500/portTICK_RATE_MS);
-	glcd->WriteString("Project:",c_FontSansSerif12,85,20);
+	glcd->WriteString("Introducing Project:",c_FontSansSerif12,5,5);
 
 	vTaskDelay(1000/portTICK_RATE_MS);
-	glcd->WriteString("THUNDERCRYER",c_FontSansSerif12,0,35);
+	glcd->WriteString("ThunderCryer",c_FontSansSerif26,3,35);
 
-	vTaskDelay(3000/portTICK_RATE_MS);
-	glcd->Window(0,0,117,50);
-	glcd->WriteString("21:14",c_FontSansSerif26,10,5);
-	glcd->WriteString("Fr. 24.02.12",c_FontSansSerif12,10,35);
+	vTaskDelay(10000/portTICK_RATE_MS);
+	glcd->Clear();
+	glcd->Window(2,2,100,60);
+	glcd->WriteString("21:14",c_FontSansSerif26,5,5);
+	glcd->WriteString("Fr. 24.02.12",c_FontNative,5,40);
 
 	glcd->WriteString("Development in progress",c_FontNative,1,120);
 
 	while(1){
 		if(x<60) {
-			sprintf(buffer,"%2d",x);
-			glcd->WriteString(buffer,c_FontSansSerif12,80,7);
+			sprintf(buffer,"%02u",x);
+			glcd->SectorClear(75,7,20,20);
+			glcd->WriteString(buffer,c_FontSansSerif12,75,7);
 			x++;
 			vTaskDelay(1000/portTICK_RATE_MS);
 		} else
