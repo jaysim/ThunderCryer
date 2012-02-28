@@ -144,7 +144,7 @@ void DebugMon_Handler(void)
 void SDIO_IRQHandler(void)
 {
   /* Process All SDIO Interrupt Sources */
-  //SD_ProcessIRQSrc();
+  SD_ProcessIRQSrc();
 }
 
 /**
@@ -156,7 +156,7 @@ void SDIO_IRQHandler(void)
 void SD_SDIO_DMA_IRQHANDLER(void)
 {
   /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
-  //SD_ProcessDMAIRQ();
+  SD_ProcessDMAIRQ();
 }
 
 /******************************************************************************/

@@ -318,21 +318,21 @@
  186              		.cfi_startproc
  187              		@ args = 0, pretend = 0, frame = 0
  188              		@ frame_needed = 1, uses_anonymous_args = 0
- 189              		@ link register save eliminated.
- 190 0000 80B4     		push	{r7}
- 191              	.LCFI12:
- 192              		.cfi_def_cfa_offset 4
- 193              		.cfi_offset 7, -4
+ 189 0000 80B5     		push	{r7, lr}
+ 190              	.LCFI12:
+ 191              		.cfi_def_cfa_offset 8
+ 192              		.cfi_offset 14, -4
+ 193              		.cfi_offset 7, -8
  194 0002 00AF     		add	r7, sp, #0
  195              	.LCFI13:
  196              		.cfi_def_cfa_register 7
  146:../stm32f4xx_it.c ****   /* Process All SDIO Interrupt Sources */
- 147:../stm32f4xx_it.c ****   //SD_ProcessIRQSrc();
+ 147:../stm32f4xx_it.c ****   SD_ProcessIRQSrc();
+ 197              		.loc 1 147 0
+ 198 0004 FFF7FEFF 		bl	SD_ProcessIRQSrc
  148:../stm32f4xx_it.c **** }
- 197              		.loc 1 148 0
- 198 0004 BD46     		mov	sp, r7
- 199 0006 80BC     		pop	{r7}
- 200 0008 7047     		bx	lr
+ 199              		.loc 1 148 0
+ 200 0008 80BD     		pop	{r7, pc}
  201              		.cfi_endproc
  202              	.LFE116:
  204 000a 00BF     		.section	.text.DMA2_Stream3_IRQHandler,"ax",%progbits
@@ -355,21 +355,21 @@
  213              		.cfi_startproc
  214              		@ args = 0, pretend = 0, frame = 0
  215              		@ frame_needed = 1, uses_anonymous_args = 0
- 216              		@ link register save eliminated.
- 217 0000 80B4     		push	{r7}
- 218              	.LCFI14:
- 219              		.cfi_def_cfa_offset 4
- 220              		.cfi_offset 7, -4
+ 216 0000 80B5     		push	{r7, lr}
+ 217              	.LCFI14:
+ 218              		.cfi_def_cfa_offset 8
+ 219              		.cfi_offset 14, -4
+ 220              		.cfi_offset 7, -8
  221 0002 00AF     		add	r7, sp, #0
  222              	.LCFI15:
  223              		.cfi_def_cfa_register 7
  158:../stm32f4xx_it.c ****   /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
- 159:../stm32f4xx_it.c ****   //SD_ProcessDMAIRQ();
+ 159:../stm32f4xx_it.c ****   SD_ProcessDMAIRQ();
+ 224              		.loc 1 159 0
+ 225 0004 FFF7FEFF 		bl	SD_ProcessDMAIRQ
  160:../stm32f4xx_it.c **** }
- 224              		.loc 1 160 0
- 225 0004 BD46     		mov	sp, r7
- 226 0006 80BC     		pop	{r7}
- 227 0008 7047     		bx	lr
+ 226              		.loc 1 160 0
+ 227 0008 80BD     		pop	{r7, pc}
  228              		.cfi_endproc
  229              	.LFE117:
  231 000a 00BF     		.text
@@ -378,22 +378,24 @@
  234              		.file 3 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_it.c
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:19     .text.NMI_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:24     .text.NMI_Handler:00000000 NMI_Handler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:47     .text.HardFault_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:52     .text.HardFault_Handler:00000000 HardFault_Handler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:73     .text.MemManage_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:78     .text.MemManage_Handler:00000000 MemManage_Handler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:99     .text.BusFault_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:104    .text.BusFault_Handler:00000000 BusFault_Handler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:125    .text.UsageFault_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:130    .text.UsageFault_Handler:00000000 UsageFault_Handler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:151    .text.DebugMon_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:156    .text.DebugMon_Handler:00000000 DebugMon_Handler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:178    .text.SDIO_IRQHandler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:183    .text.SDIO_IRQHandler:00000000 SDIO_IRQHandler
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:205    .text.DMA2_Stream3_IRQHandler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccvjNlcX.s:210    .text.DMA2_Stream3_IRQHandler:00000000 DMA2_Stream3_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:19     .text.NMI_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:24     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:47     .text.HardFault_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:52     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:73     .text.MemManage_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:78     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:99     .text.BusFault_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:104    .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:125    .text.UsageFault_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:130    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:151    .text.DebugMon_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:156    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:178    .text.SDIO_IRQHandler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:183    .text.SDIO_IRQHandler:00000000 SDIO_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:205    .text.DMA2_Stream3_IRQHandler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccYas9yg.s:210    .text.DMA2_Stream3_IRQHandler:00000000 DMA2_Stream3_IRQHandler
                      .debug_frame:00000010 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+SD_ProcessIRQSrc
+SD_ProcessDMAIRQ

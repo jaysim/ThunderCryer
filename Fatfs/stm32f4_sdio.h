@@ -234,9 +234,9 @@ typedef struct
 /**
   * @brief  SD FLASH SDIO Interface
   */
-#define SD_DETECT_PIN                    GPIO_Pin_3                 /* PD.3 */
-#define SD_DETECT_GPIO_PORT              GPIOD                       /* GPIOD */
-#define SD_DETECT_GPIO_CLK               RCC_AHB1Periph_GPIOD
+#define SD_DETECT_PIN                    GPIO_Pin_7                 /* PD.3 */
+#define SD_DETECT_GPIO_PORT              GPIOC                      /* GPIOD */
+#define SD_DETECT_GPIO_CLK               RCC_AHB1Periph_GPIOC
 
 #define SDIO_FIFO_ADDRESS                ((uint32_t)0x40012C80)
 /**
