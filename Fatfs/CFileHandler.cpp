@@ -199,6 +199,7 @@ void CFileHandler::Run(){
 	* Infinite loop */
 	while (1)
 	{}
-}}
+}
+}
 
 

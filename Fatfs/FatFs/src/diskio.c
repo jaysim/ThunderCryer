@@ -32,46 +32,36 @@ DSTATUS disk_initialize (
                          BYTE drv				/* Physical drive nmuber (0..) */
                            )
 { 
-  switch (drv) 
-  {
-    case SDIO_DRIVE:
-    {     
-      // Initialize SD Card
-      SD_Error status = SD_Init(); 
-      
-      if (status == SD_OK)
-      {
-        // Read CSD/CID MSD registers
-        status = SD_GetCardInfo(&SDCardInfo);
-      }
-      
-      if (status == SD_OK)
-      {
-        // Select card
-        status = SD_SelectDeselect((uint32_t)(SDCardInfo.RCA << 16)); 
-      }
-      
-      if (status == SD_OK)
-      {
-        status = SD_EnableWideBusOperation(SDIO_BusWide_4b);
-      }
-      //set in stm32f4_sdio.h
-      /*if (status == SD_OK)
-      {  
-        // Set Device Transfer Mode to DMA
-        status = SD_SetDeviceMode(SD_DMA_MODE);
-      }*/
-      
-      if (status != SD_OK)
-        return STA_NOINIT;
-      else
-        return 0x00;
-    }
-  }
-  
-  return STA_NOINIT;
-  
+
+	switch (drv)
+	{
+	case SDIO_DRIVE:
+
+		// Select card
+		//status = SD_SelectDeselect((uint32_t)(SDCardInfo.RCA << 16));
+
+
+		/*if (status == SD_OK)
+		  {
+			status = SD_EnableWideBusOperation(SDIO_BusWide_b);
+		  }*/
+		//set in stm32f4_sdio.h
+		/*if (status == SD_OK)
+		  {
+			// Set Device Transfer Mode to DMA
+			status = SD_SetDeviceMode(SD_DMA_MODE);
+		  }*/
+
+
+		return 0x00;
+
+		break;
+	}
+	return STA_NOINIT;
 }
+
+
+
 
 
 

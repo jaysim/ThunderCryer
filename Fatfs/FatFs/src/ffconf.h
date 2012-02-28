@@ -175,7 +175,7 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "semphr.h"
 
-#define _FS_REENTRANT	1		/* 0:Disable or 1:Enable */
+#define _FS_REENTRANT	0		/* 0:Disable or 1:Enable */
 #define _FS_TIMEOUT		1000	/* Timeout period in unit of time ticks */
 #define	_SYNC_t			xQueueHandle	/* O/S dependent type of sync object. e.g. HANDLE, OS_EVENT*, ID and etc.. */
 
