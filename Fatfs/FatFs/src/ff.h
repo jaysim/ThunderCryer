@@ -460,7 +460,7 @@ typedef struct _FATFS_ {
 	DWORD	dirbase;	/* Root directory start sector (Cluster# on FAT32) */
 	DWORD	database;	/* Data start sector */
 	DWORD	winsect;	/* Current sector appearing in the win[] */
-	BYTE	win[_MAX_SS];/* Disk access window for Directory/FAT */
+	BYTE	__attribute__ ((aligned (4)))win[_MAX_SS];/* Disk access window for Directory/FAT */
 } FATFS;
 
 

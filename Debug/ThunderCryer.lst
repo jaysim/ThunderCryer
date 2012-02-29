@@ -23,25 +23,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   9 .ARM.attributes 00000033  00000000  00000000  0002890c  2**0
                   CONTENTS, READONLY
- 10 .debug_line   000281eb  00000000  00000000  0002893f  2**0
+ 10 .debug_line   000281d9  00000000  00000000  0002893f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_info   0004cfa9  00000000  00000000  00050b2a  2**0
+ 11 .debug_info   0004cfa9  00000000  00000000  00050b18  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_abbrev 0000fa02  00000000  00000000  0009dad3  2**0
+ 12 .debug_abbrev 0000fa02  00000000  00000000  0009dac1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_aranges 00003300  00000000  00000000  000ad4d8  2**3
+ 13 .debug_aranges 00003300  00000000  00000000  000ad4c8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_ranges 00003470  00000000  00000000  000b07d8  2**3
+ 14 .debug_ranges 00003470  00000000  00000000  000b07c8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .comment      00000011  00000000  00000000  000b3c48  2**0
+ 15 .comment      00000011  00000000  00000000  000b3c38  2**0
                   CONTENTS, READONLY
- 16 .debug_loc    00020aad  00000000  00000000  000b3c59  2**0
+ 16 .debug_loc    00020aad  00000000  00000000  000b3c49  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_macinfo 01663104  00000000  00000000  000d4706  2**0
+ 17 .debug_macinfo 01663104  00000000  00000000  000d46f6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00010ebe  00000000  00000000  0173780a  2**0
+ 18 .debug_str    00010ebe  00000000  00000000  017377fa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_frame  0000a0ac  00000000  00000000  017486c8  2**2
+ 19 .debug_frame  0000a0ac  00000000  00000000  017486b8  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -30469,7 +30469,7 @@ DSTATUS disk_status (
   switch (drv) 
  8011190:	7bfb      	ldrb	r3, [r7, #15]
  8011192:	2b00      	cmp	r3, #0
- 8011194:	d12d      	bne.n	80111f2 <disk_read+0x72>
+ 8011194:	d12c      	bne.n	80111f0 <disk_read+0x70>
   {
     case SDIO_DRIVE:
     {      
@@ -30479,72 +30479,63 @@ DSTATUS disk_status (
       for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
  801119c:	f04f 0300 	mov.w	r3, #0
  80111a0:	613b      	str	r3, [r7, #16]
- 80111a2:	e016      	b.n	80111d2 <disk_read+0x52>
+ 80111a2:	e015      	b.n	80111d0 <disk_read+0x50>
       {
-        status = SD_ReadBlock((sector+secNum)*512, 
- 80111a4:	693a      	ldr	r2, [r7, #16]
- 80111a6:	687b      	ldr	r3, [r7, #4]
- 80111a8:	18d3      	adds	r3, r2, r3
- 80111aa:	ea4f 2343 	mov.w	r3, r3, lsl #9
- 80111ae:	461a      	mov	r2, r3
-                              (uint32_t*)(buff+512*secNum),
- 80111b0:	693b      	ldr	r3, [r7, #16]
- 80111b2:	ea4f 2343 	mov.w	r3, r3, lsl #9
- 80111b6:	68b9      	ldr	r1, [r7, #8]
- 80111b8:	18cb      	adds	r3, r1, r3
-    case SDIO_DRIVE:
-    {      
-      SD_Error status = SD_OK;
-      for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
-      {
-        status = SD_ReadBlock((sector+secNum)*512, 
- 80111ba:	4610      	mov	r0, r2
- 80111bc:	4619      	mov	r1, r3
- 80111be:	f44f 7200 	mov.w	r2, #512	; 0x200
- 80111c2:	f003 fb69 	bl	8014898 <SD_ReadBlock>
- 80111c6:	4603      	mov	r3, r0
- 80111c8:	75fb      	strb	r3, [r7, #23]
+        status = SD_ReadBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+ 80111a4:	693b      	ldr	r3, [r7, #16]
+ 80111a6:	ea4f 2343 	mov.w	r3, r3, lsl #9
+ 80111aa:	68ba      	ldr	r2, [r7, #8]
+ 80111ac:	18d2      	adds	r2, r2, r3
+ 80111ae:	6939      	ldr	r1, [r7, #16]
+ 80111b0:	687b      	ldr	r3, [r7, #4]
+ 80111b2:	18cb      	adds	r3, r1, r3
+ 80111b4:	ea4f 2343 	mov.w	r3, r3, lsl #9
+ 80111b8:	4610      	mov	r0, r2
+ 80111ba:	4619      	mov	r1, r3
+ 80111bc:	f44f 7200 	mov.w	r2, #512	; 0x200
+ 80111c0:	f003 fb6a 	bl	8014898 <SD_ReadBlock>
+ 80111c4:	4603      	mov	r3, r0
+ 80111c6:	75fb      	strb	r3, [r7, #23]
   switch (drv) 
   {
     case SDIO_DRIVE:
     {      
       SD_Error status = SD_OK;
       for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
- 80111ca:	693b      	ldr	r3, [r7, #16]
- 80111cc:	f103 0301 	add.w	r3, r3, #1
- 80111d0:	613b      	str	r3, [r7, #16]
- 80111d2:	7bba      	ldrb	r2, [r7, #14]
- 80111d4:	693b      	ldr	r3, [r7, #16]
- 80111d6:	429a      	cmp	r2, r3
- 80111d8:	dd02      	ble.n	80111e0 <disk_read+0x60>
- 80111da:	7dfb      	ldrb	r3, [r7, #23]
- 80111dc:	2b00      	cmp	r3, #0
- 80111de:	d0e1      	beq.n	80111a4 <disk_read+0x24>
+ 80111c8:	693b      	ldr	r3, [r7, #16]
+ 80111ca:	f103 0301 	add.w	r3, r3, #1
+ 80111ce:	613b      	str	r3, [r7, #16]
+ 80111d0:	7bba      	ldrb	r2, [r7, #14]
+ 80111d2:	693b      	ldr	r3, [r7, #16]
+ 80111d4:	429a      	cmp	r2, r3
+ 80111d6:	dd02      	ble.n	80111de <disk_read+0x5e>
+ 80111d8:	7dfb      	ldrb	r3, [r7, #23]
+ 80111da:	2b00      	cmp	r3, #0
+ 80111dc:	d0e2      	beq.n	80111a4 <disk_read+0x24>
       {
-        status = SD_ReadBlock((sector+secNum)*512, 
-                              (uint32_t*)(buff+512*secNum),
-                              512);          
+        status = SD_ReadBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
       }
       if (status == SD_OK)
- 80111e0:	7dfb      	ldrb	r3, [r7, #23]
- 80111e2:	2b00      	cmp	r3, #0
- 80111e4:	d102      	bne.n	80111ec <disk_read+0x6c>
+ 80111de:	7dfb      	ldrb	r3, [r7, #23]
+ 80111e0:	2b00      	cmp	r3, #0
+ 80111e2:	d102      	bne.n	80111ea <disk_read+0x6a>
         return RES_OK;
- 80111e6:	f04f 0300 	mov.w	r3, #0
- 80111ea:	e004      	b.n	80111f6 <disk_read+0x76>
+ 80111e4:	f04f 0300 	mov.w	r3, #0
+ 80111e8:	e004      	b.n	80111f4 <disk_read+0x74>
       else
         return RES_ERROR;
- 80111ec:	f04f 0301 	mov.w	r3, #1
- 80111f0:	e001      	b.n	80111f6 <disk_read+0x76>
+ 80111ea:	f04f 0301 	mov.w	r3, #1
+ 80111ee:	e001      	b.n	80111f4 <disk_read+0x74>
     }
   }
   return RES_PARERR;
- 80111f2:	f04f 0304 	mov.w	r3, #4
+ 80111f0:	f04f 0304 	mov.w	r3, #4
 }
- 80111f6:	4618      	mov	r0, r3
- 80111f8:	f107 0718 	add.w	r7, r7, #24
- 80111fc:	46bd      	mov	sp, r7
- 80111fe:	bd80      	pop	{r7, pc}
+ 80111f4:	4618      	mov	r0, r3
+ 80111f6:	f107 0718 	add.w	r7, r7, #24
+ 80111fa:	46bd      	mov	sp, r7
+ 80111fc:	bd80      	pop	{r7, pc}
+ 80111fe:	bf00      	nop
 
 08011200 <disk_write>:
                     BYTE drv,			/* Physical drive nmuber (0..) */
@@ -30564,7 +30555,7 @@ DSTATUS disk_status (
   switch (drv) 
  8011210:	7bfb      	ldrb	r3, [r7, #15]
  8011212:	2b00      	cmp	r3, #0
- 8011214:	d12d      	bne.n	8011272 <disk_write+0x72>
+ 8011214:	d12c      	bne.n	8011270 <disk_write+0x70>
   {
     case SDIO_DRIVE:
     {      
@@ -30574,72 +30565,63 @@ DSTATUS disk_status (
       for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
  801121c:	f04f 0300 	mov.w	r3, #0
  8011220:	613b      	str	r3, [r7, #16]
- 8011222:	e016      	b.n	8011252 <disk_write+0x52>
+ 8011222:	e015      	b.n	8011250 <disk_write+0x50>
       {
-        status = SD_WriteBlock((sector+secNum)*512, 
- 8011224:	693a      	ldr	r2, [r7, #16]
- 8011226:	687b      	ldr	r3, [r7, #4]
- 8011228:	18d3      	adds	r3, r2, r3
- 801122a:	ea4f 2343 	mov.w	r3, r3, lsl #9
- 801122e:	461a      	mov	r2, r3
-                              (uint32_t*)(buff+512*secNum),
- 8011230:	693b      	ldr	r3, [r7, #16]
- 8011232:	ea4f 2343 	mov.w	r3, r3, lsl #9
- 8011236:	68b9      	ldr	r1, [r7, #8]
- 8011238:	18cb      	adds	r3, r1, r3
-    case SDIO_DRIVE:
-    {      
-      SD_Error status = SD_OK;
-      for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
-      {
-        status = SD_WriteBlock((sector+secNum)*512, 
- 801123a:	4610      	mov	r0, r2
- 801123c:	4619      	mov	r1, r3
- 801123e:	f44f 7200 	mov.w	r2, #512	; 0x200
- 8011242:	f003 fc07 	bl	8014a54 <SD_WriteBlock>
- 8011246:	4603      	mov	r3, r0
- 8011248:	75fb      	strb	r3, [r7, #23]
+        status = SD_WriteBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+ 8011224:	693b      	ldr	r3, [r7, #16]
+ 8011226:	ea4f 2343 	mov.w	r3, r3, lsl #9
+ 801122a:	68ba      	ldr	r2, [r7, #8]
+ 801122c:	18d2      	adds	r2, r2, r3
+ 801122e:	6939      	ldr	r1, [r7, #16]
+ 8011230:	687b      	ldr	r3, [r7, #4]
+ 8011232:	18cb      	adds	r3, r1, r3
+ 8011234:	ea4f 2343 	mov.w	r3, r3, lsl #9
+ 8011238:	4610      	mov	r0, r2
+ 801123a:	4619      	mov	r1, r3
+ 801123c:	f44f 7200 	mov.w	r2, #512	; 0x200
+ 8011240:	f003 fc08 	bl	8014a54 <SD_WriteBlock>
+ 8011244:	4603      	mov	r3, r0
+ 8011246:	75fb      	strb	r3, [r7, #23]
   switch (drv) 
   {
     case SDIO_DRIVE:
     {      
       SD_Error status = SD_OK;
       for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
- 801124a:	693b      	ldr	r3, [r7, #16]
- 801124c:	f103 0301 	add.w	r3, r3, #1
- 8011250:	613b      	str	r3, [r7, #16]
- 8011252:	7bba      	ldrb	r2, [r7, #14]
- 8011254:	693b      	ldr	r3, [r7, #16]
- 8011256:	429a      	cmp	r2, r3
- 8011258:	dd02      	ble.n	8011260 <disk_write+0x60>
- 801125a:	7dfb      	ldrb	r3, [r7, #23]
- 801125c:	2b00      	cmp	r3, #0
- 801125e:	d0e1      	beq.n	8011224 <disk_write+0x24>
+ 8011248:	693b      	ldr	r3, [r7, #16]
+ 801124a:	f103 0301 	add.w	r3, r3, #1
+ 801124e:	613b      	str	r3, [r7, #16]
+ 8011250:	7bba      	ldrb	r2, [r7, #14]
+ 8011252:	693b      	ldr	r3, [r7, #16]
+ 8011254:	429a      	cmp	r2, r3
+ 8011256:	dd02      	ble.n	801125e <disk_write+0x5e>
+ 8011258:	7dfb      	ldrb	r3, [r7, #23]
+ 801125a:	2b00      	cmp	r3, #0
+ 801125c:	d0e2      	beq.n	8011224 <disk_write+0x24>
       {
-        status = SD_WriteBlock((sector+secNum)*512, 
-                              (uint32_t*)(buff+512*secNum),
-                              512);          
+        status = SD_WriteBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
       }
       if (status == SD_OK)
- 8011260:	7dfb      	ldrb	r3, [r7, #23]
- 8011262:	2b00      	cmp	r3, #0
- 8011264:	d102      	bne.n	801126c <disk_write+0x6c>
+ 801125e:	7dfb      	ldrb	r3, [r7, #23]
+ 8011260:	2b00      	cmp	r3, #0
+ 8011262:	d102      	bne.n	801126a <disk_write+0x6a>
         return RES_OK;
- 8011266:	f04f 0300 	mov.w	r3, #0
- 801126a:	e004      	b.n	8011276 <disk_write+0x76>
+ 8011264:	f04f 0300 	mov.w	r3, #0
+ 8011268:	e004      	b.n	8011274 <disk_write+0x74>
       else
         return RES_ERROR;
- 801126c:	f04f 0301 	mov.w	r3, #1
- 8011270:	e001      	b.n	8011276 <disk_write+0x76>
+ 801126a:	f04f 0301 	mov.w	r3, #1
+ 801126e:	e001      	b.n	8011274 <disk_write+0x74>
     }
   }
   return RES_PARERR;
- 8011272:	f04f 0304 	mov.w	r3, #4
+ 8011270:	f04f 0304 	mov.w	r3, #4
 }
- 8011276:	4618      	mov	r0, r3
- 8011278:	f107 0718 	add.w	r7, r7, #24
- 801127c:	46bd      	mov	sp, r7
- 801127e:	bd80      	pop	{r7, pc}
+ 8011274:	4618      	mov	r0, r3
+ 8011276:	f107 0718 	add.w	r7, r7, #24
+ 801127a:	46bd      	mov	sp, r7
+ 801127c:	bd80      	pop	{r7, pc}
+ 801127e:	bf00      	nop
 
 08011280 <disk_ioctl>:
 DRESULT disk_ioctl (
