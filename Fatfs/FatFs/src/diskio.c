@@ -108,6 +108,12 @@ DRESULT disk_read (
       for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
       {
         status = SD_ReadBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+
+        /* Check if the Transfer is finished */
+        status = SD_WaitReadOperation();
+
+        /* Wait until end of DMA transfer */
+        while(SD_GetStatus() != SD_TRANSFER_OK);
       }
       if (status == SD_OK)
         return RES_OK;
@@ -139,6 +145,12 @@ DRESULT disk_write (
       for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
       {
         status = SD_WriteBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+
+        /* Check if the Transfer is finished */
+        status = SD_WaitWriteOperation();
+
+        /* Wait until end of DMA transfer */
+        while(SD_GetStatus() != SD_TRANSFER_OK);
       }
       if (status == SD_OK)
         return RES_OK;

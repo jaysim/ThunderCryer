@@ -5,18 +5,15 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../STM32F4-Discovery/stm32f4_discovery.c \
-../STM32F4-Discovery/stm32f4_discovery_audio_codec.c \
-../STM32F4-Discovery/stm32f4_discovery_lis302dl.c 
+../STM32F4-Discovery/stm32f4_discovery_audio_codec.c 
 
 OBJS += \
 ./STM32F4-Discovery/stm32f4_discovery.o \
-./STM32F4-Discovery/stm32f4_discovery_audio_codec.o \
-./STM32F4-Discovery/stm32f4_discovery_lis302dl.o 
+./STM32F4-Discovery/stm32f4_discovery_audio_codec.o 
 
 C_DEPS += \
 ./STM32F4-Discovery/stm32f4_discovery.d \
-./STM32F4-Discovery/stm32f4_discovery_audio_codec.d \
-./STM32F4-Discovery/stm32f4_discovery_lis302dl.d 
+./STM32F4-Discovery/stm32f4_discovery_audio_codec.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
