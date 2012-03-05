@@ -33,6 +33,8 @@ SUBDIRS := \
 STM32F4xx_StdPeriph_Driver/src \
 STM32F4-Discovery \
 Menue \
+HelixMP3/real \
+HelixMP3 \
 GraphicLCD \
 FreeRTOS_EC/Source \
 FreeRTOS/Source \

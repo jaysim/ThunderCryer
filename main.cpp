@@ -51,21 +51,16 @@ int main(void){
 	 * create Led Heartbeat task with minimal stack size and priority
 	 * 1 higher than idle task
 	 */
-	//g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+5);
+	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+5);
 	//g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
-	//g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
+	g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
 
 	/**
 	 * Initialise the hardware for all Tasks and
 	 * then FreeRTOS takes control of execution
 	 */
-	//CFreeRTOS::InitHardwareForManagedTasks();
-	//CFreeRTOS::StartScheduler();
-
-	g_FileHandler.HardwareInit();
-
-	g_FileHandler.Run();
-
+	CFreeRTOS::InitHardwareForManagedTasks();
+	CFreeRTOS::StartScheduler();
 
 	while(1){
 		u++;

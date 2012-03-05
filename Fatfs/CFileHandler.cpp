@@ -15,13 +15,74 @@
 #include "misc.h"
 #include "ff.h"
 #include "string.h"
+#include "coder.h"
+#include "mp3common.h"
+#include "mp3dec.h"
+#include "stm32f4_discovery_audio_codec.h"
 /* Private typedef -----------------------------------------------------------*/
+/*******************************
+ * These are possible application
+ * states.
+ ******************************/
+typedef enum
+{
+    IDLE_STATE,
+    DEVICE_ATTACHED,
+    SEARCH_MP3_FILES,
+    OPEN_MP3_FILE,
+    FILE_OPEN,
+    FRAME_SYNC_FIND,
+    FILE_READ,
+    MP3_DECODE,
+    PLAYBACK,
+    FILE_CLOSE,
+    PLAYBACK_PAUSE,
+    PLAYBACK_STOP,
+    SYSTEM_HALT
+
+}APPLICATION_STATE;
 /* Private define ------------------------------------------------------------*/
+#define BUFFER_SIZE		4096
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+APPLICATION_STATE applicationState,previousAppState;
 /* Private function prototypes -----------------------------------------------*/
+
 /* Private functions ---------------------------------------------------------*/
 
+/**
+  * @brief  filles readbuffer with new data from file
+  * @param  readBuf  pointer to data storage for read data
+  * @param  readPtr  actual read position
+  * @retval None
+  */
+static int FillReadBuffer(unsigned char *readBuf, unsigned char *readPtr, int bufSize, int bytesLeft, FIL *infile)
+{
+    /* This function will move bytesLeft bytes from
+     * readPtr to the top of readBuf. bufSize is the
+     * size of readBuf. It then reads bufSize - bytesLeft bytes
+     * from infile and appends these bytes to readBuf.
+     * If readBuf is not full, then remaining bytes are
+     * set to zero. The total number of bytes read from
+     * infile is returned.
+     */
+
+    unsigned int uiBytesRead;
+    FRESULT fsresult=FR_OK;
+
+    /* move last, small chunk from end of buffer to start, then fill with new data */
+    memmove(readBuf, readPtr, bytesLeft);
+	fsresult = f_read(infile,readBuf + bytesLeft,bufSize - bytesLeft, &uiBytesRead);
+	if (fsresult != FR_OK){
+		//File read failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning
+		while(1);
+	}
+    /* zero-pad to avoid finding false sync word after last frame (from old data in readBuf) */
+    if (uiBytesRead < (bufSize - bytesLeft))
+        memset(readBuf + bytesLeft + uiBytesRead, 0, bufSize - bytesLeft - uiBytesRead);
+
+    return uiBytesRead;
+}
 
 
 CFileHandler::CFileHandler() {
@@ -35,38 +96,12 @@ CFileHandler::~CFileHandler() {
 
 /**
   * @brief  HardwareInit called before Scheduler starts
-  * 		SD Card interface will be initialised
+  * 		SD Card interface will be initialized
   * @param  None
   * @retval true on succsess
   */
 bool CFileHandler::HardwareInit(){
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-
-	// SDIO Interrupt ENABLE
-	NVIC_InitStructure.NVIC_IRQChannel = SDIO_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-	// DMA2 STREAMx Interrupt ENABLE
-	NVIC_InitStructure.NVIC_IRQChannel = SD_SDIO_DMA_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_Init(&NVIC_InitStructure);
-
-
-	/*-------------------------- SD Init ----------------------------- */
-	Status = SD_Init();
-
-
-	if (Status == SD_OK)
-	{
-		//SD Card initialized ok.
-		/*----------------- Read CSD/CID MSD registers ------------------*/
-		Status = SD_GetCardInfo(&SDCardInfo);
-	}
-
-	return (Status == SD_OK);
+	return true;
 }
 
 /**
@@ -75,6 +110,25 @@ bool CFileHandler::HardwareInit(){
   * @retval None
   */
 void CFileHandler::Run(){
+
+	uint8_t uiReadBuffer[BUFFER_SIZE];
+	unsigned int uiBytesRead=0;
+	HMP3Decoder mp3Decoder;
+
+	/*-----------------------------------------------------------------------------
+	Initialize the MP3decoder structure
+	-----------------------------------------------------------------------------*/
+	mp3Decoder = MP3InitDecoder();
+	if(mp3Decoder == 0) {
+		// memory allocation failed, 28k heap required
+		while(1);
+	}
+
+	/*-----------------------------------------------------------------------------
+	Initialize the audio dac and codec
+	-----------------------------------------------------------------------------*/
+	EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,100,44100);
+
 	/*-----------------------------------------------------------------------------
 	Beginning of FAT file system related code.  The following code shows steps
 	necessary to create, read, and write files.
@@ -91,115 +145,48 @@ void CFileHandler::Run(){
 	-----------------------------------------------------------------------------*/
 	fsresult = f_mount(0, &myfs);
 
-	if (fsresult != FR_OK)
+	if (fsresult != FR_OK){
 		//FAT file system mounting failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning.
 		while(1);
+	}
 
 	/*-----------------------------------------------------------------------------
-	Format the SD card.  The f_mkfs makes a file system on the SD card which is
-	the same as formatting it.  The arguments are drive #, partition type, and
-	cluster size.  The drive number is 0 here, the partition type is 0 for FDISK,
-	and the cluster size is zero for auto-select.  Auto-select selects a cluster
-	size based on drive size.  The FAT sub-type (FAT12/16/32) is not explicitly
-	specified but is chosen according to the number of clusters.  The file system
-	structure has members that indicate FAT12/16/32, as well as the cluster size.
+	Open a file and read first buffer
 	-----------------------------------------------------------------------------*/
-	/* vvv Comment out this block to prevent formatting.  Delete/insert '/' at the end of this line: *
-	printf("Formatting SD Card. Please wait... ");
-	fsresult = f_mkfs(0, 0, 0);  //format drive 0 with FDISK partitioning rule, auto-select cluster size by volume size.
-	if (fsresult == FR_OK)
-		printf("Format successful.\n");
-	else
-		printf("Format failed.  FRESULT Error code: %d.  See FATfs/ff.h for FRESEULT code meaning.\n", fsresult);
-	* ^^^ Comment out this block to prevent formatting. */
-
-
-	/*-----------------------------------------------------------------------------
-	Open a file, write to it, and close it.
-	-----------------------------------------------------------------------------*/
-	fsresult = f_open(&myfile, "hello.txt", FA_OPEN_ALWAYS | FA_READ | FA_WRITE);  //open/create file for read/write
-	if (fsresult != FR_OK)
+	fsresult = f_open(&myfile, "A-Team.mp3", FA_OPEN_EXISTING | FA_READ);  //open file for read
+	if (fsresult != FR_OK){
 		//File open failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning
 		while(1);
-
-	BYTE wbuf[16];  //buffer to write to file
-	UINT numwritten; //number of bytes actually written
-	strcpy((char*)wbuf, "hello world");
-
-
-	fsresult = f_write(&myfile, wbuf, strlen((const char*)wbuf), &numwritten);  //open/create file for read/write
-	if (fsresult != FR_OK)
-		while(1);
-		//File write failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning
-
-	fsresult = f_close(&myfile);
-	if (fsresult != FR_OK)
-		while(1);
-		//File close failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning
+	}
+	f_sync(&myfile);   // minimize critical section, see Appnote from fatfs
 
 	/*-----------------------------------------------------------------------------
-	Print some card info.  This is done after the open/write/close sequence
-	because at least one file operation must occur after the f_mount to fill in the
-	file system structure (myfs) member values.
+	read buffer out of file
 	-----------------------------------------------------------------------------*/
-	// Determine FAT sub-type
-	/*BYTE fssubtype;
-	switch (myfs.fs_type)
-	{
-	case 1:
-		fssubtype = 12;
-		break;
-	case 2:
-		fssubtype = 16;
-		break;
-	case 3:
-		fssubtype = 32;
-		break;
-	}*/
-
-	/*
-	printf("File system type is FAT%d.\n", fssubtype);
-	printf("Sector size = %d bytes.  Sectors are physical blocks.\n", SS(fs));
-	printf("Cluster size = %d sectors.  Clusters are logical file system blocks.\n", myfs.csize);
-	printf("Card capacity %ld KB.\n", SDCardInfo.CardCapacity / 1024);
-	printf("Card block size %ld bytes.\n", SDCardInfo.CardBlockSize);
-	// Get drive information and free clusters
-	uint32_t fre_clust, tot_bytes, fre_bytes;
-	FATFS *myfsptr = &myfs;  //this is necessary because f_getfree expects a pointer to a pointer to a file system object.
-	fsresult = f_getfree("/", &fre_clust, &myfsptr);
-	if (fsresult == FR_OK)
-	{
-		// Get total bytes and free bytes
-		tot_bytes = (myfs.max_clust - 2) * myfs.csize * SS(fs);
-		fre_bytes = fre_clust * myfs.csize * SS(fs);
-		// Print free space in unit of KB
-		printf("%lu KB free space. %lu KB total.\n",   fre_bytes / 1024, tot_bytes / 1024);
+	fsresult = f_read(&myfile,uiReadBuffer,BUFFER_SIZE,&uiBytesRead);
+	if (fsresult != FR_OK){
+		//File read failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning
+		while(1);
 	}
-	else
-		printf("f_getfree failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning.\n", fsresult);
+	/*-----------------------------------------------------------------------------
+	Decode Mp3 file, to end of file
+	-----------------------------------------------------------------------------*/
 
-	*-----------------------------------------------------------------------------
-		Set file date and time.  The FILINFO structure used to hold file information.
-		The time and date members are used by f_utime to set the file time and date.
-		The other members are irrelevant for setting time and date.
-		f_stat and f_readdir fill in members of the FILINFO structure, see
-		http://elm-chan.org/fsw/ff/00index_e.html for more information.
-		-----------------------------------------------------------------------------*/
-	/*FILINFO myfileinfo;
-	//  0bYYYYYYYMMMMDDDDD
-	myfileinfo.fdate = 0b0011101100101010;  //date is packed in high order word, Sept 10, 2009
-	myfileinfo.ftime = 0x0000;  //time is packed in low order word, 00:00:00
 
-	fsresult = f_utime("hello.txt", &myfileinfo);
-	if (fsresult == FR_OK)
-		printf("File date/time set ok.\n");
-	else
-		printf("File date/time set failed. FRESULT Error code: %d.  See FATfs/ff.h for FRESULT code meaning.\n", fsresult);
 
-	* Infinite loop */
+
+
+
+	/* Infinite loop */
 	while (1)
 	{}
 }
 }
+
+
+
+
+
+
 
 

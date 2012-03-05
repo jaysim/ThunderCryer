@@ -32,28 +32,39 @@ DSTATUS disk_initialize (
                          BYTE drv				/* Physical drive nmuber (0..) */
                            )
 { 
+NVIC_InitTypeDef NVIC_InitStructure;
+SD_Error Status;
 
 	switch (drv)
 	{
 	case SDIO_DRIVE:
 
-		// Select card
-		//status = SD_SelectDeselect((uint32_t)(SDCardInfo.RCA << 16));
+		// SDIO Interrupt ENABLE
+		NVIC_InitStructure.NVIC_IRQChannel = SDIO_IRQn;
+		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+		NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+		NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+		NVIC_Init(&NVIC_InitStructure);
+		// DMA2 STREAMx Interrupt ENABLE
+		NVIC_InitStructure.NVIC_IRQChannel = SD_SDIO_DMA_IRQn;
+		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+		NVIC_Init(&NVIC_InitStructure);
 
 
-		/*if (status == SD_OK)
-		  {
-			status = SD_EnableWideBusOperation(SDIO_BusWide_b);
-		  }*/
-		//set in stm32f4_sdio.h
-		/*if (status == SD_OK)
-		  {
-			// Set Device Transfer Mode to DMA
-			status = SD_SetDeviceMode(SD_DMA_MODE);
-		  }*/
+		/*-------------------------- SD Init ----------------------------- */
+		Status = SD_Init();
 
 
-		return 0x00;
+		if (Status == SD_OK)
+		{
+			//SD Card initialized ok.
+			/*----------------- Read CSD/CID MSD registers ------------------*/
+			Status = SD_GetCardInfo(&SDCardInfo);
+		}
+
+
+		if (Status == SD_OK);
+			return 0x00;
 
 		break;
 	}
@@ -100,27 +111,26 @@ DRESULT disk_read (
                    BYTE count		/* Number of sectors to read (1..255) */
                      )
 {
-  switch (drv) 
-  {
-    case SDIO_DRIVE:
-    {      
-      SD_Error status = SD_OK;
-      for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
-      {
-        status = SD_ReadBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+	SD_Error status = SD_OK;
 
-        /* Check if the Transfer is finished */
-        status = SD_WaitReadOperation();
+	switch (drv)
+	{
+	case SDIO_DRIVE:
+		status = SD_ReadMultiBlocks((uint8_t*)buff,sector*512,512,count);
 
-        /* Wait until end of DMA transfer */
-        while(SD_GetStatus() != SD_TRANSFER_OK);
-      }
-      if (status == SD_OK)
-        return RES_OK;
-      else
-        return RES_ERROR;
-    }
-  }
+		/* Check if the Transfer is finished */
+		status = SD_WaitReadOperation();
+
+		/* Wait until end of DMA transfer */
+		while(SD_GetStatus() != SD_TRANSFER_OK);
+
+		if (status == SD_OK){
+			return RES_OK;
+		}  else {
+			return RES_ERROR;
+		}
+		break;
+	}
   return RES_PARERR;
 }
 
@@ -137,28 +147,26 @@ DRESULT disk_write (
                     BYTE count			/* Number of sectors to write (1..255) */
                       )
 {
-  switch (drv) 
-  {
-    case SDIO_DRIVE:
-    {      
-      SD_Error status = SD_OK;
-      for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
-      {
-        status = SD_WriteBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+	SD_Error status = SD_OK;
+	switch (drv)
+	{
+	case SDIO_DRIVE:
+		status = SD_WriteMultiBlocks((uint8_t*)(buff),sector*512,512,count);
 
-        /* Check if the Transfer is finished */
-        status = SD_WaitWriteOperation();
+		/* Check if the Transfer is finished */
+		status = SD_WaitWriteOperation();
 
-        /* Wait until end of DMA transfer */
-        while(SD_GetStatus() != SD_TRANSFER_OK);
-      }
-      if (status == SD_OK)
-        return RES_OK;
-      else
-        return RES_ERROR;
-    }
-  }
-  return RES_PARERR;
+		/* Wait until end of DMA transfer */
+		while(SD_GetStatus() != SD_TRANSFER_OK);
+
+		if (status == SD_OK){
+			return RES_OK;
+		}  else {
+			return RES_ERROR;
+		}
+		break;
+	}
+	return RES_PARERR;
 }
 #endif /* _READONLY */
 
