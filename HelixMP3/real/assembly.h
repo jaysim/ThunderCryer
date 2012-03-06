@@ -320,6 +320,21 @@ static __inline int CLZ(int x)
 	return numZeros;
 }
 
+/*reimplement because gcc dose not know*/
+static __inline Word64 MADD64(Word64 sum, int x, int y)
+{
+	return (sum + ((Word64)x * y));
+}
+
+static __inline Word64 SHL64(Word64 x, int n)
+{
+	return x<<n;
+}
+
+static __inline Word64 SAR64(Word64 x, int n)
+{
+	return x>>n;
+}
 #else
 
 #error Unsupported platform in assembly.h
