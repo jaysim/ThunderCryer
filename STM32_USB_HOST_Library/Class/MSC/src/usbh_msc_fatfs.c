@@ -21,7 +21,7 @@ DSTATUS disk_initialize (
                          BYTE drv		/* Physical drive number (0) */
                            )
 {
-  
+
   if(HCD_IsDeviceConnected(&USB_OTG_Core))
   {  
     Stat &= ~STA_NOINIT;

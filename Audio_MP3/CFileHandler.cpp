@@ -22,10 +22,6 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-#ifdef MEDIA_USB_KEY
- USB_OTG_CORE_HANDLE          USB_OTG_Core;
- USBH_HOST                    USB_Host;
-#endif
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -58,20 +54,6 @@ bool CFileHandler::HardwareInit(){
   * @retval None
   */
 void CFileHandler::Run(){
-
-	unsigned int bytesLeft;
-	int nRead, offset, eofReached, err;
-
-	/* Init Host Library */
-	USBH_Init(&USB_OTG_Core, USB_OTG_FS_CORE_ID, &USB_Host, &USBH_MSC_cb, &USR_Callbacks);
-
-
-
-
-	while(1){
-	    /* Host Task handler */
-	    USBH_Process(&USB_OTG_Core, &USB_Host);
-	}
 
 
 }
