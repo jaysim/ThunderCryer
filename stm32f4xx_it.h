@@ -23,6 +23,10 @@
 #ifndef __STM32F4xx_IT_H
 #define __STM32F4xx_IT_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 
@@ -42,6 +46,12 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void SDIO_IRQHandler(void);
 void SD_SDIO_DMA_IRQHANDLER(void);
+void EXTI0_IRQHandler(void);
+void EXTI1_IRQHandler(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __STM32F4xx_IT_H */
 

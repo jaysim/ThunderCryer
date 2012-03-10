@@ -15,14 +15,36 @@
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.NMI_Handler,"ax",%progbits
-  19              		.align	2
-  20              		.global	NMI_Handler
-  21              		.thumb
-  22              		.thumb_func
-  24              	NMI_Handler:
-  25              	.LFB110:
-  26              		.file 1 "../stm32f4xx_it.c"
+  18              		.global	PauseResumeStatus
+  19              		.section	.data.PauseResumeStatus,"aw",%progbits
+  22              	PauseResumeStatus:
+  23 0000 02       		.byte	2
+  24              		.global	Count
+  25              		.section	.bss.Count,"aw",%nobits
+  28              	Count:
+  29 0000 00       		.space	1
+  30              		.global	LED_Toggle
+  31              		.section	.bss.LED_Toggle,"aw",%nobits
+  34              	LED_Toggle:
+  35 0000 00       		.space	1
+  36              		.global	capture
+  37              		.section	.bss.capture,"aw",%nobits
+  38              		.align	1
+  41              	capture:
+  42 0000 0000     		.space	2
+  43              		.global	Time_Rec_Base
+  44              		.section	.bss.Time_Rec_Base,"aw",%nobits
+  45              		.align	1
+  48              	Time_Rec_Base:
+  49 0000 0000     		.space	2
+  50              		.section	.text.NMI_Handler,"ax",%progbits
+  51              		.align	2
+  52              		.global	NMI_Handler
+  53              		.thumb
+  54              		.thumb_func
+  56              	NMI_Handler:
+  57              	.LFB110:
+  58              		.file 1 "../stm32f4xx_it.c"
    1:../stm32f4xx_it.c **** /**
    2:../stm32f4xx_it.c ****   ******************************************************************************
    3:../stm32f4xx_it.c ****   * @file    TIM_TimeBase/stm32f4xx_it.c 
@@ -48,354 +70,506 @@
   23:../stm32f4xx_it.c **** 
   24:../stm32f4xx_it.c **** /* Includes ------------------------------------------------------------------*/
   25:../stm32f4xx_it.c **** #include "stm32f4xx_it.h"
-  26:../stm32f4xx_it.c **** #include "stm32f4_sdio.h"
-  27:../stm32f4xx_it.c **** #include "stm32f4xx_sdio.h"
-  28:../stm32f4xx_it.c **** 
-  29:../stm32f4xx_it.c **** /* Private typedef -----------------------------------------------------------*/
-  30:../stm32f4xx_it.c **** /* Private define ------------------------------------------------------------*/
-  31:../stm32f4xx_it.c **** /* Private macro -------------------------------------------------------------*/
-  32:../stm32f4xx_it.c **** /* Private variables ---------------------------------------------------------*/
-  33:../stm32f4xx_it.c **** /* Private function prototypes -----------------------------------------------*/
-  34:../stm32f4xx_it.c **** /* Private functions ---------------------------------------------------------*/
-  35:../stm32f4xx_it.c **** 
-  36:../stm32f4xx_it.c **** /******************************************************************************/
-  37:../stm32f4xx_it.c **** /*            Cortex-M4 Processor Exceptions Handlers                         */
-  38:../stm32f4xx_it.c **** /******************************************************************************/
+  26:../stm32f4xx_it.c **** #include "stm32f4_discovery_audio_codec.h"
+  27:../stm32f4xx_it.c **** 
+  28:../stm32f4xx_it.c **** #ifdef STM32_SDIO
+  29:../stm32f4xx_it.c **** 	#include "stm32f4_sdio.h"
+  30:../stm32f4xx_it.c **** 	#include "stm32f4xx_sdio.h"
+  31:../stm32f4xx_it.c **** #else
+  32:../stm32f4xx_it.c **** 	#ifdef MEDIA_USB_KEY
+  33:../stm32f4xx_it.c **** 		#include "usb_hcd_int.h"
+  34:../stm32f4xx_it.c **** 		#include "usbh_usr.h"
+  35:../stm32f4xx_it.c **** 		#include "usbh_core.h"
+  36:../stm32f4xx_it.c **** 		#include "usbh_msc_core.h"
+  37:../stm32f4xx_it.c **** 	#endif
+  38:../stm32f4xx_it.c **** #endif
   39:../stm32f4xx_it.c **** 
-  40:../stm32f4xx_it.c **** /**
-  41:../stm32f4xx_it.c ****   * @brief  This function handles NMI exception.
-  42:../stm32f4xx_it.c ****   * @param  None
-  43:../stm32f4xx_it.c ****   * @retval None
-  44:../stm32f4xx_it.c ****   */
-  45:../stm32f4xx_it.c **** void NMI_Handler(void)
-  46:../stm32f4xx_it.c **** {
-  27              		.loc 1 46 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 1, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-  32 0000 80B4     		push	{r7}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 4
-  35              		.cfi_offset 7, -4
-  36 0002 00AF     		add	r7, sp, #0
-  37              	.LCFI1:
-  38              		.cfi_def_cfa_register 7
-  47:../stm32f4xx_it.c **** }
-  39              		.loc 1 47 0
-  40 0004 BD46     		mov	sp, r7
-  41 0006 80BC     		pop	{r7}
-  42 0008 7047     		bx	lr
-  43              		.cfi_endproc
-  44              	.LFE110:
-  46 000a 00BF     		.section	.text.HardFault_Handler,"ax",%progbits
-  47              		.align	2
-  48              		.global	HardFault_Handler
-  49              		.thumb
-  50              		.thumb_func
-  52              	HardFault_Handler:
-  53              	.LFB111:
+  40:../stm32f4xx_it.c **** /* Private typedef -----------------------------------------------------------*/
+  41:../stm32f4xx_it.c **** /* Private define ------------------------------------------------------------*/
+  42:../stm32f4xx_it.c **** /* Private macro -------------------------------------------------------------*/
+  43:../stm32f4xx_it.c **** /* Private variables ---------------------------------------------------------*/
+  44:../stm32f4xx_it.c **** __IO uint8_t PauseResumeStatus = 2, Count = 0, LED_Toggle = 0;
+  45:../stm32f4xx_it.c **** uint16_t capture = 0;
+  46:../stm32f4xx_it.c **** extern __IO uint8_t RepeatState;
+  47:../stm32f4xx_it.c **** 
   48:../stm32f4xx_it.c **** 
-  49:../stm32f4xx_it.c **** /**
-  50:../stm32f4xx_it.c ****   * @brief  This function handles Hard Fault exception.
-  51:../stm32f4xx_it.c ****   * @param  None
-  52:../stm32f4xx_it.c ****   * @retval None
-  53:../stm32f4xx_it.c ****   */
-  54:../stm32f4xx_it.c **** void HardFault_Handler(void)
-  55:../stm32f4xx_it.c **** {
-  54              		.loc 1 55 0
-  55              		.cfi_startproc
-  56              		@ args = 0, pretend = 0, frame = 0
-  57              		@ frame_needed = 1, uses_anonymous_args = 0
-  58              		@ link register save eliminated.
-  59 0000 80B4     		push	{r7}
-  60              	.LCFI2:
-  61              		.cfi_def_cfa_offset 4
-  62              		.cfi_offset 7, -4
-  63 0002 00AF     		add	r7, sp, #0
-  64              	.LCFI3:
-  65              		.cfi_def_cfa_register 7
-  66              	.L3:
-  56:../stm32f4xx_it.c ****   /* Go to infinite loop when Hard Fault exception occurs */
-  57:../stm32f4xx_it.c ****   while (1)
-  58:../stm32f4xx_it.c ****   {}
-  67              		.loc 1 58 0 discriminator 1
-  68 0004 FEE7     		b	.L3
-  69              		.cfi_endproc
-  70              	.LFE111:
-  72 0006 00BF     		.section	.text.MemManage_Handler,"ax",%progbits
-  73              		.align	2
-  74              		.global	MemManage_Handler
-  75              		.thumb
-  76              		.thumb_func
-  78              	MemManage_Handler:
-  79              	.LFB112:
-  59:../stm32f4xx_it.c **** }
-  60:../stm32f4xx_it.c **** 
-  61:../stm32f4xx_it.c **** /**
-  62:../stm32f4xx_it.c ****   * @brief  This function handles Memory Manage exception.
-  63:../stm32f4xx_it.c ****   * @param  None
-  64:../stm32f4xx_it.c ****   * @retval None
-  65:../stm32f4xx_it.c ****   */
-  66:../stm32f4xx_it.c **** void MemManage_Handler(void)
-  67:../stm32f4xx_it.c **** {
-  80              		.loc 1 67 0
-  81              		.cfi_startproc
-  82              		@ args = 0, pretend = 0, frame = 0
-  83              		@ frame_needed = 1, uses_anonymous_args = 0
-  84              		@ link register save eliminated.
-  85 0000 80B4     		push	{r7}
-  86              	.LCFI4:
-  87              		.cfi_def_cfa_offset 4
-  88              		.cfi_offset 7, -4
-  89 0002 00AF     		add	r7, sp, #0
-  90              	.LCFI5:
-  91              		.cfi_def_cfa_register 7
-  92              	.L5:
-  68:../stm32f4xx_it.c ****   /* Go to infinite loop when Memory Manage exception occurs */
-  69:../stm32f4xx_it.c ****   while (1)
-  70:../stm32f4xx_it.c ****   {}
-  93              		.loc 1 70 0 discriminator 1
-  94 0004 FEE7     		b	.L5
-  95              		.cfi_endproc
-  96              	.LFE112:
-  98 0006 00BF     		.section	.text.BusFault_Handler,"ax",%progbits
-  99              		.align	2
- 100              		.global	BusFault_Handler
- 101              		.thumb
- 102              		.thumb_func
- 104              	BusFault_Handler:
- 105              	.LFB113:
-  71:../stm32f4xx_it.c **** }
-  72:../stm32f4xx_it.c **** 
-  73:../stm32f4xx_it.c **** /**
-  74:../stm32f4xx_it.c ****   * @brief  This function handles Bus Fault exception.
-  75:../stm32f4xx_it.c ****   * @param  None
-  76:../stm32f4xx_it.c ****   * @retval None
-  77:../stm32f4xx_it.c ****   */
-  78:../stm32f4xx_it.c **** void BusFault_Handler(void)
-  79:../stm32f4xx_it.c **** {
- 106              		.loc 1 79 0
- 107              		.cfi_startproc
- 108              		@ args = 0, pretend = 0, frame = 0
- 109              		@ frame_needed = 1, uses_anonymous_args = 0
- 110              		@ link register save eliminated.
- 111 0000 80B4     		push	{r7}
- 112              	.LCFI6:
- 113              		.cfi_def_cfa_offset 4
- 114              		.cfi_offset 7, -4
- 115 0002 00AF     		add	r7, sp, #0
- 116              	.LCFI7:
- 117              		.cfi_def_cfa_register 7
- 118              	.L7:
-  80:../stm32f4xx_it.c ****   /* Go to infinite loop when Bus Fault exception occurs */
-  81:../stm32f4xx_it.c ****   while (1)
-  82:../stm32f4xx_it.c ****   {}
- 119              		.loc 1 82 0 discriminator 1
- 120 0004 FEE7     		b	.L7
- 121              		.cfi_endproc
- 122              	.LFE113:
- 124 0006 00BF     		.section	.text.UsageFault_Handler,"ax",%progbits
- 125              		.align	2
- 126              		.global	UsageFault_Handler
- 127              		.thumb
- 128              		.thumb_func
- 130              	UsageFault_Handler:
- 131              	.LFB114:
-  83:../stm32f4xx_it.c **** }
-  84:../stm32f4xx_it.c **** 
-  85:../stm32f4xx_it.c **** /**
-  86:../stm32f4xx_it.c ****   * @brief  This function handles Usage Fault exception.
-  87:../stm32f4xx_it.c ****   * @param  None
-  88:../stm32f4xx_it.c ****   * @retval None
-  89:../stm32f4xx_it.c ****   */
-  90:../stm32f4xx_it.c **** void UsageFault_Handler(void)
-  91:../stm32f4xx_it.c **** {
- 132              		.loc 1 91 0
- 133              		.cfi_startproc
- 134              		@ args = 0, pretend = 0, frame = 0
- 135              		@ frame_needed = 1, uses_anonymous_args = 0
- 136              		@ link register save eliminated.
- 137 0000 80B4     		push	{r7}
- 138              	.LCFI8:
- 139              		.cfi_def_cfa_offset 4
- 140              		.cfi_offset 7, -4
- 141 0002 00AF     		add	r7, sp, #0
- 142              	.LCFI9:
- 143              		.cfi_def_cfa_register 7
- 144              	.L9:
-  92:../stm32f4xx_it.c ****   /* Go to infinite loop when Usage Fault exception occurs */
-  93:../stm32f4xx_it.c ****   while (1)
-  94:../stm32f4xx_it.c ****   {}
- 145              		.loc 1 94 0 discriminator 1
- 146 0004 FEE7     		b	.L9
- 147              		.cfi_endproc
- 148              	.LFE114:
- 150 0006 00BF     		.section	.text.DebugMon_Handler,"ax",%progbits
- 151              		.align	2
- 152              		.global	DebugMon_Handler
- 153              		.thumb
- 154              		.thumb_func
- 156              	DebugMon_Handler:
- 157              	.LFB115:
-  95:../stm32f4xx_it.c **** }
-  96:../stm32f4xx_it.c **** 
-  97:../stm32f4xx_it.c **** /**
-  98:../stm32f4xx_it.c ****   * @brief  This function handles Debug Monitor exception.
-  99:../stm32f4xx_it.c ****   * @param  None
- 100:../stm32f4xx_it.c ****   * @retval None
- 101:../stm32f4xx_it.c ****   */
- 102:../stm32f4xx_it.c **** void DebugMon_Handler(void)
- 103:../stm32f4xx_it.c **** {}
- 158              		.loc 1 103 0
- 159              		.cfi_startproc
- 160              		@ args = 0, pretend = 0, frame = 0
- 161              		@ frame_needed = 1, uses_anonymous_args = 0
- 162              		@ link register save eliminated.
- 163 0000 80B4     		push	{r7}
- 164              	.LCFI10:
- 165              		.cfi_def_cfa_offset 4
- 166              		.cfi_offset 7, -4
- 167 0002 00AF     		add	r7, sp, #0
- 168              	.LCFI11:
- 169              		.cfi_def_cfa_register 7
- 170              		.loc 1 103 0
- 171 0004 BD46     		mov	sp, r7
- 172 0006 80BC     		pop	{r7}
- 173 0008 7047     		bx	lr
- 174              		.cfi_endproc
- 175              	.LFE115:
- 177 000a 00BF     		.section	.text.SDIO_IRQHandler,"ax",%progbits
- 178              		.align	2
- 179              		.global	SDIO_IRQHandler
- 180              		.thumb
- 181              		.thumb_func
- 183              	SDIO_IRQHandler:
- 184              	.LFB116:
- 104:../stm32f4xx_it.c **** 
- 105:../stm32f4xx_it.c **** 
- 106:../stm32f4xx_it.c **** /**
- 107:../stm32f4xx_it.c ****  * The following two function are handled by FreeRTOS.  See line 225
- 108:../stm32f4xx_it.c ****  * in port.c inside of FreeRTOS.
- 109:../stm32f4xx_it.c ****  */
- 110:../stm32f4xx_it.c **** 
- 111:../stm32f4xx_it.c **** /**
- 112:../stm32f4xx_it.c ****   * @brief  This function handles SVCall exception.
- 113:../stm32f4xx_it.c ****   * @param  None
- 114:../stm32f4xx_it.c ****   * @retval None
- 115:../stm32f4xx_it.c ****   */
- 116:../stm32f4xx_it.c **** /*void SVC_Handler(void)
- 117:../stm32f4xx_it.c **** {}*/
+  49:../stm32f4xx_it.c **** #if defined MEDIA_USB_KEY
+  50:../stm32f4xx_it.c **** __IO uint16_t Time_Rec_Base = 0;
+  51:../stm32f4xx_it.c ****  extern USB_OTG_CORE_HANDLE          USB_OTG_Core;
+  52:../stm32f4xx_it.c ****  extern __IO uint32_t XferCplt ;
+  53:../stm32f4xx_it.c ****  extern __IO uint8_t Command_index;
+  54:../stm32f4xx_it.c **** #endif /* MEDIA_USB_KEY */
+  55:../stm32f4xx_it.c **** /* Private function prototypes -----------------------------------------------*/
+  56:../stm32f4xx_it.c **** /* Private functions ---------------------------------------------------------*/
+  57:../stm32f4xx_it.c **** 
+  58:../stm32f4xx_it.c **** /******************************************************************************/
+  59:../stm32f4xx_it.c **** /*            Cortex-M4 Processor Exceptions Handlers                         */
+  60:../stm32f4xx_it.c **** /******************************************************************************/
+  61:../stm32f4xx_it.c **** 
+  62:../stm32f4xx_it.c **** /**
+  63:../stm32f4xx_it.c ****   * @brief  This function handles NMI exception.
+  64:../stm32f4xx_it.c ****   * @param  None
+  65:../stm32f4xx_it.c ****   * @retval None
+  66:../stm32f4xx_it.c ****   */
+  67:../stm32f4xx_it.c **** void NMI_Handler(void)
+  68:../stm32f4xx_it.c **** {
+  59              		.loc 1 68 0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 1, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64 0000 80B4     		push	{r7}
+  65              	.LCFI0:
+  66              		.cfi_def_cfa_offset 4
+  67              		.cfi_offset 7, -4
+  68 0002 00AF     		add	r7, sp, #0
+  69              	.LCFI1:
+  70              		.cfi_def_cfa_register 7
+  69:../stm32f4xx_it.c **** }
+  71              		.loc 1 69 0
+  72 0004 BD46     		mov	sp, r7
+  73 0006 80BC     		pop	{r7}
+  74 0008 7047     		bx	lr
+  75              		.cfi_endproc
+  76              	.LFE110:
+  78 000a 00BF     		.section	.text.HardFault_Handler,"ax",%progbits
+  79              		.align	2
+  80              		.global	HardFault_Handler
+  81              		.thumb
+  82              		.thumb_func
+  84              	HardFault_Handler:
+  85              	.LFB111:
+  70:../stm32f4xx_it.c **** 
+  71:../stm32f4xx_it.c **** /**
+  72:../stm32f4xx_it.c ****   * @brief  This function handles Hard Fault exception.
+  73:../stm32f4xx_it.c ****   * @param  None
+  74:../stm32f4xx_it.c ****   * @retval None
+  75:../stm32f4xx_it.c ****   */
+  76:../stm32f4xx_it.c **** void HardFault_Handler(void)
+  77:../stm32f4xx_it.c **** {
+  86              		.loc 1 77 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 1, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91 0000 80B4     		push	{r7}
+  92              	.LCFI2:
+  93              		.cfi_def_cfa_offset 4
+  94              		.cfi_offset 7, -4
+  95 0002 00AF     		add	r7, sp, #0
+  96              	.LCFI3:
+  97              		.cfi_def_cfa_register 7
+  98              	.L3:
+  78:../stm32f4xx_it.c ****   /* Go to infinite loop when Hard Fault exception occurs */
+  79:../stm32f4xx_it.c ****   while (1)
+  80:../stm32f4xx_it.c ****   {}
+  99              		.loc 1 80 0 discriminator 1
+ 100 0004 FEE7     		b	.L3
+ 101              		.cfi_endproc
+ 102              	.LFE111:
+ 104 0006 00BF     		.section	.text.MemManage_Handler,"ax",%progbits
+ 105              		.align	2
+ 106              		.global	MemManage_Handler
+ 107              		.thumb
+ 108              		.thumb_func
+ 110              	MemManage_Handler:
+ 111              	.LFB112:
+  81:../stm32f4xx_it.c **** }
+  82:../stm32f4xx_it.c **** 
+  83:../stm32f4xx_it.c **** /**
+  84:../stm32f4xx_it.c ****   * @brief  This function handles Memory Manage exception.
+  85:../stm32f4xx_it.c ****   * @param  None
+  86:../stm32f4xx_it.c ****   * @retval None
+  87:../stm32f4xx_it.c ****   */
+  88:../stm32f4xx_it.c **** void MemManage_Handler(void)
+  89:../stm32f4xx_it.c **** {
+ 112              		.loc 1 89 0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116              		@ link register save eliminated.
+ 117 0000 80B4     		push	{r7}
+ 118              	.LCFI4:
+ 119              		.cfi_def_cfa_offset 4
+ 120              		.cfi_offset 7, -4
+ 121 0002 00AF     		add	r7, sp, #0
+ 122              	.LCFI5:
+ 123              		.cfi_def_cfa_register 7
+ 124              	.L5:
+  90:../stm32f4xx_it.c ****   /* Go to infinite loop when Memory Manage exception occurs */
+  91:../stm32f4xx_it.c ****   while (1)
+  92:../stm32f4xx_it.c ****   {}
+ 125              		.loc 1 92 0 discriminator 1
+ 126 0004 FEE7     		b	.L5
+ 127              		.cfi_endproc
+ 128              	.LFE112:
+ 130 0006 00BF     		.section	.text.BusFault_Handler,"ax",%progbits
+ 131              		.align	2
+ 132              		.global	BusFault_Handler
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	BusFault_Handler:
+ 137              	.LFB113:
+  93:../stm32f4xx_it.c **** }
+  94:../stm32f4xx_it.c **** 
+  95:../stm32f4xx_it.c **** /**
+  96:../stm32f4xx_it.c ****   * @brief  This function handles Bus Fault exception.
+  97:../stm32f4xx_it.c ****   * @param  None
+  98:../stm32f4xx_it.c ****   * @retval None
+  99:../stm32f4xx_it.c ****   */
+ 100:../stm32f4xx_it.c **** void BusFault_Handler(void)
+ 101:../stm32f4xx_it.c **** {
+ 138              		.loc 1 101 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143 0000 80B4     		push	{r7}
+ 144              	.LCFI6:
+ 145              		.cfi_def_cfa_offset 4
+ 146              		.cfi_offset 7, -4
+ 147 0002 00AF     		add	r7, sp, #0
+ 148              	.LCFI7:
+ 149              		.cfi_def_cfa_register 7
+ 150              	.L7:
+ 102:../stm32f4xx_it.c ****   /* Go to infinite loop when Bus Fault exception occurs */
+ 103:../stm32f4xx_it.c ****   while (1)
+ 104:../stm32f4xx_it.c ****   {}
+ 151              		.loc 1 104 0 discriminator 1
+ 152 0004 FEE7     		b	.L7
+ 153              		.cfi_endproc
+ 154              	.LFE113:
+ 156 0006 00BF     		.section	.text.UsageFault_Handler,"ax",%progbits
+ 157              		.align	2
+ 158              		.global	UsageFault_Handler
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	UsageFault_Handler:
+ 163              	.LFB114:
+ 105:../stm32f4xx_it.c **** }
+ 106:../stm32f4xx_it.c **** 
+ 107:../stm32f4xx_it.c **** /**
+ 108:../stm32f4xx_it.c ****   * @brief  This function handles Usage Fault exception.
+ 109:../stm32f4xx_it.c ****   * @param  None
+ 110:../stm32f4xx_it.c ****   * @retval None
+ 111:../stm32f4xx_it.c ****   */
+ 112:../stm32f4xx_it.c **** void UsageFault_Handler(void)
+ 113:../stm32f4xx_it.c **** {
+ 164              		.loc 1 113 0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 1, uses_anonymous_args = 0
+ 168              		@ link register save eliminated.
+ 169 0000 80B4     		push	{r7}
+ 170              	.LCFI8:
+ 171              		.cfi_def_cfa_offset 4
+ 172              		.cfi_offset 7, -4
+ 173 0002 00AF     		add	r7, sp, #0
+ 174              	.LCFI9:
+ 175              		.cfi_def_cfa_register 7
+ 176              	.L9:
+ 114:../stm32f4xx_it.c ****   /* Go to infinite loop when Usage Fault exception occurs */
+ 115:../stm32f4xx_it.c ****   while (1)
+ 116:../stm32f4xx_it.c ****   {}
+ 177              		.loc 1 116 0 discriminator 1
+ 178 0004 FEE7     		b	.L9
+ 179              		.cfi_endproc
+ 180              	.LFE114:
+ 182 0006 00BF     		.section	.text.DebugMon_Handler,"ax",%progbits
+ 183              		.align	2
+ 184              		.global	DebugMon_Handler
+ 185              		.thumb
+ 186              		.thumb_func
+ 188              	DebugMon_Handler:
+ 189              	.LFB115:
+ 117:../stm32f4xx_it.c **** }
  118:../stm32f4xx_it.c **** 
  119:../stm32f4xx_it.c **** /**
- 120:../stm32f4xx_it.c ****   * @brief  This function handles PendSV_Handler exception.
+ 120:../stm32f4xx_it.c ****   * @brief  This function handles Debug Monitor exception.
  121:../stm32f4xx_it.c ****   * @param  None
  122:../stm32f4xx_it.c ****   * @retval None
  123:../stm32f4xx_it.c ****   */
- 124:../stm32f4xx_it.c **** /*void PendSV_Handler(void)
- 125:../stm32f4xx_it.c **** {}*/
+ 124:../stm32f4xx_it.c **** void DebugMon_Handler(void)
+ 125:../stm32f4xx_it.c **** {}
+ 190              		.loc 1 125 0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 1, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 195 0000 80B4     		push	{r7}
+ 196              	.LCFI10:
+ 197              		.cfi_def_cfa_offset 4
+ 198              		.cfi_offset 7, -4
+ 199 0002 00AF     		add	r7, sp, #0
+ 200              	.LCFI11:
+ 201              		.cfi_def_cfa_register 7
+ 202              		.loc 1 125 0
+ 203 0004 BD46     		mov	sp, r7
+ 204 0006 80BC     		pop	{r7}
+ 205 0008 7047     		bx	lr
+ 206              		.cfi_endproc
+ 207              	.LFE115:
+ 209 000a 00BF     		.section	.text.EXTI1_IRQHandler,"ax",%progbits
+ 210              		.align	2
+ 211              		.global	EXTI1_IRQHandler
+ 212              		.thumb
+ 213              		.thumb_func
+ 215              	EXTI1_IRQHandler:
+ 216              	.LFB116:
  126:../stm32f4xx_it.c **** 
- 127:../stm32f4xx_it.c **** /**
- 128:../stm32f4xx_it.c ****   * @brief  This function handles SysTick Handler.
- 129:../stm32f4xx_it.c ****   * @param  None
- 130:../stm32f4xx_it.c ****   * @retval None
- 131:../stm32f4xx_it.c ****   */
- 132:../stm32f4xx_it.c **** /*void SysTick_Handler(void)
- 133:../stm32f4xx_it.c **** {}*/
- 134:../stm32f4xx_it.c **** 
- 135:../stm32f4xx_it.c **** /******************************************************************************/
- 136:../stm32f4xx_it.c **** /*            STM32F4xx Peripherals Interrupt Handlers                        */
- 137:../stm32f4xx_it.c **** /******************************************************************************/
- 138:../stm32f4xx_it.c **** 
- 139:../stm32f4xx_it.c **** /**
- 140:../stm32f4xx_it.c ****   * @brief  This function handles SDIO global interrupt request.
- 141:../stm32f4xx_it.c ****   * @param  None
- 142:../stm32f4xx_it.c ****   * @retval None
- 143:../stm32f4xx_it.c ****   */
- 144:../stm32f4xx_it.c **** void SDIO_IRQHandler(void)
- 145:../stm32f4xx_it.c **** {
- 185              		.loc 1 145 0
- 186              		.cfi_startproc
- 187              		@ args = 0, pretend = 0, frame = 0
- 188              		@ frame_needed = 1, uses_anonymous_args = 0
- 189 0000 80B5     		push	{r7, lr}
- 190              	.LCFI12:
- 191              		.cfi_def_cfa_offset 8
- 192              		.cfi_offset 14, -4
- 193              		.cfi_offset 7, -8
- 194 0002 00AF     		add	r7, sp, #0
- 195              	.LCFI13:
- 196              		.cfi_def_cfa_register 7
- 146:../stm32f4xx_it.c ****   /* Process All SDIO Interrupt Sources */
- 147:../stm32f4xx_it.c ****   SD_ProcessIRQSrc();
- 197              		.loc 1 147 0
- 198 0004 FFF7FEFF 		bl	SD_ProcessIRQSrc
- 148:../stm32f4xx_it.c **** }
- 199              		.loc 1 148 0
- 200 0008 80BD     		pop	{r7, pc}
- 201              		.cfi_endproc
- 202              	.LFE116:
- 204 000a 00BF     		.section	.text.DMA2_Stream3_IRQHandler,"ax",%progbits
- 205              		.align	2
- 206              		.global	DMA2_Stream3_IRQHandler
- 207              		.thumb
- 208              		.thumb_func
- 210              	DMA2_Stream3_IRQHandler:
- 211              	.LFB117:
- 149:../stm32f4xx_it.c **** 
- 150:../stm32f4xx_it.c **** /**
- 151:../stm32f4xx_it.c ****   * @brief  This function handles DMA2 Stream3 or DMA2 Stream6 global interrupts
- 152:../stm32f4xx_it.c ****   *         requests.
- 153:../stm32f4xx_it.c ****   * @param  None
- 154:../stm32f4xx_it.c ****   * @retval None
- 155:../stm32f4xx_it.c ****   */
- 156:../stm32f4xx_it.c **** void SD_SDIO_DMA_IRQHANDLER(void)
- 157:../stm32f4xx_it.c **** {
- 212              		.loc 1 157 0
- 213              		.cfi_startproc
- 214              		@ args = 0, pretend = 0, frame = 0
- 215              		@ frame_needed = 1, uses_anonymous_args = 0
- 216 0000 80B5     		push	{r7, lr}
- 217              	.LCFI14:
- 218              		.cfi_def_cfa_offset 8
- 219              		.cfi_offset 14, -4
- 220              		.cfi_offset 7, -8
- 221 0002 00AF     		add	r7, sp, #0
- 222              	.LCFI15:
- 223              		.cfi_def_cfa_register 7
- 158:../stm32f4xx_it.c ****   /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
- 159:../stm32f4xx_it.c ****   SD_ProcessDMAIRQ();
- 224              		.loc 1 159 0
- 225 0004 FFF7FEFF 		bl	SD_ProcessDMAIRQ
- 160:../stm32f4xx_it.c **** }
- 226              		.loc 1 160 0
- 227 0008 80BD     		pop	{r7, pc}
- 228              		.cfi_endproc
- 229              	.LFE117:
- 231 000a 00BF     		.text
- 232              	.Letext0:
- 233              		.file 2 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
- 234              		.file 3 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 127:../stm32f4xx_it.c **** 
+ 128:../stm32f4xx_it.c **** /**
+ 129:../stm32f4xx_it.c ****  * The following two function are handled by FreeRTOS.  See line 225
+ 130:../stm32f4xx_it.c ****  * in port.c inside of FreeRTOS.
+ 131:../stm32f4xx_it.c ****  */
+ 132:../stm32f4xx_it.c **** 
+ 133:../stm32f4xx_it.c **** /**
+ 134:../stm32f4xx_it.c ****   * @brief  This function handles SVCall exception.
+ 135:../stm32f4xx_it.c ****   * @param  None
+ 136:../stm32f4xx_it.c ****   * @retval None
+ 137:../stm32f4xx_it.c ****   */
+ 138:../stm32f4xx_it.c **** /*void SVC_Handler(void)
+ 139:../stm32f4xx_it.c **** {}*/
+ 140:../stm32f4xx_it.c **** 
+ 141:../stm32f4xx_it.c **** /**
+ 142:../stm32f4xx_it.c ****   * @brief  This function handles PendSV_Handler exception.
+ 143:../stm32f4xx_it.c ****   * @param  None
+ 144:../stm32f4xx_it.c ****   * @retval None
+ 145:../stm32f4xx_it.c ****   */
+ 146:../stm32f4xx_it.c **** /*void PendSV_Handler(void)
+ 147:../stm32f4xx_it.c **** {}*/
+ 148:../stm32f4xx_it.c **** 
+ 149:../stm32f4xx_it.c **** /**
+ 150:../stm32f4xx_it.c ****   * @brief  This function handles SysTick Handler.
+ 151:../stm32f4xx_it.c ****   * @param  None
+ 152:../stm32f4xx_it.c ****   * @retval None
+ 153:../stm32f4xx_it.c ****   */
+ 154:../stm32f4xx_it.c **** /*void SysTick_Handler(void)
+ 155:../stm32f4xx_it.c **** {}*/
+ 156:../stm32f4xx_it.c **** 
+ 157:../stm32f4xx_it.c **** /******************************************************************************/
+ 158:../stm32f4xx_it.c **** /*            STM32F4xx Peripherals Interrupt Handlers                        */
+ 159:../stm32f4xx_it.c **** /******************************************************************************/
+ 160:../stm32f4xx_it.c **** /*
+ 161:../stm32f4xx_it.c ****  * Sdio interface collides with I2S3 in STM32F4Discovery so
+ 162:../stm32f4xx_it.c ****  * using USB Host MSC is the better way to get Massstorage access
+ 163:../stm32f4xx_it.c ****  */
+ 164:../stm32f4xx_it.c **** #ifdef STM32_SDIO
+ 165:../stm32f4xx_it.c **** /**
+ 166:../stm32f4xx_it.c ****   * @brief  This function handles SDIO global interrupt request.
+ 167:../stm32f4xx_it.c ****   * @param  None
+ 168:../stm32f4xx_it.c ****   * @retval None
+ 169:../stm32f4xx_it.c ****   */
+ 170:../stm32f4xx_it.c **** void SDIO_IRQHandler(void)
+ 171:../stm32f4xx_it.c **** {
+ 172:../stm32f4xx_it.c ****   /* Process All SDIO Interrupt Sources */
+ 173:../stm32f4xx_it.c ****   SD_ProcessIRQSrc();
+ 174:../stm32f4xx_it.c **** }
+ 175:../stm32f4xx_it.c **** 
+ 176:../stm32f4xx_it.c **** /**
+ 177:../stm32f4xx_it.c ****   * @brief  This function handles DMA2 Stream3 or DMA2 Stream6 global interrupts
+ 178:../stm32f4xx_it.c ****   *         requests.
+ 179:../stm32f4xx_it.c ****   * @param  None
+ 180:../stm32f4xx_it.c ****   * @retval None
+ 181:../stm32f4xx_it.c ****   */
+ 182:../stm32f4xx_it.c **** void SD_SDIO_DMA_IRQHANDLER(void)
+ 183:../stm32f4xx_it.c **** {
+ 184:../stm32f4xx_it.c ****   /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
+ 185:../stm32f4xx_it.c ****   SD_ProcessDMAIRQ();
+ 186:../stm32f4xx_it.c **** }
+ 187:../stm32f4xx_it.c **** 
+ 188:../stm32f4xx_it.c **** #else
+ 189:../stm32f4xx_it.c **** 
+ 190:../stm32f4xx_it.c **** 	/**
+ 191:../stm32f4xx_it.c **** 	  * @brief  This function handles External line 1 interrupt request.
+ 192:../stm32f4xx_it.c **** 	  *
+ 193:../stm32f4xx_it.c **** 	  * 		Triggers Event on mechanical shock, good as "Snoozze" Button :D
+ 194:../stm32f4xx_it.c **** 	  * @param  None
+ 195:../stm32f4xx_it.c **** 	  * @retval None
+ 196:../stm32f4xx_it.c **** 	  */
+ 197:../stm32f4xx_it.c **** 	void EXTI1_IRQHandler(void)
+ 198:../stm32f4xx_it.c **** 	{
+ 217              		.loc 1 198 0
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 0
+ 220              		@ frame_needed = 1, uses_anonymous_args = 0
+ 221 0000 80B5     		push	{r7, lr}
+ 222              	.LCFI12:
+ 223              		.cfi_def_cfa_offset 8
+ 224              		.cfi_offset 14, -4
+ 225              		.cfi_offset 7, -8
+ 226 0002 00AF     		add	r7, sp, #0
+ 227              	.LCFI13:
+ 228              		.cfi_def_cfa_register 7
+ 199:../stm32f4xx_it.c **** 	  /* Check the clic on the accelerometer to Pause/Resume Playing */
+ 200:../stm32f4xx_it.c **** 	  if(EXTI_GetITStatus(EXTI_Line1) != RESET)
+ 229              		.loc 1 200 0
+ 230 0004 4FF00200 		mov	r0, #2
+ 231 0008 FFF7FEFF 		bl	EXTI_GetITStatus
+ 232 000c 0346     		mov	r3, r0
+ 233 000e 002B     		cmp	r3, #0
+ 234 0010 03D0     		beq	.L11
+ 201:../stm32f4xx_it.c **** 	  {
+ 202:../stm32f4xx_it.c **** 		/*give sem in FreeRTOS */
+ 203:../stm32f4xx_it.c **** 
+ 204:../stm32f4xx_it.c **** 
+ 205:../stm32f4xx_it.c **** 		/* Clear the EXTI line 1 pending bit */
+ 206:../stm32f4xx_it.c **** 		EXTI_ClearITPendingBit(EXTI_Line1);
+ 235              		.loc 1 206 0
+ 236 0012 4FF00200 		mov	r0, #2
+ 237 0016 FFF7FEFF 		bl	EXTI_ClearITPendingBit
+ 238              	.L11:
+ 207:../stm32f4xx_it.c **** 	  }
+ 208:../stm32f4xx_it.c **** 	}
+ 239              		.loc 1 208 0
+ 240 001a 80BD     		pop	{r7, pc}
+ 241              		.cfi_endproc
+ 242              	.LFE116:
+ 244              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
+ 245              		.align	2
+ 246              		.global	EXTI0_IRQHandler
+ 247              		.thumb
+ 248              		.thumb_func
+ 250              	EXTI0_IRQHandler:
+ 251              	.LFB117:
+ 209:../stm32f4xx_it.c **** 
+ 210:../stm32f4xx_it.c **** 
+ 211:../stm32f4xx_it.c **** 	#if defined MEDIA_USB_KEY
+ 212:../stm32f4xx_it.c **** 		/**
+ 213:../stm32f4xx_it.c **** 		  * @brief  EXTI0_IRQHandler
+ 214:../stm32f4xx_it.c **** 		  *         This function handles External line 0 interrupt request.
+ 215:../stm32f4xx_it.c **** 		  * @param  None
+ 216:../stm32f4xx_it.c **** 		  * @retval None
+ 217:../stm32f4xx_it.c **** 		  */
+ 218:../stm32f4xx_it.c **** 		void EXTI0_IRQHandler(void)
+ 219:../stm32f4xx_it.c **** 		{
+ 252              		.loc 1 219 0
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 1, uses_anonymous_args = 0
+ 256 0000 80B5     		push	{r7, lr}
+ 257              	.LCFI14:
+ 258              		.cfi_def_cfa_offset 8
+ 259              		.cfi_offset 14, -4
+ 260              		.cfi_offset 7, -8
+ 261 0002 00AF     		add	r7, sp, #0
+ 262              	.LCFI15:
+ 263              		.cfi_def_cfa_register 7
+ 220:../stm32f4xx_it.c **** 		  /* Checks whether the User Button EXTI line is asserted*/
+ 221:../stm32f4xx_it.c **** 		  if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+ 264              		.loc 1 221 0
+ 265 0004 4FF00100 		mov	r0, #1
+ 266 0008 FFF7FEFF 		bl	EXTI_GetITStatus
+ 222:../stm32f4xx_it.c **** 		  {
+ 223:../stm32f4xx_it.c **** #ifdef test
+ 224:../stm32f4xx_it.c **** 			if (Command_index == 1)
+ 225:../stm32f4xx_it.c **** 			{
+ 226:../stm32f4xx_it.c **** 			  /* Switch to play command */
+ 227:../stm32f4xx_it.c **** 			  Command_index = 0;
+ 228:../stm32f4xx_it.c **** 			}
+ 229:../stm32f4xx_it.c **** 			else if (Command_index == 0)
+ 230:../stm32f4xx_it.c **** 			{
+ 231:../stm32f4xx_it.c **** 			  /* Switch to record command */
+ 232:../stm32f4xx_it.c **** 			  Command_index = 1;
+ 233:../stm32f4xx_it.c **** 			  XferCplt = 1;
+ 234:../stm32f4xx_it.c **** 			  EVAL_AUDIO_Stop(CODEC_PDWN_SW);
+ 235:../stm32f4xx_it.c **** 			}
+ 236:../stm32f4xx_it.c **** 			else
+ 237:../stm32f4xx_it.c **** 			{
+ 238:../stm32f4xx_it.c **** 			  /* Switch to play command */
+ 239:../stm32f4xx_it.c **** 			  Command_index = 0;
+ 240:../stm32f4xx_it.c **** 			}
+ 241:../stm32f4xx_it.c **** #endif
+ 242:../stm32f4xx_it.c **** 		  }
+ 243:../stm32f4xx_it.c **** 
+ 244:../stm32f4xx_it.c **** 		  /* Clears the EXTI's line pending bit.*/
+ 245:../stm32f4xx_it.c **** 		  EXTI_ClearITPendingBit(EXTI_Line0);
+ 267              		.loc 1 245 0
+ 268 000c 4FF00100 		mov	r0, #1
+ 269 0010 FFF7FEFF 		bl	EXTI_ClearITPendingBit
+ 246:../stm32f4xx_it.c **** 		}
+ 270              		.loc 1 246 0
+ 271 0014 80BD     		pop	{r7, pc}
+ 272              		.cfi_endproc
+ 273              	.LFE117:
+ 275 0016 00BF     		.section	.text.OTG_FS_IRQHandler,"ax",%progbits
+ 276              		.align	2
+ 277              		.global	OTG_FS_IRQHandler
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	OTG_FS_IRQHandler:
+ 282              	.LFB118:
+ 247:../stm32f4xx_it.c **** 
+ 248:../stm32f4xx_it.c **** 
+ 249:../stm32f4xx_it.c **** 		/**
+ 250:../stm32f4xx_it.c **** 		  * @brief  This function handles USB-On-The-Go FS global interrupt request.
+ 251:../stm32f4xx_it.c **** 		  * @param  None
+ 252:../stm32f4xx_it.c **** 		  * @retval None
+ 253:../stm32f4xx_it.c **** 		  */
+ 254:../stm32f4xx_it.c **** 		void OTG_FS_IRQHandler(void)
+ 255:../stm32f4xx_it.c **** 		{
+ 283              		.loc 1 255 0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 0
+ 286              		@ frame_needed = 1, uses_anonymous_args = 0
+ 287 0000 80B5     		push	{r7, lr}
+ 288              	.LCFI16:
+ 289              		.cfi_def_cfa_offset 8
+ 290              		.cfi_offset 14, -4
+ 291              		.cfi_offset 7, -8
+ 292 0002 00AF     		add	r7, sp, #0
+ 293              	.LCFI17:
+ 294              		.cfi_def_cfa_register 7
+ 256:../stm32f4xx_it.c **** 		  USBH_OTG_ISR_Handler(&USB_OTG_Core);
+ 295              		.loc 1 256 0
+ 296 0004 40F20000 		movw	r0, #:lower16:USB_OTG_Core
+ 297 0008 C0F20000 		movt	r0, #:upper16:USB_OTG_Core
+ 298 000c FFF7FEFF 		bl	USBH_OTG_ISR_Handler
+ 257:../stm32f4xx_it.c **** 		}
+ 299              		.loc 1 257 0
+ 300 0010 80BD     		pop	{r7, pc}
+ 301              		.cfi_endproc
+ 302              	.LFE118:
+ 304 0012 00BF     		.text
+ 305              	.Letext0:
+ 306              		.file 2 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 307              		.file 3 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32_USB_OTG_Driver\\inc/usb_regs.h"
+ 308              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4xx.h"
+ 309              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32_USB_OTG_Driver\\inc/usb_core.h"
+ 310              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_it.c
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:19     .text.NMI_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:24     .text.NMI_Handler:00000000 NMI_Handler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:47     .text.HardFault_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:52     .text.HardFault_Handler:00000000 HardFault_Handler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:73     .text.MemManage_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:78     .text.MemManage_Handler:00000000 MemManage_Handler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:99     .text.BusFault_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:104    .text.BusFault_Handler:00000000 BusFault_Handler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:125    .text.UsageFault_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:130    .text.UsageFault_Handler:00000000 UsageFault_Handler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:151    .text.DebugMon_Handler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:156    .text.DebugMon_Handler:00000000 DebugMon_Handler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:178    .text.SDIO_IRQHandler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:183    .text.SDIO_IRQHandler:00000000 SDIO_IRQHandler
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:205    .text.DMA2_Stream3_IRQHandler:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccMk18hh.s:210    .text.DMA2_Stream3_IRQHandler:00000000 DMA2_Stream3_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:22     .data.PauseResumeStatus:00000000 PauseResumeStatus
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:28     .bss.Count:00000000 Count
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:29     .bss.Count:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:34     .bss.LED_Toggle:00000000 LED_Toggle
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:35     .bss.LED_Toggle:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:41     .bss.capture:00000000 capture
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:38     .bss.capture:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:48     .bss.Time_Rec_Base:00000000 Time_Rec_Base
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:45     .bss.Time_Rec_Base:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:51     .text.NMI_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:56     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:79     .text.HardFault_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:84     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:105    .text.MemManage_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:110    .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:131    .text.BusFault_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:136    .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:157    .text.UsageFault_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:162    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:183    .text.DebugMon_Handler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:188    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:210    .text.EXTI1_IRQHandler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:215    .text.EXTI1_IRQHandler:00000000 EXTI1_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:245    .text.EXTI0_IRQHandler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:250    .text.EXTI0_IRQHandler:00000000 EXTI0_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:276    .text.OTG_FS_IRQHandler:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccdnESPu.s:281    .text.OTG_FS_IRQHandler:00000000 OTG_FS_IRQHandler
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
-SD_ProcessIRQSrc
-SD_ProcessDMAIRQ
+EXTI_GetITStatus
+EXTI_ClearITPendingBit
+USB_OTG_Core
+USBH_OTG_ISR_Handler

@@ -21,8 +21,30 @@ stm32f4xx_it.d: ../stm32f4xx_it.c ../stm32f4xx_it.h \
  E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_tim.h \
  E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h \
  E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h \
- E:\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h \
- E:\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h
+ E:\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery_audio_codec.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd_int.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_regs.h \
+ E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usb_conf.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_core.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_defines.h \
+ E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_usr.h \
+ E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/ff.h \
+ E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/integer.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_def.h \
+ E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_conf.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_stdreq.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_bsp.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_ioreq.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_hcs.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h \
+ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h
 
 ../stm32f4xx_it.h:
 
@@ -70,6 +92,50 @@ E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_
 
 E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h:
+E:\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery_audio_codec.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Fatfs/stm32f4_sdio.h:
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd_int.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_regs.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usb_conf.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_core.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_defines.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_usr.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/ff.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/integer.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_def.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_conf.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_stdreq.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_bsp.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_ioreq.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_hcs.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h:

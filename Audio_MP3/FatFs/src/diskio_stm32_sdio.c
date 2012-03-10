@@ -116,13 +116,20 @@ DRESULT disk_read (
 	switch (drv)
 	{
 	case SDIO_DRIVE:
-		status = SD_ReadMultiBlocks((uint8_t*)buff,sector*512,512,count);
+		for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
+		{
+			status = SD_ReadBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+			if(status != SD_OK)
+				return RES_ERROR;
 
-		/* Check if the Transfer is finished */
-		status = SD_WaitReadOperation();
+			/* Check if the Transfer is finished */
+			status = SD_WaitReadOperation();
+			if(status != SD_OK)
+				return RES_ERROR;
 
-		/* Wait until end of DMA transfer */
-		while(SD_GetStatus() != SD_TRANSFER_OK);
+			/* Wait until end of DMA transfer */
+			while(SD_GetStatus() != SD_TRANSFER_OK);
+		}
 
 		if (status == SD_OK){
 			return RES_OK;
@@ -151,14 +158,18 @@ DRESULT disk_write (
 	switch (drv)
 	{
 	case SDIO_DRIVE:
-		status = SD_WriteMultiBlocks((uint8_t*)(buff),sector*512,512,count);
-
-		/* Check if the Transfer is finished */
-		status = SD_WaitWriteOperation();
-
-		/* Wait until end of DMA transfer */
-		while(SD_GetStatus() != SD_TRANSFER_OK);
-
+		for (int secNum = 0; secNum < count && status == SD_OK; secNum++)
+		{
+			status = SD_WriteBlock((uint8_t*)(buff+512*secNum),(sector+secNum)*512,512);
+			if(status != SD_OK)
+						return RES_ERROR;
+			/* Check if the Transfer is finished */
+			status = SD_WaitWriteOperation();
+			if(status != SD_OK)
+						return RES_ERROR;
+			/* Wait until end of DMA transfer */
+			while(SD_GetStatus() != SD_TRANSFER_OK);
+		}
 		if (status == SD_OK){
 			return RES_OK;
 		}  else {

@@ -1,6 +1,10 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_CONF_H
 #define __STM32F4xx_CONF_H
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
 
 /* Includes ------------------------------------------------------------------*/
 /* Uncomment the line below to enable peripheral header file inclusion */
@@ -61,5 +65,9 @@
 #else
   #define assert_param(expr) ((void)0)
 #endif /* USE_FULL_ASSERT */
+
+#ifdef __cplusplus
+	}
+#endif
 
 #endif /* __STM32F45x_CONF_H */

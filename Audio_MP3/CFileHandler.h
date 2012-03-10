@@ -13,28 +13,9 @@
 #define CFILEHANDLER_H_
 /* Includes ------------------------------------------------------------------*/
 #include "AManagedTask.h"
-#include "stm32f4_sdio.h"
-#include "ff.h"
+#include "waveplayer.h"
 /* Exported types ------------------------------------------------------------*/
-/*******************************
- * These are possible application
- * states.
- ******************************/
-typedef enum
-{
-    IDLE_STATE,
-    OPEN_MP3_FILE,
-    FILE_OPEN,
-    FRAME_SYNC_FIND,
-    FILE_READ,
-    MP3_DECODE,
-    PLAYBACK,
-    FILE_CLOSE,
-    PLAYBACK_PAUSE,
-    PLAYBACK_STOP,
-    SYSTEM_HALT
 
-}APPLICATION_STATE;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
@@ -46,13 +27,16 @@ typedef enum
  */
 class CFileHandler: public AManagedTask{
 private:
+#ifdef STM32_SDIO
 	SD_Error Status;
 	SD_CardInfo SDCardInfo;
-	APPLICATION_STATE applicationState,previousAppState;
+#endif
 
 	FRESULT fsresult;               //return code for file related operations
 	FATFS myfs;                     //FAT file system structure, see ff.h for details
 	FIL myfile;                     //file object
+
+
 public:
 	CFileHandler();
 	virtual ~CFileHandler();

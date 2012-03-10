@@ -8,6 +8,9 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include STM32_USB_OTG_Driver/src/subdir.mk
+-include STM32_USB_HOST_Library/Core/src/subdir.mk
+-include STM32_USB_HOST_Library/Class/MSC/src/subdir.mk
 -include STM32F4xx_StdPeriph_Driver/src/subdir.mk
 -include STM32F4-Discovery/subdir.mk
 -include Menue/subdir.mk
@@ -17,9 +20,10 @@ RM := rm -rf
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
 -include FreeRTOS/Source/subdir.mk
--include Fatfs/FatFs/src/option/subdir.mk
--include Fatfs/FatFs/src/subdir.mk
--include Fatfs/subdir.mk
+-include Audio_MP3/USB_MSC/subdir.mk
+-include Audio_MP3/FatFs/src/option/subdir.mk
+-include Audio_MP3/FatFs/src/subdir.mk
+-include Audio_MP3/subdir.mk
 -include subdir.mk
 -include objects.mk
 
