@@ -21,6 +21,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_usr.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 #include "waveplayer.h"
 #include "stm32f4xx_it.h"
 
@@ -34,6 +36,7 @@
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 __IO uint8_t Command_index = 0;
+xSemaphoreHandle semUSBMounted;
 /*  Points to the DEVICE_PROP structure of current device */
 /*  The purpose of this register is to speed up the execution */
 FATFS fatfs;
@@ -64,14 +67,8 @@ USBH_Usr_cb_TypeDef USR_Callbacks =
   USBH_USR_UnrecoveredError
 };
 
-extern USB_OTG_CORE_HANDLE          USB_OTG_Core;
-uint8_t joystick_use = 0x00;
-uint8_t lcdLineNo = 0x00;
-extern __IO uint8_t RepeatState ;
-extern __IO uint8_t LED_Toggle;
 static uint8_t USBH_USR_ApplicationState = USH_USR_FS_INIT;
-extern __IO uint32_t WaveDataLength ;
-extern __IO uint16_t Time_Rec_Base;
+
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -84,6 +81,8 @@ extern __IO uint16_t Time_Rec_Base;
   */
 void USBH_USR_Init(void)
 {
+	vSemaphoreCreateBinary(semUSBMounted);
+	xSemaphoreTake(semUSBMounted,0); //Ensure sem is not available
 }
 
 /**
@@ -93,10 +92,6 @@ void USBH_USR_Init(void)
   */
 void USBH_USR_DeviceAttached(void)
 {
-  /* Red LED off when device attached */
-  STM_EVAL_LEDOff(LED5);
-  /* Green LED on */
-  STM_EVAL_LEDOn(LED4);
 
 }
 
@@ -117,17 +112,8 @@ void USBH_USR_UnrecoveredError (void)
   */
 void USBH_USR_DeviceDisconnected (void)
 {
-	/* Red LED on when device disconnected */
-	STM_EVAL_LEDOn(LED5);
-	/* Green LED off */
-	STM_EVAL_LEDOff(LED4);
-
-  /* If USB key Removed when playing a wave */
-  if( (WaveDataLength!=0)&& (Command_index != 1))
-  {
-    WavePlayer_CallBack();
-    Command_index = 0;
-  } 
+	// do not fully block the Task to signal device disconnected
+	xSemaphoreTake(semUSBMounted,1000/portTICK_RATE_MS);
 }
 
 /**
@@ -222,10 +208,14 @@ void USBH_USR_SerialNum_String(void *SerialNumString)
   */
 void USBH_USR_EnumerationDone(void)
 {
-  /* 0.5 seconds delay */
-  USB_OTG_BSP_mDelay(500);
+  vTaskDelay(500/portTICK_RATE_MS);
   
-  USBH_USR_MSC_Application();
+  /* Initialises the File System*/
+  if (f_mount( 0, &fatfs ) != FR_OK )
+	  return;
+
+  // signal a mounted device
+  xSemaphoreGive(semUSBMounted);
 } 
 
 /**
@@ -269,63 +259,11 @@ void USBH_USR_OverCurrentDetected (void)
 int USBH_USR_MSC_Application(void)
 {
 
-  switch (USBH_USR_ApplicationState)
-  {
-    case USH_USR_FS_INIT:
-
-      /* Initialises the File System*/
-      if (f_mount( 0, &fatfs ) != FR_OK ) 
-      {
-        /* efs initialisation fails*/
-        return(-1);
-      }
       
-      /* Flash Disk is write protected */
-      if (USBH_MSC_Param.MSWriteProtect == DISK_WRITE_PROTECTED)
-      {
-        while(1)
-        {
-          /* Red LED On */
-          STM_EVAL_LEDOn(LED5);
-        }
-      }
-      /* Go to menu */
-      USBH_USR_ApplicationState = USH_USR_AUDIO;
-      break;
 
-    case USH_USR_AUDIO:
-
-      /* Go to Audio menu */
-      COMMAND_AudioExecuteApplication();
-
-      /* Set user initialization flag */
-      USBH_USR_ApplicationState = USH_USR_FS_INIT;
-      break;
-
-    default:
-      break;
-  }
   return(0);
 }
 
-/**
-  * @brief  COMMAND_AudioExecuteApplication
-  * @param  None
-  * @retval None
-  */
-void COMMAND_AudioExecuteApplication(void)
-{
-  /* Execute the command switch the command index */
-  switch (Command_index)
-  {
-  /* Start Playing from USB Flash memory */
-  case CMD_PLAY:
-      WavePlayerStart();
-      break;
-  default:
-    break;
-  }
-}
 
 /**
   * @brief  USBH_USR_DeInit
@@ -335,7 +273,7 @@ void COMMAND_AudioExecuteApplication(void)
   */
 void USBH_USR_DeInit(void)
 {
-  USBH_USR_ApplicationState = USH_USR_FS_INIT;
+
 }
 
 /**
