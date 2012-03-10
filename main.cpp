@@ -56,7 +56,7 @@ int main(void){
 	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+2);
 	g_MSC.Create("USB Massstorage", configMINIMAL_STACK_SIZE *2, tskIDLE_PRIORITY +1);
 	//g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
-	//g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
+	g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
 
 	/**
 	 * Initialise the hardware for all Tasks and

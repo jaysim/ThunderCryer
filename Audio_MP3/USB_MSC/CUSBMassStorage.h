@@ -34,6 +34,7 @@ public:
 	bool HardwareInit(void);
 	void Run(void);
 	bool IsDeviceConnected(void);
+	bool DeviceMounted();
 };
 
 

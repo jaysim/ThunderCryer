@@ -10,6 +10,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "CFileHandler.h"
+#include "CUSBMassStorage.h"
 #include "stm32f4xx.h"
 #include "misc.h"
 #include "string.h"
@@ -22,14 +23,12 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern CUSB_MassStorage g_MSC;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
 
 CFileHandler::CFileHandler() {
-#ifdef STM32_SDIO
-	Status = SD_OK;
-#endif
 	fsresult = FR_OK;
 
 }
@@ -54,10 +53,22 @@ bool CFileHandler::HardwareInit(){
   * @retval None
   */
 void CFileHandler::Run(){
+	UINT bytesWritten;
+
+	//wait for USB Stick getting mounted
+	while(!g_MSC.DeviceMounted());
+
+	fsresult = f_open(&myfile,"0:Hello.txt",FA_CREATE_ALWAYS | FA_WRITE);
+	fsresult = f_write(&myfile,"Hello USB Stick!",17,&bytesWritten);
+	fsresult = f_close(&myfile);
 
 
+	while(1){
+
+	}
 }
 }
+
 
 
 

@@ -280,6 +280,7 @@ uint32_t LIS302DL_TIMEOUT_UserCallback(void)
 	while (1)
 	{
 	}
+	return -1;
 }
 
 /**

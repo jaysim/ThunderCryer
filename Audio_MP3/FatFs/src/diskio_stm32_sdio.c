@@ -63,7 +63,7 @@ SD_Error Status;
 		}
 
 
-		if (Status == SD_OK);
+		if (Status == SD_OK)
 			return 0x00;
 
 		break;

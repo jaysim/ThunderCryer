@@ -177,6 +177,7 @@ DRESULT disk_ioctl (
     
   default:
     res = RES_PARERR;
+    break;
   }
   
   

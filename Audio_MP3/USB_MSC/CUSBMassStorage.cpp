@@ -11,12 +11,17 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "CUSBMassStorage.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "usbh_usr.h"
+#include "usb_hcd.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
- USB_OTG_CORE_HANDLE          USB_OTG_Core;
- USBH_HOST                    USB_Host;
+USB_OTG_CORE_HANDLE          USB_OTG_Core;
+USBH_HOST                    USB_Host;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -63,7 +68,23 @@ void CUSB_MassStorage::Run(void){
   * @retval status of storage device
   */
 bool CUSB_MassStorage::IsDeviceConnected(void){
-	return HCD_IsDeviceConnected(&USB_OTG_Core);
+	return (bool)HCD_IsDeviceConnected(&USB_OTG_Core);
+}
+
+/**
+  * @brief  Get Mounted Status, Suspends calling task
+  * @param  None
+  * @retval status of storage device Fs
+  */
+bool CUSB_MassStorage::DeviceMounted(void){
+	bool tmp = false;
+	if(semUSBMounted != NULL){
+		if(xSemaphoreTake(semUSBMounted,100/portTICK_RATE_MS)== pdTRUE){
+			xSemaphoreGive(semUSBMounted);
+			tmp = true;
+		}
+	}
+	return tmp;
 }
 
 

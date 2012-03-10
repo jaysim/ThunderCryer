@@ -22,8 +22,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_usr.h"
 #include "FreeRTOS.h"
+#include "task.h"
 #include "semphr.h"
-#include "waveplayer.h"
+#include "ff.h"
 #include "stm32f4xx_it.h"
 
 /** @addtogroup STM32F4-Discovery_Audio_Player_Recorder
@@ -35,15 +36,11 @@
 /* Private defines -----------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-__IO uint8_t Command_index = 0;
 xSemaphoreHandle semUSBMounted;
+FATFS fatfs;
 /*  Points to the DEVICE_PROP structure of current device */
 /*  The purpose of this register is to speed up the execution */
-FATFS fatfs;
-FIL file;
-FIL fileR;
-DIR dir;
-FILINFO fno;
+
 
 USBH_Usr_cb_TypeDef USR_Callbacks =
 {
@@ -66,9 +63,6 @@ USBH_Usr_cb_TypeDef USR_Callbacks =
   USBH_USR_DeviceNotSupported,
   USBH_USR_UnrecoveredError
 };
-
-static uint8_t USBH_USR_ApplicationState = USH_USR_FS_INIT;
-
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -259,7 +253,7 @@ void USBH_USR_OverCurrentDetected (void)
 int USBH_USR_MSC_Application(void)
 {
 
-      
+
 
   return(0);
 }

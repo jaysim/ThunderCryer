@@ -28,25 +28,22 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "ff.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "semphr.h"
 #include "stm32f4_discovery.h"
 #include "usbh_core.h"
 #include <stdio.h>
+#include "ff.h"
 #include "usbh_msc_core.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* State Machine for the USBH_USR_ApplicationState */
-#define USH_USR_FS_INIT    ((uint8_t)0x00)
-#define USH_USR_AUDIO      ((uint8_t)0x01)
-
-#define CMD_PLAY           ((uint8_t)0x00)
-#define CMD_RECORD         ((uint8_t)0x01)
-
 /* Exported macros -----------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 extern  USBH_Usr_cb_TypeDef USR_Callbacks;
-
+extern xSemaphoreHandle semUSBMounted;
+extern FATFS fatfs;
 /* Exported functions ------------------------------------------------------- */ 
 void USBH_USR_Init(void);
 void USBH_USR_DeviceAttached(void);
@@ -68,10 +65,7 @@ int USBH_USR_MSC_Application(void);
 void USBH_USR_DeInit(void);
 void USBH_USR_DeviceNotSupported(void);
 void USBH_USR_UnrecoveredError(void);
-void COMMAND_AudioExecuteApplication(void);
-//extern void WavePlayerStart(void); linkage error
-//extern void Delay(__IO uint32_t nTime);
-//extern void WavePlayer_CallBack(void);
+
 #ifdef __cplusplus
 }
 #endif
