@@ -68,6 +68,7 @@ main.d: ../main.cpp \
  E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h \
  E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h \
  E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3/CFileHandler.h \
+ E:\Desktop\thundercyer-the-alarm-clock\HelixMP3\pub/mp3dec.h \
  ../stm32f4xx_conf.h
 
 E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CFreeRTOS.h:
@@ -209,5 +210,7 @@ E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh
 E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h:
 
 E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3/CFileHandler.h:
+
+E:\Desktop\thundercyer-the-alarm-clock\HelixMP3\pub/mp3dec.h:
 
 ../stm32f4xx_conf.h:

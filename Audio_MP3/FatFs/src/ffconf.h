@@ -93,8 +93,8 @@ extern "C" {
 */
 
 
-#define	_USE_LFN	2		/* 0 to 3 */
-#define	_MAX_LFN	255		/* Maximum LFN length to handle (12 to 255) */
+#define	_USE_LFN	0		/* 0 to 3 */
+#define	_MAX_LFN	55		/* Maximum LFN length to handle (12 to 255) */
 /* The _USE_LFN option switches the LFN support.
 /
 /   0: Disable LFN feature. _MAX_LFN and _LFN_UNICODE have no effect.

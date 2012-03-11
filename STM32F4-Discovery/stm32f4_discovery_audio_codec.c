@@ -1296,6 +1296,7 @@ uint32_t Codec_TIMEOUT_UserCallback(void)
   while (1)
   {   
   }
+  return 0;
 }
 #endif /* USE_DEFAULT_TIMEOUT_CALLBACK */
 /*========================
@@ -1375,6 +1376,8 @@ static void Audio_MAL_Init(void)
     
 #if defined(AUDIO_MAL_DMA_IT_TC_EN) || defined(AUDIO_MAL_DMA_IT_HT_EN) || defined(AUDIO_MAL_DMA_IT_TE_EN)
     /* I2S DMA IRQ Channel configuration */
+    NVIC_SetPriorityGrouping(NVIC_PriorityGroup_4);		//added for FreeRTOS support in Tansfercomplete callback
+
     NVIC_InitStructure.NVIC_IRQChannel = AUDIO_MAL_DMA_IRQ;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = EVAL_AUDIO_IRQ_PREPRIO;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = EVAL_AUDIO_IRQ_SUBRIO;

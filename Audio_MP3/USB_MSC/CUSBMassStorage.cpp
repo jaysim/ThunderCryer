@@ -11,10 +11,12 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "CUSBMassStorage.h"
+
 #include "FreeRTOS.h"
 #include "semphr.h"
 #include "usbh_usr.h"
 #include "usb_hcd.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -68,7 +70,7 @@ void CUSB_MassStorage::Run(void){
   * @retval status of storage device
   */
 bool CUSB_MassStorage::IsDeviceConnected(void){
-	return (bool)HCD_IsDeviceConnected(&USB_OTG_Core);
+	return HCD_IsDeviceConnected(&USB_OTG_Core);
 }
 
 /**
@@ -79,7 +81,7 @@ bool CUSB_MassStorage::IsDeviceConnected(void){
 bool CUSB_MassStorage::DeviceMounted(void){
 	bool tmp = false;
 	if(semUSBMounted != NULL){
-		if(xSemaphoreTake(semUSBMounted,100/portTICK_RATE_MS)== pdTRUE){
+		if(xSemaphoreTake(semUSBMounted,portMAX_DELAY)== pdTRUE){
 			xSemaphoreGive(semUSBMounted);
 			tmp = true;
 		}
