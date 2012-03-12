@@ -18,10 +18,16 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+static const UINT READBUF_SIZE=MAINBUF_SIZE;
+static const UINT READBUF_THRESHOLD=MAINBUF_SIZE/2-1;	// smaller then half of READBUF_SIZE to ensure no overlap for RefillBuffer
+static const UINT PCM_OUT_SIZE = MAX_NGRAN * MAX_NGRAN * MAX_NSAMP; // max Output from MP3 decoder
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern CUSB_MassStorage g_MSC;
 xSemaphoreHandle semI2SDMAFinished;
+
+static uint8_t  uiReadBuffer[READBUF_SIZE];
+static uint16_t  uiPCMBuffer[2][PCM_OUT_SIZE]; //double Buffering
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -60,10 +66,18 @@ void CFileHandler::Run(){
 	vSemaphoreCreateBinary(semI2SDMAFinished);
 
 	while(1){
-		//wait for USB Stick getting mounted
-		g_MSC.DeviceMounted();
+		/*
+		 * get sem from USB Application layer
+		 * to precess without disturbing USB
+		 */
+		xSemaphoreTake(semUSBApplication,portMAX_DELAY);
 
-		PlayMP3("0:A-Team.mp3");
+		PlayMP3("MacGyver.mp3");
+
+		/*
+		 *Application layer needs to give back the sem when ever possible
+		 */
+		xSemaphoreGive(semUSBApplication);
 
 	}
 }
@@ -139,6 +153,7 @@ bool CFileHandler::PlayMP3(const char * filename){
 			offset = MP3FindSyncWord(ptrReadPosition, uiBytesLeft);
 			if (offset < 0) {
 				// no Sync found in Buffer
+				uiBytesLeft = 0; // discard all data
 				RefillBuffer(); // read data from file
 				break;
 			}
@@ -155,9 +170,10 @@ bool CFileHandler::PlayMP3(const char * filename){
 				/*
 				 * Frame is valid initialize Codec with sample freq.
 				 */
-				EVAL_AUDIO_DeInit();
-				if(EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,mp3FrameInfo.samprate))
-					break; // communication fail
+				portENTER_CRITICAL();
+				//EVAL_AUDIO_DeInit();
+				EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,mp3FrameInfo.samprate);
+				portEXIT_CRITICAL();
 
 				eMP3State = DECODE;
 			}else if(err == 0){

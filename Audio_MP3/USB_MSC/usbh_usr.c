@@ -37,6 +37,7 @@
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 xSemaphoreHandle semUSBMounted;
+xSemaphoreHandle semUSBApplication;
 FATFS fatfs;
 /*  Points to the DEVICE_PROP structure of current device */
 /*  The purpose of this register is to speed up the execution */
@@ -65,6 +66,7 @@ USBH_Usr_cb_TypeDef USR_Callbacks =
 };
 
 /* Private function prototypes -----------------------------------------------*/
+
 /* Private functions ---------------------------------------------------------*/
 
 
@@ -77,6 +79,10 @@ void USBH_USR_Init(void)
 {
 	vSemaphoreCreateBinary(semUSBMounted);
 	xSemaphoreTake(semUSBMounted,0); //Ensure sem is not available
+
+	vSemaphoreCreateBinary(semUSBApplication);
+	xSemaphoreTake(semUSBApplication,0); //Ensure sem is not available
+
 }
 
 /**
@@ -252,12 +258,22 @@ void USBH_USR_OverCurrentDetected (void)
   */
 int USBH_USR_MSC_Application(void)
 {
-
-
-
+	/*
+	 * to syncronise USB Application Layer and File handler
+	 * This Sem is given an so FileHandler woken, when File Handler
+	 * gives the Sem back Usb obtains it an processes
+	 */
+	xSemaphoreGive(semUSBApplication);
+	/*
+	 * ensure task yields
+	 */
+	taskYIELD();
+	/*
+	 * Filehandler Tast is executing
+	 */
+	xSemaphoreTake(semUSBApplication,portMAX_DELAY);
   return(0);
 }
-
 
 /**
   * @brief  USBH_USR_DeInit

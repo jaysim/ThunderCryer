@@ -116,7 +116,7 @@
   67              		.section	.bss.g_FileHandler,"aw",%nobits
   68              		.align	2
   71              	g_FileHandler:
-  72 0000 00000000 		.space	18068
+  72 0000 00000000 		.space	660
   72      00000000 
   72      00000000 
   72      00000000 
@@ -225,37 +225,37 @@
   53:../main.cpp   **** 	 * create Led Heartbeat task with minimal stack size and priority
   54:../main.cpp   **** 	 * 1 higher than idle task
   55:../main.cpp   **** 	 */
-  56:../main.cpp   **** 	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+2);
+  56:../main.cpp   **** 	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+3);
  115              		.loc 2 56 0
  116 0006 40F20000 		movw	r0, #:lower16:g_LedTast
  117 000a C0F20000 		movt	r0, #:upper16:g_LedTast
  118 000e 40F20001 		movw	r1, #:lower16:.LC0
  119 0012 C0F20001 		movt	r1, #:upper16:.LC0
  120 0016 4FF48072 		mov	r2, #256
- 121 001a 4FF00203 		mov	r3, #2
+ 121 001a 4FF00303 		mov	r3, #3
  122 001e FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
-  57:../main.cpp   **** 	g_MSC.Create("USB Massstorage", configMINIMAL_STACK_SIZE *2, tskIDLE_PRIORITY +1);
+  57:../main.cpp   **** 	g_MSC.Create("USB Massstorage", configMINIMAL_STACK_SIZE * 10, tskIDLE_PRIORITY +1);
  123              		.loc 2 57 0
  124 0022 40F20000 		movw	r0, #:lower16:g_MSC
  125 0026 C0F20000 		movt	r0, #:upper16:g_MSC
  126 002a 40F20001 		movw	r1, #:lower16:.LC1
  127 002e C0F20001 		movt	r1, #:upper16:.LC1
- 128 0032 4FF40072 		mov	r2, #512
+ 128 0032 4FF42062 		mov	r2, #2560
  129 0036 4FF00103 		mov	r3, #1
  130 003a FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
   58:../main.cpp   **** 	//g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
-  59:../main.cpp   **** 	g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 10,tskIDLE_PRIORITY+1);
+  59:../main.cpp   **** 	g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 20,tskIDLE_PRIORITY+1);
  131              		.loc 2 59 0
  132 003e 40F20000 		movw	r0, #:lower16:g_FileHandler
  133 0042 C0F20000 		movt	r0, #:upper16:g_FileHandler
  134 0046 40F20001 		movw	r1, #:lower16:.LC2
  135 004a C0F20001 		movt	r1, #:upper16:.LC2
- 136 004e 4FF42062 		mov	r2, #2560
+ 136 004e 4FF4A052 		mov	r2, #5120
  137 0052 4FF00103 		mov	r3, #1
  138 0056 FFF7FEFF 		bl	_ZN12AManagedTask6CreateEPKctm
   60:../main.cpp   **** 
   61:../main.cpp   **** 	/**
-  62:../main.cpp   **** 	 * Initialise the hardware for all Tasks and
+  62:../main.cpp   **** 	 * Initialize the hardware for all Tasks and
   63:../main.cpp   **** 	 * then FreeRTOS takes control of execution
   64:../main.cpp   **** 	 */
   65:../main.cpp   **** 	CFreeRTOS::InitHardwareForManagedTasks();
@@ -567,45 +567,43 @@
  409              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
  410              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
  411              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/CGraphicLCD.h"
- 412              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\Audio_MP3\\FatFs\\src/integer.h"
- 413              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
- 414              		.file 9 "E:\\Desktop\\thundercyer-the-alarm-clock\\Audio_MP3/CFileHandler.h"
- 415              		.file 10 "E:\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/CT6963CDriver.h"
+ 412              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 413              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/CT6963CDriver.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.cpp
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:50     .bss.g_LedTast:00000000 g_LedTast
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:47     .bss.g_LedTast:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:57     .bss.g_Display:00000000 g_Display
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:54     .bss.g_Display:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:64     .bss.g_Menue:00000000 g_Menue
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:61     .bss.g_Menue:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:71     .bss.g_FileHandler:00000000 g_FileHandler
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:68     .bss.g_FileHandler:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:78     .bss.g_MSC:00000000 g_MSC
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:75     .bss.g_MSC:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:81     .rodata:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:82     .rodata:00000000 .LC0
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:85     .rodata:00000010 .LC1
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:88     .rodata:00000020 .LC2
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:91     .text.main:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:96     .text.main:00000000 main
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:155    .text.vApplicationTickHook:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:160    .text.vApplicationTickHook:00000000 vApplicationTickHook
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:182    .text.vApplicationIdleHook:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:187    .text.vApplicationIdleHook:00000000 vApplicationIdleHook
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:209    .text.vApplicationMallocFailedHook:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:214    .text.vApplicationMallocFailedHook:00000000 vApplicationMallocFailedHook
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:236    .text.vApplicationStackOverflowHook:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:241    .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:267    .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:271    .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:371    .rodata._ZL12c_FontNative:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:374    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:377    .text._GLOBAL__sub_I_g_LedTast:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:381    .text._GLOBAL__sub_I_g_LedTast:00000000 _GLOBAL__sub_I_g_LedTast
-C:\Users\Alex\AppData\Local\Temp\ccm7dPrg.s:404    .init_array:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:50     .bss.g_LedTast:00000000 g_LedTast
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:47     .bss.g_LedTast:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:57     .bss.g_Display:00000000 g_Display
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:54     .bss.g_Display:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:64     .bss.g_Menue:00000000 g_Menue
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:61     .bss.g_Menue:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:71     .bss.g_FileHandler:00000000 g_FileHandler
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:68     .bss.g_FileHandler:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:78     .bss.g_MSC:00000000 g_MSC
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:75     .bss.g_MSC:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:81     .rodata:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:82     .rodata:00000000 .LC0
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:85     .rodata:00000010 .LC1
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:88     .rodata:00000020 .LC2
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:91     .text.main:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:96     .text.main:00000000 main
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:155    .text.vApplicationTickHook:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:160    .text.vApplicationTickHook:00000000 vApplicationTickHook
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:182    .text.vApplicationIdleHook:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:187    .text.vApplicationIdleHook:00000000 vApplicationIdleHook
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:209    .text.vApplicationMallocFailedHook:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:214    .text.vApplicationMallocFailedHook:00000000 vApplicationMallocFailedHook
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:236    .text.vApplicationStackOverflowHook:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:241    .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:267    .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:271    .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:371    .rodata._ZL12c_FontNative:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:374    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:377    .text._GLOBAL__sub_I_g_LedTast:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:381    .text._GLOBAL__sub_I_g_LedTast:00000000 _GLOBAL__sub_I_g_LedTast
+C:\Users\Alex\AppData\Local\Temp\ccyeKotc.s:404    .init_array:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

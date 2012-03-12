@@ -32,8 +32,8 @@ typedef enum {
 }ePlayMP3State;
 
 typedef enum{
-	BUFFER_1,
-	BUFFER_2
+	BUFFER_1=0,
+	BUFFER_2=1
 }eBufferSelect;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -46,17 +46,12 @@ typedef enum{
  */
 class CFileHandler: public AManagedTask{
 private:
-	static const UINT READBUF_SIZE=8192;
-	static const UINT READBUF_THRESHOLD=4095;	// smaller then half of READBUF_SIZE to ensure no overlap for RefillBuffer
-	static const UINT PCM_OUT_SIZE = MAX_NGRAN * MAX_NGRAN * MAX_NSAMP; // max Output from MP3 decoder
+
 
 	FRESULT fsresult;               //return code for file related operations
 	FIL file;                     	//file object
 	DIR dir;						//directory object
 	FILINFO fileInfo;
-
-	uint8_t  uiReadBuffer[READBUF_SIZE];
-	uint16_t  uiPCMBuffer[2][PCM_OUT_SIZE]; //double Buffering
 
 	ePlayMP3State eMP3State;
 	eBufferSelect eBuffer;

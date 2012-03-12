@@ -43,6 +43,7 @@
 /* Exported variables --------------------------------------------------------*/
 extern  USBH_Usr_cb_TypeDef USR_Callbacks;
 extern xSemaphoreHandle semUSBMounted;
+extern xSemaphoreHandle semUSBApplication;
 extern FATFS fatfs;
 /* Exported functions ------------------------------------------------------- */ 
 void USBH_USR_Init(void);
