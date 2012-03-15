@@ -10,18 +10,21 @@ int zlow;
 __asm__ volatile ("smull %0,%1,%2,%3" : "=&r" (zlow), "=r" (y) : "r" (x), "1" (y) : "cc");
 return y;
 }
-/*
+
 static __inline short CLIPTOSHORT(int x)
 {
-int sign;
-*/
-/* clip to [-32768, 32767] *//*
-sign = x >> 31;
-if (sign != (x >> 15))
-x = sign ^ ((1 <
+	int sign;
+
+	/* assumes you've already rounded (x += (1 << (fracBits-1))) */
+	x >>= 31;
+
+	/* Ken's trick: clips to [-32768, 32767] */
+	sign = x >> 31;
+	if (sign != (x >> 15))
+		x = sign ^ ((1 << 15) - 1);
 
 	return (short)x;
-}*/
+}
 
 static __inline int FASTABS(int x)
 {

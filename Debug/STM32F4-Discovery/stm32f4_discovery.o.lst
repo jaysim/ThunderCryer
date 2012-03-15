@@ -75,7 +75,7 @@
   95              	BUTTON_IRQn:
   96 0000 06       		.byte	6
   97              		.comm	NVIC_InitStructure,4,4
-  98 0001 000000   		.section	.text.STM_EVAL_LEDInit,"ax",%progbits
+  98 0001 000000   		.text
   99              		.align	2
  100              		.global	STM_EVAL_LEDInit
  101              		.thumb
@@ -271,13 +271,12 @@
  162 006a 80BD     		pop	{r7, pc}
  163              		.cfi_endproc
  164              	.LFE110:
- 166              		.section	.text.STM_EVAL_LEDOn,"ax",%progbits
- 167              		.align	2
- 168              		.global	STM_EVAL_LEDOn
- 169              		.thumb
- 170              		.thumb_func
- 172              	STM_EVAL_LEDOn:
- 173              	.LFB111:
+ 166              		.align	2
+ 167              		.global	STM_EVAL_LEDOn
+ 168              		.thumb
+ 169              		.thumb_func
+ 171              	STM_EVAL_LEDOn:
+ 172              	.LFB111:
  131:../STM32F4-Discovery/stm32f4_discovery.c **** 
  132:../STM32F4-Discovery/stm32f4_discovery.c **** /**
  133:../STM32F4-Discovery/stm32f4_discovery.c ****   * @brief  Turns selected LED On.
@@ -291,49 +290,48 @@
  141:../STM32F4-Discovery/stm32f4_discovery.c ****   */
  142:../STM32F4-Discovery/stm32f4_discovery.c **** void STM_EVAL_LEDOn(Led_TypeDef Led)
  143:../STM32F4-Discovery/stm32f4_discovery.c **** {
- 174              		.loc 1 143 0
- 175              		.cfi_startproc
- 176              		@ args = 0, pretend = 0, frame = 8
- 177              		@ frame_needed = 1, uses_anonymous_args = 0
- 178              		@ link register save eliminated.
- 179 0000 80B4     		push	{r7}
- 180              	.LCFI3:
- 181              		.cfi_def_cfa_offset 4
- 182              		.cfi_offset 7, -4
- 183 0002 83B0     		sub	sp, sp, #12
- 184              	.LCFI4:
- 185              		.cfi_def_cfa_offset 16
- 186 0004 00AF     		add	r7, sp, #0
- 187              	.LCFI5:
- 188              		.cfi_def_cfa_register 7
- 189 0006 0346     		mov	r3, r0
- 190 0008 FB71     		strb	r3, [r7, #7]
+ 173              		.loc 1 143 0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 8
+ 176              		@ frame_needed = 1, uses_anonymous_args = 0
+ 177              		@ link register save eliminated.
+ 178 006c 80B4     		push	{r7}
+ 179              	.LCFI3:
+ 180              		.cfi_def_cfa_offset 4
+ 181              		.cfi_offset 7, -4
+ 182 006e 83B0     		sub	sp, sp, #12
+ 183              	.LCFI4:
+ 184              		.cfi_def_cfa_offset 16
+ 185 0070 00AF     		add	r7, sp, #0
+ 186              	.LCFI5:
+ 187              		.cfi_def_cfa_register 7
+ 188 0072 0346     		mov	r3, r0
+ 189 0074 FB71     		strb	r3, [r7, #7]
  144:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_PORT[Led]->BSRRL = GPIO_PIN[Led];
- 191              		.loc 1 144 0
- 192 000a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 193 000c 40F20003 		movw	r3, #:lower16:GPIO_PORT
- 194 0010 C0F20003 		movt	r3, #:upper16:GPIO_PORT
- 195 0014 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 196 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
- 197 001a 40F20003 		movw	r3, #:lower16:GPIO_PIN
- 198 001e C0F20003 		movt	r3, #:upper16:GPIO_PIN
- 199 0022 33F81130 		ldrh	r3, [r3, r1, lsl #1]
- 200 0026 1383     		strh	r3, [r2, #24]	@ movhi
+ 190              		.loc 1 144 0
+ 191 0076 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 192 0078 40F20003 		movw	r3, #:lower16:GPIO_PORT
+ 193 007c C0F20003 		movt	r3, #:upper16:GPIO_PORT
+ 194 0080 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 195 0084 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 196 0086 40F20003 		movw	r3, #:lower16:GPIO_PIN
+ 197 008a C0F20003 		movt	r3, #:upper16:GPIO_PIN
+ 198 008e 33F81130 		ldrh	r3, [r3, r1, lsl #1]
+ 199 0092 1383     		strh	r3, [r2, #24]	@ movhi
  145:../STM32F4-Discovery/stm32f4_discovery.c **** }
- 201              		.loc 1 145 0
- 202 0028 07F10C07 		add	r7, r7, #12
- 203 002c BD46     		mov	sp, r7
- 204 002e 80BC     		pop	{r7}
- 205 0030 7047     		bx	lr
- 206              		.cfi_endproc
- 207              	.LFE111:
- 209 0032 00BF     		.section	.text.STM_EVAL_LEDOff,"ax",%progbits
- 210              		.align	2
- 211              		.global	STM_EVAL_LEDOff
- 212              		.thumb
- 213              		.thumb_func
- 215              	STM_EVAL_LEDOff:
- 216              	.LFB112:
+ 200              		.loc 1 145 0
+ 201 0094 07F10C07 		add	r7, r7, #12
+ 202 0098 BD46     		mov	sp, r7
+ 203 009a 80BC     		pop	{r7}
+ 204 009c 7047     		bx	lr
+ 205              		.cfi_endproc
+ 206              	.LFE111:
+ 208 009e 00BF     		.align	2
+ 209              		.global	STM_EVAL_LEDOff
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	STM_EVAL_LEDOff:
+ 214              	.LFB112:
  146:../STM32F4-Discovery/stm32f4_discovery.c **** 
  147:../STM32F4-Discovery/stm32f4_discovery.c **** /**
  148:../STM32F4-Discovery/stm32f4_discovery.c ****   * @brief  Turns selected LED Off.
@@ -347,49 +345,48 @@
  156:../STM32F4-Discovery/stm32f4_discovery.c ****   */
  157:../STM32F4-Discovery/stm32f4_discovery.c **** void STM_EVAL_LEDOff(Led_TypeDef Led)
  158:../STM32F4-Discovery/stm32f4_discovery.c **** {
- 217              		.loc 1 158 0
- 218              		.cfi_startproc
- 219              		@ args = 0, pretend = 0, frame = 8
- 220              		@ frame_needed = 1, uses_anonymous_args = 0
- 221              		@ link register save eliminated.
- 222 0000 80B4     		push	{r7}
- 223              	.LCFI6:
- 224              		.cfi_def_cfa_offset 4
- 225              		.cfi_offset 7, -4
- 226 0002 83B0     		sub	sp, sp, #12
- 227              	.LCFI7:
- 228              		.cfi_def_cfa_offset 16
- 229 0004 00AF     		add	r7, sp, #0
- 230              	.LCFI8:
- 231              		.cfi_def_cfa_register 7
- 232 0006 0346     		mov	r3, r0
- 233 0008 FB71     		strb	r3, [r7, #7]
+ 215              		.loc 1 158 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 8
+ 218              		@ frame_needed = 1, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 220 00a0 80B4     		push	{r7}
+ 221              	.LCFI6:
+ 222              		.cfi_def_cfa_offset 4
+ 223              		.cfi_offset 7, -4
+ 224 00a2 83B0     		sub	sp, sp, #12
+ 225              	.LCFI7:
+ 226              		.cfi_def_cfa_offset 16
+ 227 00a4 00AF     		add	r7, sp, #0
+ 228              	.LCFI8:
+ 229              		.cfi_def_cfa_register 7
+ 230 00a6 0346     		mov	r3, r0
+ 231 00a8 FB71     		strb	r3, [r7, #7]
  159:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_PORT[Led]->BSRRH = GPIO_PIN[Led];  
- 234              		.loc 1 159 0
- 235 000a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 236 000c 40F20003 		movw	r3, #:lower16:GPIO_PORT
- 237 0010 C0F20003 		movt	r3, #:upper16:GPIO_PORT
- 238 0014 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 239 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
- 240 001a 40F20003 		movw	r3, #:lower16:GPIO_PIN
- 241 001e C0F20003 		movt	r3, #:upper16:GPIO_PIN
- 242 0022 33F81130 		ldrh	r3, [r3, r1, lsl #1]
- 243 0026 5383     		strh	r3, [r2, #26]	@ movhi
+ 232              		.loc 1 159 0
+ 233 00aa FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 234 00ac 40F20003 		movw	r3, #:lower16:GPIO_PORT
+ 235 00b0 C0F20003 		movt	r3, #:upper16:GPIO_PORT
+ 236 00b4 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 237 00b8 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 238 00ba 40F20003 		movw	r3, #:lower16:GPIO_PIN
+ 239 00be C0F20003 		movt	r3, #:upper16:GPIO_PIN
+ 240 00c2 33F81130 		ldrh	r3, [r3, r1, lsl #1]
+ 241 00c6 5383     		strh	r3, [r2, #26]	@ movhi
  160:../STM32F4-Discovery/stm32f4_discovery.c **** }
- 244              		.loc 1 160 0
- 245 0028 07F10C07 		add	r7, r7, #12
- 246 002c BD46     		mov	sp, r7
- 247 002e 80BC     		pop	{r7}
- 248 0030 7047     		bx	lr
- 249              		.cfi_endproc
- 250              	.LFE112:
- 252 0032 00BF     		.section	.text.STM_EVAL_LEDToggle,"ax",%progbits
- 253              		.align	2
- 254              		.global	STM_EVAL_LEDToggle
- 255              		.thumb
- 256              		.thumb_func
- 258              	STM_EVAL_LEDToggle:
- 259              	.LFB113:
+ 242              		.loc 1 160 0
+ 243 00c8 07F10C07 		add	r7, r7, #12
+ 244 00cc BD46     		mov	sp, r7
+ 245 00ce 80BC     		pop	{r7}
+ 246 00d0 7047     		bx	lr
+ 247              		.cfi_endproc
+ 248              	.LFE112:
+ 250 00d2 00BF     		.align	2
+ 251              		.global	STM_EVAL_LEDToggle
+ 252              		.thumb
+ 253              		.thumb_func
+ 255              	STM_EVAL_LEDToggle:
+ 256              	.LFB113:
  161:../STM32F4-Discovery/stm32f4_discovery.c **** 
  162:../STM32F4-Discovery/stm32f4_discovery.c **** /**
  163:../STM32F4-Discovery/stm32f4_discovery.c ****   * @brief  Toggles the selected LED.
@@ -403,56 +400,55 @@
  171:../STM32F4-Discovery/stm32f4_discovery.c ****   */
  172:../STM32F4-Discovery/stm32f4_discovery.c **** void STM_EVAL_LEDToggle(Led_TypeDef Led)
  173:../STM32F4-Discovery/stm32f4_discovery.c **** {
- 260              		.loc 1 173 0
- 261              		.cfi_startproc
- 262              		@ args = 0, pretend = 0, frame = 8
- 263              		@ frame_needed = 1, uses_anonymous_args = 0
- 264              		@ link register save eliminated.
- 265 0000 80B4     		push	{r7}
- 266              	.LCFI9:
- 267              		.cfi_def_cfa_offset 4
- 268              		.cfi_offset 7, -4
- 269 0002 83B0     		sub	sp, sp, #12
- 270              	.LCFI10:
- 271              		.cfi_def_cfa_offset 16
- 272 0004 00AF     		add	r7, sp, #0
- 273              	.LCFI11:
- 274              		.cfi_def_cfa_register 7
- 275 0006 0346     		mov	r3, r0
- 276 0008 FB71     		strb	r3, [r7, #7]
+ 257              		.loc 1 173 0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 8
+ 260              		@ frame_needed = 1, uses_anonymous_args = 0
+ 261              		@ link register save eliminated.
+ 262 00d4 80B4     		push	{r7}
+ 263              	.LCFI9:
+ 264              		.cfi_def_cfa_offset 4
+ 265              		.cfi_offset 7, -4
+ 266 00d6 83B0     		sub	sp, sp, #12
+ 267              	.LCFI10:
+ 268              		.cfi_def_cfa_offset 16
+ 269 00d8 00AF     		add	r7, sp, #0
+ 270              	.LCFI11:
+ 271              		.cfi_def_cfa_register 7
+ 272 00da 0346     		mov	r3, r0
+ 273 00dc FB71     		strb	r3, [r7, #7]
  174:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_PORT[Led]->ODR ^= GPIO_PIN[Led];
- 277              		.loc 1 174 0
- 278 000a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 279 000c 40F20003 		movw	r3, #:lower16:GPIO_PORT
- 280 0010 C0F20003 		movt	r3, #:upper16:GPIO_PORT
- 281 0014 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 282 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
- 283 001a 40F20003 		movw	r3, #:lower16:GPIO_PORT
- 284 001e C0F20003 		movt	r3, #:upper16:GPIO_PORT
- 285 0022 53F82130 		ldr	r3, [r3, r1, lsl #2]
- 286 0026 5B69     		ldr	r3, [r3, #20]
- 287 0028 1946     		mov	r1, r3
- 288 002a F879     		ldrb	r0, [r7, #7]	@ zero_extendqisi2
- 289 002c 40F20003 		movw	r3, #:lower16:GPIO_PIN
- 290 0030 C0F20003 		movt	r3, #:upper16:GPIO_PIN
- 291 0034 33F81030 		ldrh	r3, [r3, r0, lsl #1]
- 292 0038 4B40     		eors	r3, r3, r1
- 293 003a 5361     		str	r3, [r2, #20]
+ 274              		.loc 1 174 0
+ 275 00de FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 276 00e0 40F20003 		movw	r3, #:lower16:GPIO_PORT
+ 277 00e4 C0F20003 		movt	r3, #:upper16:GPIO_PORT
+ 278 00e8 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 279 00ec F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 280 00ee 40F20003 		movw	r3, #:lower16:GPIO_PORT
+ 281 00f2 C0F20003 		movt	r3, #:upper16:GPIO_PORT
+ 282 00f6 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 283 00fa 5B69     		ldr	r3, [r3, #20]
+ 284 00fc 1946     		mov	r1, r3
+ 285 00fe F879     		ldrb	r0, [r7, #7]	@ zero_extendqisi2
+ 286 0100 40F20003 		movw	r3, #:lower16:GPIO_PIN
+ 287 0104 C0F20003 		movt	r3, #:upper16:GPIO_PIN
+ 288 0108 33F81030 		ldrh	r3, [r3, r0, lsl #1]
+ 289 010c 4B40     		eors	r3, r3, r1
+ 290 010e 5361     		str	r3, [r2, #20]
  175:../STM32F4-Discovery/stm32f4_discovery.c **** }
- 294              		.loc 1 175 0
- 295 003c 07F10C07 		add	r7, r7, #12
- 296 0040 BD46     		mov	sp, r7
- 297 0042 80BC     		pop	{r7}
- 298 0044 7047     		bx	lr
- 299              		.cfi_endproc
- 300              	.LFE113:
- 302              		.section	.text.STM_EVAL_PBInit,"ax",%progbits
- 303              		.align	2
- 304              		.global	STM_EVAL_PBInit
- 305              		.thumb
- 306              		.thumb_func
- 308              	STM_EVAL_PBInit:
- 309              	.LFB114:
+ 291              		.loc 1 175 0
+ 292 0110 07F10C07 		add	r7, r7, #12
+ 293 0114 BD46     		mov	sp, r7
+ 294 0116 80BC     		pop	{r7}
+ 295 0118 7047     		bx	lr
+ 296              		.cfi_endproc
+ 297              	.LFE113:
+ 299 011a 00BF     		.align	2
+ 300              		.global	STM_EVAL_PBInit
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	STM_EVAL_PBInit:
+ 305              	.LFB114:
  176:../STM32F4-Discovery/stm32f4_discovery.c **** 
  177:../STM32F4-Discovery/stm32f4_discovery.c **** /**
  178:../STM32F4-Discovery/stm32f4_discovery.c ****   * @brief  Configures Button GPIO and EXTI Line.
@@ -467,161 +463,160 @@
  187:../STM32F4-Discovery/stm32f4_discovery.c ****   */
  188:../STM32F4-Discovery/stm32f4_discovery.c **** void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
  189:../STM32F4-Discovery/stm32f4_discovery.c **** {
- 310              		.loc 1 189 0
- 311              		.cfi_startproc
- 312              		@ args = 0, pretend = 0, frame = 32
- 313              		@ frame_needed = 1, uses_anonymous_args = 0
- 314 0000 80B5     		push	{r7, lr}
- 315              	.LCFI12:
- 316              		.cfi_def_cfa_offset 8
- 317              		.cfi_offset 14, -4
- 318              		.cfi_offset 7, -8
- 319 0002 88B0     		sub	sp, sp, #32
- 320              	.LCFI13:
- 321              		.cfi_def_cfa_offset 40
- 322 0004 00AF     		add	r7, sp, #0
- 323              	.LCFI14:
- 324              		.cfi_def_cfa_register 7
- 325 0006 0246     		mov	r2, r0
- 326 0008 0B46     		mov	r3, r1
- 327 000a FA71     		strb	r2, [r7, #7]
- 328 000c BB71     		strb	r3, [r7, #6]
+ 306              		.loc 1 189 0
+ 307              		.cfi_startproc
+ 308              		@ args = 0, pretend = 0, frame = 32
+ 309              		@ frame_needed = 1, uses_anonymous_args = 0
+ 310 011c 80B5     		push	{r7, lr}
+ 311              	.LCFI12:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 14, -4
+ 314              		.cfi_offset 7, -8
+ 315 011e 88B0     		sub	sp, sp, #32
+ 316              	.LCFI13:
+ 317              		.cfi_def_cfa_offset 40
+ 318 0120 00AF     		add	r7, sp, #0
+ 319              	.LCFI14:
+ 320              		.cfi_def_cfa_register 7
+ 321 0122 0246     		mov	r2, r0
+ 322 0124 0B46     		mov	r3, r1
+ 323 0126 FA71     		strb	r2, [r7, #7]
+ 324 0128 BB71     		strb	r3, [r7, #6]
  190:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_InitTypeDef GPIO_InitStructure;
  191:../STM32F4-Discovery/stm32f4_discovery.c ****   EXTI_InitTypeDef EXTI_InitStructure;
  192:../STM32F4-Discovery/stm32f4_discovery.c ****   NVIC_InitTypeDef NVIC_InitStructure;
  193:../STM32F4-Discovery/stm32f4_discovery.c **** 
  194:../STM32F4-Discovery/stm32f4_discovery.c ****   /* Enable the BUTTON Clock */
  195:../STM32F4-Discovery/stm32f4_discovery.c ****   RCC_AHB1PeriphClockCmd(BUTTON_CLK[Button], ENABLE);
- 329              		.loc 1 195 0
- 330 000e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 331 0010 40F20003 		movw	r3, #:lower16:BUTTON_CLK
- 332 0014 C0F20003 		movt	r3, #:upper16:BUTTON_CLK
- 333 0018 53F82230 		ldr	r3, [r3, r2, lsl #2]
- 334 001c 1846     		mov	r0, r3
- 335 001e 4FF00101 		mov	r1, #1
- 336 0022 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 325              		.loc 1 195 0
+ 326 012a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 327 012c 40F20003 		movw	r3, #:lower16:BUTTON_CLK
+ 328 0130 C0F20003 		movt	r3, #:upper16:BUTTON_CLK
+ 329 0134 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 330 0138 1846     		mov	r0, r3
+ 331 013a 4FF00101 		mov	r1, #1
+ 332 013e FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
  196:../STM32F4-Discovery/stm32f4_discovery.c ****   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
- 337              		.loc 1 196 0
- 338 0026 4FF48040 		mov	r0, #16384
- 339 002a 4FF00101 		mov	r1, #1
- 340 002e FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+ 333              		.loc 1 196 0
+ 334 0142 4FF48040 		mov	r0, #16384
+ 335 0146 4FF00101 		mov	r1, #1
+ 336 014a FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
  197:../STM32F4-Discovery/stm32f4_discovery.c **** 
  198:../STM32F4-Discovery/stm32f4_discovery.c ****   /* Configure Button pin as input */
  199:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
- 341              		.loc 1 199 0
- 342 0032 4FF00003 		mov	r3, #0
- 343 0036 3B77     		strb	r3, [r7, #28]
+ 337              		.loc 1 199 0
+ 338 014e 4FF00003 		mov	r3, #0
+ 339 0152 3B77     		strb	r3, [r7, #28]
  200:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
- 344              		.loc 1 200 0
- 345 0038 4FF00003 		mov	r3, #0
- 346 003c FB77     		strb	r3, [r7, #31]
+ 340              		.loc 1 200 0
+ 341 0154 4FF00003 		mov	r3, #0
+ 342 0158 FB77     		strb	r3, [r7, #31]
  201:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_InitStructure.GPIO_Pin = BUTTON_PIN[Button];
- 347              		.loc 1 201 0
- 348 003e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 349 0040 40F20003 		movw	r3, #:lower16:BUTTON_PIN
- 350 0044 C0F20003 		movt	r3, #:upper16:BUTTON_PIN
- 351 0048 33F81230 		ldrh	r3, [r3, r2, lsl #1]
- 352 004c BB61     		str	r3, [r7, #24]
+ 343              		.loc 1 201 0
+ 344 015a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 345 015c 40F20003 		movw	r3, #:lower16:BUTTON_PIN
+ 346 0160 C0F20003 		movt	r3, #:upper16:BUTTON_PIN
+ 347 0164 33F81230 		ldrh	r3, [r3, r2, lsl #1]
+ 348 0168 BB61     		str	r3, [r7, #24]
  202:../STM32F4-Discovery/stm32f4_discovery.c ****   GPIO_Init(BUTTON_PORT[Button], &GPIO_InitStructure);
- 353              		.loc 1 202 0
- 354 004e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 355 0050 40F20003 		movw	r3, #:lower16:BUTTON_PORT
- 356 0054 C0F20003 		movt	r3, #:upper16:BUTTON_PORT
- 357 0058 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 358 005c 07F11803 		add	r3, r7, #24
- 359 0060 1046     		mov	r0, r2
- 360 0062 1946     		mov	r1, r3
- 361 0064 FFF7FEFF 		bl	GPIO_Init
+ 349              		.loc 1 202 0
+ 350 016a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 351 016c 40F20003 		movw	r3, #:lower16:BUTTON_PORT
+ 352 0170 C0F20003 		movt	r3, #:upper16:BUTTON_PORT
+ 353 0174 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 354 0178 07F11803 		add	r3, r7, #24
+ 355 017c 1046     		mov	r0, r2
+ 356 017e 1946     		mov	r1, r3
+ 357 0180 FFF7FEFF 		bl	GPIO_Init
  203:../STM32F4-Discovery/stm32f4_discovery.c **** 
  204:../STM32F4-Discovery/stm32f4_discovery.c ****   if (Button_Mode == BUTTON_MODE_EXTI)
- 362              		.loc 1 204 0
- 363 0068 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 364 006a 012B     		cmp	r3, #1
- 365 006c 3AD1     		bne	.L5
+ 358              		.loc 1 204 0
+ 359 0184 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 360 0186 012B     		cmp	r3, #1
+ 361 0188 3AD1     		bne	.L5
  205:../STM32F4-Discovery/stm32f4_discovery.c ****   {
  206:../STM32F4-Discovery/stm32f4_discovery.c ****     /* Connect Button EXTI Line to Button GPIO Pin */
  207:../STM32F4-Discovery/stm32f4_discovery.c ****     SYSCFG_EXTILineConfig(BUTTON_PORT_SOURCE[Button], BUTTON_PIN_SOURCE[Button]);
- 366              		.loc 1 207 0
- 367 006e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 368 0070 40F20003 		movw	r3, #:lower16:BUTTON_PORT_SOURCE
- 369 0074 C0F20003 		movt	r3, #:upper16:BUTTON_PORT_SOURCE
- 370 0078 9A5C     		ldrb	r2, [r3, r2]	@ zero_extendqisi2
- 371 007a F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
- 372 007c 40F20003 		movw	r3, #:lower16:BUTTON_PIN_SOURCE
- 373 0080 C0F20003 		movt	r3, #:upper16:BUTTON_PIN_SOURCE
- 374 0084 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
- 375 0086 1046     		mov	r0, r2
- 376 0088 1946     		mov	r1, r3
- 377 008a FFF7FEFF 		bl	SYSCFG_EXTILineConfig
+ 362              		.loc 1 207 0
+ 363 018a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 364 018c 40F20003 		movw	r3, #:lower16:BUTTON_PORT_SOURCE
+ 365 0190 C0F20003 		movt	r3, #:upper16:BUTTON_PORT_SOURCE
+ 366 0194 9A5C     		ldrb	r2, [r3, r2]	@ zero_extendqisi2
+ 367 0196 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 368 0198 40F20003 		movw	r3, #:lower16:BUTTON_PIN_SOURCE
+ 369 019c C0F20003 		movt	r3, #:upper16:BUTTON_PIN_SOURCE
+ 370 01a0 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
+ 371 01a2 1046     		mov	r0, r2
+ 372 01a4 1946     		mov	r1, r3
+ 373 01a6 FFF7FEFF 		bl	SYSCFG_EXTILineConfig
  208:../STM32F4-Discovery/stm32f4_discovery.c **** 
  209:../STM32F4-Discovery/stm32f4_discovery.c ****     /* Configure Button EXTI line */
  210:../STM32F4-Discovery/stm32f4_discovery.c ****     EXTI_InitStructure.EXTI_Line = BUTTON_EXTI_LINE[Button];
- 378              		.loc 1 210 0
- 379 008e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 380 0090 40F20003 		movw	r3, #:lower16:BUTTON_EXTI_LINE
- 381 0094 C0F20003 		movt	r3, #:upper16:BUTTON_EXTI_LINE
- 382 0098 33F81230 		ldrh	r3, [r3, r2, lsl #1]
- 383 009c 3B61     		str	r3, [r7, #16]
+ 374              		.loc 1 210 0
+ 375 01aa FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 376 01ac 40F20003 		movw	r3, #:lower16:BUTTON_EXTI_LINE
+ 377 01b0 C0F20003 		movt	r3, #:upper16:BUTTON_EXTI_LINE
+ 378 01b4 33F81230 		ldrh	r3, [r3, r2, lsl #1]
+ 379 01b8 3B61     		str	r3, [r7, #16]
  211:../STM32F4-Discovery/stm32f4_discovery.c ****     EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
- 384              		.loc 1 211 0
- 385 009e 4FF00003 		mov	r3, #0
- 386 00a2 3B75     		strb	r3, [r7, #20]
+ 380              		.loc 1 211 0
+ 381 01ba 4FF00003 		mov	r3, #0
+ 382 01be 3B75     		strb	r3, [r7, #20]
  212:../STM32F4-Discovery/stm32f4_discovery.c ****     EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;  
- 387              		.loc 1 212 0
- 388 00a4 4FF00803 		mov	r3, #8
- 389 00a8 7B75     		strb	r3, [r7, #21]
+ 383              		.loc 1 212 0
+ 384 01c0 4FF00803 		mov	r3, #8
+ 385 01c4 7B75     		strb	r3, [r7, #21]
  213:../STM32F4-Discovery/stm32f4_discovery.c ****     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
- 390              		.loc 1 213 0
- 391 00aa 4FF00103 		mov	r3, #1
- 392 00ae BB75     		strb	r3, [r7, #22]
+ 386              		.loc 1 213 0
+ 387 01c6 4FF00103 		mov	r3, #1
+ 388 01ca BB75     		strb	r3, [r7, #22]
  214:../STM32F4-Discovery/stm32f4_discovery.c ****     EXTI_Init(&EXTI_InitStructure);
- 393              		.loc 1 214 0
- 394 00b0 07F11003 		add	r3, r7, #16
- 395 00b4 1846     		mov	r0, r3
- 396 00b6 FFF7FEFF 		bl	EXTI_Init
+ 389              		.loc 1 214 0
+ 390 01cc 07F11003 		add	r3, r7, #16
+ 391 01d0 1846     		mov	r0, r3
+ 392 01d2 FFF7FEFF 		bl	EXTI_Init
  215:../STM32F4-Discovery/stm32f4_discovery.c **** 
  216:../STM32F4-Discovery/stm32f4_discovery.c ****     /* Enable and set Button EXTI Interrupt to the lowest priority */
  217:../STM32F4-Discovery/stm32f4_discovery.c ****     NVIC_InitStructure.NVIC_IRQChannel = BUTTON_IRQn[Button];
- 397              		.loc 1 217 0
- 398 00ba FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 399 00bc 40F20003 		movw	r3, #:lower16:BUTTON_IRQn
- 400 00c0 C0F20003 		movt	r3, #:upper16:BUTTON_IRQn
- 401 00c4 9B5C     		ldrb	r3, [r3, r2]	@ zero_extendqisi2
- 402 00c6 3B73     		strb	r3, [r7, #12]
+ 393              		.loc 1 217 0
+ 394 01d6 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 395 01d8 40F20003 		movw	r3, #:lower16:BUTTON_IRQn
+ 396 01dc C0F20003 		movt	r3, #:upper16:BUTTON_IRQn
+ 397 01e0 9B5C     		ldrb	r3, [r3, r2]	@ zero_extendqisi2
+ 398 01e2 3B73     		strb	r3, [r7, #12]
  218:../STM32F4-Discovery/stm32f4_discovery.c ****     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
- 403              		.loc 1 218 0
- 404 00c8 4FF00F03 		mov	r3, #15
- 405 00cc 7B73     		strb	r3, [r7, #13]
+ 399              		.loc 1 218 0
+ 400 01e4 4FF00F03 		mov	r3, #15
+ 401 01e8 7B73     		strb	r3, [r7, #13]
  219:../STM32F4-Discovery/stm32f4_discovery.c ****     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
- 406              		.loc 1 219 0
- 407 00ce 4FF00F03 		mov	r3, #15
- 408 00d2 BB73     		strb	r3, [r7, #14]
+ 402              		.loc 1 219 0
+ 403 01ea 4FF00F03 		mov	r3, #15
+ 404 01ee BB73     		strb	r3, [r7, #14]
  220:../STM32F4-Discovery/stm32f4_discovery.c ****     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
- 409              		.loc 1 220 0
- 410 00d4 4FF00103 		mov	r3, #1
- 411 00d8 FB73     		strb	r3, [r7, #15]
+ 405              		.loc 1 220 0
+ 406 01f0 4FF00103 		mov	r3, #1
+ 407 01f4 FB73     		strb	r3, [r7, #15]
  221:../STM32F4-Discovery/stm32f4_discovery.c **** 
  222:../STM32F4-Discovery/stm32f4_discovery.c ****     NVIC_Init(&NVIC_InitStructure); 
- 412              		.loc 1 222 0
- 413 00da 07F10C03 		add	r3, r7, #12
- 414 00de 1846     		mov	r0, r3
- 415 00e0 FFF7FEFF 		bl	NVIC_Init
- 416              	.L5:
+ 408              		.loc 1 222 0
+ 409 01f6 07F10C03 		add	r3, r7, #12
+ 410 01fa 1846     		mov	r0, r3
+ 411 01fc FFF7FEFF 		bl	NVIC_Init
+ 412              	.L5:
  223:../STM32F4-Discovery/stm32f4_discovery.c ****   }
  224:../STM32F4-Discovery/stm32f4_discovery.c **** }
- 417              		.loc 1 224 0
- 418 00e4 07F12007 		add	r7, r7, #32
- 419 00e8 BD46     		mov	sp, r7
- 420 00ea 80BD     		pop	{r7, pc}
- 421              		.cfi_endproc
- 422              	.LFE114:
- 424              		.section	.text.STM_EVAL_PBGetState,"ax",%progbits
- 425              		.align	2
- 426              		.global	STM_EVAL_PBGetState
- 427              		.thumb
- 428              		.thumb_func
- 430              	STM_EVAL_PBGetState:
- 431              	.LFB115:
+ 413              		.loc 1 224 0
+ 414 0200 07F12007 		add	r7, r7, #32
+ 415 0204 BD46     		mov	sp, r7
+ 416 0206 80BD     		pop	{r7, pc}
+ 417              		.cfi_endproc
+ 418              	.LFE114:
+ 420              		.align	2
+ 421              		.global	STM_EVAL_PBGetState
+ 422              		.thumb
+ 423              		.thumb_func
+ 425              	STM_EVAL_PBGetState:
+ 426              	.LFB115:
  225:../STM32F4-Discovery/stm32f4_discovery.c **** 
  226:../STM32F4-Discovery/stm32f4_discovery.c **** /**
  227:../STM32F4-Discovery/stm32f4_discovery.c ****   * @brief  Returns the selected Button state.
@@ -631,89 +626,83 @@
  231:../STM32F4-Discovery/stm32f4_discovery.c ****   */
  232:../STM32F4-Discovery/stm32f4_discovery.c **** uint32_t STM_EVAL_PBGetState(Button_TypeDef Button)
  233:../STM32F4-Discovery/stm32f4_discovery.c **** {
- 432              		.loc 1 233 0
- 433              		.cfi_startproc
- 434              		@ args = 0, pretend = 0, frame = 8
- 435              		@ frame_needed = 1, uses_anonymous_args = 0
- 436 0000 80B5     		push	{r7, lr}
- 437              	.LCFI15:
- 438              		.cfi_def_cfa_offset 8
- 439              		.cfi_offset 14, -4
- 440              		.cfi_offset 7, -8
- 441 0002 82B0     		sub	sp, sp, #8
- 442              	.LCFI16:
- 443              		.cfi_def_cfa_offset 16
- 444 0004 00AF     		add	r7, sp, #0
- 445              	.LCFI17:
- 446              		.cfi_def_cfa_register 7
- 447 0006 0346     		mov	r3, r0
- 448 0008 FB71     		strb	r3, [r7, #7]
+ 427              		.loc 1 233 0
+ 428              		.cfi_startproc
+ 429              		@ args = 0, pretend = 0, frame = 8
+ 430              		@ frame_needed = 1, uses_anonymous_args = 0
+ 431 0208 80B5     		push	{r7, lr}
+ 432              	.LCFI15:
+ 433              		.cfi_def_cfa_offset 8
+ 434              		.cfi_offset 14, -4
+ 435              		.cfi_offset 7, -8
+ 436 020a 82B0     		sub	sp, sp, #8
+ 437              	.LCFI16:
+ 438              		.cfi_def_cfa_offset 16
+ 439 020c 00AF     		add	r7, sp, #0
+ 440              	.LCFI17:
+ 441              		.cfi_def_cfa_register 7
+ 442 020e 0346     		mov	r3, r0
+ 443 0210 FB71     		strb	r3, [r7, #7]
  234:../STM32F4-Discovery/stm32f4_discovery.c ****   return GPIO_ReadInputDataBit(BUTTON_PORT[Button], BUTTON_PIN[Button]);
- 449              		.loc 1 234 0
- 450 000a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 451 000c 40F20003 		movw	r3, #:lower16:BUTTON_PORT
- 452 0010 C0F20003 		movt	r3, #:upper16:BUTTON_PORT
- 453 0014 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 454 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
- 455 001a 40F20003 		movw	r3, #:lower16:BUTTON_PIN
- 456 001e C0F20003 		movt	r3, #:upper16:BUTTON_PIN
- 457 0022 33F81130 		ldrh	r3, [r3, r1, lsl #1]
- 458 0026 1046     		mov	r0, r2
- 459 0028 1946     		mov	r1, r3
- 460 002a FFF7FEFF 		bl	GPIO_ReadInputDataBit
- 461 002e 0346     		mov	r3, r0
+ 444              		.loc 1 234 0
+ 445 0212 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 446 0214 40F20003 		movw	r3, #:lower16:BUTTON_PORT
+ 447 0218 C0F20003 		movt	r3, #:upper16:BUTTON_PORT
+ 448 021c 53F82220 		ldr	r2, [r3, r2, lsl #2]
+ 449 0220 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 450 0222 40F20003 		movw	r3, #:lower16:BUTTON_PIN
+ 451 0226 C0F20003 		movt	r3, #:upper16:BUTTON_PIN
+ 452 022a 33F81130 		ldrh	r3, [r3, r1, lsl #1]
+ 453 022e 1046     		mov	r0, r2
+ 454 0230 1946     		mov	r1, r3
+ 455 0232 FFF7FEFF 		bl	GPIO_ReadInputDataBit
+ 456 0236 0346     		mov	r3, r0
  235:../STM32F4-Discovery/stm32f4_discovery.c **** }
- 462              		.loc 1 235 0
- 463 0030 1846     		mov	r0, r3
- 464 0032 07F10807 		add	r7, r7, #8
- 465 0036 BD46     		mov	sp, r7
- 466 0038 80BD     		pop	{r7, pc}
- 467              		.cfi_endproc
- 468              	.LFE115:
- 470 003a 00BF     		.text
- 471              	.Letext0:
- 472              		.file 2 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 473              		.file 3 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4xx.h"
- 474              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_exti.
- 475              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_gpio.
- 476              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/misc.h"
- 477              		.file 7 "../STM32F4-Discovery/stm32f4_discovery.h"
- 478              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 457              		.loc 1 235 0
+ 458 0238 1846     		mov	r0, r3
+ 459 023a 07F10807 		add	r7, r7, #8
+ 460 023e BD46     		mov	sp, r7
+ 461 0240 80BD     		pop	{r7, pc}
+ 462              		.cfi_endproc
+ 463              	.LFE115:
+ 465              	.Letext0:
+ 466              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 467              		.file 3 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Devi
+ 468              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
+ 469              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
+ 470              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
+ 471              		.file 7 "../STM32F4-Discovery/stm32f4_discovery.h"
+ 472              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4_discovery.c
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:23     .data.GPIO_PORT:00000000 GPIO_PORT
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:20     .data.GPIO_PORT:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:33     .rodata.GPIO_PIN:00000000 GPIO_PIN
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:30     .rodata.GPIO_PIN:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:43     .rodata.GPIO_CLK:00000000 GPIO_CLK
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:40     .rodata.GPIO_CLK:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:53     .data.BUTTON_PORT:00000000 BUTTON_PORT
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:50     .data.BUTTON_PORT:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:60     .rodata.BUTTON_PIN:00000000 BUTTON_PIN
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:57     .rodata.BUTTON_PIN:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:67     .rodata.BUTTON_CLK:00000000 BUTTON_CLK
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:64     .rodata.BUTTON_CLK:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:74     .rodata.BUTTON_EXTI_LINE:00000000 BUTTON_EXTI_LINE
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:71     .rodata.BUTTON_EXTI_LINE:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:81     .rodata.BUTTON_PORT_SOURCE:00000000 BUTTON_PORT_SOURCE
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:78     .rodata.BUTTON_PORT_SOURCE:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:88     .rodata.BUTTON_PIN_SOURCE:00000000 BUTTON_PIN_SOURCE
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:85     .rodata.BUTTON_PIN_SOURCE:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:95     .rodata.BUTTON_IRQn:00000000 BUTTON_IRQn
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:92     .rodata.BUTTON_IRQn:00000000 $d
+  C:\Temp\cc8U2kSF.s:23     .data.GPIO_PORT:00000000 GPIO_PORT
+  C:\Temp\cc8U2kSF.s:20     .data.GPIO_PORT:00000000 $d
+  C:\Temp\cc8U2kSF.s:33     .rodata.GPIO_PIN:00000000 GPIO_PIN
+  C:\Temp\cc8U2kSF.s:30     .rodata.GPIO_PIN:00000000 $d
+  C:\Temp\cc8U2kSF.s:43     .rodata.GPIO_CLK:00000000 GPIO_CLK
+  C:\Temp\cc8U2kSF.s:40     .rodata.GPIO_CLK:00000000 $d
+  C:\Temp\cc8U2kSF.s:53     .data.BUTTON_PORT:00000000 BUTTON_PORT
+  C:\Temp\cc8U2kSF.s:50     .data.BUTTON_PORT:00000000 $d
+  C:\Temp\cc8U2kSF.s:60     .rodata.BUTTON_PIN:00000000 BUTTON_PIN
+  C:\Temp\cc8U2kSF.s:57     .rodata.BUTTON_PIN:00000000 $d
+  C:\Temp\cc8U2kSF.s:67     .rodata.BUTTON_CLK:00000000 BUTTON_CLK
+  C:\Temp\cc8U2kSF.s:64     .rodata.BUTTON_CLK:00000000 $d
+  C:\Temp\cc8U2kSF.s:74     .rodata.BUTTON_EXTI_LINE:00000000 BUTTON_EXTI_LINE
+  C:\Temp\cc8U2kSF.s:71     .rodata.BUTTON_EXTI_LINE:00000000 $d
+  C:\Temp\cc8U2kSF.s:81     .rodata.BUTTON_PORT_SOURCE:00000000 BUTTON_PORT_SOURCE
+  C:\Temp\cc8U2kSF.s:78     .rodata.BUTTON_PORT_SOURCE:00000000 $d
+  C:\Temp\cc8U2kSF.s:88     .rodata.BUTTON_PIN_SOURCE:00000000 BUTTON_PIN_SOURCE
+  C:\Temp\cc8U2kSF.s:85     .rodata.BUTTON_PIN_SOURCE:00000000 $d
+  C:\Temp\cc8U2kSF.s:95     .rodata.BUTTON_IRQn:00000000 BUTTON_IRQn
+  C:\Temp\cc8U2kSF.s:92     .rodata.BUTTON_IRQn:00000000 $d
                             *COM*:00000004 NVIC_InitStructure
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:99     .text.STM_EVAL_LEDInit:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:104    .text.STM_EVAL_LEDInit:00000000 STM_EVAL_LEDInit
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:167    .text.STM_EVAL_LEDOn:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:172    .text.STM_EVAL_LEDOn:00000000 STM_EVAL_LEDOn
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:210    .text.STM_EVAL_LEDOff:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:215    .text.STM_EVAL_LEDOff:00000000 STM_EVAL_LEDOff
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:253    .text.STM_EVAL_LEDToggle:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:258    .text.STM_EVAL_LEDToggle:00000000 STM_EVAL_LEDToggle
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:303    .text.STM_EVAL_PBInit:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:308    .text.STM_EVAL_PBInit:00000000 STM_EVAL_PBInit
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:425    .text.STM_EVAL_PBGetState:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccE6lEBG.s:430    .text.STM_EVAL_PBGetState:00000000 STM_EVAL_PBGetState
+  C:\Temp\cc8U2kSF.s:99     .text:00000000 $t
+  C:\Temp\cc8U2kSF.s:104    .text:00000000 STM_EVAL_LEDInit
+  C:\Temp\cc8U2kSF.s:171    .text:0000006c STM_EVAL_LEDOn
+  C:\Temp\cc8U2kSF.s:213    .text:000000a0 STM_EVAL_LEDOff
+  C:\Temp\cc8U2kSF.s:255    .text:000000d4 STM_EVAL_LEDToggle
+  C:\Temp\cc8U2kSF.s:304    .text:0000011c STM_EVAL_PBInit
+  C:\Temp\cc8U2kSF.s:425    .text:00000208 STM_EVAL_PBGetState
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

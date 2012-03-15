@@ -314,7 +314,7 @@
  173 0016 7047     		bx	lr
  174              		.cfi_endproc
  175              	.LFE114:
- 177              		.section	.text._ZN15CRecursiveMutexC2Ev,"ax",%progbits
+ 177              		.text
  178              		.align	2
  179              		.global	_ZN15CRecursiveMutexC2Ev
  180              		.thumb
@@ -373,178 +373,174 @@
  220 0024 08000000 		.word	_ZTV15CRecursiveMutex+8
  221              		.cfi_endproc
  222              	.LFE116:
- 224              		.section	.text._ZN15CRecursiveMutexC2EPv,"ax",%progbits
- 225              		.align	2
- 226              		.global	_ZN15CRecursiveMutexC2EPv
- 227              		.thumb
- 228              		.thumb_func
- 230              	_ZN15CRecursiveMutexC2EPv:
- 231              	.LFB119:
+ 224              		.align	2
+ 225              		.global	_ZN15CRecursiveMutexC2EPv
+ 226              		.thumb
+ 227              		.thumb_func
+ 229              	_ZN15CRecursiveMutexC2EPv:
+ 230              	.LFB119:
   15:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
   16:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::CRecursiveMutex(xSemaphoreHandle handleSemaphore) {
- 232              		.loc 3 16 0
- 233              		.cfi_startproc
- 234              		@ args = 0, pretend = 0, frame = 8
- 235              		@ frame_needed = 1, uses_anonymous_args = 0
- 236 0000 80B5     		push	{r7, lr}
- 237              	.LCFI15:
- 238              		.cfi_def_cfa_offset 8
- 239              		.cfi_offset 14, -4
- 240              		.cfi_offset 7, -8
- 241 0002 82B0     		sub	sp, sp, #8
- 242              	.LCFI16:
- 243              		.cfi_def_cfa_offset 16
- 244 0004 00AF     		add	r7, sp, #0
- 245              	.LCFI17:
- 246              		.cfi_def_cfa_register 7
- 247 0006 7860     		str	r0, [r7, #4]
- 248 0008 3960     		str	r1, [r7, #0]
- 249              	.LBB4:
- 250              		.loc 3 16 0
- 251 000a 7B68     		ldr	r3, [r7, #4]
- 252 000c 1846     		mov	r0, r3
- 253 000e FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
- 254 0012 7B68     		ldr	r3, [r7, #4]
- 255 0014 064A     		ldr	r2, .L11
- 256 0016 1A60     		str	r2, [r3, #0]
+ 231              		.loc 3 16 0
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 8
+ 234              		@ frame_needed = 1, uses_anonymous_args = 0
+ 235 0028 80B5     		push	{r7, lr}
+ 236              	.LCFI15:
+ 237              		.cfi_def_cfa_offset 8
+ 238              		.cfi_offset 14, -4
+ 239              		.cfi_offset 7, -8
+ 240 002a 82B0     		sub	sp, sp, #8
+ 241              	.LCFI16:
+ 242              		.cfi_def_cfa_offset 16
+ 243 002c 00AF     		add	r7, sp, #0
+ 244              	.LCFI17:
+ 245              		.cfi_def_cfa_register 7
+ 246 002e 7860     		str	r0, [r7, #4]
+ 247 0030 3960     		str	r1, [r7, #0]
+ 248              	.LBB4:
+ 249              		.loc 3 16 0
+ 250 0032 7B68     		ldr	r3, [r7, #4]
+ 251 0034 1846     		mov	r0, r3
+ 252 0036 FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 253 003a 7B68     		ldr	r3, [r7, #4]
+ 254 003c 064A     		ldr	r2, .L11
+ 255 003e 1A60     		str	r2, [r3, #0]
   17:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	Attach(handleSemaphore);
- 257              		.loc 3 17 0
- 258 0018 7B68     		ldr	r3, [r7, #4]
- 259 001a 1846     		mov	r0, r3
- 260 001c 3968     		ldr	r1, [r7, #0]
- 261 001e FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
- 262              	.LBE4:
+ 256              		.loc 3 17 0
+ 257 0040 7B68     		ldr	r3, [r7, #4]
+ 258 0042 1846     		mov	r0, r3
+ 259 0044 3968     		ldr	r1, [r7, #0]
+ 260 0046 FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
+ 261              	.LBE4:
   18:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
- 263              		.loc 3 18 0
- 264 0022 7B68     		ldr	r3, [r7, #4]
- 265 0024 1846     		mov	r0, r3
- 266 0026 07F10807 		add	r7, r7, #8
- 267 002a BD46     		mov	sp, r7
- 268 002c 80BD     		pop	{r7, pc}
- 269              	.L12:
- 270 002e 00BF     		.align	2
- 271              	.L11:
- 272 0030 08000000 		.word	_ZTV15CRecursiveMutex+8
- 273              		.cfi_endproc
- 274              	.LFE119:
- 276              		.section	.text._ZN15CRecursiveMutexD2Ev,"ax",%progbits
- 277              		.align	2
- 278              		.global	_ZN15CRecursiveMutexD2Ev
- 279              		.thumb
- 280              		.thumb_func
- 282              	_ZN15CRecursiveMutexD2Ev:
- 283              	.LFB122:
+ 262              		.loc 3 18 0
+ 263 004a 7B68     		ldr	r3, [r7, #4]
+ 264 004c 1846     		mov	r0, r3
+ 265 004e 07F10807 		add	r7, r7, #8
+ 266 0052 BD46     		mov	sp, r7
+ 267 0054 80BD     		pop	{r7, pc}
+ 268              	.L12:
+ 269 0056 00BF     		.align	2
+ 270              	.L11:
+ 271 0058 08000000 		.word	_ZTV15CRecursiveMutex+8
+ 272              		.cfi_endproc
+ 273              	.LFE119:
+ 275              		.align	2
+ 276              		.global	_ZN15CRecursiveMutexD2Ev
+ 277              		.thumb
+ 278              		.thumb_func
+ 280              	_ZN15CRecursiveMutexD2Ev:
+ 281              	.LFB122:
   19:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
   20:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::~CRecursiveMutex() {
- 284              		.loc 3 20 0
- 285              		.cfi_startproc
- 286              		@ args = 0, pretend = 0, frame = 8
- 287              		@ frame_needed = 1, uses_anonymous_args = 0
- 288 0000 80B5     		push	{r7, lr}
- 289              	.LCFI18:
- 290              		.cfi_def_cfa_offset 8
- 291              		.cfi_offset 14, -4
- 292              		.cfi_offset 7, -8
- 293 0002 82B0     		sub	sp, sp, #8
- 294              	.LCFI19:
- 295              		.cfi_def_cfa_offset 16
- 296 0004 00AF     		add	r7, sp, #0
- 297              	.LCFI20:
- 298              		.cfi_def_cfa_register 7
- 299 0006 7860     		str	r0, [r7, #4]
- 300              	.LBB5:
- 301              		.loc 3 20 0
- 302 0008 7B68     		ldr	r3, [r7, #4]
- 303 000a 0A4A     		ldr	r2, .L16
- 304 000c 1A60     		str	r2, [r3, #0]
+ 282              		.loc 3 20 0
+ 283              		.cfi_startproc
+ 284              		@ args = 0, pretend = 0, frame = 8
+ 285              		@ frame_needed = 1, uses_anonymous_args = 0
+ 286 005c 80B5     		push	{r7, lr}
+ 287              	.LCFI18:
+ 288              		.cfi_def_cfa_offset 8
+ 289              		.cfi_offset 14, -4
+ 290              		.cfi_offset 7, -8
+ 291 005e 82B0     		sub	sp, sp, #8
+ 292              	.LCFI19:
+ 293              		.cfi_def_cfa_offset 16
+ 294 0060 00AF     		add	r7, sp, #0
+ 295              	.LCFI20:
+ 296              		.cfi_def_cfa_register 7
+ 297 0062 7860     		str	r0, [r7, #4]
+ 298              	.LBB5:
+ 299              		.loc 3 20 0
+ 300 0064 7B68     		ldr	r3, [r7, #4]
+ 301 0066 0A4A     		ldr	r2, .L16
+ 302 0068 1A60     		str	r2, [r3, #0]
   21:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	// TODO Auto-generated destructor stub
   22:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
- 305              		.loc 3 22 0
- 306 000e 7868     		ldr	r0, [r7, #4]
- 307 0010 FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
- 308              	.LBE5:
- 309 0014 4FF00003 		mov	r3, #0
- 310 0018 03F00103 		and	r3, r3, #1
- 311 001c DBB2     		uxtb	r3, r3
- 312 001e 002B     		cmp	r3, #0
- 313 0020 02D0     		beq	.L15
- 314              		.loc 3 22 0 is_stmt 0 discriminator 2
- 315 0022 7868     		ldr	r0, [r7, #4]
- 316 0024 FFF7FEFF 		bl	_ZdlPv
- 317              	.L15:
- 318              		.loc 3 22 0 discriminator 3
- 319 0028 7B68     		ldr	r3, [r7, #4]
- 320 002a 1846     		mov	r0, r3
- 321 002c 07F10807 		add	r7, r7, #8
- 322 0030 BD46     		mov	sp, r7
- 323 0032 80BD     		pop	{r7, pc}
- 324              	.L17:
- 325              		.align	2
- 326              	.L16:
- 327 0034 08000000 		.word	_ZTV15CRecursiveMutex+8
- 328              		.cfi_endproc
- 329              	.LFE122:
- 331              		.section	.text._ZN15CRecursiveMutexD0Ev,"ax",%progbits
- 332              		.align	2
- 333              		.global	_ZN15CRecursiveMutexD0Ev
- 334              		.thumb
- 335              		.thumb_func
- 337              	_ZN15CRecursiveMutexD0Ev:
- 338              	.LFB124:
+ 303              		.loc 3 22 0
+ 304 006a 7868     		ldr	r0, [r7, #4]
+ 305 006c FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
+ 306              	.LBE5:
+ 307 0070 4FF00003 		mov	r3, #0
+ 308 0074 03F00103 		and	r3, r3, #1
+ 309 0078 DBB2     		uxtb	r3, r3
+ 310 007a 002B     		cmp	r3, #0
+ 311 007c 02D0     		beq	.L15
+ 312              		.loc 3 22 0 is_stmt 0 discriminator 2
+ 313 007e 7868     		ldr	r0, [r7, #4]
+ 314 0080 FFF7FEFF 		bl	_ZdlPv
+ 315              	.L15:
+ 316              		.loc 3 22 0 discriminator 3
+ 317 0084 7B68     		ldr	r3, [r7, #4]
+ 318 0086 1846     		mov	r0, r3
+ 319 0088 07F10807 		add	r7, r7, #8
+ 320 008c BD46     		mov	sp, r7
+ 321 008e 80BD     		pop	{r7, pc}
+ 322              	.L17:
+ 323              		.align	2
+ 324              	.L16:
+ 325 0090 08000000 		.word	_ZTV15CRecursiveMutex+8
+ 326              		.cfi_endproc
+ 327              	.LFE122:
+ 329              		.align	2
+ 330              		.global	_ZN15CRecursiveMutexD0Ev
+ 331              		.thumb
+ 332              		.thumb_func
+ 334              	_ZN15CRecursiveMutexD0Ev:
+ 335              	.LFB124:
   20:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** CRecursiveMutex::~CRecursiveMutex() {
- 339              		.loc 3 20 0 is_stmt 1
- 340              		.cfi_startproc
- 341              		@ args = 0, pretend = 0, frame = 8
- 342              		@ frame_needed = 1, uses_anonymous_args = 0
- 343 0000 80B5     		push	{r7, lr}
- 344              	.LCFI21:
- 345              		.cfi_def_cfa_offset 8
- 346              		.cfi_offset 14, -4
- 347              		.cfi_offset 7, -8
- 348 0002 82B0     		sub	sp, sp, #8
- 349              	.LCFI22:
- 350              		.cfi_def_cfa_offset 16
- 351 0004 00AF     		add	r7, sp, #0
- 352              	.LCFI23:
- 353              		.cfi_def_cfa_register 7
- 354 0006 7860     		str	r0, [r7, #4]
- 355              		.loc 3 22 0
- 356 0008 7868     		ldr	r0, [r7, #4]
- 357 000a FFF7FEFF 		bl	_ZN15CRecursiveMutexD1Ev
- 358 000e 7868     		ldr	r0, [r7, #4]
- 359 0010 FFF7FEFF 		bl	_ZdlPv
- 360 0014 7B68     		ldr	r3, [r7, #4]
- 361 0016 1846     		mov	r0, r3
- 362 0018 07F10807 		add	r7, r7, #8
- 363 001c BD46     		mov	sp, r7
- 364 001e 80BD     		pop	{r7, pc}
- 365              		.cfi_endproc
- 366              	.LFE124:
- 368              		.section	.text._ZN15CRecursiveMutex6CreateEv,"ax",%progbits
- 369              		.align	2
- 370              		.global	_ZN15CRecursiveMutex6CreateEv
- 371              		.thumb
- 372              		.thumb_func
- 374              	_ZN15CRecursiveMutex6CreateEv:
- 375              	.LFB125:
+ 336              		.loc 3 20 0 is_stmt 1
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 8
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340 0094 80B5     		push	{r7, lr}
+ 341              	.LCFI21:
+ 342              		.cfi_def_cfa_offset 8
+ 343              		.cfi_offset 14, -4
+ 344              		.cfi_offset 7, -8
+ 345 0096 82B0     		sub	sp, sp, #8
+ 346              	.LCFI22:
+ 347              		.cfi_def_cfa_offset 16
+ 348 0098 00AF     		add	r7, sp, #0
+ 349              	.LCFI23:
+ 350              		.cfi_def_cfa_register 7
+ 351 009a 7860     		str	r0, [r7, #4]
+ 352              		.loc 3 22 0
+ 353 009c 7868     		ldr	r0, [r7, #4]
+ 354 009e FFF7FEFF 		bl	_ZN15CRecursiveMutexD1Ev
+ 355 00a2 7868     		ldr	r0, [r7, #4]
+ 356 00a4 FFF7FEFF 		bl	_ZdlPv
+ 357 00a8 7B68     		ldr	r3, [r7, #4]
+ 358 00aa 1846     		mov	r0, r3
+ 359 00ac 07F10807 		add	r7, r7, #8
+ 360 00b0 BD46     		mov	sp, r7
+ 361 00b2 80BD     		pop	{r7, pc}
+ 362              		.cfi_endproc
+ 363              	.LFE124:
+ 365              		.align	2
+ 366              		.global	_ZN15CRecursiveMutex6CreateEv
+ 367              		.thumb
+ 368              		.thumb_func
+ 370              	_ZN15CRecursiveMutex6CreateEv:
+ 371              	.LFB125:
   23:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
   24:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** bool CRecursiveMutex::Create() {
- 376              		.loc 3 24 0
- 377              		.cfi_startproc
- 378              		@ args = 0, pretend = 0, frame = 8
- 379              		@ frame_needed = 1, uses_anonymous_args = 0
- 380 0000 80B5     		push	{r7, lr}
- 381              	.LCFI24:
- 382              		.cfi_def_cfa_offset 8
- 383              		.cfi_offset 14, -4
- 384              		.cfi_offset 7, -8
- 385 0002 82B0     		sub	sp, sp, #8
- 386              	.LCFI25:
- 387              		.cfi_def_cfa_offset 16
- 388 0004 00AF     		add	r7, sp, #0
- 389              	.LCFI26:
- 390              		.cfi_def_cfa_register 7
- 391 0006 7860     		str	r0, [r7, #4]
+ 372              		.loc 3 24 0
+ 373              		.cfi_startproc
+ 374              		@ args = 0, pretend = 0, frame = 8
+ 375              		@ frame_needed = 1, uses_anonymous_args = 0
+ 376 00b4 80B5     		push	{r7, lr}
+ 377              	.LCFI24:
+ 378              		.cfi_def_cfa_offset 8
+ 379              		.cfi_offset 14, -4
+ 380              		.cfi_offset 7, -8
+ 381 00b6 82B0     		sub	sp, sp, #8
+ 382              	.LCFI25:
+ 383              		.cfi_def_cfa_offset 16
+ 384 00b8 00AF     		add	r7, sp, #0
+ 385              	.LCFI26:
+ 386              		.cfi_def_cfa_register 7
+ 387 00ba 7860     		str	r0, [r7, #4]
   25:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** #if (configUSE_RECURSIVE_MUTEXES == 1 && configUSE_MUTEXES ==1)
   26:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	xSemaphoreHandle handle = xSemaphoreCreateRecursiveMutex();
   27:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	if (handle != NULL)
@@ -552,77 +548,76 @@
   29:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** #endif
   30:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 
   31:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** 	return IsValid();
- 392              		.loc 3 31 0
- 393 0008 7B68     		ldr	r3, [r7, #4]
- 394 000a 1B68     		ldr	r3, [r3, #0]
- 395 000c 1B68     		ldr	r3, [r3, #0]
- 396 000e 7A68     		ldr	r2, [r7, #4]
- 397 0010 1046     		mov	r0, r2
- 398 0012 9847     		blx	r3
- 399 0014 0346     		mov	r3, r0
+ 388              		.loc 3 31 0
+ 389 00bc 7B68     		ldr	r3, [r7, #4]
+ 390 00be 1B68     		ldr	r3, [r3, #0]
+ 391 00c0 1B68     		ldr	r3, [r3, #0]
+ 392 00c2 7A68     		ldr	r2, [r7, #4]
+ 393 00c4 1046     		mov	r0, r2
+ 394 00c6 9847     		blx	r3
+ 395 00c8 0346     		mov	r3, r0
   32:../FreeRTOS_EC/Source/CRecursiveMutex.cpp **** }
- 400              		.loc 3 32 0
- 401 0016 1846     		mov	r0, r3
- 402 0018 07F10807 		add	r7, r7, #8
- 403 001c BD46     		mov	sp, r7
- 404 001e 80BD     		pop	{r7, pc}
- 405              		.cfi_endproc
- 406              	.LFE125:
- 408              		.global	_ZTV15CRecursiveMutex
- 409              		.section	.rodata._ZTV15CRecursiveMutex,"a",%progbits
- 410              		.align	3
- 413              	_ZTV15CRecursiveMutex:
- 414 0000 00000000 		.word	0
- 415 0004 00000000 		.word	0
- 416 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
- 417 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
- 418 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
- 419 0014 00000000 		.word	_ZN15CRecursiveMutexD1Ev
- 420 0018 00000000 		.word	_ZN15CRecursiveMutexD0Ev
- 421 001c 00000000 		.word	_ZN15CRecursiveMutex4TakeEm
- 422 0020 00000000 		.word	_ZN15CRecursiveMutex4GiveEv
- 423              		.global	_ZN15CRecursiveMutexC1Ev
- 424              		.thumb_set _ZN15CRecursiveMutexC1Ev,_ZN15CRecursiveMutexC2Ev
- 425              		.global	_ZN15CRecursiveMutexC1EPv
- 426              		.thumb_set _ZN15CRecursiveMutexC1EPv,_ZN15CRecursiveMutexC2EPv
- 427              		.global	_ZN15CRecursiveMutexD1Ev
- 428              		.thumb_set _ZN15CRecursiveMutexD1Ev,_ZN15CRecursiveMutexD2Ev
- 429 0024 00000000 		.text
- 430              	.Letext0:
- 431              		.file 4 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 432              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
- 433              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/queue.h"
- 434              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/semphr.h"
- 435              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
- 436              		.file 9 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 396              		.loc 3 32 0
+ 397 00ca 1846     		mov	r0, r3
+ 398 00cc 07F10807 		add	r7, r7, #8
+ 399 00d0 BD46     		mov	sp, r7
+ 400 00d2 80BD     		pop	{r7, pc}
+ 401              		.cfi_endproc
+ 402              	.LFE125:
+ 404              		.global	_ZTV15CRecursiveMutex
+ 405              		.section	.rodata._ZTV15CRecursiveMutex,"a",%progbits
+ 406              		.align	3
+ 409              	_ZTV15CRecursiveMutex:
+ 410 0000 00000000 		.word	0
+ 411 0004 00000000 		.word	0
+ 412 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
+ 413 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
+ 414 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
+ 415 0014 00000000 		.word	_ZN15CRecursiveMutexD1Ev
+ 416 0018 00000000 		.word	_ZN15CRecursiveMutexD0Ev
+ 417 001c 00000000 		.word	_ZN15CRecursiveMutex4TakeEm
+ 418 0020 00000000 		.word	_ZN15CRecursiveMutex4GiveEv
+ 419              		.global	_ZN15CRecursiveMutexC1Ev
+ 420              		.thumb_set _ZN15CRecursiveMutexC1Ev,_ZN15CRecursiveMutexC2Ev
+ 421              		.global	_ZN15CRecursiveMutexC1EPv
+ 422              		.thumb_set _ZN15CRecursiveMutexC1EPv,_ZN15CRecursiveMutexC2EPv
+ 423              		.global	_ZN15CRecursiveMutexD1Ev
+ 424              		.thumb_set _ZN15CRecursiveMutexD1Ev,_ZN15CRecursiveMutexD2Ev
+ 425 0024 00000000 		.text
+ 426              	.Letext0:
+ 427              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 428              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 429              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 430              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 431              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 432              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
 DEFINED SYMBOLS
                             *ABS*:00000000 CRecursiveMutex.cpp
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:19     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:24     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:61     .text._ZN11ASyncObject6DetachEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:66     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:106    .text._ZN15CRecursiveMutex4TakeEm:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:111    .text._ZN15CRecursiveMutex4TakeEm:00000000 _ZN15CRecursiveMutex4TakeEm
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:143    .text._ZN15CRecursiveMutex4GiveEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:148    .text._ZN15CRecursiveMutex4GiveEv:00000000 _ZN15CRecursiveMutex4GiveEv
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:178    .text._ZN15CRecursiveMutexC2Ev:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:183    .text._ZN15CRecursiveMutexC2Ev:00000000 _ZN15CRecursiveMutexC2Ev
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:220    .text._ZN15CRecursiveMutexC2Ev:00000024 $d
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:413    .rodata._ZTV15CRecursiveMutex:00000000 _ZTV15CRecursiveMutex
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:225    .text._ZN15CRecursiveMutexC2EPv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:230    .text._ZN15CRecursiveMutexC2EPv:00000000 _ZN15CRecursiveMutexC2EPv
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:272    .text._ZN15CRecursiveMutexC2EPv:00000030 $d
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:277    .text._ZN15CRecursiveMutexD2Ev:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:282    .text._ZN15CRecursiveMutexD2Ev:00000000 _ZN15CRecursiveMutexD2Ev
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:327    .text._ZN15CRecursiveMutexD2Ev:00000034 $d
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:332    .text._ZN15CRecursiveMutexD0Ev:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:337    .text._ZN15CRecursiveMutexD0Ev:00000000 _ZN15CRecursiveMutexD0Ev
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:282    .text._ZN15CRecursiveMutexD2Ev:00000000 _ZN15CRecursiveMutexD1Ev
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:369    .text._ZN15CRecursiveMutex6CreateEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:374    .text._ZN15CRecursiveMutex6CreateEv:00000000 _ZN15CRecursiveMutex6CreateEv
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:410    .rodata._ZTV15CRecursiveMutex:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:183    .text._ZN15CRecursiveMutexC2Ev:00000000 _ZN15CRecursiveMutexC1Ev
-C:\Users\Alex\AppData\Local\Temp\ccHlGJ4t.s:230    .text._ZN15CRecursiveMutexC2EPv:00000000 _ZN15CRecursiveMutexC1EPv
+  C:\Temp\cc1pJjXa.s:19     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
+  C:\Temp\cc1pJjXa.s:24     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
+  C:\Temp\cc1pJjXa.s:61     .text._ZN11ASyncObject6DetachEv:00000000 $t
+  C:\Temp\cc1pJjXa.s:66     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
+  C:\Temp\cc1pJjXa.s:106    .text._ZN15CRecursiveMutex4TakeEm:00000000 $t
+  C:\Temp\cc1pJjXa.s:111    .text._ZN15CRecursiveMutex4TakeEm:00000000 _ZN15CRecursiveMutex4TakeEm
+  C:\Temp\cc1pJjXa.s:143    .text._ZN15CRecursiveMutex4GiveEv:00000000 $t
+  C:\Temp\cc1pJjXa.s:148    .text._ZN15CRecursiveMutex4GiveEv:00000000 _ZN15CRecursiveMutex4GiveEv
+  C:\Temp\cc1pJjXa.s:178    .text:00000000 $t
+  C:\Temp\cc1pJjXa.s:183    .text:00000000 _ZN15CRecursiveMutexC2Ev
+  C:\Temp\cc1pJjXa.s:220    .text:00000024 $d
+  C:\Temp\cc1pJjXa.s:409    .rodata._ZTV15CRecursiveMutex:00000000 _ZTV15CRecursiveMutex
+  C:\Temp\cc1pJjXa.s:224    .text:00000028 $t
+  C:\Temp\cc1pJjXa.s:229    .text:00000028 _ZN15CRecursiveMutexC2EPv
+  C:\Temp\cc1pJjXa.s:271    .text:00000058 $d
+  C:\Temp\cc1pJjXa.s:275    .text:0000005c $t
+  C:\Temp\cc1pJjXa.s:280    .text:0000005c _ZN15CRecursiveMutexD2Ev
+  C:\Temp\cc1pJjXa.s:325    .text:00000090 $d
+  C:\Temp\cc1pJjXa.s:329    .text:00000094 $t
+  C:\Temp\cc1pJjXa.s:334    .text:00000094 _ZN15CRecursiveMutexD0Ev
+  C:\Temp\cc1pJjXa.s:280    .text:0000005c _ZN15CRecursiveMutexD1Ev
+  C:\Temp\cc1pJjXa.s:370    .text:000000b4 _ZN15CRecursiveMutex6CreateEv
+  C:\Temp\cc1pJjXa.s:406    .rodata._ZTV15CRecursiveMutex:00000000 $d
+  C:\Temp\cc1pJjXa.s:183    .text:00000000 _ZN15CRecursiveMutexC1Ev
+  C:\Temp\cc1pJjXa.s:229    .text:00000028 _ZN15CRecursiveMutexC1EPv
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

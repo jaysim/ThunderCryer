@@ -350,7 +350,7 @@ uint32_t EVAL_AUDIO_DeInit(void)
   * @param  Size: Number of audio data BYTES.
   * @retval 0 if correct communication, else wrong communication
   */
-uint32_t EVAL_AUDIO_Play(uint16_t* pBuffer, uint32_t Size)
+uint32_t EVAL_AUDIO_Play(int16_t* pBuffer, uint32_t Size)
 {
   /* Set the total number of data to be played (count in half-word) */
   AudioTotalSize = Size;
@@ -362,10 +362,11 @@ uint32_t EVAL_AUDIO_Play(uint16_t* pBuffer, uint32_t Size)
   Audio_MAL_Play((uint32_t)pBuffer, (uint32_t)(DMA_MAX(Size/4)));
   
   /* Update the remaining number of data to be played */
-  AudioRemSize = (Size/2) - DMA_MAX(AudioTotalSize);
+  // Size/2 was bull shit caused overflow
+  AudioRemSize = (Size) - DMA_MAX(AudioTotalSize);
   
   /* Update the current audio pointer position */
-  CurrentPos = pBuffer + DMA_MAX(AudioTotalSize);
+  CurrentPos = (uint16_t*)pBuffer + DMA_MAX(AudioTotalSize);
   
   return 0;
 }

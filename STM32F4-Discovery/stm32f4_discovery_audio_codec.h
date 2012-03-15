@@ -106,7 +106,7 @@
 
 /* Uncomment this line to enable verifying data sent to codec after each write 
   operation */
-#define VERIFY_WRITTENDATA 
+//#define VERIFY_WRITTENDATA
 /*----------------------------------------------------------------------------*/
 
 /*-----------------------------------
@@ -247,7 +247,7 @@
 void EVAL_AUDIO_SetAudioInterface(uint32_t Interface);
 uint32_t EVAL_AUDIO_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
 uint32_t EVAL_AUDIO_DeInit(void);
-uint32_t EVAL_AUDIO_Play(uint16_t* pBuffer, uint32_t Size);
+uint32_t EVAL_AUDIO_Play(int16_t* pBuffer, uint32_t Size);
 uint32_t EVAL_AUDIO_PauseResume(uint32_t Cmd);
 uint32_t EVAL_AUDIO_Stop(uint32_t CodecPowerDown_Mode);
 uint32_t EVAL_AUDIO_VolumeCtl(uint8_t Volume);

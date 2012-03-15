@@ -762,7 +762,7 @@
  287              		.align	2
  290              	_ZN12AManagedTask22s_pManagedTaskListHeadE:
  291 0000 00000000 		.space	4
- 292              		.section	.text._ZN12AManagedTaskC2Ev,"ax",%progbits
+ 292              		.text
  293              		.align	2
  294              		.global	_ZN12AManagedTaskC2Ev
  295              		.thumb
@@ -831,577 +831,565 @@
  343 0034 08000000 		.word	_ZTV12AManagedTask+8
  344              		.cfi_endproc
  345              	.LFE141:
- 347              		.section	.text._ZN12AManagedTaskD2Ev,"ax",%progbits
- 348              		.align	2
- 349              		.global	_ZN12AManagedTaskD2Ev
- 350              		.thumb
- 351              		.thumb_func
- 353              	_ZN12AManagedTaskD2Ev:
- 354              	.LFB144:
+ 347              		.align	2
+ 348              		.global	_ZN12AManagedTaskD2Ev
+ 349              		.thumb
+ 350              		.thumb_func
+ 352              	_ZN12AManagedTaskD2Ev:
+ 353              	.LFB144:
   17:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   18:../FreeRTOS_EC/Source/AManagedTask.cpp **** AManagedTask::~AManagedTask() {
- 355              		.loc 4 18 0
- 356              		.cfi_startproc
- 357              		@ args = 0, pretend = 0, frame = 8
- 358              		@ frame_needed = 1, uses_anonymous_args = 0
- 359 0000 80B5     		push	{r7, lr}
- 360              	.LCFI23:
- 361              		.cfi_def_cfa_offset 8
- 362              		.cfi_offset 14, -4
- 363              		.cfi_offset 7, -8
- 364 0002 82B0     		sub	sp, sp, #8
- 365              	.LCFI24:
- 366              		.cfi_def_cfa_offset 16
- 367 0004 00AF     		add	r7, sp, #0
- 368              	.LCFI25:
- 369              		.cfi_def_cfa_register 7
- 370 0006 7860     		str	r0, [r7, #4]
- 371              	.LBB4:
- 372              		.loc 4 18 0
- 373 0008 7B68     		ldr	r3, [r7, #4]
- 374 000a 0C4A     		ldr	r2, .L16
- 375 000c 1A60     		str	r2, [r3, #0]
+ 354              		.loc 4 18 0
+ 355              		.cfi_startproc
+ 356              		@ args = 0, pretend = 0, frame = 8
+ 357              		@ frame_needed = 1, uses_anonymous_args = 0
+ 358 0038 80B5     		push	{r7, lr}
+ 359              	.LCFI23:
+ 360              		.cfi_def_cfa_offset 8
+ 361              		.cfi_offset 14, -4
+ 362              		.cfi_offset 7, -8
+ 363 003a 82B0     		sub	sp, sp, #8
+ 364              	.LCFI24:
+ 365              		.cfi_def_cfa_offset 16
+ 366 003c 00AF     		add	r7, sp, #0
+ 367              	.LCFI25:
+ 368              		.cfi_def_cfa_register 7
+ 369 003e 7860     		str	r0, [r7, #4]
+ 370              	.LBB4:
+ 371              		.loc 4 18 0
+ 372 0040 7B68     		ldr	r3, [r7, #4]
+ 373 0042 0C4A     		ldr	r2, .L16
+ 374 0044 1A60     		str	r2, [r3, #0]
   19:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	RemoveFromManagedTask(this);
- 376              		.loc 4 19 0
- 377 000e 7868     		ldr	r0, [r7, #4]
- 378 0010 7968     		ldr	r1, [r7, #4]
- 379 0012 FFF7FEFF 		bl	_ZN12AManagedTask21RemoveFromManagedTaskEPS_
+ 375              		.loc 4 19 0
+ 376 0046 7868     		ldr	r0, [r7, #4]
+ 377 0048 7968     		ldr	r1, [r7, #4]
+ 378 004a FFF7FEFF 		bl	_ZN12AManagedTask21RemoveFromManagedTaskEPS_
   20:../FreeRTOS_EC/Source/AManagedTask.cpp **** }
- 380              		.loc 4 20 0
- 381 0016 7868     		ldr	r0, [r7, #4]
- 382 0018 FFF7FEFF 		bl	_ZN5CTaskD2Ev
- 383              	.LBE4:
- 384 001c 4FF00003 		mov	r3, #0
- 385 0020 03F00103 		and	r3, r3, #1
- 386 0024 DBB2     		uxtb	r3, r3
- 387 0026 002B     		cmp	r3, #0
- 388 0028 02D0     		beq	.L15
- 389              		.loc 4 20 0 is_stmt 0 discriminator 2
- 390 002a 7868     		ldr	r0, [r7, #4]
- 391 002c FFF7FEFF 		bl	_ZdlPv
- 392              	.L15:
- 393              		.loc 4 20 0 discriminator 3
- 394 0030 7B68     		ldr	r3, [r7, #4]
- 395 0032 1846     		mov	r0, r3
- 396 0034 07F10807 		add	r7, r7, #8
- 397 0038 BD46     		mov	sp, r7
- 398 003a 80BD     		pop	{r7, pc}
- 399              	.L17:
- 400              		.align	2
- 401              	.L16:
- 402 003c 08000000 		.word	_ZTV12AManagedTask+8
- 403              		.cfi_endproc
- 404              	.LFE144:
- 406              		.section	.text._ZN12AManagedTaskD0Ev,"ax",%progbits
- 407              		.align	2
- 408              		.global	_ZN12AManagedTaskD0Ev
- 409              		.thumb
- 410              		.thumb_func
- 412              	_ZN12AManagedTaskD0Ev:
- 413              	.LFB146:
+ 379              		.loc 4 20 0
+ 380 004e 7868     		ldr	r0, [r7, #4]
+ 381 0050 FFF7FEFF 		bl	_ZN5CTaskD2Ev
+ 382              	.LBE4:
+ 383 0054 4FF00003 		mov	r3, #0
+ 384 0058 03F00103 		and	r3, r3, #1
+ 385 005c DBB2     		uxtb	r3, r3
+ 386 005e 002B     		cmp	r3, #0
+ 387 0060 02D0     		beq	.L15
+ 388              		.loc 4 20 0 is_stmt 0 discriminator 2
+ 389 0062 7868     		ldr	r0, [r7, #4]
+ 390 0064 FFF7FEFF 		bl	_ZdlPv
+ 391              	.L15:
+ 392              		.loc 4 20 0 discriminator 3
+ 393 0068 7B68     		ldr	r3, [r7, #4]
+ 394 006a 1846     		mov	r0, r3
+ 395 006c 07F10807 		add	r7, r7, #8
+ 396 0070 BD46     		mov	sp, r7
+ 397 0072 80BD     		pop	{r7, pc}
+ 398              	.L17:
+ 399              		.align	2
+ 400              	.L16:
+ 401 0074 08000000 		.word	_ZTV12AManagedTask+8
+ 402              		.cfi_endproc
+ 403              	.LFE144:
+ 405              		.align	2
+ 406              		.global	_ZN12AManagedTaskD0Ev
+ 407              		.thumb
+ 408              		.thumb_func
+ 410              	_ZN12AManagedTaskD0Ev:
+ 411              	.LFB146:
   18:../FreeRTOS_EC/Source/AManagedTask.cpp **** AManagedTask::~AManagedTask() {
- 414              		.loc 4 18 0 is_stmt 1
- 415              		.cfi_startproc
- 416              		@ args = 0, pretend = 0, frame = 8
- 417              		@ frame_needed = 1, uses_anonymous_args = 0
- 418 0000 80B5     		push	{r7, lr}
- 419              	.LCFI26:
- 420              		.cfi_def_cfa_offset 8
- 421              		.cfi_offset 14, -4
- 422              		.cfi_offset 7, -8
- 423 0002 82B0     		sub	sp, sp, #8
- 424              	.LCFI27:
- 425              		.cfi_def_cfa_offset 16
- 426 0004 00AF     		add	r7, sp, #0
- 427              	.LCFI28:
- 428              		.cfi_def_cfa_register 7
- 429 0006 7860     		str	r0, [r7, #4]
- 430              		.loc 4 20 0
- 431 0008 7868     		ldr	r0, [r7, #4]
- 432 000a FFF7FEFF 		bl	_ZN12AManagedTaskD1Ev
- 433 000e 7868     		ldr	r0, [r7, #4]
- 434 0010 FFF7FEFF 		bl	_ZdlPv
- 435 0014 7B68     		ldr	r3, [r7, #4]
- 436 0016 1846     		mov	r0, r3
- 437 0018 07F10807 		add	r7, r7, #8
- 438 001c BD46     		mov	sp, r7
- 439 001e 80BD     		pop	{r7, pc}
- 440              		.cfi_endproc
- 441              	.LFE146:
- 443              		.section	.text._ZN12AManagedTask6CreateEPKctm,"ax",%progbits
- 444              		.align	2
- 445              		.global	_ZN12AManagedTask6CreateEPKctm
- 446              		.thumb
- 447              		.thumb_func
- 449              	_ZN12AManagedTask6CreateEPKctm:
- 450              	.LFB147:
+ 412              		.loc 4 18 0 is_stmt 1
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 8
+ 415              		@ frame_needed = 1, uses_anonymous_args = 0
+ 416 0078 80B5     		push	{r7, lr}
+ 417              	.LCFI26:
+ 418              		.cfi_def_cfa_offset 8
+ 419              		.cfi_offset 14, -4
+ 420              		.cfi_offset 7, -8
+ 421 007a 82B0     		sub	sp, sp, #8
+ 422              	.LCFI27:
+ 423              		.cfi_def_cfa_offset 16
+ 424 007c 00AF     		add	r7, sp, #0
+ 425              	.LCFI28:
+ 426              		.cfi_def_cfa_register 7
+ 427 007e 7860     		str	r0, [r7, #4]
+ 428              		.loc 4 20 0
+ 429 0080 7868     		ldr	r0, [r7, #4]
+ 430 0082 FFF7FEFF 		bl	_ZN12AManagedTaskD1Ev
+ 431 0086 7868     		ldr	r0, [r7, #4]
+ 432 0088 FFF7FEFF 		bl	_ZdlPv
+ 433 008c 7B68     		ldr	r3, [r7, #4]
+ 434 008e 1846     		mov	r0, r3
+ 435 0090 07F10807 		add	r7, r7, #8
+ 436 0094 BD46     		mov	sp, r7
+ 437 0096 80BD     		pop	{r7, pc}
+ 438              		.cfi_endproc
+ 439              	.LFE146:
+ 441              		.align	2
+ 442              		.global	_ZN12AManagedTask6CreateEPKctm
+ 443              		.thumb
+ 444              		.thumb_func
+ 446              	_ZN12AManagedTask6CreateEPKctm:
+ 447              	.LFB147:
   21:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   22:../FreeRTOS_EC/Source/AManagedTask.cpp **** portBASE_TYPE AManagedTask::Create(const portCHAR * const pcName, unsigned portSHORT usStackDepth, 
- 451              		.loc 4 22 0
- 452              		.cfi_startproc
- 453              		@ args = 0, pretend = 0, frame = 16
- 454              		@ frame_needed = 1, uses_anonymous_args = 0
- 455 0000 90B5     		push	{r4, r7, lr}
- 456              	.LCFI29:
- 457              		.cfi_def_cfa_offset 12
- 458              		.cfi_offset 14, -4
- 459              		.cfi_offset 7, -8
- 460              		.cfi_offset 4, -12
- 461 0002 87B0     		sub	sp, sp, #28
- 462              	.LCFI30:
- 463              		.cfi_def_cfa_offset 40
- 464 0004 02AF     		add	r7, sp, #8
- 465              	.LCFI31:
- 466              		.cfi_def_cfa 7, 32
- 467 0006 F860     		str	r0, [r7, #12]
- 468 0008 B960     		str	r1, [r7, #8]
- 469 000a 3B60     		str	r3, [r7, #0]
- 470 000c 1346     		mov	r3, r2	@ movhi
- 471 000e FB80     		strh	r3, [r7, #6]	@ movhi
+ 448              		.loc 4 22 0
+ 449              		.cfi_startproc
+ 450              		@ args = 0, pretend = 0, frame = 16
+ 451              		@ frame_needed = 1, uses_anonymous_args = 0
+ 452 0098 90B5     		push	{r4, r7, lr}
+ 453              	.LCFI29:
+ 454              		.cfi_def_cfa_offset 12
+ 455              		.cfi_offset 14, -4
+ 456              		.cfi_offset 7, -8
+ 457              		.cfi_offset 4, -12
+ 458 009a 87B0     		sub	sp, sp, #28
+ 459              	.LCFI30:
+ 460              		.cfi_def_cfa_offset 40
+ 461 009c 02AF     		add	r7, sp, #8
+ 462              	.LCFI31:
+ 463              		.cfi_def_cfa 7, 32
+ 464 009e F860     		str	r0, [r7, #12]
+ 465 00a0 B960     		str	r1, [r7, #8]
+ 466 00a2 3B60     		str	r3, [r7, #0]
+ 467 00a4 1346     		mov	r3, r2	@ movhi
+ 468 00a6 FB80     		strh	r3, [r7, #6]	@ movhi
   23:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	return OnCreate(pcName, usStackDepth, uxPriority) &&
- 472              		.loc 4 23 0
- 473 0010 FB68     		ldr	r3, [r7, #12]
- 474 0012 1B68     		ldr	r3, [r3, #0]
- 475 0014 03F11C03 		add	r3, r3, #28
- 476 0018 1C68     		ldr	r4, [r3, #0]
- 477 001a FB88     		ldrh	r3, [r7, #6]
- 478 001c F868     		ldr	r0, [r7, #12]
- 479 001e B968     		ldr	r1, [r7, #8]
- 480 0020 1A46     		mov	r2, r3
- 481 0022 3B68     		ldr	r3, [r7, #0]
- 482 0024 A047     		blx	r4
- 483 0026 0346     		mov	r3, r0
+ 469              		.loc 4 23 0
+ 470 00a8 FB68     		ldr	r3, [r7, #12]
+ 471 00aa 1B68     		ldr	r3, [r3, #0]
+ 472 00ac 03F11C03 		add	r3, r3, #28
+ 473 00b0 1C68     		ldr	r4, [r3, #0]
+ 474 00b2 FB88     		ldrh	r3, [r7, #6]
+ 475 00b4 F868     		ldr	r0, [r7, #12]
+ 476 00b6 B968     		ldr	r1, [r7, #8]
+ 477 00b8 1A46     		mov	r2, r3
+ 478 00ba 3B68     		ldr	r3, [r7, #0]
+ 479 00bc A047     		blx	r4
+ 480 00be 0346     		mov	r3, r0
   24:../FreeRTOS_EC/Source/AManagedTask.cpp **** 			CTask::Create(AManagedTask::taskControlFunc, pcName, usStackDepth, this, uxPriority);
- 484              		.loc 4 24 0
- 485 0028 002B     		cmp	r3, #0
- 486 002a 13D0     		beq	.L21
- 487              		.loc 4 24 0 is_stmt 0 discriminator 1
- 488 002c FA68     		ldr	r2, [r7, #12]
- 489 002e FB88     		ldrh	r3, [r7, #6]
- 490 0030 F968     		ldr	r1, [r7, #12]
- 491 0032 0091     		str	r1, [sp, #0]
- 492 0034 3968     		ldr	r1, [r7, #0]
- 493 0036 0191     		str	r1, [sp, #4]
- 494 0038 1046     		mov	r0, r2
- 495 003a 40F20001 		movw	r1, #:lower16:_ZN12AManagedTask15taskControlFuncEPv
- 496 003e C0F20001 		movt	r1, #:upper16:_ZN12AManagedTask15taskControlFuncEPv
- 497 0042 BA68     		ldr	r2, [r7, #8]
- 498 0044 FFF7FEFF 		bl	_ZN5CTask6CreateEPFvPvEPKctS0_m
- 499 0048 0346     		mov	r3, r0
- 500 004a 002B     		cmp	r3, #0
- 501 004c 02D0     		beq	.L21
- 502              		.loc 4 24 0 discriminator 3
- 503 004e 4FF00103 		mov	r3, #1
- 504 0052 01E0     		b	.L22
- 505              	.L21:
- 506              		.loc 4 24 0 discriminator 2
- 507 0054 4FF00003 		mov	r3, #0
- 508              	.L22:
+ 481              		.loc 4 24 0
+ 482 00c0 002B     		cmp	r3, #0
+ 483 00c2 13D0     		beq	.L21
+ 484              		.loc 4 24 0 is_stmt 0 discriminator 1
+ 485 00c4 FA68     		ldr	r2, [r7, #12]
+ 486 00c6 FB88     		ldrh	r3, [r7, #6]
+ 487 00c8 F968     		ldr	r1, [r7, #12]
+ 488 00ca 0091     		str	r1, [sp, #0]
+ 489 00cc 3968     		ldr	r1, [r7, #0]
+ 490 00ce 0191     		str	r1, [sp, #4]
+ 491 00d0 1046     		mov	r0, r2
+ 492 00d2 40F20001 		movw	r1, #:lower16:_ZN12AManagedTask15taskControlFuncEPv
+ 493 00d6 C0F20001 		movt	r1, #:upper16:_ZN12AManagedTask15taskControlFuncEPv
+ 494 00da BA68     		ldr	r2, [r7, #8]
+ 495 00dc FFF7FEFF 		bl	_ZN5CTask6CreateEPFvPvEPKctS0_m
+ 496 00e0 0346     		mov	r3, r0
+ 497 00e2 002B     		cmp	r3, #0
+ 498 00e4 02D0     		beq	.L21
+ 499              		.loc 4 24 0 discriminator 3
+ 500 00e6 4FF00103 		mov	r3, #1
+ 501 00ea 01E0     		b	.L22
+ 502              	.L21:
+ 503              		.loc 4 24 0 discriminator 2
+ 504 00ec 4FF00003 		mov	r3, #0
+ 505              	.L22:
   25:../FreeRTOS_EC/Source/AManagedTask.cpp **** }
- 509              		.loc 4 25 0 is_stmt 1 discriminator 4
- 510 0058 1846     		mov	r0, r3
- 511 005a 07F11407 		add	r7, r7, #20
- 512 005e BD46     		mov	sp, r7
- 513 0060 90BD     		pop	{r4, r7, pc}
- 514              		.cfi_endproc
- 515              	.LFE147:
- 517 0062 00BF     		.section	.text._ZN12AManagedTask15taskControlFuncEPv,"ax",%progbits
- 518              		.align	2
- 519              		.global	_ZN12AManagedTask15taskControlFuncEPv
- 520              		.thumb
- 521              		.thumb_func
- 523              	_ZN12AManagedTask15taskControlFuncEPv:
- 524              	.LFB148:
+ 506              		.loc 4 25 0 is_stmt 1 discriminator 4
+ 507 00f0 1846     		mov	r0, r3
+ 508 00f2 07F11407 		add	r7, r7, #20
+ 509 00f6 BD46     		mov	sp, r7
+ 510 00f8 90BD     		pop	{r4, r7, pc}
+ 511              		.cfi_endproc
+ 512              	.LFE147:
+ 514 00fa 00BF     		.align	2
+ 515              		.global	_ZN12AManagedTask15taskControlFuncEPv
+ 516              		.thumb
+ 517              		.thumb_func
+ 519              	_ZN12AManagedTask15taskControlFuncEPv:
+ 520              	.LFB148:
   26:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   27:../FreeRTOS_EC/Source/AManagedTask.cpp **** void AManagedTask::taskControlFunc(void *pParams) {
- 525              		.loc 4 27 0
- 526              		.cfi_startproc
- 527              		@ args = 0, pretend = 0, frame = 8
- 528              		@ frame_needed = 1, uses_anonymous_args = 0
- 529 0000 80B5     		push	{r7, lr}
- 530              	.LCFI32:
- 531              		.cfi_def_cfa_offset 8
- 532              		.cfi_offset 14, -4
- 533              		.cfi_offset 7, -8
- 534 0002 82B0     		sub	sp, sp, #8
- 535              	.LCFI33:
- 536              		.cfi_def_cfa_offset 16
- 537 0004 00AF     		add	r7, sp, #0
- 538              	.LCFI34:
- 539              		.cfi_def_cfa_register 7
- 540 0006 7860     		str	r0, [r7, #4]
+ 521              		.loc 4 27 0
+ 522              		.cfi_startproc
+ 523              		@ args = 0, pretend = 0, frame = 8
+ 524              		@ frame_needed = 1, uses_anonymous_args = 0
+ 525 00fc 80B5     		push	{r7, lr}
+ 526              	.LCFI32:
+ 527              		.cfi_def_cfa_offset 8
+ 528              		.cfi_offset 14, -4
+ 529              		.cfi_offset 7, -8
+ 530 00fe 82B0     		sub	sp, sp, #8
+ 531              	.LCFI33:
+ 532              		.cfi_def_cfa_offset 16
+ 533 0100 00AF     		add	r7, sp, #0
+ 534              	.LCFI34:
+ 535              		.cfi_def_cfa_register 7
+ 536 0102 7860     		str	r0, [r7, #4]
   28:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	static_cast<AManagedTask *>(pParams)->Run();
- 541              		.loc 4 28 0
- 542 0008 7B68     		ldr	r3, [r7, #4]
- 543 000a 1B68     		ldr	r3, [r3, #0]
- 544 000c 03F11803 		add	r3, r3, #24
- 545 0010 1B68     		ldr	r3, [r3, #0]
- 546 0012 7868     		ldr	r0, [r7, #4]
- 547 0014 9847     		blx	r3
+ 537              		.loc 4 28 0
+ 538 0104 7B68     		ldr	r3, [r7, #4]
+ 539 0106 1B68     		ldr	r3, [r3, #0]
+ 540 0108 03F11803 		add	r3, r3, #24
+ 541 010c 1B68     		ldr	r3, [r3, #0]
+ 542 010e 7868     		ldr	r0, [r7, #4]
+ 543 0110 9847     		blx	r3
   29:../FreeRTOS_EC/Source/AManagedTask.cpp **** }
- 548              		.loc 4 29 0
- 549 0016 07F10807 		add	r7, r7, #8
- 550 001a BD46     		mov	sp, r7
- 551 001c 80BD     		pop	{r7, pc}
- 552              		.cfi_endproc
- 553              	.LFE148:
- 555 001e 00BF     		.section	.text._ZN12AManagedTask16AddToManagedTaskEPS_,"ax",%progbits
- 556              		.align	2
- 557              		.global	_ZN12AManagedTask16AddToManagedTaskEPS_
- 558              		.thumb
- 559              		.thumb_func
- 561              	_ZN12AManagedTask16AddToManagedTaskEPS_:
- 562              	.LFB149:
+ 544              		.loc 4 29 0
+ 545 0112 07F10807 		add	r7, r7, #8
+ 546 0116 BD46     		mov	sp, r7
+ 547 0118 80BD     		pop	{r7, pc}
+ 548              		.cfi_endproc
+ 549              	.LFE148:
+ 551 011a 00BF     		.align	2
+ 552              		.global	_ZN12AManagedTask16AddToManagedTaskEPS_
+ 553              		.thumb
+ 554              		.thumb_func
+ 556              	_ZN12AManagedTask16AddToManagedTaskEPS_:
+ 557              	.LFB149:
   30:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   31:../FreeRTOS_EC/Source/AManagedTask.cpp **** void AManagedTask::AddToManagedTask(AManagedTask *pTaskToAdd) {
- 563              		.loc 4 31 0
- 564              		.cfi_startproc
- 565              		@ args = 0, pretend = 0, frame = 8
- 566              		@ frame_needed = 1, uses_anonymous_args = 0
- 567 0000 80B5     		push	{r7, lr}
- 568              	.LCFI35:
- 569              		.cfi_def_cfa_offset 8
- 570              		.cfi_offset 14, -4
- 571              		.cfi_offset 7, -8
- 572 0002 82B0     		sub	sp, sp, #8
- 573              	.LCFI36:
- 574              		.cfi_def_cfa_offset 16
- 575 0004 00AF     		add	r7, sp, #0
- 576              	.LCFI37:
- 577              		.cfi_def_cfa_register 7
- 578 0006 7860     		str	r0, [r7, #4]
- 579 0008 3960     		str	r1, [r7, #0]
+ 558              		.loc 4 31 0
+ 559              		.cfi_startproc
+ 560              		@ args = 0, pretend = 0, frame = 8
+ 561              		@ frame_needed = 1, uses_anonymous_args = 0
+ 562 011c 80B5     		push	{r7, lr}
+ 563              	.LCFI35:
+ 564              		.cfi_def_cfa_offset 8
+ 565              		.cfi_offset 14, -4
+ 566              		.cfi_offset 7, -8
+ 567 011e 82B0     		sub	sp, sp, #8
+ 568              	.LCFI36:
+ 569              		.cfi_def_cfa_offset 16
+ 570 0120 00AF     		add	r7, sp, #0
+ 571              	.LCFI37:
+ 572              		.cfi_def_cfa_register 7
+ 573 0122 7860     		str	r0, [r7, #4]
+ 574 0124 3960     		str	r1, [r7, #0]
   32:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	EnterCritical();
- 580              		.loc 4 32 0
- 581 000a FFF7FEFF 		bl	_ZN5CTask13EnterCriticalEv
+ 575              		.loc 4 32 0
+ 576 0126 FFF7FEFF 		bl	_ZN5CTask13EnterCriticalEv
   33:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	// is the first element?
   34:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	if (s_pManagedTaskListHead == NULL) {
- 582              		.loc 4 34 0
- 583 000e 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 584 0012 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 585 0016 1B68     		ldr	r3, [r3, #0]
- 586 0018 002B     		cmp	r3, #0
- 587 001a 06D1     		bne	.L25
+ 577              		.loc 4 34 0
+ 578 012a 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 579 012e C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 580 0132 1B68     		ldr	r3, [r3, #0]
+ 581 0134 002B     		cmp	r3, #0
+ 582 0136 06D1     		bne	.L25
   35:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		s_pManagedTaskListHead = this;
- 588              		.loc 4 35 0
- 589 001c 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 590 0020 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 591 0024 7A68     		ldr	r2, [r7, #4]
- 592 0026 1A60     		str	r2, [r3, #0]
- 593 0028 0CE0     		b	.L26
- 594              	.L25:
+ 583              		.loc 4 35 0
+ 584 0138 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 585 013c C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 586 0140 7A68     		ldr	r2, [r7, #4]
+ 587 0142 1A60     		str	r2, [r3, #0]
+ 588 0144 0CE0     		b	.L26
+ 589              	.L25:
   36:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	}
   37:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	else {
   38:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		// add the task to the head of the managed task list.
   39:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		m_pNextManagedTask = s_pManagedTaskListHead;
- 595              		.loc 4 39 0
- 596 002a 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 597 002e C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 598 0032 1A68     		ldr	r2, [r3, #0]
- 599 0034 7B68     		ldr	r3, [r7, #4]
- 600 0036 9A60     		str	r2, [r3, #8]
+ 590              		.loc 4 39 0
+ 591 0146 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 592 014a C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 593 014e 1A68     		ldr	r2, [r3, #0]
+ 594 0150 7B68     		ldr	r3, [r7, #4]
+ 595 0152 9A60     		str	r2, [r3, #8]
   40:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		s_pManagedTaskListHead = this;
- 601              		.loc 4 40 0
- 602 0038 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 603 003c C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 604 0040 7A68     		ldr	r2, [r7, #4]
- 605 0042 1A60     		str	r2, [r3, #0]
- 606              	.L26:
+ 596              		.loc 4 40 0
+ 597 0154 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 598 0158 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 599 015c 7A68     		ldr	r2, [r7, #4]
+ 600 015e 1A60     		str	r2, [r3, #0]
+ 601              	.L26:
   41:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	}
   42:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	ExitCritical();
- 607              		.loc 4 42 0
- 608 0044 FFF7FEFF 		bl	_ZN5CTask12ExitCriticalEv
+ 602              		.loc 4 42 0
+ 603 0160 FFF7FEFF 		bl	_ZN5CTask12ExitCriticalEv
   43:../FreeRTOS_EC/Source/AManagedTask.cpp **** }
- 609              		.loc 4 43 0
- 610 0048 07F10807 		add	r7, r7, #8
- 611 004c BD46     		mov	sp, r7
- 612 004e 80BD     		pop	{r7, pc}
- 613              		.cfi_endproc
- 614              	.LFE149:
- 616              		.section	.text._ZN12AManagedTask21RemoveFromManagedTaskEPS_,"ax",%progbits
- 617              		.align	2
- 618              		.global	_ZN12AManagedTask21RemoveFromManagedTaskEPS_
- 619              		.thumb
- 620              		.thumb_func
- 622              	_ZN12AManagedTask21RemoveFromManagedTaskEPS_:
- 623              	.LFB150:
+ 604              		.loc 4 43 0
+ 605 0164 07F10807 		add	r7, r7, #8
+ 606 0168 BD46     		mov	sp, r7
+ 607 016a 80BD     		pop	{r7, pc}
+ 608              		.cfi_endproc
+ 609              	.LFE149:
+ 611              		.align	2
+ 612              		.global	_ZN12AManagedTask21RemoveFromManagedTaskEPS_
+ 613              		.thumb
+ 614              		.thumb_func
+ 616              	_ZN12AManagedTask21RemoveFromManagedTaskEPS_:
+ 617              	.LFB150:
   44:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   45:../FreeRTOS_EC/Source/AManagedTask.cpp **** void AManagedTask::RemoveFromManagedTask(AManagedTask *pTaskToRemove) {
- 624              		.loc 4 45 0
- 625              		.cfi_startproc
- 626              		@ args = 0, pretend = 0, frame = 16
- 627              		@ frame_needed = 1, uses_anonymous_args = 0
- 628 0000 80B5     		push	{r7, lr}
- 629              	.LCFI38:
- 630              		.cfi_def_cfa_offset 8
- 631              		.cfi_offset 14, -4
- 632              		.cfi_offset 7, -8
- 633 0002 84B0     		sub	sp, sp, #16
- 634              	.LCFI39:
- 635              		.cfi_def_cfa_offset 24
- 636 0004 00AF     		add	r7, sp, #0
- 637              	.LCFI40:
- 638              		.cfi_def_cfa_register 7
- 639 0006 7860     		str	r0, [r7, #4]
- 640 0008 3960     		str	r1, [r7, #0]
- 641              	.LBB5:
+ 618              		.loc 4 45 0
+ 619              		.cfi_startproc
+ 620              		@ args = 0, pretend = 0, frame = 16
+ 621              		@ frame_needed = 1, uses_anonymous_args = 0
+ 622 016c 80B5     		push	{r7, lr}
+ 623              	.LCFI38:
+ 624              		.cfi_def_cfa_offset 8
+ 625              		.cfi_offset 14, -4
+ 626              		.cfi_offset 7, -8
+ 627 016e 84B0     		sub	sp, sp, #16
+ 628              	.LCFI39:
+ 629              		.cfi_def_cfa_offset 24
+ 630 0170 00AF     		add	r7, sp, #0
+ 631              	.LCFI40:
+ 632              		.cfi_def_cfa_register 7
+ 633 0172 7860     		str	r0, [r7, #4]
+ 634 0174 3960     		str	r1, [r7, #0]
+ 635              	.LBB5:
   46:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	// search for the task to remove in the managed task list
   47:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	// is it the first element?
   48:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	EnterCritical();
- 642              		.loc 4 48 0
- 643 000a FFF7FEFF 		bl	_ZN5CTask13EnterCriticalEv
- 644              	.LBB6:
+ 636              		.loc 4 48 0
+ 637 0176 FFF7FEFF 		bl	_ZN5CTask13EnterCriticalEv
+ 638              	.LBB6:
   49:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	if (pTaskToRemove == s_pManagedTaskListHead) {
- 645              		.loc 4 49 0
- 646 000e 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 647 0012 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 648 0016 1B68     		ldr	r3, [r3, #0]
- 649 0018 3A68     		ldr	r2, [r7, #0]
- 650 001a 9A42     		cmp	r2, r3
- 651 001c 09D1     		bne	.L28
+ 639              		.loc 4 49 0
+ 640 017a 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 641 017e C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 642 0182 1B68     		ldr	r3, [r3, #0]
+ 643 0184 3A68     		ldr	r2, [r7, #0]
+ 644 0186 9A42     		cmp	r2, r3
+ 645 0188 09D1     		bne	.L28
   50:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		s_pManagedTaskListHead = pTaskToRemove->m_pNextManagedTask;
- 652              		.loc 4 50 0
- 653 001e 3B68     		ldr	r3, [r7, #0]
- 654 0020 9A68     		ldr	r2, [r3, #8]
- 655 0022 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 656 0026 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 657 002a 1A60     		str	r2, [r3, #0]
+ 646              		.loc 4 50 0
+ 647 018a 3B68     		ldr	r3, [r7, #0]
+ 648 018c 9A68     		ldr	r2, [r3, #8]
+ 649 018e 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 650 0192 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 651 0196 1A60     		str	r2, [r3, #0]
   51:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		ExitCritical();
- 658              		.loc 4 51 0
- 659 002c FFF7FEFF 		bl	_ZN5CTask12ExitCriticalEv
- 660 0030 25E0     		b	.L27
- 661              	.L28:
- 662              	.LBB7:
+ 652              		.loc 4 51 0
+ 653 0198 FFF7FEFF 		bl	_ZN5CTask12ExitCriticalEv
+ 654 019c 25E0     		b	.L27
+ 655              	.L28:
+ 656              	.LBB7:
   52:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	}
   53:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	else {
   54:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		ExitCritical();
- 663              		.loc 4 54 0
- 664 0032 FFF7FEFF 		bl	_ZN5CTask12ExitCriticalEv
+ 657              		.loc 4 54 0
+ 658 019e FFF7FEFF 		bl	_ZN5CTask12ExitCriticalEv
   55:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		CFreeRTOS::SuspendAllTasks();
- 665              		.loc 4 55 0
- 666 0036 FFF7FEFF 		bl	_ZN9CFreeRTOS15SuspendAllTasksEv
+ 659              		.loc 4 55 0
+ 660 01a2 FFF7FEFF 		bl	_ZN9CFreeRTOS15SuspendAllTasksEv
   56:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		AManagedTask *pTask = s_pManagedTaskListHead;
- 667              		.loc 4 56 0
- 668 003a 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 669 003e C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 670 0042 1B68     		ldr	r3, [r3, #0]
- 671 0044 FB60     		str	r3, [r7, #12]
+ 661              		.loc 4 56 0
+ 662 01a6 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 663 01aa C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 664 01ae 1B68     		ldr	r3, [r3, #0]
+ 665 01b0 FB60     		str	r3, [r7, #12]
   57:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		while (pTask != NULL && pTask->m_pNextManagedTask != pTaskToRemove) {
- 672              		.loc 4 57 0
- 673 0046 02E0     		b	.L30
- 674              	.L33:
+ 666              		.loc 4 57 0
+ 667 01b2 02E0     		b	.L30
+ 668              	.L33:
   58:../FreeRTOS_EC/Source/AManagedTask.cpp **** 			pTask = pTask->m_pNextManagedTask;
- 675              		.loc 4 58 0
- 676 0048 FB68     		ldr	r3, [r7, #12]
- 677 004a 9B68     		ldr	r3, [r3, #8]
- 678 004c FB60     		str	r3, [r7, #12]
- 679              	.L30:
+ 669              		.loc 4 58 0
+ 670 01b4 FB68     		ldr	r3, [r7, #12]
+ 671 01b6 9B68     		ldr	r3, [r3, #8]
+ 672 01b8 FB60     		str	r3, [r7, #12]
+ 673              	.L30:
   57:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		while (pTask != NULL && pTask->m_pNextManagedTask != pTaskToRemove) {
- 680              		.loc 4 57 0 discriminator 1
- 681 004e FB68     		ldr	r3, [r7, #12]
- 682 0050 002B     		cmp	r3, #0
- 683 0052 07D0     		beq	.L31
+ 674              		.loc 4 57 0 discriminator 1
+ 675 01ba FB68     		ldr	r3, [r7, #12]
+ 676 01bc 002B     		cmp	r3, #0
+ 677 01be 07D0     		beq	.L31
   57:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		while (pTask != NULL && pTask->m_pNextManagedTask != pTaskToRemove) {
- 684              		.loc 4 57 0 is_stmt 0 discriminator 2
- 685 0054 FB68     		ldr	r3, [r7, #12]
- 686 0056 9A68     		ldr	r2, [r3, #8]
- 687 0058 3B68     		ldr	r3, [r7, #0]
- 688 005a 9A42     		cmp	r2, r3
- 689 005c 02D0     		beq	.L31
+ 678              		.loc 4 57 0 is_stmt 0 discriminator 2
+ 679 01c0 FB68     		ldr	r3, [r7, #12]
+ 680 01c2 9A68     		ldr	r2, [r3, #8]
+ 681 01c4 3B68     		ldr	r3, [r7, #0]
+ 682 01c6 9A42     		cmp	r2, r3
+ 683 01c8 02D0     		beq	.L31
   57:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		while (pTask != NULL && pTask->m_pNextManagedTask != pTaskToRemove) {
- 690              		.loc 4 57 0 discriminator 4
- 691 005e 4FF00103 		mov	r3, #1
- 692 0062 01E0     		b	.L32
- 693              	.L31:
+ 684              		.loc 4 57 0 discriminator 4
+ 685 01ca 4FF00103 		mov	r3, #1
+ 686 01ce 01E0     		b	.L32
+ 687              	.L31:
   57:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		while (pTask != NULL && pTask->m_pNextManagedTask != pTaskToRemove) {
- 694              		.loc 4 57 0 discriminator 3
- 695 0064 4FF00003 		mov	r3, #0
- 696              	.L32:
+ 688              		.loc 4 57 0 discriminator 3
+ 689 01d0 4FF00003 		mov	r3, #0
+ 690              	.L32:
   57:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		while (pTask != NULL && pTask->m_pNextManagedTask != pTaskToRemove) {
- 697              		.loc 4 57 0 discriminator 5
- 698 0068 002B     		cmp	r3, #0
- 699 006a EDD1     		bne	.L33
+ 691              		.loc 4 57 0 discriminator 5
+ 692 01d4 002B     		cmp	r3, #0
+ 693 01d6 EDD1     		bne	.L33
   59:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		}
   60:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		if (pTask != NULL) { // Check to be sure that the task is in the list
- 700              		.loc 4 60 0 is_stmt 1
- 701 006c FB68     		ldr	r3, [r7, #12]
- 702 006e 002B     		cmp	r3, #0
- 703 0070 03D0     		beq	.L34
+ 694              		.loc 4 60 0 is_stmt 1
+ 695 01d8 FB68     		ldr	r3, [r7, #12]
+ 696 01da 002B     		cmp	r3, #0
+ 697 01dc 03D0     		beq	.L34
   61:../FreeRTOS_EC/Source/AManagedTask.cpp **** 			// remove the thask from the list
   62:../FreeRTOS_EC/Source/AManagedTask.cpp **** 			pTask->m_pNextManagedTask = pTaskToRemove->m_pNextManagedTask;
- 704              		.loc 4 62 0
- 705 0072 3B68     		ldr	r3, [r7, #0]
- 706 0074 9A68     		ldr	r2, [r3, #8]
- 707 0076 FB68     		ldr	r3, [r7, #12]
- 708 0078 9A60     		str	r2, [r3, #8]
- 709              	.L34:
+ 698              		.loc 4 62 0
+ 699 01de 3B68     		ldr	r3, [r7, #0]
+ 700 01e0 9A68     		ldr	r2, [r3, #8]
+ 701 01e2 FB68     		ldr	r3, [r7, #12]
+ 702 01e4 9A60     		str	r2, [r3, #8]
+ 703              	.L34:
   63:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		}
   64:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		CFreeRTOS::ResumeAllTasks();
- 710              		.loc 4 64 0
- 711 007a FFF7FEFF 		bl	_ZN9CFreeRTOS14ResumeAllTasksEv
- 712              	.L27:
- 713              	.LBE7:
- 714              	.LBE6:
- 715              	.LBE5:
+ 704              		.loc 4 64 0
+ 705 01e6 FFF7FEFF 		bl	_ZN9CFreeRTOS14ResumeAllTasksEv
+ 706              	.L27:
+ 707              	.LBE7:
+ 708              	.LBE6:
+ 709              	.LBE5:
   65:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	}
   66:../FreeRTOS_EC/Source/AManagedTask.cpp **** }
- 716              		.loc 4 66 0
- 717 007e 07F11007 		add	r7, r7, #16
- 718 0082 BD46     		mov	sp, r7
- 719 0084 80BD     		pop	{r7, pc}
- 720              		.cfi_endproc
- 721              	.LFE150:
- 723 0086 00BF     		.section	.text._ZN12AManagedTask27InitHardwareForManagedTasksEv,"ax",%progbits
- 724              		.align	2
- 725              		.global	_ZN12AManagedTask27InitHardwareForManagedTasksEv
- 726              		.thumb
- 727              		.thumb_func
- 729              	_ZN12AManagedTask27InitHardwareForManagedTasksEv:
- 730              	.LFB151:
+ 710              		.loc 4 66 0
+ 711 01ea 07F11007 		add	r7, r7, #16
+ 712 01ee BD46     		mov	sp, r7
+ 713 01f0 80BD     		pop	{r7, pc}
+ 714              		.cfi_endproc
+ 715              	.LFE150:
+ 717 01f2 00BF     		.align	2
+ 718              		.global	_ZN12AManagedTask27InitHardwareForManagedTasksEv
+ 719              		.thumb
+ 720              		.thumb_func
+ 722              	_ZN12AManagedTask27InitHardwareForManagedTasksEv:
+ 723              	.LFB151:
   67:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   68:../FreeRTOS_EC/Source/AManagedTask.cpp **** bool AManagedTask::InitHardwareForManagedTasks() {
- 731              		.loc 4 68 0
- 732              		.cfi_startproc
- 733              		@ args = 0, pretend = 0, frame = 8
- 734              		@ frame_needed = 1, uses_anonymous_args = 0
- 735 0000 90B5     		push	{r4, r7, lr}
- 736              	.LCFI41:
- 737              		.cfi_def_cfa_offset 12
- 738              		.cfi_offset 14, -4
- 739              		.cfi_offset 7, -8
- 740              		.cfi_offset 4, -12
- 741 0002 83B0     		sub	sp, sp, #12
- 742              	.LCFI42:
- 743              		.cfi_def_cfa_offset 24
- 744 0004 00AF     		add	r7, sp, #0
- 745              	.LCFI43:
- 746              		.cfi_def_cfa_register 7
- 747              	.LBB8:
+ 724              		.loc 4 68 0
+ 725              		.cfi_startproc
+ 726              		@ args = 0, pretend = 0, frame = 8
+ 727              		@ frame_needed = 1, uses_anonymous_args = 0
+ 728 01f4 90B5     		push	{r4, r7, lr}
+ 729              	.LCFI41:
+ 730              		.cfi_def_cfa_offset 12
+ 731              		.cfi_offset 14, -4
+ 732              		.cfi_offset 7, -8
+ 733              		.cfi_offset 4, -12
+ 734 01f6 83B0     		sub	sp, sp, #12
+ 735              	.LCFI42:
+ 736              		.cfi_def_cfa_offset 24
+ 737 01f8 00AF     		add	r7, sp, #0
+ 738              	.LCFI43:
+ 739              		.cfi_def_cfa_register 7
+ 740              	.LBB8:
   69:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	bool bRes = true;
- 748              		.loc 4 69 0
- 749 0006 4FF00103 		mov	r3, #1
- 750 000a FB71     		strb	r3, [r7, #7]
- 751              	.LBB9:
+ 741              		.loc 4 69 0
+ 742 01fa 4FF00103 		mov	r3, #1
+ 743 01fe FB71     		strb	r3, [r7, #7]
+ 744              	.LBB9:
   70:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	for (AManagedTask *pTask=s_pManagedTaskListHead; pTask!=NULL; pTask=pTask->m_pNextManagedTask)
- 752              		.loc 4 70 0
- 753 000c 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 754 0010 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
- 755 0014 1B68     		ldr	r3, [r3, #0]
- 756 0016 3B60     		str	r3, [r7, #0]
- 757 0018 11E0     		b	.L36
- 758              	.L37:
+ 745              		.loc 4 70 0
+ 746 0200 40F20003 		movw	r3, #:lower16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 747 0204 C0F20003 		movt	r3, #:upper16:_ZN12AManagedTask22s_pManagedTaskListHeadE
+ 748 0208 1B68     		ldr	r3, [r3, #0]
+ 749 020a 3B60     		str	r3, [r7, #0]
+ 750 020c 11E0     		b	.L36
+ 751              	.L37:
   71:../FreeRTOS_EC/Source/AManagedTask.cpp **** 		bRes &= pTask->HardwareInit();
- 759              		.loc 4 71 0 discriminator 2
- 760 001a FC79     		ldrb	r4, [r7, #7]	@ zero_extendqisi2
- 761 001c 3B68     		ldr	r3, [r7, #0]
- 762 001e 1B68     		ldr	r3, [r3, #0]
- 763 0020 03F11403 		add	r3, r3, #20
- 764 0024 1B68     		ldr	r3, [r3, #0]
- 765 0026 3868     		ldr	r0, [r7, #0]
- 766 0028 9847     		blx	r3
- 767 002a 0346     		mov	r3, r0
- 768 002c 2340     		ands	r3, r3, r4
- 769 002e 002B     		cmp	r3, #0
- 770 0030 0CBF     		ite	eq
- 771 0032 0023     		moveq	r3, #0
- 772 0034 0123     		movne	r3, #1
- 773 0036 FB71     		strb	r3, [r7, #7]
+ 752              		.loc 4 71 0 discriminator 2
+ 753 020e FC79     		ldrb	r4, [r7, #7]	@ zero_extendqisi2
+ 754 0210 3B68     		ldr	r3, [r7, #0]
+ 755 0212 1B68     		ldr	r3, [r3, #0]
+ 756 0214 03F11403 		add	r3, r3, #20
+ 757 0218 1B68     		ldr	r3, [r3, #0]
+ 758 021a 3868     		ldr	r0, [r7, #0]
+ 759 021c 9847     		blx	r3
+ 760 021e 0346     		mov	r3, r0
+ 761 0220 2340     		ands	r3, r3, r4
+ 762 0222 002B     		cmp	r3, #0
+ 763 0224 0CBF     		ite	eq
+ 764 0226 0023     		moveq	r3, #0
+ 765 0228 0123     		movne	r3, #1
+ 766 022a FB71     		strb	r3, [r7, #7]
   70:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	for (AManagedTask *pTask=s_pManagedTaskListHead; pTask!=NULL; pTask=pTask->m_pNextManagedTask)
- 774              		.loc 4 70 0 discriminator 2
- 775 0038 3B68     		ldr	r3, [r7, #0]
- 776 003a 9B68     		ldr	r3, [r3, #8]
- 777 003c 3B60     		str	r3, [r7, #0]
- 778              	.L36:
+ 767              		.loc 4 70 0 discriminator 2
+ 768 022c 3B68     		ldr	r3, [r7, #0]
+ 769 022e 9B68     		ldr	r3, [r3, #8]
+ 770 0230 3B60     		str	r3, [r7, #0]
+ 771              	.L36:
   70:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	for (AManagedTask *pTask=s_pManagedTaskListHead; pTask!=NULL; pTask=pTask->m_pNextManagedTask)
- 779              		.loc 4 70 0 is_stmt 0 discriminator 1
- 780 003e 3B68     		ldr	r3, [r7, #0]
- 781 0040 002B     		cmp	r3, #0
- 782 0042 0CBF     		ite	eq
- 783 0044 0023     		moveq	r3, #0
- 784 0046 0123     		movne	r3, #1
- 785 0048 DBB2     		uxtb	r3, r3
- 786 004a 002B     		cmp	r3, #0
- 787 004c E5D1     		bne	.L37
- 788              	.LBE9:
+ 772              		.loc 4 70 0 is_stmt 0 discriminator 1
+ 773 0232 3B68     		ldr	r3, [r7, #0]
+ 774 0234 002B     		cmp	r3, #0
+ 775 0236 0CBF     		ite	eq
+ 776 0238 0023     		moveq	r3, #0
+ 777 023a 0123     		movne	r3, #1
+ 778 023c DBB2     		uxtb	r3, r3
+ 779 023e 002B     		cmp	r3, #0
+ 780 0240 E5D1     		bne	.L37
+ 781              	.LBE9:
   72:../FreeRTOS_EC/Source/AManagedTask.cpp **** 
   73:../FreeRTOS_EC/Source/AManagedTask.cpp **** 	return bRes;
- 789              		.loc 4 73 0 is_stmt 1
- 790 004e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 791              	.LBE8:
+ 782              		.loc 4 73 0 is_stmt 1
+ 783 0242 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 784              	.LBE8:
   74:../FreeRTOS_EC/Source/AManagedTask.cpp **** }
- 792              		.loc 4 74 0
- 793 0050 1846     		mov	r0, r3
- 794 0052 07F10C07 		add	r7, r7, #12
- 795 0056 BD46     		mov	sp, r7
- 796 0058 90BD     		pop	{r4, r7, pc}
- 797              		.cfi_endproc
- 798              	.LFE151:
- 800              		.global	_ZTV12AManagedTask
- 801 005a 00BF     		.section	.rodata._ZTV12AManagedTask,"a",%progbits
- 802              		.align	3
- 805              	_ZTV12AManagedTask:
- 806 0000 00000000 		.word	0
- 807 0004 00000000 		.word	0
- 808 0008 00000000 		.word	_ZNK5CTask7IsValidEv
- 809 000c 00000000 		.word	_ZN5CTask6AttachEPv
- 810 0010 00000000 		.word	_ZN5CTask6DetachEv
- 811 0014 00000000 		.word	_ZN12AManagedTaskD1Ev
- 812 0018 00000000 		.word	_ZN12AManagedTaskD0Ev
- 813 001c 00000000 		.word	_ZN12AManagedTask12HardwareInitEv
- 814 0020 00000000 		.word	__cxa_pure_virtual
- 815 0024 00000000 		.word	_ZN12AManagedTask8OnCreateEPKctm
- 816              		.global	_ZN12AManagedTaskC1Ev
- 817              		.thumb_set _ZN12AManagedTaskC1Ev,_ZN12AManagedTaskC2Ev
- 818              		.global	_ZN12AManagedTaskD1Ev
- 819              		.thumb_set _ZN12AManagedTaskD1Ev,_ZN12AManagedTaskD2Ev
- 820              		.text
- 821              	.Letext0:
- 822              		.file 5 "e:/elektronik/toolchain/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 823              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
- 824              		.file 7 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
- 825              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 785              		.loc 4 74 0
+ 786 0244 1846     		mov	r0, r3
+ 787 0246 07F10C07 		add	r7, r7, #12
+ 788 024a BD46     		mov	sp, r7
+ 789 024c 90BD     		pop	{r4, r7, pc}
+ 790              		.cfi_endproc
+ 791              	.LFE151:
+ 793              		.global	_ZTV12AManagedTask
+ 794              		.section	.rodata._ZTV12AManagedTask,"a",%progbits
+ 795              		.align	3
+ 798              	_ZTV12AManagedTask:
+ 799 0000 00000000 		.word	0
+ 800 0004 00000000 		.word	0
+ 801 0008 00000000 		.word	_ZNK5CTask7IsValidEv
+ 802 000c 00000000 		.word	_ZN5CTask6AttachEPv
+ 803 0010 00000000 		.word	_ZN5CTask6DetachEv
+ 804 0014 00000000 		.word	_ZN12AManagedTaskD1Ev
+ 805 0018 00000000 		.word	_ZN12AManagedTaskD0Ev
+ 806 001c 00000000 		.word	_ZN12AManagedTask12HardwareInitEv
+ 807 0020 00000000 		.word	__cxa_pure_virtual
+ 808 0024 00000000 		.word	_ZN12AManagedTask8OnCreateEPKctm
+ 809              		.global	_ZN12AManagedTaskC1Ev
+ 810              		.thumb_set _ZN12AManagedTaskC1Ev,_ZN12AManagedTaskC2Ev
+ 811              		.global	_ZN12AManagedTaskD1Ev
+ 812              		.thumb_set _ZN12AManagedTaskD1Ev,_ZN12AManagedTaskD2Ev
+ 813              		.text
+ 814              	.Letext0:
+ 815              		.file 5 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 816              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
+ 817              		.file 7 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 818              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
 DEFINED SYMBOLS
                             *ABS*:00000000 AManagedTask.cpp
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:19     .text._ZN5CTask13EnterCriticalEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:24     .text._ZN5CTask13EnterCriticalEv:00000000 _ZN5CTask13EnterCriticalEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:46     .text._ZN5CTask12ExitCriticalEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:51     .text._ZN5CTask12ExitCriticalEv:00000000 _ZN5CTask12ExitCriticalEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:72     .text._ZNK5CTask7IsValidEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:77     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:113    .text._ZN5CTask6DetachEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:118    .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:158    .text._ZN12AManagedTask12HardwareInitEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:163    .text._ZN12AManagedTask12HardwareInitEv:00000000 _ZN12AManagedTask12HardwareInitEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:193    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:198    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:231    .text._ZN9CFreeRTOS15SuspendAllTasksEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:236    .text._ZN9CFreeRTOS15SuspendAllTasksEv:00000000 _ZN9CFreeRTOS15SuspendAllTasksEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:258    .text._ZN9CFreeRTOS14ResumeAllTasksEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:263    .text._ZN9CFreeRTOS14ResumeAllTasksEv:00000000 _ZN9CFreeRTOS14ResumeAllTasksEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:290    .bss._ZN12AManagedTask22s_pManagedTaskListHeadE:00000000 _ZN12AManagedTask22s_pManagedTaskListHeadE
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:287    .bss._ZN12AManagedTask22s_pManagedTaskListHeadE:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:293    .text._ZN12AManagedTaskC2Ev:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:298    .text._ZN12AManagedTaskC2Ev:00000000 _ZN12AManagedTaskC2Ev
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:561    .text._ZN12AManagedTask16AddToManagedTaskEPS_:00000000 _ZN12AManagedTask16AddToManagedTaskEPS_
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:343    .text._ZN12AManagedTaskC2Ev:00000034 $d
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:805    .rodata._ZTV12AManagedTask:00000000 _ZTV12AManagedTask
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:348    .text._ZN12AManagedTaskD2Ev:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:353    .text._ZN12AManagedTaskD2Ev:00000000 _ZN12AManagedTaskD2Ev
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:622    .text._ZN12AManagedTask21RemoveFromManagedTaskEPS_:00000000 _ZN12AManagedTask21RemoveFromManagedTaskEPS_
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:402    .text._ZN12AManagedTaskD2Ev:0000003c $d
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:407    .text._ZN12AManagedTaskD0Ev:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:412    .text._ZN12AManagedTaskD0Ev:00000000 _ZN12AManagedTaskD0Ev
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:353    .text._ZN12AManagedTaskD2Ev:00000000 _ZN12AManagedTaskD1Ev
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:444    .text._ZN12AManagedTask6CreateEPKctm:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:449    .text._ZN12AManagedTask6CreateEPKctm:00000000 _ZN12AManagedTask6CreateEPKctm
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:523    .text._ZN12AManagedTask15taskControlFuncEPv:00000000 _ZN12AManagedTask15taskControlFuncEPv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:518    .text._ZN12AManagedTask15taskControlFuncEPv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:556    .text._ZN12AManagedTask16AddToManagedTaskEPS_:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:617    .text._ZN12AManagedTask21RemoveFromManagedTaskEPS_:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:724    .text._ZN12AManagedTask27InitHardwareForManagedTasksEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:729    .text._ZN12AManagedTask27InitHardwareForManagedTasksEv:00000000 _ZN12AManagedTask27InitHardwareForManagedTasksEv
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:802    .rodata._ZTV12AManagedTask:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccQCEU6V.s:298    .text._ZN12AManagedTaskC2Ev:00000000 _ZN12AManagedTaskC1Ev
+  C:\Temp\ccUWqtYN.s:19     .text._ZN5CTask13EnterCriticalEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:24     .text._ZN5CTask13EnterCriticalEv:00000000 _ZN5CTask13EnterCriticalEv
+  C:\Temp\ccUWqtYN.s:46     .text._ZN5CTask12ExitCriticalEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:51     .text._ZN5CTask12ExitCriticalEv:00000000 _ZN5CTask12ExitCriticalEv
+  C:\Temp\ccUWqtYN.s:72     .text._ZNK5CTask7IsValidEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:77     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
+  C:\Temp\ccUWqtYN.s:113    .text._ZN5CTask6DetachEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:118    .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
+  C:\Temp\ccUWqtYN.s:158    .text._ZN12AManagedTask12HardwareInitEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:163    .text._ZN12AManagedTask12HardwareInitEv:00000000 _ZN12AManagedTask12HardwareInitEv
+  C:\Temp\ccUWqtYN.s:193    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
+  C:\Temp\ccUWqtYN.s:198    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
+  C:\Temp\ccUWqtYN.s:231    .text._ZN9CFreeRTOS15SuspendAllTasksEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:236    .text._ZN9CFreeRTOS15SuspendAllTasksEv:00000000 _ZN9CFreeRTOS15SuspendAllTasksEv
+  C:\Temp\ccUWqtYN.s:258    .text._ZN9CFreeRTOS14ResumeAllTasksEv:00000000 $t
+  C:\Temp\ccUWqtYN.s:263    .text._ZN9CFreeRTOS14ResumeAllTasksEv:00000000 _ZN9CFreeRTOS14ResumeAllTasksEv
+  C:\Temp\ccUWqtYN.s:290    .bss._ZN12AManagedTask22s_pManagedTaskListHeadE:00000000 _ZN12AManagedTask22s_pManagedTaskListHeadE
+  C:\Temp\ccUWqtYN.s:287    .bss._ZN12AManagedTask22s_pManagedTaskListHeadE:00000000 $d
+  C:\Temp\ccUWqtYN.s:293    .text:00000000 $t
+  C:\Temp\ccUWqtYN.s:298    .text:00000000 _ZN12AManagedTaskC2Ev
+  C:\Temp\ccUWqtYN.s:556    .text:0000011c _ZN12AManagedTask16AddToManagedTaskEPS_
+  C:\Temp\ccUWqtYN.s:343    .text:00000034 $d
+  C:\Temp\ccUWqtYN.s:798    .rodata._ZTV12AManagedTask:00000000 _ZTV12AManagedTask
+  C:\Temp\ccUWqtYN.s:347    .text:00000038 $t
+  C:\Temp\ccUWqtYN.s:352    .text:00000038 _ZN12AManagedTaskD2Ev
+  C:\Temp\ccUWqtYN.s:616    .text:0000016c _ZN12AManagedTask21RemoveFromManagedTaskEPS_
+  C:\Temp\ccUWqtYN.s:401    .text:00000074 $d
+  C:\Temp\ccUWqtYN.s:405    .text:00000078 $t
+  C:\Temp\ccUWqtYN.s:410    .text:00000078 _ZN12AManagedTaskD0Ev
+  C:\Temp\ccUWqtYN.s:352    .text:00000038 _ZN12AManagedTaskD1Ev
+  C:\Temp\ccUWqtYN.s:446    .text:00000098 _ZN12AManagedTask6CreateEPKctm
+  C:\Temp\ccUWqtYN.s:519    .text:000000fc _ZN12AManagedTask15taskControlFuncEPv
+  C:\Temp\ccUWqtYN.s:722    .text:000001f4 _ZN12AManagedTask27InitHardwareForManagedTasksEv
+  C:\Temp\ccUWqtYN.s:795    .rodata._ZTV12AManagedTask:00000000 $d
+  C:\Temp\ccUWqtYN.s:298    .text:00000000 _ZN12AManagedTaskC1Ev
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

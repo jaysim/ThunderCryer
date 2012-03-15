@@ -1,216 +1,216 @@
 main.d: ../main.cpp \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CFreeRTOS.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOS.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/projdefs.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOSConfig.h \
- E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/stm32f4xx.h \
- E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4.h \
- E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h \
- E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmFunc.h \
- E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4_simd.h \
- E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/system_stm32f4xx.h \
- E:\Desktop\thundercyer-the-alarm-clock/stm32f4xx_conf.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dac.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dma.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_exti.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_fsmc.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_gpio.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_i2c.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_pwr.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rcc.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rtc.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_sdio.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_spi.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_syscfg.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_tim.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h \
- E:\Desktop\thundercyer-the-alarm-clock/ustime.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/portable.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/../../Source/portable/GCC/ARM_CM4F/portmacro.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/mpu_wrappers.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/task.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/list.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/IFreeRTOSProtocol.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CFreeRTOS.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOS.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/projdefs.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOSConfig.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/stm32f4xx.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmFunc.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4_simd.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/system_stm32f4xx.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock/stm32f4xx_conf.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dac.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dma.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_exti.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_fsmc.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_gpio.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_i2c.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_pwr.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rcc.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rtc.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_sdio.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_spi.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_syscfg.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_tim.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock/ustime.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/portable.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/../../Source/portable/GCC/ARM_CM4F/portmacro.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/mpu_wrappers.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/task.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/list.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/IFreeRTOSProtocol.h \
  ../ustime.h ../CLedHeartBeatSTM32F4Disc.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/AManagedTask.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h \
- E:\Desktop\thundercyer-the-alarm-clock\Menue/CMenue.h \
- E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
- E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h \
- E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h \
- E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/CUSBMassStorage.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd_int.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_regs.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usb_conf.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_core.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_defines.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_usr.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/semphr.h \
- E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/queue.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_def.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_conf.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/ff.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/integer.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_stdreq.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_bsp.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_ioreq.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_hcs.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h \
- E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h \
- E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3/CFileHandler.h \
- E:\Desktop\thundercyer-the-alarm-clock\HelixMP3\pub/mp3dec.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/AManagedTask.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Menue/CMenue.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/CUSBMassStorage.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd_int.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_regs.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usb_conf.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_core.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_defines.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_usr.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/semphr.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/queue.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_def.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_conf.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/ff.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/integer.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_stdreq.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_bsp.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_ioreq.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_hcs.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3/CFileHandler.h \
+ C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\HelixMP3\pub/mp3dec.h \
  ../stm32f4xx_conf.h
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CFreeRTOS.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CFreeRTOS.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOS.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOS.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/projdefs.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/projdefs.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOSConfig.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/FreeRTOSConfig.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/stm32f4xx.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/stm32f4xx.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmFunc.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmFunc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4_simd.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cm4_simd.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/system_stm32f4xx.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Device\STM32F4xx\Include/system_stm32f4xx.h:
 
-E:\Desktop\thundercyer-the-alarm-clock/stm32f4xx_conf.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock/stm32f4xx_conf.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dac.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dac.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dma.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_dma.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_exti.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_exti.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_fsmc.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_fsmc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_gpio.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_gpio.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_i2c.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_i2c.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_pwr.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_pwr.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rcc.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rcc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rtc.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_rtc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_sdio.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_sdio.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_spi.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_spi.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_syscfg.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_syscfg.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_tim.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_tim.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/stm32f4xx_wwdg.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4xx_StdPeriph_Driver\inc/misc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock/ustime.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock/ustime.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/portable.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/portable.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/../../Source/portable/GCC/ARM_CM4F/portmacro.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/../../Source/portable/GCC/ARM_CM4F/portmacro.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/mpu_wrappers.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/mpu_wrappers.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/task.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/task.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/list.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/list.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/IFreeRTOSProtocol.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/IFreeRTOSProtocol.h:
 
 ../ustime.h:
 
 ../CLedHeartBeatSTM32F4Disc.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/AManagedTask.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/AManagedTask.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source/CTask.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Menue/CMenue.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Menue/CMenue.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963GPIOInterface.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CT6963CDriver.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\GraphicLCD/CGraphicLCD.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/CUSBMassStorage.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/CUSBMassStorage.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd_int.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd_int.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_regs.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_regs.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usb_conf.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usb_conf.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_core.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_core.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_defines.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_defines.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_usr.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_usr.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/semphr.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/semphr.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/queue.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\FreeRTOS\Source\include/queue.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32F4-Discovery/stm32f4_discovery.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_hcd.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_def.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_def.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_conf.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\USB_MSC/usbh_conf.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/ff.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/ff.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/integer.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3\FatFs\src/integer.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_stdreq.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_stdreq.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_core.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_bsp.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_OTG_Driver\inc/usb_bsp.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_ioreq.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_ioreq.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_hcs.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Core\inc/usbh_hcs.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_core.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_scsi.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\STM32_USB_HOST_Library\Class\MSC\inc/usbh_msc_bot.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\Audio_MP3/CFileHandler.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\Audio_MP3/CFileHandler.h:
 
-E:\Desktop\thundercyer-the-alarm-clock\HelixMP3\pub/mp3dec.h:
+C:\Dokumente\ und\ Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\HelixMP3\pub/mp3dec.h:
 
 ../stm32f4xx_conf.h:
