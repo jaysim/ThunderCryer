@@ -27,7 +27,8 @@ extern CUSB_MassStorage g_MSC;
 xSemaphoreHandle semI2SDMAFinished;
 
 static uint8_t  uiReadBuffer[READBUF_SIZE];
-static uint16_t  uiPCMBuffer[2][PCM_OUT_SIZE]; //double Buffering
+static int16_t  iPCMBuffer1[PCM_OUT_SIZE]= {0x0000}; //double Buffering
+static int16_t  iPCMBuffer2[PCM_OUT_SIZE] = {0x0000}; //double Buffering
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -38,7 +39,7 @@ CFileHandler::CFileHandler() {
 	ptrReadPosition = uiReadBuffer;
 	eMP3State = OPEN_FILE;
 	eBuffer = BUFFER_1;
-	uiVolume = 100;
+	uiVolume = 50;
 
 }
 
@@ -127,8 +128,8 @@ bool CFileHandler::RefillBuffer(void){
   * @retval true for success and false for fault
   */
 bool CFileHandler::PlayMP3(const char * filename){
-	int offset = 0;
-	int err = 0;
+	static int offset = 0;
+	static int err = 0;
 
 	//operate files only when device connected
 	while(g_MSC.IsDeviceConnected()){
@@ -167,6 +168,8 @@ bool CFileHandler::PlayMP3(const char * filename){
 			 */
 			err = MP3GetNextFrameInfo(hMP3Decoder,&mp3FrameInfo,ptrReadPosition);
 			if(err == 0 && mp3FrameInfo.nChans == 2 && mp3FrameInfo.version == 0){
+				/* Initialize I2S interface */
+				EVAL_AUDIO_SetAudioInterface(AUDIO_INTERFACE_I2S);
 				/*
 				 * Frame is valid initialize Codec with sample freq.
 				 */
@@ -192,7 +195,12 @@ bool CFileHandler::PlayMP3(const char * filename){
 					eMP3State = CLOSE_FILE;
 			}
 
-			err = MP3Decode(hMP3Decoder,&ptrReadPosition,(int*)&uiBytesLeft,(short int*)uiPCMBuffer[eBuffer],0);
+			if(eBuffer == BUFFER_1){
+				err = MP3Decode(hMP3Decoder,&ptrReadPosition,(int*)&uiBytesLeft,iPCMBuffer1,0);
+			}else{
+				err = MP3Decode(hMP3Decoder,&ptrReadPosition,(int*)&uiBytesLeft,iPCMBuffer2,0);
+			}
+
 			if (err)
 			{
 				/* error occurred */
@@ -228,25 +236,30 @@ bool CFileHandler::PlayMP3(const char * filename){
 				/*
 				 * start playing the samples
 				 */
-				EVAL_AUDIO_Play(uiPCMBuffer[eBuffer],mp3FrameInfo.outputSamps);
-				if(eBuffer == BUFFER_1)
+				if(eBuffer == BUFFER_1) {
+					Audio_MAL_Play((uint32_t)iPCMBuffer1,sizeof(iPCMBuffer1));
 					eBuffer = BUFFER_2;
-				else
+				}else{
+					Audio_MAL_Play((uint32_t)iPCMBuffer2,sizeof(iPCMBuffer2));
 					eBuffer = BUFFER_1; //switch Buffers
-
+				}
 				eMP3State = DECODE;
 			}
 
 			break;
 
 		default:
+			fsresult = FR_OK;
+			uiBytesLeft = 0;
+			ptrReadPosition = uiReadBuffer;
+			eBuffer = BUFFER_1;
 			/*
 			 * Close-File State not implemented,
 			 * all unknown states result in file close
 			 */
 			f_close(&file);
 			eMP3State = OPEN_FILE;
-			return false;
+			return true;
 			break;
 		}
 	}
