@@ -24,34 +24,20 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
 #include "stm32f4_discovery_audio_codec.h"
-
-#ifdef STM32_SDIO
-	#include "stm32f4_sdio.h"
-	#include "stm32f4xx_sdio.h"
-#else
-	#ifdef MEDIA_USB_KEY
-		#include "usb_hcd_int.h"
-		#include "usbh_usr.h"
-		#include "usbh_core.h"
-		#include "usbh_msc_core.h"
-	#endif
-#endif
+#include "usb_hcd_int.h"
+#include "usbh_usr.h"
+#include "usbh_core.h"
+#include "usbh_msc_core.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-__IO uint8_t PauseResumeStatus = 2, Count = 0, LED_Toggle = 0;
-uint16_t capture = 0;
-extern __IO uint8_t RepeatState;
-
-
-#if defined MEDIA_USB_KEY
-__IO uint16_t Time_Rec_Base = 0;
- extern USB_OTG_CORE_HANDLE          USB_OTG_Core;
- extern __IO uint32_t XferCplt ;
- extern __IO uint8_t Command_index;
-#endif /* MEDIA_USB_KEY */
+extern USB_OTG_CORE_HANDLE USB_OTG_Core;
+extern xSemaphoreHandle semShock;
+extern xSemaphoreHandle semUserButton;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -161,105 +147,77 @@ void DebugMon_Handler(void)
  * Sdio interface collides with I2S3 in STM32F4Discovery so
  * using USB Host MSC is the better way to get Massstorage access
  */
-#ifdef STM32_SDIO
-/**
-  * @brief  This function handles SDIO global interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDIO_IRQHandler(void)
-{
-  /* Process All SDIO Interrupt Sources */
-  SD_ProcessIRQSrc();
-}
 
 /**
-  * @brief  This function handles DMA2 Stream3 or DMA2 Stream6 global interrupts
-  *         requests.
-  * @param  None
-  * @retval None
-  */
-void SD_SDIO_DMA_IRQHANDLER(void)
+ * @brief  	This function handles External line 1 interrupt request.
+ *
+ * 			Triggers Event on mechanical shock, good as "Snoozze" Button :D
+ * @param  None
+ * @retval None
+ */
+void EXTI1_IRQHandler(void)
 {
-  /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
-  SD_ProcessDMAIRQ();
-}
+	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
-#else
-
-	/**
-	  * @brief  This function handles External line 1 interrupt request.
-	  *
-	  * 		Triggers Event on mechanical shock, good as "Snoozze" Button :D
-	  * @param  None
-	  * @retval None
-	  */
-	void EXTI1_IRQHandler(void)
+	/* Check the click on the accelerometer to Pause/Resume Playing */
+	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
 	{
-	  /* Check the clic on the accelerometer to Pause/Resume Playing */
-	  if(EXTI_GetITStatus(EXTI_Line1) != RESET)
-	  {
 		/*give sem in FreeRTOS */
-
+		xSemaphoreGiveFromISR(semShock,&xHigherPriorityTaskWoken);
 
 		/* Clear the EXTI line 1 pending bit */
 		EXTI_ClearITPendingBit(EXTI_Line1);
-	  }
+
+		/*
+		 * triggers PendSV handler for context switch
+		 * but when DMA Handler has higher Priority
+		 * this has no effect until ISR is finished
+		 */
+		portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+	}
+}
+
+/**
+ * @brief  EXTI0_IRQHandler
+ *         This function handles External line 0 interrupt request.
+ * @param  None
+ * @retval None
+ */
+void EXTI0_IRQHandler(void)
+{
+	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+
+	/* Checks whether the User Button EXTI line is asserted*/
+	if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+	{
+		/*give sem in FreeRTOS */
+		xSemaphoreGiveFromISR(semUserButton,&xHigherPriorityTaskWoken);
+
+		/* Clear the EXTI line 1 pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line1);
+
+		/*
+		 * triggers PendSV handler for context switch
+		 * but when DMA Handler has higher Priority
+		 * this has no effect until ISR is finished
+		 */
+		portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 	}
 
-
-	#if defined MEDIA_USB_KEY
-		/**
-		  * @brief  EXTI0_IRQHandler
-		  *         This function handles External line 0 interrupt request.
-		  * @param  None
-		  * @retval None
-		  */
-		void EXTI0_IRQHandler(void)
-		{
-		  /* Checks whether the User Button EXTI line is asserted*/
-		  if (EXTI_GetITStatus(EXTI_Line0) != RESET)
-		  {
-#ifdef test
-			if (Command_index == 1)
-			{
-			  /* Switch to play command */
-			  Command_index = 0;
-			}
-			else if (Command_index == 0)
-			{
-			  /* Switch to record command */
-			  Command_index = 1;
-			  XferCplt = 1;
-			  EVAL_AUDIO_Stop(CODEC_PDWN_SW);
-			}
-			else
-			{
-			  /* Switch to play command */
-			  Command_index = 0;
-			}
-#endif
-		  }
-
-		  /* Clears the EXTI's line pending bit.*/
-		  EXTI_ClearITPendingBit(EXTI_Line0);
-		}
+	/* Clears the EXTI's line pending bit.*/
+	EXTI_ClearITPendingBit(EXTI_Line0);
+}
 
 
-		/**
-		  * @brief  This function handles USB-On-The-Go FS global interrupt request.
-		  * @param  None
-		  * @retval None
-		  */
-		void OTG_FS_IRQHandler(void)
-		{
-		  USBH_OTG_ISR_Handler(&USB_OTG_Core);
-		}
-
-	#endif /* MEDIA_USB_KEY */
-
-
-#endif //STM32_SDIO
+/**
+ * @brief  This function handles USB-On-The-Go FS global interrupt request.
+ * @param  None
+ * @retval None
+ */
+void OTG_FS_IRQHandler(void)
+{
+	USBH_OTG_ISR_Handler(&USB_OTG_Core);
+}
 
 
 /******************************************************************************/

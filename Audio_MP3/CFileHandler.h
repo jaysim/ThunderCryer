@@ -14,11 +14,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "AManagedTask.h"
 
- extern "C" {
-	#include "ff.h"
-	#include "stdint.h"
-	#include "mp3dec.h"
- }
+#include "ff.h"
+#include "stdint.h"
+#include "mp3dec.h"
+
 
 
 /* Exported types ------------------------------------------------------------*/
@@ -55,6 +54,8 @@ private:
 
 	ePlayMP3State eMP3State;
 	eBufferSelect eBuffer;
+	bool bPlaying;
+	uint16_t uiLastSamplerate;
 
 	uint16_t uiBytesLeft;
 	uint8_t * ptrReadPosition;
@@ -65,12 +66,22 @@ private:
 
 	bool RefillBuffer(void);
 	bool PlayMP3(const char * filename);
+	void Mems_Config(void);
+	void EXTILine_Config(void);
 
 public:
 	CFileHandler();
 	virtual ~CFileHandler();
 	bool HardwareInit();
 	void Run();
+	void NextSong();
+	void PrevSong();
+	char** GetFolders();
+	void PlayPause();
+	uint8_t GetVolume(){return uiVolume;};
+	void SetVolume(uint8_t newVolume);
+
+
 };
 
 #endif /* CFILEHANDLER_H_ */

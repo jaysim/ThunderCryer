@@ -116,7 +116,7 @@
   67              		.section	.bss.g_FileHandler,"aw",%nobits
   68              		.align	2
   71              	g_FileHandler:
-  72 0000 00000000 		.space	660
+  72 0000 00000000 		.space	664
   72      00000000 
   72      00000000 
   72      00000000 
@@ -152,7 +152,7 @@
   93              		.thumb
   94              		.thumb_func
   96              	main:
-  97              	.LFB140:
+  97              	.LFB141:
   98              		.file 2 "../main.cpp"
    1:../main.cpp   **** /**
    2:../main.cpp   ****   ******************************************************************************
@@ -277,13 +277,13 @@
  149 006a FAE7     		b	.L3
  150              	.LBE2:
  151              		.cfi_endproc
- 152              	.LFE140:
+ 152              	.LFE141:
  154              		.align	2
  155              		.global	vApplicationTickHook
  156              		.thumb
  157              		.thumb_func
  159              	vApplicationTickHook:
- 160              	.LFB141:
+ 160              	.LFB142:
   70:../main.cpp   **** 	}
   71:../main.cpp   **** 
   72:../main.cpp   **** 	return 0;
@@ -314,13 +314,13 @@
  175 0072 80BC     		pop	{r7}
  176 0074 7047     		bx	lr
  177              		.cfi_endproc
- 178              	.LFE141:
+ 178              	.LFE142:
  180 0076 00BF     		.align	2
  181              		.global	vApplicationIdleHook
  182              		.thumb
  183              		.thumb_func
  185              	vApplicationIdleHook:
- 186              	.LFB142:
+ 186              	.LFB143:
   83:../main.cpp   **** 
   84:../main.cpp   **** 	// This FreeRTOS call-back function gets when no other task is ready to execute.
   85:../main.cpp   **** 	// On a completely unloaded system this is getting called at over 2.5MHz!
@@ -345,13 +345,13 @@
  201 007e 80BC     		pop	{r7}
  202 0080 7047     		bx	lr
  203              		.cfi_endproc
- 204              	.LFE142:
+ 204              	.LFE143:
  206 0082 00BF     		.align	2
  207              		.global	vApplicationMallocFailedHook
  208              		.thumb
  209              		.thumb_func
  211              	vApplicationMallocFailedHook:
- 212              	.LFB143:
+ 212              	.LFB144:
   90:../main.cpp   **** 
   91:../main.cpp   **** 	// A required FreeRTOS function.
   92:../main.cpp   **** 	// ----------------------------------------------------------------------------
@@ -375,13 +375,13 @@
  227 008a 80BC     		pop	{r7}
  228 008c 7047     		bx	lr
  229              		.cfi_endproc
- 230              	.LFE143:
+ 230              	.LFE144:
  232 008e 00BF     		.align	2
  233              		.global	vApplicationStackOverflowHook
  234              		.thumb
  235              		.thumb_func
  237              	vApplicationStackOverflowHook:
- 238              	.LFB144:
+ 238              	.LFB145:
   96:../main.cpp   **** 
   97:../main.cpp   **** 	// A required FreeRTOS function. gets called on stack overflow
   98:../main.cpp   **** 	// ----------------------------------------------------------------------------
@@ -409,12 +409,12 @@
  257              		.loc 2 101 0 discriminator 1
  258 009a FEE7     		b	.L8
  259              		.cfi_endproc
- 260              	.LFE144:
+ 260              	.LFE145:
  262              		.align	2
  263              		.thumb
  264              		.thumb_func
  266              	_Z41__static_initialization_and_destruction_0ii:
- 267              	.LFB145:
+ 267              	.LFB146:
  102:../main.cpp   **** 	}
  103:../main.cpp   **** } // extern "C"
  104:../main.cpp   **** 
@@ -519,7 +519,7 @@
  360 0198 BD46     		mov	sp, r7
  361 019a 80BD     		pop	{r7, pc}
  362              		.cfi_endproc
- 363              	.LFE145:
+ 363              	.LFE146:
  365              		.section	.rodata._ZL12c_FontNative,"a",%progbits
  366              		.align	2
  369              	_ZL12c_FontNative:
@@ -533,7 +533,7 @@
  373              		.thumb
  374              		.thumb_func
  376              	_GLOBAL__sub_I_g_LedTast:
- 377              	.LFB146:
+ 377              	.LFB147:
  378              		.loc 2 105 0
  379              		.cfi_startproc
  380              		@ args = 0, pretend = 0, frame = 0
@@ -552,7 +552,7 @@
  393 01a8 FFF778FF 		bl	_Z41__static_initialization_and_destruction_0ii
  394 01ac 80BD     		pop	{r7, pc}
  395              		.cfi_endproc
- 396              	.LFE146:
+ 396              	.LFE147:
  398              		.section	.init_array,"aw",%init_array
  399              		.align	2
  400 0000 00000000 		.word	_GLOBAL__sub_I_g_LedTast(target1)
@@ -566,33 +566,33 @@
  408              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\GraphicLCD/
 DEFINED SYMBOLS
                             *ABS*:00000000 main.cpp
-  C:\Temp\ccTaSyIW.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
-  C:\Temp\ccTaSyIW.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
-  C:\Temp\ccTaSyIW.s:50     .bss.g_LedTast:00000000 g_LedTast
-  C:\Temp\ccTaSyIW.s:47     .bss.g_LedTast:00000000 $d
-  C:\Temp\ccTaSyIW.s:57     .bss.g_Display:00000000 g_Display
-  C:\Temp\ccTaSyIW.s:54     .bss.g_Display:00000000 $d
-  C:\Temp\ccTaSyIW.s:64     .bss.g_Menue:00000000 g_Menue
-  C:\Temp\ccTaSyIW.s:61     .bss.g_Menue:00000000 $d
-  C:\Temp\ccTaSyIW.s:71     .bss.g_FileHandler:00000000 g_FileHandler
-  C:\Temp\ccTaSyIW.s:68     .bss.g_FileHandler:00000000 $d
-  C:\Temp\ccTaSyIW.s:78     .bss.g_MSC:00000000 g_MSC
-  C:\Temp\ccTaSyIW.s:75     .bss.g_MSC:00000000 $d
-  C:\Temp\ccTaSyIW.s:81     .rodata:00000000 $d
-  C:\Temp\ccTaSyIW.s:82     .rodata:00000000 .LC0
-  C:\Temp\ccTaSyIW.s:85     .rodata:00000010 .LC1
-  C:\Temp\ccTaSyIW.s:88     .rodata:00000020 .LC2
-  C:\Temp\ccTaSyIW.s:91     .text:00000000 $t
-  C:\Temp\ccTaSyIW.s:96     .text:00000000 main
-  C:\Temp\ccTaSyIW.s:159    .text:0000006c vApplicationTickHook
-  C:\Temp\ccTaSyIW.s:185    .text:00000078 vApplicationIdleHook
-  C:\Temp\ccTaSyIW.s:211    .text:00000084 vApplicationMallocFailedHook
-  C:\Temp\ccTaSyIW.s:237    .text:00000090 vApplicationStackOverflowHook
-  C:\Temp\ccTaSyIW.s:266    .text:0000009c _Z41__static_initialization_and_destruction_0ii
-  C:\Temp\ccTaSyIW.s:366    .rodata._ZL12c_FontNative:00000000 $d
-  C:\Temp\ccTaSyIW.s:369    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
-  C:\Temp\ccTaSyIW.s:376    .text:0000019c _GLOBAL__sub_I_g_LedTast
-  C:\Temp\ccTaSyIW.s:399    .init_array:00000000 $d
+  C:\Temp\ccLp6egh.s:19     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 $t
+  C:\Temp\ccLp6egh.s:24     .text._ZN9CFreeRTOS14StartSchedulerEv:00000000 _ZN9CFreeRTOS14StartSchedulerEv
+  C:\Temp\ccLp6egh.s:50     .bss.g_LedTast:00000000 g_LedTast
+  C:\Temp\ccLp6egh.s:47     .bss.g_LedTast:00000000 $d
+  C:\Temp\ccLp6egh.s:57     .bss.g_Display:00000000 g_Display
+  C:\Temp\ccLp6egh.s:54     .bss.g_Display:00000000 $d
+  C:\Temp\ccLp6egh.s:64     .bss.g_Menue:00000000 g_Menue
+  C:\Temp\ccLp6egh.s:61     .bss.g_Menue:00000000 $d
+  C:\Temp\ccLp6egh.s:71     .bss.g_FileHandler:00000000 g_FileHandler
+  C:\Temp\ccLp6egh.s:68     .bss.g_FileHandler:00000000 $d
+  C:\Temp\ccLp6egh.s:78     .bss.g_MSC:00000000 g_MSC
+  C:\Temp\ccLp6egh.s:75     .bss.g_MSC:00000000 $d
+  C:\Temp\ccLp6egh.s:81     .rodata:00000000 $d
+  C:\Temp\ccLp6egh.s:82     .rodata:00000000 .LC0
+  C:\Temp\ccLp6egh.s:85     .rodata:00000010 .LC1
+  C:\Temp\ccLp6egh.s:88     .rodata:00000020 .LC2
+  C:\Temp\ccLp6egh.s:91     .text:00000000 $t
+  C:\Temp\ccLp6egh.s:96     .text:00000000 main
+  C:\Temp\ccLp6egh.s:159    .text:0000006c vApplicationTickHook
+  C:\Temp\ccLp6egh.s:185    .text:00000078 vApplicationIdleHook
+  C:\Temp\ccLp6egh.s:211    .text:00000084 vApplicationMallocFailedHook
+  C:\Temp\ccLp6egh.s:237    .text:00000090 vApplicationStackOverflowHook
+  C:\Temp\ccLp6egh.s:266    .text:0000009c _Z41__static_initialization_and_destruction_0ii
+  C:\Temp\ccLp6egh.s:366    .rodata._ZL12c_FontNative:00000000 $d
+  C:\Temp\ccLp6egh.s:369    .rodata._ZL12c_FontNative:00000000 _ZL12c_FontNative
+  C:\Temp\ccLp6egh.s:376    .text:0000019c _GLOBAL__sub_I_g_LedTast
+  C:\Temp\ccLp6egh.s:399    .init_array:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

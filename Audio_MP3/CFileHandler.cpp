@@ -13,9 +13,7 @@
 #include "CUSBMassStorage.h"
 #include "string.h"
 #include "stm32f4_discovery_audio_codec.h"
-
-
-
+#include "stm32f4_discovery_lis302dl.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 static const UINT READBUF_SIZE=MAINBUF_SIZE;
@@ -25,6 +23,8 @@ static const UINT PCM_OUT_SIZE = MAX_NGRAN * MAX_NGRAN * MAX_NSAMP; // max Outpu
 /* Private variables ---------------------------------------------------------*/
 extern CUSB_MassStorage g_MSC;
 xSemaphoreHandle semI2SDMAFinished;
+xSemaphoreHandle semUserButton;
+xSemaphoreHandle semShock;
 
 static uint8_t  uiReadBuffer[READBUF_SIZE];
 static int16_t  iPCMBuffer1[PCM_OUT_SIZE]= {0x0000}; //double Buffering
@@ -40,7 +40,8 @@ CFileHandler::CFileHandler() {
 	eMP3State = OPEN_FILE;
 	eBuffer = BUFFER_1;
 	uiVolume = 50;
-
+	uiLastSamplerate = 44100;
+	bPlaying  = true;
 }
 
 CFileHandler::~CFileHandler() {
@@ -54,7 +55,27 @@ CFileHandler::~CFileHandler() {
   * @retval true on succsess
   */
 bool CFileHandler::HardwareInit(){
+	vSemaphoreCreateBinary(semShock);
+	vSemaphoreCreateBinary(semUserButton);
+	// ensure that the semaphores are taken
+	xSemaphoreTake(semShock,0);
+	xSemaphoreTake(semUserButton,0);
+
+	/*
+	 * configure onboard accelerometer to drive
+	 * an external interrupt line on mechanical shock
+	 */
+	Mems_Config();
+	/*
+	 * configure Interrupt for UserButton
+	 */
+	EXTILine_Config();
+
 	hMP3Decoder = MP3InitDecoder();
+	/*
+	 * first Codec init with standard samplerate
+	 */
+	EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,uiLastSamplerate);
 	return true;
 }
 
@@ -82,7 +103,6 @@ void CFileHandler::Run(){
 
 	}
 }
-
 
 
 /**
@@ -168,16 +188,22 @@ bool CFileHandler::PlayMP3(const char * filename){
 			 */
 			err = MP3GetNextFrameInfo(hMP3Decoder,&mp3FrameInfo,ptrReadPosition);
 			if(err == 0 && mp3FrameInfo.nChans == 2 && mp3FrameInfo.version == 0){
-				/* Initialize I2S interface */
-				EVAL_AUDIO_SetAudioInterface(AUDIO_INTERFACE_I2S);
+				if(uiLastSamplerate != mp3FrameInfo.samprate) {
+					/* Initialize I2S interface */
+					EVAL_AUDIO_SetAudioInterface(AUDIO_INTERFACE_I2S);
+					/*
+					 * initialize Codec with sample freq.
+					 */
+					portENTER_CRITICAL();
+					EVAL_AUDIO_DeInit();
+					EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,mp3FrameInfo.samprate);
+					portEXIT_CRITICAL();
+					uiLastSamplerate = mp3FrameInfo.samprate;
+				}
 				/*
-				 * Frame is valid initialize Codec with sample freq.
+				 * Frame is valid initialize Codec is initialized with samperate
+				 * so lets go playing mp3
 				 */
-				portENTER_CRITICAL();
-				//EVAL_AUDIO_DeInit();
-				EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,mp3FrameInfo.samprate);
-				portEXIT_CRITICAL();
-
 				eMP3State = DECODE;
 			}else if(err == 0){
 				/*
@@ -266,6 +292,158 @@ bool CFileHandler::PlayMP3(const char * filename){
 	eMP3State = OPEN_FILE;
 	return false; //Device disconnected
 }
+
+/**
+  * @brief  plays next song
+  *
+  */
+void CFileHandler::NextSong(){
+}
+
+/**
+  * @brief  plays prev song
+  *
+  */
+void CFileHandler::PrevSong(){
+}
+
+/**
+  * @brief  read all folders
+  *
+  */
+char** CFileHandler::GetFolders(){
+	return 0;
+}
+
+/**
+  * @brief  toggles play, pause state
+  *
+  */
+void CFileHandler::PlayPause(){
+	if(bPlaying) {
+		EVAL_AUDIO_PauseResume(AUDIO_PAUSE);
+		bPlaying = false;
+	} else {
+		EVAL_AUDIO_PauseResume(AUDIO_RESUME);
+		bPlaying = true;
+	}
+}
+
+/**
+  * @brief  set actual DAC volume in %
+  *
+  */
+void CFileHandler::SetVolume(uint8_t newVolume){
+	uiVolume = newVolume;
+	EVAL_AUDIO_VolumeCtl(newVolume);
+}
+
+
+/**
+ * @brief  configure the mems accelometer
+ * @param  None
+ * @retval None
+ */
+void CFileHandler::Mems_Config(void)
+{
+	uint8_t ctrl = 0;
+
+	LIS302DL_InitTypeDef  LIS302DL_InitStruct;
+	LIS302DL_InterruptConfigTypeDef LIS302DL_InterruptStruct;
+
+	/* Set configuration of LIS302DL*/
+	LIS302DL_InitStruct.Power_Mode = LIS302DL_LOWPOWERMODE_ACTIVE;
+	LIS302DL_InitStruct.Output_DataRate = LIS302DL_DATARATE_100;
+	LIS302DL_InitStruct.Axes_Enable = LIS302DL_X_ENABLE | LIS302DL_Y_ENABLE | LIS302DL_Z_ENABLE;
+	LIS302DL_InitStruct.Full_Scale = LIS302DL_FULLSCALE_2_3;
+	LIS302DL_InitStruct.Self_Test = LIS302DL_SELFTEST_NORMAL;
+	LIS302DL_Init(&LIS302DL_InitStruct);
+
+	/* Set configuration of Internal High Pass Filter of LIS302DL*/
+	LIS302DL_InterruptStruct.Latch_Request = LIS302DL_INTERRUPTREQUEST_LATCHED;
+	LIS302DL_InterruptStruct.SingleClick_Axes = LIS302DL_CLICKINTERRUPT_Z_ENABLE;
+	LIS302DL_InterruptStruct.DoubleClick_Axes = LIS302DL_DOUBLECLICKINTERRUPT_Z_ENABLE;
+	LIS302DL_InterruptConfig(&LIS302DL_InterruptStruct);
+
+	/* Configure Interrupt control register: enable Click interrupt on INT1 and
+     INT2 on Z axis high event */
+	ctrl = 0x3F;
+	LIS302DL_Write(&ctrl, LIS302DL_CTRL_REG3_ADDR, 1);
+
+	/* Enable Interrupt generation on click on Z axis */
+	ctrl = 0x50;
+	LIS302DL_Write(&ctrl, LIS302DL_CLICK_CFG_REG_ADDR, 1);
+
+	/* Configure Click Threshold on X/Y axis (10 x 0.5g) */
+	ctrl = 0xAA;
+	LIS302DL_Write(&ctrl, LIS302DL_CLICK_THSY_X_REG_ADDR, 1);
+
+	/* Configure Click Threshold on Z axis (10 x 0.5g) */
+	ctrl = 0x0A;
+	LIS302DL_Write(&ctrl, LIS302DL_CLICK_THSZ_REG_ADDR, 1);
+
+	/* Enable interrupt on Y axis high event */
+	ctrl = 0x4C;
+	LIS302DL_Write(&ctrl, LIS302DL_FF_WU_CFG1_REG_ADDR, 1);
+
+	/* Configure Time Limit */
+	ctrl = 0x03;
+	LIS302DL_Write(&ctrl, LIS302DL_CLICK_TIMELIMIT_REG_ADDR, 1);
+
+	/* Configure Latency */
+	ctrl = 0x7F;
+	LIS302DL_Write(&ctrl, LIS302DL_CLICK_LATENCY_REG_ADDR, 1);
+
+	/* Configure Click Window */
+	ctrl = 0x7F;
+	LIS302DL_Write(&ctrl, LIS302DL_CLICK_WINDOW_REG_ADDR, 1);
+
+}
+
+/**
+ * @brief  Configures EXTI Line0 (connected to PA0 pin) in interrupt mode
+ * @param  None
+ * @retval None
+ */
+void CFileHandler::EXTILine_Config(void)
+{
+	GPIO_InitTypeDef   GPIO_InitStructure;
+	NVIC_InitTypeDef   NVIC_InitStructure;
+	EXTI_InitTypeDef   EXTI_InitStructure;
+	/* Enable GPIOA clock */
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
+	/* Enable SYSCFG clock */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+	/* Configure PE0 and PE1 pins as input floating */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1;
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
+
+	/* Connect EXTI Line to PE1 pins */
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOE, EXTI_PinSource1);
+
+	/* Configure EXTI Line1 */
+	EXTI_InitStructure.EXTI_Line = EXTI_Line1;
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+	EXTI_Init(&EXTI_InitStructure);
+
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+
+	/* Enable and set EXTI Line0 Interrupt to the priority 1 higher than RTOS Kern */
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = configLIBRARY_KERNEL_INTERRUPT_PRIORITY-1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+
+
+
+
+
 
 
 extern "C" {
