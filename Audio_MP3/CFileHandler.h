@@ -53,8 +53,13 @@ private:
 	FILINFO fileInfo;
 
 	ePlayMP3State eMP3State;
+	ePlayMP3State eMP3StatePrev;
 	eBufferSelect eBuffer;
+
 	bool bPlaying;
+	bool bPlay;
+	bool bNext;
+	bool bStop;
 	uint16_t uiLastSamplerate;
 
 	uint16_t uiBytesLeft;
@@ -65,7 +70,13 @@ private:
 	MP3FrameInfo mp3FrameInfo;
 
 	bool RefillBuffer(void);
-	bool PlayMP3(const char * filename);
+	bool PlayMP3(const char* filename);
+	bool GetUSBRelease(portTickType delay);
+	inline bool GetUSBConnected();
+	void ReleaseUSB();
+	void MP3Player();
+	void ReadConfig();
+	void WriteConfig();
 	void Mems_Config(void);
 	void EXTILine_Config(void);
 
@@ -74,10 +85,11 @@ public:
 	virtual ~CFileHandler();
 	bool HardwareInit();
 	void Run();
-	void NextSong();
-	void PrevSong();
-	char** GetFolders();
+	inline void NextSong();
+	const char* GetSong();
 	void PlayPause();
+	inline void StopPlayer();
+	inline void StartPlayer();
 	uint8_t GetVolume(){return uiVolume;};
 	void SetVolume(uint8_t newVolume);
 

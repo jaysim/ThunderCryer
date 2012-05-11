@@ -73,20 +73,5 @@ bool CUSB_MassStorage::IsDeviceConnected(void){
 	return HCD_IsDeviceConnected(&USB_OTG_Core);
 }
 
-/**
-  * @brief  Get Mounted Status, Suspends calling task
-  * @param  None
-  * @retval status of storage device Fs
-  */
-bool CUSB_MassStorage::DeviceMounted(void){
-	bool tmp = false;
-	if(semUSBMounted != NULL){
-		if(xSemaphoreTake(semUSBMounted,portMAX_DELAY)== pdTRUE){
-			xSemaphoreGive(semUSBMounted);
-			tmp = true;
-		}
-	}
-	return tmp;
-}
 
 

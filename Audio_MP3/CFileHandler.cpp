@@ -39,7 +39,7 @@ CFileHandler::CFileHandler() {
 	ptrReadPosition = uiReadBuffer;
 	eMP3State = OPEN_FILE;
 	eBuffer = BUFFER_1;
-	uiVolume = 50;
+	uiVolume = 80;
 	uiLastSamplerate = 44100;
 	bPlaying  = true;
 }
@@ -76,32 +76,29 @@ bool CFileHandler::HardwareInit(){
 	 * first Codec init with standard samplerate
 	 */
 	EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,uiLastSamplerate);
+	// stop I2S to prevent noise
+	EVAL_AUDIO_Stop(CODEC_PDWN_SW);
 	return true;
 }
 
 /**
-  * @brief  task function for Led Heartbeat
+  * @brief  task function for file handling
   * @param  None
   * @retval None
   */
 void CFileHandler::Run(){
 	vSemaphoreCreateBinary(semI2SDMAFinished);
 
-	while(1){
-		/*
-		 * get sem from USB Application layer
-		 * to precess without disturbing USB
-		 */
-		xSemaphoreTake(semUSBApplication,portMAX_DELAY);
+	/*
+	 * Read configuration from file on startup
+	 */
+	ReadConfig();
 
-		PlayMP3("MacGyver.mp3");
+	/*
+	 * start mp3 player, will not leave this function
+	 */
+	MP3Player();
 
-		/*
-		 *Application layer needs to give back the sem when ever possible
-		 */
-		xSemaphoreGive(semUSBApplication);
-
-	}
 }
 
 
@@ -143,16 +140,88 @@ bool CFileHandler::RefillBuffer(void){
 }
 
 /**
+  * @brief  reads configuration from filesystem
+  *
+  */
+void CFileHandler::ReadConfig(){
+
+}
+
+/**
+  * @brief  writes configuration to filesystem
+  *
+  */
+void CFileHandler::WriteConfig(){
+}
+
+/**
+  * @brief  MP3 player application
+  * 		Playes MP3 from he whole device
+  */
+void CFileHandler::MP3Player(){
+	while(1){
+
+	}
+}
+
+/**
+  * @brief  gets sem from USB handling layer
+  *
+  * @retval true for success and false for fault
+  */
+bool CFileHandler::GetUSBRelease(portTickType delay){
+	/*
+	 * get sem from USB Application layer
+	 * to process without disturbing USB handling
+	 */
+	xSemaphoreTake(semUSBApplication,delay);
+
+	/*
+	 * check if Device is Connected
+	 */
+	if(GetUSBConnected()){
+		return true;
+	} else {
+		/*
+		 * Release Sem from USB
+		 */
+		ReleaseUSB();
+		return false;
+	}
+
+}
+
+/**
+  * @brief  gets connected status from USB
+  *
+  * @retval true for connected and false for not
+  */
+inline bool CFileHandler::GetUSBConnected(){
+	return g_MSC.IsDeviceConnected();
+}
+
+
+/**
+  * @brief  give USB sem Back to USB handling Layer
+  */
+void CFileHandler::ReleaseUSB(){
+	/*
+	 * Application layer needs to give back the sem when ever possible
+	 */
+	xSemaphoreGive(semUSBApplication);
+}
+
+/**
   * @brief  plays mp3 file
   *
   * @retval true for success and false for fault
   */
-bool CFileHandler::PlayMP3(const char * filename){
+bool CFileHandler::PlayMP3(const char* filename){
 	static int offset = 0;
 	static int err = 0;
 
 	//operate files only when device connected
-	while(g_MSC.IsDeviceConnected()){
+	while(GetUSBConnected()){
 
 		switch(eMP3State){
 /*------------------------------------------------------------------------------*/
@@ -161,6 +230,8 @@ bool CFileHandler::PlayMP3(const char * filename){
 			fsresult = f_open(&file,filename,FA_OPEN_EXISTING | FA_READ);
 			if(fsresult != FR_OK)
 				break;
+
+			f_sync(&file); //see app note from chan
 
 			if(!RefillBuffer()) // read data from file
 				break;
@@ -263,10 +334,10 @@ bool CFileHandler::PlayMP3(const char * filename){
 				 * start playing the samples
 				 */
 				if(eBuffer == BUFFER_1) {
-					Audio_MAL_Play((uint32_t)iPCMBuffer1,sizeof(iPCMBuffer1));
+					EVAL_AUDIO_Play(iPCMBuffer1,sizeof(iPCMBuffer1));
 					eBuffer = BUFFER_2;
 				}else{
-					Audio_MAL_Play((uint32_t)iPCMBuffer2,sizeof(iPCMBuffer2));
+					EVAL_AUDIO_Play(iPCMBuffer2,sizeof(iPCMBuffer2));
 					eBuffer = BUFFER_1; //switch Buffers
 				}
 				eMP3State = DECODE;
@@ -275,6 +346,8 @@ bool CFileHandler::PlayMP3(const char * filename){
 			break;
 
 		default:
+			// stop I2S to prevent noise
+			EVAL_AUDIO_Stop(CODEC_PDWN_SW);
 			fsresult = FR_OK;
 			uiBytesLeft = 0;
 			ptrReadPosition = uiReadBuffer;
@@ -298,21 +371,6 @@ bool CFileHandler::PlayMP3(const char * filename){
   *
   */
 void CFileHandler::NextSong(){
-}
-
-/**
-  * @brief  plays prev song
-  *
-  */
-void CFileHandler::PrevSong(){
-}
-
-/**
-  * @brief  read all folders
-  *
-  */
-char** CFileHandler::GetFolders(){
-	return 0;
 }
 
 /**

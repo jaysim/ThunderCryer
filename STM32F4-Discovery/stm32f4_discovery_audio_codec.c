@@ -359,7 +359,7 @@ uint32_t EVAL_AUDIO_Play(int16_t* pBuffer, uint32_t Size)
   Codec_Play();
   
   /* Update the Media layer and enable it for play */  
-  Audio_MAL_Play((uint32_t)pBuffer, (uint32_t)(DMA_MAX(Size/4)));
+  Audio_MAL_Play((uint32_t)pBuffer, Size);
   
   /* Update the remaining number of data to be played */
   // Size/2 was bull shit caused overflow

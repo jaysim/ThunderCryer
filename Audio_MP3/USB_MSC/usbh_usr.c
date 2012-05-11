@@ -260,8 +260,8 @@ int USBH_USR_MSC_Application(void)
 {
 	/*
 	 * to syncronise USB Application Layer and File handler
-	 * This Sem is given an so FileHandler woken, when File Handler
-	 * gives the Sem back Usb obtains it an processes
+	 * This Sem is given, so FileHandler is woke, when File Handler
+	 * gives the Sem back Usb obtains it and processes
 	 */
 	xSemaphoreGive(semUSBApplication);
 	/*
