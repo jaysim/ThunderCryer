@@ -34,8 +34,7 @@ typedef enum {
 	OPEN_DIR,
 	GET_FILE,
 	PLAY_FILE,
-	STOP,
-	CLOSE_DIR
+	STOP
 }eMP3PlayerState;
 
 typedef enum{
@@ -59,6 +58,7 @@ private:
 	FIL file;                     	//file object
 	DIR dir;						//directory object
 	FILINFO fileInfo;
+	char path[40];					//actual path
 
 	ePlayMP3State eMP3State;
 	eBufferSelect eBuffer;

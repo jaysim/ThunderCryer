@@ -14,6 +14,8 @@
 #include "string.h"
 #include "stm32f4_discovery_audio_codec.h"
 #include "stm32f4_discovery_lis302dl.h"
+#include "ctype.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 static const UINT READBUF_SIZE=MAINBUF_SIZE;
@@ -159,37 +161,137 @@ void CFileHandler::WriteConfig(){
   * 		Playes MP3 from he whole device
   */
 void CFileHandler::MP3Player(){
+	int i;
+	bool bFileIsMP3 = false;
+
 	//operate files only when device connected
-	while(GetUSBConnected() & !bStop){
+	while(GetUSBConnected()){
 
-			switch(ePlayerState){
-	/*------------------------------------------------------------------------------*/
-			case OPEN_DIR:
+		switch(ePlayerState){
+/*------------------------------------------------------------------------------*/
+		case OPEN_DIR:
 
-				break;
-	/*------------------------------------------------------------------------------*/
-			case GET_FILE:
+			/* Open the directory */
+			fsresult = f_opendir(&dir, path);
+			if (fsresult == FR_OK) {
+				/* get new file on success */
+				ePlayerStatePrev = ePlayerState;
+				ePlayerState = GET_FILE;
 
-				break;
-	/*------------------------------------------------------------------------------*/
-			case PLAY_FILE:
-
-				break;
-	/*------------------------------------------------------------------------------*/
-			case STOP:
-
-				break;
-	/*------------------------------------------------------------------------------*/
-			case CLOSE_DIR:
-
-				break;
-			default:
-
+				if(bStop){
+					ePlayerState = STOP;
+					bStop = false;
+				}
+			}
+			break;
+/*------------------------------------------------------------------------------*/
+		case GET_FILE:
+			/* Read a directory item */
+			fsresult = f_readdir(&dir, &fileInfo);
+			if (fsresult != FR_OK || fileInfo.fname[0] == 0){
+				break;  /* Break on error or end of dir */
+			}
+			if (fileInfo.fname[0] == '.'){
+				continue;             /* Ignore dot entry */
+			}
+			if (fileInfo.fattrib & AM_DIR) {
+				/* It is a directory */
+				/* copy dir Path in Path var */
+				strcpy(path,fileInfo.fname);
+				/* open the new Folder */
 				ePlayerStatePrev = ePlayerState;
 				ePlayerState = OPEN_DIR;
-				break;
-	}
 
+				/* get next file on next flag */
+				if(bNext) {
+					ePlayerState = GET_FILE;
+					bNext = false;
+				}
+
+				if(bStop){
+					ePlayerState = STOP;
+					bStop = false;
+				}
+			} else {
+				/* It is a file. */
+				bFileIsMP3 = false;
+				/* check filetype */
+				for(i=sizeof(fileInfo.fname)-4;i>=0;i--){
+					if(fileInfo.fname[i] == '.'){
+						if((toupper(fileInfo.fname[i+1]) == 'M') &&
+							(toupper(fileInfo.fname[i+2]) == 'P') &&
+							((fileInfo.fname[i+3]) == '3')){
+							/* Fileending is .MP3, so play it */
+							bFileIsMP3 = true;
+							break;
+						}
+					}
+				}
+				ePlayerStatePrev = ePlayerState;
+				/* check if its an MP3 */
+				if(bFileIsMP3){
+					/* play MP3 */
+					ePlayerState = PLAY_FILE;
+
+					/* get next file on next flag */
+					if(bNext) {
+						ePlayerState = GET_FILE;
+						bNext = false;
+					}
+
+				} else {
+					/*get next file*/
+					ePlayerState = GET_FILE;
+
+					if(bStop){
+						ePlayerState = STOP;
+						bStop = false;
+					}
+
+				}
+			}
+
+			break;
+/*------------------------------------------------------------------------------*/
+		case PLAY_FILE:
+
+			PlayMP3(fileInfo.fname);
+
+			ePlayerStatePrev = ePlayerState;
+
+			/* get next file on next flag */
+			if(bNext) {
+				ePlayerState = GET_FILE;
+				bNext = false;
+			}
+
+			if(bStop){
+				ePlayerState = STOP;
+				bStop = false;
+			}
+
+			break;
+/*------------------------------------------------------------------------------*/
+		case STOP:
+			/* start playing again */
+			if(bPlay){
+				/*check for stop loop */
+				if(ePlayerStatePrev == STOP)
+					ePlayerStatePrev = OPEN_DIR;
+				/* go back to previous state */
+				ePlayerState = ePlayerStatePrev;
+				ePlayerStatePrev = STOP;
+				/*clear Flag*/
+				bPlay = false;
+			}
+			break;
+/*------------------------------------------------------------------------------*/
+		default:
+			ePlayerStatePrev = ePlayerState;
+			ePlayerState = OPEN_DIR;
+			break;
+		}
+	}
 }
 
 /**
@@ -250,6 +352,12 @@ bool CFileHandler::PlayMP3(const char* filename){
 
 	//operate files only when device connected
 	while(GetUSBConnected()){
+
+		/* check if file is skipped */
+		if(bNext) {
+			/* file is to be skiped */
+			return false;
+		}
 
 		switch(eMP3State){
 /*------------------------------------------------------------------------------*/
@@ -398,7 +506,31 @@ bool CFileHandler::PlayMP3(const char* filename){
   * @brief  plays next song
   *
   */
-void CFileHandler::NextSong(){
+inline void CFileHandler::NextSong(){
+	/* the flag will be cleared when Song was skipped */
+	bNext = true;
+}
+
+/**
+ * @brief halts MP3Player
+ */
+inline void CFileHandler::StopPlayer(){
+	bStop = true;
+}
+
+/**
+ * @brief starts MP3Player
+ */
+inline void CFileHandler::StartPlayer(){
+	bPlay = true;
+}
+
+/**
+ * @brief get the actual filename of the song played
+ * @return filename of played song
+ */
+const char* CFileHandler::GetSong(){
+	return fileInfo.fname;
 }
 
 /**
@@ -414,6 +546,8 @@ void CFileHandler::PlayPause(){
 		bPlaying = true;
 	}
 }
+
+
 
 /**
   * @brief  set actual DAC volume in %
