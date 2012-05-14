@@ -164,6 +164,9 @@ void CFileHandler::MP3Player(){
 	int i;
 	bool bFileIsMP3 = false;
 
+	// get release from USB stack
+	GetUSBRelease(portMAX_DELAY);
+
 	//operate files only when device connected
 	while(GetUSBConnected()){
 
@@ -292,6 +295,9 @@ void CFileHandler::MP3Player(){
 			break;
 		}
 	}
+
+	// give control back to USB stack
+	ReleaseUSB();
 }
 
 /**
