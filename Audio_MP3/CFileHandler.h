@@ -30,6 +30,14 @@ typedef enum {
 	CLOSE_FILE
 }ePlayMP3State;
 
+typedef enum {
+	OPEN_DIR,
+	GET_FILE,
+	PLAY_FILE,
+	STOP,
+	CLOSE_DIR
+}eMP3PlayerState;
+
 typedef enum{
 	BUFFER_1=0,
 	BUFFER_2=1
@@ -53,8 +61,10 @@ private:
 	FILINFO fileInfo;
 
 	ePlayMP3State eMP3State;
-	ePlayMP3State eMP3StatePrev;
 	eBufferSelect eBuffer;
+
+	eMP3PlayerState ePlayerState;
+	eMP3PlayerState ePlayerStatePrev;
 
 	bool bPlaying;
 	bool bPlay;

@@ -159,9 +159,37 @@ void CFileHandler::WriteConfig(){
   * 		Playes MP3 from he whole device
   */
 void CFileHandler::MP3Player(){
-	while(1){
+	//operate files only when device connected
+	while(GetUSBConnected() & !bStop){
 
+			switch(ePlayerState){
+	/*------------------------------------------------------------------------------*/
+			case OPEN_DIR:
+
+				break;
+	/*------------------------------------------------------------------------------*/
+			case GET_FILE:
+
+				break;
+	/*------------------------------------------------------------------------------*/
+			case PLAY_FILE:
+
+				break;
+	/*------------------------------------------------------------------------------*/
+			case STOP:
+
+				break;
+	/*------------------------------------------------------------------------------*/
+			case CLOSE_DIR:
+
+				break;
+			default:
+
+				ePlayerStatePrev = ePlayerState;
+				ePlayerState = OPEN_DIR;
+				break;
 	}
+
 }
 
 /**
