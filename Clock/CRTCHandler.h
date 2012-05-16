@@ -20,19 +20,14 @@ namespace rtc_handler_namespace {
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 /* Class definitions -------------------------------------------------------- */
-
-
-#include "AManagedTask.h"
-
-
-
-/*
- *
- */
 class CRTCHandler: public AManagedTask {
+private:
+	void RTC_Config();
 public:
 	CRTCHandler();
 	virtual ~CRTCHandler();
+	bool HardwareInit();
+	void Run();
 };
 
 } /* namespace rtc_handler_namespace */
