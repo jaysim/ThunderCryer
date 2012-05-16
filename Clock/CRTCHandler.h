@@ -23,6 +23,7 @@ namespace rtc_handler_namespace {
 class CRTCHandler: public AManagedTask {
 private:
 	void RTC_Config();
+	uint32_t GetLSIFrequency();
 public:
 	CRTCHandler();
 	virtual ~CRTCHandler();
