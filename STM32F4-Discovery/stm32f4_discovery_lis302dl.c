@@ -479,6 +479,7 @@ uint32_t LIS302DL_TIMEOUT_UserCallback(void)
   while (1)
   {   
   }
+  return 0;
 }
 #endif /* USE_DEFAULT_TIMEOUT_CALLBACK */
 

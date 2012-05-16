@@ -234,7 +234,7 @@ static void     Codec_AudioInterface_Init(uint32_t AudioFreq);
 static void     Codec_AudioInterface_DeInit(void);
 static void     Codec_Reset(void);
 static uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint8_t RegisterValue);
-static uint32_t Codec_ReadRegister(uint8_t RegisterAddr);
+//static uint32_t Codec_ReadRegister(uint8_t RegisterAddr);
 static void     Codec_GPIO_Init(void);
 static void     Codec_GPIO_DeInit(void);
 static void     Delay(__IO uint32_t nCount);
@@ -943,102 +943,102 @@ static uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint8_t RegisterValue)
   * @retval Value of the register to be read or dummy value if the communication
   *         fails.
   */
-static uint32_t Codec_ReadRegister(uint8_t RegisterAddr)
-{
-  uint32_t result = 0;
-
-  /*!< While the bus is busy */
-  CODECTimeout = CODEC_LONG_TIMEOUT;
-  while(I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_BUSY))
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }
-  
-  /* Start the config sequence */
-  I2C_GenerateSTART(CODEC_I2C, ENABLE);
-
-  /* Test on EV5 and clear it */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while (!I2C_CheckEvent(CODEC_I2C, I2C_EVENT_MASTER_MODE_SELECT))
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }
-  
-  /* Transmit the slave address and enable writing operation */
-  I2C_Send7bitAddress(CODEC_I2C, CODEC_ADDRESS, I2C_Direction_Transmitter);
-
-  /* Test on EV6 and clear it */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while (!I2C_CheckEvent(CODEC_I2C, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }
-
-  /* Transmit the register address to be read */
-  I2C_SendData(CODEC_I2C, RegisterAddr);
-
-  /* Test on EV8 and clear it */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while (I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_BTF) == RESET)
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }
-  
-  /*!< Send START condition a second time */  
-  I2C_GenerateSTART(CODEC_I2C, ENABLE);
-  
-  /*!< Test on EV5 and clear it (cleared by reading SR1 then writing to DR) */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while(!I2C_CheckEvent(CODEC_I2C, I2C_EVENT_MASTER_MODE_SELECT))
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  } 
-  
-  /*!< Send Codec address for read */
-  I2C_Send7bitAddress(CODEC_I2C, CODEC_ADDRESS, I2C_Direction_Receiver);  
-  
-  /* Wait on ADDR flag to be set (ADDR is still not cleared at this level */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while(I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_ADDR) == RESET)
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }     
-  
-  /*!< Disable Acknowledgment */
-  I2C_AcknowledgeConfig(CODEC_I2C, DISABLE);   
-  
-  /* Clear ADDR register by reading SR1 then SR2 register (SR1 has already been read) */
-  (void)CODEC_I2C->SR2;
-  
-  /*!< Send STOP Condition */
-  I2C_GenerateSTOP(CODEC_I2C, ENABLE);
-  
-  /* Wait for the byte to be received */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while(I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_RXNE) == RESET)
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }
-  
-  /*!< Read the byte received from the Codec */
-  result = I2C_ReceiveData(CODEC_I2C);
-  
-  /* Wait to make sure that STOP flag has been cleared */
-  CODECTimeout = CODEC_FLAG_TIMEOUT;
-  while(CODEC_I2C->CR1 & I2C_CR1_STOP)
-  {
-    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
-  }  
-  
-  /*!< Re-Enable Acknowledgment to be ready for another reception */
-  I2C_AcknowledgeConfig(CODEC_I2C, ENABLE);  
-  
-  /* Clear AF flag for next communication */
-  I2C_ClearFlag(CODEC_I2C, I2C_FLAG_AF); 
-  
-  /* Return the byte read from Codec */
-  return result;
-}
+//static uint32_t Codec_ReadRegister(uint8_t RegisterAddr)
+//{
+//  uint32_t result = 0;
+//
+//  /*!< While the bus is busy */
+//  CODECTimeout = CODEC_LONG_TIMEOUT;
+//  while(I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_BUSY))
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /* Start the config sequence */
+//  I2C_GenerateSTART(CODEC_I2C, ENABLE);
+//
+//  /* Test on EV5 and clear it */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while (!I2C_CheckEvent(CODEC_I2C, I2C_EVENT_MASTER_MODE_SELECT))
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /* Transmit the slave address and enable writing operation */
+//  I2C_Send7bitAddress(CODEC_I2C, CODEC_ADDRESS, I2C_Direction_Transmitter);
+//
+//  /* Test on EV6 and clear it */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while (!I2C_CheckEvent(CODEC_I2C, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /* Transmit the register address to be read */
+//  I2C_SendData(CODEC_I2C, RegisterAddr);
+//
+//  /* Test on EV8 and clear it */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while (I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_BTF) == RESET)
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /*!< Send START condition a second time */
+//  I2C_GenerateSTART(CODEC_I2C, ENABLE);
+//
+//  /*!< Test on EV5 and clear it (cleared by reading SR1 then writing to DR) */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while(!I2C_CheckEvent(CODEC_I2C, I2C_EVENT_MASTER_MODE_SELECT))
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /*!< Send Codec address for read */
+//  I2C_Send7bitAddress(CODEC_I2C, CODEC_ADDRESS, I2C_Direction_Receiver);
+//
+//  /* Wait on ADDR flag to be set (ADDR is still not cleared at this level */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while(I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_ADDR) == RESET)
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /*!< Disable Acknowledgment */
+//  I2C_AcknowledgeConfig(CODEC_I2C, DISABLE);
+//
+//  /* Clear ADDR register by reading SR1 then SR2 register (SR1 has already been read) */
+//  (void)CODEC_I2C->SR2;
+//
+//  /*!< Send STOP Condition */
+//  I2C_GenerateSTOP(CODEC_I2C, ENABLE);
+//
+//  /* Wait for the byte to be received */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while(I2C_GetFlagStatus(CODEC_I2C, I2C_FLAG_RXNE) == RESET)
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /*!< Read the byte received from the Codec */
+//  result = I2C_ReceiveData(CODEC_I2C);
+//
+//  /* Wait to make sure that STOP flag has been cleared */
+//  CODECTimeout = CODEC_FLAG_TIMEOUT;
+//  while(CODEC_I2C->CR1 & I2C_CR1_STOP)
+//  {
+//    if((CODECTimeout--) == 0) return Codec_TIMEOUT_UserCallback();
+//  }
+//
+//  /*!< Re-Enable Acknowledgment to be ready for another reception */
+//  I2C_AcknowledgeConfig(CODEC_I2C, ENABLE);
+//
+//  /* Clear AF flag for next communication */
+//  I2C_ClearFlag(CODEC_I2C, I2C_FLAG_AF);
+//
+//  /* Return the byte read from Codec */
+//  return result;
+//}
 
 /**
   * @brief  Initializes the Audio Codec control interface (I2C).
