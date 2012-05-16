@@ -20,6 +20,7 @@ RM := rm -rf
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
 -include FreeRTOS/Source/subdir.mk
+-include Clock/subdir.mk
 -include Audio_MP3/USB_MSC/subdir.mk
 -include Audio_MP3/FatFs/src/option/subdir.mk
 -include Audio_MP3/FatFs/src/subdir.mk

@@ -35,6 +35,42 @@ CRTCHandler::~CRTCHandler() {
 }
 
 /**
+  * @brief  gives time as string
+  * @param  None
+  * @retval timestring in the format hh:mm:ss
+  */
+const char* CRTCHandler::GetTimeString(){
+	return "";
+}
+
+/**
+  * @brief  gives alarm time as string
+  * @param  alarm  select the alarm to set
+  * @retval timestring in the format hh:mm:ss
+  */
+const char* CRTCHandler::GetAlarmString(eAlarms alarm){
+	return "";
+}
+/**
+  * @brief  set time by time string
+  * @param  timestring in the format hh:mm:ss
+  * @retval none
+  */
+void CRTCHandler::SetTimeString(const char* timeString){
+
+}
+/**
+  * @brief  set alarm by time string
+  * @param  timestring in the format hh:mm:ss
+  * @param  alarm  select the alarm to set
+  * @retval none
+  */
+void CRTCHandler::SetAlarmString(const char* timeString, eAlarms alarm){
+
+}
+
+
+/**
   * @brief  HardwareInit called before Scheduler starts
   * @param  None
   * @retval true on succsess

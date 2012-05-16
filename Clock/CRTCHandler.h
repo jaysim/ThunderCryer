@@ -16,6 +16,10 @@
 /* namespace -----------------------------------------------------------------*/
 namespace rtc_handler_namespace {
 /* Exported types ------------------------------------------------------------*/
+typedef enum {
+	Alarm_A,
+	Alarm_B
+} eAlarms;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
@@ -29,6 +33,10 @@ public:
 	virtual ~CRTCHandler();
 	bool HardwareInit();
 	void Run();
+	const char* GetTimeString();
+	const char* GetAlarmString(eAlarms alarm);
+	void SetTimeString(const char* timeString);
+	void SetAlarmString(const char* timeString, eAlarms alarm);
 };
 
 } /* namespace rtc_handler_namespace */

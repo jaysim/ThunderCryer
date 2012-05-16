@@ -42,6 +42,7 @@ GraphicLCD \
 FreeRTOS_EC/Source \
 FreeRTOS/Source \
 FreeRTOS/Source/portable/GCC/ARM_CM4F \
+Clock \
 Audio_MP3 \
 Audio_MP3/USB_MSC \
 Audio_MP3/FatFs/src/option \
