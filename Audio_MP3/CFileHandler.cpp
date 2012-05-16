@@ -42,8 +42,11 @@ CFileHandler::CFileHandler() {
 	eMP3State = OPEN_FILE;
 	eBuffer = BUFFER_1;
 	uiVolume = 80;
-	uiLastSamplerate = 44100;
+	uiLastSamplerate = 48000;
 	bPlaying  = true;
+	bPlay = false;
+	bNext = false;
+	bStop = false;
 }
 
 CFileHandler::~CFileHandler() {
@@ -67,19 +70,18 @@ bool CFileHandler::HardwareInit(){
 	 * configure onboard accelerometer to drive
 	 * an external interrupt line on mechanical shock
 	 */
-	Mems_Config();
+	//Mems_Config();
 	/*
 	 * configure Interrupt for UserButton
 	 */
-	EXTILine_Config();
+	//EXTILine_Config();
 
 	hMP3Decoder = MP3InitDecoder();
 	/*
 	 * first Codec init with standard samplerate
 	 */
 	EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,uiLastSamplerate);
-	// stop I2S to prevent noise
-	EVAL_AUDIO_Stop(CODEC_PDWN_SW);
+
 	return true;
 }
 
@@ -262,16 +264,13 @@ void CFileHandler::MP3Player(){
 
 			ePlayerStatePrev = ePlayerState;
 
-			/* get next file on next flag */
-			if(bNext) {
-				ePlayerState = GET_FILE;
-				bNext = false;
-			}
-
 			if(bStop){
 				ePlayerState = STOP;
 				bStop = false;
 			}
+
+			/*get next file*/
+			ePlayerState = GET_FILE;
 
 			break;
 /*------------------------------------------------------------------------------*/
@@ -401,15 +400,19 @@ bool CFileHandler::PlayMP3(const char* filename){
 			 */
 			err = MP3GetNextFrameInfo(hMP3Decoder,&mp3FrameInfo,ptrReadPosition);
 			if(err == 0 && mp3FrameInfo.nChans == 2 && mp3FrameInfo.version == 0){
+
 				if(uiLastSamplerate != mp3FrameInfo.samprate) {
-					/* Initialize I2S interface */
-					EVAL_AUDIO_SetAudioInterface(AUDIO_INTERFACE_I2S);
+
+					/*
+					 * compensate clock error in i2s
+					 */
+					uiLastSamplerate = (mp3FrameInfo.samprate/237)*250;
 					/*
 					 * initialize Codec with sample freq.
 					 */
 					portENTER_CRITICAL();
 					EVAL_AUDIO_DeInit();
-					EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,mp3FrameInfo.samprate);
+					EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO,uiVolume,uiLastSamplerate);
 					portEXIT_CRITICAL();
 					uiLastSamplerate = mp3FrameInfo.samprate;
 				}
@@ -418,7 +421,7 @@ bool CFileHandler::PlayMP3(const char* filename){
 				 * so lets go playing mp3
 				 */
 				eMP3State = DECODE;
-			}else if(err == 0){
+			}else{
 				/*
 				 * valid frame but not compatible with the codec
 				 */

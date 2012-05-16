@@ -346,8 +346,11 @@ void I2S_Init(SPI_TypeDef* SPIx, I2S_InitTypeDef* I2S_InitStruct)
   /* If the default value has to be written, reinitialize i2sdiv and i2sodd*/
   if(I2S_InitStruct->I2S_AudioFreq == I2S_AudioFreq_Default)
   {
-    i2sodd = (uint16_t)0;
-    i2sdiv = (uint16_t)2;   
+    i2sodd = (uint16_t)1;//0;  //changed due to calc issues
+    i2sdiv = (uint16_t)53;//2;
+  }else if(I2S_InitStruct->I2S_AudioFreq == I2S_AudioFreq_48k) {
+	i2sodd = (uint16_t)1;
+	i2sdiv = (uint16_t)12;
   }
   /* If the requested audio frequency is not the default, compute the prescaler */
   else

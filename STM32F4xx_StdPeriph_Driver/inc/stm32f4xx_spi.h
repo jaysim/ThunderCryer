@@ -320,7 +320,7 @@ typedef struct
 #define I2S_AudioFreq_16k                ((uint32_t)16000)
 #define I2S_AudioFreq_11k                ((uint32_t)11025)
 #define I2S_AudioFreq_8k                 ((uint32_t)8000)
-#define I2S_AudioFreq_Default            ((uint32_t)2)
+#define I2S_AudioFreq_Default            ((uint32_t)I2S_AudioFreq_44k)
 
 #define IS_I2S_AUDIO_FREQ(FREQ) ((((FREQ) >= I2S_AudioFreq_8k) && \
                                  ((FREQ) <= I2S_AudioFreq_192k)) || \
