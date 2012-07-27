@@ -9,20 +9,21 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"CMutex.cpp"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
-  19              		.align	2
-  20              		.weak	_ZNK11ASyncObject7IsValidEv
-  21              		.thumb
-  22              		.thumb_func
-  24              	_ZNK11ASyncObject7IsValidEv:
-  25              	.LFB111:
-  26              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CMutex.cpp"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
+  20              		.align	2
+  21              		.weak	_ZNK11ASyncObject7IsValidEv
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZNK11ASyncObject7IsValidEv:
+  26              	.LFB111:
+  27              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
    1:../FreeRTOS_EC/Source/ASyncObject.h **** /**
    2:../FreeRTOS_EC/Source/ASyncObject.h ****  * @file   ASyncObject.h
    3:../FreeRTOS_EC/Source/ASyncObject.h ****  * @class  ASyncObject
@@ -65,111 +66,111 @@
   40:../FreeRTOS_EC/Source/ASyncObject.h **** 
   41:../FreeRTOS_EC/Source/ASyncObject.h **** inline
   42:../FreeRTOS_EC/Source/ASyncObject.h **** bool ASyncObject::IsValid() const {
-  27              		.loc 1 42 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 8
-  30              		@ frame_needed = 1, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-  32 0000 80B4     		push	{r7}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 4
-  35              		.cfi_offset 7, -4
-  36 0002 83B0     		sub	sp, sp, #12
-  37              	.LCFI1:
-  38              		.cfi_def_cfa_offset 16
-  39 0004 00AF     		add	r7, sp, #0
-  40              	.LCFI2:
-  41              		.cfi_def_cfa_register 7
-  42 0006 7860     		str	r0, [r7, #4]
+  28              		.loc 1 42 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
   43:../FreeRTOS_EC/Source/ASyncObject.h **** 	return m_handleSemaphore != NULL;
-  43              		.loc 1 43 0
-  44 0008 7B68     		ldr	r3, [r7, #4]
-  45 000a 5B68     		ldr	r3, [r3, #4]
-  46 000c 002B     		cmp	r3, #0
-  47 000e 0CBF     		ite	eq
-  48 0010 0023     		moveq	r3, #0
-  49 0012 0123     		movne	r3, #1
-  50 0014 DBB2     		uxtb	r3, r3
+  44              		.loc 1 43 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 5B68     		ldr	r3, [r3, #4]
+  47 000c 002B     		cmp	r3, #0
+  48 000e 0CBF     		ite	eq
+  49 0010 0023     		moveq	r3, #0
+  50 0012 0123     		movne	r3, #1
+  51 0014 DBB2     		uxtb	r3, r3
   44:../FreeRTOS_EC/Source/ASyncObject.h **** }
-  51              		.loc 1 44 0
-  52 0016 1846     		mov	r0, r3
-  53 0018 07F10C07 		add	r7, r7, #12
-  54 001c BD46     		mov	sp, r7
-  55 001e 80BC     		pop	{r7}
-  56 0020 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE111:
-  60 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
-  61              		.align	2
-  62              		.weak	_ZN11ASyncObject6DetachEv
-  63              		.thumb
-  64              		.thumb_func
-  66              	_ZN11ASyncObject6DetachEv:
-  67              	.LFB112:
+  52              		.loc 1 44 0
+  53 0016 1846     		mov	r0, r3
+  54 0018 07F10C07 		add	r7, r7, #12
+  55 001c BD46     		mov	sp, r7
+  56 001e 80BC     		pop	{r7}
+  57 0020 7047     		bx	lr
+  58              		.cfi_endproc
+  59              	.LFE111:
+  61 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
+  62              		.align	2
+  63              		.weak	_ZN11ASyncObject6DetachEv
+  64              		.thumb
+  65              		.thumb_func
+  67              	_ZN11ASyncObject6DetachEv:
+  68              	.LFB112:
   45:../FreeRTOS_EC/Source/ASyncObject.h **** 
   46:../FreeRTOS_EC/Source/ASyncObject.h **** inline
   47:../FreeRTOS_EC/Source/ASyncObject.h **** xGenericHandle ASyncObject::Detach() {
-  68              		.loc 1 47 0
-  69              		.cfi_startproc
-  70              		@ args = 0, pretend = 0, frame = 16
-  71              		@ frame_needed = 1, uses_anonymous_args = 0
-  72              		@ link register save eliminated.
-  73 0000 80B4     		push	{r7}
-  74              	.LCFI3:
-  75              		.cfi_def_cfa_offset 4
-  76              		.cfi_offset 7, -4
-  77 0002 85B0     		sub	sp, sp, #20
-  78              	.LCFI4:
-  79              		.cfi_def_cfa_offset 24
-  80 0004 00AF     		add	r7, sp, #0
-  81              	.LCFI5:
-  82              		.cfi_def_cfa_register 7
-  83 0006 7860     		str	r0, [r7, #4]
-  84              	.LBB2:
+  69              		.loc 1 47 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 16
+  72              		@ frame_needed = 1, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 0000 80B4     		push	{r7}
+  75              	.LCFI3:
+  76              		.cfi_def_cfa_offset 4
+  77              		.cfi_offset 7, -4
+  78 0002 85B0     		sub	sp, sp, #20
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_offset 24
+  81 0004 00AF     		add	r7, sp, #0
+  82              	.LCFI5:
+  83              		.cfi_def_cfa_register 7
+  84 0006 7860     		str	r0, [r7, #4]
+  85              	.LBB2:
   48:../FreeRTOS_EC/Source/ASyncObject.h **** 	xSemaphoreHandle res = m_handleSemaphore;
-  85              		.loc 1 48 0
-  86 0008 7B68     		ldr	r3, [r7, #4]
-  87 000a 5B68     		ldr	r3, [r3, #4]
-  88 000c FB60     		str	r3, [r7, #12]
+  86              		.loc 1 48 0
+  87 0008 7B68     		ldr	r3, [r7, #4]
+  88 000a 5B68     		ldr	r3, [r3, #4]
+  89 000c FB60     		str	r3, [r7, #12]
   49:../FreeRTOS_EC/Source/ASyncObject.h **** 	m_handleSemaphore = NULL;
-  89              		.loc 1 49 0
-  90 000e 7B68     		ldr	r3, [r7, #4]
-  91 0010 4FF00002 		mov	r2, #0
-  92 0014 5A60     		str	r2, [r3, #4]
+  90              		.loc 1 49 0
+  91 000e 7B68     		ldr	r3, [r7, #4]
+  92 0010 4FF00002 		mov	r2, #0
+  93 0014 5A60     		str	r2, [r3, #4]
   50:../FreeRTOS_EC/Source/ASyncObject.h **** 	return res;
-  93              		.loc 1 50 0
-  94 0016 FB68     		ldr	r3, [r7, #12]
-  95              	.LBE2:
+  94              		.loc 1 50 0
+  95 0016 FB68     		ldr	r3, [r7, #12]
+  96              	.LBE2:
   51:../FreeRTOS_EC/Source/ASyncObject.h **** }
-  96              		.loc 1 51 0
-  97 0018 1846     		mov	r0, r3
-  98 001a 07F11407 		add	r7, r7, #20
-  99 001e BD46     		mov	sp, r7
- 100 0020 80BC     		pop	{r7}
- 101 0022 7047     		bx	lr
- 102              		.cfi_endproc
- 103              	.LFE112:
- 105              		.section	.rodata
- 106              		.align	2
- 107              	.LC0:
- 108 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CMutex.h\000"
- 108      72656552 
- 108      544F535F 
- 108      45432F53 
- 108      6F757263 
- 109 001f 00       		.align	2
- 110              	.LC1:
- 111 0020 49735661 		.ascii	"IsValid()\000"
- 111      6C696428 
- 111      2900
- 112 002a 0000     		.section	.text._ZN6CMutex4TakeEm,"axG",%progbits,_ZN6CMutex4TakeEm,comdat
- 113              		.align	2
- 114              		.weak	_ZN6CMutex4TakeEm
- 115              		.thumb
- 116              		.thumb_func
- 118              	_ZN6CMutex4TakeEm:
- 119              	.LFB113:
- 120              		.file 2 "../FreeRTOS_EC/Source/CMutex.h"
+  97              		.loc 1 51 0
+  98 0018 1846     		mov	r0, r3
+  99 001a 07F11407 		add	r7, r7, #20
+ 100 001e BD46     		mov	sp, r7
+ 101 0020 80BC     		pop	{r7}
+ 102 0022 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE112:
+ 106              		.section	.rodata
+ 107              		.align	2
+ 108              	.LC0:
+ 109 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CMutex.h\000"
+ 109      72656552 
+ 109      544F535F 
+ 109      45432F53 
+ 109      6F757263 
+ 110 001f 00       		.align	2
+ 111              	.LC1:
+ 112 0020 49735661 		.ascii	"IsValid()\000"
+ 112      6C696428 
+ 112      2900
+ 113 002a 0000     		.section	.text._ZN6CMutex4TakeEm,"axG",%progbits,_ZN6CMutex4TakeEm,comdat
+ 114              		.align	2
+ 115              		.weak	_ZN6CMutex4TakeEm
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	_ZN6CMutex4TakeEm:
+ 120              	.LFB113:
+ 121              		.file 2 "../FreeRTOS_EC/Source/CMutex.h"
    1:../FreeRTOS_EC/Source/CMutex.h **** /**
    2:../FreeRTOS_EC/Source/CMutex.h ****  * @file CMutex.h
    3:../FreeRTOS_EC/Source/CMutex.h ****  * @class CMutex
@@ -251,141 +252,141 @@
   79:../FreeRTOS_EC/Source/CMutex.h **** 
   80:../FreeRTOS_EC/Source/CMutex.h **** inline
   81:../FreeRTOS_EC/Source/CMutex.h **** portBASE_TYPE CMutex::Take(portTickType xBlockTime) {
- 121              		.loc 2 81 0
- 122              		.cfi_startproc
- 123              		@ args = 0, pretend = 0, frame = 8
- 124              		@ frame_needed = 1, uses_anonymous_args = 0
- 125 0000 80B5     		push	{r7, lr}
- 126              	.LCFI6:
- 127              		.cfi_def_cfa_offset 8
- 128              		.cfi_offset 14, -4
- 129              		.cfi_offset 7, -8
- 130 0002 82B0     		sub	sp, sp, #8
- 131              	.LCFI7:
- 132              		.cfi_def_cfa_offset 16
- 133 0004 00AF     		add	r7, sp, #0
- 134              	.LCFI8:
- 135              		.cfi_def_cfa_register 7
- 136 0006 7860     		str	r0, [r7, #4]
- 137 0008 3960     		str	r1, [r7, #0]
- 138              	.LBB3:
+ 122              		.loc 2 81 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 8
+ 125              		@ frame_needed = 1, uses_anonymous_args = 0
+ 126 0000 80B5     		push	{r7, lr}
+ 127              	.LCFI6:
+ 128              		.cfi_def_cfa_offset 8
+ 129              		.cfi_offset 14, -4
+ 130              		.cfi_offset 7, -8
+ 131 0002 82B0     		sub	sp, sp, #8
+ 132              	.LCFI7:
+ 133              		.cfi_def_cfa_offset 16
+ 134 0004 00AF     		add	r7, sp, #0
+ 135              	.LCFI8:
+ 136              		.cfi_def_cfa_register 7
+ 137 0006 7860     		str	r0, [r7, #4]
+ 138 0008 3960     		str	r1, [r7, #0]
+ 139              	.LBB3:
   82:../FreeRTOS_EC/Source/CMutex.h **** 	assert(IsValid());
- 139              		.loc 2 82 0
- 140 000a 7B68     		ldr	r3, [r7, #4]
- 141 000c 1B68     		ldr	r3, [r3, #0]
- 142 000e 1B68     		ldr	r3, [r3, #0]
- 143 0010 7A68     		ldr	r2, [r7, #4]
- 144 0012 1046     		mov	r0, r2
- 145 0014 9847     		blx	r3
- 146 0016 0346     		mov	r3, r0
- 147 0018 002B     		cmp	r3, #0
- 148 001a 0FD1     		bne	.L4
- 149              		.loc 2 82 0 is_stmt 0 discriminator 1
- 150 001c 40F20000 		movw	r0, #:lower16:.LC0
- 151 0020 C0F20000 		movt	r0, #:upper16:.LC0
- 152 0024 4FF05201 		mov	r1, #82
- 153 0028 40F20002 		movw	r2, #:lower16:_ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__
- 154 002c C0F20002 		movt	r2, #:upper16:_ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__
- 155 0030 40F20003 		movw	r3, #:lower16:.LC1
- 156 0034 C0F20003 		movt	r3, #:upper16:.LC1
- 157 0038 FFF7FEFF 		bl	__assert_func
- 158              	.L4:
+ 140              		.loc 2 82 0
+ 141 000a 7B68     		ldr	r3, [r7, #4]
+ 142 000c 1B68     		ldr	r3, [r3, #0]
+ 143 000e 1B68     		ldr	r3, [r3, #0]
+ 144 0010 7A68     		ldr	r2, [r7, #4]
+ 145 0012 1046     		mov	r0, r2
+ 146 0014 9847     		blx	r3
+ 147 0016 0346     		mov	r3, r0
+ 148 0018 002B     		cmp	r3, #0
+ 149 001a 0FD1     		bne	.L4
+ 150              		.loc 2 82 0 is_stmt 0 discriminator 1
+ 151 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 152 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 153 0024 4FF05201 		mov	r1, #82
+ 154 0028 40F20002 		movw	r2, #:lower16:_ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__
+ 155 002c C0F20002 		movt	r2, #:upper16:_ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__
+ 156 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 157 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 158 0038 FFF7FEFF 		bl	__assert_func
+ 159              	.L4:
   83:../FreeRTOS_EC/Source/CMutex.h **** 
   84:../FreeRTOS_EC/Source/CMutex.h **** 	return xSemaphoreTake(m_handleSemaphore, xBlockTime);
- 159              		.loc 2 84 0 is_stmt 1
- 160 003c 7B68     		ldr	r3, [r7, #4]
- 161 003e 5B68     		ldr	r3, [r3, #4]
- 162 0040 1846     		mov	r0, r3
- 163 0042 4FF00001 		mov	r1, #0
- 164 0046 3A68     		ldr	r2, [r7, #0]
- 165 0048 4FF00003 		mov	r3, #0
- 166 004c FFF7FEFF 		bl	xQueueGenericReceive
- 167 0050 0346     		mov	r3, r0
- 168              	.LBE3:
+ 160              		.loc 2 84 0 is_stmt 1
+ 161 003c 7B68     		ldr	r3, [r7, #4]
+ 162 003e 5B68     		ldr	r3, [r3, #4]
+ 163 0040 1846     		mov	r0, r3
+ 164 0042 4FF00001 		mov	r1, #0
+ 165 0046 3A68     		ldr	r2, [r7, #0]
+ 166 0048 4FF00003 		mov	r3, #0
+ 167 004c FFF7FEFF 		bl	xQueueGenericReceive
+ 168 0050 0346     		mov	r3, r0
+ 169              	.LBE3:
   85:../FreeRTOS_EC/Source/CMutex.h **** }
- 169              		.loc 2 85 0
- 170 0052 1846     		mov	r0, r3
- 171 0054 07F10807 		add	r7, r7, #8
- 172 0058 BD46     		mov	sp, r7
- 173 005a 80BD     		pop	{r7, pc}
- 174              		.cfi_endproc
- 175              	.LFE113:
- 177              		.section	.text._ZN6CMutex4GiveEv,"axG",%progbits,_ZN6CMutex4GiveEv,comdat
- 178              		.align	2
- 179              		.weak	_ZN6CMutex4GiveEv
- 180              		.thumb
- 181              		.thumb_func
- 183              	_ZN6CMutex4GiveEv:
- 184              	.LFB114:
+ 170              		.loc 2 85 0
+ 171 0052 1846     		mov	r0, r3
+ 172 0054 07F10807 		add	r7, r7, #8
+ 173 0058 BD46     		mov	sp, r7
+ 174 005a 80BD     		pop	{r7, pc}
+ 175              		.cfi_endproc
+ 176              	.LFE113:
+ 178              		.section	.text._ZN6CMutex4GiveEv,"axG",%progbits,_ZN6CMutex4GiveEv,comdat
+ 179              		.align	2
+ 180              		.weak	_ZN6CMutex4GiveEv
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	_ZN6CMutex4GiveEv:
+ 185              	.LFB114:
   86:../FreeRTOS_EC/Source/CMutex.h **** 
   87:../FreeRTOS_EC/Source/CMutex.h **** inline
   88:../FreeRTOS_EC/Source/CMutex.h **** portBASE_TYPE CMutex::Give() {
- 185              		.loc 2 88 0
- 186              		.cfi_startproc
- 187              		@ args = 0, pretend = 0, frame = 8
- 188              		@ frame_needed = 1, uses_anonymous_args = 0
- 189 0000 80B5     		push	{r7, lr}
- 190              	.LCFI9:
- 191              		.cfi_def_cfa_offset 8
- 192              		.cfi_offset 14, -4
- 193              		.cfi_offset 7, -8
- 194 0002 82B0     		sub	sp, sp, #8
- 195              	.LCFI10:
- 196              		.cfi_def_cfa_offset 16
- 197 0004 00AF     		add	r7, sp, #0
- 198              	.LCFI11:
- 199              		.cfi_def_cfa_register 7
- 200 0006 7860     		str	r0, [r7, #4]
- 201              	.LBB4:
+ 186              		.loc 2 88 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 8
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 0000 80B5     		push	{r7, lr}
+ 191              	.LCFI9:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 14, -4
+ 194              		.cfi_offset 7, -8
+ 195 0002 82B0     		sub	sp, sp, #8
+ 196              	.LCFI10:
+ 197              		.cfi_def_cfa_offset 16
+ 198 0004 00AF     		add	r7, sp, #0
+ 199              	.LCFI11:
+ 200              		.cfi_def_cfa_register 7
+ 201 0006 7860     		str	r0, [r7, #4]
+ 202              	.LBB4:
   89:../FreeRTOS_EC/Source/CMutex.h **** 	assert(IsValid());
- 202              		.loc 2 89 0
- 203 0008 7B68     		ldr	r3, [r7, #4]
- 204 000a 1B68     		ldr	r3, [r3, #0]
- 205 000c 1B68     		ldr	r3, [r3, #0]
- 206 000e 7A68     		ldr	r2, [r7, #4]
- 207 0010 1046     		mov	r0, r2
- 208 0012 9847     		blx	r3
- 209 0014 0346     		mov	r3, r0
- 210 0016 002B     		cmp	r3, #0
- 211 0018 0FD1     		bne	.L6
- 212              		.loc 2 89 0 is_stmt 0 discriminator 1
- 213 001a 40F20000 		movw	r0, #:lower16:.LC0
- 214 001e C0F20000 		movt	r0, #:upper16:.LC0
- 215 0022 4FF05901 		mov	r1, #89
- 216 0026 40F20002 		movw	r2, #:lower16:_ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__
- 217 002a C0F20002 		movt	r2, #:upper16:_ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__
- 218 002e 40F20003 		movw	r3, #:lower16:.LC1
- 219 0032 C0F20003 		movt	r3, #:upper16:.LC1
- 220 0036 FFF7FEFF 		bl	__assert_func
- 221              	.L6:
+ 203              		.loc 2 89 0
+ 204 0008 7B68     		ldr	r3, [r7, #4]
+ 205 000a 1B68     		ldr	r3, [r3, #0]
+ 206 000c 1B68     		ldr	r3, [r3, #0]
+ 207 000e 7A68     		ldr	r2, [r7, #4]
+ 208 0010 1046     		mov	r0, r2
+ 209 0012 9847     		blx	r3
+ 210 0014 0346     		mov	r3, r0
+ 211 0016 002B     		cmp	r3, #0
+ 212 0018 0FD1     		bne	.L6
+ 213              		.loc 2 89 0 is_stmt 0 discriminator 1
+ 214 001a 40F20000 		movw	r0, #:lower16:.LC0
+ 215 001e C0F20000 		movt	r0, #:upper16:.LC0
+ 216 0022 4FF05901 		mov	r1, #89
+ 217 0026 40F20002 		movw	r2, #:lower16:_ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__
+ 218 002a C0F20002 		movt	r2, #:upper16:_ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__
+ 219 002e 40F20003 		movw	r3, #:lower16:.LC1
+ 220 0032 C0F20003 		movt	r3, #:upper16:.LC1
+ 221 0036 FFF7FEFF 		bl	__assert_func
+ 222              	.L6:
   90:../FreeRTOS_EC/Source/CMutex.h **** 
   91:../FreeRTOS_EC/Source/CMutex.h **** 	return xSemaphoreGive(m_handleSemaphore);
- 222              		.loc 2 91 0 is_stmt 1
- 223 003a 7B68     		ldr	r3, [r7, #4]
- 224 003c 5B68     		ldr	r3, [r3, #4]
- 225 003e 1846     		mov	r0, r3
- 226 0040 4FF00001 		mov	r1, #0
- 227 0044 4FF00002 		mov	r2, #0
- 228 0048 4FF00003 		mov	r3, #0
- 229 004c FFF7FEFF 		bl	xQueueGenericSend
- 230 0050 0346     		mov	r3, r0
- 231              	.LBE4:
+ 223              		.loc 2 91 0 is_stmt 1
+ 224 003a 7B68     		ldr	r3, [r7, #4]
+ 225 003c 5B68     		ldr	r3, [r3, #4]
+ 226 003e 1846     		mov	r0, r3
+ 227 0040 4FF00001 		mov	r1, #0
+ 228 0044 4FF00002 		mov	r2, #0
+ 229 0048 4FF00003 		mov	r3, #0
+ 230 004c FFF7FEFF 		bl	xQueueGenericSend
+ 231 0050 0346     		mov	r3, r0
+ 232              	.LBE4:
   92:../FreeRTOS_EC/Source/CMutex.h **** }
- 232              		.loc 2 92 0
- 233 0052 1846     		mov	r0, r3
- 234 0054 07F10807 		add	r7, r7, #8
- 235 0058 BD46     		mov	sp, r7
- 236 005a 80BD     		pop	{r7, pc}
- 237              		.cfi_endproc
- 238              	.LFE114:
- 240              		.text
- 241              		.align	2
- 242              		.global	_ZN6CMutexC2Ev
- 243              		.thumb
- 244              		.thumb_func
- 246              	_ZN6CMutexC2Ev:
- 247              	.LFB116:
- 248              		.file 3 "../FreeRTOS_EC/Source/CMutex.cpp"
+ 233              		.loc 2 92 0
+ 234 0052 1846     		mov	r0, r3
+ 235 0054 07F10807 		add	r7, r7, #8
+ 236 0058 BD46     		mov	sp, r7
+ 237 005a 80BD     		pop	{r7, pc}
+ 238              		.cfi_endproc
+ 239              	.LFE114:
+ 241              		.text
+ 242              		.align	2
+ 243              		.global	_ZN6CMutexC2Ev
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	_ZN6CMutexC2Ev:
+ 248              	.LFB116:
+ 249              		.file 3 "../FreeRTOS_EC/Source/CMutex.cpp"
    1:../FreeRTOS_EC/Source/CMutex.cpp **** /**
    2:../FreeRTOS_EC/Source/CMutex.cpp ****  * CMutex.cpp
    3:../FreeRTOS_EC/Source/CMutex.cpp ****  *
@@ -397,339 +398,339 @@
    9:../FreeRTOS_EC/Source/CMutex.cpp **** #include "CMutex.h"
   10:../FreeRTOS_EC/Source/CMutex.cpp **** 
   11:../FreeRTOS_EC/Source/CMutex.cpp **** CMutex::CMutex() {
- 249              		.loc 3 11 0
- 250              		.cfi_startproc
- 251              		@ args = 0, pretend = 0, frame = 8
- 252              		@ frame_needed = 1, uses_anonymous_args = 0
- 253 0000 80B5     		push	{r7, lr}
- 254              	.LCFI12:
- 255              		.cfi_def_cfa_offset 8
- 256              		.cfi_offset 14, -4
- 257              		.cfi_offset 7, -8
- 258 0002 82B0     		sub	sp, sp, #8
- 259              	.LCFI13:
- 260              		.cfi_def_cfa_offset 16
- 261 0004 00AF     		add	r7, sp, #0
- 262              	.LCFI14:
- 263              		.cfi_def_cfa_register 7
- 264 0006 7860     		str	r0, [r7, #4]
- 265              	.LBB5:
- 266              		.loc 3 11 0
- 267 0008 7B68     		ldr	r3, [r7, #4]
- 268 000a 1846     		mov	r0, r3
- 269 000c FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
- 270 0010 7B68     		ldr	r3, [r7, #4]
- 271 0012 044A     		ldr	r2, .L9
- 272 0014 1A60     		str	r2, [r3, #0]
- 273              	.LBE5:
+ 250              		.loc 3 11 0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 8
+ 253              		@ frame_needed = 1, uses_anonymous_args = 0
+ 254 0000 80B5     		push	{r7, lr}
+ 255              	.LCFI12:
+ 256              		.cfi_def_cfa_offset 8
+ 257              		.cfi_offset 14, -4
+ 258              		.cfi_offset 7, -8
+ 259 0002 82B0     		sub	sp, sp, #8
+ 260              	.LCFI13:
+ 261              		.cfi_def_cfa_offset 16
+ 262 0004 00AF     		add	r7, sp, #0
+ 263              	.LCFI14:
+ 264              		.cfi_def_cfa_register 7
+ 265 0006 7860     		str	r0, [r7, #4]
+ 266              	.LBB5:
+ 267              		.loc 3 11 0
+ 268 0008 7B68     		ldr	r3, [r7, #4]
+ 269 000a 1846     		mov	r0, r3
+ 270 000c FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 271 0010 7B68     		ldr	r3, [r7, #4]
+ 272 0012 044A     		ldr	r2, .L9
+ 273 0014 1A60     		str	r2, [r3, #0]
+ 274              	.LBE5:
   12:../FreeRTOS_EC/Source/CMutex.cpp **** 	// TODO Auto-generated constructor stub
   13:../FreeRTOS_EC/Source/CMutex.cpp **** 
   14:../FreeRTOS_EC/Source/CMutex.cpp **** }
- 274              		.loc 3 14 0
- 275 0016 7B68     		ldr	r3, [r7, #4]
- 276 0018 1846     		mov	r0, r3
- 277 001a 07F10807 		add	r7, r7, #8
- 278 001e BD46     		mov	sp, r7
- 279 0020 80BD     		pop	{r7, pc}
- 280              	.L10:
- 281 0022 00BF     		.align	2
- 282              	.L9:
- 283 0024 08000000 		.word	_ZTV6CMutex+8
- 284              		.cfi_endproc
- 285              	.LFE116:
- 287              		.align	2
- 288              		.global	_ZN6CMutexD2Ev
- 289              		.thumb
- 290              		.thumb_func
- 292              	_ZN6CMutexD2Ev:
- 293              	.LFB119:
+ 275              		.loc 3 14 0
+ 276 0016 7B68     		ldr	r3, [r7, #4]
+ 277 0018 1846     		mov	r0, r3
+ 278 001a 07F10807 		add	r7, r7, #8
+ 279 001e BD46     		mov	sp, r7
+ 280 0020 80BD     		pop	{r7, pc}
+ 281              	.L10:
+ 282 0022 00BF     		.align	2
+ 283              	.L9:
+ 284 0024 08000000 		.word	_ZTV6CMutex+8
+ 285              		.cfi_endproc
+ 286              	.LFE116:
+ 288              		.align	2
+ 289              		.global	_ZN6CMutexD2Ev
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	_ZN6CMutexD2Ev:
+ 294              	.LFB119:
   15:../FreeRTOS_EC/Source/CMutex.cpp **** 
   16:../FreeRTOS_EC/Source/CMutex.cpp **** CMutex::~CMutex() {
- 294              		.loc 3 16 0
- 295              		.cfi_startproc
- 296              		@ args = 0, pretend = 0, frame = 8
- 297              		@ frame_needed = 1, uses_anonymous_args = 0
- 298 0028 80B5     		push	{r7, lr}
- 299              	.LCFI15:
- 300              		.cfi_def_cfa_offset 8
- 301              		.cfi_offset 14, -4
- 302              		.cfi_offset 7, -8
- 303 002a 82B0     		sub	sp, sp, #8
- 304              	.LCFI16:
- 305              		.cfi_def_cfa_offset 16
- 306 002c 00AF     		add	r7, sp, #0
- 307              	.LCFI17:
- 308              		.cfi_def_cfa_register 7
- 309 002e 7860     		str	r0, [r7, #4]
- 310              	.LBB6:
- 311              		.loc 3 16 0
- 312 0030 7B68     		ldr	r3, [r7, #4]
- 313 0032 0A4A     		ldr	r2, .L14
- 314 0034 1A60     		str	r2, [r3, #0]
+ 295              		.loc 3 16 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 8
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299 0028 80B5     		push	{r7, lr}
+ 300              	.LCFI15:
+ 301              		.cfi_def_cfa_offset 8
+ 302              		.cfi_offset 14, -4
+ 303              		.cfi_offset 7, -8
+ 304 002a 82B0     		sub	sp, sp, #8
+ 305              	.LCFI16:
+ 306              		.cfi_def_cfa_offset 16
+ 307 002c 00AF     		add	r7, sp, #0
+ 308              	.LCFI17:
+ 309              		.cfi_def_cfa_register 7
+ 310 002e 7860     		str	r0, [r7, #4]
+ 311              	.LBB6:
+ 312              		.loc 3 16 0
+ 313 0030 7B68     		ldr	r3, [r7, #4]
+ 314 0032 0A4A     		ldr	r2, .L14
+ 315 0034 1A60     		str	r2, [r3, #0]
   17:../FreeRTOS_EC/Source/CMutex.cpp **** 	// TODO Auto-generated destructor stub
   18:../FreeRTOS_EC/Source/CMutex.cpp **** }
- 315              		.loc 3 18 0
- 316 0036 7868     		ldr	r0, [r7, #4]
- 317 0038 FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
- 318              	.LBE6:
- 319 003c 4FF00003 		mov	r3, #0
- 320 0040 03F00103 		and	r3, r3, #1
- 321 0044 DBB2     		uxtb	r3, r3
- 322 0046 002B     		cmp	r3, #0
- 323 0048 02D0     		beq	.L13
- 324              		.loc 3 18 0 is_stmt 0 discriminator 2
- 325 004a 7868     		ldr	r0, [r7, #4]
- 326 004c FFF7FEFF 		bl	_ZdlPv
- 327              	.L13:
- 328              		.loc 3 18 0 discriminator 3
- 329 0050 7B68     		ldr	r3, [r7, #4]
- 330 0052 1846     		mov	r0, r3
- 331 0054 07F10807 		add	r7, r7, #8
- 332 0058 BD46     		mov	sp, r7
- 333 005a 80BD     		pop	{r7, pc}
- 334              	.L15:
- 335              		.align	2
- 336              	.L14:
- 337 005c 08000000 		.word	_ZTV6CMutex+8
- 338              		.cfi_endproc
- 339              	.LFE119:
- 341              		.align	2
- 342              		.global	_ZN6CMutexD0Ev
- 343              		.thumb
- 344              		.thumb_func
- 346              	_ZN6CMutexD0Ev:
- 347              	.LFB121:
+ 316              		.loc 3 18 0
+ 317 0036 7868     		ldr	r0, [r7, #4]
+ 318 0038 FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
+ 319              	.LBE6:
+ 320 003c 4FF00003 		mov	r3, #0
+ 321 0040 03F00103 		and	r3, r3, #1
+ 322 0044 DBB2     		uxtb	r3, r3
+ 323 0046 002B     		cmp	r3, #0
+ 324 0048 02D0     		beq	.L13
+ 325              		.loc 3 18 0 is_stmt 0 discriminator 2
+ 326 004a 7868     		ldr	r0, [r7, #4]
+ 327 004c FFF7FEFF 		bl	_ZdlPv
+ 328              	.L13:
+ 329              		.loc 3 18 0 discriminator 3
+ 330 0050 7B68     		ldr	r3, [r7, #4]
+ 331 0052 1846     		mov	r0, r3
+ 332 0054 07F10807 		add	r7, r7, #8
+ 333 0058 BD46     		mov	sp, r7
+ 334 005a 80BD     		pop	{r7, pc}
+ 335              	.L15:
+ 336              		.align	2
+ 337              	.L14:
+ 338 005c 08000000 		.word	_ZTV6CMutex+8
+ 339              		.cfi_endproc
+ 340              	.LFE119:
+ 342              		.align	2
+ 343              		.global	_ZN6CMutexD0Ev
+ 344              		.thumb
+ 345              		.thumb_func
+ 347              	_ZN6CMutexD0Ev:
+ 348              	.LFB121:
   16:../FreeRTOS_EC/Source/CMutex.cpp **** CMutex::~CMutex() {
- 348              		.loc 3 16 0 is_stmt 1
- 349              		.cfi_startproc
- 350              		@ args = 0, pretend = 0, frame = 8
- 351              		@ frame_needed = 1, uses_anonymous_args = 0
- 352 0060 80B5     		push	{r7, lr}
- 353              	.LCFI18:
- 354              		.cfi_def_cfa_offset 8
- 355              		.cfi_offset 14, -4
- 356              		.cfi_offset 7, -8
- 357 0062 82B0     		sub	sp, sp, #8
- 358              	.LCFI19:
- 359              		.cfi_def_cfa_offset 16
- 360 0064 00AF     		add	r7, sp, #0
- 361              	.LCFI20:
- 362              		.cfi_def_cfa_register 7
- 363 0066 7860     		str	r0, [r7, #4]
- 364              		.loc 3 18 0
- 365 0068 7868     		ldr	r0, [r7, #4]
- 366 006a FFF7FEFF 		bl	_ZN6CMutexD1Ev
- 367 006e 7868     		ldr	r0, [r7, #4]
- 368 0070 FFF7FEFF 		bl	_ZdlPv
- 369 0074 7B68     		ldr	r3, [r7, #4]
- 370 0076 1846     		mov	r0, r3
- 371 0078 07F10807 		add	r7, r7, #8
- 372 007c BD46     		mov	sp, r7
- 373 007e 80BD     		pop	{r7, pc}
- 374              		.cfi_endproc
- 375              	.LFE121:
- 377              		.align	2
- 378              		.global	_ZN6CMutexC2EPv
- 379              		.thumb
- 380              		.thumb_func
- 382              	_ZN6CMutexC2EPv:
- 383              	.LFB123:
+ 349              		.loc 3 16 0 is_stmt 1
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 8
+ 352              		@ frame_needed = 1, uses_anonymous_args = 0
+ 353 0060 80B5     		push	{r7, lr}
+ 354              	.LCFI18:
+ 355              		.cfi_def_cfa_offset 8
+ 356              		.cfi_offset 14, -4
+ 357              		.cfi_offset 7, -8
+ 358 0062 82B0     		sub	sp, sp, #8
+ 359              	.LCFI19:
+ 360              		.cfi_def_cfa_offset 16
+ 361 0064 00AF     		add	r7, sp, #0
+ 362              	.LCFI20:
+ 363              		.cfi_def_cfa_register 7
+ 364 0066 7860     		str	r0, [r7, #4]
+ 365              		.loc 3 18 0
+ 366 0068 7868     		ldr	r0, [r7, #4]
+ 367 006a FFF7FEFF 		bl	_ZN6CMutexD1Ev
+ 368 006e 7868     		ldr	r0, [r7, #4]
+ 369 0070 FFF7FEFF 		bl	_ZdlPv
+ 370 0074 7B68     		ldr	r3, [r7, #4]
+ 371 0076 1846     		mov	r0, r3
+ 372 0078 07F10807 		add	r7, r7, #8
+ 373 007c BD46     		mov	sp, r7
+ 374 007e 80BD     		pop	{r7, pc}
+ 375              		.cfi_endproc
+ 376              	.LFE121:
+ 378              		.align	2
+ 379              		.global	_ZN6CMutexC2EPv
+ 380              		.thumb
+ 381              		.thumb_func
+ 383              	_ZN6CMutexC2EPv:
+ 384              	.LFB123:
   19:../FreeRTOS_EC/Source/CMutex.cpp **** 
   20:../FreeRTOS_EC/Source/CMutex.cpp **** CMutex::CMutex(xSemaphoreHandle handleSemaphore) {
- 384              		.loc 3 20 0
- 385              		.cfi_startproc
- 386              		@ args = 0, pretend = 0, frame = 8
- 387              		@ frame_needed = 1, uses_anonymous_args = 0
- 388 0080 80B5     		push	{r7, lr}
- 389              	.LCFI21:
- 390              		.cfi_def_cfa_offset 8
- 391              		.cfi_offset 14, -4
- 392              		.cfi_offset 7, -8
- 393 0082 82B0     		sub	sp, sp, #8
- 394              	.LCFI22:
- 395              		.cfi_def_cfa_offset 16
- 396 0084 00AF     		add	r7, sp, #0
- 397              	.LCFI23:
- 398              		.cfi_def_cfa_register 7
- 399 0086 7860     		str	r0, [r7, #4]
- 400 0088 3960     		str	r1, [r7, #0]
- 401              	.LBB7:
- 402              		.loc 3 20 0
- 403 008a 7B68     		ldr	r3, [r7, #4]
- 404 008c 1846     		mov	r0, r3
- 405 008e FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
- 406 0092 7B68     		ldr	r3, [r7, #4]
- 407 0094 064A     		ldr	r2, .L20
- 408 0096 1A60     		str	r2, [r3, #0]
+ 385              		.loc 3 20 0
+ 386              		.cfi_startproc
+ 387              		@ args = 0, pretend = 0, frame = 8
+ 388              		@ frame_needed = 1, uses_anonymous_args = 0
+ 389 0080 80B5     		push	{r7, lr}
+ 390              	.LCFI21:
+ 391              		.cfi_def_cfa_offset 8
+ 392              		.cfi_offset 14, -4
+ 393              		.cfi_offset 7, -8
+ 394 0082 82B0     		sub	sp, sp, #8
+ 395              	.LCFI22:
+ 396              		.cfi_def_cfa_offset 16
+ 397 0084 00AF     		add	r7, sp, #0
+ 398              	.LCFI23:
+ 399              		.cfi_def_cfa_register 7
+ 400 0086 7860     		str	r0, [r7, #4]
+ 401 0088 3960     		str	r1, [r7, #0]
+ 402              	.LBB7:
+ 403              		.loc 3 20 0
+ 404 008a 7B68     		ldr	r3, [r7, #4]
+ 405 008c 1846     		mov	r0, r3
+ 406 008e FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 407 0092 7B68     		ldr	r3, [r7, #4]
+ 408 0094 064A     		ldr	r2, .L20
+ 409 0096 1A60     		str	r2, [r3, #0]
   21:../FreeRTOS_EC/Source/CMutex.cpp **** 	Attach(handleSemaphore);
- 409              		.loc 3 21 0
- 410 0098 7B68     		ldr	r3, [r7, #4]
- 411 009a 1846     		mov	r0, r3
- 412 009c 3968     		ldr	r1, [r7, #0]
- 413 009e FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
- 414              	.LBE7:
+ 410              		.loc 3 21 0
+ 411 0098 7B68     		ldr	r3, [r7, #4]
+ 412 009a 1846     		mov	r0, r3
+ 413 009c 3968     		ldr	r1, [r7, #0]
+ 414 009e FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
+ 415              	.LBE7:
   22:../FreeRTOS_EC/Source/CMutex.cpp **** }
- 415              		.loc 3 22 0
- 416 00a2 7B68     		ldr	r3, [r7, #4]
- 417 00a4 1846     		mov	r0, r3
- 418 00a6 07F10807 		add	r7, r7, #8
- 419 00aa BD46     		mov	sp, r7
- 420 00ac 80BD     		pop	{r7, pc}
- 421              	.L21:
- 422 00ae 00BF     		.align	2
- 423              	.L20:
- 424 00b0 08000000 		.word	_ZTV6CMutex+8
- 425              		.cfi_endproc
- 426              	.LFE123:
- 428              		.align	2
- 429              		.global	_ZN6CMutex6CreateEv
- 430              		.thumb
- 431              		.thumb_func
- 433              	_ZN6CMutex6CreateEv:
- 434              	.LFB125:
+ 416              		.loc 3 22 0
+ 417 00a2 7B68     		ldr	r3, [r7, #4]
+ 418 00a4 1846     		mov	r0, r3
+ 419 00a6 07F10807 		add	r7, r7, #8
+ 420 00aa BD46     		mov	sp, r7
+ 421 00ac 80BD     		pop	{r7, pc}
+ 422              	.L21:
+ 423 00ae 00BF     		.align	2
+ 424              	.L20:
+ 425 00b0 08000000 		.word	_ZTV6CMutex+8
+ 426              		.cfi_endproc
+ 427              	.LFE123:
+ 429              		.align	2
+ 430              		.global	_ZN6CMutex6CreateEv
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	_ZN6CMutex6CreateEv:
+ 435              	.LFB125:
   23:../FreeRTOS_EC/Source/CMutex.cpp **** 
   24:../FreeRTOS_EC/Source/CMutex.cpp **** bool CMutex::Create() {
- 435              		.loc 3 24 0
- 436              		.cfi_startproc
- 437              		@ args = 0, pretend = 0, frame = 16
- 438              		@ frame_needed = 1, uses_anonymous_args = 0
- 439 00b4 80B5     		push	{r7, lr}
- 440              	.LCFI24:
- 441              		.cfi_def_cfa_offset 8
- 442              		.cfi_offset 14, -4
- 443              		.cfi_offset 7, -8
- 444 00b6 84B0     		sub	sp, sp, #16
- 445              	.LCFI25:
- 446              		.cfi_def_cfa_offset 24
- 447 00b8 00AF     		add	r7, sp, #0
- 448              	.LCFI26:
- 449              		.cfi_def_cfa_register 7
- 450 00ba 7860     		str	r0, [r7, #4]
- 451              	.LBB8:
+ 436              		.loc 3 24 0
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 16
+ 439              		@ frame_needed = 1, uses_anonymous_args = 0
+ 440 00b4 80B5     		push	{r7, lr}
+ 441              	.LCFI24:
+ 442              		.cfi_def_cfa_offset 8
+ 443              		.cfi_offset 14, -4
+ 444              		.cfi_offset 7, -8
+ 445 00b6 84B0     		sub	sp, sp, #16
+ 446              	.LCFI25:
+ 447              		.cfi_def_cfa_offset 24
+ 448 00b8 00AF     		add	r7, sp, #0
+ 449              	.LCFI26:
+ 450              		.cfi_def_cfa_register 7
+ 451 00ba 7860     		str	r0, [r7, #4]
+ 452              	.LBB8:
   25:../FreeRTOS_EC/Source/CMutex.cpp **** 
   26:../FreeRTOS_EC/Source/CMutex.cpp **** #if ( configUSE_MUTEXES == 1 )
   27:../FreeRTOS_EC/Source/CMutex.cpp **** 
   28:../FreeRTOS_EC/Source/CMutex.cpp **** 	xSemaphoreHandle handle;
   29:../FreeRTOS_EC/Source/CMutex.cpp **** 
   30:../FreeRTOS_EC/Source/CMutex.cpp **** 	handle = xSemaphoreCreateMutex();
- 452              		.loc 3 30 0
- 453 00bc FFF7FEFF 		bl	xQueueCreateMutex
- 454 00c0 0346     		mov	r3, r0
- 455 00c2 FB60     		str	r3, [r7, #12]
+ 453              		.loc 3 30 0
+ 454 00bc FFF7FEFF 		bl	xQueueCreateMutex
+ 455 00c0 0346     		mov	r3, r0
+ 456 00c2 FB60     		str	r3, [r7, #12]
   31:../FreeRTOS_EC/Source/CMutex.cpp **** 
   32:../FreeRTOS_EC/Source/CMutex.cpp **** 	if (handle != NULL)
- 456              		.loc 3 32 0
- 457 00c4 FB68     		ldr	r3, [r7, #12]
- 458 00c6 002B     		cmp	r3, #0
- 459 00c8 08D0     		beq	.L23
+ 457              		.loc 3 32 0
+ 458 00c4 FB68     		ldr	r3, [r7, #12]
+ 459 00c6 002B     		cmp	r3, #0
+ 460 00c8 08D0     		beq	.L23
   33:../FreeRTOS_EC/Source/CMutex.cpp **** 		Attach(handle);
- 460              		.loc 3 33 0
- 461 00ca 7B68     		ldr	r3, [r7, #4]
- 462 00cc 1B68     		ldr	r3, [r3, #0]
- 463 00ce 03F10403 		add	r3, r3, #4
- 464 00d2 1B68     		ldr	r3, [r3, #0]
- 465 00d4 7A68     		ldr	r2, [r7, #4]
- 466 00d6 1046     		mov	r0, r2
- 467 00d8 F968     		ldr	r1, [r7, #12]
- 468 00da 9847     		blx	r3
- 469              	.L23:
+ 461              		.loc 3 33 0
+ 462 00ca 7B68     		ldr	r3, [r7, #4]
+ 463 00cc 1B68     		ldr	r3, [r3, #0]
+ 464 00ce 03F10403 		add	r3, r3, #4
+ 465 00d2 1B68     		ldr	r3, [r3, #0]
+ 466 00d4 7A68     		ldr	r2, [r7, #4]
+ 467 00d6 1046     		mov	r0, r2
+ 468 00d8 F968     		ldr	r1, [r7, #12]
+ 469 00da 9847     		blx	r3
+ 470              	.L23:
   34:../FreeRTOS_EC/Source/CMutex.cpp **** #endif
   35:../FreeRTOS_EC/Source/CMutex.cpp **** 
   36:../FreeRTOS_EC/Source/CMutex.cpp **** 	return IsValid();
- 470              		.loc 3 36 0
- 471 00dc 7B68     		ldr	r3, [r7, #4]
- 472 00de 1B68     		ldr	r3, [r3, #0]
- 473 00e0 1B68     		ldr	r3, [r3, #0]
- 474 00e2 7A68     		ldr	r2, [r7, #4]
- 475 00e4 1046     		mov	r0, r2
- 476 00e6 9847     		blx	r3
- 477 00e8 0346     		mov	r3, r0
- 478              	.LBE8:
+ 471              		.loc 3 36 0
+ 472 00dc 7B68     		ldr	r3, [r7, #4]
+ 473 00de 1B68     		ldr	r3, [r3, #0]
+ 474 00e0 1B68     		ldr	r3, [r3, #0]
+ 475 00e2 7A68     		ldr	r2, [r7, #4]
+ 476 00e4 1046     		mov	r0, r2
+ 477 00e6 9847     		blx	r3
+ 478 00e8 0346     		mov	r3, r0
+ 479              	.LBE8:
   37:../FreeRTOS_EC/Source/CMutex.cpp **** }
- 479              		.loc 3 37 0
- 480 00ea 1846     		mov	r0, r3
- 481 00ec 07F11007 		add	r7, r7, #16
- 482 00f0 BD46     		mov	sp, r7
- 483 00f2 80BD     		pop	{r7, pc}
- 484              		.cfi_endproc
- 485              	.LFE125:
- 487              		.global	_ZTV6CMutex
- 488              		.section	.rodata._ZTV6CMutex,"a",%progbits
- 489              		.align	3
- 492              	_ZTV6CMutex:
- 493 0000 00000000 		.word	0
- 494 0004 00000000 		.word	0
- 495 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
- 496 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
- 497 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
- 498 0014 00000000 		.word	_ZN6CMutexD1Ev
- 499 0018 00000000 		.word	_ZN6CMutexD0Ev
- 500 001c 00000000 		.word	_ZN6CMutex4TakeEm
- 501 0020 00000000 		.word	_ZN6CMutex4GiveEv
- 502 0024 00000000 		.section	.rodata._ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__,"a",%progbits
- 503              		.align	2
- 506              	_ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__:
- 507 0000 76697274 		.ascii	"virtual long int CMutex::Give()\000"
- 507      75616C20 
- 507      6C6F6E67 
- 507      20696E74 
- 507      20434D75 
- 508              		.section	.rodata._ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__,"a",%progbits
- 509              		.align	2
- 512              	_ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__:
- 513 0000 76697274 		.ascii	"virtual long int CMutex::Take(portTickType)\000"
- 513      75616C20 
- 513      6C6F6E67 
- 513      20696E74 
- 513      20434D75 
- 514              		.global	_ZN6CMutexC1Ev
- 515              		.thumb_set _ZN6CMutexC1Ev,_ZN6CMutexC2Ev
- 516              		.global	_ZN6CMutexD1Ev
- 517              		.thumb_set _ZN6CMutexD1Ev,_ZN6CMutexD2Ev
- 518              		.global	_ZN6CMutexC1EPv
- 519              		.thumb_set _ZN6CMutexC1EPv,_ZN6CMutexC2EPv
- 520              		.text
- 521              	.Letext0:
- 522              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 523              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 524              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 525              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 526              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
- 527              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 480              		.loc 3 37 0
+ 481 00ea 1846     		mov	r0, r3
+ 482 00ec 07F11007 		add	r7, r7, #16
+ 483 00f0 BD46     		mov	sp, r7
+ 484 00f2 80BD     		pop	{r7, pc}
+ 485              		.cfi_endproc
+ 486              	.LFE125:
+ 488              		.global	_ZTV6CMutex
+ 489              		.section	.rodata._ZTV6CMutex,"a",%progbits
+ 490              		.align	3
+ 493              	_ZTV6CMutex:
+ 494 0000 00000000 		.word	0
+ 495 0004 00000000 		.word	0
+ 496 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
+ 497 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
+ 498 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
+ 499 0014 00000000 		.word	_ZN6CMutexD1Ev
+ 500 0018 00000000 		.word	_ZN6CMutexD0Ev
+ 501 001c 00000000 		.word	_ZN6CMutex4TakeEm
+ 502 0020 00000000 		.word	_ZN6CMutex4GiveEv
+ 503 0024 00000000 		.section	.rodata._ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__,"a",%progbits
+ 504              		.align	2
+ 507              	_ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__:
+ 508 0000 76697274 		.ascii	"virtual long int CMutex::Give()\000"
+ 508      75616C20 
+ 508      6C6F6E67 
+ 508      20696E74 
+ 508      20434D75 
+ 509              		.section	.rodata._ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__,"a",%progbits
+ 510              		.align	2
+ 513              	_ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__:
+ 514 0000 76697274 		.ascii	"virtual long int CMutex::Take(portTickType)\000"
+ 514      75616C20 
+ 514      6C6F6E67 
+ 514      20696E74 
+ 514      20434D75 
+ 515              		.global	_ZN6CMutexC1Ev
+ 516              		.thumb_set _ZN6CMutexC1Ev,_ZN6CMutexC2Ev
+ 517              		.global	_ZN6CMutexD1Ev
+ 518              		.thumb_set _ZN6CMutexD1Ev,_ZN6CMutexD2Ev
+ 519              		.global	_ZN6CMutexC1EPv
+ 520              		.thumb_set _ZN6CMutexC1EPv,_ZN6CMutexC2EPv
+ 521              		.text
+ 522              	.Letext0:
+ 523              		.file 4 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 524              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
+ 525              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/queue.h"
+ 526              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/semphr.h"
+ 527              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 528              		.file 9 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CMutex.cpp
-  C:\Temp\cc941aAo.s:19     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
-  C:\Temp\cc941aAo.s:24     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
-  C:\Temp\cc941aAo.s:61     .text._ZN11ASyncObject6DetachEv:00000000 $t
-  C:\Temp\cc941aAo.s:66     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
-  C:\Temp\cc941aAo.s:106    .rodata:00000000 $d
-  C:\Temp\cc941aAo.s:107    .rodata:00000000 .LC0
-  C:\Temp\cc941aAo.s:110    .rodata:00000020 .LC1
-  C:\Temp\cc941aAo.s:113    .text._ZN6CMutex4TakeEm:00000000 $t
-  C:\Temp\cc941aAo.s:118    .text._ZN6CMutex4TakeEm:00000000 _ZN6CMutex4TakeEm
-  C:\Temp\cc941aAo.s:512    .rodata._ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__:00000000 _ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__
-  C:\Temp\cc941aAo.s:178    .text._ZN6CMutex4GiveEv:00000000 $t
-  C:\Temp\cc941aAo.s:183    .text._ZN6CMutex4GiveEv:00000000 _ZN6CMutex4GiveEv
-  C:\Temp\cc941aAo.s:506    .rodata._ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__:00000000 _ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__
-  C:\Temp\cc941aAo.s:241    .text:00000000 $t
-  C:\Temp\cc941aAo.s:246    .text:00000000 _ZN6CMutexC2Ev
-  C:\Temp\cc941aAo.s:283    .text:00000024 $d
-  C:\Temp\cc941aAo.s:492    .rodata._ZTV6CMutex:00000000 _ZTV6CMutex
-  C:\Temp\cc941aAo.s:287    .text:00000028 $t
-  C:\Temp\cc941aAo.s:292    .text:00000028 _ZN6CMutexD2Ev
-  C:\Temp\cc941aAo.s:337    .text:0000005c $d
-  C:\Temp\cc941aAo.s:341    .text:00000060 $t
-  C:\Temp\cc941aAo.s:346    .text:00000060 _ZN6CMutexD0Ev
-  C:\Temp\cc941aAo.s:292    .text:00000028 _ZN6CMutexD1Ev
-  C:\Temp\cc941aAo.s:382    .text:00000080 _ZN6CMutexC2EPv
-  C:\Temp\cc941aAo.s:424    .text:000000b0 $d
-  C:\Temp\cc941aAo.s:428    .text:000000b4 $t
-  C:\Temp\cc941aAo.s:433    .text:000000b4 _ZN6CMutex6CreateEv
-  C:\Temp\cc941aAo.s:489    .rodata._ZTV6CMutex:00000000 $d
-  C:\Temp\cc941aAo.s:503    .rodata._ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\cc941aAo.s:509    .rodata._ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\cc941aAo.s:246    .text:00000000 _ZN6CMutexC1Ev
-  C:\Temp\cc941aAo.s:382    .text:00000080 _ZN6CMutexC1EPv
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:20     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:25     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:62     .text._ZN11ASyncObject6DetachEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:67     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:107    .rodata:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:108    .rodata:00000000 .LC0
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:111    .rodata:00000020 .LC1
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:114    .text._ZN6CMutex4TakeEm:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:119    .text._ZN6CMutex4TakeEm:00000000 _ZN6CMutex4TakeEm
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:513    .rodata._ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__:00000000 _ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:179    .text._ZN6CMutex4GiveEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:184    .text._ZN6CMutex4GiveEv:00000000 _ZN6CMutex4GiveEv
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:507    .rodata._ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__:00000000 _ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:242    .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:247    .text:00000000 _ZN6CMutexC2Ev
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:284    .text:00000024 $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:493    .rodata._ZTV6CMutex:00000000 _ZTV6CMutex
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:288    .text:00000028 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:293    .text:00000028 _ZN6CMutexD2Ev
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:338    .text:0000005c $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:342    .text:00000060 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:347    .text:00000060 _ZN6CMutexD0Ev
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:293    .text:00000028 _ZN6CMutexD1Ev
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:383    .text:00000080 _ZN6CMutexC2EPv
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:425    .text:000000b0 $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:429    .text:000000b4 $t
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:434    .text:000000b4 _ZN6CMutex6CreateEv
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:490    .rodata._ZTV6CMutex:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:504    .rodata._ZZN6CMutex4GiveEvE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:510    .rodata._ZZN6CMutex4TakeEmE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:247    .text:00000000 _ZN6CMutexC1Ev
+C:\Users\Alex\AppData\Local\Temp\ccWRPtGh.s:383    .text:00000080 _ZN6CMutexC1EPv
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

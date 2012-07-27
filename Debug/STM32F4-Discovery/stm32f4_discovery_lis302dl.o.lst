@@ -9,25 +9,26 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"stm32f4_discovery_lis302dl.c"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.global	LIS302DLTimeout
-  19              		.section	.data.LIS302DLTimeout,"aw",%progbits
-  20              		.align	2
-  23              	LIS302DLTimeout:
-  24 0000 00100000 		.word	4096
-  25              		.text
-  26              		.align	2
-  27              		.global	LIS302DL_Init
-  28              		.thumb
-  29              		.thumb_func
-  31              	LIS302DL_Init:
-  32              	.LFB110:
-  33              		.file 1 "../STM32F4-Discovery/stm32f4_discovery_lis302dl.c"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"stm32f4_discovery_lis302dl.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	LIS302DLTimeout
+  20              		.section	.data.LIS302DLTimeout,"aw",%progbits
+  21              		.align	2
+  24              	LIS302DLTimeout:
+  25 0000 00100000 		.word	4096
+  26              		.text
+  27              		.align	2
+  28              		.global	LIS302DL_Init
+  29              		.thumb
+  30              		.thumb_func
+  32              	LIS302DL_Init:
+  33              	.LFB110:
+  34              		.file 1 "../STM32F4-Discovery/stm32f4_discovery_lis302dl.c"
    1:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
    2:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ******************************************************************************
    3:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @file    stm32f4_discovery_lis302dl.c
@@ -128,87 +129,87 @@
   98:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
   99:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_Init(LIS302DL_InitTypeDef *LIS302DL_InitStruct)
  100:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
-  34              		.loc 1 100 0
-  35              		.cfi_startproc
-  36              		@ args = 0, pretend = 0, frame = 16
-  37              		@ frame_needed = 1, uses_anonymous_args = 0
-  38 0000 80B5     		push	{r7, lr}
-  39              	.LCFI0:
-  40              		.cfi_def_cfa_offset 8
-  41              		.cfi_offset 14, -4
-  42              		.cfi_offset 7, -8
-  43 0002 84B0     		sub	sp, sp, #16
-  44              	.LCFI1:
-  45              		.cfi_def_cfa_offset 24
-  46 0004 00AF     		add	r7, sp, #0
-  47              	.LCFI2:
-  48              		.cfi_def_cfa_register 7
-  49 0006 7860     		str	r0, [r7, #4]
+  35              		.loc 1 100 0
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 16
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39 0000 80B5     		push	{r7, lr}
+  40              	.LCFI0:
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 14, -4
+  43              		.cfi_offset 7, -8
+  44 0002 84B0     		sub	sp, sp, #16
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_offset 24
+  47 0004 00AF     		add	r7, sp, #0
+  48              	.LCFI2:
+  49              		.cfi_def_cfa_register 7
+  50 0006 7860     		str	r0, [r7, #4]
  101:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t ctrl = 0x00;
-  50              		.loc 1 101 0
-  51 0008 4FF00003 		mov	r3, #0
-  52 000c FB73     		strb	r3, [r7, #15]
+  51              		.loc 1 101 0
+  52 0008 4FF00003 		mov	r3, #0
+  53 000c FB73     		strb	r3, [r7, #15]
  102:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  103:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure the low level interface ---------------------------------------*/
  104:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_LowLevel_Init();
-  53              		.loc 1 104 0
-  54 000e 00F0EDF9 		bl	LIS302DL_LowLevel_Init
+  54              		.loc 1 104 0
+  55 000e 00F0EDF9 		bl	LIS302DL_LowLevel_Init
  105:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  106:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure MEMS: data rate, power mode, full scale, self test and axes */
  107:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t) (LIS302DL_InitStruct->Output_DataRate | LIS302DL_InitStruct->Power_Mode | \
-  55              		.loc 1 107 0
-  56 0012 7B68     		ldr	r3, [r7, #4]
-  57 0014 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
-  58 0016 7B68     		ldr	r3, [r7, #4]
-  59 0018 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
-  60 001a 1343     		orrs	r3, r3, r2
-  61 001c DAB2     		uxtb	r2, r3
+  56              		.loc 1 107 0
+  57 0012 7B68     		ldr	r3, [r7, #4]
+  58 0014 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+  59 0016 7B68     		ldr	r3, [r7, #4]
+  60 0018 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  61 001a 1343     		orrs	r3, r3, r2
+  62 001c DAB2     		uxtb	r2, r3
  108:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                     LIS302DL_InitStruct->Full_Scale | LIS302DL_InitStruct->Self_Test | \
-  62              		.loc 1 108 0
-  63 001e 7B68     		ldr	r3, [r7, #4]
-  64 0020 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+  63              		.loc 1 108 0
+  64 001e 7B68     		ldr	r3, [r7, #4]
+  65 0020 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  107:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t) (LIS302DL_InitStruct->Output_DataRate | LIS302DL_InitStruct->Power_Mode | \
-  65              		.loc 1 107 0
-  66 0022 1343     		orrs	r3, r3, r2
-  67 0024 DAB2     		uxtb	r2, r3
-  68              		.loc 1 108 0
-  69 0026 7B68     		ldr	r3, [r7, #4]
-  70 0028 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+  66              		.loc 1 107 0
+  67 0022 1343     		orrs	r3, r3, r2
+  68 0024 DAB2     		uxtb	r2, r3
+  69              		.loc 1 108 0
+  70 0026 7B68     		ldr	r3, [r7, #4]
+  71 0028 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
  107:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t) (LIS302DL_InitStruct->Output_DataRate | LIS302DL_InitStruct->Power_Mode | \
-  71              		.loc 1 107 0
-  72 002a 1343     		orrs	r3, r3, r2
-  73 002c DAB2     		uxtb	r2, r3
+  72              		.loc 1 107 0
+  73 002a 1343     		orrs	r3, r3, r2
+  74 002c DAB2     		uxtb	r2, r3
  109:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                     LIS302DL_InitStruct->Axes_Enable);
-  74              		.loc 1 109 0
-  75 002e 7B68     		ldr	r3, [r7, #4]
-  76 0030 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+  75              		.loc 1 109 0
+  76 002e 7B68     		ldr	r3, [r7, #4]
+  77 0030 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
  107:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t) (LIS302DL_InitStruct->Output_DataRate | LIS302DL_InitStruct->Power_Mode | \
-  77              		.loc 1 107 0
-  78 0032 1343     		orrs	r3, r3, r2
-  79 0034 DBB2     		uxtb	r3, r3
-  80 0036 FB73     		strb	r3, [r7, #15]
+  78              		.loc 1 107 0
+  79 0032 1343     		orrs	r3, r3, r2
+  80 0034 DBB2     		uxtb	r3, r3
+  81 0036 FB73     		strb	r3, [r7, #15]
  110:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  111:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CTRL_REG1 regsister */
  112:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&ctrl, LIS302DL_CTRL_REG1_ADDR, 1);
-  81              		.loc 1 112 0
-  82 0038 07F10F03 		add	r3, r7, #15
-  83 003c 1846     		mov	r0, r3
-  84 003e 4FF02001 		mov	r1, #32
-  85 0042 4FF00102 		mov	r2, #1
-  86 0046 FFF7FEFF 		bl	LIS302DL_Write
+  82              		.loc 1 112 0
+  83 0038 07F10F03 		add	r3, r7, #15
+  84 003c 1846     		mov	r0, r3
+  85 003e 4FF02001 		mov	r1, #32
+  86 0042 4FF00102 		mov	r2, #1
+  87 0046 FFF7FEFF 		bl	LIS302DL_Write
  113:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
-  87              		.loc 1 113 0
-  88 004a 07F11007 		add	r7, r7, #16
-  89 004e BD46     		mov	sp, r7
-  90 0050 80BD     		pop	{r7, pc}
-  91              		.cfi_endproc
-  92              	.LFE110:
-  94 0052 00BF     		.align	2
-  95              		.global	LIS302DL_FilterConfig
-  96              		.thumb
-  97              		.thumb_func
-  99              	LIS302DL_FilterConfig:
- 100              	.LFB111:
+  88              		.loc 1 113 0
+  89 004a 07F11007 		add	r7, r7, #16
+  90 004e BD46     		mov	sp, r7
+  91 0050 80BD     		pop	{r7, pc}
+  92              		.cfi_endproc
+  93              	.LFE110:
+  95 0052 00BF     		.align	2
+  96              		.global	LIS302DL_FilterConfig
+  97              		.thumb
+  98              		.thumb_func
+ 100              	LIS302DL_FilterConfig:
+ 101              	.LFB111:
  114:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  115:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  116:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Set LIS302DL Internal High Pass Filter configuration.
@@ -218,92 +219,92 @@
  120:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  121:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_FilterConfig(LIS302DL_FilterConfigTypeDef *LIS302DL_FilterConfigStruct)
  122:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 101              		.loc 1 122 0
- 102              		.cfi_startproc
- 103              		@ args = 0, pretend = 0, frame = 16
- 104              		@ frame_needed = 1, uses_anonymous_args = 0
- 105 0054 80B5     		push	{r7, lr}
- 106              	.LCFI3:
- 107              		.cfi_def_cfa_offset 8
- 108              		.cfi_offset 14, -4
- 109              		.cfi_offset 7, -8
- 110 0056 84B0     		sub	sp, sp, #16
- 111              	.LCFI4:
- 112              		.cfi_def_cfa_offset 24
- 113 0058 00AF     		add	r7, sp, #0
- 114              	.LCFI5:
- 115              		.cfi_def_cfa_register 7
- 116 005a 7860     		str	r0, [r7, #4]
+ 102              		.loc 1 122 0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 16
+ 105              		@ frame_needed = 1, uses_anonymous_args = 0
+ 106 0054 80B5     		push	{r7, lr}
+ 107              	.LCFI3:
+ 108              		.cfi_def_cfa_offset 8
+ 109              		.cfi_offset 14, -4
+ 110              		.cfi_offset 7, -8
+ 111 0056 84B0     		sub	sp, sp, #16
+ 112              	.LCFI4:
+ 113              		.cfi_def_cfa_offset 24
+ 114 0058 00AF     		add	r7, sp, #0
+ 115              	.LCFI5:
+ 116              		.cfi_def_cfa_register 7
+ 117 005a 7860     		str	r0, [r7, #4]
  123:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t ctrl = 0x00;
- 117              		.loc 1 123 0
- 118 005c 4FF00003 		mov	r3, #0
- 119 0060 FB73     		strb	r3, [r7, #15]
+ 118              		.loc 1 123 0
+ 119 005c 4FF00003 		mov	r3, #0
+ 120 0060 FB73     		strb	r3, [r7, #15]
  124:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  125:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Read CTRL_REG2 register */
  126:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&ctrl, LIS302DL_CTRL_REG2_ADDR, 1);
- 120              		.loc 1 126 0
- 121 0062 07F10F03 		add	r3, r7, #15
- 122 0066 1846     		mov	r0, r3
- 123 0068 4FF02101 		mov	r1, #33
- 124 006c 4FF00102 		mov	r2, #1
- 125 0070 FFF7FEFF 		bl	LIS302DL_Read
+ 121              		.loc 1 126 0
+ 122 0062 07F10F03 		add	r3, r7, #15
+ 123 0066 1846     		mov	r0, r3
+ 124 0068 4FF02101 		mov	r1, #33
+ 125 006c 4FF00102 		mov	r2, #1
+ 126 0070 FFF7FEFF 		bl	LIS302DL_Read
  127:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  128:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Clear high pass filter cut-off level, interrupt and data selection bits*/
  129:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl &= (uint8_t)~(LIS302DL_FILTEREDDATASELECTION_OUTPUTREGISTER | \
- 126              		.loc 1 129 0
- 127 0074 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
- 128 0076 23F02F03 		bic	r3, r3, #47
- 129 007a DBB2     		uxtb	r3, r3
- 130 007c FB73     		strb	r3, [r7, #15]
+ 127              		.loc 1 129 0
+ 128 0074 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 129 0076 23F02F03 		bic	r3, r3, #47
+ 130 007a DBB2     		uxtb	r3, r3
+ 131 007c FB73     		strb	r3, [r7, #15]
  130:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                      LIS302DL_HIGHPASSFILTER_LEVEL_3 | \
  131:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                      LIS302DL_HIGHPASSFILTERINTERRUPT_1_2);
  132:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure MEMS high pass filter cut-off level, interrupt and data selection bits */           
  133:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl |= (uint8_t)(LIS302DL_FilterConfigStruct->HighPassFilter_Data_Selection | \
- 131              		.loc 1 133 0
- 132 007e 7B68     		ldr	r3, [r7, #4]
- 133 0080 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 132              		.loc 1 133 0
+ 133 007e 7B68     		ldr	r3, [r7, #4]
+ 134 0080 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
  134:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                     LIS302DL_FilterConfigStruct->HighPassFilter_CutOff_Frequency | \
- 134              		.loc 1 134 0
- 135 0082 7B68     		ldr	r3, [r7, #4]
- 136 0084 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 135              		.loc 1 134 0
+ 136 0082 7B68     		ldr	r3, [r7, #4]
+ 137 0084 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  133:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl |= (uint8_t)(LIS302DL_FilterConfigStruct->HighPassFilter_Data_Selection | \
- 137              		.loc 1 133 0
- 138 0086 1343     		orrs	r3, r3, r2
- 139 0088 DAB2     		uxtb	r2, r3
+ 138              		.loc 1 133 0
+ 139 0086 1343     		orrs	r3, r3, r2
+ 140 0088 DAB2     		uxtb	r2, r3
  135:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                     LIS302DL_FilterConfigStruct->HighPassFilter_Interrupt);
- 140              		.loc 1 135 0
- 141 008a 7B68     		ldr	r3, [r7, #4]
- 142 008c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 141              		.loc 1 135 0
+ 142 008a 7B68     		ldr	r3, [r7, #4]
+ 143 008c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
  133:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl |= (uint8_t)(LIS302DL_FilterConfigStruct->HighPassFilter_Data_Selection | \
- 143              		.loc 1 133 0
- 144 008e 1343     		orrs	r3, r3, r2
- 145 0090 DAB2     		uxtb	r2, r3
- 146 0092 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
- 147 0094 1343     		orrs	r3, r3, r2
- 148 0096 DBB2     		uxtb	r3, r3
- 149 0098 FB73     		strb	r3, [r7, #15]
+ 144              		.loc 1 133 0
+ 145 008e 1343     		orrs	r3, r3, r2
+ 146 0090 DAB2     		uxtb	r2, r3
+ 147 0092 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 148 0094 1343     		orrs	r3, r3, r2
+ 149 0096 DBB2     		uxtb	r3, r3
+ 150 0098 FB73     		strb	r3, [r7, #15]
  136:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  137:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CTRL_REG2 register */
  138:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&ctrl, LIS302DL_CTRL_REG2_ADDR, 1);
- 150              		.loc 1 138 0
- 151 009a 07F10F03 		add	r3, r7, #15
- 152 009e 1846     		mov	r0, r3
- 153 00a0 4FF02101 		mov	r1, #33
- 154 00a4 4FF00102 		mov	r2, #1
- 155 00a8 FFF7FEFF 		bl	LIS302DL_Write
+ 151              		.loc 1 138 0
+ 152 009a 07F10F03 		add	r3, r7, #15
+ 153 009e 1846     		mov	r0, r3
+ 154 00a0 4FF02101 		mov	r1, #33
+ 155 00a4 4FF00102 		mov	r2, #1
+ 156 00a8 FFF7FEFF 		bl	LIS302DL_Write
  139:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 156              		.loc 1 139 0
- 157 00ac 07F11007 		add	r7, r7, #16
- 158 00b0 BD46     		mov	sp, r7
- 159 00b2 80BD     		pop	{r7, pc}
- 160              		.cfi_endproc
- 161              	.LFE111:
- 163              		.align	2
- 164              		.global	LIS302DL_InterruptConfig
- 165              		.thumb
- 166              		.thumb_func
- 168              	LIS302DL_InterruptConfig:
- 169              	.LFB112:
+ 157              		.loc 1 139 0
+ 158 00ac 07F11007 		add	r7, r7, #16
+ 159 00b0 BD46     		mov	sp, r7
+ 160 00b2 80BD     		pop	{r7, pc}
+ 161              		.cfi_endproc
+ 162              	.LFE111:
+ 164              		.align	2
+ 165              		.global	LIS302DL_InterruptConfig
+ 166              		.thumb
+ 167              		.thumb_func
+ 169              	LIS302DL_InterruptConfig:
+ 170              	.LFB112:
  140:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  141:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  142:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief Set LIS302DL Interrupt configuration
@@ -313,80 +314,80 @@
  146:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  147:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_InterruptConfig(LIS302DL_InterruptConfigTypeDef *LIS302DL_IntConfigStruct)
  148:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 170              		.loc 1 148 0
- 171              		.cfi_startproc
- 172              		@ args = 0, pretend = 0, frame = 16
- 173              		@ frame_needed = 1, uses_anonymous_args = 0
- 174 00b4 80B5     		push	{r7, lr}
- 175              	.LCFI6:
- 176              		.cfi_def_cfa_offset 8
- 177              		.cfi_offset 14, -4
- 178              		.cfi_offset 7, -8
- 179 00b6 84B0     		sub	sp, sp, #16
- 180              	.LCFI7:
- 181              		.cfi_def_cfa_offset 24
- 182 00b8 00AF     		add	r7, sp, #0
- 183              	.LCFI8:
- 184              		.cfi_def_cfa_register 7
- 185 00ba 7860     		str	r0, [r7, #4]
+ 171              		.loc 1 148 0
+ 172              		.cfi_startproc
+ 173              		@ args = 0, pretend = 0, frame = 16
+ 174              		@ frame_needed = 1, uses_anonymous_args = 0
+ 175 00b4 80B5     		push	{r7, lr}
+ 176              	.LCFI6:
+ 177              		.cfi_def_cfa_offset 8
+ 178              		.cfi_offset 14, -4
+ 179              		.cfi_offset 7, -8
+ 180 00b6 84B0     		sub	sp, sp, #16
+ 181              	.LCFI7:
+ 182              		.cfi_def_cfa_offset 24
+ 183 00b8 00AF     		add	r7, sp, #0
+ 184              	.LCFI8:
+ 185              		.cfi_def_cfa_register 7
+ 186 00ba 7860     		str	r0, [r7, #4]
  149:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t ctrl = 0x00;
- 186              		.loc 1 149 0
- 187 00bc 4FF00003 		mov	r3, #0
- 188 00c0 FB73     		strb	r3, [r7, #15]
+ 187              		.loc 1 149 0
+ 188 00bc 4FF00003 		mov	r3, #0
+ 189 00c0 FB73     		strb	r3, [r7, #15]
  150:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  151:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Read CLICK_CFG register */
  152:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&ctrl, LIS302DL_CLICK_CFG_REG_ADDR, 1);
- 189              		.loc 1 152 0
- 190 00c2 07F10F03 		add	r3, r7, #15
- 191 00c6 1846     		mov	r0, r3
- 192 00c8 4FF03801 		mov	r1, #56
- 193 00cc 4FF00102 		mov	r2, #1
- 194 00d0 FFF7FEFF 		bl	LIS302DL_Read
+ 190              		.loc 1 152 0
+ 191 00c2 07F10F03 		add	r3, r7, #15
+ 192 00c6 1846     		mov	r0, r3
+ 193 00c8 4FF03801 		mov	r1, #56
+ 194 00cc 4FF00102 		mov	r2, #1
+ 195 00d0 FFF7FEFF 		bl	LIS302DL_Read
  153:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  154:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure latch Interrupt request, click interrupts and double click interrupts */            
  155:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t)(LIS302DL_IntConfigStruct->Latch_Request| \
- 195              		.loc 1 155 0
- 196 00d4 7B68     		ldr	r3, [r7, #4]
- 197 00d6 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 196              		.loc 1 155 0
+ 197 00d4 7B68     		ldr	r3, [r7, #4]
+ 198 00d6 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
  156:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                    LIS302DL_IntConfigStruct->SingleClick_Axes | \
- 198              		.loc 1 156 0
- 199 00d8 7B68     		ldr	r3, [r7, #4]
- 200 00da 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 199              		.loc 1 156 0
+ 200 00d8 7B68     		ldr	r3, [r7, #4]
+ 201 00da 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  155:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t)(LIS302DL_IntConfigStruct->Latch_Request| \
- 201              		.loc 1 155 0
- 202 00dc 1343     		orrs	r3, r3, r2
- 203 00de DAB2     		uxtb	r2, r3
+ 202              		.loc 1 155 0
+ 203 00dc 1343     		orrs	r3, r3, r2
+ 204 00de DAB2     		uxtb	r2, r3
  157:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****                    LIS302DL_IntConfigStruct->DoubleClick_Axes);
- 204              		.loc 1 157 0
- 205 00e0 7B68     		ldr	r3, [r7, #4]
- 206 00e2 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 205              		.loc 1 157 0
+ 206 00e0 7B68     		ldr	r3, [r7, #4]
+ 207 00e2 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
  155:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   ctrl = (uint8_t)(LIS302DL_IntConfigStruct->Latch_Request| \
- 207              		.loc 1 155 0
- 208 00e4 1343     		orrs	r3, r3, r2
- 209 00e6 DBB2     		uxtb	r3, r3
- 210 00e8 FB73     		strb	r3, [r7, #15]
+ 208              		.loc 1 155 0
+ 209 00e4 1343     		orrs	r3, r3, r2
+ 210 00e6 DBB2     		uxtb	r3, r3
+ 211 00e8 FB73     		strb	r3, [r7, #15]
  158:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  159:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CLICK_CFG register */
  160:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&ctrl, LIS302DL_CLICK_CFG_REG_ADDR, 1);
- 211              		.loc 1 160 0
- 212 00ea 07F10F03 		add	r3, r7, #15
- 213 00ee 1846     		mov	r0, r3
- 214 00f0 4FF03801 		mov	r1, #56
- 215 00f4 4FF00102 		mov	r2, #1
- 216 00f8 FFF7FEFF 		bl	LIS302DL_Write
+ 212              		.loc 1 160 0
+ 213 00ea 07F10F03 		add	r3, r7, #15
+ 214 00ee 1846     		mov	r0, r3
+ 215 00f0 4FF03801 		mov	r1, #56
+ 216 00f4 4FF00102 		mov	r2, #1
+ 217 00f8 FFF7FEFF 		bl	LIS302DL_Write
  161:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 217              		.loc 1 161 0
- 218 00fc 07F11007 		add	r7, r7, #16
- 219 0100 BD46     		mov	sp, r7
- 220 0102 80BD     		pop	{r7, pc}
- 221              		.cfi_endproc
- 222              	.LFE112:
- 224              		.align	2
- 225              		.global	LIS302DL_LowpowerCmd
- 226              		.thumb
- 227              		.thumb_func
- 229              	LIS302DL_LowpowerCmd:
- 230              	.LFB113:
+ 218              		.loc 1 161 0
+ 219 00fc 07F11007 		add	r7, r7, #16
+ 220 0100 BD46     		mov	sp, r7
+ 221 0102 80BD     		pop	{r7, pc}
+ 222              		.cfi_endproc
+ 223              	.LFE112:
+ 225              		.align	2
+ 226              		.global	LIS302DL_LowpowerCmd
+ 227              		.thumb
+ 228              		.thumb_func
+ 230              	LIS302DL_LowpowerCmd:
+ 231              	.LFB113:
  162:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  163:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  164:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Change the lowpower mode for LIS302DL
@@ -398,70 +399,70 @@
  170:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  171:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_LowpowerCmd(uint8_t LowPowerMode)
  172:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 231              		.loc 1 172 0
- 232              		.cfi_startproc
- 233              		@ args = 0, pretend = 0, frame = 16
- 234              		@ frame_needed = 1, uses_anonymous_args = 0
- 235 0104 80B5     		push	{r7, lr}
- 236              	.LCFI9:
- 237              		.cfi_def_cfa_offset 8
- 238              		.cfi_offset 14, -4
- 239              		.cfi_offset 7, -8
- 240 0106 84B0     		sub	sp, sp, #16
- 241              	.LCFI10:
- 242              		.cfi_def_cfa_offset 24
- 243 0108 00AF     		add	r7, sp, #0
- 244              	.LCFI11:
- 245              		.cfi_def_cfa_register 7
- 246 010a 0346     		mov	r3, r0
- 247 010c FB71     		strb	r3, [r7, #7]
+ 232              		.loc 1 172 0
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 16
+ 235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 236 0104 80B5     		push	{r7, lr}
+ 237              	.LCFI9:
+ 238              		.cfi_def_cfa_offset 8
+ 239              		.cfi_offset 14, -4
+ 240              		.cfi_offset 7, -8
+ 241 0106 84B0     		sub	sp, sp, #16
+ 242              	.LCFI10:
+ 243              		.cfi_def_cfa_offset 24
+ 244 0108 00AF     		add	r7, sp, #0
+ 245              	.LCFI11:
+ 246              		.cfi_def_cfa_register 7
+ 247 010a 0346     		mov	r3, r0
+ 248 010c FB71     		strb	r3, [r7, #7]
  173:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t tmpreg;
  174:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  175:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Read CTRL_REG1 register */
  176:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
- 248              		.loc 1 176 0
- 249 010e 07F10F03 		add	r3, r7, #15
- 250 0112 1846     		mov	r0, r3
- 251 0114 4FF02001 		mov	r1, #32
- 252 0118 4FF00102 		mov	r2, #1
- 253 011c FFF7FEFF 		bl	LIS302DL_Read
+ 249              		.loc 1 176 0
+ 250 010e 07F10F03 		add	r3, r7, #15
+ 251 0112 1846     		mov	r0, r3
+ 252 0114 4FF02001 		mov	r1, #32
+ 253 0118 4FF00102 		mov	r2, #1
+ 254 011c FFF7FEFF 		bl	LIS302DL_Read
  177:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  178:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set new low power mode configuration */
  179:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg &= (uint8_t)~LIS302DL_LOWPOWERMODE_ACTIVE;
- 254              		.loc 1 179 0
- 255 0120 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
- 256 0122 23F04003 		bic	r3, r3, #64
- 257 0126 DBB2     		uxtb	r3, r3
- 258 0128 FB73     		strb	r3, [r7, #15]
+ 255              		.loc 1 179 0
+ 256 0120 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 257 0122 23F04003 		bic	r3, r3, #64
+ 258 0126 DBB2     		uxtb	r3, r3
+ 259 0128 FB73     		strb	r3, [r7, #15]
  180:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg |= LowPowerMode;
- 259              		.loc 1 180 0
- 260 012a FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
- 261 012c FB79     		ldrb	r3, [r7, #7]
- 262 012e 1343     		orrs	r3, r3, r2
- 263 0130 DBB2     		uxtb	r3, r3
- 264 0132 FB73     		strb	r3, [r7, #15]
+ 260              		.loc 1 180 0
+ 261 012a FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 262 012c FB79     		ldrb	r3, [r7, #7]
+ 263 012e 1343     		orrs	r3, r3, r2
+ 264 0130 DBB2     		uxtb	r3, r3
+ 265 0132 FB73     		strb	r3, [r7, #15]
  181:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  182:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CTRL_REG1 regsister */
  183:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
- 265              		.loc 1 183 0
- 266 0134 07F10F03 		add	r3, r7, #15
- 267 0138 1846     		mov	r0, r3
- 268 013a 4FF02001 		mov	r1, #32
- 269 013e 4FF00102 		mov	r2, #1
- 270 0142 FFF7FEFF 		bl	LIS302DL_Write
+ 266              		.loc 1 183 0
+ 267 0134 07F10F03 		add	r3, r7, #15
+ 268 0138 1846     		mov	r0, r3
+ 269 013a 4FF02001 		mov	r1, #32
+ 270 013e 4FF00102 		mov	r2, #1
+ 271 0142 FFF7FEFF 		bl	LIS302DL_Write
  184:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 271              		.loc 1 184 0
- 272 0146 07F11007 		add	r7, r7, #16
- 273 014a BD46     		mov	sp, r7
- 274 014c 80BD     		pop	{r7, pc}
- 275              		.cfi_endproc
- 276              	.LFE113:
- 278 014e 00BF     		.align	2
- 279              		.global	LIS302DL_DataRateCmd
- 280              		.thumb
- 281              		.thumb_func
- 283              	LIS302DL_DataRateCmd:
- 284              	.LFB114:
+ 272              		.loc 1 184 0
+ 273 0146 07F11007 		add	r7, r7, #16
+ 274 014a BD46     		mov	sp, r7
+ 275 014c 80BD     		pop	{r7, pc}
+ 276              		.cfi_endproc
+ 277              	.LFE113:
+ 279 014e 00BF     		.align	2
+ 280              		.global	LIS302DL_DataRateCmd
+ 281              		.thumb
+ 282              		.thumb_func
+ 284              	LIS302DL_DataRateCmd:
+ 285              	.LFB114:
  185:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  186:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  187:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Data Rate command 
@@ -473,70 +474,70 @@
  193:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  194:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_DataRateCmd(uint8_t DataRateValue)
  195:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 285              		.loc 1 195 0
- 286              		.cfi_startproc
- 287              		@ args = 0, pretend = 0, frame = 16
- 288              		@ frame_needed = 1, uses_anonymous_args = 0
- 289 0150 80B5     		push	{r7, lr}
- 290              	.LCFI12:
- 291              		.cfi_def_cfa_offset 8
- 292              		.cfi_offset 14, -4
- 293              		.cfi_offset 7, -8
- 294 0152 84B0     		sub	sp, sp, #16
- 295              	.LCFI13:
- 296              		.cfi_def_cfa_offset 24
- 297 0154 00AF     		add	r7, sp, #0
- 298              	.LCFI14:
- 299              		.cfi_def_cfa_register 7
- 300 0156 0346     		mov	r3, r0
- 301 0158 FB71     		strb	r3, [r7, #7]
+ 286              		.loc 1 195 0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 16
+ 289              		@ frame_needed = 1, uses_anonymous_args = 0
+ 290 0150 80B5     		push	{r7, lr}
+ 291              	.LCFI12:
+ 292              		.cfi_def_cfa_offset 8
+ 293              		.cfi_offset 14, -4
+ 294              		.cfi_offset 7, -8
+ 295 0152 84B0     		sub	sp, sp, #16
+ 296              	.LCFI13:
+ 297              		.cfi_def_cfa_offset 24
+ 298 0154 00AF     		add	r7, sp, #0
+ 299              	.LCFI14:
+ 300              		.cfi_def_cfa_register 7
+ 301 0156 0346     		mov	r3, r0
+ 302 0158 FB71     		strb	r3, [r7, #7]
  196:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t tmpreg;
  197:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  198:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Read CTRL_REG1 register */
  199:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
- 302              		.loc 1 199 0
- 303 015a 07F10F03 		add	r3, r7, #15
- 304 015e 1846     		mov	r0, r3
- 305 0160 4FF02001 		mov	r1, #32
- 306 0164 4FF00102 		mov	r2, #1
- 307 0168 FFF7FEFF 		bl	LIS302DL_Read
+ 303              		.loc 1 199 0
+ 304 015a 07F10F03 		add	r3, r7, #15
+ 305 015e 1846     		mov	r0, r3
+ 306 0160 4FF02001 		mov	r1, #32
+ 307 0164 4FF00102 		mov	r2, #1
+ 308 0168 FFF7FEFF 		bl	LIS302DL_Read
  200:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  201:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set new Data rate configuration */
  202:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg &= (uint8_t)~LIS302DL_DATARATE_400;
- 308              		.loc 1 202 0
- 309 016c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
- 310 016e 03F07F03 		and	r3, r3, #127
- 311 0172 DBB2     		uxtb	r3, r3
- 312 0174 FB73     		strb	r3, [r7, #15]
+ 309              		.loc 1 202 0
+ 310 016c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 311 016e 03F07F03 		and	r3, r3, #127
+ 312 0172 DBB2     		uxtb	r3, r3
+ 313 0174 FB73     		strb	r3, [r7, #15]
  203:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg |= DataRateValue;
- 313              		.loc 1 203 0
- 314 0176 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
- 315 0178 FB79     		ldrb	r3, [r7, #7]
- 316 017a 1343     		orrs	r3, r3, r2
- 317 017c DBB2     		uxtb	r3, r3
- 318 017e FB73     		strb	r3, [r7, #15]
+ 314              		.loc 1 203 0
+ 315 0176 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 316 0178 FB79     		ldrb	r3, [r7, #7]
+ 317 017a 1343     		orrs	r3, r3, r2
+ 318 017c DBB2     		uxtb	r3, r3
+ 319 017e FB73     		strb	r3, [r7, #15]
  204:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  205:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CTRL_REG1 regsister */
  206:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
- 319              		.loc 1 206 0
- 320 0180 07F10F03 		add	r3, r7, #15
- 321 0184 1846     		mov	r0, r3
- 322 0186 4FF02001 		mov	r1, #32
- 323 018a 4FF00102 		mov	r2, #1
- 324 018e FFF7FEFF 		bl	LIS302DL_Write
+ 320              		.loc 1 206 0
+ 321 0180 07F10F03 		add	r3, r7, #15
+ 322 0184 1846     		mov	r0, r3
+ 323 0186 4FF02001 		mov	r1, #32
+ 324 018a 4FF00102 		mov	r2, #1
+ 325 018e FFF7FEFF 		bl	LIS302DL_Write
  207:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 325              		.loc 1 207 0
- 326 0192 07F11007 		add	r7, r7, #16
- 327 0196 BD46     		mov	sp, r7
- 328 0198 80BD     		pop	{r7, pc}
- 329              		.cfi_endproc
- 330              	.LFE114:
- 332 019a 00BF     		.align	2
- 333              		.global	LIS302DL_FullScaleCmd
- 334              		.thumb
- 335              		.thumb_func
- 337              	LIS302DL_FullScaleCmd:
- 338              	.LFB115:
+ 326              		.loc 1 207 0
+ 327 0192 07F11007 		add	r7, r7, #16
+ 328 0196 BD46     		mov	sp, r7
+ 329 0198 80BD     		pop	{r7, pc}
+ 330              		.cfi_endproc
+ 331              	.LFE114:
+ 333 019a 00BF     		.align	2
+ 334              		.global	LIS302DL_FullScaleCmd
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	LIS302DL_FullScaleCmd:
+ 339              	.LFB115:
  208:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  209:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  210:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Change the Full Scale of LIS302DL
@@ -548,70 +549,70 @@
  216:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  217:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_FullScaleCmd(uint8_t FS_value)
  218:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 339              		.loc 1 218 0
- 340              		.cfi_startproc
- 341              		@ args = 0, pretend = 0, frame = 16
- 342              		@ frame_needed = 1, uses_anonymous_args = 0
- 343 019c 80B5     		push	{r7, lr}
- 344              	.LCFI15:
- 345              		.cfi_def_cfa_offset 8
- 346              		.cfi_offset 14, -4
- 347              		.cfi_offset 7, -8
- 348 019e 84B0     		sub	sp, sp, #16
- 349              	.LCFI16:
- 350              		.cfi_def_cfa_offset 24
- 351 01a0 00AF     		add	r7, sp, #0
- 352              	.LCFI17:
- 353              		.cfi_def_cfa_register 7
- 354 01a2 0346     		mov	r3, r0
- 355 01a4 FB71     		strb	r3, [r7, #7]
+ 340              		.loc 1 218 0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 16
+ 343              		@ frame_needed = 1, uses_anonymous_args = 0
+ 344 019c 80B5     		push	{r7, lr}
+ 345              	.LCFI15:
+ 346              		.cfi_def_cfa_offset 8
+ 347              		.cfi_offset 14, -4
+ 348              		.cfi_offset 7, -8
+ 349 019e 84B0     		sub	sp, sp, #16
+ 350              	.LCFI16:
+ 351              		.cfi_def_cfa_offset 24
+ 352 01a0 00AF     		add	r7, sp, #0
+ 353              	.LCFI17:
+ 354              		.cfi_def_cfa_register 7
+ 355 01a2 0346     		mov	r3, r0
+ 356 01a4 FB71     		strb	r3, [r7, #7]
  219:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t tmpreg;
  220:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  221:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Read CTRL_REG1 register */
  222:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
- 356              		.loc 1 222 0
- 357 01a6 07F10F03 		add	r3, r7, #15
- 358 01aa 1846     		mov	r0, r3
- 359 01ac 4FF02001 		mov	r1, #32
- 360 01b0 4FF00102 		mov	r2, #1
- 361 01b4 FFF7FEFF 		bl	LIS302DL_Read
+ 357              		.loc 1 222 0
+ 358 01a6 07F10F03 		add	r3, r7, #15
+ 359 01aa 1846     		mov	r0, r3
+ 360 01ac 4FF02001 		mov	r1, #32
+ 361 01b0 4FF00102 		mov	r2, #1
+ 362 01b4 FFF7FEFF 		bl	LIS302DL_Read
  223:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  224:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set new full scale configuration */
  225:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg &= (uint8_t)~LIS302DL_FULLSCALE_9_2;
- 362              		.loc 1 225 0
- 363 01b8 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
- 364 01ba 23F02003 		bic	r3, r3, #32
- 365 01be DBB2     		uxtb	r3, r3
- 366 01c0 FB73     		strb	r3, [r7, #15]
+ 363              		.loc 1 225 0
+ 364 01b8 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 365 01ba 23F02003 		bic	r3, r3, #32
+ 366 01be DBB2     		uxtb	r3, r3
+ 367 01c0 FB73     		strb	r3, [r7, #15]
  226:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg |= FS_value;
- 367              		.loc 1 226 0
- 368 01c2 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
- 369 01c4 FB79     		ldrb	r3, [r7, #7]
- 370 01c6 1343     		orrs	r3, r3, r2
- 371 01c8 DBB2     		uxtb	r3, r3
- 372 01ca FB73     		strb	r3, [r7, #15]
+ 368              		.loc 1 226 0
+ 369 01c2 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 370 01c4 FB79     		ldrb	r3, [r7, #7]
+ 371 01c6 1343     		orrs	r3, r3, r2
+ 372 01c8 DBB2     		uxtb	r3, r3
+ 373 01ca FB73     		strb	r3, [r7, #15]
  227:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  228:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CTRL_REG1 regsister */
  229:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
- 373              		.loc 1 229 0
- 374 01cc 07F10F03 		add	r3, r7, #15
- 375 01d0 1846     		mov	r0, r3
- 376 01d2 4FF02001 		mov	r1, #32
- 377 01d6 4FF00102 		mov	r2, #1
- 378 01da FFF7FEFF 		bl	LIS302DL_Write
+ 374              		.loc 1 229 0
+ 375 01cc 07F10F03 		add	r3, r7, #15
+ 376 01d0 1846     		mov	r0, r3
+ 377 01d2 4FF02001 		mov	r1, #32
+ 378 01d6 4FF00102 		mov	r2, #1
+ 379 01da FFF7FEFF 		bl	LIS302DL_Write
  230:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 379              		.loc 1 230 0
- 380 01de 07F11007 		add	r7, r7, #16
- 381 01e2 BD46     		mov	sp, r7
- 382 01e4 80BD     		pop	{r7, pc}
- 383              		.cfi_endproc
- 384              	.LFE115:
- 386 01e6 00BF     		.align	2
- 387              		.global	LIS302DL_RebootCmd
- 388              		.thumb
- 389              		.thumb_func
- 391              	LIS302DL_RebootCmd:
- 392              	.LFB116:
+ 380              		.loc 1 230 0
+ 381 01de 07F11007 		add	r7, r7, #16
+ 382 01e2 BD46     		mov	sp, r7
+ 383 01e4 80BD     		pop	{r7, pc}
+ 384              		.cfi_endproc
+ 385              	.LFE115:
+ 387 01e6 00BF     		.align	2
+ 388              		.global	LIS302DL_RebootCmd
+ 389              		.thumb
+ 390              		.thumb_func
+ 392              	LIS302DL_RebootCmd:
+ 393              	.LFB116:
  231:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  232:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  233:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Reboot memory content of LIS302DL
@@ -620,60 +621,60 @@
  236:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  237:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_RebootCmd(void)
  238:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 393              		.loc 1 238 0
- 394              		.cfi_startproc
- 395              		@ args = 0, pretend = 0, frame = 8
- 396              		@ frame_needed = 1, uses_anonymous_args = 0
- 397 01e8 80B5     		push	{r7, lr}
- 398              	.LCFI18:
- 399              		.cfi_def_cfa_offset 8
- 400              		.cfi_offset 14, -4
- 401              		.cfi_offset 7, -8
- 402 01ea 82B0     		sub	sp, sp, #8
- 403              	.LCFI19:
- 404              		.cfi_def_cfa_offset 16
- 405 01ec 00AF     		add	r7, sp, #0
- 406              	.LCFI20:
- 407              		.cfi_def_cfa_register 7
+ 394              		.loc 1 238 0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 8
+ 397              		@ frame_needed = 1, uses_anonymous_args = 0
+ 398 01e8 80B5     		push	{r7, lr}
+ 399              	.LCFI18:
+ 400              		.cfi_def_cfa_offset 8
+ 401              		.cfi_offset 14, -4
+ 402              		.cfi_offset 7, -8
+ 403 01ea 82B0     		sub	sp, sp, #8
+ 404              	.LCFI19:
+ 405              		.cfi_def_cfa_offset 16
+ 406 01ec 00AF     		add	r7, sp, #0
+ 407              	.LCFI20:
+ 408              		.cfi_def_cfa_register 7
  239:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t tmpreg;
  240:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Read CTRL_REG2 register */
  241:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&tmpreg, LIS302DL_CTRL_REG2_ADDR, 1);
- 408              		.loc 1 241 0
- 409 01ee 07F10703 		add	r3, r7, #7
- 410 01f2 1846     		mov	r0, r3
- 411 01f4 4FF02101 		mov	r1, #33
- 412 01f8 4FF00102 		mov	r2, #1
- 413 01fc FFF7FEFF 		bl	LIS302DL_Read
+ 409              		.loc 1 241 0
+ 410 01ee 07F10703 		add	r3, r7, #7
+ 411 01f2 1846     		mov	r0, r3
+ 412 01f4 4FF02101 		mov	r1, #33
+ 413 01f8 4FF00102 		mov	r2, #1
+ 414 01fc FFF7FEFF 		bl	LIS302DL_Read
  242:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  243:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable or Disable the reboot memory */
  244:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   tmpreg |= LIS302DL_BOOT_REBOOTMEMORY;
- 414              		.loc 1 244 0
- 415 0200 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 416 0202 43F04003 		orr	r3, r3, #64
- 417 0206 DBB2     		uxtb	r3, r3
- 418 0208 FB71     		strb	r3, [r7, #7]
+ 415              		.loc 1 244 0
+ 416 0200 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 417 0202 43F04003 		orr	r3, r3, #64
+ 418 0206 DBB2     		uxtb	r3, r3
+ 419 0208 FB71     		strb	r3, [r7, #7]
  245:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  246:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Write value to MEMS CTRL_REG2 regsister */
  247:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Write(&tmpreg, LIS302DL_CTRL_REG2_ADDR, 1);
- 419              		.loc 1 247 0
- 420 020a 07F10703 		add	r3, r7, #7
- 421 020e 1846     		mov	r0, r3
- 422 0210 4FF02101 		mov	r1, #33
- 423 0214 4FF00102 		mov	r2, #1
- 424 0218 FFF7FEFF 		bl	LIS302DL_Write
+ 420              		.loc 1 247 0
+ 421 020a 07F10703 		add	r3, r7, #7
+ 422 020e 1846     		mov	r0, r3
+ 423 0210 4FF02101 		mov	r1, #33
+ 424 0214 4FF00102 		mov	r2, #1
+ 425 0218 FFF7FEFF 		bl	LIS302DL_Write
  248:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 425              		.loc 1 248 0
- 426 021c 07F10807 		add	r7, r7, #8
- 427 0220 BD46     		mov	sp, r7
- 428 0222 80BD     		pop	{r7, pc}
- 429              		.cfi_endproc
- 430              	.LFE116:
- 432              		.align	2
- 433              		.global	LIS302DL_Write
- 434              		.thumb
- 435              		.thumb_func
- 437              	LIS302DL_Write:
- 438              	.LFB117:
+ 426              		.loc 1 248 0
+ 427 021c 07F10807 		add	r7, r7, #8
+ 428 0220 BD46     		mov	sp, r7
+ 429 0222 80BD     		pop	{r7, pc}
+ 430              		.cfi_endproc
+ 431              	.LFE116:
+ 433              		.align	2
+ 434              		.global	LIS302DL_Write
+ 435              		.thumb
+ 436              		.thumb_func
+ 438              	LIS302DL_Write:
+ 439              	.LFB117:
  249:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  250:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  251:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Writes one byte to the LIS302DL.
@@ -684,107 +685,107 @@
  256:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  257:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite)
  258:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 439              		.loc 1 258 0
- 440              		.cfi_startproc
- 441              		@ args = 0, pretend = 0, frame = 8
- 442              		@ frame_needed = 1, uses_anonymous_args = 0
- 443 0224 80B5     		push	{r7, lr}
- 444              	.LCFI21:
- 445              		.cfi_def_cfa_offset 8
- 446              		.cfi_offset 14, -4
- 447              		.cfi_offset 7, -8
- 448 0226 82B0     		sub	sp, sp, #8
- 449              	.LCFI22:
- 450              		.cfi_def_cfa_offset 16
- 451 0228 00AF     		add	r7, sp, #0
- 452              	.LCFI23:
- 453              		.cfi_def_cfa_register 7
- 454 022a 7860     		str	r0, [r7, #4]
- 455 022c 1346     		mov	r3, r2
- 456 022e 0A46     		mov	r2, r1
- 457 0230 FA70     		strb	r2, [r7, #3]
- 458 0232 3B80     		strh	r3, [r7, #0]	@ movhi
+ 440              		.loc 1 258 0
+ 441              		.cfi_startproc
+ 442              		@ args = 0, pretend = 0, frame = 8
+ 443              		@ frame_needed = 1, uses_anonymous_args = 0
+ 444 0224 80B5     		push	{r7, lr}
+ 445              	.LCFI21:
+ 446              		.cfi_def_cfa_offset 8
+ 447              		.cfi_offset 14, -4
+ 448              		.cfi_offset 7, -8
+ 449 0226 82B0     		sub	sp, sp, #8
+ 450              	.LCFI22:
+ 451              		.cfi_def_cfa_offset 16
+ 452 0228 00AF     		add	r7, sp, #0
+ 453              	.LCFI23:
+ 454              		.cfi_def_cfa_register 7
+ 455 022a 7860     		str	r0, [r7, #4]
+ 456 022c 1346     		mov	r3, r2
+ 457 022e 0A46     		mov	r2, r1
+ 458 0230 FA70     		strb	r2, [r7, #3]
+ 459 0232 3B80     		strh	r3, [r7, #0]	@ movhi
  259:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure the MS bit: 
  260:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****        - When 0, the address will remain unchanged in multiple read/write commands.
  261:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****        - When 1, the address will be auto incremented in multiple read/write commands.
  262:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  263:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   if(NumByteToWrite > 0x01)
- 459              		.loc 1 263 0
- 460 0234 3B88     		ldrh	r3, [r7, #0]
- 461 0236 012B     		cmp	r3, #1
- 462 0238 03D9     		bls	.L9
+ 460              		.loc 1 263 0
+ 461 0234 3B88     		ldrh	r3, [r7, #0]
+ 462 0236 012B     		cmp	r3, #1
+ 463 0238 03D9     		bls	.L9
  264:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  265:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     WriteAddr |= (uint8_t)MULTIPLEBYTE_CMD;
- 463              		.loc 1 265 0
- 464 023a FB78     		ldrb	r3, [r7, #3]
- 465 023c 43F04003 		orr	r3, r3, #64
- 466 0240 FB70     		strb	r3, [r7, #3]
- 467              	.L9:
+ 464              		.loc 1 265 0
+ 465 023a FB78     		ldrb	r3, [r7, #3]
+ 466 023c 43F04003 		orr	r3, r3, #64
+ 467 0240 FB70     		strb	r3, [r7, #3]
+ 468              	.L9:
  266:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  267:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set chip select Low at the start of the transmission */
  268:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_CS_LOW();
- 468              		.loc 1 268 0
- 469 0242 4FF48050 		mov	r0, #4096
- 470 0246 C4F20200 		movt	r0, 16386
- 471 024a 4FF00801 		mov	r1, #8
- 472 024e FFF7FEFF 		bl	GPIO_ResetBits
+ 469              		.loc 1 268 0
+ 470 0242 4FF48050 		mov	r0, #4096
+ 471 0246 C4F20200 		movt	r0, 16386
+ 472 024a 4FF00801 		mov	r1, #8
+ 473 024e FFF7FEFF 		bl	GPIO_ResetBits
  269:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  270:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Send the Address of the indexed register */
  271:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_SendByte(WriteAddr);
- 473              		.loc 1 271 0
- 474 0252 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 475 0254 1846     		mov	r0, r3
- 476 0256 00F0AFF9 		bl	LIS302DL_SendByte
+ 474              		.loc 1 271 0
+ 475 0252 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 476 0254 1846     		mov	r0, r3
+ 477 0256 00F0AFF9 		bl	LIS302DL_SendByte
  272:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Send the data that will be written into the device (MSB First) */
  273:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while(NumByteToWrite >= 0x01)
- 477              		.loc 1 273 0
- 478 025a 0CE0     		b	.L10
- 479              	.L11:
+ 478              		.loc 1 273 0
+ 479 025a 0CE0     		b	.L10
+ 480              	.L11:
  274:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  275:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     LIS302DL_SendByte(*pBuffer);
- 480              		.loc 1 275 0
- 481 025c 7B68     		ldr	r3, [r7, #4]
- 482 025e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
- 483 0260 1846     		mov	r0, r3
- 484 0262 00F0A9F9 		bl	LIS302DL_SendByte
+ 481              		.loc 1 275 0
+ 482 025c 7B68     		ldr	r3, [r7, #4]
+ 483 025e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 484 0260 1846     		mov	r0, r3
+ 485 0262 00F0A9F9 		bl	LIS302DL_SendByte
  276:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     NumByteToWrite--;
- 485              		.loc 1 276 0
- 486 0266 3B88     		ldrh	r3, [r7, #0]	@ movhi
- 487 0268 03F1FF33 		add	r3, r3, #-1
- 488 026c 3B80     		strh	r3, [r7, #0]	@ movhi
+ 486              		.loc 1 276 0
+ 487 0266 3B88     		ldrh	r3, [r7, #0]	@ movhi
+ 488 0268 03F1FF33 		add	r3, r3, #-1
+ 489 026c 3B80     		strh	r3, [r7, #0]	@ movhi
  277:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     pBuffer++;
- 489              		.loc 1 277 0
- 490 026e 7B68     		ldr	r3, [r7, #4]
- 491 0270 03F10103 		add	r3, r3, #1
- 492 0274 7B60     		str	r3, [r7, #4]
- 493              	.L10:
+ 490              		.loc 1 277 0
+ 491 026e 7B68     		ldr	r3, [r7, #4]
+ 492 0270 03F10103 		add	r3, r3, #1
+ 493 0274 7B60     		str	r3, [r7, #4]
+ 494              	.L10:
  273:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while(NumByteToWrite >= 0x01)
- 494              		.loc 1 273 0 discriminator 1
- 495 0276 3B88     		ldrh	r3, [r7, #0]
- 496 0278 002B     		cmp	r3, #0
- 497 027a EFD1     		bne	.L11
+ 495              		.loc 1 273 0 discriminator 1
+ 496 0276 3B88     		ldrh	r3, [r7, #0]
+ 497 0278 002B     		cmp	r3, #0
+ 498 027a EFD1     		bne	.L11
  278:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  279:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  280:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set chip select High at the end of the transmission */ 
  281:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_CS_HIGH();
- 498              		.loc 1 281 0
- 499 027c 4FF48050 		mov	r0, #4096
- 500 0280 C4F20200 		movt	r0, 16386
- 501 0284 4FF00801 		mov	r1, #8
- 502 0288 FFF7FEFF 		bl	GPIO_SetBits
+ 499              		.loc 1 281 0
+ 500 027c 4FF48050 		mov	r0, #4096
+ 501 0280 C4F20200 		movt	r0, 16386
+ 502 0284 4FF00801 		mov	r1, #8
+ 503 0288 FFF7FEFF 		bl	GPIO_SetBits
  282:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 503              		.loc 1 282 0
- 504 028c 07F10807 		add	r7, r7, #8
- 505 0290 BD46     		mov	sp, r7
- 506 0292 80BD     		pop	{r7, pc}
- 507              		.cfi_endproc
- 508              	.LFE117:
- 510              		.align	2
- 511              		.global	LIS302DL_Read
- 512              		.thumb
- 513              		.thumb_func
- 515              	LIS302DL_Read:
- 516              	.LFB118:
+ 504              		.loc 1 282 0
+ 505 028c 07F10807 		add	r7, r7, #8
+ 506 0290 BD46     		mov	sp, r7
+ 507 0292 80BD     		pop	{r7, pc}
+ 508              		.cfi_endproc
+ 509              	.LFE117:
+ 511              		.align	2
+ 512              		.global	LIS302DL_Read
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	LIS302DL_Read:
+ 517              	.LFB118:
  283:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  284:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  285:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Reads a block of data from the LIS302DL.
@@ -795,117 +796,117 @@
  290:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  291:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead)
  292:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {  
- 517              		.loc 1 292 0
- 518              		.cfi_startproc
- 519              		@ args = 0, pretend = 0, frame = 8
- 520              		@ frame_needed = 1, uses_anonymous_args = 0
- 521 0294 80B5     		push	{r7, lr}
- 522              	.LCFI24:
- 523              		.cfi_def_cfa_offset 8
- 524              		.cfi_offset 14, -4
- 525              		.cfi_offset 7, -8
- 526 0296 82B0     		sub	sp, sp, #8
- 527              	.LCFI25:
- 528              		.cfi_def_cfa_offset 16
- 529 0298 00AF     		add	r7, sp, #0
- 530              	.LCFI26:
- 531              		.cfi_def_cfa_register 7
- 532 029a 7860     		str	r0, [r7, #4]
- 533 029c 1346     		mov	r3, r2
- 534 029e 0A46     		mov	r2, r1
- 535 02a0 FA70     		strb	r2, [r7, #3]
- 536 02a2 3B80     		strh	r3, [r7, #0]	@ movhi
+ 518              		.loc 1 292 0
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 8
+ 521              		@ frame_needed = 1, uses_anonymous_args = 0
+ 522 0294 80B5     		push	{r7, lr}
+ 523              	.LCFI24:
+ 524              		.cfi_def_cfa_offset 8
+ 525              		.cfi_offset 14, -4
+ 526              		.cfi_offset 7, -8
+ 527 0296 82B0     		sub	sp, sp, #8
+ 528              	.LCFI25:
+ 529              		.cfi_def_cfa_offset 16
+ 530 0298 00AF     		add	r7, sp, #0
+ 531              	.LCFI26:
+ 532              		.cfi_def_cfa_register 7
+ 533 029a 7860     		str	r0, [r7, #4]
+ 534 029c 1346     		mov	r3, r2
+ 535 029e 0A46     		mov	r2, r1
+ 536 02a0 FA70     		strb	r2, [r7, #3]
+ 537 02a2 3B80     		strh	r3, [r7, #0]	@ movhi
  293:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   if(NumByteToRead > 0x01)
- 537              		.loc 1 293 0
- 538 02a4 3B88     		ldrh	r3, [r7, #0]
- 539 02a6 012B     		cmp	r3, #1
- 540 02a8 04D9     		bls	.L13
+ 538              		.loc 1 293 0
+ 539 02a4 3B88     		ldrh	r3, [r7, #0]
+ 540 02a6 012B     		cmp	r3, #1
+ 541 02a8 04D9     		bls	.L13
  294:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  295:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     ReadAddr |= (uint8_t)(READWRITE_CMD | MULTIPLEBYTE_CMD);
- 541              		.loc 1 295 0
- 542 02aa FB78     		ldrb	r3, [r7, #3]
- 543 02ac 63F03F03 		orn	r3, r3, #63
- 544 02b0 FB70     		strb	r3, [r7, #3]
- 545 02b2 03E0     		b	.L14
- 546              	.L13:
+ 542              		.loc 1 295 0
+ 543 02aa FB78     		ldrb	r3, [r7, #3]
+ 544 02ac 63F03F03 		orn	r3, r3, #63
+ 545 02b0 FB70     		strb	r3, [r7, #3]
+ 546 02b2 03E0     		b	.L14
+ 547              	.L13:
  296:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  297:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   else
  298:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  299:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     ReadAddr |= (uint8_t)READWRITE_CMD;
- 547              		.loc 1 299 0
- 548 02b4 FB78     		ldrb	r3, [r7, #3]
- 549 02b6 63F07F03 		orn	r3, r3, #127
- 550 02ba FB70     		strb	r3, [r7, #3]
- 551              	.L14:
+ 548              		.loc 1 299 0
+ 549 02b4 FB78     		ldrb	r3, [r7, #3]
+ 550 02b6 63F07F03 		orn	r3, r3, #127
+ 551 02ba FB70     		strb	r3, [r7, #3]
+ 552              	.L14:
  300:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  301:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set chip select Low at the start of the transmission */
  302:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_CS_LOW();
- 552              		.loc 1 302 0
- 553 02bc 4FF48050 		mov	r0, #4096
- 554 02c0 C4F20200 		movt	r0, 16386
- 555 02c4 4FF00801 		mov	r1, #8
- 556 02c8 FFF7FEFF 		bl	GPIO_ResetBits
+ 553              		.loc 1 302 0
+ 554 02bc 4FF48050 		mov	r0, #4096
+ 555 02c0 C4F20200 		movt	r0, 16386
+ 556 02c4 4FF00801 		mov	r1, #8
+ 557 02c8 FFF7FEFF 		bl	GPIO_ResetBits
  303:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  304:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Send the Address of the indexed register */
  305:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_SendByte(ReadAddr);
- 557              		.loc 1 305 0
- 558 02cc FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 559 02ce 1846     		mov	r0, r3
- 560 02d0 00F072F9 		bl	LIS302DL_SendByte
+ 558              		.loc 1 305 0
+ 559 02cc FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 560 02ce 1846     		mov	r0, r3
+ 561 02d0 00F072F9 		bl	LIS302DL_SendByte
  306:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  307:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Receive the data that will be read from the device (MSB First) */
  308:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while(NumByteToRead > 0x00)
- 561              		.loc 1 308 0
- 562 02d4 0FE0     		b	.L15
- 563              	.L16:
+ 562              		.loc 1 308 0
+ 563 02d4 0FE0     		b	.L15
+ 564              	.L16:
  309:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  310:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     /* Send dummy byte (0x00) to generate the SPI clock to LIS302DL (Slave device) */
  311:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     *pBuffer = LIS302DL_SendByte(DUMMY_BYTE);
- 564              		.loc 1 311 0
- 565 02d6 4FF00000 		mov	r0, #0
- 566 02da 00F06DF9 		bl	LIS302DL_SendByte
- 567 02de 0346     		mov	r3, r0
- 568 02e0 1A46     		mov	r2, r3
- 569 02e2 7B68     		ldr	r3, [r7, #4]
- 570 02e4 1A70     		strb	r2, [r3, #0]
+ 565              		.loc 1 311 0
+ 566 02d6 4FF00000 		mov	r0, #0
+ 567 02da 00F06DF9 		bl	LIS302DL_SendByte
+ 568 02de 0346     		mov	r3, r0
+ 569 02e0 1A46     		mov	r2, r3
+ 570 02e2 7B68     		ldr	r3, [r7, #4]
+ 571 02e4 1A70     		strb	r2, [r3, #0]
  312:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     NumByteToRead--;
- 571              		.loc 1 312 0
- 572 02e6 3B88     		ldrh	r3, [r7, #0]	@ movhi
- 573 02e8 03F1FF33 		add	r3, r3, #-1
- 574 02ec 3B80     		strh	r3, [r7, #0]	@ movhi
+ 572              		.loc 1 312 0
+ 573 02e6 3B88     		ldrh	r3, [r7, #0]	@ movhi
+ 574 02e8 03F1FF33 		add	r3, r3, #-1
+ 575 02ec 3B80     		strh	r3, [r7, #0]	@ movhi
  313:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     pBuffer++;
- 575              		.loc 1 313 0
- 576 02ee 7B68     		ldr	r3, [r7, #4]
- 577 02f0 03F10103 		add	r3, r3, #1
- 578 02f4 7B60     		str	r3, [r7, #4]
- 579              	.L15:
+ 576              		.loc 1 313 0
+ 577 02ee 7B68     		ldr	r3, [r7, #4]
+ 578 02f0 03F10103 		add	r3, r3, #1
+ 579 02f4 7B60     		str	r3, [r7, #4]
+ 580              	.L15:
  308:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while(NumByteToRead > 0x00)
- 580              		.loc 1 308 0 discriminator 1
- 581 02f6 3B88     		ldrh	r3, [r7, #0]
- 582 02f8 002B     		cmp	r3, #0
- 583 02fa ECD1     		bne	.L16
+ 581              		.loc 1 308 0 discriminator 1
+ 582 02f6 3B88     		ldrh	r3, [r7, #0]
+ 583 02f8 002B     		cmp	r3, #0
+ 584 02fa ECD1     		bne	.L16
  314:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  315:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  316:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Set chip select High at the end of the transmission */ 
  317:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_CS_HIGH();
- 584              		.loc 1 317 0
- 585 02fc 4FF48050 		mov	r0, #4096
- 586 0300 C4F20200 		movt	r0, 16386
- 587 0304 4FF00801 		mov	r1, #8
- 588 0308 FFF7FEFF 		bl	GPIO_SetBits
+ 585              		.loc 1 317 0
+ 586 02fc 4FF48050 		mov	r0, #4096
+ 587 0300 C4F20200 		movt	r0, 16386
+ 588 0304 4FF00801 		mov	r1, #8
+ 589 0308 FFF7FEFF 		bl	GPIO_SetBits
  318:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 589              		.loc 1 318 0
- 590 030c 07F10807 		add	r7, r7, #8
- 591 0310 BD46     		mov	sp, r7
- 592 0312 80BD     		pop	{r7, pc}
- 593              		.cfi_endproc
- 594              	.LFE118:
- 596              		.align	2
- 597              		.global	LIS302DL_ReadACC
- 598              		.thumb
- 599              		.thumb_func
- 601              	LIS302DL_ReadACC:
- 602              	.LFB119:
+ 590              		.loc 1 318 0
+ 591 030c 07F10807 		add	r7, r7, #8
+ 592 0310 BD46     		mov	sp, r7
+ 593 0312 80BD     		pop	{r7, pc}
+ 594              		.cfi_endproc
+ 595              	.LFE118:
+ 597              		.align	2
+ 598              		.global	LIS302DL_ReadACC
+ 599              		.thumb
+ 600              		.thumb_func
+ 602              	LIS302DL_ReadACC:
+ 603              	.LFB119:
  319:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  320:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  321:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Read LIS302DL output register, and calculate the acceleration 
@@ -915,164 +916,164 @@
  325:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  326:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** void LIS302DL_ReadACC(int32_t* out)
  327:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 603              		.loc 1 327 0
- 604              		.cfi_startproc
- 605              		@ args = 0, pretend = 0, frame = 24
- 606              		@ frame_needed = 1, uses_anonymous_args = 0
- 607 0314 80B5     		push	{r7, lr}
- 608              	.LCFI27:
- 609              		.cfi_def_cfa_offset 8
- 610              		.cfi_offset 14, -4
- 611              		.cfi_offset 7, -8
- 612 0316 86B0     		sub	sp, sp, #24
- 613              	.LCFI28:
- 614              		.cfi_def_cfa_offset 32
- 615 0318 00AF     		add	r7, sp, #0
- 616              	.LCFI29:
- 617              		.cfi_def_cfa_register 7
- 618 031a 7860     		str	r0, [r7, #4]
+ 604              		.loc 1 327 0
+ 605              		.cfi_startproc
+ 606              		@ args = 0, pretend = 0, frame = 24
+ 607              		@ frame_needed = 1, uses_anonymous_args = 0
+ 608 0314 80B5     		push	{r7, lr}
+ 609              	.LCFI27:
+ 610              		.cfi_def_cfa_offset 8
+ 611              		.cfi_offset 14, -4
+ 612              		.cfi_offset 7, -8
+ 613 0316 86B0     		sub	sp, sp, #24
+ 614              	.LCFI28:
+ 615              		.cfi_def_cfa_offset 32
+ 616 0318 00AF     		add	r7, sp, #0
+ 617              	.LCFI29:
+ 618              		.cfi_def_cfa_register 7
+ 619 031a 7860     		str	r0, [r7, #4]
  328:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t buffer[6];
  329:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   uint8_t crtl, i = 0x00;
- 619              		.loc 1 329 0
- 620 031c 4FF00003 		mov	r3, #0
- 621 0320 FB75     		strb	r3, [r7, #23]
+ 620              		.loc 1 329 0
+ 621 031c 4FF00003 		mov	r3, #0
+ 622 0320 FB75     		strb	r3, [r7, #23]
  330:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****    
  331:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(&crtl, LIS302DL_CTRL_REG1_ADDR, 1);  
- 622              		.loc 1 331 0
- 623 0322 07F10F03 		add	r3, r7, #15
- 624 0326 1846     		mov	r0, r3
- 625 0328 4FF02001 		mov	r1, #32
- 626 032c 4FF00102 		mov	r2, #1
- 627 0330 FFF7FEFF 		bl	LIS302DL_Read
+ 623              		.loc 1 331 0
+ 624 0322 07F10F03 		add	r3, r7, #15
+ 625 0326 1846     		mov	r0, r3
+ 626 0328 4FF02001 		mov	r1, #32
+ 627 032c 4FF00102 		mov	r2, #1
+ 628 0330 FFF7FEFF 		bl	LIS302DL_Read
  332:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DL_Read(buffer, LIS302DL_OUT_X_ADDR, 6);
- 628              		.loc 1 332 0
- 629 0334 07F11003 		add	r3, r7, #16
- 630 0338 1846     		mov	r0, r3
- 631 033a 4FF02901 		mov	r1, #41
- 632 033e 4FF00602 		mov	r2, #6
- 633 0342 FFF7FEFF 		bl	LIS302DL_Read
+ 629              		.loc 1 332 0
+ 630 0334 07F11003 		add	r3, r7, #16
+ 631 0338 1846     		mov	r0, r3
+ 632 033a 4FF02901 		mov	r1, #41
+ 633 033e 4FF00602 		mov	r2, #6
+ 634 0342 FFF7FEFF 		bl	LIS302DL_Read
  333:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  334:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   switch(crtl & 0x20) 
- 634              		.loc 1 334 0
- 635 0346 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
- 636 0348 03F02003 		and	r3, r3, #32
- 637 034c 002B     		cmp	r3, #0
- 638 034e 02D0     		beq	.L19
- 639 0350 202B     		cmp	r3, #32
- 640 0352 23D0     		beq	.L20
- 641 0354 45E0     		b	.L26
- 642              	.L19:
+ 635              		.loc 1 334 0
+ 636 0346 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 637 0348 03F02003 		and	r3, r3, #32
+ 638 034c 002B     		cmp	r3, #0
+ 639 034e 02D0     		beq	.L19
+ 640 0350 202B     		cmp	r3, #32
+ 641 0352 23D0     		beq	.L20
+ 642 0354 45E0     		b	.L26
+ 643              	.L19:
  335:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     {
  336:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     /* FS bit = 0 ==> Sensitivity typical value = 18milligals/digit*/ 
  337:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     case 0x00:
  338:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       for(i=0; i<0x03; i++)
- 643              		.loc 1 338 0
- 644 0356 4FF00003 		mov	r3, #0
- 645 035a FB75     		strb	r3, [r7, #23]
- 646 035c 1AE0     		b	.L21
- 647              	.L22:
+ 644              		.loc 1 338 0
+ 645 0356 4FF00003 		mov	r3, #0
+ 646 035a FB75     		strb	r3, [r7, #23]
+ 647 035c 1AE0     		b	.L21
+ 648              	.L22:
  339:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       {
  340:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****         *out =(int32_t)(LIS302DL_SENSITIVITY_2_3G *  (int8_t)buffer[2*i]);
- 648              		.loc 1 340 0 discriminator 2
- 649 035e FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
- 650 0360 4FEA4303 		lsl	r3, r3, #1
- 651 0364 07F11802 		add	r2, r7, #24
- 652 0368 D318     		adds	r3, r2, r3
- 653 036a 13F8083C 		ldrb	r3, [r3, #-8]	@ zero_extendqisi2
- 654 036e DBB2     		uxtb	r3, r3
- 655 0370 5AB2     		sxtb	r2, r3
- 656 0372 1346     		mov	r3, r2
- 657 0374 4FEAC303 		lsl	r3, r3, #3
- 658 0378 9B18     		adds	r3, r3, r2
- 659 037a 4FEA4303 		lsl	r3, r3, #1
- 660 037e 1A46     		mov	r2, r3
- 661 0380 7B68     		ldr	r3, [r7, #4]
- 662 0382 1A60     		str	r2, [r3, #0]
+ 649              		.loc 1 340 0 discriminator 2
+ 650 035e FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 651 0360 4FEA4303 		lsl	r3, r3, #1
+ 652 0364 07F11802 		add	r2, r7, #24
+ 653 0368 D318     		adds	r3, r2, r3
+ 654 036a 13F8083C 		ldrb	r3, [r3, #-8]	@ zero_extendqisi2
+ 655 036e DBB2     		uxtb	r3, r3
+ 656 0370 5AB2     		sxtb	r2, r3
+ 657 0372 1346     		mov	r3, r2
+ 658 0374 4FEAC303 		lsl	r3, r3, #3
+ 659 0378 9B18     		adds	r3, r3, r2
+ 660 037a 4FEA4303 		lsl	r3, r3, #1
+ 661 037e 1A46     		mov	r2, r3
+ 662 0380 7B68     		ldr	r3, [r7, #4]
+ 663 0382 1A60     		str	r2, [r3, #0]
  341:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****         out++;
- 663              		.loc 1 341 0 discriminator 2
- 664 0384 7B68     		ldr	r3, [r7, #4]
- 665 0386 03F10403 		add	r3, r3, #4
- 666 038a 7B60     		str	r3, [r7, #4]
+ 664              		.loc 1 341 0 discriminator 2
+ 665 0384 7B68     		ldr	r3, [r7, #4]
+ 666 0386 03F10403 		add	r3, r3, #4
+ 667 038a 7B60     		str	r3, [r7, #4]
  338:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       for(i=0; i<0x03; i++)
- 667              		.loc 1 338 0 discriminator 2
- 668 038c FB7D     		ldrb	r3, [r7, #23]
- 669 038e 03F10103 		add	r3, r3, #1
- 670 0392 FB75     		strb	r3, [r7, #23]
- 671              	.L21:
+ 668              		.loc 1 338 0 discriminator 2
+ 669 038c FB7D     		ldrb	r3, [r7, #23]
+ 670 038e 03F10103 		add	r3, r3, #1
+ 671 0392 FB75     		strb	r3, [r7, #23]
+ 672              	.L21:
  338:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       for(i=0; i<0x03; i++)
- 672              		.loc 1 338 0 is_stmt 0 discriminator 1
- 673 0394 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
- 674 0396 022B     		cmp	r3, #2
- 675 0398 E1D9     		bls	.L22
+ 673              		.loc 1 338 0 is_stmt 0 discriminator 1
+ 674 0394 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 675 0396 022B     		cmp	r3, #2
+ 676 0398 E1D9     		bls	.L22
  342:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       }
  343:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       break;
- 676              		.loc 1 343 0 is_stmt 1
- 677 039a 23E0     		b	.L17
- 678              	.L20:
+ 677              		.loc 1 343 0 is_stmt 1
+ 678 039a 23E0     		b	.L17
+ 679              	.L20:
  344:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     /* FS bit = 1 ==> Sensitivity typical value = 72milligals/digit*/ 
  345:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     case 0x20:
  346:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       for(i=0; i<0x03; i++)
- 679              		.loc 1 346 0
- 680 039c 4FF00003 		mov	r3, #0
- 681 03a0 FB75     		strb	r3, [r7, #23]
- 682 03a2 1AE0     		b	.L24
- 683              	.L25:
+ 680              		.loc 1 346 0
+ 681 039c 4FF00003 		mov	r3, #0
+ 682 03a0 FB75     		strb	r3, [r7, #23]
+ 683 03a2 1AE0     		b	.L24
+ 684              	.L25:
  347:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       {
  348:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****         *out =(int32_t)(LIS302DL_SENSITIVITY_9_2G * (int8_t)buffer[2*i]);
- 684              		.loc 1 348 0 discriminator 2
- 685 03a4 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
- 686 03a6 4FEA4303 		lsl	r3, r3, #1
- 687 03aa 07F11802 		add	r2, r7, #24
- 688 03ae D318     		adds	r3, r2, r3
- 689 03b0 13F8083C 		ldrb	r3, [r3, #-8]	@ zero_extendqisi2
- 690 03b4 DBB2     		uxtb	r3, r3
- 691 03b6 5AB2     		sxtb	r2, r3
- 692 03b8 1346     		mov	r3, r2
- 693 03ba 4FEAC303 		lsl	r3, r3, #3
- 694 03be 9B18     		adds	r3, r3, r2
- 695 03c0 4FEAC303 		lsl	r3, r3, #3
- 696 03c4 1A46     		mov	r2, r3
- 697 03c6 7B68     		ldr	r3, [r7, #4]
- 698 03c8 1A60     		str	r2, [r3, #0]
+ 685              		.loc 1 348 0 discriminator 2
+ 686 03a4 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 687 03a6 4FEA4303 		lsl	r3, r3, #1
+ 688 03aa 07F11802 		add	r2, r7, #24
+ 689 03ae D318     		adds	r3, r2, r3
+ 690 03b0 13F8083C 		ldrb	r3, [r3, #-8]	@ zero_extendqisi2
+ 691 03b4 DBB2     		uxtb	r3, r3
+ 692 03b6 5AB2     		sxtb	r2, r3
+ 693 03b8 1346     		mov	r3, r2
+ 694 03ba 4FEAC303 		lsl	r3, r3, #3
+ 695 03be 9B18     		adds	r3, r3, r2
+ 696 03c0 4FEAC303 		lsl	r3, r3, #3
+ 697 03c4 1A46     		mov	r2, r3
+ 698 03c6 7B68     		ldr	r3, [r7, #4]
+ 699 03c8 1A60     		str	r2, [r3, #0]
  349:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****         out++;
- 699              		.loc 1 349 0 discriminator 2
- 700 03ca 7B68     		ldr	r3, [r7, #4]
- 701 03cc 03F10403 		add	r3, r3, #4
- 702 03d0 7B60     		str	r3, [r7, #4]
+ 700              		.loc 1 349 0 discriminator 2
+ 701 03ca 7B68     		ldr	r3, [r7, #4]
+ 702 03cc 03F10403 		add	r3, r3, #4
+ 703 03d0 7B60     		str	r3, [r7, #4]
  346:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       for(i=0; i<0x03; i++)
- 703              		.loc 1 346 0 discriminator 2
- 704 03d2 FB7D     		ldrb	r3, [r7, #23]
- 705 03d4 03F10103 		add	r3, r3, #1
- 706 03d8 FB75     		strb	r3, [r7, #23]
- 707              	.L24:
+ 704              		.loc 1 346 0 discriminator 2
+ 705 03d2 FB7D     		ldrb	r3, [r7, #23]
+ 706 03d4 03F10103 		add	r3, r3, #1
+ 707 03d8 FB75     		strb	r3, [r7, #23]
+ 708              	.L24:
  346:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       for(i=0; i<0x03; i++)
- 708              		.loc 1 346 0 is_stmt 0 discriminator 1
- 709 03da FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
- 710 03dc 022B     		cmp	r3, #2
- 711 03de E1D9     		bls	.L25
+ 709              		.loc 1 346 0 is_stmt 0 discriminator 1
+ 710 03da FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 711 03dc 022B     		cmp	r3, #2
+ 712 03de E1D9     		bls	.L25
  350:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       }         
  351:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       break;
- 712              		.loc 1 351 0 is_stmt 1
- 713 03e0 00E0     		b	.L17
- 714              	.L26:
+ 713              		.loc 1 351 0 is_stmt 1
+ 714 03e0 00E0     		b	.L17
+ 715              	.L26:
  352:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     default:
  353:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****       break;
- 715              		.loc 1 353 0
- 716 03e2 00BF     		nop
- 717              	.L17:
+ 716              		.loc 1 353 0
+ 717 03e2 00BF     		nop
+ 718              	.L17:
  354:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     }
  355:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****  }
- 718              		.loc 1 355 0
- 719 03e4 07F11807 		add	r7, r7, #24
- 720 03e8 BD46     		mov	sp, r7
- 721 03ea 80BD     		pop	{r7, pc}
- 722              		.cfi_endproc
- 723              	.LFE119:
- 725              		.align	2
- 726              		.thumb
- 727              		.thumb_func
- 729              	LIS302DL_LowLevel_Init:
- 730              	.LFB120:
+ 719              		.loc 1 355 0
+ 720 03e4 07F11807 		add	r7, r7, #24
+ 721 03e8 BD46     		mov	sp, r7
+ 722 03ea 80BD     		pop	{r7, pc}
+ 723              		.cfi_endproc
+ 724              	.LFE119:
+ 726              		.align	2
+ 727              		.thumb
+ 728              		.thumb_func
+ 730              	LIS302DL_LowLevel_Init:
+ 731              	.LFB120:
  356:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  357:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  358:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Initializes the low level interface used to drive the LIS302DL
@@ -1081,280 +1082,280 @@
  361:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  362:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** static void LIS302DL_LowLevel_Init(void)
  363:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 731              		.loc 1 363 0
- 732              		.cfi_startproc
- 733              		@ args = 0, pretend = 0, frame = 32
- 734              		@ frame_needed = 1, uses_anonymous_args = 0
- 735 03ec 80B5     		push	{r7, lr}
- 736              	.LCFI30:
- 737              		.cfi_def_cfa_offset 8
- 738              		.cfi_offset 14, -4
- 739              		.cfi_offset 7, -8
- 740 03ee 88B0     		sub	sp, sp, #32
- 741              	.LCFI31:
- 742              		.cfi_def_cfa_offset 40
- 743 03f0 00AF     		add	r7, sp, #0
- 744              	.LCFI32:
- 745              		.cfi_def_cfa_register 7
+ 732              		.loc 1 363 0
+ 733              		.cfi_startproc
+ 734              		@ args = 0, pretend = 0, frame = 32
+ 735              		@ frame_needed = 1, uses_anonymous_args = 0
+ 736 03ec 80B5     		push	{r7, lr}
+ 737              	.LCFI30:
+ 738              		.cfi_def_cfa_offset 8
+ 739              		.cfi_offset 14, -4
+ 740              		.cfi_offset 7, -8
+ 741 03ee 88B0     		sub	sp, sp, #32
+ 742              	.LCFI31:
+ 743              		.cfi_def_cfa_offset 40
+ 744 03f0 00AF     		add	r7, sp, #0
+ 745              	.LCFI32:
+ 746              		.cfi_def_cfa_register 7
  364:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitTypeDef GPIO_InitStructure;
  365:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitTypeDef  SPI_InitStructure;
  366:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  367:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable the SPI periph */
  368:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   RCC_APB2PeriphClockCmd(LIS302DL_SPI_CLK, ENABLE);
- 746              		.loc 1 368 0
- 747 03f2 4FF48050 		mov	r0, #4096
- 748 03f6 4FF00101 		mov	r1, #1
- 749 03fa FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+ 747              		.loc 1 368 0
+ 748 03f2 4FF48050 		mov	r0, #4096
+ 749 03f6 4FF00101 		mov	r1, #1
+ 750 03fa FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
  369:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  370:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable SCK, MOSI and MISO GPIO clocks */
  371:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   RCC_AHB1PeriphClockCmd(LIS302DL_SPI_SCK_GPIO_CLK | LIS302DL_SPI_MISO_GPIO_CLK | LIS302DL_SPI_MOSI
- 750              		.loc 1 371 0
- 751 03fe 4FF00100 		mov	r0, #1
- 752 0402 4FF00101 		mov	r1, #1
- 753 0406 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 751              		.loc 1 371 0
+ 752 03fe 4FF00100 		mov	r0, #1
+ 753 0402 4FF00101 		mov	r1, #1
+ 754 0406 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
  372:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  373:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable CS  GPIO clock */
  374:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   RCC_AHB1PeriphClockCmd(LIS302DL_SPI_CS_GPIO_CLK, ENABLE);
- 754              		.loc 1 374 0
- 755 040a 4FF01000 		mov	r0, #16
- 756 040e 4FF00101 		mov	r1, #1
- 757 0412 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 755              		.loc 1 374 0
+ 756 040a 4FF01000 		mov	r0, #16
+ 757 040e 4FF00101 		mov	r1, #1
+ 758 0412 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
  375:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  376:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable INT1 GPIO clock */
  377:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   RCC_AHB1PeriphClockCmd(LIS302DL_SPI_INT1_GPIO_CLK, ENABLE);
- 758              		.loc 1 377 0
- 759 0416 4FF01000 		mov	r0, #16
- 760 041a 4FF00101 		mov	r1, #1
- 761 041e FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 759              		.loc 1 377 0
+ 760 0416 4FF01000 		mov	r0, #16
+ 761 041a 4FF00101 		mov	r1, #1
+ 762 041e FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
  378:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  379:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable INT2 GPIO clock */
  380:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   RCC_AHB1PeriphClockCmd(LIS302DL_SPI_INT2_GPIO_CLK, ENABLE);
- 762              		.loc 1 380 0
- 763 0422 4FF01000 		mov	r0, #16
- 764 0426 4FF00101 		mov	r1, #1
- 765 042a FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 763              		.loc 1 380 0
+ 764 0422 4FF01000 		mov	r0, #16
+ 765 0426 4FF00101 		mov	r1, #1
+ 766 042a FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
  381:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  382:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_PinAFConfig(LIS302DL_SPI_SCK_GPIO_PORT, LIS302DL_SPI_SCK_SOURCE, LIS302DL_SPI_SCK_AF);
- 766              		.loc 1 382 0
- 767 042e 4FF00000 		mov	r0, #0
- 768 0432 C4F20200 		movt	r0, 16386
- 769 0436 4FF00501 		mov	r1, #5
- 770 043a 4FF00502 		mov	r2, #5
- 771 043e FFF7FEFF 		bl	GPIO_PinAFConfig
+ 767              		.loc 1 382 0
+ 768 042e 4FF00000 		mov	r0, #0
+ 769 0432 C4F20200 		movt	r0, 16386
+ 770 0436 4FF00501 		mov	r1, #5
+ 771 043a 4FF00502 		mov	r2, #5
+ 772 043e FFF7FEFF 		bl	GPIO_PinAFConfig
  383:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_PinAFConfig(LIS302DL_SPI_MISO_GPIO_PORT, LIS302DL_SPI_MISO_SOURCE, LIS302DL_SPI_MISO_AF);
- 772              		.loc 1 383 0
- 773 0442 4FF00000 		mov	r0, #0
- 774 0446 C4F20200 		movt	r0, 16386
- 775 044a 4FF00601 		mov	r1, #6
- 776 044e 4FF00502 		mov	r2, #5
- 777 0452 FFF7FEFF 		bl	GPIO_PinAFConfig
+ 773              		.loc 1 383 0
+ 774 0442 4FF00000 		mov	r0, #0
+ 775 0446 C4F20200 		movt	r0, 16386
+ 776 044a 4FF00601 		mov	r1, #6
+ 777 044e 4FF00502 		mov	r2, #5
+ 778 0452 FFF7FEFF 		bl	GPIO_PinAFConfig
  384:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_PinAFConfig(LIS302DL_SPI_MOSI_GPIO_PORT, LIS302DL_SPI_MOSI_SOURCE, LIS302DL_SPI_MOSI_AF);
- 778              		.loc 1 384 0
- 779 0456 4FF00000 		mov	r0, #0
- 780 045a C4F20200 		movt	r0, 16386
- 781 045e 4FF00701 		mov	r1, #7
- 782 0462 4FF00502 		mov	r2, #5
- 783 0466 FFF7FEFF 		bl	GPIO_PinAFConfig
+ 779              		.loc 1 384 0
+ 780 0456 4FF00000 		mov	r0, #0
+ 781 045a C4F20200 		movt	r0, 16386
+ 782 045e 4FF00701 		mov	r1, #7
+ 783 0462 4FF00502 		mov	r2, #5
+ 784 0466 FFF7FEFF 		bl	GPIO_PinAFConfig
  385:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  386:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
- 784              		.loc 1 386 0
- 785 046a 4FF00203 		mov	r3, #2
- 786 046e 3B77     		strb	r3, [r7, #28]
+ 785              		.loc 1 386 0
+ 786 046a 4FF00203 		mov	r3, #2
+ 787 046e 3B77     		strb	r3, [r7, #28]
  387:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
- 787              		.loc 1 387 0
- 788 0470 4FF00003 		mov	r3, #0
- 789 0474 BB77     		strb	r3, [r7, #30]
+ 788              		.loc 1 387 0
+ 789 0470 4FF00003 		mov	r3, #0
+ 790 0474 BB77     		strb	r3, [r7, #30]
  388:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_DOWN;
- 790              		.loc 1 388 0
- 791 0476 4FF00203 		mov	r3, #2
- 792 047a FB77     		strb	r3, [r7, #31]
+ 791              		.loc 1 388 0
+ 792 0476 4FF00203 		mov	r3, #2
+ 793 047a FB77     		strb	r3, [r7, #31]
  389:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
- 793              		.loc 1 389 0
- 794 047c 4FF00203 		mov	r3, #2
- 795 0480 7B77     		strb	r3, [r7, #29]
+ 794              		.loc 1 389 0
+ 795 047c 4FF00203 		mov	r3, #2
+ 796 0480 7B77     		strb	r3, [r7, #29]
  390:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  391:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* SPI SCK pin configuration */
  392:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Pin = LIS302DL_SPI_SCK_PIN;
- 796              		.loc 1 392 0
- 797 0482 4FF02003 		mov	r3, #32
- 798 0486 BB61     		str	r3, [r7, #24]
+ 797              		.loc 1 392 0
+ 798 0482 4FF02003 		mov	r3, #32
+ 799 0486 BB61     		str	r3, [r7, #24]
  393:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_Init(LIS302DL_SPI_SCK_GPIO_PORT, &GPIO_InitStructure);
- 799              		.loc 1 393 0
- 800 0488 07F11803 		add	r3, r7, #24
- 801 048c 4FF00000 		mov	r0, #0
- 802 0490 C4F20200 		movt	r0, 16386
- 803 0494 1946     		mov	r1, r3
- 804 0496 FFF7FEFF 		bl	GPIO_Init
+ 800              		.loc 1 393 0
+ 801 0488 07F11803 		add	r3, r7, #24
+ 802 048c 4FF00000 		mov	r0, #0
+ 803 0490 C4F20200 		movt	r0, 16386
+ 804 0494 1946     		mov	r1, r3
+ 805 0496 FFF7FEFF 		bl	GPIO_Init
  394:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  395:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* SPI  MOSI pin configuration */
  396:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Pin =  LIS302DL_SPI_MOSI_PIN;
- 805              		.loc 1 396 0
- 806 049a 4FF08003 		mov	r3, #128
- 807 049e BB61     		str	r3, [r7, #24]
+ 806              		.loc 1 396 0
+ 807 049a 4FF08003 		mov	r3, #128
+ 808 049e BB61     		str	r3, [r7, #24]
  397:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_Init(LIS302DL_SPI_MOSI_GPIO_PORT, &GPIO_InitStructure);
- 808              		.loc 1 397 0
- 809 04a0 07F11803 		add	r3, r7, #24
- 810 04a4 4FF00000 		mov	r0, #0
- 811 04a8 C4F20200 		movt	r0, 16386
- 812 04ac 1946     		mov	r1, r3
- 813 04ae FFF7FEFF 		bl	GPIO_Init
+ 809              		.loc 1 397 0
+ 810 04a0 07F11803 		add	r3, r7, #24
+ 811 04a4 4FF00000 		mov	r0, #0
+ 812 04a8 C4F20200 		movt	r0, 16386
+ 813 04ac 1946     		mov	r1, r3
+ 814 04ae FFF7FEFF 		bl	GPIO_Init
  398:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  399:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* SPI MISO pin configuration */
  400:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Pin = LIS302DL_SPI_MISO_PIN;
- 814              		.loc 1 400 0
- 815 04b2 4FF04003 		mov	r3, #64
- 816 04b6 BB61     		str	r3, [r7, #24]
+ 815              		.loc 1 400 0
+ 816 04b2 4FF04003 		mov	r3, #64
+ 817 04b6 BB61     		str	r3, [r7, #24]
  401:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_Init(LIS302DL_SPI_MISO_GPIO_PORT, &GPIO_InitStructure);
- 817              		.loc 1 401 0
- 818 04b8 07F11803 		add	r3, r7, #24
- 819 04bc 4FF00000 		mov	r0, #0
- 820 04c0 C4F20200 		movt	r0, 16386
- 821 04c4 1946     		mov	r1, r3
- 822 04c6 FFF7FEFF 		bl	GPIO_Init
+ 818              		.loc 1 401 0
+ 819 04b8 07F11803 		add	r3, r7, #24
+ 820 04bc 4FF00000 		mov	r0, #0
+ 821 04c0 C4F20200 		movt	r0, 16386
+ 822 04c4 1946     		mov	r1, r3
+ 823 04c6 FFF7FEFF 		bl	GPIO_Init
  402:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  403:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* SPI configuration -------------------------------------------------------*/
  404:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_I2S_DeInit(LIS302DL_SPI);
- 823              		.loc 1 404 0
- 824 04ca 4FF44050 		mov	r0, #12288
- 825 04ce C4F20100 		movt	r0, 16385
- 826 04d2 FFF7FEFF 		bl	SPI_I2S_DeInit
+ 824              		.loc 1 404 0
+ 825 04ca 4FF44050 		mov	r0, #12288
+ 826 04ce C4F20100 		movt	r0, 16385
+ 827 04d2 FFF7FEFF 		bl	SPI_I2S_DeInit
  405:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
- 827              		.loc 1 405 0
- 828 04d6 4FF00003 		mov	r3, #0
- 829 04da BB80     		strh	r3, [r7, #4]	@ movhi
+ 828              		.loc 1 405 0
+ 829 04d6 4FF00003 		mov	r3, #0
+ 830 04da BB80     		strh	r3, [r7, #4]	@ movhi
  406:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
- 830              		.loc 1 406 0
- 831 04dc 4FF00003 		mov	r3, #0
- 832 04e0 3B81     		strh	r3, [r7, #8]	@ movhi
+ 831              		.loc 1 406 0
+ 832 04dc 4FF00003 		mov	r3, #0
+ 833 04e0 3B81     		strh	r3, [r7, #8]	@ movhi
  407:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
- 833              		.loc 1 407 0
- 834 04e2 4FF00003 		mov	r3, #0
- 835 04e6 7B81     		strh	r3, [r7, #10]	@ movhi
+ 834              		.loc 1 407 0
+ 835 04e2 4FF00003 		mov	r3, #0
+ 836 04e6 7B81     		strh	r3, [r7, #10]	@ movhi
  408:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
- 836              		.loc 1 408 0
- 837 04e8 4FF00003 		mov	r3, #0
- 838 04ec BB81     		strh	r3, [r7, #12]	@ movhi
+ 837              		.loc 1 408 0
+ 838 04e8 4FF00003 		mov	r3, #0
+ 839 04ec BB81     		strh	r3, [r7, #12]	@ movhi
  409:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
- 839              		.loc 1 409 0
- 840 04ee 4FF40073 		mov	r3, #512
- 841 04f2 FB81     		strh	r3, [r7, #14]	@ movhi
+ 840              		.loc 1 409 0
+ 841 04ee 4FF40073 		mov	r3, #512
+ 842 04f2 FB81     		strh	r3, [r7, #14]	@ movhi
  410:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
- 842              		.loc 1 410 0
- 843 04f4 4FF00803 		mov	r3, #8
- 844 04f8 3B82     		strh	r3, [r7, #16]	@ movhi
+ 843              		.loc 1 410 0
+ 844 04f4 4FF00803 		mov	r3, #8
+ 845 04f8 3B82     		strh	r3, [r7, #16]	@ movhi
  411:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
- 845              		.loc 1 411 0
- 846 04fa 4FF00003 		mov	r3, #0
- 847 04fe 7B82     		strh	r3, [r7, #18]	@ movhi
+ 846              		.loc 1 411 0
+ 847 04fa 4FF00003 		mov	r3, #0
+ 848 04fe 7B82     		strh	r3, [r7, #18]	@ movhi
  412:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_CRCPolynomial = 7;
- 848              		.loc 1 412 0
- 849 0500 4FF00703 		mov	r3, #7
- 850 0504 BB82     		strh	r3, [r7, #20]	@ movhi
+ 849              		.loc 1 412 0
+ 850 0500 4FF00703 		mov	r3, #7
+ 851 0504 BB82     		strh	r3, [r7, #20]	@ movhi
  413:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
- 851              		.loc 1 413 0
- 852 0506 4FF48273 		mov	r3, #260
- 853 050a FB80     		strh	r3, [r7, #6]	@ movhi
+ 852              		.loc 1 413 0
+ 853 0506 4FF48273 		mov	r3, #260
+ 854 050a FB80     		strh	r3, [r7, #6]	@ movhi
  414:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_Init(LIS302DL_SPI, &SPI_InitStructure);
- 854              		.loc 1 414 0
- 855 050c 07F10403 		add	r3, r7, #4
- 856 0510 4FF44050 		mov	r0, #12288
- 857 0514 C4F20100 		movt	r0, 16385
- 858 0518 1946     		mov	r1, r3
- 859 051a FFF7FEFF 		bl	SPI_Init
+ 855              		.loc 1 414 0
+ 856 050c 07F10403 		add	r3, r7, #4
+ 857 0510 4FF44050 		mov	r0, #12288
+ 858 0514 C4F20100 		movt	r0, 16385
+ 859 0518 1946     		mov	r1, r3
+ 860 051a FFF7FEFF 		bl	SPI_Init
  415:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  416:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Enable SPI1  */
  417:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_Cmd(LIS302DL_SPI, ENABLE);
- 860              		.loc 1 417 0
- 861 051e 4FF44050 		mov	r0, #12288
- 862 0522 C4F20100 		movt	r0, 16385
- 863 0526 4FF00101 		mov	r1, #1
- 864 052a FFF7FEFF 		bl	SPI_Cmd
+ 861              		.loc 1 417 0
+ 862 051e 4FF44050 		mov	r0, #12288
+ 863 0522 C4F20100 		movt	r0, 16385
+ 864 0526 4FF00101 		mov	r1, #1
+ 865 052a FFF7FEFF 		bl	SPI_Cmd
  418:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  419:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure GPIO PIN for Lis Chip select */
  420:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Pin = LIS302DL_SPI_CS_PIN;
- 865              		.loc 1 420 0
- 866 052e 4FF00803 		mov	r3, #8
- 867 0532 BB61     		str	r3, [r7, #24]
+ 866              		.loc 1 420 0
+ 867 052e 4FF00803 		mov	r3, #8
+ 868 0532 BB61     		str	r3, [r7, #24]
  421:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
- 868              		.loc 1 421 0
- 869 0534 4FF00103 		mov	r3, #1
- 870 0538 3B77     		strb	r3, [r7, #28]
+ 869              		.loc 1 421 0
+ 870 0534 4FF00103 		mov	r3, #1
+ 871 0538 3B77     		strb	r3, [r7, #28]
  422:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
- 871              		.loc 1 422 0
- 872 053a 4FF00003 		mov	r3, #0
- 873 053e BB77     		strb	r3, [r7, #30]
+ 872              		.loc 1 422 0
+ 873 053a 4FF00003 		mov	r3, #0
+ 874 053e BB77     		strb	r3, [r7, #30]
  423:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
- 874              		.loc 1 423 0
- 875 0540 4FF00203 		mov	r3, #2
- 876 0544 7B77     		strb	r3, [r7, #29]
+ 875              		.loc 1 423 0
+ 876 0540 4FF00203 		mov	r3, #2
+ 877 0544 7B77     		strb	r3, [r7, #29]
  424:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_Init(LIS302DL_SPI_CS_GPIO_PORT, &GPIO_InitStructure);
- 877              		.loc 1 424 0
- 878 0546 07F11803 		add	r3, r7, #24
- 879 054a 4FF48050 		mov	r0, #4096
- 880 054e C4F20200 		movt	r0, 16386
- 881 0552 1946     		mov	r1, r3
- 882 0554 FFF7FEFF 		bl	GPIO_Init
+ 878              		.loc 1 424 0
+ 879 0546 07F11803 		add	r3, r7, #24
+ 880 054a 4FF48050 		mov	r0, #4096
+ 881 054e C4F20200 		movt	r0, 16386
+ 882 0552 1946     		mov	r1, r3
+ 883 0554 FFF7FEFF 		bl	GPIO_Init
  425:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  426:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Deselect : Chip Select high */
  427:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_SetBits(LIS302DL_SPI_CS_GPIO_PORT, LIS302DL_SPI_CS_PIN);
- 883              		.loc 1 427 0
- 884 0558 4FF48050 		mov	r0, #4096
- 885 055c C4F20200 		movt	r0, 16386
- 886 0560 4FF00801 		mov	r1, #8
- 887 0564 FFF7FEFF 		bl	GPIO_SetBits
+ 884              		.loc 1 427 0
+ 885 0558 4FF48050 		mov	r0, #4096
+ 886 055c C4F20200 		movt	r0, 16386
+ 887 0560 4FF00801 		mov	r1, #8
+ 888 0564 FFF7FEFF 		bl	GPIO_SetBits
  428:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  429:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Configure GPIO PINs to detect Interrupts */
  430:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Pin = LIS302DL_SPI_INT1_PIN;
- 888              		.loc 1 430 0
- 889 0568 4FF00103 		mov	r3, #1
- 890 056c BB61     		str	r3, [r7, #24]
+ 889              		.loc 1 430 0
+ 890 0568 4FF00103 		mov	r3, #1
+ 891 056c BB61     		str	r3, [r7, #24]
  431:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
- 891              		.loc 1 431 0
- 892 056e 4FF00003 		mov	r3, #0
- 893 0572 3B77     		strb	r3, [r7, #28]
+ 892              		.loc 1 431 0
+ 893 056e 4FF00003 		mov	r3, #0
+ 894 0572 3B77     		strb	r3, [r7, #28]
  432:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
- 894              		.loc 1 432 0
- 895 0574 4FF00003 		mov	r3, #0
- 896 0578 BB77     		strb	r3, [r7, #30]
+ 895              		.loc 1 432 0
+ 896 0574 4FF00003 		mov	r3, #0
+ 897 0578 BB77     		strb	r3, [r7, #30]
  433:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
- 897              		.loc 1 433 0
- 898 057a 4FF00203 		mov	r3, #2
- 899 057e 7B77     		strb	r3, [r7, #29]
+ 898              		.loc 1 433 0
+ 899 057a 4FF00203 		mov	r3, #2
+ 900 057e 7B77     		strb	r3, [r7, #29]
  434:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;
- 900              		.loc 1 434 0
- 901 0580 4FF00003 		mov	r3, #0
- 902 0584 FB77     		strb	r3, [r7, #31]
+ 901              		.loc 1 434 0
+ 902 0580 4FF00003 		mov	r3, #0
+ 903 0584 FB77     		strb	r3, [r7, #31]
  435:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_Init(LIS302DL_SPI_INT1_GPIO_PORT, &GPIO_InitStructure);
- 903              		.loc 1 435 0
- 904 0586 07F11803 		add	r3, r7, #24
- 905 058a 4FF48050 		mov	r0, #4096
- 906 058e C4F20200 		movt	r0, 16386
- 907 0592 1946     		mov	r1, r3
- 908 0594 FFF7FEFF 		bl	GPIO_Init
+ 904              		.loc 1 435 0
+ 905 0586 07F11803 		add	r3, r7, #24
+ 906 058a 4FF48050 		mov	r0, #4096
+ 907 058e C4F20200 		movt	r0, 16386
+ 908 0592 1946     		mov	r1, r3
+ 909 0594 FFF7FEFF 		bl	GPIO_Init
  436:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  437:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_InitStructure.GPIO_Pin = LIS302DL_SPI_INT2_PIN;
- 909              		.loc 1 437 0
- 910 0598 4FF00203 		mov	r3, #2
- 911 059c BB61     		str	r3, [r7, #24]
+ 910              		.loc 1 437 0
+ 911 0598 4FF00203 		mov	r3, #2
+ 912 059c BB61     		str	r3, [r7, #24]
  438:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   GPIO_Init(LIS302DL_SPI_INT2_GPIO_PORT, &GPIO_InitStructure);
- 912              		.loc 1 438 0
- 913 059e 07F11803 		add	r3, r7, #24
- 914 05a2 4FF48050 		mov	r0, #4096
- 915 05a6 C4F20200 		movt	r0, 16386
- 916 05aa 1946     		mov	r1, r3
- 917 05ac FFF7FEFF 		bl	GPIO_Init
+ 913              		.loc 1 438 0
+ 914 059e 07F11803 		add	r3, r7, #24
+ 915 05a2 4FF48050 		mov	r0, #4096
+ 916 05a6 C4F20200 		movt	r0, 16386
+ 917 05aa 1946     		mov	r1, r3
+ 918 05ac FFF7FEFF 		bl	GPIO_Init
  439:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 918              		.loc 1 439 0
- 919 05b0 07F12007 		add	r7, r7, #32
- 920 05b4 BD46     		mov	sp, r7
- 921 05b6 80BD     		pop	{r7, pc}
- 922              		.cfi_endproc
- 923              	.LFE120:
- 925              		.align	2
- 926              		.thumb
- 927              		.thumb_func
- 929              	LIS302DL_SendByte:
- 930              	.LFB121:
+ 919              		.loc 1 439 0
+ 920 05b0 07F12007 		add	r7, r7, #32
+ 921 05b4 BD46     		mov	sp, r7
+ 922 05b6 80BD     		pop	{r7, pc}
+ 923              		.cfi_endproc
+ 924              	.LFE120:
+ 926              		.align	2
+ 927              		.thumb
+ 928              		.thumb_func
+ 930              	LIS302DL_SendByte:
+ 931              	.LFB121:
  440:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  441:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
  442:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   * @brief  Sends a Byte through the SPI interface and return the Byte received 
@@ -1364,146 +1365,146 @@
  446:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  447:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** static uint8_t LIS302DL_SendByte(uint8_t byte)
  448:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 931              		.loc 1 448 0
- 932              		.cfi_startproc
- 933              		@ args = 0, pretend = 0, frame = 8
- 934              		@ frame_needed = 1, uses_anonymous_args = 0
- 935 05b8 80B5     		push	{r7, lr}
- 936              	.LCFI33:
- 937              		.cfi_def_cfa_offset 8
- 938              		.cfi_offset 14, -4
- 939              		.cfi_offset 7, -8
- 940 05ba 82B0     		sub	sp, sp, #8
- 941              	.LCFI34:
- 942              		.cfi_def_cfa_offset 16
- 943 05bc 00AF     		add	r7, sp, #0
- 944              	.LCFI35:
- 945              		.cfi_def_cfa_register 7
- 946 05be 0346     		mov	r3, r0
- 947 05c0 FB71     		strb	r3, [r7, #7]
+ 932              		.loc 1 448 0
+ 933              		.cfi_startproc
+ 934              		@ args = 0, pretend = 0, frame = 8
+ 935              		@ frame_needed = 1, uses_anonymous_args = 0
+ 936 05b8 80B5     		push	{r7, lr}
+ 937              	.LCFI33:
+ 938              		.cfi_def_cfa_offset 8
+ 939              		.cfi_offset 14, -4
+ 940              		.cfi_offset 7, -8
+ 941 05ba 82B0     		sub	sp, sp, #8
+ 942              	.LCFI34:
+ 943              		.cfi_def_cfa_offset 16
+ 944 05bc 00AF     		add	r7, sp, #0
+ 945              	.LCFI35:
+ 946              		.cfi_def_cfa_register 7
+ 947 05be 0346     		mov	r3, r0
+ 948 05c0 FB71     		strb	r3, [r7, #7]
  449:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Loop while DR register in not emplty */
  450:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DLTimeout = LIS302DL_FLAG_TIMEOUT;
- 948              		.loc 1 450 0
- 949 05c2 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
- 950 05c6 C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
- 951 05ca 4FF48052 		mov	r2, #4096
- 952 05ce 1A60     		str	r2, [r3, #0]
+ 949              		.loc 1 450 0
+ 950 05c2 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
+ 951 05c6 C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
+ 952 05ca 4FF48052 		mov	r2, #4096
+ 953 05ce 1A60     		str	r2, [r3, #0]
  451:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while (SPI_I2S_GetFlagStatus(LIS302DL_SPI, SPI_I2S_FLAG_TXE) == RESET)
- 953              		.loc 1 451 0
- 954 05d0 17E0     		b	.L29
- 955              	.L31:
+ 954              		.loc 1 451 0
+ 955 05d0 17E0     		b	.L29
+ 956              	.L31:
  452:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  453:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     if((LIS302DLTimeout--) == 0) return LIS302DL_TIMEOUT_UserCallback();
- 956              		.loc 1 453 0
- 957 05d2 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
- 958 05d6 C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
- 959 05da 1B68     		ldr	r3, [r3, #0]
- 960 05dc 002B     		cmp	r3, #0
- 961 05de 14BF     		ite	ne
- 962 05e0 0022     		movne	r2, #0
- 963 05e2 0122     		moveq	r2, #1
- 964 05e4 D2B2     		uxtb	r2, r2
- 965 05e6 03F1FF31 		add	r1, r3, #-1
- 966 05ea 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
- 967 05ee C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
- 968 05f2 1960     		str	r1, [r3, #0]
- 969 05f4 002A     		cmp	r2, #0
- 970 05f6 04D0     		beq	.L29
- 971              		.loc 1 453 0 is_stmt 0 discriminator 1
- 972 05f8 FFF7FEFF 		bl	LIS302DL_TIMEOUT_UserCallback
- 973 05fc 0346     		mov	r3, r0
- 974 05fe DBB2     		uxtb	r3, r3
- 975 0600 46E0     		b	.L30
- 976              	.L29:
+ 957              		.loc 1 453 0
+ 958 05d2 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
+ 959 05d6 C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
+ 960 05da 1B68     		ldr	r3, [r3, #0]
+ 961 05dc 002B     		cmp	r3, #0
+ 962 05de 14BF     		ite	ne
+ 963 05e0 0022     		movne	r2, #0
+ 964 05e2 0122     		moveq	r2, #1
+ 965 05e4 D2B2     		uxtb	r2, r2
+ 966 05e6 03F1FF31 		add	r1, r3, #-1
+ 967 05ea 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
+ 968 05ee C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
+ 969 05f2 1960     		str	r1, [r3, #0]
+ 970 05f4 002A     		cmp	r2, #0
+ 971 05f6 04D0     		beq	.L29
+ 972              		.loc 1 453 0 is_stmt 0 discriminator 1
+ 973 05f8 FFF7FEFF 		bl	LIS302DL_TIMEOUT_UserCallback
+ 974 05fc 0346     		mov	r3, r0
+ 975 05fe DBB2     		uxtb	r3, r3
+ 976 0600 46E0     		b	.L30
+ 977              	.L29:
  451:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while (SPI_I2S_GetFlagStatus(LIS302DL_SPI, SPI_I2S_FLAG_TXE) == RESET)
- 977              		.loc 1 451 0 is_stmt 1 discriminator 1
- 978 0602 4FF44050 		mov	r0, #12288
- 979 0606 C4F20100 		movt	r0, 16385
- 980 060a 4FF00201 		mov	r1, #2
- 981 060e FFF7FEFF 		bl	SPI_I2S_GetFlagStatus
- 982 0612 0346     		mov	r3, r0
- 983 0614 002B     		cmp	r3, #0
- 984 0616 DCD0     		beq	.L31
+ 978              		.loc 1 451 0 is_stmt 1 discriminator 1
+ 979 0602 4FF44050 		mov	r0, #12288
+ 980 0606 C4F20100 		movt	r0, 16385
+ 981 060a 4FF00201 		mov	r1, #2
+ 982 060e FFF7FEFF 		bl	SPI_I2S_GetFlagStatus
+ 983 0612 0346     		mov	r3, r0
+ 984 0614 002B     		cmp	r3, #0
+ 985 0616 DCD0     		beq	.L31
  454:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  455:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  456:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Send a Byte through the SPI peripheral */
  457:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   SPI_I2S_SendData(LIS302DL_SPI, byte);
- 985              		.loc 1 457 0
- 986 0618 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 987 061a 9BB2     		uxth	r3, r3
- 988 061c 4FF44050 		mov	r0, #12288
- 989 0620 C4F20100 		movt	r0, 16385
- 990 0624 1946     		mov	r1, r3
- 991 0626 FFF7FEFF 		bl	SPI_I2S_SendData
+ 986              		.loc 1 457 0
+ 987 0618 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 988 061a 9BB2     		uxth	r3, r3
+ 989 061c 4FF44050 		mov	r0, #12288
+ 990 0620 C4F20100 		movt	r0, 16385
+ 991 0624 1946     		mov	r1, r3
+ 992 0626 FFF7FEFF 		bl	SPI_I2S_SendData
  458:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  459:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Wait to receive a Byte */
  460:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   LIS302DLTimeout = LIS302DL_FLAG_TIMEOUT;
- 992              		.loc 1 460 0
- 993 062a 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
- 994 062e C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
- 995 0632 4FF48052 		mov	r2, #4096
- 996 0636 1A60     		str	r2, [r3, #0]
+ 993              		.loc 1 460 0
+ 994 062a 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
+ 995 062e C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
+ 996 0632 4FF48052 		mov	r2, #4096
+ 997 0636 1A60     		str	r2, [r3, #0]
  461:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while (SPI_I2S_GetFlagStatus(LIS302DL_SPI, SPI_I2S_FLAG_RXNE) == RESET)
- 997              		.loc 1 461 0
- 998 0638 17E0     		b	.L32
- 999              	.L33:
+ 998              		.loc 1 461 0
+ 999 0638 17E0     		b	.L32
+ 1000              	.L33:
  462:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {
  463:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****     if((LIS302DLTimeout--) == 0) return LIS302DL_TIMEOUT_UserCallback();
- 1000              		.loc 1 463 0
- 1001 063a 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
- 1002 063e C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
- 1003 0642 1B68     		ldr	r3, [r3, #0]
- 1004 0644 002B     		cmp	r3, #0
- 1005 0646 14BF     		ite	ne
- 1006 0648 0022     		movne	r2, #0
- 1007 064a 0122     		moveq	r2, #1
- 1008 064c D2B2     		uxtb	r2, r2
- 1009 064e 03F1FF31 		add	r1, r3, #-1
- 1010 0652 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
- 1011 0656 C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
- 1012 065a 1960     		str	r1, [r3, #0]
- 1013 065c 002A     		cmp	r2, #0
- 1014 065e 04D0     		beq	.L32
- 1015              		.loc 1 463 0 is_stmt 0 discriminator 1
- 1016 0660 FFF7FEFF 		bl	LIS302DL_TIMEOUT_UserCallback
- 1017 0664 0346     		mov	r3, r0
- 1018 0666 DBB2     		uxtb	r3, r3
- 1019 0668 12E0     		b	.L30
- 1020              	.L32:
+ 1001              		.loc 1 463 0
+ 1002 063a 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
+ 1003 063e C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
+ 1004 0642 1B68     		ldr	r3, [r3, #0]
+ 1005 0644 002B     		cmp	r3, #0
+ 1006 0646 14BF     		ite	ne
+ 1007 0648 0022     		movne	r2, #0
+ 1008 064a 0122     		moveq	r2, #1
+ 1009 064c D2B2     		uxtb	r2, r2
+ 1010 064e 03F1FF31 		add	r1, r3, #-1
+ 1011 0652 40F20003 		movw	r3, #:lower16:LIS302DLTimeout
+ 1012 0656 C0F20003 		movt	r3, #:upper16:LIS302DLTimeout
+ 1013 065a 1960     		str	r1, [r3, #0]
+ 1014 065c 002A     		cmp	r2, #0
+ 1015 065e 04D0     		beq	.L32
+ 1016              		.loc 1 463 0 is_stmt 0 discriminator 1
+ 1017 0660 FFF7FEFF 		bl	LIS302DL_TIMEOUT_UserCallback
+ 1018 0664 0346     		mov	r3, r0
+ 1019 0666 DBB2     		uxtb	r3, r3
+ 1020 0668 12E0     		b	.L30
+ 1021              	.L32:
  461:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while (SPI_I2S_GetFlagStatus(LIS302DL_SPI, SPI_I2S_FLAG_RXNE) == RESET)
- 1021              		.loc 1 461 0 is_stmt 1 discriminator 1
- 1022 066a 4FF44050 		mov	r0, #12288
- 1023 066e C4F20100 		movt	r0, 16385
- 1024 0672 4FF00101 		mov	r1, #1
- 1025 0676 FFF7FEFF 		bl	SPI_I2S_GetFlagStatus
- 1026 067a 0346     		mov	r3, r0
- 1027 067c 002B     		cmp	r3, #0
- 1028 067e DCD0     		beq	.L33
+ 1022              		.loc 1 461 0 is_stmt 1 discriminator 1
+ 1023 066a 4FF44050 		mov	r0, #12288
+ 1024 066e C4F20100 		movt	r0, 16385
+ 1025 0672 4FF00101 		mov	r1, #1
+ 1026 0676 FFF7FEFF 		bl	SPI_I2S_GetFlagStatus
+ 1027 067a 0346     		mov	r3, r0
+ 1028 067c 002B     		cmp	r3, #0
+ 1029 067e DCD0     		beq	.L33
  464:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
  465:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   
  466:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Return the Byte read from the SPI bus */
  467:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   return (uint8_t)SPI_I2S_ReceiveData(LIS302DL_SPI);
- 1029              		.loc 1 467 0
- 1030 0680 4FF44050 		mov	r0, #12288
- 1031 0684 C4F20100 		movt	r0, 16385
- 1032 0688 FFF7FEFF 		bl	SPI_I2S_ReceiveData
- 1033 068c 0346     		mov	r3, r0
- 1034 068e DBB2     		uxtb	r3, r3
- 1035              	.L30:
+ 1030              		.loc 1 467 0
+ 1031 0680 4FF44050 		mov	r0, #12288
+ 1032 0684 C4F20100 		movt	r0, 16385
+ 1033 0688 FFF7FEFF 		bl	SPI_I2S_ReceiveData
+ 1034 068c 0346     		mov	r3, r0
+ 1035 068e DBB2     		uxtb	r3, r3
+ 1036              	.L30:
  468:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** }
- 1036              		.loc 1 468 0
- 1037 0690 1846     		mov	r0, r3
- 1038 0692 07F10807 		add	r7, r7, #8
- 1039 0696 BD46     		mov	sp, r7
- 1040 0698 80BD     		pop	{r7, pc}
- 1041              		.cfi_endproc
- 1042              	.LFE121:
- 1044 069a 00BF     		.align	2
- 1045              		.global	LIS302DL_TIMEOUT_UserCallback
- 1046              		.thumb
- 1047              		.thumb_func
- 1049              	LIS302DL_TIMEOUT_UserCallback:
- 1050              	.LFB122:
+ 1037              		.loc 1 468 0
+ 1038 0690 1846     		mov	r0, r3
+ 1039 0692 07F10807 		add	r7, r7, #8
+ 1040 0696 BD46     		mov	sp, r7
+ 1041 0698 80BD     		pop	{r7, pc}
+ 1042              		.cfi_endproc
+ 1043              	.LFE121:
+ 1045 069a 00BF     		.align	2
+ 1046              		.global	LIS302DL_TIMEOUT_UserCallback
+ 1047              		.thumb
+ 1048              		.thumb_func
+ 1050              	LIS302DL_TIMEOUT_UserCallback:
+ 1051              	.LFB122:
  469:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** 
  470:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** #ifdef USE_DEFAULT_TIMEOUT_CALLBACK
  471:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** /**
@@ -1513,52 +1514,52 @@
  475:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   */
  476:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** uint32_t LIS302DL_TIMEOUT_UserCallback(void)
  477:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c **** {
- 1051              		.loc 1 477 0
- 1052              		.cfi_startproc
- 1053              		@ args = 0, pretend = 0, frame = 0
- 1054              		@ frame_needed = 1, uses_anonymous_args = 0
- 1055              		@ link register save eliminated.
- 1056 069c 80B4     		push	{r7}
- 1057              	.LCFI36:
- 1058              		.cfi_def_cfa_offset 4
- 1059              		.cfi_offset 7, -4
- 1060 069e 00AF     		add	r7, sp, #0
- 1061              	.LCFI37:
- 1062              		.cfi_def_cfa_register 7
- 1063              	.L35:
+ 1052              		.loc 1 477 0
+ 1053              		.cfi_startproc
+ 1054              		@ args = 0, pretend = 0, frame = 0
+ 1055              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1056              		@ link register save eliminated.
+ 1057 069c 80B4     		push	{r7}
+ 1058              	.LCFI36:
+ 1059              		.cfi_def_cfa_offset 4
+ 1060              		.cfi_offset 7, -4
+ 1061 069e 00AF     		add	r7, sp, #0
+ 1062              	.LCFI37:
+ 1063              		.cfi_def_cfa_register 7
+ 1064              	.L35:
  478:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   /* Block communication and all processes */
  479:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   while (1)
  480:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   {   
  481:../STM32F4-Discovery/stm32f4_discovery_lis302dl.c ****   }
- 1064              		.loc 1 481 0 discriminator 1
- 1065 06a0 FEE7     		b	.L35
- 1066              		.cfi_endproc
- 1067              	.LFE122:
- 1069              	.Letext0:
- 1070              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 1071              		.file 3 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Devi
- 1072              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
- 1073              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_S
- 1074              		.file 6 "../STM32F4-Discovery/stm32f4_discovery_lis302dl.h"
- 1075              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 1065              		.loc 1 481 0 discriminator 1
+ 1066 06a0 FEE7     		b	.L35
+ 1067              		.cfi_endproc
+ 1068              	.LFE122:
+ 1070              	.Letext0:
+ 1071              		.file 2 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 1072              		.file 3 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4xx.h"
+ 1073              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_gpio.
+ 1074              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_spi.h
+ 1075              		.file 6 "../STM32F4-Discovery/stm32f4_discovery_lis302dl.h"
+ 1076              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4_discovery_lis302dl.c
-  C:\Temp\ccV51aAo.s:23     .data.LIS302DLTimeout:00000000 LIS302DLTimeout
-  C:\Temp\ccV51aAo.s:20     .data.LIS302DLTimeout:00000000 $d
-  C:\Temp\ccV51aAo.s:26     .text:00000000 $t
-  C:\Temp\ccV51aAo.s:31     .text:00000000 LIS302DL_Init
-  C:\Temp\ccV51aAo.s:729    .text:000003ec LIS302DL_LowLevel_Init
-  C:\Temp\ccV51aAo.s:437    .text:00000224 LIS302DL_Write
-  C:\Temp\ccV51aAo.s:99     .text:00000054 LIS302DL_FilterConfig
-  C:\Temp\ccV51aAo.s:515    .text:00000294 LIS302DL_Read
-  C:\Temp\ccV51aAo.s:168    .text:000000b4 LIS302DL_InterruptConfig
-  C:\Temp\ccV51aAo.s:229    .text:00000104 LIS302DL_LowpowerCmd
-  C:\Temp\ccV51aAo.s:283    .text:00000150 LIS302DL_DataRateCmd
-  C:\Temp\ccV51aAo.s:337    .text:0000019c LIS302DL_FullScaleCmd
-  C:\Temp\ccV51aAo.s:391    .text:000001e8 LIS302DL_RebootCmd
-  C:\Temp\ccV51aAo.s:929    .text:000005b8 LIS302DL_SendByte
-  C:\Temp\ccV51aAo.s:601    .text:00000314 LIS302DL_ReadACC
-  C:\Temp\ccV51aAo.s:1049   .text:0000069c LIS302DL_TIMEOUT_UserCallback
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:24     .data.LIS302DLTimeout:00000000 LIS302DLTimeout
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:21     .data.LIS302DLTimeout:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:27     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:32     .text:00000000 LIS302DL_Init
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:730    .text:000003ec LIS302DL_LowLevel_Init
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:438    .text:00000224 LIS302DL_Write
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:100    .text:00000054 LIS302DL_FilterConfig
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:516    .text:00000294 LIS302DL_Read
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:169    .text:000000b4 LIS302DL_InterruptConfig
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:230    .text:00000104 LIS302DL_LowpowerCmd
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:284    .text:00000150 LIS302DL_DataRateCmd
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:338    .text:0000019c LIS302DL_FullScaleCmd
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:392    .text:000001e8 LIS302DL_RebootCmd
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:930    .text:000005b8 LIS302DL_SendByte
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:602    .text:00000314 LIS302DL_ReadACC
+C:\Users\Alex\AppData\Local\Temp\ccVsD3X2.s:1050   .text:0000069c LIS302DL_TIMEOUT_UserCallback
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

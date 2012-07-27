@@ -9,20 +9,21 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"CMessageTask.cpp"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZNK5CTask7IsValidEv,"axG",%progbits,_ZNK5CTask7IsValidEv,comdat
-  19              		.align	2
-  20              		.weak	_ZNK5CTask7IsValidEv
-  21              		.thumb
-  22              		.thumb_func
-  24              	_ZNK5CTask7IsValidEv:
-  25              	.LFB132:
-  26              		.file 1 "../FreeRTOS_EC/Source/CTask.h"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CMessageTask.cpp"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._ZNK5CTask7IsValidEv,"axG",%progbits,_ZNK5CTask7IsValidEv,comdat
+  20              		.align	2
+  21              		.weak	_ZNK5CTask7IsValidEv
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZNK5CTask7IsValidEv:
+  26              	.LFB132:
+  27              		.file 1 "../FreeRTOS_EC/Source/CTask.h"
    1:../FreeRTOS_EC/Source/CTask.h **** /**
    2:../FreeRTOS_EC/Source/CTask.h ****  * @file CTask.h
    3:../FreeRTOS_EC/Source/CTask.h ****  * @class CTask
@@ -342,98 +343,98 @@
  317:../FreeRTOS_EC/Source/CTask.h **** 
  318:../FreeRTOS_EC/Source/CTask.h **** inline
  319:../FreeRTOS_EC/Source/CTask.h **** bool CTask::IsValid() const{
-  27              		.loc 1 319 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 8
-  30              		@ frame_needed = 1, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-  32 0000 80B4     		push	{r7}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 4
-  35              		.cfi_offset 7, -4
-  36 0002 83B0     		sub	sp, sp, #12
-  37              	.LCFI1:
-  38              		.cfi_def_cfa_offset 16
-  39 0004 00AF     		add	r7, sp, #0
-  40              	.LCFI2:
-  41              		.cfi_def_cfa_register 7
-  42 0006 7860     		str	r0, [r7, #4]
+  28              		.loc 1 319 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
  320:../FreeRTOS_EC/Source/CTask.h **** 	return m_handleTask != NULL;
-  43              		.loc 1 320 0
-  44 0008 7B68     		ldr	r3, [r7, #4]
-  45 000a 5B68     		ldr	r3, [r3, #4]
-  46 000c 002B     		cmp	r3, #0
-  47 000e 0CBF     		ite	eq
-  48 0010 0023     		moveq	r3, #0
-  49 0012 0123     		movne	r3, #1
-  50 0014 DBB2     		uxtb	r3, r3
+  44              		.loc 1 320 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 5B68     		ldr	r3, [r3, #4]
+  47 000c 002B     		cmp	r3, #0
+  48 000e 0CBF     		ite	eq
+  49 0010 0023     		moveq	r3, #0
+  50 0012 0123     		movne	r3, #1
+  51 0014 DBB2     		uxtb	r3, r3
  321:../FreeRTOS_EC/Source/CTask.h **** }
-  51              		.loc 1 321 0
-  52 0016 1846     		mov	r0, r3
-  53 0018 07F10C07 		add	r7, r7, #12
-  54 001c BD46     		mov	sp, r7
-  55 001e 80BC     		pop	{r7}
-  56 0020 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE132:
-  60 0022 00BF     		.section	.text._ZN5CTask6DetachEv,"axG",%progbits,_ZN5CTask6DetachEv,comdat
-  61              		.align	2
-  62              		.weak	_ZN5CTask6DetachEv
-  63              		.thumb
-  64              		.thumb_func
-  66              	_ZN5CTask6DetachEv:
-  67              	.LFB133:
+  52              		.loc 1 321 0
+  53 0016 1846     		mov	r0, r3
+  54 0018 07F10C07 		add	r7, r7, #12
+  55 001c BD46     		mov	sp, r7
+  56 001e 80BC     		pop	{r7}
+  57 0020 7047     		bx	lr
+  58              		.cfi_endproc
+  59              	.LFE132:
+  61 0022 00BF     		.section	.text._ZN5CTask6DetachEv,"axG",%progbits,_ZN5CTask6DetachEv,comdat
+  62              		.align	2
+  63              		.weak	_ZN5CTask6DetachEv
+  64              		.thumb
+  65              		.thumb_func
+  67              	_ZN5CTask6DetachEv:
+  68              	.LFB133:
  322:../FreeRTOS_EC/Source/CTask.h **** 
  323:../FreeRTOS_EC/Source/CTask.h **** inline
  324:../FreeRTOS_EC/Source/CTask.h **** xGenericHandle CTask::Detach() {
-  68              		.loc 1 324 0
-  69              		.cfi_startproc
-  70              		@ args = 0, pretend = 0, frame = 16
-  71              		@ frame_needed = 1, uses_anonymous_args = 0
-  72              		@ link register save eliminated.
-  73 0000 80B4     		push	{r7}
-  74              	.LCFI3:
-  75              		.cfi_def_cfa_offset 4
-  76              		.cfi_offset 7, -4
-  77 0002 85B0     		sub	sp, sp, #20
-  78              	.LCFI4:
-  79              		.cfi_def_cfa_offset 24
-  80 0004 00AF     		add	r7, sp, #0
-  81              	.LCFI5:
-  82              		.cfi_def_cfa_register 7
-  83 0006 7860     		str	r0, [r7, #4]
-  84              	.LBB2:
+  69              		.loc 1 324 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 16
+  72              		@ frame_needed = 1, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 0000 80B4     		push	{r7}
+  75              	.LCFI3:
+  76              		.cfi_def_cfa_offset 4
+  77              		.cfi_offset 7, -4
+  78 0002 85B0     		sub	sp, sp, #20
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_offset 24
+  81 0004 00AF     		add	r7, sp, #0
+  82              	.LCFI5:
+  83              		.cfi_def_cfa_register 7
+  84 0006 7860     		str	r0, [r7, #4]
+  85              	.LBB2:
  325:../FreeRTOS_EC/Source/CTask.h **** 	xTaskHandle res = m_handleTask;
-  85              		.loc 1 325 0
-  86 0008 7B68     		ldr	r3, [r7, #4]
-  87 000a 5B68     		ldr	r3, [r3, #4]
-  88 000c FB60     		str	r3, [r7, #12]
+  86              		.loc 1 325 0
+  87 0008 7B68     		ldr	r3, [r7, #4]
+  88 000a 5B68     		ldr	r3, [r3, #4]
+  89 000c FB60     		str	r3, [r7, #12]
  326:../FreeRTOS_EC/Source/CTask.h **** 	m_handleTask = NULL;
-  89              		.loc 1 326 0
-  90 000e 7B68     		ldr	r3, [r7, #4]
-  91 0010 4FF00002 		mov	r2, #0
-  92 0014 5A60     		str	r2, [r3, #4]
+  90              		.loc 1 326 0
+  91 000e 7B68     		ldr	r3, [r7, #4]
+  92 0010 4FF00002 		mov	r2, #0
+  93 0014 5A60     		str	r2, [r3, #4]
  327:../FreeRTOS_EC/Source/CTask.h **** 	return res;
-  93              		.loc 1 327 0
-  94 0016 FB68     		ldr	r3, [r7, #12]
-  95              	.LBE2:
+  94              		.loc 1 327 0
+  95 0016 FB68     		ldr	r3, [r7, #12]
+  96              	.LBE2:
  328:../FreeRTOS_EC/Source/CTask.h **** }
-  96              		.loc 1 328 0
-  97 0018 1846     		mov	r0, r3
-  98 001a 07F11407 		add	r7, r7, #20
-  99 001e BD46     		mov	sp, r7
- 100 0020 80BC     		pop	{r7}
- 101 0022 7047     		bx	lr
- 102              		.cfi_endproc
- 103              	.LFE133:
- 105              		.section	.text._ZN12AManagedTask12HardwareInitEv,"axG",%progbits,_ZN12AManagedTask12HardwareInitEv
- 106              		.align	2
- 107              		.weak	_ZN12AManagedTask12HardwareInitEv
- 108              		.thumb
- 109              		.thumb_func
- 111              	_ZN12AManagedTask12HardwareInitEv:
- 112              	.LFB134:
- 113              		.file 2 "../FreeRTOS_EC/Source/AManagedTask.h"
+  97              		.loc 1 328 0
+  98 0018 1846     		mov	r0, r3
+  99 001a 07F11407 		add	r7, r7, #20
+ 100 001e BD46     		mov	sp, r7
+ 101 0020 80BC     		pop	{r7}
+ 102 0022 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE133:
+ 106              		.section	.text._ZN12AManagedTask12HardwareInitEv,"axG",%progbits,_ZN12AManagedTask12HardwareInitEv
+ 107              		.align	2
+ 108              		.weak	_ZN12AManagedTask12HardwareInitEv
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	_ZN12AManagedTask12HardwareInitEv:
+ 113              	.LFB134:
+ 114              		.file 2 "../FreeRTOS_EC/Source/AManagedTask.h"
    1:../FreeRTOS_EC/Source/AManagedTask.h **** /**
    2:../FreeRTOS_EC/Source/AManagedTask.h ****  * @file AManagedTask.h
    3:../FreeRTOS_EC/Source/AManagedTask.h ****  * @class AManagedTask
@@ -515,39 +516,39 @@
   79:../FreeRTOS_EC/Source/AManagedTask.h **** 	 * @return true if success, false otherwise.
   80:../FreeRTOS_EC/Source/AManagedTask.h **** 	 */
   81:../FreeRTOS_EC/Source/AManagedTask.h **** 	virtual bool HardwareInit() { return true; }
- 114              		.loc 2 81 0
- 115              		.cfi_startproc
- 116              		@ args = 0, pretend = 0, frame = 8
- 117              		@ frame_needed = 1, uses_anonymous_args = 0
- 118              		@ link register save eliminated.
- 119 0000 80B4     		push	{r7}
- 120              	.LCFI6:
- 121              		.cfi_def_cfa_offset 4
- 122              		.cfi_offset 7, -4
- 123 0002 83B0     		sub	sp, sp, #12
- 124              	.LCFI7:
- 125              		.cfi_def_cfa_offset 16
- 126 0004 00AF     		add	r7, sp, #0
- 127              	.LCFI8:
- 128              		.cfi_def_cfa_register 7
- 129 0006 7860     		str	r0, [r7, #4]
- 130              		.loc 2 81 0
- 131 0008 4FF00103 		mov	r3, #1
- 132 000c 1846     		mov	r0, r3
- 133 000e 07F10C07 		add	r7, r7, #12
- 134 0012 BD46     		mov	sp, r7
- 135 0014 80BC     		pop	{r7}
- 136 0016 7047     		bx	lr
- 137              		.cfi_endproc
- 138              	.LFE134:
- 140              		.section	.text._ZN6CQueue4SendEPKvm,"axG",%progbits,_ZN6CQueue4SendEPKvm,comdat
- 141              		.align	2
- 142              		.weak	_ZN6CQueue4SendEPKvm
- 143              		.thumb
- 144              		.thumb_func
- 146              	_ZN6CQueue4SendEPKvm:
- 147              	.LFB137:
- 148              		.file 3 "../FreeRTOS_EC/Source/CQueue.h"
+ 115              		.loc 2 81 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 8
+ 118              		@ frame_needed = 1, uses_anonymous_args = 0
+ 119              		@ link register save eliminated.
+ 120 0000 80B4     		push	{r7}
+ 121              	.LCFI6:
+ 122              		.cfi_def_cfa_offset 4
+ 123              		.cfi_offset 7, -4
+ 124 0002 83B0     		sub	sp, sp, #12
+ 125              	.LCFI7:
+ 126              		.cfi_def_cfa_offset 16
+ 127 0004 00AF     		add	r7, sp, #0
+ 128              	.LCFI8:
+ 129              		.cfi_def_cfa_register 7
+ 130 0006 7860     		str	r0, [r7, #4]
+ 131              		.loc 2 81 0
+ 132 0008 4FF00103 		mov	r3, #1
+ 133 000c 1846     		mov	r0, r3
+ 134 000e 07F10C07 		add	r7, r7, #12
+ 135 0012 BD46     		mov	sp, r7
+ 136 0014 80BC     		pop	{r7}
+ 137 0016 7047     		bx	lr
+ 138              		.cfi_endproc
+ 139              	.LFE134:
+ 141              		.section	.text._ZN6CQueue4SendEPKvm,"axG",%progbits,_ZN6CQueue4SendEPKvm,comdat
+ 142              		.align	2
+ 143              		.weak	_ZN6CQueue4SendEPKvm
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	_ZN6CQueue4SendEPKvm:
+ 148              	.LFB137:
+ 149              		.file 3 "../FreeRTOS_EC/Source/CQueue.h"
    1:../FreeRTOS_EC/Source/CQueue.h **** /**
    2:../FreeRTOS_EC/Source/CQueue.h ****  * @file CQueue.h
    3:../FreeRTOS_EC/Source/CQueue.h ****  * @class CQueue
@@ -699,108 +700,108 @@
  149:../FreeRTOS_EC/Source/CQueue.h **** 
  150:../FreeRTOS_EC/Source/CQueue.h **** inline
  151:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::Send(const void * pvItemToQueue, portTickType xTicksToWait) {
- 149              		.loc 3 151 0
- 150              		.cfi_startproc
- 151              		@ args = 0, pretend = 0, frame = 16
- 152              		@ frame_needed = 1, uses_anonymous_args = 0
- 153 0000 80B5     		push	{r7, lr}
- 154              	.LCFI9:
- 155              		.cfi_def_cfa_offset 8
- 156              		.cfi_offset 14, -4
- 157              		.cfi_offset 7, -8
- 158 0002 84B0     		sub	sp, sp, #16
- 159              	.LCFI10:
- 160              		.cfi_def_cfa_offset 24
- 161 0004 00AF     		add	r7, sp, #0
- 162              	.LCFI11:
- 163              		.cfi_def_cfa_register 7
- 164 0006 F860     		str	r0, [r7, #12]
- 165 0008 B960     		str	r1, [r7, #8]
- 166 000a 7A60     		str	r2, [r7, #4]
+ 150              		.loc 3 151 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 16
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154 0000 80B5     		push	{r7, lr}
+ 155              	.LCFI9:
+ 156              		.cfi_def_cfa_offset 8
+ 157              		.cfi_offset 14, -4
+ 158              		.cfi_offset 7, -8
+ 159 0002 84B0     		sub	sp, sp, #16
+ 160              	.LCFI10:
+ 161              		.cfi_def_cfa_offset 24
+ 162 0004 00AF     		add	r7, sp, #0
+ 163              	.LCFI11:
+ 164              		.cfi_def_cfa_register 7
+ 165 0006 F860     		str	r0, [r7, #12]
+ 166 0008 B960     		str	r1, [r7, #8]
+ 167 000a 7A60     		str	r2, [r7, #4]
  152:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSend(m_handleQueue, pvItemToQueue, xTicksToWait);
- 167              		.loc 3 152 0
- 168 000c FB68     		ldr	r3, [r7, #12]
- 169 000e 5B68     		ldr	r3, [r3, #4]
- 170 0010 1846     		mov	r0, r3
- 171 0012 B968     		ldr	r1, [r7, #8]
- 172 0014 7A68     		ldr	r2, [r7, #4]
- 173 0016 4FF00003 		mov	r3, #0
- 174 001a FFF7FEFF 		bl	xQueueGenericSend
- 175 001e 0346     		mov	r3, r0
+ 168              		.loc 3 152 0
+ 169 000c FB68     		ldr	r3, [r7, #12]
+ 170 000e 5B68     		ldr	r3, [r3, #4]
+ 171 0010 1846     		mov	r0, r3
+ 172 0012 B968     		ldr	r1, [r7, #8]
+ 173 0014 7A68     		ldr	r2, [r7, #4]
+ 174 0016 4FF00003 		mov	r3, #0
+ 175 001a FFF7FEFF 		bl	xQueueGenericSend
+ 176 001e 0346     		mov	r3, r0
  153:../FreeRTOS_EC/Source/CQueue.h **** }
- 176              		.loc 3 153 0
- 177 0020 1846     		mov	r0, r3
- 178 0022 07F11007 		add	r7, r7, #16
- 179 0026 BD46     		mov	sp, r7
- 180 0028 80BD     		pop	{r7, pc}
- 181              		.cfi_endproc
- 182              	.LFE137:
- 184 002a 00BF     		.section	.text._ZN6CQueue11SendFromISREPKvPl,"axG",%progbits,_ZN6CQueue11SendFromISREPKvPl,comdat
- 185              		.align	2
- 186              		.weak	_ZN6CQueue11SendFromISREPKvPl
- 187              		.thumb
- 188              		.thumb_func
- 190              	_ZN6CQueue11SendFromISREPKvPl:
- 191              	.LFB138:
+ 177              		.loc 3 153 0
+ 178 0020 1846     		mov	r0, r3
+ 179 0022 07F11007 		add	r7, r7, #16
+ 180 0026 BD46     		mov	sp, r7
+ 181 0028 80BD     		pop	{r7, pc}
+ 182              		.cfi_endproc
+ 183              	.LFE137:
+ 185 002a 00BF     		.section	.text._ZN6CQueue11SendFromISREPKvPl,"axG",%progbits,_ZN6CQueue11SendFromISREPKvPl,comdat
+ 186              		.align	2
+ 187              		.weak	_ZN6CQueue11SendFromISREPKvPl
+ 188              		.thumb
+ 189              		.thumb_func
+ 191              	_ZN6CQueue11SendFromISREPKvPl:
+ 192              	.LFB138:
  154:../FreeRTOS_EC/Source/CQueue.h **** 
  155:../FreeRTOS_EC/Source/CQueue.h **** inline
  156:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriorityTaskWo
- 192              		.loc 3 156 0
- 193              		.cfi_startproc
- 194              		@ args = 0, pretend = 0, frame = 16
- 195              		@ frame_needed = 1, uses_anonymous_args = 0
- 196 0000 80B5     		push	{r7, lr}
- 197              	.LCFI12:
- 198              		.cfi_def_cfa_offset 8
- 199              		.cfi_offset 14, -4
- 200              		.cfi_offset 7, -8
- 201 0002 84B0     		sub	sp, sp, #16
- 202              	.LCFI13:
- 203              		.cfi_def_cfa_offset 24
- 204 0004 00AF     		add	r7, sp, #0
- 205              	.LCFI14:
- 206              		.cfi_def_cfa_register 7
- 207 0006 F860     		str	r0, [r7, #12]
- 208 0008 B960     		str	r1, [r7, #8]
- 209 000a 7A60     		str	r2, [r7, #4]
+ 193              		.loc 3 156 0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 16
+ 196              		@ frame_needed = 1, uses_anonymous_args = 0
+ 197 0000 80B5     		push	{r7, lr}
+ 198              	.LCFI12:
+ 199              		.cfi_def_cfa_offset 8
+ 200              		.cfi_offset 14, -4
+ 201              		.cfi_offset 7, -8
+ 202 0002 84B0     		sub	sp, sp, #16
+ 203              	.LCFI13:
+ 204              		.cfi_def_cfa_offset 24
+ 205 0004 00AF     		add	r7, sp, #0
+ 206              	.LCFI14:
+ 207              		.cfi_def_cfa_register 7
+ 208 0006 F860     		str	r0, [r7, #12]
+ 209 0008 B960     		str	r1, [r7, #8]
+ 210 000a 7A60     		str	r2, [r7, #4]
  157:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendFromISR(m_handleQueue, pvItemToQueue, pxHigherPriorityTaskWoken);
- 210              		.loc 3 157 0
- 211 000c FB68     		ldr	r3, [r7, #12]
- 212 000e 5B68     		ldr	r3, [r3, #4]
- 213 0010 1846     		mov	r0, r3
- 214 0012 B968     		ldr	r1, [r7, #8]
- 215 0014 7A68     		ldr	r2, [r7, #4]
- 216 0016 4FF00003 		mov	r3, #0
- 217 001a FFF7FEFF 		bl	xQueueGenericSendFromISR
- 218 001e 0346     		mov	r3, r0
+ 211              		.loc 3 157 0
+ 212 000c FB68     		ldr	r3, [r7, #12]
+ 213 000e 5B68     		ldr	r3, [r3, #4]
+ 214 0010 1846     		mov	r0, r3
+ 215 0012 B968     		ldr	r1, [r7, #8]
+ 216 0014 7A68     		ldr	r2, [r7, #4]
+ 217 0016 4FF00003 		mov	r3, #0
+ 218 001a FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 219 001e 0346     		mov	r3, r0
  158:../FreeRTOS_EC/Source/CQueue.h **** }
- 219              		.loc 3 158 0
- 220 0020 1846     		mov	r0, r3
- 221 0022 07F11007 		add	r7, r7, #16
- 222 0026 BD46     		mov	sp, r7
- 223 0028 80BD     		pop	{r7, pc}
- 224              		.cfi_endproc
- 225              	.LFE138:
- 227 002a 00BF     		.section	.rodata
- 228              		.align	2
- 229              	.LC0:
- 230 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CQueue.h\000"
- 230      72656552 
- 230      544F535F 
- 230      45432F53 
- 230      6F757263 
- 231 001f 00       		.align	2
- 232              	.LC1:
- 233 0020 49735661 		.ascii	"IsValid()\000"
- 233      6C696428 
- 233      2900
- 234 002a 0000     		.section	.text._ZN6CQueue11SendToFrontEPKvm,"axG",%progbits,_ZN6CQueue11SendToFrontEPKvm,comdat
- 235              		.align	2
- 236              		.weak	_ZN6CQueue11SendToFrontEPKvm
- 237              		.thumb
- 238              		.thumb_func
- 240              	_ZN6CQueue11SendToFrontEPKvm:
- 241              	.LFB141:
+ 220              		.loc 3 158 0
+ 221 0020 1846     		mov	r0, r3
+ 222 0022 07F11007 		add	r7, r7, #16
+ 223 0026 BD46     		mov	sp, r7
+ 224 0028 80BD     		pop	{r7, pc}
+ 225              		.cfi_endproc
+ 226              	.LFE138:
+ 228 002a 00BF     		.section	.rodata
+ 229              		.align	2
+ 230              	.LC0:
+ 231 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CQueue.h\000"
+ 231      72656552 
+ 231      544F535F 
+ 231      45432F53 
+ 231      6F757263 
+ 232 001f 00       		.align	2
+ 233              	.LC1:
+ 234 0020 49735661 		.ascii	"IsValid()\000"
+ 234      6C696428 
+ 234      2900
+ 235 002a 0000     		.section	.text._ZN6CQueue11SendToFrontEPKvm,"axG",%progbits,_ZN6CQueue11SendToFrontEPKvm,comdat
+ 236              		.align	2
+ 237              		.weak	_ZN6CQueue11SendToFrontEPKvm
+ 238              		.thumb
+ 239              		.thumb_func
+ 241              	_ZN6CQueue11SendToFrontEPKvm:
+ 242              	.LFB141:
  159:../FreeRTOS_EC/Source/CQueue.h **** 
  160:../FreeRTOS_EC/Source/CQueue.h **** inline
  161:../FreeRTOS_EC/Source/CQueue.h **** unsigned portBASE_TYPE CQueue::MessagesWaiting() {
@@ -818,141 +819,141 @@
  173:../FreeRTOS_EC/Source/CQueue.h **** 
  174:../FreeRTOS_EC/Source/CQueue.h **** inline
  175:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendToFront(const void * pvItemToQueue, portTickType xTicksToWait) {
- 242              		.loc 3 175 0
- 243              		.cfi_startproc
- 244              		@ args = 0, pretend = 0, frame = 16
- 245              		@ frame_needed = 1, uses_anonymous_args = 0
- 246 0000 80B5     		push	{r7, lr}
- 247              	.LCFI15:
- 248              		.cfi_def_cfa_offset 8
- 249              		.cfi_offset 14, -4
- 250              		.cfi_offset 7, -8
- 251 0002 84B0     		sub	sp, sp, #16
- 252              	.LCFI16:
- 253              		.cfi_def_cfa_offset 24
- 254 0004 00AF     		add	r7, sp, #0
- 255              	.LCFI17:
- 256              		.cfi_def_cfa_register 7
- 257 0006 F860     		str	r0, [r7, #12]
- 258 0008 B960     		str	r1, [r7, #8]
- 259 000a 7A60     		str	r2, [r7, #4]
- 260              	.LBB3:
+ 243              		.loc 3 175 0
+ 244              		.cfi_startproc
+ 245              		@ args = 0, pretend = 0, frame = 16
+ 246              		@ frame_needed = 1, uses_anonymous_args = 0
+ 247 0000 80B5     		push	{r7, lr}
+ 248              	.LCFI15:
+ 249              		.cfi_def_cfa_offset 8
+ 250              		.cfi_offset 14, -4
+ 251              		.cfi_offset 7, -8
+ 252 0002 84B0     		sub	sp, sp, #16
+ 253              	.LCFI16:
+ 254              		.cfi_def_cfa_offset 24
+ 255 0004 00AF     		add	r7, sp, #0
+ 256              	.LCFI17:
+ 257              		.cfi_def_cfa_register 7
+ 258 0006 F860     		str	r0, [r7, #12]
+ 259 0008 B960     		str	r1, [r7, #8]
+ 260 000a 7A60     		str	r2, [r7, #4]
+ 261              	.LBB3:
  176:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
- 261              		.loc 3 176 0
- 262 000c FB68     		ldr	r3, [r7, #12]
- 263 000e 1B68     		ldr	r3, [r3, #0]
- 264 0010 1B68     		ldr	r3, [r3, #0]
- 265 0012 F868     		ldr	r0, [r7, #12]
- 266 0014 9847     		blx	r3
- 267 0016 0346     		mov	r3, r0
- 268 0018 002B     		cmp	r3, #0
- 269 001a 0FD1     		bne	.L7
- 270              		.loc 3 176 0 is_stmt 0 discriminator 1
- 271 001c 40F20000 		movw	r0, #:lower16:.LC0
- 272 0020 C0F20000 		movt	r0, #:upper16:.LC0
- 273 0024 4FF0B001 		mov	r1, #176
- 274 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
- 275 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
- 276 0030 40F20003 		movw	r3, #:lower16:.LC1
- 277 0034 C0F20003 		movt	r3, #:upper16:.LC1
- 278 0038 FFF7FEFF 		bl	__assert_func
- 279              	.L7:
+ 262              		.loc 3 176 0
+ 263 000c FB68     		ldr	r3, [r7, #12]
+ 264 000e 1B68     		ldr	r3, [r3, #0]
+ 265 0010 1B68     		ldr	r3, [r3, #0]
+ 266 0012 F868     		ldr	r0, [r7, #12]
+ 267 0014 9847     		blx	r3
+ 268 0016 0346     		mov	r3, r0
+ 269 0018 002B     		cmp	r3, #0
+ 270 001a 0FD1     		bne	.L7
+ 271              		.loc 3 176 0 is_stmt 0 discriminator 1
+ 272 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 273 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 274 0024 4FF0B001 		mov	r1, #176
+ 275 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
+ 276 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
+ 277 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 278 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 279 0038 FFF7FEFF 		bl	__assert_func
+ 280              	.L7:
  177:../FreeRTOS_EC/Source/CQueue.h **** 
  178:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendToFront(m_handleQueue, pvItemToQueue, xTicksToWait);
- 280              		.loc 3 178 0 is_stmt 1
- 281 003c FB68     		ldr	r3, [r7, #12]
- 282 003e 5B68     		ldr	r3, [r3, #4]
- 283 0040 1846     		mov	r0, r3
- 284 0042 B968     		ldr	r1, [r7, #8]
- 285 0044 7A68     		ldr	r2, [r7, #4]
- 286 0046 4FF00103 		mov	r3, #1
- 287 004a FFF7FEFF 		bl	xQueueGenericSend
- 288 004e 0346     		mov	r3, r0
- 289              	.LBE3:
+ 281              		.loc 3 178 0 is_stmt 1
+ 282 003c FB68     		ldr	r3, [r7, #12]
+ 283 003e 5B68     		ldr	r3, [r3, #4]
+ 284 0040 1846     		mov	r0, r3
+ 285 0042 B968     		ldr	r1, [r7, #8]
+ 286 0044 7A68     		ldr	r2, [r7, #4]
+ 287 0046 4FF00103 		mov	r3, #1
+ 288 004a FFF7FEFF 		bl	xQueueGenericSend
+ 289 004e 0346     		mov	r3, r0
+ 290              	.LBE3:
  179:../FreeRTOS_EC/Source/CQueue.h **** }
- 290              		.loc 3 179 0
- 291 0050 1846     		mov	r0, r3
- 292 0052 07F11007 		add	r7, r7, #16
- 293 0056 BD46     		mov	sp, r7
- 294 0058 80BD     		pop	{r7, pc}
- 295              		.cfi_endproc
- 296              	.LFE141:
- 298 005a 00BF     		.section	.text._ZN6CQueue7ReceiveEPvm,"axG",%progbits,_ZN6CQueue7ReceiveEPvm,comdat
- 299              		.align	2
- 300              		.weak	_ZN6CQueue7ReceiveEPvm
- 301              		.thumb
- 302              		.thumb_func
- 304              	_ZN6CQueue7ReceiveEPvm:
- 305              	.LFB142:
+ 291              		.loc 3 179 0
+ 292 0050 1846     		mov	r0, r3
+ 293 0052 07F11007 		add	r7, r7, #16
+ 294 0056 BD46     		mov	sp, r7
+ 295 0058 80BD     		pop	{r7, pc}
+ 296              		.cfi_endproc
+ 297              	.LFE141:
+ 299 005a 00BF     		.section	.text._ZN6CQueue7ReceiveEPvm,"axG",%progbits,_ZN6CQueue7ReceiveEPvm,comdat
+ 300              		.align	2
+ 301              		.weak	_ZN6CQueue7ReceiveEPvm
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	_ZN6CQueue7ReceiveEPvm:
+ 306              	.LFB142:
  180:../FreeRTOS_EC/Source/CQueue.h **** 
  181:../FreeRTOS_EC/Source/CQueue.h **** inline
  182:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::Receive(void *pvBuffer, portTickType xTicksToWait) {
- 306              		.loc 3 182 0
- 307              		.cfi_startproc
- 308              		@ args = 0, pretend = 0, frame = 16
- 309              		@ frame_needed = 1, uses_anonymous_args = 0
- 310 0000 80B5     		push	{r7, lr}
- 311              	.LCFI18:
- 312              		.cfi_def_cfa_offset 8
- 313              		.cfi_offset 14, -4
- 314              		.cfi_offset 7, -8
- 315 0002 84B0     		sub	sp, sp, #16
- 316              	.LCFI19:
- 317              		.cfi_def_cfa_offset 24
- 318 0004 00AF     		add	r7, sp, #0
- 319              	.LCFI20:
- 320              		.cfi_def_cfa_register 7
- 321 0006 F860     		str	r0, [r7, #12]
- 322 0008 B960     		str	r1, [r7, #8]
- 323 000a 7A60     		str	r2, [r7, #4]
- 324              	.LBB4:
+ 307              		.loc 3 182 0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 16
+ 310              		@ frame_needed = 1, uses_anonymous_args = 0
+ 311 0000 80B5     		push	{r7, lr}
+ 312              	.LCFI18:
+ 313              		.cfi_def_cfa_offset 8
+ 314              		.cfi_offset 14, -4
+ 315              		.cfi_offset 7, -8
+ 316 0002 84B0     		sub	sp, sp, #16
+ 317              	.LCFI19:
+ 318              		.cfi_def_cfa_offset 24
+ 319 0004 00AF     		add	r7, sp, #0
+ 320              	.LCFI20:
+ 321              		.cfi_def_cfa_register 7
+ 322 0006 F860     		str	r0, [r7, #12]
+ 323 0008 B960     		str	r1, [r7, #8]
+ 324 000a 7A60     		str	r2, [r7, #4]
+ 325              	.LBB4:
  183:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
- 325              		.loc 3 183 0
- 326 000c FB68     		ldr	r3, [r7, #12]
- 327 000e 1B68     		ldr	r3, [r3, #0]
- 328 0010 1B68     		ldr	r3, [r3, #0]
- 329 0012 F868     		ldr	r0, [r7, #12]
- 330 0014 9847     		blx	r3
- 331 0016 0346     		mov	r3, r0
- 332 0018 002B     		cmp	r3, #0
- 333 001a 0FD1     		bne	.L9
- 334              		.loc 3 183 0 is_stmt 0 discriminator 1
- 335 001c 40F20000 		movw	r0, #:lower16:.LC0
- 336 0020 C0F20000 		movt	r0, #:upper16:.LC0
- 337 0024 4FF0B701 		mov	r1, #183
- 338 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
- 339 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
- 340 0030 40F20003 		movw	r3, #:lower16:.LC1
- 341 0034 C0F20003 		movt	r3, #:upper16:.LC1
- 342 0038 FFF7FEFF 		bl	__assert_func
- 343              	.L9:
+ 326              		.loc 3 183 0
+ 327 000c FB68     		ldr	r3, [r7, #12]
+ 328 000e 1B68     		ldr	r3, [r3, #0]
+ 329 0010 1B68     		ldr	r3, [r3, #0]
+ 330 0012 F868     		ldr	r0, [r7, #12]
+ 331 0014 9847     		blx	r3
+ 332 0016 0346     		mov	r3, r0
+ 333 0018 002B     		cmp	r3, #0
+ 334 001a 0FD1     		bne	.L9
+ 335              		.loc 3 183 0 is_stmt 0 discriminator 1
+ 336 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 337 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 338 0024 4FF0B701 		mov	r1, #183
+ 339 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
+ 340 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
+ 341 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 342 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 343 0038 FFF7FEFF 		bl	__assert_func
+ 344              	.L9:
  184:../FreeRTOS_EC/Source/CQueue.h **** 
  185:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueReceive(m_handleQueue, pvBuffer, xTicksToWait);
- 344              		.loc 3 185 0 is_stmt 1
- 345 003c FB68     		ldr	r3, [r7, #12]
- 346 003e 5B68     		ldr	r3, [r3, #4]
- 347 0040 1846     		mov	r0, r3
- 348 0042 B968     		ldr	r1, [r7, #8]
- 349 0044 7A68     		ldr	r2, [r7, #4]
- 350 0046 4FF00003 		mov	r3, #0
- 351 004a FFF7FEFF 		bl	xQueueGenericReceive
- 352 004e 0346     		mov	r3, r0
- 353              	.LBE4:
+ 345              		.loc 3 185 0 is_stmt 1
+ 346 003c FB68     		ldr	r3, [r7, #12]
+ 347 003e 5B68     		ldr	r3, [r3, #4]
+ 348 0040 1846     		mov	r0, r3
+ 349 0042 B968     		ldr	r1, [r7, #8]
+ 350 0044 7A68     		ldr	r2, [r7, #4]
+ 351 0046 4FF00003 		mov	r3, #0
+ 352 004a FFF7FEFF 		bl	xQueueGenericReceive
+ 353 004e 0346     		mov	r3, r0
+ 354              	.LBE4:
  186:../FreeRTOS_EC/Source/CQueue.h **** }
- 354              		.loc 3 186 0
- 355 0050 1846     		mov	r0, r3
- 356 0052 07F11007 		add	r7, r7, #16
- 357 0056 BD46     		mov	sp, r7
- 358 0058 80BD     		pop	{r7, pc}
- 359              		.cfi_endproc
- 360              	.LFE142:
- 362 005a 00BF     		.section	.text._ZN6CQueue18SendToFrontFromISREPKvPl,"axG",%progbits,_ZN6CQueue18SendToFrontFromISR
- 363              		.align	2
- 364              		.weak	_ZN6CQueue18SendToFrontFromISREPKvPl
- 365              		.thumb
- 366              		.thumb_func
- 368              	_ZN6CQueue18SendToFrontFromISREPKvPl:
- 369              	.LFB145:
+ 355              		.loc 3 186 0
+ 356 0050 1846     		mov	r0, r3
+ 357 0052 07F11007 		add	r7, r7, #16
+ 358 0056 BD46     		mov	sp, r7
+ 359 0058 80BD     		pop	{r7, pc}
+ 360              		.cfi_endproc
+ 361              	.LFE142:
+ 363 005a 00BF     		.section	.text._ZN6CQueue18SendToFrontFromISREPKvPl,"axG",%progbits,_ZN6CQueue18SendToFrontFromISR
+ 364              		.align	2
+ 365              		.weak	_ZN6CQueue18SendToFrontFromISREPKvPl
+ 366              		.thumb
+ 367              		.thumb_func
+ 369              	_ZN6CQueue18SendToFrontFromISREPKvPl:
+ 370              	.LFB145:
  187:../FreeRTOS_EC/Source/CQueue.h **** 
  188:../FreeRTOS_EC/Source/CQueue.h **** inline
  189:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::Peek(void *pvBuffer, portTickType xTicksToWait) {
@@ -970,73 +971,73 @@
  201:../FreeRTOS_EC/Source/CQueue.h **** 
  202:../FreeRTOS_EC/Source/CQueue.h **** inline
  203:../FreeRTOS_EC/Source/CQueue.h **** portBASE_TYPE CQueue::SendToFrontFromISR(const void * pvItemToQueue, portBASE_TYPE *pxHigherPriorit
- 370              		.loc 3 203 0
- 371              		.cfi_startproc
- 372              		@ args = 0, pretend = 0, frame = 16
- 373              		@ frame_needed = 1, uses_anonymous_args = 0
- 374 0000 80B5     		push	{r7, lr}
- 375              	.LCFI21:
- 376              		.cfi_def_cfa_offset 8
- 377              		.cfi_offset 14, -4
- 378              		.cfi_offset 7, -8
- 379 0002 84B0     		sub	sp, sp, #16
- 380              	.LCFI22:
- 381              		.cfi_def_cfa_offset 24
- 382 0004 00AF     		add	r7, sp, #0
- 383              	.LCFI23:
- 384              		.cfi_def_cfa_register 7
- 385 0006 F860     		str	r0, [r7, #12]
- 386 0008 B960     		str	r1, [r7, #8]
- 387 000a 7A60     		str	r2, [r7, #4]
- 388              	.LBB5:
+ 371              		.loc 3 203 0
+ 372              		.cfi_startproc
+ 373              		@ args = 0, pretend = 0, frame = 16
+ 374              		@ frame_needed = 1, uses_anonymous_args = 0
+ 375 0000 80B5     		push	{r7, lr}
+ 376              	.LCFI21:
+ 377              		.cfi_def_cfa_offset 8
+ 378              		.cfi_offset 14, -4
+ 379              		.cfi_offset 7, -8
+ 380 0002 84B0     		sub	sp, sp, #16
+ 381              	.LCFI22:
+ 382              		.cfi_def_cfa_offset 24
+ 383 0004 00AF     		add	r7, sp, #0
+ 384              	.LCFI23:
+ 385              		.cfi_def_cfa_register 7
+ 386 0006 F860     		str	r0, [r7, #12]
+ 387 0008 B960     		str	r1, [r7, #8]
+ 388 000a 7A60     		str	r2, [r7, #4]
+ 389              	.LBB5:
  204:../FreeRTOS_EC/Source/CQueue.h **** 	assert(IsValid());
- 389              		.loc 3 204 0
- 390 000c FB68     		ldr	r3, [r7, #12]
- 391 000e 1B68     		ldr	r3, [r3, #0]
- 392 0010 1B68     		ldr	r3, [r3, #0]
- 393 0012 F868     		ldr	r0, [r7, #12]
- 394 0014 9847     		blx	r3
- 395 0016 0346     		mov	r3, r0
- 396 0018 002B     		cmp	r3, #0
- 397 001a 0FD1     		bne	.L11
- 398              		.loc 3 204 0 is_stmt 0 discriminator 1
- 399 001c 40F20000 		movw	r0, #:lower16:.LC0
- 400 0020 C0F20000 		movt	r0, #:upper16:.LC0
- 401 0024 4FF0CC01 		mov	r1, #204
- 402 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
- 403 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
- 404 0030 40F20003 		movw	r3, #:lower16:.LC1
- 405 0034 C0F20003 		movt	r3, #:upper16:.LC1
- 406 0038 FFF7FEFF 		bl	__assert_func
- 407              	.L11:
+ 390              		.loc 3 204 0
+ 391 000c FB68     		ldr	r3, [r7, #12]
+ 392 000e 1B68     		ldr	r3, [r3, #0]
+ 393 0010 1B68     		ldr	r3, [r3, #0]
+ 394 0012 F868     		ldr	r0, [r7, #12]
+ 395 0014 9847     		blx	r3
+ 396 0016 0346     		mov	r3, r0
+ 397 0018 002B     		cmp	r3, #0
+ 398 001a 0FD1     		bne	.L11
+ 399              		.loc 3 204 0 is_stmt 0 discriminator 1
+ 400 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 401 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 402 0024 4FF0CC01 		mov	r1, #204
+ 403 0028 40F20002 		movw	r2, #:lower16:_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
+ 404 002c C0F20002 		movt	r2, #:upper16:_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
+ 405 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 406 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 407 0038 FFF7FEFF 		bl	__assert_func
+ 408              	.L11:
  205:../FreeRTOS_EC/Source/CQueue.h **** 
  206:../FreeRTOS_EC/Source/CQueue.h **** 	return xQueueSendToFrontFromISR(m_handleQueue, pvItemToQueue, pxHigherPriorityTaskWoken);
- 408              		.loc 3 206 0 is_stmt 1
- 409 003c FB68     		ldr	r3, [r7, #12]
- 410 003e 5B68     		ldr	r3, [r3, #4]
- 411 0040 1846     		mov	r0, r3
- 412 0042 B968     		ldr	r1, [r7, #8]
- 413 0044 7A68     		ldr	r2, [r7, #4]
- 414 0046 4FF00103 		mov	r3, #1
- 415 004a FFF7FEFF 		bl	xQueueGenericSendFromISR
- 416 004e 0346     		mov	r3, r0
- 417              	.LBE5:
+ 409              		.loc 3 206 0 is_stmt 1
+ 410 003c FB68     		ldr	r3, [r7, #12]
+ 411 003e 5B68     		ldr	r3, [r3, #4]
+ 412 0040 1846     		mov	r0, r3
+ 413 0042 B968     		ldr	r1, [r7, #8]
+ 414 0044 7A68     		ldr	r2, [r7, #4]
+ 415 0046 4FF00103 		mov	r3, #1
+ 416 004a FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 417 004e 0346     		mov	r3, r0
+ 418              	.LBE5:
  207:../FreeRTOS_EC/Source/CQueue.h **** }
- 418              		.loc 3 207 0
- 419 0050 1846     		mov	r0, r3
- 420 0052 07F11007 		add	r7, r7, #16
- 421 0056 BD46     		mov	sp, r7
- 422 0058 80BD     		pop	{r7, pc}
- 423              		.cfi_endproc
- 424              	.LFE145:
- 426 005a 00BF     		.section	.text._ZN12CMessageTask6OnInitEv,"axG",%progbits,_ZN12CMessageTask6OnInitEv,comdat
- 427              		.align	2
- 428              		.weak	_ZN12CMessageTask6OnInitEv
- 429              		.thumb
- 430              		.thumb_func
- 432              	_ZN12CMessageTask6OnInitEv:
- 433              	.LFB150:
- 434              		.file 4 "../FreeRTOS_EC/Source/CMessageTask.h"
+ 419              		.loc 3 207 0
+ 420 0050 1846     		mov	r0, r3
+ 421 0052 07F11007 		add	r7, r7, #16
+ 422 0056 BD46     		mov	sp, r7
+ 423 0058 80BD     		pop	{r7, pc}
+ 424              		.cfi_endproc
+ 425              	.LFE145:
+ 427 005a 00BF     		.section	.text._ZN12CMessageTask6OnInitEv,"axG",%progbits,_ZN12CMessageTask6OnInitEv,comdat
+ 428              		.align	2
+ 429              		.weak	_ZN12CMessageTask6OnInitEv
+ 430              		.thumb
+ 431              		.thumb_func
+ 433              	_ZN12CMessageTask6OnInitEv:
+ 434              	.LFB150:
+ 435              		.file 4 "../FreeRTOS_EC/Source/CMessageTask.h"
    1:../FreeRTOS_EC/Source/CMessageTask.h **** /**
    2:../FreeRTOS_EC/Source/CMessageTask.h ****  * @file CMessageTask.h
    3:../FreeRTOS_EC/Source/CMessageTask.h ****  * @class CMessageTask
@@ -1166,82 +1167,82 @@
  127:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * @return <code>true</code> if success, <code>false</code> otherwise.
  128:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
  129:../FreeRTOS_EC/Source/CMessageTask.h **** 	virtual bool OnInit() { return true; }
- 435              		.loc 4 129 0
- 436              		.cfi_startproc
- 437              		@ args = 0, pretend = 0, frame = 8
- 438              		@ frame_needed = 1, uses_anonymous_args = 0
- 439              		@ link register save eliminated.
- 440 0000 80B4     		push	{r7}
- 441              	.LCFI24:
- 442              		.cfi_def_cfa_offset 4
- 443              		.cfi_offset 7, -4
- 444 0002 83B0     		sub	sp, sp, #12
- 445              	.LCFI25:
- 446              		.cfi_def_cfa_offset 16
- 447 0004 00AF     		add	r7, sp, #0
- 448              	.LCFI26:
- 449              		.cfi_def_cfa_register 7
- 450 0006 7860     		str	r0, [r7, #4]
- 451              		.loc 4 129 0
- 452 0008 4FF00103 		mov	r3, #1
- 453 000c 1846     		mov	r0, r3
- 454 000e 07F10C07 		add	r7, r7, #12
- 455 0012 BD46     		mov	sp, r7
- 456 0014 80BC     		pop	{r7}
- 457 0016 7047     		bx	lr
- 458              		.cfi_endproc
- 459              	.LFE150:
- 461              		.section	.text._ZN12CMessageTask9OnTimeOutEv,"axG",%progbits,_ZN12CMessageTask9OnTimeOutEv,comdat
- 462              		.align	2
- 463              		.weak	_ZN12CMessageTask9OnTimeOutEv
- 464              		.thumb
- 465              		.thumb_func
- 467              	_ZN12CMessageTask9OnTimeOutEv:
- 468              	.LFB151:
+ 436              		.loc 4 129 0
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 8
+ 439              		@ frame_needed = 1, uses_anonymous_args = 0
+ 440              		@ link register save eliminated.
+ 441 0000 80B4     		push	{r7}
+ 442              	.LCFI24:
+ 443              		.cfi_def_cfa_offset 4
+ 444              		.cfi_offset 7, -4
+ 445 0002 83B0     		sub	sp, sp, #12
+ 446              	.LCFI25:
+ 447              		.cfi_def_cfa_offset 16
+ 448 0004 00AF     		add	r7, sp, #0
+ 449              	.LCFI26:
+ 450              		.cfi_def_cfa_register 7
+ 451 0006 7860     		str	r0, [r7, #4]
+ 452              		.loc 4 129 0
+ 453 0008 4FF00103 		mov	r3, #1
+ 454 000c 1846     		mov	r0, r3
+ 455 000e 07F10C07 		add	r7, r7, #12
+ 456 0012 BD46     		mov	sp, r7
+ 457 0014 80BC     		pop	{r7}
+ 458 0016 7047     		bx	lr
+ 459              		.cfi_endproc
+ 460              	.LFE150:
+ 462              		.section	.text._ZN12CMessageTask9OnTimeOutEv,"axG",%progbits,_ZN12CMessageTask9OnTimeOutEv,comdat
+ 463              		.align	2
+ 464              		.weak	_ZN12CMessageTask9OnTimeOutEv
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	_ZN12CMessageTask9OnTimeOutEv:
+ 469              	.LFB151:
  130:../FreeRTOS_EC/Source/CMessageTask.h **** 
  131:../FreeRTOS_EC/Source/CMessageTask.h **** 	/**
  132:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * Called by the framework during the message loop when the timeout expire and no message are
  133:../FreeRTOS_EC/Source/CMessageTask.h **** 	 * received.
  134:../FreeRTOS_EC/Source/CMessageTask.h **** 	 */
  135:../FreeRTOS_EC/Source/CMessageTask.h **** 	virtual void OnTimeOut() {};
- 469              		.loc 4 135 0
- 470              		.cfi_startproc
- 471              		@ args = 0, pretend = 0, frame = 8
- 472              		@ frame_needed = 1, uses_anonymous_args = 0
- 473              		@ link register save eliminated.
- 474 0000 80B4     		push	{r7}
- 475              	.LCFI27:
- 476              		.cfi_def_cfa_offset 4
- 477              		.cfi_offset 7, -4
- 478 0002 83B0     		sub	sp, sp, #12
- 479              	.LCFI28:
- 480              		.cfi_def_cfa_offset 16
- 481 0004 00AF     		add	r7, sp, #0
- 482              	.LCFI29:
- 483              		.cfi_def_cfa_register 7
- 484 0006 7860     		str	r0, [r7, #4]
- 485              		.loc 4 135 0
- 486 0008 07F10C07 		add	r7, r7, #12
- 487 000c BD46     		mov	sp, r7
- 488 000e 80BC     		pop	{r7}
- 489 0010 7047     		bx	lr
- 490              		.cfi_endproc
- 491              	.LFE151:
- 493              		.global	_ZN12CMessageTask13s_message_mapE
- 494 0012 00BF     		.section	.rodata._ZN12CMessageTask13s_message_mapE,"a",%progbits
- 495              		.align	2
- 498              	_ZN12CMessageTask13s_message_mapE:
- 499 0000 00000000 		.space	12
- 499      00000000 
- 499      00000000 
- 500              		.text
- 501              		.align	2
- 502              		.global	_ZN12CMessageTaskC2Ev
- 503              		.thumb
- 504              		.thumb_func
- 506              	_ZN12CMessageTaskC2Ev:
- 507              	.LFB155:
- 508              		.file 5 "../FreeRTOS_EC/Source/CMessageTask.cpp"
+ 470              		.loc 4 135 0
+ 471              		.cfi_startproc
+ 472              		@ args = 0, pretend = 0, frame = 8
+ 473              		@ frame_needed = 1, uses_anonymous_args = 0
+ 474              		@ link register save eliminated.
+ 475 0000 80B4     		push	{r7}
+ 476              	.LCFI27:
+ 477              		.cfi_def_cfa_offset 4
+ 478              		.cfi_offset 7, -4
+ 479 0002 83B0     		sub	sp, sp, #12
+ 480              	.LCFI28:
+ 481              		.cfi_def_cfa_offset 16
+ 482 0004 00AF     		add	r7, sp, #0
+ 483              	.LCFI29:
+ 484              		.cfi_def_cfa_register 7
+ 485 0006 7860     		str	r0, [r7, #4]
+ 486              		.loc 4 135 0
+ 487 0008 07F10C07 		add	r7, r7, #12
+ 488 000c BD46     		mov	sp, r7
+ 489 000e 80BC     		pop	{r7}
+ 490 0010 7047     		bx	lr
+ 491              		.cfi_endproc
+ 492              	.LFE151:
+ 494              		.global	_ZN12CMessageTask13s_message_mapE
+ 495 0012 00BF     		.section	.rodata._ZN12CMessageTask13s_message_mapE,"a",%progbits
+ 496              		.align	2
+ 499              	_ZN12CMessageTask13s_message_mapE:
+ 500 0000 00000000 		.space	12
+ 500      00000000 
+ 500      00000000 
+ 501              		.text
+ 502              		.align	2
+ 503              		.global	_ZN12CMessageTaskC2Ev
+ 504              		.thumb
+ 505              		.thumb_func
+ 507              	_ZN12CMessageTaskC2Ev:
+ 508              	.LFB155:
+ 509              		.file 5 "../FreeRTOS_EC/Source/CMessageTask.cpp"
    1:../FreeRTOS_EC/Source/CMessageTask.cpp **** /*
    2:../FreeRTOS_EC/Source/CMessageTask.cpp ****  * CMessageTask.cpp
    3:../FreeRTOS_EC/Source/CMessageTask.cpp ****  *
@@ -1258,259 +1259,259 @@
   14:../FreeRTOS_EC/Source/CMessageTask.cpp **** };
   15:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   16:../FreeRTOS_EC/Source/CMessageTask.cpp **** CMessageTask::CMessageTask()
- 509              		.loc 5 16 0
- 510              		.cfi_startproc
- 511              		@ args = 0, pretend = 0, frame = 8
- 512              		@ frame_needed = 1, uses_anonymous_args = 0
- 513 0000 80B5     		push	{r7, lr}
- 514              	.LCFI30:
- 515              		.cfi_def_cfa_offset 8
- 516              		.cfi_offset 14, -4
- 517              		.cfi_offset 7, -8
- 518 0002 82B0     		sub	sp, sp, #8
- 519              	.LCFI31:
- 520              		.cfi_def_cfa_offset 16
- 521 0004 00AF     		add	r7, sp, #0
- 522              	.LCFI32:
- 523              		.cfi_def_cfa_register 7
- 524 0006 7860     		str	r0, [r7, #4]
- 525              	.LBB6:
- 526              		.loc 5 16 0
- 527 0008 7B68     		ldr	r3, [r7, #4]
- 528 000a 1846     		mov	r0, r3
- 529 000c FFF7FEFF 		bl	_ZN12AManagedTaskC2Ev
- 530 0010 7B68     		ldr	r3, [r7, #4]
- 531 0012 0B4A     		ldr	r2, .L16
- 532 0014 1A60     		str	r2, [r3, #0]
- 533 0016 7B68     		ldr	r3, [r7, #4]
- 534 0018 03F11003 		add	r3, r3, #16
- 535 001c 1846     		mov	r0, r3
- 536 001e FFF7FEFF 		bl	_ZN6CQueueC1Ev
+ 510              		.loc 5 16 0
+ 511              		.cfi_startproc
+ 512              		@ args = 0, pretend = 0, frame = 8
+ 513              		@ frame_needed = 1, uses_anonymous_args = 0
+ 514 0000 80B5     		push	{r7, lr}
+ 515              	.LCFI30:
+ 516              		.cfi_def_cfa_offset 8
+ 517              		.cfi_offset 14, -4
+ 518              		.cfi_offset 7, -8
+ 519 0002 82B0     		sub	sp, sp, #8
+ 520              	.LCFI31:
+ 521              		.cfi_def_cfa_offset 16
+ 522 0004 00AF     		add	r7, sp, #0
+ 523              	.LCFI32:
+ 524              		.cfi_def_cfa_register 7
+ 525 0006 7860     		str	r0, [r7, #4]
+ 526              	.LBB6:
+ 527              		.loc 5 16 0
+ 528 0008 7B68     		ldr	r3, [r7, #4]
+ 529 000a 1846     		mov	r0, r3
+ 530 000c FFF7FEFF 		bl	_ZN12AManagedTaskC2Ev
+ 531 0010 7B68     		ldr	r3, [r7, #4]
+ 532 0012 0B4A     		ldr	r2, .L16
+ 533 0014 1A60     		str	r2, [r3, #0]
+ 534 0016 7B68     		ldr	r3, [r7, #4]
+ 535 0018 03F11003 		add	r3, r3, #16
+ 536 001c 1846     		mov	r0, r3
+ 537 001e FFF7FEFF 		bl	_ZN6CQueueC1Ev
   17:../FreeRTOS_EC/Source/CMessageTask.cpp **** {
   18:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	m_pDelegate = NULL;
- 537              		.loc 5 18 0
- 538 0022 7B68     		ldr	r3, [r7, #4]
- 539 0024 4FF00002 		mov	r2, #0
- 540 0028 9A61     		str	r2, [r3, #24]
+ 538              		.loc 5 18 0
+ 539 0022 7B68     		ldr	r3, [r7, #4]
+ 540 0024 4FF00002 		mov	r2, #0
+ 541 0028 9A61     		str	r2, [r3, #24]
   19:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	m_nTimeOut = portMAX_DELAY;
- 541              		.loc 5 19 0
- 542 002a 7B68     		ldr	r3, [r7, #4]
- 543 002c 4FF0FF32 		mov	r2, #-1
- 544 0030 DA60     		str	r2, [r3, #12]
- 545              	.LBE6:
+ 542              		.loc 5 19 0
+ 543 002a 7B68     		ldr	r3, [r7, #4]
+ 544 002c 4FF0FF32 		mov	r2, #-1
+ 545 0030 DA60     		str	r2, [r3, #12]
+ 546              	.LBE6:
   20:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 546              		.loc 5 20 0
- 547 0032 7B68     		ldr	r3, [r7, #4]
- 548 0034 1846     		mov	r0, r3
- 549 0036 07F10807 		add	r7, r7, #8
- 550 003a BD46     		mov	sp, r7
- 551 003c 80BD     		pop	{r7, pc}
- 552              	.L17:
- 553 003e 00BF     		.align	2
- 554              	.L16:
- 555 0040 08000000 		.word	_ZTV12CMessageTask+8
- 556              		.cfi_endproc
- 557              	.LFE155:
- 559              		.align	2
- 560              		.global	_ZN12CMessageTaskD2Ev
- 561              		.thumb
- 562              		.thumb_func
- 564              	_ZN12CMessageTaskD2Ev:
- 565              	.LFB158:
+ 547              		.loc 5 20 0
+ 548 0032 7B68     		ldr	r3, [r7, #4]
+ 549 0034 1846     		mov	r0, r3
+ 550 0036 07F10807 		add	r7, r7, #8
+ 551 003a BD46     		mov	sp, r7
+ 552 003c 80BD     		pop	{r7, pc}
+ 553              	.L17:
+ 554 003e 00BF     		.align	2
+ 555              	.L16:
+ 556 0040 08000000 		.word	_ZTV12CMessageTask+8
+ 557              		.cfi_endproc
+ 558              	.LFE155:
+ 560              		.align	2
+ 561              		.global	_ZN12CMessageTaskD2Ev
+ 562              		.thumb
+ 563              		.thumb_func
+ 565              	_ZN12CMessageTaskD2Ev:
+ 566              	.LFB158:
   21:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   22:../FreeRTOS_EC/Source/CMessageTask.cpp **** CMessageTask::~CMessageTask() {
- 566              		.loc 5 22 0
- 567              		.cfi_startproc
- 568              		@ args = 0, pretend = 0, frame = 8
- 569              		@ frame_needed = 1, uses_anonymous_args = 0
- 570 0044 80B5     		push	{r7, lr}
- 571              	.LCFI33:
- 572              		.cfi_def_cfa_offset 8
- 573              		.cfi_offset 14, -4
- 574              		.cfi_offset 7, -8
- 575 0046 82B0     		sub	sp, sp, #8
- 576              	.LCFI34:
- 577              		.cfi_def_cfa_offset 16
- 578 0048 00AF     		add	r7, sp, #0
- 579              	.LCFI35:
- 580              		.cfi_def_cfa_register 7
- 581 004a 7860     		str	r0, [r7, #4]
- 582              	.LBB7:
- 583              		.loc 5 22 0
- 584 004c 7B68     		ldr	r3, [r7, #4]
- 585 004e 0D4A     		ldr	r2, .L21
- 586 0050 1A60     		str	r2, [r3, #0]
- 587 0052 7B68     		ldr	r3, [r7, #4]
- 588 0054 03F11003 		add	r3, r3, #16
+ 567              		.loc 5 22 0
+ 568              		.cfi_startproc
+ 569              		@ args = 0, pretend = 0, frame = 8
+ 570              		@ frame_needed = 1, uses_anonymous_args = 0
+ 571 0044 80B5     		push	{r7, lr}
+ 572              	.LCFI33:
+ 573              		.cfi_def_cfa_offset 8
+ 574              		.cfi_offset 14, -4
+ 575              		.cfi_offset 7, -8
+ 576 0046 82B0     		sub	sp, sp, #8
+ 577              	.LCFI34:
+ 578              		.cfi_def_cfa_offset 16
+ 579 0048 00AF     		add	r7, sp, #0
+ 580              	.LCFI35:
+ 581              		.cfi_def_cfa_register 7
+ 582 004a 7860     		str	r0, [r7, #4]
+ 583              	.LBB7:
+ 584              		.loc 5 22 0
+ 585 004c 7B68     		ldr	r3, [r7, #4]
+ 586 004e 0D4A     		ldr	r2, .L21
+ 587 0050 1A60     		str	r2, [r3, #0]
+ 588 0052 7B68     		ldr	r3, [r7, #4]
+ 589 0054 03F11003 		add	r3, r3, #16
   23:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	// TODO Auto-generated destructor stub
   24:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 589              		.loc 5 24 0
- 590 0058 1846     		mov	r0, r3
- 591 005a FFF7FEFF 		bl	_ZN6CQueueD1Ev
- 592 005e 7868     		ldr	r0, [r7, #4]
- 593 0060 FFF7FEFF 		bl	_ZN12AManagedTaskD2Ev
- 594              	.LBE7:
- 595 0064 4FF00003 		mov	r3, #0
- 596 0068 03F00103 		and	r3, r3, #1
- 597 006c DBB2     		uxtb	r3, r3
- 598 006e 002B     		cmp	r3, #0
- 599 0070 02D0     		beq	.L20
- 600              		.loc 5 24 0 is_stmt 0 discriminator 2
- 601 0072 7868     		ldr	r0, [r7, #4]
- 602 0074 FFF7FEFF 		bl	_ZdlPv
- 603              	.L20:
- 604              		.loc 5 24 0 discriminator 3
- 605 0078 7B68     		ldr	r3, [r7, #4]
- 606 007a 1846     		mov	r0, r3
- 607 007c 07F10807 		add	r7, r7, #8
- 608 0080 BD46     		mov	sp, r7
- 609 0082 80BD     		pop	{r7, pc}
- 610              	.L22:
- 611              		.align	2
- 612              	.L21:
- 613 0084 08000000 		.word	_ZTV12CMessageTask+8
- 614              		.cfi_endproc
- 615              	.LFE158:
- 617              		.align	2
- 618              		.global	_ZN12CMessageTaskD0Ev
- 619              		.thumb
- 620              		.thumb_func
- 622              	_ZN12CMessageTaskD0Ev:
- 623              	.LFB160:
+ 590              		.loc 5 24 0
+ 591 0058 1846     		mov	r0, r3
+ 592 005a FFF7FEFF 		bl	_ZN6CQueueD1Ev
+ 593 005e 7868     		ldr	r0, [r7, #4]
+ 594 0060 FFF7FEFF 		bl	_ZN12AManagedTaskD2Ev
+ 595              	.LBE7:
+ 596 0064 4FF00003 		mov	r3, #0
+ 597 0068 03F00103 		and	r3, r3, #1
+ 598 006c DBB2     		uxtb	r3, r3
+ 599 006e 002B     		cmp	r3, #0
+ 600 0070 02D0     		beq	.L20
+ 601              		.loc 5 24 0 is_stmt 0 discriminator 2
+ 602 0072 7868     		ldr	r0, [r7, #4]
+ 603 0074 FFF7FEFF 		bl	_ZdlPv
+ 604              	.L20:
+ 605              		.loc 5 24 0 discriminator 3
+ 606 0078 7B68     		ldr	r3, [r7, #4]
+ 607 007a 1846     		mov	r0, r3
+ 608 007c 07F10807 		add	r7, r7, #8
+ 609 0080 BD46     		mov	sp, r7
+ 610 0082 80BD     		pop	{r7, pc}
+ 611              	.L22:
+ 612              		.align	2
+ 613              	.L21:
+ 614 0084 08000000 		.word	_ZTV12CMessageTask+8
+ 615              		.cfi_endproc
+ 616              	.LFE158:
+ 618              		.align	2
+ 619              		.global	_ZN12CMessageTaskD0Ev
+ 620              		.thumb
+ 621              		.thumb_func
+ 623              	_ZN12CMessageTaskD0Ev:
+ 624              	.LFB160:
   22:../FreeRTOS_EC/Source/CMessageTask.cpp **** CMessageTask::~CMessageTask() {
- 624              		.loc 5 22 0 is_stmt 1
- 625              		.cfi_startproc
- 626              		@ args = 0, pretend = 0, frame = 8
- 627              		@ frame_needed = 1, uses_anonymous_args = 0
- 628 0088 80B5     		push	{r7, lr}
- 629              	.LCFI36:
- 630              		.cfi_def_cfa_offset 8
- 631              		.cfi_offset 14, -4
- 632              		.cfi_offset 7, -8
- 633 008a 82B0     		sub	sp, sp, #8
- 634              	.LCFI37:
- 635              		.cfi_def_cfa_offset 16
- 636 008c 00AF     		add	r7, sp, #0
- 637              	.LCFI38:
- 638              		.cfi_def_cfa_register 7
- 639 008e 7860     		str	r0, [r7, #4]
- 640              		.loc 5 24 0
- 641 0090 7868     		ldr	r0, [r7, #4]
- 642 0092 FFF7FEFF 		bl	_ZN12CMessageTaskD1Ev
- 643 0096 7868     		ldr	r0, [r7, #4]
- 644 0098 FFF7FEFF 		bl	_ZdlPv
- 645 009c 7B68     		ldr	r3, [r7, #4]
- 646 009e 1846     		mov	r0, r3
- 647 00a0 07F10807 		add	r7, r7, #8
- 648 00a4 BD46     		mov	sp, r7
- 649 00a6 80BD     		pop	{r7, pc}
- 650              		.cfi_endproc
- 651              	.LFE160:
- 653              		.align	2
- 654              		.global	_ZN12CMessageTask8OnCreateEPKctm
- 655              		.thumb
- 656              		.thumb_func
- 658              	_ZN12CMessageTask8OnCreateEPKctm:
- 659              	.LFB161:
+ 625              		.loc 5 22 0 is_stmt 1
+ 626              		.cfi_startproc
+ 627              		@ args = 0, pretend = 0, frame = 8
+ 628              		@ frame_needed = 1, uses_anonymous_args = 0
+ 629 0088 80B5     		push	{r7, lr}
+ 630              	.LCFI36:
+ 631              		.cfi_def_cfa_offset 8
+ 632              		.cfi_offset 14, -4
+ 633              		.cfi_offset 7, -8
+ 634 008a 82B0     		sub	sp, sp, #8
+ 635              	.LCFI37:
+ 636              		.cfi_def_cfa_offset 16
+ 637 008c 00AF     		add	r7, sp, #0
+ 638              	.LCFI38:
+ 639              		.cfi_def_cfa_register 7
+ 640 008e 7860     		str	r0, [r7, #4]
+ 641              		.loc 5 24 0
+ 642 0090 7868     		ldr	r0, [r7, #4]
+ 643 0092 FFF7FEFF 		bl	_ZN12CMessageTaskD1Ev
+ 644 0096 7868     		ldr	r0, [r7, #4]
+ 645 0098 FFF7FEFF 		bl	_ZdlPv
+ 646 009c 7B68     		ldr	r3, [r7, #4]
+ 647 009e 1846     		mov	r0, r3
+ 648 00a0 07F10807 		add	r7, r7, #8
+ 649 00a4 BD46     		mov	sp, r7
+ 650 00a6 80BD     		pop	{r7, pc}
+ 651              		.cfi_endproc
+ 652              	.LFE160:
+ 654              		.align	2
+ 655              		.global	_ZN12CMessageTask8OnCreateEPKctm
+ 656              		.thumb
+ 657              		.thumb_func
+ 659              	_ZN12CMessageTask8OnCreateEPKctm:
+ 660              	.LFB161:
   25:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   26:../FreeRTOS_EC/Source/CMessageTask.cpp **** portBASE_TYPE CMessageTask::OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth
- 660              		.loc 5 26 0
- 661              		.cfi_startproc
- 662              		@ args = 0, pretend = 0, frame = 24
- 663              		@ frame_needed = 1, uses_anonymous_args = 0
- 664 00a8 80B5     		push	{r7, lr}
- 665              	.LCFI39:
- 666              		.cfi_def_cfa_offset 8
- 667              		.cfi_offset 14, -4
- 668              		.cfi_offset 7, -8
- 669 00aa 86B0     		sub	sp, sp, #24
- 670              	.LCFI40:
- 671              		.cfi_def_cfa_offset 32
- 672 00ac 00AF     		add	r7, sp, #0
- 673              	.LCFI41:
- 674              		.cfi_def_cfa_register 7
- 675 00ae F860     		str	r0, [r7, #12]
- 676 00b0 B960     		str	r1, [r7, #8]
- 677 00b2 3B60     		str	r3, [r7, #0]
- 678 00b4 1346     		mov	r3, r2	@ movhi
- 679 00b6 FB80     		strh	r3, [r7, #6]	@ movhi
- 680              	.LBB8:
+ 661              		.loc 5 26 0
+ 662              		.cfi_startproc
+ 663              		@ args = 0, pretend = 0, frame = 24
+ 664              		@ frame_needed = 1, uses_anonymous_args = 0
+ 665 00a8 80B5     		push	{r7, lr}
+ 666              	.LCFI39:
+ 667              		.cfi_def_cfa_offset 8
+ 668              		.cfi_offset 14, -4
+ 669              		.cfi_offset 7, -8
+ 670 00aa 86B0     		sub	sp, sp, #24
+ 671              	.LCFI40:
+ 672              		.cfi_def_cfa_offset 32
+ 673 00ac 00AF     		add	r7, sp, #0
+ 674              	.LCFI41:
+ 675              		.cfi_def_cfa_register 7
+ 676 00ae F860     		str	r0, [r7, #12]
+ 677 00b0 B960     		str	r1, [r7, #8]
+ 678 00b2 3B60     		str	r3, [r7, #0]
+ 679 00b4 1346     		mov	r3, r2	@ movhi
+ 680 00b6 FB80     		strh	r3, [r7, #6]	@ movhi
+ 681              	.LBB8:
   27:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	portBASE_TYPE res;
   28:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	res = m_queue.Create(CMessageTask::MESSAGE_QUEUE_SIZE, sizeof(char[20])).IsValid();
- 681              		.loc 5 28 0
- 682 00b8 FB68     		ldr	r3, [r7, #12]
- 683 00ba 03F11003 		add	r3, r3, #16
- 684 00be 1846     		mov	r0, r3
- 685 00c0 4FF00501 		mov	r1, #5
- 686 00c4 4FF01402 		mov	r2, #20
- 687 00c8 FFF7FEFF 		bl	_ZN6CQueue6CreateEmm
- 688 00cc 0346     		mov	r3, r0
- 689 00ce 1A68     		ldr	r2, [r3, #0]
- 690 00d0 1268     		ldr	r2, [r2, #0]
- 691 00d2 1846     		mov	r0, r3
- 692 00d4 9047     		blx	r2
- 693 00d6 0346     		mov	r3, r0
- 694 00d8 7B61     		str	r3, [r7, #20]
+ 682              		.loc 5 28 0
+ 683 00b8 FB68     		ldr	r3, [r7, #12]
+ 684 00ba 03F11003 		add	r3, r3, #16
+ 685 00be 1846     		mov	r0, r3
+ 686 00c0 4FF00501 		mov	r1, #5
+ 687 00c4 4FF01402 		mov	r2, #20
+ 688 00c8 FFF7FEFF 		bl	_ZN6CQueue6CreateEmm
+ 689 00cc 0346     		mov	r3, r0
+ 690 00ce 1A68     		ldr	r2, [r3, #0]
+ 691 00d0 1268     		ldr	r2, [r2, #0]
+ 692 00d2 1846     		mov	r0, r3
+ 693 00d4 9047     		blx	r2
+ 694 00d6 0346     		mov	r3, r0
+ 695 00d8 7B61     		str	r3, [r7, #20]
   29:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   30:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return res;
- 695              		.loc 5 30 0
- 696 00da 7B69     		ldr	r3, [r7, #20]
- 697              	.LBE8:
+ 696              		.loc 5 30 0
+ 697 00da 7B69     		ldr	r3, [r7, #20]
+ 698              	.LBE8:
   31:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 698              		.loc 5 31 0
- 699 00dc 1846     		mov	r0, r3
- 700 00de 07F11807 		add	r7, r7, #24
- 701 00e2 BD46     		mov	sp, r7
- 702 00e4 80BD     		pop	{r7, pc}
- 703              		.cfi_endproc
- 704              	.LFE161:
- 706 00e6 00BF     		.align	2
- 707              		.global	_ZN12CMessageTask3RunEv
- 708              		.thumb
- 709              		.thumb_func
- 711              	_ZN12CMessageTask3RunEv:
- 712              	.LFB162:
+ 699              		.loc 5 31 0
+ 700 00dc 1846     		mov	r0, r3
+ 701 00de 07F11807 		add	r7, r7, #24
+ 702 00e2 BD46     		mov	sp, r7
+ 703 00e4 80BD     		pop	{r7, pc}
+ 704              		.cfi_endproc
+ 705              	.LFE161:
+ 707 00e6 00BF     		.align	2
+ 708              		.global	_ZN12CMessageTask3RunEv
+ 709              		.thumb
+ 710              		.thumb_func
+ 712              	_ZN12CMessageTask3RunEv:
+ 713              	.LFB162:
   32:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   33:../FreeRTOS_EC/Source/CMessageTask.cpp **** void CMessageTask::Run() {
- 713              		.loc 5 33 0
- 714              		.cfi_startproc
- 715              		@ args = 0, pretend = 0, frame = 16
- 716              		@ frame_needed = 1, uses_anonymous_args = 0
- 717 00e8 80B5     		push	{r7, lr}
- 718              	.LCFI42:
- 719              		.cfi_def_cfa_offset 8
- 720              		.cfi_offset 14, -4
- 721              		.cfi_offset 7, -8
- 722 00ea 84B0     		sub	sp, sp, #16
- 723              	.LCFI43:
- 724              		.cfi_def_cfa_offset 24
- 725 00ec 00AF     		add	r7, sp, #0
- 726              	.LCFI44:
- 727              		.cfi_def_cfa_register 7
- 728 00ee 7860     		str	r0, [r7, #4]
- 729              	.LBB9:
+ 714              		.loc 5 33 0
+ 715              		.cfi_startproc
+ 716              		@ args = 0, pretend = 0, frame = 16
+ 717              		@ frame_needed = 1, uses_anonymous_args = 0
+ 718 00e8 80B5     		push	{r7, lr}
+ 719              	.LCFI42:
+ 720              		.cfi_def_cfa_offset 8
+ 721              		.cfi_offset 14, -4
+ 722              		.cfi_offset 7, -8
+ 723 00ea 84B0     		sub	sp, sp, #16
+ 724              	.LCFI43:
+ 725              		.cfi_def_cfa_offset 24
+ 726 00ec 00AF     		add	r7, sp, #0
+ 727              	.LCFI44:
+ 728              		.cfi_def_cfa_register 7
+ 729 00ee 7860     		str	r0, [r7, #4]
+ 730              	.LBB9:
   34:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   35:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	// call task specific initialization code.
   36:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	 if ( !OnInit() ) {
- 730              		.loc 5 36 0
- 731 00f0 7B68     		ldr	r3, [r7, #4]
- 732 00f2 1B68     		ldr	r3, [r3, #0]
- 733 00f4 03F12403 		add	r3, r3, #36
- 734 00f8 1B68     		ldr	r3, [r3, #0]
- 735 00fa 7868     		ldr	r0, [r7, #4]
- 736 00fc 9847     		blx	r3
- 737 00fe 0346     		mov	r3, r0
- 738 0100 83F00103 		eor	r3, r3, #1
- 739 0104 DBB2     		uxtb	r3, r3
- 740 0106 002B     		cmp	r3, #0
- 741 0108 08D0     		beq	.L27
+ 731              		.loc 5 36 0
+ 732 00f0 7B68     		ldr	r3, [r7, #4]
+ 733 00f2 1B68     		ldr	r3, [r3, #0]
+ 734 00f4 03F12403 		add	r3, r3, #36
+ 735 00f8 1B68     		ldr	r3, [r3, #0]
+ 736 00fa 7868     		ldr	r0, [r7, #4]
+ 737 00fc 9847     		blx	r3
+ 738 00fe 0346     		mov	r3, r0
+ 739 0100 83F00103 		eor	r3, r3, #1
+ 740 0104 DBB2     		uxtb	r3, r3
+ 741 0106 002B     		cmp	r3, #0
+ 742 0108 08D0     		beq	.L27
   37:../FreeRTOS_EC/Source/CMessageTask.cpp **** #if INCLUDE_vTaskDelete == 1
   38:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		 Delete();
- 742              		.loc 5 38 0
- 743 010a 7B68     		ldr	r3, [r7, #4]
- 744 010c 1846     		mov	r0, r3
- 745 010e FFF7FEFF 		bl	_ZN5CTask6DeleteEv
- 746              	.LBE9:
+ 743              		.loc 5 38 0
+ 744 010a 7B68     		ldr	r3, [r7, #4]
+ 745 010c 1846     		mov	r0, r3
+ 746 010e FFF7FEFF 		bl	_ZN5CTask6DeleteEv
+ 747              	.LBE9:
   39:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		 return;
   40:../FreeRTOS_EC/Source/CMessageTask.cpp **** #else
   41:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	 // The task must not start due to initialization problem, but the FreeRTOS
@@ -1537,570 +1538,570 @@
   62:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		}
   63:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	}
   64:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 747              		.loc 5 64 0
- 748 0112 07F11007 		add	r7, r7, #16
- 749 0116 BD46     		mov	sp, r7
- 750 0118 80BD     		pop	{r7, pc}
- 751              	.L31:
- 752              	.LBB10:
+ 748              		.loc 5 64 0
+ 749 0112 07F11007 		add	r7, r7, #16
+ 750 0116 BD46     		mov	sp, r7
+ 751 0118 80BD     		pop	{r7, pc}
+ 752              	.L31:
+ 753              	.LBB10:
   48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
- 753              		.loc 5 48 0
- 754 011a 00BF     		nop
- 755              	.L27:
+ 754              		.loc 5 48 0
+ 755 011a 00BF     		nop
+ 756              	.L27:
   50:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		if ( m_queue.Receive(&msg, m_nTimeOut) == pdTRUE ) {
- 756              		.loc 5 50 0
- 757 011c 7B68     		ldr	r3, [r7, #4]
- 758 011e 03F11001 		add	r1, r3, #16
- 759 0122 7B68     		ldr	r3, [r7, #4]
- 760 0124 DB68     		ldr	r3, [r3, #12]
- 761 0126 07F10802 		add	r2, r7, #8
- 762 012a 0846     		mov	r0, r1
- 763 012c 1146     		mov	r1, r2
- 764 012e 1A46     		mov	r2, r3
- 765 0130 FFF7FEFF 		bl	_ZN6CQueue7ReceiveEPvm
- 766 0134 0346     		mov	r3, r0
- 767 0136 012B     		cmp	r3, #1
- 768 0138 14BF     		ite	ne
- 769 013a 0023     		movne	r3, #0
- 770 013c 0123     		moveq	r3, #1
- 771 013e DBB2     		uxtb	r3, r3
- 772 0140 002B     		cmp	r3, #0
- 773 0142 2AD0     		beq	.L28
+ 757              		.loc 5 50 0
+ 758 011c 7B68     		ldr	r3, [r7, #4]
+ 759 011e 03F11001 		add	r1, r3, #16
+ 760 0122 7B68     		ldr	r3, [r7, #4]
+ 761 0124 DB68     		ldr	r3, [r3, #12]
+ 762 0126 07F10802 		add	r2, r7, #8
+ 763 012a 0846     		mov	r0, r1
+ 764 012c 1146     		mov	r1, r2
+ 765 012e 1A46     		mov	r2, r3
+ 766 0130 FFF7FEFF 		bl	_ZN6CQueue7ReceiveEPvm
+ 767 0134 0346     		mov	r3, r0
+ 768 0136 012B     		cmp	r3, #1
+ 769 0138 14BF     		ite	ne
+ 770 013a 0023     		movne	r3, #0
+ 771 013c 0123     		moveq	r3, #1
+ 772 013e DBB2     		uxtb	r3, r3
+ 773 0140 002B     		cmp	r3, #0
+ 774 0142 2AD0     		beq	.L28
   54:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->OnHandleEvent(msg);
- 774              		.loc 5 54 0
- 775 0144 7B68     		ldr	r3, [r7, #4]
- 776 0146 9B69     		ldr	r3, [r3, #24]
- 777 0148 002B     		cmp	r3, #0
- 778 014a 0AD0     		beq	.L29
+ 775              		.loc 5 54 0
+ 776 0144 7B68     		ldr	r3, [r7, #4]
+ 777 0146 9B69     		ldr	r3, [r3, #24]
+ 778 0148 002B     		cmp	r3, #0
+ 779 014a 0AD0     		beq	.L29
   54:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->OnHandleEvent(msg);
- 779              		.loc 5 54 0 is_stmt 0 discriminator 1
- 780 014c 7B68     		ldr	r3, [r7, #4]
- 781 014e 9B69     		ldr	r3, [r3, #24]
- 782 0150 1B68     		ldr	r3, [r3, #0]
- 783 0152 1B68     		ldr	r3, [r3, #0]
- 784 0154 7A68     		ldr	r2, [r7, #4]
- 785 0156 9169     		ldr	r1, [r2, #24]
- 786 0158 07F10802 		add	r2, r7, #8
- 787 015c 0846     		mov	r0, r1
- 788 015e 1146     		mov	r1, r2
- 789 0160 9847     		blx	r3
- 790              	.L29:
+ 780              		.loc 5 54 0 is_stmt 0 discriminator 1
+ 781 014c 7B68     		ldr	r3, [r7, #4]
+ 782 014e 9B69     		ldr	r3, [r3, #24]
+ 783 0150 1B68     		ldr	r3, [r3, #0]
+ 784 0152 1B68     		ldr	r3, [r3, #0]
+ 785 0154 7A68     		ldr	r2, [r7, #4]
+ 786 0156 9169     		ldr	r1, [r2, #24]
+ 787 0158 07F10802 		add	r2, r7, #8
+ 788 015c 0846     		mov	r0, r1
+ 789 015e 1146     		mov	r1, r2
+ 790 0160 9847     		blx	r3
+ 791              	.L29:
   55:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			DispatchMessage(msg);
- 791              		.loc 5 55 0 is_stmt 1
- 792 0162 7B68     		ldr	r3, [r7, #4]
- 793 0164 1B68     		ldr	r3, [r3, #0]
- 794 0166 03F12003 		add	r3, r3, #32
- 795 016a 1B68     		ldr	r3, [r3, #0]
- 796 016c 07F10802 		add	r2, r7, #8
- 797 0170 7868     		ldr	r0, [r7, #4]
- 798 0172 1146     		mov	r1, r2
- 799 0174 9847     		blx	r3
+ 792              		.loc 5 55 0 is_stmt 1
+ 793 0162 7B68     		ldr	r3, [r7, #4]
+ 794 0164 1B68     		ldr	r3, [r3, #0]
+ 795 0166 03F12003 		add	r3, r3, #32
+ 796 016a 1B68     		ldr	r3, [r3, #0]
+ 797 016c 07F10802 		add	r2, r7, #8
+ 798 0170 7868     		ldr	r0, [r7, #4]
+ 799 0172 1146     		mov	r1, r2
+ 800 0174 9847     		blx	r3
   57:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->DidHandleEvent(msg);
- 800              		.loc 5 57 0
- 801 0176 7B68     		ldr	r3, [r7, #4]
- 802 0178 9B69     		ldr	r3, [r3, #24]
- 803 017a 002B     		cmp	r3, #0
- 804 017c CDD0     		beq	.L31
+ 801              		.loc 5 57 0
+ 802 0176 7B68     		ldr	r3, [r7, #4]
+ 803 0178 9B69     		ldr	r3, [r3, #24]
+ 804 017a 002B     		cmp	r3, #0
+ 805 017c CDD0     		beq	.L31
   57:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			if (m_pDelegate) m_pDelegate->DidHandleEvent(msg);
- 805              		.loc 5 57 0 is_stmt 0 discriminator 1
- 806 017e 7B68     		ldr	r3, [r7, #4]
- 807 0180 9B69     		ldr	r3, [r3, #24]
- 808 0182 1B68     		ldr	r3, [r3, #0]
- 809 0184 03F10403 		add	r3, r3, #4
- 810 0188 1B68     		ldr	r3, [r3, #0]
- 811 018a 7A68     		ldr	r2, [r7, #4]
- 812 018c 9169     		ldr	r1, [r2, #24]
- 813 018e 07F10802 		add	r2, r7, #8
- 814 0192 0846     		mov	r0, r1
- 815 0194 1146     		mov	r1, r2
- 816 0196 9847     		blx	r3
+ 806              		.loc 5 57 0 is_stmt 0 discriminator 1
+ 807 017e 7B68     		ldr	r3, [r7, #4]
+ 808 0180 9B69     		ldr	r3, [r3, #24]
+ 809 0182 1B68     		ldr	r3, [r3, #0]
+ 810 0184 03F10403 		add	r3, r3, #4
+ 811 0188 1B68     		ldr	r3, [r3, #0]
+ 812 018a 7A68     		ldr	r2, [r7, #4]
+ 813 018c 9169     		ldr	r1, [r2, #24]
+ 814 018e 07F10802 		add	r2, r7, #8
+ 815 0192 0846     		mov	r0, r1
+ 816 0194 1146     		mov	r1, r2
+ 817 0196 9847     		blx	r3
   48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
- 817              		.loc 5 48 0 is_stmt 1 discriminator 1
- 818 0198 BFE7     		b	.L31
- 819              	.L28:
+ 818              		.loc 5 48 0 is_stmt 1 discriminator 1
+ 819 0198 BFE7     		b	.L31
+ 820              	.L28:
   61:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			OnTimeOut();
- 820              		.loc 5 61 0
- 821 019a 7B68     		ldr	r3, [r7, #4]
- 822 019c 1B68     		ldr	r3, [r3, #0]
- 823 019e 03F12803 		add	r3, r3, #40
- 824 01a2 1B68     		ldr	r3, [r3, #0]
- 825 01a4 7868     		ldr	r0, [r7, #4]
- 826 01a6 9847     		blx	r3
+ 821              		.loc 5 61 0
+ 822 019a 7B68     		ldr	r3, [r7, #4]
+ 823 019c 1B68     		ldr	r3, [r3, #0]
+ 824 019e 03F12803 		add	r3, r3, #40
+ 825 01a2 1B68     		ldr	r3, [r3, #0]
+ 826 01a4 7868     		ldr	r0, [r7, #4]
+ 827 01a6 9847     		blx	r3
   48:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (;;) {
- 827              		.loc 5 48 0
- 828 01a8 B7E7     		b	.L31
- 829              	.LBE10:
- 830              		.cfi_endproc
- 831              	.LFE162:
- 833 01aa 00BF     		.align	2
- 834              		.global	_ZN12CMessageTask15DispatchMessageERK8CMessage
- 835              		.thumb
- 836              		.thumb_func
- 838              	_ZN12CMessageTask15DispatchMessageERK8CMessage:
- 839              	.LFB163:
+ 828              		.loc 5 48 0
+ 829 01a8 B7E7     		b	.L31
+ 830              	.LBE10:
+ 831              		.cfi_endproc
+ 832              	.LFE162:
+ 834 01aa 00BF     		.align	2
+ 835              		.global	_ZN12CMessageTask15DispatchMessageERK8CMessage
+ 836              		.thumb
+ 837              		.thumb_func
+ 839              	_ZN12CMessageTask15DispatchMessageERK8CMessage:
+ 840              	.LFB163:
   65:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   66:../FreeRTOS_EC/Source/CMessageTask.cpp **** void CMessageTask::DispatchMessage(const CMessage &msg) {
- 840              		.loc 5 66 0
- 841              		.cfi_startproc
- 842              		@ args = 0, pretend = 0, frame = 16
- 843              		@ frame_needed = 1, uses_anonymous_args = 0
- 844 01ac 90B5     		push	{r4, r7, lr}
- 845              	.LCFI45:
- 846              		.cfi_def_cfa_offset 12
- 847              		.cfi_offset 14, -4
- 848              		.cfi_offset 7, -8
- 849              		.cfi_offset 4, -12
- 850 01ae 85B0     		sub	sp, sp, #20
- 851              	.LCFI46:
- 852              		.cfi_def_cfa_offset 32
- 853 01b0 00AF     		add	r7, sp, #0
- 854              	.LCFI47:
- 855              		.cfi_def_cfa_register 7
- 856 01b2 7860     		str	r0, [r7, #4]
- 857 01b4 3960     		str	r1, [r7, #0]
- 858              	.LBB11:
- 859              	.LBB12:
+ 841              		.loc 5 66 0
+ 842              		.cfi_startproc
+ 843              		@ args = 0, pretend = 0, frame = 16
+ 844              		@ frame_needed = 1, uses_anonymous_args = 0
+ 845 01ac 90B5     		push	{r4, r7, lr}
+ 846              	.LCFI45:
+ 847              		.cfi_def_cfa_offset 12
+ 848              		.cfi_offset 14, -4
+ 849              		.cfi_offset 7, -8
+ 850              		.cfi_offset 4, -12
+ 851 01ae 85B0     		sub	sp, sp, #20
+ 852              	.LCFI46:
+ 853              		.cfi_def_cfa_offset 32
+ 854 01b0 00AF     		add	r7, sp, #0
+ 855              	.LCFI47:
+ 856              		.cfi_def_cfa_register 7
+ 857 01b2 7860     		str	r0, [r7, #4]
+ 858 01b4 3960     		str	r1, [r7, #0]
+ 859              	.LBB11:
+ 860              	.LBB12:
   67:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (int i=0; s_message_map[i].id!=NULL_MSG; ++i) {
- 860              		.loc 5 67 0
- 861 01b6 4FF00003 		mov	r3, #0
- 862 01ba FB60     		str	r3, [r7, #12]
- 863 01bc 77E0     		b	.L33
- 864              	.L38:
+ 861              		.loc 5 67 0
+ 862 01b6 4FF00003 		mov	r3, #0
+ 863 01ba FB60     		str	r3, [r7, #12]
+ 864 01bc 77E0     		b	.L33
+ 865              	.L38:
   68:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		if (s_message_map[i].id == msg.m_nId) {
- 865              		.loc 5 68 0
- 866 01be 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 867 01c2 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 868 01c6 F968     		ldr	r1, [r7, #12]
- 869 01c8 0B46     		mov	r3, r1
- 870 01ca 4FEA4303 		lsl	r3, r3, #1
- 871 01ce 5B18     		adds	r3, r3, r1
- 872 01d0 4FEA8303 		lsl	r3, r3, #2
- 873 01d4 D318     		adds	r3, r2, r3
- 874 01d6 1A88     		ldrh	r2, [r3, #0]
- 875 01d8 3B68     		ldr	r3, [r7, #0]
- 876 01da 1B88     		ldrh	r3, [r3, #0]
- 877 01dc 9A42     		cmp	r2, r3
- 878 01de 62D1     		bne	.L34
+ 866              		.loc 5 68 0
+ 867 01be 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 868 01c2 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 869 01c6 F968     		ldr	r1, [r7, #12]
+ 870 01c8 0B46     		mov	r3, r1
+ 871 01ca 4FEA4303 		lsl	r3, r3, #1
+ 872 01ce 5B18     		adds	r3, r3, r1
+ 873 01d0 4FEA8303 		lsl	r3, r3, #2
+ 874 01d4 D318     		adds	r3, r2, r3
+ 875 01d6 1A88     		ldrh	r2, [r3, #0]
+ 876 01d8 3B68     		ldr	r3, [r7, #0]
+ 877 01da 1B88     		ldrh	r3, [r3, #0]
+ 878 01dc 9A42     		cmp	r2, r3
+ 879 01de 62D1     		bne	.L34
   69:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			(this->*s_message_map[i].MessageHandler)(msg.wParam);
- 879              		.loc 5 69 0
- 880 01e0 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 881 01e4 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 882 01e8 F968     		ldr	r1, [r7, #12]
- 883 01ea 0B46     		mov	r3, r1
- 884 01ec 4FEA4303 		lsl	r3, r3, #1
- 885 01f0 5B18     		adds	r3, r3, r1
- 886 01f2 4FEA8303 		lsl	r3, r3, #2
- 887 01f6 D318     		adds	r3, r2, r3
- 888 01f8 03F10803 		add	r3, r3, #8
- 889 01fc 1B68     		ldr	r3, [r3, #0]
- 890 01fe 03F00103 		and	r3, r3, #1
- 891 0202 DBB2     		uxtb	r3, r3
- 892 0204 002B     		cmp	r3, #0
- 893 0206 26D0     		beq	.L35
- 894              		.loc 5 69 0 is_stmt 0 discriminator 1
- 895 0208 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 896 020c C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 897 0210 F968     		ldr	r1, [r7, #12]
- 898 0212 0B46     		mov	r3, r1
- 899 0214 4FEA4303 		lsl	r3, r3, #1
- 900 0218 5B18     		adds	r3, r3, r1
- 901 021a 4FEA8303 		lsl	r3, r3, #2
- 902 021e D318     		adds	r3, r2, r3
- 903 0220 03F10803 		add	r3, r3, #8
- 904 0224 1B68     		ldr	r3, [r3, #0]
- 905 0226 4FEA6303 		asr	r3, r3, #1
- 906 022a 7A68     		ldr	r2, [r7, #4]
- 907 022c D318     		adds	r3, r2, r3
- 908 022e 1868     		ldr	r0, [r3, #0]
- 909 0230 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 910 0234 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 911 0238 F968     		ldr	r1, [r7, #12]
- 912 023a 0B46     		mov	r3, r1
- 913 023c 4FEA4303 		lsl	r3, r3, #1
- 914 0240 5B18     		adds	r3, r3, r1
- 915 0242 4FEA8303 		lsl	r3, r3, #2
- 916 0246 D318     		adds	r3, r2, r3
- 917 0248 03F10403 		add	r3, r3, #4
- 918 024c 1B68     		ldr	r3, [r3, #0]
- 919 024e C318     		adds	r3, r0, r3
- 920 0250 1B68     		ldr	r3, [r3, #0]
- 921 0252 1C46     		mov	r4, r3
- 922 0254 0EE0     		b	.L36
- 923              	.L35:
- 924              		.loc 5 69 0 discriminator 2
- 925 0256 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 926 025a C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 927 025e F968     		ldr	r1, [r7, #12]
- 928 0260 0B46     		mov	r3, r1
- 929 0262 4FEA4303 		lsl	r3, r3, #1
- 930 0266 5B18     		adds	r3, r3, r1
- 931 0268 4FEA8303 		lsl	r3, r3, #2
- 932 026c D318     		adds	r3, r2, r3
- 933 026e 03F10403 		add	r3, r3, #4
- 934 0272 1C68     		ldr	r4, [r3, #0]
- 935              	.L36:
- 936              		.loc 5 69 0 discriminator 3
- 937 0274 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 938 0278 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 939 027c F968     		ldr	r1, [r7, #12]
- 940 027e 0B46     		mov	r3, r1
- 941 0280 4FEA4303 		lsl	r3, r3, #1
- 942 0284 5B18     		adds	r3, r3, r1
- 943 0286 4FEA8303 		lsl	r3, r3, #2
- 944 028a D318     		adds	r3, r2, r3
- 945 028c 03F10803 		add	r3, r3, #8
- 946 0290 1B68     		ldr	r3, [r3, #0]
- 947 0292 4FEA6303 		asr	r3, r3, #1
- 948 0296 7A68     		ldr	r2, [r7, #4]
- 949 0298 D218     		adds	r2, r2, r3
- 950 029a 3B68     		ldr	r3, [r7, #0]
- 951 029c 5B68     		ldr	r3, [r3, #4]
- 952 029e 1046     		mov	r0, r2
- 953 02a0 1946     		mov	r1, r3
- 954 02a2 A047     		blx	r4
+ 880              		.loc 5 69 0
+ 881 01e0 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 882 01e4 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 883 01e8 F968     		ldr	r1, [r7, #12]
+ 884 01ea 0B46     		mov	r3, r1
+ 885 01ec 4FEA4303 		lsl	r3, r3, #1
+ 886 01f0 5B18     		adds	r3, r3, r1
+ 887 01f2 4FEA8303 		lsl	r3, r3, #2
+ 888 01f6 D318     		adds	r3, r2, r3
+ 889 01f8 03F10803 		add	r3, r3, #8
+ 890 01fc 1B68     		ldr	r3, [r3, #0]
+ 891 01fe 03F00103 		and	r3, r3, #1
+ 892 0202 DBB2     		uxtb	r3, r3
+ 893 0204 002B     		cmp	r3, #0
+ 894 0206 26D0     		beq	.L35
+ 895              		.loc 5 69 0 is_stmt 0 discriminator 1
+ 896 0208 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 897 020c C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 898 0210 F968     		ldr	r1, [r7, #12]
+ 899 0212 0B46     		mov	r3, r1
+ 900 0214 4FEA4303 		lsl	r3, r3, #1
+ 901 0218 5B18     		adds	r3, r3, r1
+ 902 021a 4FEA8303 		lsl	r3, r3, #2
+ 903 021e D318     		adds	r3, r2, r3
+ 904 0220 03F10803 		add	r3, r3, #8
+ 905 0224 1B68     		ldr	r3, [r3, #0]
+ 906 0226 4FEA6303 		asr	r3, r3, #1
+ 907 022a 7A68     		ldr	r2, [r7, #4]
+ 908 022c D318     		adds	r3, r2, r3
+ 909 022e 1868     		ldr	r0, [r3, #0]
+ 910 0230 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 911 0234 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 912 0238 F968     		ldr	r1, [r7, #12]
+ 913 023a 0B46     		mov	r3, r1
+ 914 023c 4FEA4303 		lsl	r3, r3, #1
+ 915 0240 5B18     		adds	r3, r3, r1
+ 916 0242 4FEA8303 		lsl	r3, r3, #2
+ 917 0246 D318     		adds	r3, r2, r3
+ 918 0248 03F10403 		add	r3, r3, #4
+ 919 024c 1B68     		ldr	r3, [r3, #0]
+ 920 024e C318     		adds	r3, r0, r3
+ 921 0250 1B68     		ldr	r3, [r3, #0]
+ 922 0252 1C46     		mov	r4, r3
+ 923 0254 0EE0     		b	.L36
+ 924              	.L35:
+ 925              		.loc 5 69 0 discriminator 2
+ 926 0256 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 927 025a C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 928 025e F968     		ldr	r1, [r7, #12]
+ 929 0260 0B46     		mov	r3, r1
+ 930 0262 4FEA4303 		lsl	r3, r3, #1
+ 931 0266 5B18     		adds	r3, r3, r1
+ 932 0268 4FEA8303 		lsl	r3, r3, #2
+ 933 026c D318     		adds	r3, r2, r3
+ 934 026e 03F10403 		add	r3, r3, #4
+ 935 0272 1C68     		ldr	r4, [r3, #0]
+ 936              	.L36:
+ 937              		.loc 5 69 0 discriminator 3
+ 938 0274 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 939 0278 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 940 027c F968     		ldr	r1, [r7, #12]
+ 941 027e 0B46     		mov	r3, r1
+ 942 0280 4FEA4303 		lsl	r3, r3, #1
+ 943 0284 5B18     		adds	r3, r3, r1
+ 944 0286 4FEA8303 		lsl	r3, r3, #2
+ 945 028a D318     		adds	r3, r2, r3
+ 946 028c 03F10803 		add	r3, r3, #8
+ 947 0290 1B68     		ldr	r3, [r3, #0]
+ 948 0292 4FEA6303 		asr	r3, r3, #1
+ 949 0296 7A68     		ldr	r2, [r7, #4]
+ 950 0298 D218     		adds	r2, r2, r3
+ 951 029a 3B68     		ldr	r3, [r7, #0]
+ 952 029c 5B68     		ldr	r3, [r3, #4]
+ 953 029e 1046     		mov	r0, r2
+ 954 02a0 1946     		mov	r1, r3
+ 955 02a2 A047     		blx	r4
   70:../FreeRTOS_EC/Source/CMessageTask.cpp **** 			break;
- 955              		.loc 5 70 0 is_stmt 1 discriminator 3
- 956 02a4 18E0     		b	.L32
- 957              	.L34:
+ 956              		.loc 5 70 0 is_stmt 1 discriminator 3
+ 957 02a4 18E0     		b	.L32
+ 958              	.L34:
   67:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (int i=0; s_message_map[i].id!=NULL_MSG; ++i) {
- 958              		.loc 5 67 0
- 959 02a6 FB68     		ldr	r3, [r7, #12]
- 960 02a8 03F10103 		add	r3, r3, #1
- 961 02ac FB60     		str	r3, [r7, #12]
- 962              	.L33:
+ 959              		.loc 5 67 0
+ 960 02a6 FB68     		ldr	r3, [r7, #12]
+ 961 02a8 03F10103 		add	r3, r3, #1
+ 962 02ac FB60     		str	r3, [r7, #12]
+ 963              	.L33:
   67:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	for (int i=0; s_message_map[i].id!=NULL_MSG; ++i) {
- 963              		.loc 5 67 0 is_stmt 0 discriminator 1
- 964 02ae 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
- 965 02b2 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
- 966 02b6 F968     		ldr	r1, [r7, #12]
- 967 02b8 0B46     		mov	r3, r1
- 968 02ba 4FEA4303 		lsl	r3, r3, #1
- 969 02be 5B18     		adds	r3, r3, r1
- 970 02c0 4FEA8303 		lsl	r3, r3, #2
- 971 02c4 D318     		adds	r3, r2, r3
- 972 02c6 1B88     		ldrh	r3, [r3, #0]
- 973 02c8 002B     		cmp	r3, #0
- 974 02ca 0CBF     		ite	eq
- 975 02cc 0023     		moveq	r3, #0
- 976 02ce 0123     		movne	r3, #1
- 977 02d0 DBB2     		uxtb	r3, r3
- 978 02d2 002B     		cmp	r3, #0
- 979 02d4 7FF473AF 		bne	.L38
- 980              	.L32:
- 981              	.LBE12:
- 982              	.LBE11:
+ 964              		.loc 5 67 0 is_stmt 0 discriminator 1
+ 965 02ae 40F20002 		movw	r2, #:lower16:_ZN12CMessageTask13s_message_mapE
+ 966 02b2 C0F20002 		movt	r2, #:upper16:_ZN12CMessageTask13s_message_mapE
+ 967 02b6 F968     		ldr	r1, [r7, #12]
+ 968 02b8 0B46     		mov	r3, r1
+ 969 02ba 4FEA4303 		lsl	r3, r3, #1
+ 970 02be 5B18     		adds	r3, r3, r1
+ 971 02c0 4FEA8303 		lsl	r3, r3, #2
+ 972 02c4 D318     		adds	r3, r2, r3
+ 973 02c6 1B88     		ldrh	r3, [r3, #0]
+ 974 02c8 002B     		cmp	r3, #0
+ 975 02ca 0CBF     		ite	eq
+ 976 02cc 0023     		moveq	r3, #0
+ 977 02ce 0123     		movne	r3, #1
+ 978 02d0 DBB2     		uxtb	r3, r3
+ 979 02d2 002B     		cmp	r3, #0
+ 980 02d4 7FF473AF 		bne	.L38
+ 981              	.L32:
+ 982              	.LBE12:
+ 983              	.LBE11:
   71:../FreeRTOS_EC/Source/CMessageTask.cpp **** 		}
   72:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	}
   73:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 983              		.loc 5 73 0 is_stmt 1
- 984 02d8 07F11407 		add	r7, r7, #20
- 985 02dc BD46     		mov	sp, r7
- 986 02de 90BD     		pop	{r4, r7, pc}
- 987              		.cfi_endproc
- 988              	.LFE163:
- 990              		.align	2
- 991              		.global	_ZN12CMessageTask11PostMessageEP8CMessagem
- 992              		.thumb
- 993              		.thumb_func
- 995              	_ZN12CMessageTask11PostMessageEP8CMessagem:
- 996              	.LFB164:
+ 984              		.loc 5 73 0 is_stmt 1
+ 985 02d8 07F11407 		add	r7, r7, #20
+ 986 02dc BD46     		mov	sp, r7
+ 987 02de 90BD     		pop	{r4, r7, pc}
+ 988              		.cfi_endproc
+ 989              	.LFE163:
+ 991              		.align	2
+ 992              		.global	_ZN12CMessageTask11PostMessageEP8CMessagem
+ 993              		.thumb
+ 994              		.thumb_func
+ 996              	_ZN12CMessageTask11PostMessageEP8CMessagem:
+ 997              	.LFB164:
   74:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   75:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::PostMessage(CMessage *pMsg, portTickType nTicksToWait/*=portMAX_DELAY*/) {
- 997              		.loc 5 75 0
- 998              		.cfi_startproc
- 999              		@ args = 0, pretend = 0, frame = 16
- 1000              		@ frame_needed = 1, uses_anonymous_args = 0
- 1001 02e0 80B5     		push	{r7, lr}
- 1002              	.LCFI48:
- 1003              		.cfi_def_cfa_offset 8
- 1004              		.cfi_offset 14, -4
- 1005              		.cfi_offset 7, -8
- 1006 02e2 84B0     		sub	sp, sp, #16
- 1007              	.LCFI49:
- 1008              		.cfi_def_cfa_offset 24
- 1009 02e4 00AF     		add	r7, sp, #0
- 1010              	.LCFI50:
- 1011              		.cfi_def_cfa_register 7
- 1012 02e6 F860     		str	r0, [r7, #12]
- 1013 02e8 B960     		str	r1, [r7, #8]
- 1014 02ea 7A60     		str	r2, [r7, #4]
+ 998              		.loc 5 75 0
+ 999              		.cfi_startproc
+ 1000              		@ args = 0, pretend = 0, frame = 16
+ 1001              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1002 02e0 80B5     		push	{r7, lr}
+ 1003              	.LCFI48:
+ 1004              		.cfi_def_cfa_offset 8
+ 1005              		.cfi_offset 14, -4
+ 1006              		.cfi_offset 7, -8
+ 1007 02e2 84B0     		sub	sp, sp, #16
+ 1008              	.LCFI49:
+ 1009              		.cfi_def_cfa_offset 24
+ 1010 02e4 00AF     		add	r7, sp, #0
+ 1011              	.LCFI50:
+ 1012              		.cfi_def_cfa_register 7
+ 1013 02e6 F860     		str	r0, [r7, #12]
+ 1014 02e8 B960     		str	r1, [r7, #8]
+ 1015 02ea 7A60     		str	r2, [r7, #4]
   76:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.Send(pMsg, nTicksToWait);
- 1015              		.loc 5 76 0
- 1016 02ec FB68     		ldr	r3, [r7, #12]
- 1017 02ee 03F11003 		add	r3, r3, #16
- 1018 02f2 1846     		mov	r0, r3
- 1019 02f4 B968     		ldr	r1, [r7, #8]
- 1020 02f6 7A68     		ldr	r2, [r7, #4]
- 1021 02f8 FFF7FEFF 		bl	_ZN6CQueue4SendEPKvm
- 1022 02fc 0346     		mov	r3, r0
- 1023 02fe 002B     		cmp	r3, #0
- 1024 0300 0CBF     		ite	eq
- 1025 0302 0023     		moveq	r3, #0
- 1026 0304 0123     		movne	r3, #1
- 1027 0306 DBB2     		uxtb	r3, r3
+ 1016              		.loc 5 76 0
+ 1017 02ec FB68     		ldr	r3, [r7, #12]
+ 1018 02ee 03F11003 		add	r3, r3, #16
+ 1019 02f2 1846     		mov	r0, r3
+ 1020 02f4 B968     		ldr	r1, [r7, #8]
+ 1021 02f6 7A68     		ldr	r2, [r7, #4]
+ 1022 02f8 FFF7FEFF 		bl	_ZN6CQueue4SendEPKvm
+ 1023 02fc 0346     		mov	r3, r0
+ 1024 02fe 002B     		cmp	r3, #0
+ 1025 0300 0CBF     		ite	eq
+ 1026 0302 0023     		moveq	r3, #0
+ 1027 0304 0123     		movne	r3, #1
+ 1028 0306 DBB2     		uxtb	r3, r3
   77:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 1028              		.loc 5 77 0
- 1029 0308 1846     		mov	r0, r3
- 1030 030a 07F11007 		add	r7, r7, #16
- 1031 030e BD46     		mov	sp, r7
- 1032 0310 80BD     		pop	{r7, pc}
- 1033              		.cfi_endproc
- 1034              	.LFE164:
- 1036 0312 00BF     		.align	2
- 1037              		.global	_ZN12CMessageTask18PostMessageFromISREP8CMessagePl
- 1038              		.thumb
- 1039              		.thumb_func
- 1041              	_ZN12CMessageTask18PostMessageFromISREP8CMessagePl:
- 1042              	.LFB165:
+ 1029              		.loc 5 77 0
+ 1030 0308 1846     		mov	r0, r3
+ 1031 030a 07F11007 		add	r7, r7, #16
+ 1032 030e BD46     		mov	sp, r7
+ 1033 0310 80BD     		pop	{r7, pc}
+ 1034              		.cfi_endproc
+ 1035              	.LFE164:
+ 1037 0312 00BF     		.align	2
+ 1038              		.global	_ZN12CMessageTask18PostMessageFromISREP8CMessagePl
+ 1039              		.thumb
+ 1040              		.thumb_func
+ 1042              	_ZN12CMessageTask18PostMessageFromISREP8CMessagePl:
+ 1043              	.LFB165:
   78:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   79:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::PostMessageFromISR(CMessage *pMsg, portBASE_TYPE *pxHigherPriorityTaskWoken) {
- 1043              		.loc 5 79 0
- 1044              		.cfi_startproc
- 1045              		@ args = 0, pretend = 0, frame = 16
- 1046              		@ frame_needed = 1, uses_anonymous_args = 0
- 1047 0314 80B5     		push	{r7, lr}
- 1048              	.LCFI51:
- 1049              		.cfi_def_cfa_offset 8
- 1050              		.cfi_offset 14, -4
- 1051              		.cfi_offset 7, -8
- 1052 0316 84B0     		sub	sp, sp, #16
- 1053              	.LCFI52:
- 1054              		.cfi_def_cfa_offset 24
- 1055 0318 00AF     		add	r7, sp, #0
- 1056              	.LCFI53:
- 1057              		.cfi_def_cfa_register 7
- 1058 031a F860     		str	r0, [r7, #12]
- 1059 031c B960     		str	r1, [r7, #8]
- 1060 031e 7A60     		str	r2, [r7, #4]
+ 1044              		.loc 5 79 0
+ 1045              		.cfi_startproc
+ 1046              		@ args = 0, pretend = 0, frame = 16
+ 1047              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1048 0314 80B5     		push	{r7, lr}
+ 1049              	.LCFI51:
+ 1050              		.cfi_def_cfa_offset 8
+ 1051              		.cfi_offset 14, -4
+ 1052              		.cfi_offset 7, -8
+ 1053 0316 84B0     		sub	sp, sp, #16
+ 1054              	.LCFI52:
+ 1055              		.cfi_def_cfa_offset 24
+ 1056 0318 00AF     		add	r7, sp, #0
+ 1057              	.LCFI53:
+ 1058              		.cfi_def_cfa_register 7
+ 1059 031a F860     		str	r0, [r7, #12]
+ 1060 031c B960     		str	r1, [r7, #8]
+ 1061 031e 7A60     		str	r2, [r7, #4]
   80:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.SendFromISR(pMsg, pxHigherPriorityTaskWoken);
- 1061              		.loc 5 80 0
- 1062 0320 FB68     		ldr	r3, [r7, #12]
- 1063 0322 03F11003 		add	r3, r3, #16
- 1064 0326 1846     		mov	r0, r3
- 1065 0328 B968     		ldr	r1, [r7, #8]
- 1066 032a 7A68     		ldr	r2, [r7, #4]
- 1067 032c FFF7FEFF 		bl	_ZN6CQueue11SendFromISREPKvPl
- 1068 0330 0346     		mov	r3, r0
- 1069 0332 002B     		cmp	r3, #0
- 1070 0334 0CBF     		ite	eq
- 1071 0336 0023     		moveq	r3, #0
- 1072 0338 0123     		movne	r3, #1
- 1073 033a DBB2     		uxtb	r3, r3
+ 1062              		.loc 5 80 0
+ 1063 0320 FB68     		ldr	r3, [r7, #12]
+ 1064 0322 03F11003 		add	r3, r3, #16
+ 1065 0326 1846     		mov	r0, r3
+ 1066 0328 B968     		ldr	r1, [r7, #8]
+ 1067 032a 7A68     		ldr	r2, [r7, #4]
+ 1068 032c FFF7FEFF 		bl	_ZN6CQueue11SendFromISREPKvPl
+ 1069 0330 0346     		mov	r3, r0
+ 1070 0332 002B     		cmp	r3, #0
+ 1071 0334 0CBF     		ite	eq
+ 1072 0336 0023     		moveq	r3, #0
+ 1073 0338 0123     		movne	r3, #1
+ 1074 033a DBB2     		uxtb	r3, r3
   81:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 1074              		.loc 5 81 0
- 1075 033c 1846     		mov	r0, r3
- 1076 033e 07F11007 		add	r7, r7, #16
- 1077 0342 BD46     		mov	sp, r7
- 1078 0344 80BD     		pop	{r7, pc}
- 1079              		.cfi_endproc
- 1080              	.LFE165:
- 1082 0346 00BF     		.align	2
- 1083              		.global	_ZN12CMessageTask11SendMessageEP8CMessagem
- 1084              		.thumb
- 1085              		.thumb_func
- 1087              	_ZN12CMessageTask11SendMessageEP8CMessagem:
- 1088              	.LFB166:
+ 1075              		.loc 5 81 0
+ 1076 033c 1846     		mov	r0, r3
+ 1077 033e 07F11007 		add	r7, r7, #16
+ 1078 0342 BD46     		mov	sp, r7
+ 1079 0344 80BD     		pop	{r7, pc}
+ 1080              		.cfi_endproc
+ 1081              	.LFE165:
+ 1083 0346 00BF     		.align	2
+ 1084              		.global	_ZN12CMessageTask11SendMessageEP8CMessagem
+ 1085              		.thumb
+ 1086              		.thumb_func
+ 1088              	_ZN12CMessageTask11SendMessageEP8CMessagem:
+ 1089              	.LFB166:
   82:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   83:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::SendMessage(CMessage *pMsg, portTickType nTicksToWait/*=portMAX_DELAY*/) {
- 1089              		.loc 5 83 0
- 1090              		.cfi_startproc
- 1091              		@ args = 0, pretend = 0, frame = 16
- 1092              		@ frame_needed = 1, uses_anonymous_args = 0
- 1093 0348 80B5     		push	{r7, lr}
- 1094              	.LCFI54:
- 1095              		.cfi_def_cfa_offset 8
- 1096              		.cfi_offset 14, -4
- 1097              		.cfi_offset 7, -8
- 1098 034a 84B0     		sub	sp, sp, #16
- 1099              	.LCFI55:
- 1100              		.cfi_def_cfa_offset 24
- 1101 034c 00AF     		add	r7, sp, #0
- 1102              	.LCFI56:
- 1103              		.cfi_def_cfa_register 7
- 1104 034e F860     		str	r0, [r7, #12]
- 1105 0350 B960     		str	r1, [r7, #8]
- 1106 0352 7A60     		str	r2, [r7, #4]
+ 1090              		.loc 5 83 0
+ 1091              		.cfi_startproc
+ 1092              		@ args = 0, pretend = 0, frame = 16
+ 1093              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1094 0348 80B5     		push	{r7, lr}
+ 1095              	.LCFI54:
+ 1096              		.cfi_def_cfa_offset 8
+ 1097              		.cfi_offset 14, -4
+ 1098              		.cfi_offset 7, -8
+ 1099 034a 84B0     		sub	sp, sp, #16
+ 1100              	.LCFI55:
+ 1101              		.cfi_def_cfa_offset 24
+ 1102 034c 00AF     		add	r7, sp, #0
+ 1103              	.LCFI56:
+ 1104              		.cfi_def_cfa_register 7
+ 1105 034e F860     		str	r0, [r7, #12]
+ 1106 0350 B960     		str	r1, [r7, #8]
+ 1107 0352 7A60     		str	r2, [r7, #4]
   84:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.SendToFront(pMsg, nTicksToWait);
- 1107              		.loc 5 84 0
- 1108 0354 FB68     		ldr	r3, [r7, #12]
- 1109 0356 03F11003 		add	r3, r3, #16
- 1110 035a 1846     		mov	r0, r3
- 1111 035c B968     		ldr	r1, [r7, #8]
- 1112 035e 7A68     		ldr	r2, [r7, #4]
- 1113 0360 FFF7FEFF 		bl	_ZN6CQueue11SendToFrontEPKvm
- 1114 0364 0346     		mov	r3, r0
- 1115 0366 002B     		cmp	r3, #0
- 1116 0368 0CBF     		ite	eq
- 1117 036a 0023     		moveq	r3, #0
- 1118 036c 0123     		movne	r3, #1
- 1119 036e DBB2     		uxtb	r3, r3
+ 1108              		.loc 5 84 0
+ 1109 0354 FB68     		ldr	r3, [r7, #12]
+ 1110 0356 03F11003 		add	r3, r3, #16
+ 1111 035a 1846     		mov	r0, r3
+ 1112 035c B968     		ldr	r1, [r7, #8]
+ 1113 035e 7A68     		ldr	r2, [r7, #4]
+ 1114 0360 FFF7FEFF 		bl	_ZN6CQueue11SendToFrontEPKvm
+ 1115 0364 0346     		mov	r3, r0
+ 1116 0366 002B     		cmp	r3, #0
+ 1117 0368 0CBF     		ite	eq
+ 1118 036a 0023     		moveq	r3, #0
+ 1119 036c 0123     		movne	r3, #1
+ 1120 036e DBB2     		uxtb	r3, r3
   85:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 1120              		.loc 5 85 0
- 1121 0370 1846     		mov	r0, r3
- 1122 0372 07F11007 		add	r7, r7, #16
- 1123 0376 BD46     		mov	sp, r7
- 1124 0378 80BD     		pop	{r7, pc}
- 1125              		.cfi_endproc
- 1126              	.LFE166:
- 1128 037a 00BF     		.align	2
- 1129              		.global	_ZN12CMessageTask11SenfFromISREP8CMessagePl
- 1130              		.thumb
- 1131              		.thumb_func
- 1133              	_ZN12CMessageTask11SenfFromISREP8CMessagePl:
- 1134              	.LFB167:
+ 1121              		.loc 5 85 0
+ 1122 0370 1846     		mov	r0, r3
+ 1123 0372 07F11007 		add	r7, r7, #16
+ 1124 0376 BD46     		mov	sp, r7
+ 1125 0378 80BD     		pop	{r7, pc}
+ 1126              		.cfi_endproc
+ 1127              	.LFE166:
+ 1129 037a 00BF     		.align	2
+ 1130              		.global	_ZN12CMessageTask11SenfFromISREP8CMessagePl
+ 1131              		.thumb
+ 1132              		.thumb_func
+ 1134              	_ZN12CMessageTask11SenfFromISREP8CMessagePl:
+ 1135              	.LFB167:
   86:../FreeRTOS_EC/Source/CMessageTask.cpp **** 
   87:../FreeRTOS_EC/Source/CMessageTask.cpp **** bool CMessageTask::SenfFromISR(CMessage *pMsg, portBASE_TYPE * pxHigherPriorityTaskWoken) {
- 1135              		.loc 5 87 0
- 1136              		.cfi_startproc
- 1137              		@ args = 0, pretend = 0, frame = 16
- 1138              		@ frame_needed = 1, uses_anonymous_args = 0
- 1139 037c 80B5     		push	{r7, lr}
- 1140              	.LCFI57:
- 1141              		.cfi_def_cfa_offset 8
- 1142              		.cfi_offset 14, -4
- 1143              		.cfi_offset 7, -8
- 1144 037e 84B0     		sub	sp, sp, #16
- 1145              	.LCFI58:
- 1146              		.cfi_def_cfa_offset 24
- 1147 0380 00AF     		add	r7, sp, #0
- 1148              	.LCFI59:
- 1149              		.cfi_def_cfa_register 7
- 1150 0382 F860     		str	r0, [r7, #12]
- 1151 0384 B960     		str	r1, [r7, #8]
- 1152 0386 7A60     		str	r2, [r7, #4]
+ 1136              		.loc 5 87 0
+ 1137              		.cfi_startproc
+ 1138              		@ args = 0, pretend = 0, frame = 16
+ 1139              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1140 037c 80B5     		push	{r7, lr}
+ 1141              	.LCFI57:
+ 1142              		.cfi_def_cfa_offset 8
+ 1143              		.cfi_offset 14, -4
+ 1144              		.cfi_offset 7, -8
+ 1145 037e 84B0     		sub	sp, sp, #16
+ 1146              	.LCFI58:
+ 1147              		.cfi_def_cfa_offset 24
+ 1148 0380 00AF     		add	r7, sp, #0
+ 1149              	.LCFI59:
+ 1150              		.cfi_def_cfa_register 7
+ 1151 0382 F860     		str	r0, [r7, #12]
+ 1152 0384 B960     		str	r1, [r7, #8]
+ 1153 0386 7A60     		str	r2, [r7, #4]
   88:../FreeRTOS_EC/Source/CMessageTask.cpp **** 	return (bool)m_queue.SendToFrontFromISR(pMsg, pxHigherPriorityTaskWoken);
- 1153              		.loc 5 88 0
- 1154 0388 FB68     		ldr	r3, [r7, #12]
- 1155 038a 03F11003 		add	r3, r3, #16
- 1156 038e 1846     		mov	r0, r3
- 1157 0390 B968     		ldr	r1, [r7, #8]
- 1158 0392 7A68     		ldr	r2, [r7, #4]
- 1159 0394 FFF7FEFF 		bl	_ZN6CQueue18SendToFrontFromISREPKvPl
- 1160 0398 0346     		mov	r3, r0
- 1161 039a 002B     		cmp	r3, #0
- 1162 039c 0CBF     		ite	eq
- 1163 039e 0023     		moveq	r3, #0
- 1164 03a0 0123     		movne	r3, #1
- 1165 03a2 DBB2     		uxtb	r3, r3
+ 1154              		.loc 5 88 0
+ 1155 0388 FB68     		ldr	r3, [r7, #12]
+ 1156 038a 03F11003 		add	r3, r3, #16
+ 1157 038e 1846     		mov	r0, r3
+ 1158 0390 B968     		ldr	r1, [r7, #8]
+ 1159 0392 7A68     		ldr	r2, [r7, #4]
+ 1160 0394 FFF7FEFF 		bl	_ZN6CQueue18SendToFrontFromISREPKvPl
+ 1161 0398 0346     		mov	r3, r0
+ 1162 039a 002B     		cmp	r3, #0
+ 1163 039c 0CBF     		ite	eq
+ 1164 039e 0023     		moveq	r3, #0
+ 1165 03a0 0123     		movne	r3, #1
+ 1166 03a2 DBB2     		uxtb	r3, r3
   89:../FreeRTOS_EC/Source/CMessageTask.cpp **** }
- 1166              		.loc 5 89 0
- 1167 03a4 1846     		mov	r0, r3
- 1168 03a6 07F11007 		add	r7, r7, #16
- 1169 03aa BD46     		mov	sp, r7
- 1170 03ac 80BD     		pop	{r7, pc}
- 1171              		.cfi_endproc
- 1172              	.LFE167:
- 1174              		.global	_ZTV12CMessageTask
- 1175              		.section	.rodata._ZTV12CMessageTask,"a",%progbits
- 1176              		.align	3
- 1179              	_ZTV12CMessageTask:
- 1180 0000 00000000 		.word	0
- 1181 0004 00000000 		.word	0
- 1182 0008 00000000 		.word	_ZNK5CTask7IsValidEv
- 1183 000c 00000000 		.word	_ZN5CTask6AttachEPv
- 1184 0010 00000000 		.word	_ZN5CTask6DetachEv
- 1185 0014 00000000 		.word	_ZN12CMessageTaskD1Ev
- 1186 0018 00000000 		.word	_ZN12CMessageTaskD0Ev
- 1187 001c 00000000 		.word	_ZN12AManagedTask12HardwareInitEv
- 1188 0020 00000000 		.word	_ZN12CMessageTask3RunEv
- 1189 0024 00000000 		.word	_ZN12CMessageTask8OnCreateEPKctm
- 1190 0028 00000000 		.word	_ZN12CMessageTask15DispatchMessageERK8CMessage
- 1191 002c 00000000 		.word	_ZN12CMessageTask6OnInitEv
- 1192 0030 00000000 		.word	_ZN12CMessageTask9OnTimeOutEv
- 1193 0034 00000000 		.section	.rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__,"a",%progbits
- 1194              		.align	2
- 1197              	_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:
- 1198 0000 6C6F6E67 		.ascii	"long int CQueue::SendToFrontFromISR(const void*, lo"
- 1198      20696E74 
- 1198      20435175 
- 1198      6575653A 
- 1198      3A53656E 
- 1199 0033 6E672069 		.ascii	"ng int*)\000"
- 1199      6E742A29 
- 1199      00
- 1200              		.section	.rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__,"a",%progbits
- 1201              		.align	2
- 1204              	_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:
- 1205 0000 6C6F6E67 		.ascii	"long int CQueue::SendToFront(const void*, portTickT"
- 1205      20696E74 
- 1205      20435175 
- 1205      6575653A 
- 1205      3A53656E 
- 1206 0033 79706529 		.ascii	"ype)\000"
- 1206      00
- 1207              		.section	.rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__,"a",%progbits
- 1208              		.align	2
- 1211              	_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:
- 1212 0000 6C6F6E67 		.ascii	"long int CQueue::Receive(void*, portTickType)\000"
- 1212      20696E74 
- 1212      20435175 
- 1212      6575653A 
- 1212      3A526563 
- 1213              		.global	_ZN12CMessageTaskC1Ev
- 1214              		.thumb_set _ZN12CMessageTaskC1Ev,_ZN12CMessageTaskC2Ev
- 1215              		.global	_ZN12CMessageTaskD1Ev
- 1216              		.thumb_set _ZN12CMessageTaskD1Ev,_ZN12CMessageTaskD2Ev
- 1217 002e 0000     		.text
- 1218              	.Letext0:
- 1219              		.file 6 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 1220              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 1221              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 1222              		.file 9 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
- 1223              		.file 10 "../FreeRTOS_EC/Source/MessageMacro.h"
- 1224              		.file 11 "<built-in>"
- 1225              		.file 12 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Inc
+ 1167              		.loc 5 89 0
+ 1168 03a4 1846     		mov	r0, r3
+ 1169 03a6 07F11007 		add	r7, r7, #16
+ 1170 03aa BD46     		mov	sp, r7
+ 1171 03ac 80BD     		pop	{r7, pc}
+ 1172              		.cfi_endproc
+ 1173              	.LFE167:
+ 1175              		.global	_ZTV12CMessageTask
+ 1176              		.section	.rodata._ZTV12CMessageTask,"a",%progbits
+ 1177              		.align	3
+ 1180              	_ZTV12CMessageTask:
+ 1181 0000 00000000 		.word	0
+ 1182 0004 00000000 		.word	0
+ 1183 0008 00000000 		.word	_ZNK5CTask7IsValidEv
+ 1184 000c 00000000 		.word	_ZN5CTask6AttachEPv
+ 1185 0010 00000000 		.word	_ZN5CTask6DetachEv
+ 1186 0014 00000000 		.word	_ZN12CMessageTaskD1Ev
+ 1187 0018 00000000 		.word	_ZN12CMessageTaskD0Ev
+ 1188 001c 00000000 		.word	_ZN12AManagedTask12HardwareInitEv
+ 1189 0020 00000000 		.word	_ZN12CMessageTask3RunEv
+ 1190 0024 00000000 		.word	_ZN12CMessageTask8OnCreateEPKctm
+ 1191 0028 00000000 		.word	_ZN12CMessageTask15DispatchMessageERK8CMessage
+ 1192 002c 00000000 		.word	_ZN12CMessageTask6OnInitEv
+ 1193 0030 00000000 		.word	_ZN12CMessageTask9OnTimeOutEv
+ 1194 0034 00000000 		.section	.rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__,"a",%progbits
+ 1195              		.align	2
+ 1198              	_ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:
+ 1199 0000 6C6F6E67 		.ascii	"long int CQueue::SendToFrontFromISR(const void*, lo"
+ 1199      20696E74 
+ 1199      20435175 
+ 1199      6575653A 
+ 1199      3A53656E 
+ 1200 0033 6E672069 		.ascii	"ng int*)\000"
+ 1200      6E742A29 
+ 1200      00
+ 1201              		.section	.rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__,"a",%progbits
+ 1202              		.align	2
+ 1205              	_ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:
+ 1206 0000 6C6F6E67 		.ascii	"long int CQueue::SendToFront(const void*, portTickT"
+ 1206      20696E74 
+ 1206      20435175 
+ 1206      6575653A 
+ 1206      3A53656E 
+ 1207 0033 79706529 		.ascii	"ype)\000"
+ 1207      00
+ 1208              		.section	.rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__,"a",%progbits
+ 1209              		.align	2
+ 1212              	_ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:
+ 1213 0000 6C6F6E67 		.ascii	"long int CQueue::Receive(void*, portTickType)\000"
+ 1213      20696E74 
+ 1213      20435175 
+ 1213      6575653A 
+ 1213      3A526563 
+ 1214              		.global	_ZN12CMessageTaskC1Ev
+ 1215              		.thumb_set _ZN12CMessageTaskC1Ev,_ZN12CMessageTaskC2Ev
+ 1216              		.global	_ZN12CMessageTaskD1Ev
+ 1217              		.thumb_set _ZN12CMessageTaskD1Ev,_ZN12CMessageTaskD2Ev
+ 1218 002e 0000     		.text
+ 1219              	.Letext0:
+ 1220              		.file 6 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 1221              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
+ 1222              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
+ 1223              		.file 9 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 1224              		.file 10 "../FreeRTOS_EC/Source/MessageMacro.h"
+ 1225              		.file 11 "<built-in>"
+ 1226              		.file 12 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CMessageTask.cpp
-  C:\Temp\ccxQlJQx.s:19     .text._ZNK5CTask7IsValidEv:00000000 $t
-  C:\Temp\ccxQlJQx.s:24     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
-  C:\Temp\ccxQlJQx.s:61     .text._ZN5CTask6DetachEv:00000000 $t
-  C:\Temp\ccxQlJQx.s:66     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
-  C:\Temp\ccxQlJQx.s:106    .text._ZN12AManagedTask12HardwareInitEv:00000000 $t
-  C:\Temp\ccxQlJQx.s:111    .text._ZN12AManagedTask12HardwareInitEv:00000000 _ZN12AManagedTask12HardwareInitEv
-  C:\Temp\ccxQlJQx.s:141    .text._ZN6CQueue4SendEPKvm:00000000 $t
-  C:\Temp\ccxQlJQx.s:146    .text._ZN6CQueue4SendEPKvm:00000000 _ZN6CQueue4SendEPKvm
-  C:\Temp\ccxQlJQx.s:185    .text._ZN6CQueue11SendFromISREPKvPl:00000000 $t
-  C:\Temp\ccxQlJQx.s:190    .text._ZN6CQueue11SendFromISREPKvPl:00000000 _ZN6CQueue11SendFromISREPKvPl
-  C:\Temp\ccxQlJQx.s:228    .rodata:00000000 $d
-  C:\Temp\ccxQlJQx.s:229    .rodata:00000000 .LC0
-  C:\Temp\ccxQlJQx.s:232    .rodata:00000020 .LC1
-  C:\Temp\ccxQlJQx.s:235    .text._ZN6CQueue11SendToFrontEPKvm:00000000 $t
-  C:\Temp\ccxQlJQx.s:240    .text._ZN6CQueue11SendToFrontEPKvm:00000000 _ZN6CQueue11SendToFrontEPKvm
-  C:\Temp\ccxQlJQx.s:1204   .rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
-  C:\Temp\ccxQlJQx.s:299    .text._ZN6CQueue7ReceiveEPvm:00000000 $t
-  C:\Temp\ccxQlJQx.s:304    .text._ZN6CQueue7ReceiveEPvm:00000000 _ZN6CQueue7ReceiveEPvm
-  C:\Temp\ccxQlJQx.s:1211   .rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
-  C:\Temp\ccxQlJQx.s:363    .text._ZN6CQueue18SendToFrontFromISREPKvPl:00000000 $t
-  C:\Temp\ccxQlJQx.s:368    .text._ZN6CQueue18SendToFrontFromISREPKvPl:00000000 _ZN6CQueue18SendToFrontFromISREPKvPl
-  C:\Temp\ccxQlJQx.s:1197   .rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
-  C:\Temp\ccxQlJQx.s:427    .text._ZN12CMessageTask6OnInitEv:00000000 $t
-  C:\Temp\ccxQlJQx.s:432    .text._ZN12CMessageTask6OnInitEv:00000000 _ZN12CMessageTask6OnInitEv
-  C:\Temp\ccxQlJQx.s:462    .text._ZN12CMessageTask9OnTimeOutEv:00000000 $t
-  C:\Temp\ccxQlJQx.s:467    .text._ZN12CMessageTask9OnTimeOutEv:00000000 _ZN12CMessageTask9OnTimeOutEv
-  C:\Temp\ccxQlJQx.s:498    .rodata._ZN12CMessageTask13s_message_mapE:00000000 _ZN12CMessageTask13s_message_mapE
-  C:\Temp\ccxQlJQx.s:495    .rodata._ZN12CMessageTask13s_message_mapE:00000000 $d
-  C:\Temp\ccxQlJQx.s:501    .text:00000000 $t
-  C:\Temp\ccxQlJQx.s:506    .text:00000000 _ZN12CMessageTaskC2Ev
-  C:\Temp\ccxQlJQx.s:555    .text:00000040 $d
-  C:\Temp\ccxQlJQx.s:1179   .rodata._ZTV12CMessageTask:00000000 _ZTV12CMessageTask
-  C:\Temp\ccxQlJQx.s:559    .text:00000044 $t
-  C:\Temp\ccxQlJQx.s:564    .text:00000044 _ZN12CMessageTaskD2Ev
-  C:\Temp\ccxQlJQx.s:613    .text:00000084 $d
-  C:\Temp\ccxQlJQx.s:617    .text:00000088 $t
-  C:\Temp\ccxQlJQx.s:622    .text:00000088 _ZN12CMessageTaskD0Ev
-  C:\Temp\ccxQlJQx.s:564    .text:00000044 _ZN12CMessageTaskD1Ev
-  C:\Temp\ccxQlJQx.s:658    .text:000000a8 _ZN12CMessageTask8OnCreateEPKctm
-  C:\Temp\ccxQlJQx.s:711    .text:000000e8 _ZN12CMessageTask3RunEv
-  C:\Temp\ccxQlJQx.s:838    .text:000001ac _ZN12CMessageTask15DispatchMessageERK8CMessage
-  C:\Temp\ccxQlJQx.s:995    .text:000002e0 _ZN12CMessageTask11PostMessageEP8CMessagem
-  C:\Temp\ccxQlJQx.s:1041   .text:00000314 _ZN12CMessageTask18PostMessageFromISREP8CMessagePl
-  C:\Temp\ccxQlJQx.s:1087   .text:00000348 _ZN12CMessageTask11SendMessageEP8CMessagem
-  C:\Temp\ccxQlJQx.s:1133   .text:0000037c _ZN12CMessageTask11SenfFromISREP8CMessagePl
-  C:\Temp\ccxQlJQx.s:1176   .rodata._ZTV12CMessageTask:00000000 $d
-  C:\Temp\ccxQlJQx.s:1194   .rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\ccxQlJQx.s:1201   .rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\ccxQlJQx.s:1208   .rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\ccxQlJQx.s:506    .text:00000000 _ZN12CMessageTaskC1Ev
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:20     .text._ZNK5CTask7IsValidEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:25     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:62     .text._ZN5CTask6DetachEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:67     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:107    .text._ZN12AManagedTask12HardwareInitEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:112    .text._ZN12AManagedTask12HardwareInitEv:00000000 _ZN12AManagedTask12HardwareInitEv
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:142    .text._ZN6CQueue4SendEPKvm:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:147    .text._ZN6CQueue4SendEPKvm:00000000 _ZN6CQueue4SendEPKvm
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:186    .text._ZN6CQueue11SendFromISREPKvPl:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:191    .text._ZN6CQueue11SendFromISREPKvPl:00000000 _ZN6CQueue11SendFromISREPKvPl
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:229    .rodata:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:230    .rodata:00000000 .LC0
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:233    .rodata:00000020 .LC1
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:236    .text._ZN6CQueue11SendToFrontEPKvm:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:241    .text._ZN6CQueue11SendToFrontEPKvm:00000000 _ZN6CQueue11SendToFrontEPKvm
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1205   .rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:300    .text._ZN6CQueue7ReceiveEPvm:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:305    .text._ZN6CQueue7ReceiveEPvm:00000000 _ZN6CQueue7ReceiveEPvm
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1212   .rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:364    .text._ZN6CQueue18SendToFrontFromISREPKvPl:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:369    .text._ZN6CQueue18SendToFrontFromISREPKvPl:00000000 _ZN6CQueue18SendToFrontFromISREPKvPl
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1198   .rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:00000000 _ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:428    .text._ZN12CMessageTask6OnInitEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:433    .text._ZN12CMessageTask6OnInitEv:00000000 _ZN12CMessageTask6OnInitEv
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:463    .text._ZN12CMessageTask9OnTimeOutEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:468    .text._ZN12CMessageTask9OnTimeOutEv:00000000 _ZN12CMessageTask9OnTimeOutEv
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:499    .rodata._ZN12CMessageTask13s_message_mapE:00000000 _ZN12CMessageTask13s_message_mapE
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:496    .rodata._ZN12CMessageTask13s_message_mapE:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:502    .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:507    .text:00000000 _ZN12CMessageTaskC2Ev
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:556    .text:00000040 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1180   .rodata._ZTV12CMessageTask:00000000 _ZTV12CMessageTask
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:560    .text:00000044 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:565    .text:00000044 _ZN12CMessageTaskD2Ev
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:614    .text:00000084 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:618    .text:00000088 $t
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:623    .text:00000088 _ZN12CMessageTaskD0Ev
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:565    .text:00000044 _ZN12CMessageTaskD1Ev
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:659    .text:000000a8 _ZN12CMessageTask8OnCreateEPKctm
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:712    .text:000000e8 _ZN12CMessageTask3RunEv
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:839    .text:000001ac _ZN12CMessageTask15DispatchMessageERK8CMessage
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:996    .text:000002e0 _ZN12CMessageTask11PostMessageEP8CMessagem
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1042   .text:00000314 _ZN12CMessageTask18PostMessageFromISREP8CMessagePl
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1088   .text:00000348 _ZN12CMessageTask11SendMessageEP8CMessagem
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1134   .text:0000037c _ZN12CMessageTask11SenfFromISREP8CMessagePl
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1177   .rodata._ZTV12CMessageTask:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1195   .rodata._ZZN6CQueue18SendToFrontFromISREPKvPlE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1202   .rodata._ZZN6CQueue11SendToFrontEPKvmE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:1209   .rodata._ZZN6CQueue7ReceiveEPvmE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccguklhA.s:507    .text:00000000 _ZN12CMessageTaskC1Ev
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

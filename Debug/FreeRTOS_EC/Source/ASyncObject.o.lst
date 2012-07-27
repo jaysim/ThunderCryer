@@ -9,20 +9,21 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"ASyncObject.cpp"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
-  19              		.align	2
-  20              		.weak	_ZNK11ASyncObject7IsValidEv
-  21              		.thumb
-  22              		.thumb_func
-  24              	_ZNK11ASyncObject7IsValidEv:
-  25              	.LFB111:
-  26              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ASyncObject.cpp"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
+  20              		.align	2
+  21              		.weak	_ZNK11ASyncObject7IsValidEv
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZNK11ASyncObject7IsValidEv:
+  26              	.LFB111:
+  27              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
    1:../FreeRTOS_EC/Source/ASyncObject.h **** /**
    2:../FreeRTOS_EC/Source/ASyncObject.h ****  * @file   ASyncObject.h
    3:../FreeRTOS_EC/Source/ASyncObject.h ****  * @class  ASyncObject
@@ -65,98 +66,98 @@
   40:../FreeRTOS_EC/Source/ASyncObject.h **** 
   41:../FreeRTOS_EC/Source/ASyncObject.h **** inline
   42:../FreeRTOS_EC/Source/ASyncObject.h **** bool ASyncObject::IsValid() const {
-  27              		.loc 1 42 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 8
-  30              		@ frame_needed = 1, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-  32 0000 80B4     		push	{r7}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 4
-  35              		.cfi_offset 7, -4
-  36 0002 83B0     		sub	sp, sp, #12
-  37              	.LCFI1:
-  38              		.cfi_def_cfa_offset 16
-  39 0004 00AF     		add	r7, sp, #0
-  40              	.LCFI2:
-  41              		.cfi_def_cfa_register 7
-  42 0006 7860     		str	r0, [r7, #4]
+  28              		.loc 1 42 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
   43:../FreeRTOS_EC/Source/ASyncObject.h **** 	return m_handleSemaphore != NULL;
-  43              		.loc 1 43 0
-  44 0008 7B68     		ldr	r3, [r7, #4]
-  45 000a 5B68     		ldr	r3, [r3, #4]
-  46 000c 002B     		cmp	r3, #0
-  47 000e 0CBF     		ite	eq
-  48 0010 0023     		moveq	r3, #0
-  49 0012 0123     		movne	r3, #1
-  50 0014 DBB2     		uxtb	r3, r3
+  44              		.loc 1 43 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 5B68     		ldr	r3, [r3, #4]
+  47 000c 002B     		cmp	r3, #0
+  48 000e 0CBF     		ite	eq
+  49 0010 0023     		moveq	r3, #0
+  50 0012 0123     		movne	r3, #1
+  51 0014 DBB2     		uxtb	r3, r3
   44:../FreeRTOS_EC/Source/ASyncObject.h **** }
-  51              		.loc 1 44 0
-  52 0016 1846     		mov	r0, r3
-  53 0018 07F10C07 		add	r7, r7, #12
-  54 001c BD46     		mov	sp, r7
-  55 001e 80BC     		pop	{r7}
-  56 0020 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE111:
-  60 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
-  61              		.align	2
-  62              		.weak	_ZN11ASyncObject6DetachEv
-  63              		.thumb
-  64              		.thumb_func
-  66              	_ZN11ASyncObject6DetachEv:
-  67              	.LFB112:
+  52              		.loc 1 44 0
+  53 0016 1846     		mov	r0, r3
+  54 0018 07F10C07 		add	r7, r7, #12
+  55 001c BD46     		mov	sp, r7
+  56 001e 80BC     		pop	{r7}
+  57 0020 7047     		bx	lr
+  58              		.cfi_endproc
+  59              	.LFE111:
+  61 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
+  62              		.align	2
+  63              		.weak	_ZN11ASyncObject6DetachEv
+  64              		.thumb
+  65              		.thumb_func
+  67              	_ZN11ASyncObject6DetachEv:
+  68              	.LFB112:
   45:../FreeRTOS_EC/Source/ASyncObject.h **** 
   46:../FreeRTOS_EC/Source/ASyncObject.h **** inline
   47:../FreeRTOS_EC/Source/ASyncObject.h **** xGenericHandle ASyncObject::Detach() {
-  68              		.loc 1 47 0
-  69              		.cfi_startproc
-  70              		@ args = 0, pretend = 0, frame = 16
-  71              		@ frame_needed = 1, uses_anonymous_args = 0
-  72              		@ link register save eliminated.
-  73 0000 80B4     		push	{r7}
-  74              	.LCFI3:
-  75              		.cfi_def_cfa_offset 4
-  76              		.cfi_offset 7, -4
-  77 0002 85B0     		sub	sp, sp, #20
-  78              	.LCFI4:
-  79              		.cfi_def_cfa_offset 24
-  80 0004 00AF     		add	r7, sp, #0
-  81              	.LCFI5:
-  82              		.cfi_def_cfa_register 7
-  83 0006 7860     		str	r0, [r7, #4]
-  84              	.LBB2:
+  69              		.loc 1 47 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 16
+  72              		@ frame_needed = 1, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 0000 80B4     		push	{r7}
+  75              	.LCFI3:
+  76              		.cfi_def_cfa_offset 4
+  77              		.cfi_offset 7, -4
+  78 0002 85B0     		sub	sp, sp, #20
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_offset 24
+  81 0004 00AF     		add	r7, sp, #0
+  82              	.LCFI5:
+  83              		.cfi_def_cfa_register 7
+  84 0006 7860     		str	r0, [r7, #4]
+  85              	.LBB2:
   48:../FreeRTOS_EC/Source/ASyncObject.h **** 	xSemaphoreHandle res = m_handleSemaphore;
-  85              		.loc 1 48 0
-  86 0008 7B68     		ldr	r3, [r7, #4]
-  87 000a 5B68     		ldr	r3, [r3, #4]
-  88 000c FB60     		str	r3, [r7, #12]
+  86              		.loc 1 48 0
+  87 0008 7B68     		ldr	r3, [r7, #4]
+  88 000a 5B68     		ldr	r3, [r3, #4]
+  89 000c FB60     		str	r3, [r7, #12]
   49:../FreeRTOS_EC/Source/ASyncObject.h **** 	m_handleSemaphore = NULL;
-  89              		.loc 1 49 0
-  90 000e 7B68     		ldr	r3, [r7, #4]
-  91 0010 4FF00002 		mov	r2, #0
-  92 0014 5A60     		str	r2, [r3, #4]
+  90              		.loc 1 49 0
+  91 000e 7B68     		ldr	r3, [r7, #4]
+  92 0010 4FF00002 		mov	r2, #0
+  93 0014 5A60     		str	r2, [r3, #4]
   50:../FreeRTOS_EC/Source/ASyncObject.h **** 	return res;
-  93              		.loc 1 50 0
-  94 0016 FB68     		ldr	r3, [r7, #12]
-  95              	.LBE2:
+  94              		.loc 1 50 0
+  95 0016 FB68     		ldr	r3, [r7, #12]
+  96              	.LBE2:
   51:../FreeRTOS_EC/Source/ASyncObject.h **** }
-  96              		.loc 1 51 0
-  97 0018 1846     		mov	r0, r3
-  98 001a 07F11407 		add	r7, r7, #20
-  99 001e BD46     		mov	sp, r7
- 100 0020 80BC     		pop	{r7}
- 101 0022 7047     		bx	lr
- 102              		.cfi_endproc
- 103              	.LFE112:
- 105              		.section	.text._ZN12IFreeRTOSObjC2Ev,"axG",%progbits,_ZN12IFreeRTOSObjC5Ev,comdat
- 106              		.align	2
- 107              		.weak	_ZN12IFreeRTOSObjC2Ev
- 108              		.thumb
- 109              		.thumb_func
- 111              	_ZN12IFreeRTOSObjC2Ev:
- 112              	.LFB115:
- 113              		.file 2 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+  97              		.loc 1 51 0
+  98 0018 1846     		mov	r0, r3
+  99 001a 07F11407 		add	r7, r7, #20
+ 100 001e BD46     		mov	sp, r7
+ 101 0020 80BC     		pop	{r7}
+ 102 0022 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE112:
+ 106              		.section	.text._ZN12IFreeRTOSObjC2Ev,"axG",%progbits,_ZN12IFreeRTOSObjC5Ev,comdat
+ 107              		.align	2
+ 108              		.weak	_ZN12IFreeRTOSObjC2Ev
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	_ZN12IFreeRTOSObjC2Ev:
+ 113              	.LFB115:
+ 114              		.file 2 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
    1:../FreeRTOS_EC/Source/IFreeRTOSProtocol.h **** /**
    2:../FreeRTOS_EC/Source/IFreeRTOSProtocol.h ****  * @file IFreeRTOSProtocol.h
    3:../FreeRTOS_EC/Source/IFreeRTOSProtocol.h ****  * @class IFreeRTOSObj
@@ -181,48 +182,48 @@
   22:../FreeRTOS_EC/Source/IFreeRTOSProtocol.h **** typedef void *xGenericHandle;
   23:../FreeRTOS_EC/Source/IFreeRTOSProtocol.h **** 
   24:../FreeRTOS_EC/Source/IFreeRTOSProtocol.h **** class IFreeRTOSObj {
- 114              		.loc 2 24 0
- 115              		.cfi_startproc
- 116              		@ args = 0, pretend = 0, frame = 8
- 117              		@ frame_needed = 1, uses_anonymous_args = 0
- 118              		@ link register save eliminated.
- 119 0000 80B4     		push	{r7}
- 120              	.LCFI6:
- 121              		.cfi_def_cfa_offset 4
- 122              		.cfi_offset 7, -4
- 123 0002 83B0     		sub	sp, sp, #12
- 124              	.LCFI7:
- 125              		.cfi_def_cfa_offset 16
- 126 0004 00AF     		add	r7, sp, #0
- 127              	.LCFI8:
- 128              		.cfi_def_cfa_register 7
- 129 0006 7860     		str	r0, [r7, #4]
- 130              	.LBB3:
- 131              		.loc 2 24 0
- 132 0008 7B68     		ldr	r3, [r7, #4]
- 133 000a 044A     		ldr	r2, .L5
- 134 000c 1A60     		str	r2, [r3, #0]
- 135              	.LBE3:
- 136 000e 7B68     		ldr	r3, [r7, #4]
- 137 0010 1846     		mov	r0, r3
- 138 0012 07F10C07 		add	r7, r7, #12
- 139 0016 BD46     		mov	sp, r7
- 140 0018 80BC     		pop	{r7}
- 141 001a 7047     		bx	lr
- 142              	.L6:
- 143              		.align	2
- 144              	.L5:
- 145 001c 08000000 		.word	_ZTV12IFreeRTOSObj+8
- 146              		.cfi_endproc
- 147              	.LFE115:
- 149              		.text
- 150              		.align	2
- 151              		.global	_ZN11ASyncObjectC2Ev
- 152              		.thumb
- 153              		.thumb_func
- 155              	_ZN11ASyncObjectC2Ev:
- 156              	.LFB117:
- 157              		.file 3 "../FreeRTOS_EC/Source/ASyncObject.cpp"
+ 115              		.loc 2 24 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 8
+ 118              		@ frame_needed = 1, uses_anonymous_args = 0
+ 119              		@ link register save eliminated.
+ 120 0000 80B4     		push	{r7}
+ 121              	.LCFI6:
+ 122              		.cfi_def_cfa_offset 4
+ 123              		.cfi_offset 7, -4
+ 124 0002 83B0     		sub	sp, sp, #12
+ 125              	.LCFI7:
+ 126              		.cfi_def_cfa_offset 16
+ 127 0004 00AF     		add	r7, sp, #0
+ 128              	.LCFI8:
+ 129              		.cfi_def_cfa_register 7
+ 130 0006 7860     		str	r0, [r7, #4]
+ 131              	.LBB3:
+ 132              		.loc 2 24 0
+ 133 0008 7B68     		ldr	r3, [r7, #4]
+ 134 000a 044A     		ldr	r2, .L5
+ 135 000c 1A60     		str	r2, [r3, #0]
+ 136              	.LBE3:
+ 137 000e 7B68     		ldr	r3, [r7, #4]
+ 138 0010 1846     		mov	r0, r3
+ 139 0012 07F10C07 		add	r7, r7, #12
+ 140 0016 BD46     		mov	sp, r7
+ 141 0018 80BC     		pop	{r7}
+ 142 001a 7047     		bx	lr
+ 143              	.L6:
+ 144              		.align	2
+ 145              	.L5:
+ 146 001c 08000000 		.word	_ZTV12IFreeRTOSObj+8
+ 147              		.cfi_endproc
+ 148              	.LFE115:
+ 150              		.text
+ 151              		.align	2
+ 152              		.global	_ZN11ASyncObjectC2Ev
+ 153              		.thumb
+ 154              		.thumb_func
+ 156              	_ZN11ASyncObjectC2Ev:
+ 157              	.LFB117:
+ 158              		.file 3 "../FreeRTOS_EC/Source/ASyncObject.cpp"
    1:../FreeRTOS_EC/Source/ASyncObject.cpp **** /**
    2:../FreeRTOS_EC/Source/ASyncObject.cpp ****  * ASyncObject.cpp
    3:../FreeRTOS_EC/Source/ASyncObject.cpp ****  *
@@ -235,359 +236,359 @@
   10:../FreeRTOS_EC/Source/ASyncObject.cpp **** #include <assert.h>
   11:../FreeRTOS_EC/Source/ASyncObject.cpp **** 
   12:../FreeRTOS_EC/Source/ASyncObject.cpp **** ASyncObject::ASyncObject() {
- 158              		.loc 3 12 0
- 159              		.cfi_startproc
- 160              		@ args = 0, pretend = 0, frame = 8
- 161              		@ frame_needed = 1, uses_anonymous_args = 0
- 162 0000 80B5     		push	{r7, lr}
- 163              	.LCFI9:
- 164              		.cfi_def_cfa_offset 8
- 165              		.cfi_offset 14, -4
- 166              		.cfi_offset 7, -8
- 167 0002 82B0     		sub	sp, sp, #8
- 168              	.LCFI10:
- 169              		.cfi_def_cfa_offset 16
- 170 0004 00AF     		add	r7, sp, #0
- 171              	.LCFI11:
- 172              		.cfi_def_cfa_register 7
- 173 0006 7860     		str	r0, [r7, #4]
- 174              	.LBB4:
- 175              		.loc 3 12 0
- 176 0008 7B68     		ldr	r3, [r7, #4]
- 177 000a 1846     		mov	r0, r3
- 178 000c FFF7FEFF 		bl	_ZN12IFreeRTOSObjC2Ev
- 179 0010 7B68     		ldr	r3, [r7, #4]
- 180 0012 064A     		ldr	r2, .L9
- 181 0014 1A60     		str	r2, [r3, #0]
+ 159              		.loc 3 12 0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 8
+ 162              		@ frame_needed = 1, uses_anonymous_args = 0
+ 163 0000 80B5     		push	{r7, lr}
+ 164              	.LCFI9:
+ 165              		.cfi_def_cfa_offset 8
+ 166              		.cfi_offset 14, -4
+ 167              		.cfi_offset 7, -8
+ 168 0002 82B0     		sub	sp, sp, #8
+ 169              	.LCFI10:
+ 170              		.cfi_def_cfa_offset 16
+ 171 0004 00AF     		add	r7, sp, #0
+ 172              	.LCFI11:
+ 173              		.cfi_def_cfa_register 7
+ 174 0006 7860     		str	r0, [r7, #4]
+ 175              	.LBB4:
+ 176              		.loc 3 12 0
+ 177 0008 7B68     		ldr	r3, [r7, #4]
+ 178 000a 1846     		mov	r0, r3
+ 179 000c FFF7FEFF 		bl	_ZN12IFreeRTOSObjC2Ev
+ 180 0010 7B68     		ldr	r3, [r7, #4]
+ 181 0012 064A     		ldr	r2, .L9
+ 182 0014 1A60     		str	r2, [r3, #0]
   13:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	m_handleSemaphore = NULL;
- 182              		.loc 3 13 0
- 183 0016 7B68     		ldr	r3, [r7, #4]
- 184 0018 4FF00002 		mov	r2, #0
- 185 001c 5A60     		str	r2, [r3, #4]
- 186              	.LBE4:
+ 183              		.loc 3 13 0
+ 184 0016 7B68     		ldr	r3, [r7, #4]
+ 185 0018 4FF00002 		mov	r2, #0
+ 186 001c 5A60     		str	r2, [r3, #4]
+ 187              	.LBE4:
   14:../FreeRTOS_EC/Source/ASyncObject.cpp **** }
- 187              		.loc 3 14 0
- 188 001e 7B68     		ldr	r3, [r7, #4]
- 189 0020 1846     		mov	r0, r3
- 190 0022 07F10807 		add	r7, r7, #8
- 191 0026 BD46     		mov	sp, r7
- 192 0028 80BD     		pop	{r7, pc}
- 193              	.L10:
- 194 002a 00BF     		.align	2
- 195              	.L9:
- 196 002c 08000000 		.word	_ZTV11ASyncObject+8
- 197              		.cfi_endproc
- 198              	.LFE117:
- 200              		.align	2
- 201              		.global	_ZN11ASyncObjectD2Ev
- 202              		.thumb
- 203              		.thumb_func
- 205              	_ZN11ASyncObjectD2Ev:
- 206              	.LFB120:
+ 188              		.loc 3 14 0
+ 189 001e 7B68     		ldr	r3, [r7, #4]
+ 190 0020 1846     		mov	r0, r3
+ 191 0022 07F10807 		add	r7, r7, #8
+ 192 0026 BD46     		mov	sp, r7
+ 193 0028 80BD     		pop	{r7, pc}
+ 194              	.L10:
+ 195 002a 00BF     		.align	2
+ 196              	.L9:
+ 197 002c 08000000 		.word	_ZTV11ASyncObject+8
+ 198              		.cfi_endproc
+ 199              	.LFE117:
+ 201              		.align	2
+ 202              		.global	_ZN11ASyncObjectD2Ev
+ 203              		.thumb
+ 204              		.thumb_func
+ 206              	_ZN11ASyncObjectD2Ev:
+ 207              	.LFB120:
   15:../FreeRTOS_EC/Source/ASyncObject.cpp **** 
   16:../FreeRTOS_EC/Source/ASyncObject.cpp **** ASyncObject::~ASyncObject() {
- 207              		.loc 3 16 0
- 208              		.cfi_startproc
- 209              		@ args = 0, pretend = 0, frame = 8
- 210              		@ frame_needed = 1, uses_anonymous_args = 0
- 211 0030 80B5     		push	{r7, lr}
- 212              	.LCFI12:
- 213              		.cfi_def_cfa_offset 8
- 214              		.cfi_offset 14, -4
- 215              		.cfi_offset 7, -8
- 216 0032 82B0     		sub	sp, sp, #8
- 217              	.LCFI13:
- 218              		.cfi_def_cfa_offset 16
- 219 0034 00AF     		add	r7, sp, #0
- 220              	.LCFI14:
- 221              		.cfi_def_cfa_register 7
- 222 0036 7860     		str	r0, [r7, #4]
- 223              	.LBB5:
- 224              		.loc 3 16 0
- 225 0038 7B68     		ldr	r3, [r7, #4]
- 226 003a 0D4A     		ldr	r2, .L14
- 227 003c 1A60     		str	r2, [r3, #0]
+ 208              		.loc 3 16 0
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 8
+ 211              		@ frame_needed = 1, uses_anonymous_args = 0
+ 212 0030 80B5     		push	{r7, lr}
+ 213              	.LCFI12:
+ 214              		.cfi_def_cfa_offset 8
+ 215              		.cfi_offset 14, -4
+ 216              		.cfi_offset 7, -8
+ 217 0032 82B0     		sub	sp, sp, #8
+ 218              	.LCFI13:
+ 219              		.cfi_def_cfa_offset 16
+ 220 0034 00AF     		add	r7, sp, #0
+ 221              	.LCFI14:
+ 222              		.cfi_def_cfa_register 7
+ 223 0036 7860     		str	r0, [r7, #4]
+ 224              	.LBB5:
+ 225              		.loc 3 16 0
+ 226 0038 7B68     		ldr	r3, [r7, #4]
+ 227 003a 0D4A     		ldr	r2, .L14
+ 228 003c 1A60     		str	r2, [r3, #0]
   17:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	if (IsValid())
- 228              		.loc 3 17 0
- 229 003e 7868     		ldr	r0, [r7, #4]
- 230 0040 FFF7FEFF 		bl	_ZNK11ASyncObject7IsValidEv
- 231 0044 0346     		mov	r3, r0
- 232 0046 002B     		cmp	r3, #0
- 233 0048 02D0     		beq	.L12
+ 229              		.loc 3 17 0
+ 230 003e 7868     		ldr	r0, [r7, #4]
+ 231 0040 FFF7FEFF 		bl	_ZNK11ASyncObject7IsValidEv
+ 232 0044 0346     		mov	r3, r0
+ 233 0046 002B     		cmp	r3, #0
+ 234 0048 02D0     		beq	.L12
   18:../FreeRTOS_EC/Source/ASyncObject.cpp **** 		Delete();
- 234              		.loc 3 18 0
- 235 004a 7868     		ldr	r0, [r7, #4]
- 236 004c FFF7FEFF 		bl	_ZN11ASyncObject6DeleteEv
- 237              	.L12:
- 238              	.LBE5:
+ 235              		.loc 3 18 0
+ 236 004a 7868     		ldr	r0, [r7, #4]
+ 237 004c FFF7FEFF 		bl	_ZN11ASyncObject6DeleteEv
+ 238              	.L12:
+ 239              	.LBE5:
   19:../FreeRTOS_EC/Source/ASyncObject.cpp **** }
- 239              		.loc 3 19 0
- 240 0050 4FF00003 		mov	r3, #0
- 241 0054 03F00103 		and	r3, r3, #1
- 242 0058 DBB2     		uxtb	r3, r3
- 243 005a 002B     		cmp	r3, #0
- 244 005c 02D0     		beq	.L13
- 245              		.loc 3 19 0 is_stmt 0 discriminator 1
- 246 005e 7868     		ldr	r0, [r7, #4]
- 247 0060 FFF7FEFF 		bl	_ZdlPv
- 248              	.L13:
- 249              		.loc 3 19 0 discriminator 2
- 250 0064 7B68     		ldr	r3, [r7, #4]
- 251 0066 1846     		mov	r0, r3
- 252 0068 07F10807 		add	r7, r7, #8
- 253 006c BD46     		mov	sp, r7
- 254 006e 80BD     		pop	{r7, pc}
- 255              	.L15:
- 256              		.align	2
- 257              	.L14:
- 258 0070 08000000 		.word	_ZTV11ASyncObject+8
- 259              		.cfi_endproc
- 260              	.LFE120:
- 262              		.align	2
- 263              		.global	_ZN11ASyncObjectD0Ev
- 264              		.thumb
- 265              		.thumb_func
- 267              	_ZN11ASyncObjectD0Ev:
- 268              	.LFB122:
+ 240              		.loc 3 19 0
+ 241 0050 4FF00003 		mov	r3, #0
+ 242 0054 03F00103 		and	r3, r3, #1
+ 243 0058 DBB2     		uxtb	r3, r3
+ 244 005a 002B     		cmp	r3, #0
+ 245 005c 02D0     		beq	.L13
+ 246              		.loc 3 19 0 is_stmt 0 discriminator 1
+ 247 005e 7868     		ldr	r0, [r7, #4]
+ 248 0060 FFF7FEFF 		bl	_ZdlPv
+ 249              	.L13:
+ 250              		.loc 3 19 0 discriminator 2
+ 251 0064 7B68     		ldr	r3, [r7, #4]
+ 252 0066 1846     		mov	r0, r3
+ 253 0068 07F10807 		add	r7, r7, #8
+ 254 006c BD46     		mov	sp, r7
+ 255 006e 80BD     		pop	{r7, pc}
+ 256              	.L15:
+ 257              		.align	2
+ 258              	.L14:
+ 259 0070 08000000 		.word	_ZTV11ASyncObject+8
+ 260              		.cfi_endproc
+ 261              	.LFE120:
+ 263              		.align	2
+ 264              		.global	_ZN11ASyncObjectD0Ev
+ 265              		.thumb
+ 266              		.thumb_func
+ 268              	_ZN11ASyncObjectD0Ev:
+ 269              	.LFB122:
   16:../FreeRTOS_EC/Source/ASyncObject.cpp **** ASyncObject::~ASyncObject() {
- 269              		.loc 3 16 0 is_stmt 1
- 270              		.cfi_startproc
- 271              		@ args = 0, pretend = 0, frame = 8
- 272              		@ frame_needed = 1, uses_anonymous_args = 0
- 273 0074 80B5     		push	{r7, lr}
- 274              	.LCFI15:
- 275              		.cfi_def_cfa_offset 8
- 276              		.cfi_offset 14, -4
- 277              		.cfi_offset 7, -8
- 278 0076 82B0     		sub	sp, sp, #8
- 279              	.LCFI16:
- 280              		.cfi_def_cfa_offset 16
- 281 0078 00AF     		add	r7, sp, #0
- 282              	.LCFI17:
- 283              		.cfi_def_cfa_register 7
- 284 007a 7860     		str	r0, [r7, #4]
- 285              		.loc 3 19 0
- 286 007c 7868     		ldr	r0, [r7, #4]
- 287 007e FFF7FEFF 		bl	_ZN11ASyncObjectD1Ev
- 288 0082 7868     		ldr	r0, [r7, #4]
- 289 0084 FFF7FEFF 		bl	_ZdlPv
- 290 0088 7B68     		ldr	r3, [r7, #4]
- 291 008a 1846     		mov	r0, r3
- 292 008c 07F10807 		add	r7, r7, #8
- 293 0090 BD46     		mov	sp, r7
- 294 0092 80BD     		pop	{r7, pc}
- 295              		.cfi_endproc
- 296              	.LFE122:
- 298              		.align	2
- 299              		.global	_ZN11ASyncObject6DeleteEv
- 300              		.thumb
- 301              		.thumb_func
- 303              	_ZN11ASyncObject6DeleteEv:
- 304              	.LFB123:
+ 270              		.loc 3 16 0 is_stmt 1
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 8
+ 273              		@ frame_needed = 1, uses_anonymous_args = 0
+ 274 0074 80B5     		push	{r7, lr}
+ 275              	.LCFI15:
+ 276              		.cfi_def_cfa_offset 8
+ 277              		.cfi_offset 14, -4
+ 278              		.cfi_offset 7, -8
+ 279 0076 82B0     		sub	sp, sp, #8
+ 280              	.LCFI16:
+ 281              		.cfi_def_cfa_offset 16
+ 282 0078 00AF     		add	r7, sp, #0
+ 283              	.LCFI17:
+ 284              		.cfi_def_cfa_register 7
+ 285 007a 7860     		str	r0, [r7, #4]
+ 286              		.loc 3 19 0
+ 287 007c 7868     		ldr	r0, [r7, #4]
+ 288 007e FFF7FEFF 		bl	_ZN11ASyncObjectD1Ev
+ 289 0082 7868     		ldr	r0, [r7, #4]
+ 290 0084 FFF7FEFF 		bl	_ZdlPv
+ 291 0088 7B68     		ldr	r3, [r7, #4]
+ 292 008a 1846     		mov	r0, r3
+ 293 008c 07F10807 		add	r7, r7, #8
+ 294 0090 BD46     		mov	sp, r7
+ 295 0092 80BD     		pop	{r7, pc}
+ 296              		.cfi_endproc
+ 297              	.LFE122:
+ 299              		.align	2
+ 300              		.global	_ZN11ASyncObject6DeleteEv
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	_ZN11ASyncObject6DeleteEv:
+ 305              	.LFB123:
   20:../FreeRTOS_EC/Source/ASyncObject.cpp **** 
   21:../FreeRTOS_EC/Source/ASyncObject.cpp **** void ASyncObject::Delete() {
- 305              		.loc 3 21 0
- 306              		.cfi_startproc
- 307              		@ args = 0, pretend = 0, frame = 8
- 308              		@ frame_needed = 1, uses_anonymous_args = 0
- 309 0094 80B5     		push	{r7, lr}
- 310              	.LCFI18:
- 311              		.cfi_def_cfa_offset 8
- 312              		.cfi_offset 14, -4
- 313              		.cfi_offset 7, -8
- 314 0096 82B0     		sub	sp, sp, #8
- 315              	.LCFI19:
- 316              		.cfi_def_cfa_offset 16
- 317 0098 00AF     		add	r7, sp, #0
- 318              	.LCFI20:
- 319              		.cfi_def_cfa_register 7
- 320 009a 7860     		str	r0, [r7, #4]
+ 306              		.loc 3 21 0
+ 307              		.cfi_startproc
+ 308              		@ args = 0, pretend = 0, frame = 8
+ 309              		@ frame_needed = 1, uses_anonymous_args = 0
+ 310 0094 80B5     		push	{r7, lr}
+ 311              	.LCFI18:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 14, -4
+ 314              		.cfi_offset 7, -8
+ 315 0096 82B0     		sub	sp, sp, #8
+ 316              	.LCFI19:
+ 317              		.cfi_def_cfa_offset 16
+ 318 0098 00AF     		add	r7, sp, #0
+ 319              	.LCFI20:
+ 320              		.cfi_def_cfa_register 7
+ 321 009a 7860     		str	r0, [r7, #4]
   22:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	if (m_handleSemaphore != NULL) {
- 321              		.loc 3 22 0
- 322 009c 7B68     		ldr	r3, [r7, #4]
- 323 009e 5B68     		ldr	r3, [r3, #4]
- 324 00a0 002B     		cmp	r3, #0
- 325 00a2 08D0     		beq	.L18
+ 322              		.loc 3 22 0
+ 323 009c 7B68     		ldr	r3, [r7, #4]
+ 324 009e 5B68     		ldr	r3, [r3, #4]
+ 325 00a0 002B     		cmp	r3, #0
+ 326 00a2 08D0     		beq	.L18
   23:../FreeRTOS_EC/Source/ASyncObject.cpp **** 		vQueueDelete(m_handleSemaphore);
- 326              		.loc 3 23 0
- 327 00a4 7B68     		ldr	r3, [r7, #4]
- 328 00a6 5B68     		ldr	r3, [r3, #4]
- 329 00a8 1846     		mov	r0, r3
- 330 00aa FFF7FEFF 		bl	vQueueDelete
+ 327              		.loc 3 23 0
+ 328 00a4 7B68     		ldr	r3, [r7, #4]
+ 329 00a6 5B68     		ldr	r3, [r3, #4]
+ 330 00a8 1846     		mov	r0, r3
+ 331 00aa FFF7FEFF 		bl	vQueueDelete
   24:../FreeRTOS_EC/Source/ASyncObject.cpp **** 		m_handleSemaphore = NULL;
- 331              		.loc 3 24 0
- 332 00ae 7B68     		ldr	r3, [r7, #4]
- 333 00b0 4FF00002 		mov	r2, #0
- 334 00b4 5A60     		str	r2, [r3, #4]
- 335              	.L18:
+ 332              		.loc 3 24 0
+ 333 00ae 7B68     		ldr	r3, [r7, #4]
+ 334 00b0 4FF00002 		mov	r2, #0
+ 335 00b4 5A60     		str	r2, [r3, #4]
+ 336              	.L18:
   25:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	}
   26:../FreeRTOS_EC/Source/ASyncObject.cpp **** }
- 336              		.loc 3 26 0
- 337 00b6 07F10807 		add	r7, r7, #8
- 338 00ba BD46     		mov	sp, r7
- 339 00bc 80BD     		pop	{r7, pc}
- 340              		.cfi_endproc
- 341              	.LFE123:
- 343              		.section	.rodata
- 344              		.align	2
- 345              	.LC0:
- 346 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/ASyncObject.cpp\000"
- 346      72656552 
- 346      544F535F 
- 346      45432F53 
- 346      6F757263 
- 347 0026 0000     		.align	2
- 348              	.LC1:
- 349 0028 68616E64 		.ascii	"handle != NULL\000"
- 349      6C652021 
- 349      3D204E55 
- 349      4C4C00
- 350 0037 00       		.text
- 351 00be 00BF     		.align	2
- 352              		.global	_ZN11ASyncObject6AttachEPv
- 353              		.thumb
- 354              		.thumb_func
- 356              	_ZN11ASyncObject6AttachEPv:
- 357              	.LFB124:
+ 337              		.loc 3 26 0
+ 338 00b6 07F10807 		add	r7, r7, #8
+ 339 00ba BD46     		mov	sp, r7
+ 340 00bc 80BD     		pop	{r7, pc}
+ 341              		.cfi_endproc
+ 342              	.LFE123:
+ 344              		.section	.rodata
+ 345              		.align	2
+ 346              	.LC0:
+ 347 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/ASyncObject.cpp\000"
+ 347      72656552 
+ 347      544F535F 
+ 347      45432F53 
+ 347      6F757263 
+ 348 0026 0000     		.align	2
+ 349              	.LC1:
+ 350 0028 68616E64 		.ascii	"handle != NULL\000"
+ 350      6C652021 
+ 350      3D204E55 
+ 350      4C4C00
+ 351 0037 00       		.text
+ 352 00be 00BF     		.align	2
+ 353              		.global	_ZN11ASyncObject6AttachEPv
+ 354              		.thumb
+ 355              		.thumb_func
+ 357              	_ZN11ASyncObject6AttachEPv:
+ 358              	.LFB124:
   27:../FreeRTOS_EC/Source/ASyncObject.cpp **** 
   28:../FreeRTOS_EC/Source/ASyncObject.cpp **** void ASyncObject::Attach(xGenericHandle handle) {
- 358              		.loc 3 28 0
- 359              		.cfi_startproc
- 360              		@ args = 0, pretend = 0, frame = 8
- 361              		@ frame_needed = 1, uses_anonymous_args = 0
- 362 00c0 80B5     		push	{r7, lr}
- 363              	.LCFI21:
- 364              		.cfi_def_cfa_offset 8
- 365              		.cfi_offset 14, -4
- 366              		.cfi_offset 7, -8
- 367 00c2 82B0     		sub	sp, sp, #8
- 368              	.LCFI22:
- 369              		.cfi_def_cfa_offset 16
- 370 00c4 00AF     		add	r7, sp, #0
- 371              	.LCFI23:
- 372              		.cfi_def_cfa_register 7
- 373 00c6 7860     		str	r0, [r7, #4]
- 374 00c8 3960     		str	r1, [r7, #0]
- 375              	.LBB6:
+ 359              		.loc 3 28 0
+ 360              		.cfi_startproc
+ 361              		@ args = 0, pretend = 0, frame = 8
+ 362              		@ frame_needed = 1, uses_anonymous_args = 0
+ 363 00c0 80B5     		push	{r7, lr}
+ 364              	.LCFI21:
+ 365              		.cfi_def_cfa_offset 8
+ 366              		.cfi_offset 14, -4
+ 367              		.cfi_offset 7, -8
+ 368 00c2 82B0     		sub	sp, sp, #8
+ 369              	.LCFI22:
+ 370              		.cfi_def_cfa_offset 16
+ 371 00c4 00AF     		add	r7, sp, #0
+ 372              	.LCFI23:
+ 373              		.cfi_def_cfa_register 7
+ 374 00c6 7860     		str	r0, [r7, #4]
+ 375 00c8 3960     		str	r1, [r7, #0]
+ 376              	.LBB6:
   29:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	assert(handle != NULL);
- 376              		.loc 3 29 0
- 377 00ca 3B68     		ldr	r3, [r7, #0]
- 378 00cc 002B     		cmp	r3, #0
- 379 00ce 0FD1     		bne	.L21
- 380              		.loc 3 29 0 is_stmt 0 discriminator 1
- 381 00d0 40F20000 		movw	r0, #:lower16:.LC0
- 382 00d4 C0F20000 		movt	r0, #:upper16:.LC0
- 383 00d8 4FF01D01 		mov	r1, #29
- 384 00dc 40F20002 		movw	r2, #:lower16:_ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__
- 385 00e0 C0F20002 		movt	r2, #:upper16:_ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__
- 386 00e4 40F20003 		movw	r3, #:lower16:.LC1
- 387 00e8 C0F20003 		movt	r3, #:upper16:.LC1
- 388 00ec FFF7FEFF 		bl	__assert_func
- 389              	.L21:
+ 377              		.loc 3 29 0
+ 378 00ca 3B68     		ldr	r3, [r7, #0]
+ 379 00cc 002B     		cmp	r3, #0
+ 380 00ce 0FD1     		bne	.L21
+ 381              		.loc 3 29 0 is_stmt 0 discriminator 1
+ 382 00d0 40F20000 		movw	r0, #:lower16:.LC0
+ 383 00d4 C0F20000 		movt	r0, #:upper16:.LC0
+ 384 00d8 4FF01D01 		mov	r1, #29
+ 385 00dc 40F20002 		movw	r2, #:lower16:_ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__
+ 386 00e0 C0F20002 		movt	r2, #:upper16:_ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__
+ 387 00e4 40F20003 		movw	r3, #:lower16:.LC1
+ 388 00e8 C0F20003 		movt	r3, #:upper16:.LC1
+ 389 00ec FFF7FEFF 		bl	__assert_func
+ 390              	.L21:
   30:../FreeRTOS_EC/Source/ASyncObject.cpp **** 
   31:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	if (IsValid()) {
- 390              		.loc 3 31 0 is_stmt 1
- 391 00f0 7B68     		ldr	r3, [r7, #4]
- 392 00f2 1B68     		ldr	r3, [r3, #0]
- 393 00f4 1B68     		ldr	r3, [r3, #0]
- 394 00f6 7868     		ldr	r0, [r7, #4]
- 395 00f8 9847     		blx	r3
- 396 00fa 0346     		mov	r3, r0
- 397 00fc 002B     		cmp	r3, #0
- 398 00fe 02D0     		beq	.L22
+ 391              		.loc 3 31 0 is_stmt 1
+ 392 00f0 7B68     		ldr	r3, [r7, #4]
+ 393 00f2 1B68     		ldr	r3, [r3, #0]
+ 394 00f4 1B68     		ldr	r3, [r3, #0]
+ 395 00f6 7868     		ldr	r0, [r7, #4]
+ 396 00f8 9847     		blx	r3
+ 397 00fa 0346     		mov	r3, r0
+ 398 00fc 002B     		cmp	r3, #0
+ 399 00fe 02D0     		beq	.L22
   32:../FreeRTOS_EC/Source/ASyncObject.cpp **** 		Delete();
- 399              		.loc 3 32 0
- 400 0100 7868     		ldr	r0, [r7, #4]
- 401 0102 FFF7FEFF 		bl	_ZN11ASyncObject6DeleteEv
- 402              	.L22:
+ 400              		.loc 3 32 0
+ 401 0100 7868     		ldr	r0, [r7, #4]
+ 402 0102 FFF7FEFF 		bl	_ZN11ASyncObject6DeleteEv
+ 403              	.L22:
   33:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	}
   34:../FreeRTOS_EC/Source/ASyncObject.cpp **** 	m_handleSemaphore = handle;
- 403              		.loc 3 34 0
- 404 0106 7B68     		ldr	r3, [r7, #4]
- 405 0108 3A68     		ldr	r2, [r7, #0]
- 406 010a 5A60     		str	r2, [r3, #4]
- 407              	.LBE6:
+ 404              		.loc 3 34 0
+ 405 0106 7B68     		ldr	r3, [r7, #4]
+ 406 0108 3A68     		ldr	r2, [r7, #0]
+ 407 010a 5A60     		str	r2, [r3, #4]
+ 408              	.LBE6:
   35:../FreeRTOS_EC/Source/ASyncObject.cpp **** }
- 408              		.loc 3 35 0
- 409 010c 07F10807 		add	r7, r7, #8
- 410 0110 BD46     		mov	sp, r7
- 411 0112 80BD     		pop	{r7, pc}
- 412              		.cfi_endproc
- 413              	.LFE124:
- 415              		.global	_ZTV11ASyncObject
- 416              		.section	.rodata._ZTV11ASyncObject,"a",%progbits
- 417              		.align	3
- 420              	_ZTV11ASyncObject:
- 421 0000 00000000 		.word	0
- 422 0004 00000000 		.word	0
- 423 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
- 424 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
- 425 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
- 426 0014 00000000 		.word	_ZN11ASyncObjectD1Ev
- 427 0018 00000000 		.word	_ZN11ASyncObjectD0Ev
- 428 001c 00000000 		.word	__cxa_pure_virtual
- 429 0020 00000000 		.word	__cxa_pure_virtual
- 430              		.weak	_ZTV12IFreeRTOSObj
- 431 0024 00000000 		.section	.rodata._ZTV12IFreeRTOSObj,"aG",%progbits,_ZTV12IFreeRTOSObj,comdat
- 432              		.align	3
- 435              	_ZTV12IFreeRTOSObj:
- 436 0000 00000000 		.word	0
- 437 0004 00000000 		.word	0
- 438 0008 00000000 		.word	__cxa_pure_virtual
- 439 000c 00000000 		.word	__cxa_pure_virtual
- 440 0010 00000000 		.word	__cxa_pure_virtual
- 441 0014 00000000 		.section	.rodata._ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__,"a",%progbits
- 442              		.align	2
- 445              	_ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__:
- 446 0000 76697274 		.ascii	"virtual void ASyncObject::Attach(xGenericHandle)\000"
- 446      75616C20 
- 446      766F6964 
- 446      20415379 
- 446      6E634F62 
- 447              		.weak	_ZN12IFreeRTOSObjC1Ev
- 448              		.thumb_set _ZN12IFreeRTOSObjC1Ev,_ZN12IFreeRTOSObjC2Ev
- 449              		.global	_ZN11ASyncObjectC1Ev
- 450              		.thumb_set _ZN11ASyncObjectC1Ev,_ZN11ASyncObjectC2Ev
- 451              		.global	_ZN11ASyncObjectD1Ev
- 452              		.thumb_set _ZN11ASyncObjectD1Ev,_ZN11ASyncObjectD2Ev
- 453 0031 000000   		.text
- 454              	.Letext0:
- 455              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 456              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 457              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 458              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 459              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 409              		.loc 3 35 0
+ 410 010c 07F10807 		add	r7, r7, #8
+ 411 0110 BD46     		mov	sp, r7
+ 412 0112 80BD     		pop	{r7, pc}
+ 413              		.cfi_endproc
+ 414              	.LFE124:
+ 416              		.global	_ZTV11ASyncObject
+ 417              		.section	.rodata._ZTV11ASyncObject,"a",%progbits
+ 418              		.align	3
+ 421              	_ZTV11ASyncObject:
+ 422 0000 00000000 		.word	0
+ 423 0004 00000000 		.word	0
+ 424 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
+ 425 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
+ 426 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
+ 427 0014 00000000 		.word	_ZN11ASyncObjectD1Ev
+ 428 0018 00000000 		.word	_ZN11ASyncObjectD0Ev
+ 429 001c 00000000 		.word	__cxa_pure_virtual
+ 430 0020 00000000 		.word	__cxa_pure_virtual
+ 431              		.weak	_ZTV12IFreeRTOSObj
+ 432 0024 00000000 		.section	.rodata._ZTV12IFreeRTOSObj,"aG",%progbits,_ZTV12IFreeRTOSObj,comdat
+ 433              		.align	3
+ 436              	_ZTV12IFreeRTOSObj:
+ 437 0000 00000000 		.word	0
+ 438 0004 00000000 		.word	0
+ 439 0008 00000000 		.word	__cxa_pure_virtual
+ 440 000c 00000000 		.word	__cxa_pure_virtual
+ 441 0010 00000000 		.word	__cxa_pure_virtual
+ 442 0014 00000000 		.section	.rodata._ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__,"a",%progbits
+ 443              		.align	2
+ 446              	_ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__:
+ 447 0000 76697274 		.ascii	"virtual void ASyncObject::Attach(xGenericHandle)\000"
+ 447      75616C20 
+ 447      766F6964 
+ 447      20415379 
+ 447      6E634F62 
+ 448              		.weak	_ZN12IFreeRTOSObjC1Ev
+ 449              		.thumb_set _ZN12IFreeRTOSObjC1Ev,_ZN12IFreeRTOSObjC2Ev
+ 450              		.global	_ZN11ASyncObjectC1Ev
+ 451              		.thumb_set _ZN11ASyncObjectC1Ev,_ZN11ASyncObjectC2Ev
+ 452              		.global	_ZN11ASyncObjectD1Ev
+ 453              		.thumb_set _ZN11ASyncObjectD1Ev,_ZN11ASyncObjectD2Ev
+ 454 0031 000000   		.text
+ 455              	.Letext0:
+ 456              		.file 4 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 457              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
+ 458              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/queue.h"
+ 459              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/semphr.h"
+ 460              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 ASyncObject.cpp
-  C:\Temp\ccnScxHp.s:19     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
-  C:\Temp\ccnScxHp.s:24     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
-  C:\Temp\ccnScxHp.s:61     .text._ZN11ASyncObject6DetachEv:00000000 $t
-  C:\Temp\ccnScxHp.s:66     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
-  C:\Temp\ccnScxHp.s:106    .text._ZN12IFreeRTOSObjC2Ev:00000000 $t
-  C:\Temp\ccnScxHp.s:111    .text._ZN12IFreeRTOSObjC2Ev:00000000 _ZN12IFreeRTOSObjC2Ev
-  C:\Temp\ccnScxHp.s:145    .text._ZN12IFreeRTOSObjC2Ev:0000001c $d
-  C:\Temp\ccnScxHp.s:435    .rodata._ZTV12IFreeRTOSObj:00000000 _ZTV12IFreeRTOSObj
-  C:\Temp\ccnScxHp.s:150    .text:00000000 $t
-  C:\Temp\ccnScxHp.s:155    .text:00000000 _ZN11ASyncObjectC2Ev
-  C:\Temp\ccnScxHp.s:196    .text:0000002c $d
-  C:\Temp\ccnScxHp.s:420    .rodata._ZTV11ASyncObject:00000000 _ZTV11ASyncObject
-  C:\Temp\ccnScxHp.s:200    .text:00000030 $t
-  C:\Temp\ccnScxHp.s:205    .text:00000030 _ZN11ASyncObjectD2Ev
-  C:\Temp\ccnScxHp.s:303    .text:00000094 _ZN11ASyncObject6DeleteEv
-  C:\Temp\ccnScxHp.s:258    .text:00000070 $d
-  C:\Temp\ccnScxHp.s:262    .text:00000074 $t
-  C:\Temp\ccnScxHp.s:267    .text:00000074 _ZN11ASyncObjectD0Ev
-  C:\Temp\ccnScxHp.s:205    .text:00000030 _ZN11ASyncObjectD1Ev
-  C:\Temp\ccnScxHp.s:344    .rodata:00000000 $d
-  C:\Temp\ccnScxHp.s:345    .rodata:00000000 .LC0
-  C:\Temp\ccnScxHp.s:348    .rodata:00000028 .LC1
-  C:\Temp\ccnScxHp.s:356    .text:000000c0 _ZN11ASyncObject6AttachEPv
-  C:\Temp\ccnScxHp.s:445    .rodata._ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__:00000000 _ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__
-  C:\Temp\ccnScxHp.s:417    .rodata._ZTV11ASyncObject:00000000 $d
-  C:\Temp\ccnScxHp.s:432    .rodata._ZTV12IFreeRTOSObj:00000000 $d
-  C:\Temp\ccnScxHp.s:442    .rodata._ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\ccnScxHp.s:111    .text._ZN12IFreeRTOSObjC2Ev:00000000 _ZN12IFreeRTOSObjC1Ev
-  C:\Temp\ccnScxHp.s:155    .text:00000000 _ZN11ASyncObjectC1Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:20     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:25     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:62     .text._ZN11ASyncObject6DetachEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:67     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:107    .text._ZN12IFreeRTOSObjC2Ev:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:112    .text._ZN12IFreeRTOSObjC2Ev:00000000 _ZN12IFreeRTOSObjC2Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:146    .text._ZN12IFreeRTOSObjC2Ev:0000001c $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:436    .rodata._ZTV12IFreeRTOSObj:00000000 _ZTV12IFreeRTOSObj
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:151    .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:156    .text:00000000 _ZN11ASyncObjectC2Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:197    .text:0000002c $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:421    .rodata._ZTV11ASyncObject:00000000 _ZTV11ASyncObject
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:201    .text:00000030 $t
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:206    .text:00000030 _ZN11ASyncObjectD2Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:304    .text:00000094 _ZN11ASyncObject6DeleteEv
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:259    .text:00000070 $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:263    .text:00000074 $t
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:268    .text:00000074 _ZN11ASyncObjectD0Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:206    .text:00000030 _ZN11ASyncObjectD1Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:345    .rodata:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:346    .rodata:00000000 .LC0
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:349    .rodata:00000028 .LC1
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:357    .text:000000c0 _ZN11ASyncObject6AttachEPv
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:446    .rodata._ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__:00000000 _ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:418    .rodata._ZTV11ASyncObject:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:433    .rodata._ZTV12IFreeRTOSObj:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:443    .rodata._ZZN11ASyncObject6AttachEPvE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:112    .text._ZN12IFreeRTOSObjC2Ev:00000000 _ZN12IFreeRTOSObjC1Ev
+C:\Users\Alex\AppData\Local\Temp\ccK8VRbQ.s:156    .text:00000000 _ZN11ASyncObjectC1Ev
                      .debug_frame:00000010 $d
                            .group:00000000 _ZN12IFreeRTOSObjC5Ev
 

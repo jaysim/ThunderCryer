@@ -9,19 +9,20 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"stm32f4xx_pwr.c"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.align	2
-  19              		.global	PWR_DeInit
-  20              		.thumb
-  21              		.thumb_func
-  23              	PWR_DeInit:
-  24              	.LFB110:
-  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"stm32f4xx_pwr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.align	2
+  20              		.global	PWR_DeInit
+  21              		.thumb
+  22              		.thumb_func
+  24              	PWR_DeInit:
+  25              	.LFB110:
+  26              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c"
    1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
    2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   ******************************************************************************
    3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @file    stm32f4xx_pwr.c
@@ -143,39 +144,39 @@
  119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_DeInit(void)
  121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
-  26              		.loc 1 121 0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 0
-  29              		@ frame_needed = 1, uses_anonymous_args = 0
-  30 0000 80B5     		push	{r7, lr}
-  31              	.LCFI0:
-  32              		.cfi_def_cfa_offset 8
-  33              		.cfi_offset 14, -4
-  34              		.cfi_offset 7, -8
-  35 0002 00AF     		add	r7, sp, #0
-  36              	.LCFI1:
-  37              		.cfi_def_cfa_register 7
+  27              		.loc 1 121 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 14, -4
+  35              		.cfi_offset 7, -8
+  36 0002 00AF     		add	r7, sp, #0
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_register 7
  122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, ENABLE);
-  38              		.loc 1 122 0
-  39 0004 4FF08050 		mov	r0, #268435456
-  40 0008 4FF00101 		mov	r1, #1
-  41 000c FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
+  39              		.loc 1 122 0
+  40 0004 4FF08050 		mov	r0, #268435456
+  41 0008 4FF00101 		mov	r1, #1
+  42 000c FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
  123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, DISABLE);
-  42              		.loc 1 123 0
-  43 0010 4FF08050 		mov	r0, #268435456
-  44 0014 4FF00001 		mov	r1, #0
-  45 0018 FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
+  43              		.loc 1 123 0
+  44 0010 4FF08050 		mov	r0, #268435456
+  45 0014 4FF00001 		mov	r1, #0
+  46 0018 FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
  124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
-  46              		.loc 1 124 0
-  47 001c 80BD     		pop	{r7, pc}
-  48              		.cfi_endproc
-  49              	.LFE110:
-  51 001e 00BF     		.align	2
-  52              		.global	PWR_BackupAccessCmd
-  53              		.thumb
-  54              		.thumb_func
-  56              	PWR_BackupAccessCmd:
-  57              	.LFB111:
+  47              		.loc 1 124 0
+  48 001c 80BD     		pop	{r7, pc}
+  49              		.cfi_endproc
+  50              	.LFE110:
+  52 001e 00BF     		.align	2
+  53              		.global	PWR_BackupAccessCmd
+  54              		.thumb
+  55              		.thumb_func
+  57              	PWR_BackupAccessCmd:
+  58              	.LFB111:
  125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @brief  Enables or disables access to the backup domain (RTC registers, RTC 
@@ -188,46 +189,46 @@
  134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_BackupAccessCmd(FunctionalState NewState)
  136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
-  58              		.loc 1 136 0
-  59              		.cfi_startproc
-  60              		@ args = 0, pretend = 0, frame = 8
-  61              		@ frame_needed = 1, uses_anonymous_args = 0
-  62              		@ link register save eliminated.
-  63 0020 80B4     		push	{r7}
-  64              	.LCFI2:
-  65              		.cfi_def_cfa_offset 4
-  66              		.cfi_offset 7, -4
-  67 0022 83B0     		sub	sp, sp, #12
-  68              	.LCFI3:
-  69              		.cfi_def_cfa_offset 16
-  70 0024 00AF     		add	r7, sp, #0
-  71              	.LCFI4:
-  72              		.cfi_def_cfa_register 7
-  73 0026 0346     		mov	r3, r0
-  74 0028 FB71     		strb	r3, [r7, #7]
+  59              		.loc 1 136 0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 8
+  62              		@ frame_needed = 1, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64 0020 80B4     		push	{r7}
+  65              	.LCFI2:
+  66              		.cfi_def_cfa_offset 4
+  67              		.cfi_offset 7, -4
+  68 0022 83B0     		sub	sp, sp, #12
+  69              	.LCFI3:
+  70              		.cfi_def_cfa_offset 16
+  71 0024 00AF     		add	r7, sp, #0
+  72              	.LCFI4:
+  73              		.cfi_def_cfa_register 7
+  74 0026 0346     		mov	r3, r0
+  75 0028 FB71     		strb	r3, [r7, #7]
  137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   *(__IO uint32_t *) CR_DBP_BB = (uint32_t)NewState;
-  75              		.loc 1 140 0
-  76 002a 4FF02003 		mov	r3, #32
-  77 002e C4F20E23 		movt	r3, 16910
-  78 0032 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
-  79 0034 1A60     		str	r2, [r3, #0]
+  76              		.loc 1 140 0
+  77 002a 4FF02003 		mov	r3, #32
+  78 002e C4F20E23 		movt	r3, 16910
+  79 0032 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+  80 0034 1A60     		str	r2, [r3, #0]
  141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
-  80              		.loc 1 141 0
-  81 0036 07F10C07 		add	r7, r7, #12
-  82 003a BD46     		mov	sp, r7
-  83 003c 80BC     		pop	{r7}
-  84 003e 7047     		bx	lr
-  85              		.cfi_endproc
-  86              	.LFE111:
-  88              		.align	2
-  89              		.global	PWR_PVDLevelConfig
-  90              		.thumb
-  91              		.thumb_func
-  93              	PWR_PVDLevelConfig:
-  94              	.LFB112:
+  81              		.loc 1 141 0
+  82 0036 07F10C07 		add	r7, r7, #12
+  83 003a BD46     		mov	sp, r7
+  84 003c 80BC     		pop	{r7}
+  85 003e 7047     		bx	lr
+  86              		.cfi_endproc
+  87              	.LFE111:
+  89              		.align	2
+  90              		.global	PWR_PVDLevelConfig
+  91              		.thumb
+  92              		.thumb_func
+  94              	PWR_PVDLevelConfig:
+  95              	.LFB112:
  142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @}
@@ -269,73 +270,73 @@
  180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_PVDLevelConfig(uint32_t PWR_PVDLevel)
  182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
-  95              		.loc 1 182 0
-  96              		.cfi_startproc
-  97              		@ args = 0, pretend = 0, frame = 16
-  98              		@ frame_needed = 1, uses_anonymous_args = 0
-  99              		@ link register save eliminated.
- 100 0040 80B4     		push	{r7}
- 101              	.LCFI5:
- 102              		.cfi_def_cfa_offset 4
- 103              		.cfi_offset 7, -4
- 104 0042 85B0     		sub	sp, sp, #20
- 105              	.LCFI6:
- 106              		.cfi_def_cfa_offset 24
- 107 0044 00AF     		add	r7, sp, #0
- 108              	.LCFI7:
- 109              		.cfi_def_cfa_register 7
- 110 0046 7860     		str	r0, [r7, #4]
+  96              		.loc 1 182 0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 16
+  99              		@ frame_needed = 1, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101 0040 80B4     		push	{r7}
+ 102              	.LCFI5:
+ 103              		.cfi_def_cfa_offset 4
+ 104              		.cfi_offset 7, -4
+ 105 0042 85B0     		sub	sp, sp, #20
+ 106              	.LCFI6:
+ 107              		.cfi_def_cfa_offset 24
+ 108 0044 00AF     		add	r7, sp, #0
+ 109              	.LCFI7:
+ 110              		.cfi_def_cfa_register 7
+ 111 0046 7860     		str	r0, [r7, #4]
  183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   uint32_t tmpreg = 0;
- 111              		.loc 1 183 0
- 112 0048 4FF00003 		mov	r3, #0
- 113 004c FB60     		str	r3, [r7, #12]
+ 112              		.loc 1 183 0
+ 113 0048 4FF00003 		mov	r3, #0
+ 114 004c FB60     		str	r3, [r7, #12]
  184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_PWR_PVD_LEVEL(PWR_PVDLevel));
  187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   tmpreg = PWR->CR;
- 114              		.loc 1 188 0
- 115 004e 4FF4E043 		mov	r3, #28672
- 116 0052 C4F20003 		movt	r3, 16384
- 117 0056 1B68     		ldr	r3, [r3, #0]
- 118 0058 FB60     		str	r3, [r7, #12]
+ 115              		.loc 1 188 0
+ 116 004e 4FF4E043 		mov	r3, #28672
+ 117 0052 C4F20003 		movt	r3, 16384
+ 118 0056 1B68     		ldr	r3, [r3, #0]
+ 119 0058 FB60     		str	r3, [r7, #12]
  189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Clear PLS[7:5] bits */
  191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   tmpreg &= CR_PLS_MASK;
- 119              		.loc 1 191 0
- 120 005a FB68     		ldr	r3, [r7, #12]
- 121 005c 23F0E003 		bic	r3, r3, #224
- 122 0060 FB60     		str	r3, [r7, #12]
+ 120              		.loc 1 191 0
+ 121 005a FB68     		ldr	r3, [r7, #12]
+ 122 005c 23F0E003 		bic	r3, r3, #224
+ 123 0060 FB60     		str	r3, [r7, #12]
  192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Set PLS[7:5] bits according to PWR_PVDLevel value */
  194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   tmpreg |= PWR_PVDLevel;
- 123              		.loc 1 194 0
- 124 0062 FA68     		ldr	r2, [r7, #12]
- 125 0064 7B68     		ldr	r3, [r7, #4]
- 126 0066 1343     		orrs	r3, r3, r2
- 127 0068 FB60     		str	r3, [r7, #12]
+ 124              		.loc 1 194 0
+ 125 0062 FA68     		ldr	r2, [r7, #12]
+ 126 0064 7B68     		ldr	r3, [r7, #4]
+ 127 0066 1343     		orrs	r3, r3, r2
+ 128 0068 FB60     		str	r3, [r7, #12]
  195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Store the new value */
  197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   PWR->CR = tmpreg;
- 128              		.loc 1 197 0
- 129 006a 4FF4E043 		mov	r3, #28672
- 130 006e C4F20003 		movt	r3, 16384
- 131 0072 FA68     		ldr	r2, [r7, #12]
- 132 0074 1A60     		str	r2, [r3, #0]
+ 129              		.loc 1 197 0
+ 130 006a 4FF4E043 		mov	r3, #28672
+ 131 006e C4F20003 		movt	r3, 16384
+ 132 0072 FA68     		ldr	r2, [r7, #12]
+ 133 0074 1A60     		str	r2, [r3, #0]
  198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 133              		.loc 1 198 0
- 134 0076 07F11407 		add	r7, r7, #20
- 135 007a BD46     		mov	sp, r7
- 136 007c 80BC     		pop	{r7}
- 137 007e 7047     		bx	lr
- 138              		.cfi_endproc
- 139              	.LFE112:
- 141              		.align	2
- 142              		.global	PWR_PVDCmd
- 143              		.thumb
- 144              		.thumb_func
- 146              	PWR_PVDCmd:
- 147              	.LFB113:
+ 134              		.loc 1 198 0
+ 135 0076 07F11407 		add	r7, r7, #20
+ 136 007a BD46     		mov	sp, r7
+ 137 007c 80BC     		pop	{r7}
+ 138 007e 7047     		bx	lr
+ 139              		.cfi_endproc
+ 140              	.LFE112:
+ 142              		.align	2
+ 143              		.global	PWR_PVDCmd
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	PWR_PVDCmd:
+ 148              	.LFB113:
  199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @brief  Enables or disables the Power Voltage Detector(PVD).
@@ -345,46 +346,46 @@
  205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_PVDCmd(FunctionalState NewState)
  207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 148              		.loc 1 207 0
- 149              		.cfi_startproc
- 150              		@ args = 0, pretend = 0, frame = 8
- 151              		@ frame_needed = 1, uses_anonymous_args = 0
- 152              		@ link register save eliminated.
- 153 0080 80B4     		push	{r7}
- 154              	.LCFI8:
- 155              		.cfi_def_cfa_offset 4
- 156              		.cfi_offset 7, -4
- 157 0082 83B0     		sub	sp, sp, #12
- 158              	.LCFI9:
- 159              		.cfi_def_cfa_offset 16
- 160 0084 00AF     		add	r7, sp, #0
- 161              	.LCFI10:
- 162              		.cfi_def_cfa_register 7
- 163 0086 0346     		mov	r3, r0
- 164 0088 FB71     		strb	r3, [r7, #7]
+ 149              		.loc 1 207 0
+ 150              		.cfi_startproc
+ 151              		@ args = 0, pretend = 0, frame = 8
+ 152              		@ frame_needed = 1, uses_anonymous_args = 0
+ 153              		@ link register save eliminated.
+ 154 0080 80B4     		push	{r7}
+ 155              	.LCFI8:
+ 156              		.cfi_def_cfa_offset 4
+ 157              		.cfi_offset 7, -4
+ 158 0082 83B0     		sub	sp, sp, #12
+ 159              	.LCFI9:
+ 160              		.cfi_def_cfa_offset 16
+ 161 0084 00AF     		add	r7, sp, #0
+ 162              	.LCFI10:
+ 163              		.cfi_def_cfa_register 7
+ 164 0086 0346     		mov	r3, r0
+ 165 0088 FB71     		strb	r3, [r7, #7]
  208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   *(__IO uint32_t *) CR_PVDE_BB = (uint32_t)NewState;
- 165              		.loc 1 211 0
- 166 008a 4FF01003 		mov	r3, #16
- 167 008e C4F20E23 		movt	r3, 16910
- 168 0092 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 169 0094 1A60     		str	r2, [r3, #0]
+ 166              		.loc 1 211 0
+ 167 008a 4FF01003 		mov	r3, #16
+ 168 008e C4F20E23 		movt	r3, 16910
+ 169 0092 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 170 0094 1A60     		str	r2, [r3, #0]
  212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 170              		.loc 1 212 0
- 171 0096 07F10C07 		add	r7, r7, #12
- 172 009a BD46     		mov	sp, r7
- 173 009c 80BC     		pop	{r7}
- 174 009e 7047     		bx	lr
- 175              		.cfi_endproc
- 176              	.LFE113:
- 178              		.align	2
- 179              		.global	PWR_WakeUpPinCmd
- 180              		.thumb
- 181              		.thumb_func
- 183              	PWR_WakeUpPinCmd:
- 184              	.LFB114:
+ 171              		.loc 1 212 0
+ 172 0096 07F10C07 		add	r7, r7, #12
+ 173 009a BD46     		mov	sp, r7
+ 174 009c 80BC     		pop	{r7}
+ 175 009e 7047     		bx	lr
+ 176              		.cfi_endproc
+ 177              	.LFE113:
+ 179              		.align	2
+ 180              		.global	PWR_WakeUpPinCmd
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	PWR_WakeUpPinCmd:
+ 185              	.LFB114:
  213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @}
@@ -414,46 +415,46 @@
  239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_WakeUpPinCmd(FunctionalState NewState)
  241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 185              		.loc 1 241 0
- 186              		.cfi_startproc
- 187              		@ args = 0, pretend = 0, frame = 8
- 188              		@ frame_needed = 1, uses_anonymous_args = 0
- 189              		@ link register save eliminated.
- 190 00a0 80B4     		push	{r7}
- 191              	.LCFI11:
- 192              		.cfi_def_cfa_offset 4
- 193              		.cfi_offset 7, -4
- 194 00a2 83B0     		sub	sp, sp, #12
- 195              	.LCFI12:
- 196              		.cfi_def_cfa_offset 16
- 197 00a4 00AF     		add	r7, sp, #0
- 198              	.LCFI13:
- 199              		.cfi_def_cfa_register 7
- 200 00a6 0346     		mov	r3, r0
- 201 00a8 FB71     		strb	r3, [r7, #7]
+ 186              		.loc 1 241 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 8
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190              		@ link register save eliminated.
+ 191 00a0 80B4     		push	{r7}
+ 192              	.LCFI11:
+ 193              		.cfi_def_cfa_offset 4
+ 194              		.cfi_offset 7, -4
+ 195 00a2 83B0     		sub	sp, sp, #12
+ 196              	.LCFI12:
+ 197              		.cfi_def_cfa_offset 16
+ 198 00a4 00AF     		add	r7, sp, #0
+ 199              	.LCFI13:
+ 200              		.cfi_def_cfa_register 7
+ 201 00a6 0346     		mov	r3, r0
+ 202 00a8 FB71     		strb	r3, [r7, #7]
  242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */  
  243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   *(__IO uint32_t *) CSR_EWUP_BB = (uint32_t)NewState;
- 202              		.loc 1 245 0
- 203 00aa 4FF0A003 		mov	r3, #160
- 204 00ae C4F20E23 		movt	r3, 16910
- 205 00b2 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 206 00b4 1A60     		str	r2, [r3, #0]
+ 203              		.loc 1 245 0
+ 204 00aa 4FF0A003 		mov	r3, #160
+ 205 00ae C4F20E23 		movt	r3, 16910
+ 206 00b2 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 207 00b4 1A60     		str	r2, [r3, #0]
  246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 207              		.loc 1 246 0
- 208 00b6 07F10C07 		add	r7, r7, #12
- 209 00ba BD46     		mov	sp, r7
- 210 00bc 80BC     		pop	{r7}
- 211 00be 7047     		bx	lr
- 212              		.cfi_endproc
- 213              	.LFE114:
- 215              		.align	2
- 216              		.global	PWR_BackupRegulatorCmd
- 217              		.thumb
- 218              		.thumb_func
- 220              	PWR_BackupRegulatorCmd:
- 221              	.LFB115:
+ 208              		.loc 1 246 0
+ 209 00b6 07F10C07 		add	r7, r7, #12
+ 210 00ba BD46     		mov	sp, r7
+ 211 00bc 80BC     		pop	{r7}
+ 212 00be 7047     		bx	lr
+ 213              		.cfi_endproc
+ 214              	.LFE114:
+ 216              		.align	2
+ 217              		.global	PWR_BackupRegulatorCmd
+ 218              		.thumb
+ 219              		.thumb_func
+ 221              	PWR_BackupRegulatorCmd:
+ 222              	.LFB115:
  247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @}
@@ -507,46 +508,46 @@
  297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  298:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_BackupRegulatorCmd(FunctionalState NewState)
  299:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 222              		.loc 1 299 0
- 223              		.cfi_startproc
- 224              		@ args = 0, pretend = 0, frame = 8
- 225              		@ frame_needed = 1, uses_anonymous_args = 0
- 226              		@ link register save eliminated.
- 227 00c0 80B4     		push	{r7}
- 228              	.LCFI14:
- 229              		.cfi_def_cfa_offset 4
- 230              		.cfi_offset 7, -4
- 231 00c2 83B0     		sub	sp, sp, #12
- 232              	.LCFI15:
- 233              		.cfi_def_cfa_offset 16
- 234 00c4 00AF     		add	r7, sp, #0
- 235              	.LCFI16:
- 236              		.cfi_def_cfa_register 7
- 237 00c6 0346     		mov	r3, r0
- 238 00c8 FB71     		strb	r3, [r7, #7]
+ 223              		.loc 1 299 0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 8
+ 226              		@ frame_needed = 1, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 228 00c0 80B4     		push	{r7}
+ 229              	.LCFI14:
+ 230              		.cfi_def_cfa_offset 4
+ 231              		.cfi_offset 7, -4
+ 232 00c2 83B0     		sub	sp, sp, #12
+ 233              	.LCFI15:
+ 234              		.cfi_def_cfa_offset 16
+ 235 00c4 00AF     		add	r7, sp, #0
+ 236              	.LCFI16:
+ 237              		.cfi_def_cfa_register 7
+ 238 00c6 0346     		mov	r3, r0
+ 239 00c8 FB71     		strb	r3, [r7, #7]
  300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  301:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  303:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   *(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
- 239              		.loc 1 303 0
- 240 00ca 4FF0A403 		mov	r3, #164
- 241 00ce C4F20E23 		movt	r3, 16910
- 242 00d2 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 243 00d4 1A60     		str	r2, [r3, #0]
+ 240              		.loc 1 303 0
+ 241 00ca 4FF0A403 		mov	r3, #164
+ 242 00ce C4F20E23 		movt	r3, 16910
+ 243 00d2 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 244 00d4 1A60     		str	r2, [r3, #0]
  304:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 244              		.loc 1 304 0
- 245 00d6 07F10C07 		add	r7, r7, #12
- 246 00da BD46     		mov	sp, r7
- 247 00dc 80BC     		pop	{r7}
- 248 00de 7047     		bx	lr
- 249              		.cfi_endproc
- 250              	.LFE115:
- 252              		.align	2
- 253              		.global	PWR_MainRegulatorModeConfig
- 254              		.thumb
- 255              		.thumb_func
- 257              	PWR_MainRegulatorModeConfig:
- 258              	.LFB116:
+ 245              		.loc 1 304 0
+ 246 00d6 07F10C07 		add	r7, r7, #12
+ 247 00da BD46     		mov	sp, r7
+ 248 00dc 80BC     		pop	{r7}
+ 249 00de 7047     		bx	lr
+ 250              		.cfi_endproc
+ 251              	.LFE115:
+ 253              		.align	2
+ 254              		.global	PWR_MainRegulatorModeConfig
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	PWR_MainRegulatorModeConfig:
+ 259              	.LFB116:
  305:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  307:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @brief  Configures the main internal regulator output voltage.
@@ -562,70 +563,70 @@
  317:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_MainRegulatorModeConfig(uint32_t PWR_Regulator_Voltage)
  319:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 259              		.loc 1 319 0
- 260              		.cfi_startproc
- 261              		@ args = 0, pretend = 0, frame = 8
- 262              		@ frame_needed = 1, uses_anonymous_args = 0
- 263              		@ link register save eliminated.
- 264 00e0 80B4     		push	{r7}
- 265              	.LCFI17:
- 266              		.cfi_def_cfa_offset 4
- 267              		.cfi_offset 7, -4
- 268 00e2 83B0     		sub	sp, sp, #12
- 269              	.LCFI18:
- 270              		.cfi_def_cfa_offset 16
- 271 00e4 00AF     		add	r7, sp, #0
- 272              	.LCFI19:
- 273              		.cfi_def_cfa_register 7
- 274 00e6 7860     		str	r0, [r7, #4]
+ 260              		.loc 1 319 0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 8
+ 263              		@ frame_needed = 1, uses_anonymous_args = 0
+ 264              		@ link register save eliminated.
+ 265 00e0 80B4     		push	{r7}
+ 266              	.LCFI17:
+ 267              		.cfi_def_cfa_offset 4
+ 268              		.cfi_offset 7, -4
+ 269 00e2 83B0     		sub	sp, sp, #12
+ 270              	.LCFI18:
+ 271              		.cfi_def_cfa_offset 16
+ 272 00e4 00AF     		add	r7, sp, #0
+ 273              	.LCFI19:
+ 274              		.cfi_def_cfa_register 7
+ 275 00e6 7860     		str	r0, [r7, #4]
  320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_PWR_REGULATOR_VOLTAGE(PWR_Regulator_Voltage));
  322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   if (PWR_Regulator_Voltage == PWR_Regulator_Voltage_Scale2)
- 275              		.loc 1 323 0
- 276 00e8 7B68     		ldr	r3, [r7, #4]
- 277 00ea 002B     		cmp	r3, #0
- 278 00ec 0CD1     		bne	.L8
+ 276              		.loc 1 323 0
+ 277 00e8 7B68     		ldr	r3, [r7, #4]
+ 278 00ea 002B     		cmp	r3, #0
+ 279 00ec 0CD1     		bne	.L8
  324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   {
  325:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****     PWR->CR &= ~PWR_Regulator_Voltage_Scale1;
- 279              		.loc 1 325 0
- 280 00ee 4FF4E043 		mov	r3, #28672
- 281 00f2 C4F20003 		movt	r3, 16384
- 282 00f6 4FF4E042 		mov	r2, #28672
- 283 00fa C4F20002 		movt	r2, 16384
- 284 00fe 1268     		ldr	r2, [r2, #0]
- 285 0100 22F48042 		bic	r2, r2, #16384
- 286 0104 1A60     		str	r2, [r3, #0]
- 287 0106 0BE0     		b	.L7
- 288              	.L8:
+ 280              		.loc 1 325 0
+ 281 00ee 4FF4E043 		mov	r3, #28672
+ 282 00f2 C4F20003 		movt	r3, 16384
+ 283 00f6 4FF4E042 		mov	r2, #28672
+ 284 00fa C4F20002 		movt	r2, 16384
+ 285 00fe 1268     		ldr	r2, [r2, #0]
+ 286 0100 22F48042 		bic	r2, r2, #16384
+ 287 0104 1A60     		str	r2, [r3, #0]
+ 288 0106 0BE0     		b	.L7
+ 289              	.L8:
  326:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   }
  327:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   else
  328:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   {    
  329:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****     PWR->CR |= PWR_Regulator_Voltage_Scale1;
- 289              		.loc 1 329 0
- 290 0108 4FF4E043 		mov	r3, #28672
- 291 010c C4F20003 		movt	r3, 16384
- 292 0110 4FF4E042 		mov	r2, #28672
- 293 0114 C4F20002 		movt	r2, 16384
- 294 0118 1268     		ldr	r2, [r2, #0]
- 295 011a 42F48042 		orr	r2, r2, #16384
- 296 011e 1A60     		str	r2, [r3, #0]
- 297              	.L7:
+ 290              		.loc 1 329 0
+ 291 0108 4FF4E043 		mov	r3, #28672
+ 292 010c C4F20003 		movt	r3, 16384
+ 293 0110 4FF4E042 		mov	r2, #28672
+ 294 0114 C4F20002 		movt	r2, 16384
+ 295 0118 1268     		ldr	r2, [r2, #0]
+ 296 011a 42F48042 		orr	r2, r2, #16384
+ 297 011e 1A60     		str	r2, [r3, #0]
+ 298              	.L7:
  330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   }
  331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 298              		.loc 1 331 0
- 299 0120 07F10C07 		add	r7, r7, #12
- 300 0124 BD46     		mov	sp, r7
- 301 0126 80BC     		pop	{r7}
- 302 0128 7047     		bx	lr
- 303              		.cfi_endproc
- 304              	.LFE116:
- 306 012a 00BF     		.align	2
- 307              		.global	PWR_FlashPowerDownCmd
- 308              		.thumb
- 309              		.thumb_func
- 311              	PWR_FlashPowerDownCmd:
- 312              	.LFB117:
+ 299              		.loc 1 331 0
+ 300 0120 07F10C07 		add	r7, r7, #12
+ 301 0124 BD46     		mov	sp, r7
+ 302 0126 80BC     		pop	{r7}
+ 303 0128 7047     		bx	lr
+ 304              		.cfi_endproc
+ 305              	.LFE116:
+ 307 012a 00BF     		.align	2
+ 308              		.global	PWR_FlashPowerDownCmd
+ 309              		.thumb
+ 310              		.thumb_func
+ 312              	PWR_FlashPowerDownCmd:
+ 313              	.LFB117:
  332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @}
@@ -656,46 +657,46 @@
  359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_FlashPowerDownCmd(FunctionalState NewState)
  361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 313              		.loc 1 361 0
- 314              		.cfi_startproc
- 315              		@ args = 0, pretend = 0, frame = 8
- 316              		@ frame_needed = 1, uses_anonymous_args = 0
- 317              		@ link register save eliminated.
- 318 012c 80B4     		push	{r7}
- 319              	.LCFI20:
- 320              		.cfi_def_cfa_offset 4
- 321              		.cfi_offset 7, -4
- 322 012e 83B0     		sub	sp, sp, #12
- 323              	.LCFI21:
- 324              		.cfi_def_cfa_offset 16
- 325 0130 00AF     		add	r7, sp, #0
- 326              	.LCFI22:
- 327              		.cfi_def_cfa_register 7
- 328 0132 0346     		mov	r3, r0
- 329 0134 FB71     		strb	r3, [r7, #7]
+ 314              		.loc 1 361 0
+ 315              		.cfi_startproc
+ 316              		@ args = 0, pretend = 0, frame = 8
+ 317              		@ frame_needed = 1, uses_anonymous_args = 0
+ 318              		@ link register save eliminated.
+ 319 012c 80B4     		push	{r7}
+ 320              	.LCFI20:
+ 321              		.cfi_def_cfa_offset 4
+ 322              		.cfi_offset 7, -4
+ 323 012e 83B0     		sub	sp, sp, #12
+ 324              	.LCFI21:
+ 325              		.cfi_def_cfa_offset 16
+ 326 0130 00AF     		add	r7, sp, #0
+ 327              	.LCFI22:
+ 328              		.cfi_def_cfa_register 7
+ 329 0132 0346     		mov	r3, r0
+ 330 0134 FB71     		strb	r3, [r7, #7]
  362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   *(__IO uint32_t *) CR_FPDS_BB = (uint32_t)NewState;
- 330              		.loc 1 365 0
- 331 0136 4FF02403 		mov	r3, #36
- 332 013a C4F20E23 		movt	r3, 16910
- 333 013e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
- 334 0140 1A60     		str	r2, [r3, #0]
+ 331              		.loc 1 365 0
+ 332 0136 4FF02403 		mov	r3, #36
+ 333 013a C4F20E23 		movt	r3, 16910
+ 334 013e FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 335 0140 1A60     		str	r2, [r3, #0]
  366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 335              		.loc 1 366 0
- 336 0142 07F10C07 		add	r7, r7, #12
- 337 0146 BD46     		mov	sp, r7
- 338 0148 80BC     		pop	{r7}
- 339 014a 7047     		bx	lr
- 340              		.cfi_endproc
- 341              	.LFE117:
- 343              		.align	2
- 344              		.global	PWR_EnterSTOPMode
- 345              		.thumb
- 346              		.thumb_func
- 348              	PWR_EnterSTOPMode:
- 349              	.LFB118:
+ 336              		.loc 1 366 0
+ 337 0142 07F10C07 		add	r7, r7, #12
+ 338 0146 BD46     		mov	sp, r7
+ 339 0148 80BC     		pop	{r7}
+ 340 014a 7047     		bx	lr
+ 341              		.cfi_endproc
+ 342              	.LFE117:
+ 344              		.align	2
+ 345              		.global	PWR_EnterSTOPMode
+ 346              		.thumb
+ 347              		.thumb_func
+ 349              	PWR_EnterSTOPMode:
+ 350              	.LFB118:
  367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @}
@@ -831,28 +832,28 @@
  499:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  500:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
  501:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 350              		.loc 1 501 0
- 351              		.cfi_startproc
- 352              		@ args = 0, pretend = 0, frame = 16
- 353              		@ frame_needed = 1, uses_anonymous_args = 0
- 354              		@ link register save eliminated.
- 355 014c 80B4     		push	{r7}
- 356              	.LCFI23:
- 357              		.cfi_def_cfa_offset 4
- 358              		.cfi_offset 7, -4
- 359 014e 85B0     		sub	sp, sp, #20
- 360              	.LCFI24:
- 361              		.cfi_def_cfa_offset 24
- 362 0150 00AF     		add	r7, sp, #0
- 363              	.LCFI25:
- 364              		.cfi_def_cfa_register 7
- 365 0152 7860     		str	r0, [r7, #4]
- 366 0154 0B46     		mov	r3, r1
- 367 0156 FB70     		strb	r3, [r7, #3]
+ 351              		.loc 1 501 0
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 16
+ 354              		@ frame_needed = 1, uses_anonymous_args = 0
+ 355              		@ link register save eliminated.
+ 356 014c 80B4     		push	{r7}
+ 357              	.LCFI23:
+ 358              		.cfi_def_cfa_offset 4
+ 359              		.cfi_offset 7, -4
+ 360 014e 85B0     		sub	sp, sp, #20
+ 361              	.LCFI24:
+ 362              		.cfi_def_cfa_offset 24
+ 363 0150 00AF     		add	r7, sp, #0
+ 364              	.LCFI25:
+ 365              		.cfi_def_cfa_register 7
+ 366 0152 7860     		str	r0, [r7, #4]
+ 367 0154 0B46     		mov	r3, r1
+ 368 0156 FB70     		strb	r3, [r7, #3]
  502:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   uint32_t tmpreg = 0;
- 368              		.loc 1 502 0
- 369 0158 4FF00003 		mov	r3, #0
- 370 015c FB60     		str	r3, [r7, #12]
+ 369              		.loc 1 502 0
+ 370 0158 4FF00003 		mov	r3, #0
+ 371 015c FB60     		str	r3, [r7, #12]
  503:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  504:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  505:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_PWR_REGULATOR(PWR_Regulator));
@@ -860,366 +861,366 @@
  507:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  508:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Select the regulator state in STOP mode ---------------------------------*/
  509:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   tmpreg = PWR->CR;
- 371              		.loc 1 509 0
- 372 015e 4FF4E043 		mov	r3, #28672
- 373 0162 C4F20003 		movt	r3, 16384
- 374 0166 1B68     		ldr	r3, [r3, #0]
- 375 0168 FB60     		str	r3, [r7, #12]
+ 372              		.loc 1 509 0
+ 373 015e 4FF4E043 		mov	r3, #28672
+ 374 0162 C4F20003 		movt	r3, 16384
+ 375 0166 1B68     		ldr	r3, [r3, #0]
+ 376 0168 FB60     		str	r3, [r7, #12]
  510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Clear PDDS and LPDSR bits */
  511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   tmpreg &= CR_DS_MASK;
- 376              		.loc 1 511 0
- 377 016a FB68     		ldr	r3, [r7, #12]
- 378 016c 23F00303 		bic	r3, r3, #3
- 379 0170 FB60     		str	r3, [r7, #12]
+ 377              		.loc 1 511 0
+ 378 016a FB68     		ldr	r3, [r7, #12]
+ 379 016c 23F00303 		bic	r3, r3, #3
+ 380 0170 FB60     		str	r3, [r7, #12]
  512:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  513:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Set LPDSR bit according to PWR_Regulator value */
  514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   tmpreg |= PWR_Regulator;
- 380              		.loc 1 514 0
- 381 0172 FA68     		ldr	r2, [r7, #12]
- 382 0174 7B68     		ldr	r3, [r7, #4]
- 383 0176 1343     		orrs	r3, r3, r2
- 384 0178 FB60     		str	r3, [r7, #12]
+ 381              		.loc 1 514 0
+ 382 0172 FA68     		ldr	r2, [r7, #12]
+ 383 0174 7B68     		ldr	r3, [r7, #4]
+ 384 0176 1343     		orrs	r3, r3, r2
+ 385 0178 FB60     		str	r3, [r7, #12]
  515:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  516:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Store the new value */
  517:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   PWR->CR = tmpreg;
- 385              		.loc 1 517 0
- 386 017a 4FF4E043 		mov	r3, #28672
- 387 017e C4F20003 		movt	r3, 16384
- 388 0182 FA68     		ldr	r2, [r7, #12]
- 389 0184 1A60     		str	r2, [r3, #0]
+ 386              		.loc 1 517 0
+ 387 017a 4FF4E043 		mov	r3, #28672
+ 388 017e C4F20003 		movt	r3, 16384
+ 389 0182 FA68     		ldr	r2, [r7, #12]
+ 390 0184 1A60     		str	r2, [r3, #0]
  518:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  519:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Set SLEEPDEEP bit of Cortex System Control Register */
  520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
- 390              		.loc 1 520 0
- 391 0186 4FF46D43 		mov	r3, #60672
- 392 018a CEF20003 		movt	r3, 57344
- 393 018e 4FF46D42 		mov	r2, #60672
- 394 0192 CEF20002 		movt	r2, 57344
- 395 0196 1269     		ldr	r2, [r2, #16]
- 396 0198 42F00402 		orr	r2, r2, #4
- 397 019c 1A61     		str	r2, [r3, #16]
+ 391              		.loc 1 520 0
+ 392 0186 4FF46D43 		mov	r3, #60672
+ 393 018a CEF20003 		movt	r3, 57344
+ 394 018e 4FF46D42 		mov	r2, #60672
+ 395 0192 CEF20002 		movt	r2, 57344
+ 396 0196 1269     		ldr	r2, [r2, #16]
+ 397 0198 42F00402 		orr	r2, r2, #4
+ 398 019c 1A61     		str	r2, [r3, #16]
  521:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  522:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Select STOP mode entry --------------------------------------------------*/
  523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   if(PWR_STOPEntry == PWR_STOPEntry_WFI)
- 398              		.loc 1 523 0
- 399 019e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 400 01a0 012B     		cmp	r3, #1
- 401 01a2 01D1     		bne	.L12
- 402              	.LBB8:
- 403              	.LBB9:
- 404              		.file 2 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
-   1:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /**************************************************************************//**
-   2:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @file     core_cmInstr.h
-   3:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
-   4:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @version  V2.10
-   5:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @date     19. July 2011
-   6:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
-   7:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @note
-   8:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
-   9:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
-  10:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @par
-  11:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
-  12:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed 
-  13:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * within development tools that are supporting such ARM based processors. 
-  14:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
-  15:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @par
-  16:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
-  17:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
-  18:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
-  19:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
-  20:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-  21:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
-  22:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  ******************************************************************************/
-  23:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  24:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
-  25:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __CORE_CMINSTR_H
-  26:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  27:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  28:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
-  29:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
-  30:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   Access to dedicated instructions
-  31:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   @{
-  32:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** */
-  33:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  34:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
-  35:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* ARM armcc specific functions */
-  36:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  37:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
-  38:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
-  39:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #endif
-  40:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  41:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  42:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
-  43:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  44:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
-  45:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  46:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __NOP                             __nop
-  47:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  48:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  49:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
-  50:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  51:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
-  52:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
-  53:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  54:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __WFI                             __wfi
-  55:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  56:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  57:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
-  58:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  59:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
-  60:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
-  61:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  62:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __WFE                             __wfe
-  63:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  64:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  65:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
-  66:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  67:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
-  68:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  69:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __SEV                             __sev
-  70:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  71:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  72:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
-  73:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  74:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
-  75:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
-  76:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
-  77:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  78:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __ISB()                           __isb(0xF)
-  79:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  80:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  81:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
-  82:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  83:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
-  84:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
-  85:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  86:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
-  87:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  88:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  89:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
-  90:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  91:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
-  92:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
-  93:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
-  94:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
-  95:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  96:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  97:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
-  98:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
-  99:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
- 100:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 101:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 102:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 103:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 104:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __REV                             __rev
- 105:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 106:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 107:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
- 108:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 109:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
- 110:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 111:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 112:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 113:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 114:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM uint32_t __REV16(uint32_t value)
- 115:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
- 116:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   rev16 r0, r0
- 117:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   bx lr
- 118:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
- 119:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 120:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 121:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
- 122:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 123:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
- 124:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 125:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 126:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 127:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 128:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM int32_t __REVSH(int32_t value)
- 129:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
- 130:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   revsh r0, r0
- 131:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   bx lr
- 132:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
- 133:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 134:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 135:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
- 136:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 137:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse bit order of value
- 138:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 139:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the bit order of the given value.
- 140:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 141:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 142:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 143:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 144:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __RBIT                            __rbit
- 145:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 146:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 147:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
- 148:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 149:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
- 150:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 151:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
- 152:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
- 153:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 154:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
- 155:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 156:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 157:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
- 158:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 159:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
- 160:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 161:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
- 162:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
- 163:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 164:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
- 165:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 166:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 167:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
- 168:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 169:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
- 170:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 171:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
- 172:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
- 173:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 174:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
- 175:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 176:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 177:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
- 178:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 179:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
- 180:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 181:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
- 182:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
- 183:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
- 184:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
- 185:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 186:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
- 187:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 188:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 189:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
- 190:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 191:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
- 192:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 193:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
- 194:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
- 195:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
- 196:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
- 197:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 198:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
- 199:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 200:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 201:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
- 202:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 203:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
- 204:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 205:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
- 206:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
- 207:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
- 208:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
- 209:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 210:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
- 211:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 212:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 213:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Remove the exclusive lock
- 214:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 215:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
- 216:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 217:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 218:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __CLREX                           __clrex
- 219:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 220:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 221:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Signed Saturate
- 222:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 223:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function saturates a signed value.
- 224:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 225:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
- 226:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
- 227:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
- 228:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 229:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __SSAT                            __ssat
- 230:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 231:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 232:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Unsigned Saturate
- 233:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 234:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function saturates an unsigned value.
- 235:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 236:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
- 237:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
- 238:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
- 239:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 240:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __USAT                            __usat
- 241:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 242:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 243:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Count leading zeros
- 244:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 245:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
- 246:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 247:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
- 248:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             number of leading zeros in value
- 249:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 250:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __CLZ                             __clz 
- 251:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 252:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
- 253:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 254:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 255:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 256:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
- 257:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* IAR iccarm specific functions */
- 258:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 259:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #include <cmsis_iar.h>
- 260:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 261:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 262:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
- 263:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* GNU gcc specific functions */
- 264:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 265:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
- 266:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 267:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
- 268:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 269:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
- 270:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
- 271:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("nop");
- 272:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
- 273:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 274:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 275:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
- 276:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 277:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
- 278:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
- 279:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 280:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFI(void)
- 281:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
- 282:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
- 405              		.loc 2 282 0
- 406              	@ 282 "C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_
- 407 01a4 30BF     		wfi
- 408              	@ 0 "" 2
- 409              		.thumb
- 410 01a6 00E0     		b	.L13
- 411              	.L12:
- 412              	.LBE9:
- 413              	.LBE8:
- 414              	.LBB10:
- 415              	.LBB11:
- 283:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
- 284:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 285:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 286:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
- 287:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
- 288:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
- 289:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
- 290:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
- 291:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFE(void)
- 292:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
- 293:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfe");
- 416              		.loc 2 293 0
- 417              	@ 293 "C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_
- 418 01a8 20BF     		wfe
- 419              	@ 0 "" 2
- 420              		.thumb
- 421              	.L13:
- 422              	.LBE11:
- 423              	.LBE10:
+ 399              		.loc 1 523 0
+ 400 019e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 401 01a0 012B     		cmp	r3, #1
+ 402 01a2 01D1     		bne	.L12
+ 403              	.LBB8:
+ 404              	.LBB9:
+ 405              		.file 2 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cmInstr.h"
+   1:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /**************************************************************************//**
+   2:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @file     core_cmInstr.h
+   3:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
+   4:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @version  V2.10
+   5:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @date     19. July 2011
+   6:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
+   7:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @note
+   8:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
+   9:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
+  10:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @par
+  11:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+  12:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed 
+  13:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * within development tools that are supporting such ARM based processors. 
+  14:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
+  15:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * @par
+  16:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  *
+  22:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  ******************************************************************************/
+  23:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  24:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
+  25:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __CORE_CMINSTR_H
+  26:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  27:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  28:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
+  29:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+  30:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   Access to dedicated instructions
+  31:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   @{
+  32:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** */
+  33:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  34:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  35:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* ARM armcc specific functions */
+  36:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  37:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
+  38:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  39:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #endif
+  40:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  41:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  42:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+  43:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  44:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+  45:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  46:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __NOP                             __nop
+  47:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  48:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  49:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+  50:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  51:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+  52:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+  53:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  54:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __WFI                             __wfi
+  55:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  56:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  57:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+  58:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  59:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+  60:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+  61:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  62:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __WFE                             __wfe
+  63:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  64:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  65:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+  66:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  67:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+  68:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  69:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __SEV                             __sev
+  70:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  71:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  72:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+  73:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  74:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+  75:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+  76:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+  77:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  78:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __ISB()                           __isb(0xF)
+  79:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  80:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  81:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+  82:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  83:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+  84:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+  85:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  86:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
+  87:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  88:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  89:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+  90:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  91:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+  92:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+  93:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+  94:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
+  95:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  96:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  97:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+  98:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+  99:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 100:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 101:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 102:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 103:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 104:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __REV                             __rev
+ 105:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 106:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 107:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
+ 108:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 109:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
+ 110:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 111:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 112:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 113:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 114:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM uint32_t __REV16(uint32_t value)
+ 115:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
+ 116:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   rev16 r0, r0
+ 117:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 118:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
+ 119:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 120:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 121:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
+ 122:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 123:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
+ 124:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 125:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 126:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 127:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 128:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM int32_t __REVSH(int32_t value)
+ 129:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
+ 130:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   revsh r0, r0
+ 131:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 132:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
+ 133:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 134:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 135:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
+ 136:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 137:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse bit order of value
+ 138:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 139:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function reverses the bit order of the given value.
+ 140:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 141:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 142:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 143:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 144:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __RBIT                            __rbit
+ 145:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 146:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 147:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
+ 148:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 149:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
+ 150:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 151:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 152:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
+ 153:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 154:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
+ 155:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 156:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 157:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
+ 158:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 159:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
+ 160:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 161:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 162:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
+ 163:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 164:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
+ 165:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 166:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 167:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
+ 168:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 169:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
+ 170:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 171:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 172:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
+ 173:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 174:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
+ 175:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 176:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 177:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
+ 178:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 179:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
+ 180:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 181:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 182:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 183:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 184:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 185:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 186:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
+ 187:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 188:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 189:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
+ 190:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 191:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
+ 192:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 193:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 194:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 195:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 196:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 197:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 198:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
+ 199:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 200:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 201:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
+ 202:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 203:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
+ 204:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 205:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 206:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 207:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 208:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 209:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 210:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
+ 211:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 212:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 213:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Remove the exclusive lock
+ 214:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 215:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
+ 216:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 217:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 218:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __CLREX                           __clrex
+ 219:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 220:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 221:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Signed Saturate
+ 222:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 223:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function saturates a signed value.
+ 224:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 225:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 226:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
+ 227:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 228:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 229:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __SSAT                            __ssat
+ 230:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 231:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 232:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Unsigned Saturate
+ 233:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 234:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function saturates an unsigned value.
+ 235:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 236:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 237:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
+ 238:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 239:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 240:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __USAT                            __usat
+ 241:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 242:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 243:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Count leading zeros
+ 244:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 245:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
+ 246:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 247:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
+ 248:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     \return             number of leading zeros in value
+ 249:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 250:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #define __CLZ                             __clz 
+ 251:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 252:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 253:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 254:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 255:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 256:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 257:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* IAR iccarm specific functions */
+ 258:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 259:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #include <cmsis_iar.h>
+ 260:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 261:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 262:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 263:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /* GNU gcc specific functions */
+ 264:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 265:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+ 266:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 267:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+ 268:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 269:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
+ 270:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
+ 271:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("nop");
+ 272:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
+ 273:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 274:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 275:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+ 276:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 277:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+ 278:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+ 279:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 280:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFI(void)
+ 281:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
+ 282:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
+ 406              		.loc 2 282 0
+ 407              	@ 282 "E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h" 1
+ 408 01a4 30BF     		wfi
+ 409              	@ 0 "" 2
+ 410              		.thumb
+ 411 01a6 00E0     		b	.L13
+ 412              	.L12:
+ 413              	.LBE9:
+ 414              	.LBE8:
+ 415              	.LBB10:
+ 416              	.LBB11:
+ 283:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** }
+ 284:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 285:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 286:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+ 287:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** 
+ 288:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+ 289:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+ 290:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****  */
+ 291:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFE(void)
+ 292:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h **** {
+ 293:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfe");
+ 417              		.loc 2 293 0
+ 418              	@ 293 "E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h" 1
+ 419 01a8 20BF     		wfe
+ 420              	@ 0 "" 2
+ 421              		.thumb
+ 422              	.L13:
+ 423              	.LBE11:
+ 424              	.LBE10:
  524:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   {   
  525:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****     /* Request Wait For Interrupt */
  526:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****     __WFI();
@@ -1231,28 +1232,28 @@
  532:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   }
  533:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Reset SLEEPDEEP bit of Cortex System Control Register */
  534:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   SCB->SCR &= (uint32_t)~((uint32_t)SCB_SCR_SLEEPDEEP_Msk);  
- 424              		.loc 1 534 0
- 425 01aa 4FF46D43 		mov	r3, #60672
- 426 01ae CEF20003 		movt	r3, 57344
- 427 01b2 4FF46D42 		mov	r2, #60672
- 428 01b6 CEF20002 		movt	r2, 57344
- 429 01ba 1269     		ldr	r2, [r2, #16]
- 430 01bc 22F00402 		bic	r2, r2, #4
- 431 01c0 1A61     		str	r2, [r3, #16]
+ 425              		.loc 1 534 0
+ 426 01aa 4FF46D43 		mov	r3, #60672
+ 427 01ae CEF20003 		movt	r3, 57344
+ 428 01b2 4FF46D42 		mov	r2, #60672
+ 429 01b6 CEF20002 		movt	r2, 57344
+ 430 01ba 1269     		ldr	r2, [r2, #16]
+ 431 01bc 22F00402 		bic	r2, r2, #4
+ 432 01c0 1A61     		str	r2, [r3, #16]
  535:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 432              		.loc 1 535 0
- 433 01c2 07F11407 		add	r7, r7, #20
- 434 01c6 BD46     		mov	sp, r7
- 435 01c8 80BC     		pop	{r7}
- 436 01ca 7047     		bx	lr
- 437              		.cfi_endproc
- 438              	.LFE118:
- 440              		.align	2
- 441              		.global	PWR_EnterSTANDBYMode
- 442              		.thumb
- 443              		.thumb_func
- 445              	PWR_EnterSTANDBYMode:
- 446              	.LFB119:
+ 433              		.loc 1 535 0
+ 434 01c2 07F11407 		add	r7, r7, #20
+ 435 01c6 BD46     		mov	sp, r7
+ 436 01c8 80BC     		pop	{r7}
+ 437 01ca 7047     		bx	lr
+ 438              		.cfi_endproc
+ 439              	.LFE118:
+ 441              		.align	2
+ 442              		.global	PWR_EnterSTANDBYMode
+ 443              		.thumb
+ 444              		.thumb_func
+ 446              	PWR_EnterSTANDBYMode:
+ 447              	.LFB119:
  536:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  537:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  538:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @brief  Enters STANDBY mode.
@@ -1267,60 +1268,60 @@
  547:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  548:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_EnterSTANDBYMode(void)
  549:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 447              		.loc 1 549 0
- 448              		.cfi_startproc
- 449              		@ args = 0, pretend = 0, frame = 0
- 450              		@ frame_needed = 1, uses_anonymous_args = 0
- 451              		@ link register save eliminated.
- 452 01cc 80B4     		push	{r7}
- 453              	.LCFI26:
- 454              		.cfi_def_cfa_offset 4
- 455              		.cfi_offset 7, -4
- 456 01ce 00AF     		add	r7, sp, #0
- 457              	.LCFI27:
- 458              		.cfi_def_cfa_register 7
+ 448              		.loc 1 549 0
+ 449              		.cfi_startproc
+ 450              		@ args = 0, pretend = 0, frame = 0
+ 451              		@ frame_needed = 1, uses_anonymous_args = 0
+ 452              		@ link register save eliminated.
+ 453 01cc 80B4     		push	{r7}
+ 454              	.LCFI26:
+ 455              		.cfi_def_cfa_offset 4
+ 456              		.cfi_offset 7, -4
+ 457 01ce 00AF     		add	r7, sp, #0
+ 458              	.LCFI27:
+ 459              		.cfi_def_cfa_register 7
  550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Clear Wakeup flag */
  551:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   PWR->CR |= PWR_CR_CWUF;
- 459              		.loc 1 551 0
- 460 01d0 4FF4E043 		mov	r3, #28672
- 461 01d4 C4F20003 		movt	r3, 16384
- 462 01d8 4FF4E042 		mov	r2, #28672
- 463 01dc C4F20002 		movt	r2, 16384
- 464 01e0 1268     		ldr	r2, [r2, #0]
- 465 01e2 42F00402 		orr	r2, r2, #4
- 466 01e6 1A60     		str	r2, [r3, #0]
+ 460              		.loc 1 551 0
+ 461 01d0 4FF4E043 		mov	r3, #28672
+ 462 01d4 C4F20003 		movt	r3, 16384
+ 463 01d8 4FF4E042 		mov	r2, #28672
+ 464 01dc C4F20002 		movt	r2, 16384
+ 465 01e0 1268     		ldr	r2, [r2, #0]
+ 466 01e2 42F00402 		orr	r2, r2, #4
+ 467 01e6 1A60     		str	r2, [r3, #0]
  552:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  553:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Select STANDBY mode */
  554:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   PWR->CR |= PWR_CR_PDDS;
- 467              		.loc 1 554 0
- 468 01e8 4FF4E043 		mov	r3, #28672
- 469 01ec C4F20003 		movt	r3, 16384
- 470 01f0 4FF4E042 		mov	r2, #28672
- 471 01f4 C4F20002 		movt	r2, 16384
- 472 01f8 1268     		ldr	r2, [r2, #0]
- 473 01fa 42F00202 		orr	r2, r2, #2
- 474 01fe 1A60     		str	r2, [r3, #0]
+ 468              		.loc 1 554 0
+ 469 01e8 4FF4E043 		mov	r3, #28672
+ 470 01ec C4F20003 		movt	r3, 16384
+ 471 01f0 4FF4E042 		mov	r2, #28672
+ 472 01f4 C4F20002 		movt	r2, 16384
+ 473 01f8 1268     		ldr	r2, [r2, #0]
+ 474 01fa 42F00202 		orr	r2, r2, #2
+ 475 01fe 1A60     		str	r2, [r3, #0]
  555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  556:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Set SLEEPDEEP bit of Cortex System Control Register */
  557:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
- 475              		.loc 1 557 0
- 476 0200 4FF46D43 		mov	r3, #60672
- 477 0204 CEF20003 		movt	r3, 57344
- 478 0208 4FF46D42 		mov	r2, #60672
- 479 020c CEF20002 		movt	r2, 57344
- 480 0210 1269     		ldr	r2, [r2, #16]
- 481 0212 42F00402 		orr	r2, r2, #4
- 482 0216 1A61     		str	r2, [r3, #16]
- 483              	.LBB12:
- 484              	.LBB13:
- 282:C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
- 485              		.loc 2 282 0
- 486              	@ 282 "C:\Dokumente und Einstellungen\brand\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_
- 487 0218 30BF     		wfi
- 488              	@ 0 "" 2
- 489              		.thumb
- 490              	.LBE13:
- 491              	.LBE12:
+ 476              		.loc 1 557 0
+ 477 0200 4FF46D43 		mov	r3, #60672
+ 478 0204 CEF20003 		movt	r3, 57344
+ 479 0208 4FF46D42 		mov	r2, #60672
+ 480 020c CEF20002 		movt	r2, 57344
+ 481 0210 1269     		ldr	r2, [r2, #16]
+ 482 0212 42F00402 		orr	r2, r2, #4
+ 483 0216 1A61     		str	r2, [r3, #16]
+ 484              	.LBB12:
+ 485              	.LBB13:
+ 282:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
+ 486              		.loc 2 282 0
+ 487              	@ 282 "E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmInstr.h" 1
+ 488 0218 30BF     		wfi
+ 489              	@ 0 "" 2
+ 490              		.thumb
+ 491              	.LBE13:
+ 492              	.LBE12:
  558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  559:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /* This option is used to ensure that store operations are completed */
  560:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** #if defined ( __CC_ARM   )
@@ -1329,18 +1330,18 @@
  563:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Request Wait For Interrupt */
  564:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   __WFI();
  565:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 492              		.loc 1 565 0
- 493 021a BD46     		mov	sp, r7
- 494 021c 80BC     		pop	{r7}
- 495 021e 7047     		bx	lr
- 496              		.cfi_endproc
- 497              	.LFE119:
- 499              		.align	2
- 500              		.global	PWR_GetFlagStatus
- 501              		.thumb
- 502              		.thumb_func
- 504              	PWR_GetFlagStatus:
- 505              	.LFB120:
+ 493              		.loc 1 565 0
+ 494 021a BD46     		mov	sp, r7
+ 495 021c 80BC     		pop	{r7}
+ 496 021e 7047     		bx	lr
+ 497              		.cfi_endproc
+ 498              	.LFE119:
+ 500              		.align	2
+ 501              		.global	PWR_GetFlagStatus
+ 502              		.thumb
+ 503              		.thumb_func
+ 505              	PWR_GetFlagStatus:
+ 506              	.LFB120:
  566:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  567:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  568:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @}
@@ -1382,75 +1383,75 @@
  604:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  605:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** FlagStatus PWR_GetFlagStatus(uint32_t PWR_FLAG)
  606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 506              		.loc 1 606 0
- 507              		.cfi_startproc
- 508              		@ args = 0, pretend = 0, frame = 16
- 509              		@ frame_needed = 1, uses_anonymous_args = 0
- 510              		@ link register save eliminated.
- 511 0220 80B4     		push	{r7}
- 512              	.LCFI28:
- 513              		.cfi_def_cfa_offset 4
- 514              		.cfi_offset 7, -4
- 515 0222 85B0     		sub	sp, sp, #20
- 516              	.LCFI29:
- 517              		.cfi_def_cfa_offset 24
- 518 0224 00AF     		add	r7, sp, #0
- 519              	.LCFI30:
- 520              		.cfi_def_cfa_register 7
- 521 0226 7860     		str	r0, [r7, #4]
+ 507              		.loc 1 606 0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 16
+ 510              		@ frame_needed = 1, uses_anonymous_args = 0
+ 511              		@ link register save eliminated.
+ 512 0220 80B4     		push	{r7}
+ 513              	.LCFI28:
+ 514              		.cfi_def_cfa_offset 4
+ 515              		.cfi_offset 7, -4
+ 516 0222 85B0     		sub	sp, sp, #20
+ 517              	.LCFI29:
+ 518              		.cfi_def_cfa_offset 24
+ 519 0224 00AF     		add	r7, sp, #0
+ 520              	.LCFI30:
+ 521              		.cfi_def_cfa_register 7
+ 522 0226 7860     		str	r0, [r7, #4]
  607:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   FlagStatus bitstatus = RESET;
- 522              		.loc 1 607 0
- 523 0228 4FF00003 		mov	r3, #0
- 524 022c FB73     		strb	r3, [r7, #15]
+ 523              		.loc 1 607 0
+ 524 0228 4FF00003 		mov	r3, #0
+ 525 022c FB73     		strb	r3, [r7, #15]
  608:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  610:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_PWR_GET_FLAG(PWR_FLAG));
  611:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   
  612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   if ((PWR->CSR & PWR_FLAG) != (uint32_t)RESET)
- 525              		.loc 1 612 0
- 526 022e 4FF4E043 		mov	r3, #28672
- 527 0232 C4F20003 		movt	r3, 16384
- 528 0236 5B68     		ldr	r3, [r3, #4]
- 529 0238 1A46     		mov	r2, r3
- 530 023a 7B68     		ldr	r3, [r7, #4]
- 531 023c 1340     		ands	r3, r3, r2
- 532 023e 002B     		cmp	r3, #0
- 533 0240 03D0     		beq	.L16
+ 526              		.loc 1 612 0
+ 527 022e 4FF4E043 		mov	r3, #28672
+ 528 0232 C4F20003 		movt	r3, 16384
+ 529 0236 5B68     		ldr	r3, [r3, #4]
+ 530 0238 1A46     		mov	r2, r3
+ 531 023a 7B68     		ldr	r3, [r7, #4]
+ 532 023c 1340     		ands	r3, r3, r2
+ 533 023e 002B     		cmp	r3, #0
+ 534 0240 03D0     		beq	.L16
  613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   {
  614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****     bitstatus = SET;
- 534              		.loc 1 614 0
- 535 0242 4FF00103 		mov	r3, #1
- 536 0246 FB73     		strb	r3, [r7, #15]
- 537 0248 02E0     		b	.L17
- 538              	.L16:
+ 535              		.loc 1 614 0
+ 536 0242 4FF00103 		mov	r3, #1
+ 537 0246 FB73     		strb	r3, [r7, #15]
+ 538 0248 02E0     		b	.L17
+ 539              	.L16:
  615:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   }
  616:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   else
  617:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   {
  618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****     bitstatus = RESET;
- 539              		.loc 1 618 0
- 540 024a 4FF00003 		mov	r3, #0
- 541 024e FB73     		strb	r3, [r7, #15]
- 542              	.L17:
+ 540              		.loc 1 618 0
+ 541 024a 4FF00003 		mov	r3, #0
+ 542 024e FB73     		strb	r3, [r7, #15]
+ 543              	.L17:
  619:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   }
  620:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Return the flag status */
  621:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   return bitstatus;
- 543              		.loc 1 621 0
- 544 0250 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 544              		.loc 1 621 0
+ 545 0250 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  622:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 545              		.loc 1 622 0
- 546 0252 1846     		mov	r0, r3
- 547 0254 07F11407 		add	r7, r7, #20
- 548 0258 BD46     		mov	sp, r7
- 549 025a 80BC     		pop	{r7}
- 550 025c 7047     		bx	lr
- 551              		.cfi_endproc
- 552              	.LFE120:
- 554 025e 00BF     		.align	2
- 555              		.global	PWR_ClearFlag
- 556              		.thumb
- 557              		.thumb_func
- 559              	PWR_ClearFlag:
- 560              	.LFB121:
+ 546              		.loc 1 622 0
+ 547 0252 1846     		mov	r0, r3
+ 548 0254 07F11407 		add	r7, r7, #20
+ 549 0258 BD46     		mov	sp, r7
+ 550 025a 80BC     		pop	{r7}
+ 551 025c 7047     		bx	lr
+ 552              		.cfi_endproc
+ 553              	.LFE120:
+ 555 025e 00BF     		.align	2
+ 556              		.global	PWR_ClearFlag
+ 557              		.thumb
+ 558              		.thumb_func
+ 560              	PWR_ClearFlag:
+ 561              	.LFB121:
  623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** 
  624:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** /**
  625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   * @brief  Clears the PWR's pending flags.
@@ -1462,64 +1463,64 @@
  631:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   */
  632:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** void PWR_ClearFlag(uint32_t PWR_FLAG)
  633:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** {
- 561              		.loc 1 633 0
- 562              		.cfi_startproc
- 563              		@ args = 0, pretend = 0, frame = 8
- 564              		@ frame_needed = 1, uses_anonymous_args = 0
- 565              		@ link register save eliminated.
- 566 0260 80B4     		push	{r7}
- 567              	.LCFI31:
- 568              		.cfi_def_cfa_offset 4
- 569              		.cfi_offset 7, -4
- 570 0262 83B0     		sub	sp, sp, #12
- 571              	.LCFI32:
- 572              		.cfi_def_cfa_offset 16
- 573 0264 00AF     		add	r7, sp, #0
- 574              	.LCFI33:
- 575              		.cfi_def_cfa_register 7
- 576 0266 7860     		str	r0, [r7, #4]
+ 562              		.loc 1 633 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 8
+ 565              		@ frame_needed = 1, uses_anonymous_args = 0
+ 566              		@ link register save eliminated.
+ 567 0260 80B4     		push	{r7}
+ 568              	.LCFI31:
+ 569              		.cfi_def_cfa_offset 4
+ 570              		.cfi_offset 7, -4
+ 571 0262 83B0     		sub	sp, sp, #12
+ 572              	.LCFI32:
+ 573              		.cfi_def_cfa_offset 16
+ 574 0264 00AF     		add	r7, sp, #0
+ 575              	.LCFI33:
+ 576              		.cfi_def_cfa_register 7
+ 577 0266 7860     		str	r0, [r7, #4]
  634:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   /* Check the parameters */
  635:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   assert_param(IS_PWR_CLEAR_FLAG(PWR_FLAG));
  636:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****          
  637:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c ****   PWR->CR |=  PWR_FLAG << 2;
- 577              		.loc 1 637 0
- 578 0268 4FF4E043 		mov	r3, #28672
- 579 026c C4F20003 		movt	r3, 16384
- 580 0270 4FF4E042 		mov	r2, #28672
- 581 0274 C4F20002 		movt	r2, 16384
- 582 0278 1268     		ldr	r2, [r2, #0]
- 583 027a 1146     		mov	r1, r2
- 584 027c 7A68     		ldr	r2, [r7, #4]
- 585 027e 4FEA8202 		lsl	r2, r2, #2
- 586 0282 0A43     		orrs	r2, r2, r1
- 587 0284 1A60     		str	r2, [r3, #0]
+ 578              		.loc 1 637 0
+ 579 0268 4FF4E043 		mov	r3, #28672
+ 580 026c C4F20003 		movt	r3, 16384
+ 581 0270 4FF4E042 		mov	r2, #28672
+ 582 0274 C4F20002 		movt	r2, 16384
+ 583 0278 1268     		ldr	r2, [r2, #0]
+ 584 027a 1146     		mov	r1, r2
+ 585 027c 7A68     		ldr	r2, [r7, #4]
+ 586 027e 4FEA8202 		lsl	r2, r2, #2
+ 587 0282 0A43     		orrs	r2, r2, r1
+ 588 0284 1A60     		str	r2, [r3, #0]
  638:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c **** }
- 588              		.loc 1 638 0
- 589 0286 07F10C07 		add	r7, r7, #12
- 590 028a BD46     		mov	sp, r7
- 591 028c 80BC     		pop	{r7}
- 592 028e 7047     		bx	lr
- 593              		.cfi_endproc
- 594              	.LFE121:
- 596              	.Letext0:
- 597              		.file 3 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 598              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
- 599              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Devi
+ 589              		.loc 1 638 0
+ 590 0286 07F10C07 		add	r7, r7, #12
+ 591 028a BD46     		mov	sp, r7
+ 592 028c 80BC     		pop	{r7}
+ 593 028e 7047     		bx	lr
+ 594              		.cfi_endproc
+ 595              	.LFE121:
+ 597              	.Letext0:
+ 598              		.file 3 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 599              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 600              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4xx.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_pwr.c
-  C:\Temp\ccCbmUAq.s:18     .text:00000000 $t
-  C:\Temp\ccCbmUAq.s:23     .text:00000000 PWR_DeInit
-  C:\Temp\ccCbmUAq.s:56     .text:00000020 PWR_BackupAccessCmd
-  C:\Temp\ccCbmUAq.s:93     .text:00000040 PWR_PVDLevelConfig
-  C:\Temp\ccCbmUAq.s:146    .text:00000080 PWR_PVDCmd
-  C:\Temp\ccCbmUAq.s:183    .text:000000a0 PWR_WakeUpPinCmd
-  C:\Temp\ccCbmUAq.s:220    .text:000000c0 PWR_BackupRegulatorCmd
-  C:\Temp\ccCbmUAq.s:257    .text:000000e0 PWR_MainRegulatorModeConfig
-  C:\Temp\ccCbmUAq.s:311    .text:0000012c PWR_FlashPowerDownCmd
-  C:\Temp\ccCbmUAq.s:348    .text:0000014c PWR_EnterSTOPMode
-  C:\Temp\ccCbmUAq.s:445    .text:000001cc PWR_EnterSTANDBYMode
-  C:\Temp\ccCbmUAq.s:504    .text:00000220 PWR_GetFlagStatus
-  C:\Temp\ccCbmUAq.s:559    .text:00000260 PWR_ClearFlag
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:19     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:24     .text:00000000 PWR_DeInit
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:57     .text:00000020 PWR_BackupAccessCmd
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:94     .text:00000040 PWR_PVDLevelConfig
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:147    .text:00000080 PWR_PVDCmd
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:184    .text:000000a0 PWR_WakeUpPinCmd
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:221    .text:000000c0 PWR_BackupRegulatorCmd
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:258    .text:000000e0 PWR_MainRegulatorModeConfig
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:312    .text:0000012c PWR_FlashPowerDownCmd
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:349    .text:0000014c PWR_EnterSTOPMode
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:446    .text:000001cc PWR_EnterSTANDBYMode
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:505    .text:00000220 PWR_GetFlagStatus
+C:\Users\Alex\AppData\Local\Temp\ccist5vv.s:560    .text:00000260 PWR_ClearFlag
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

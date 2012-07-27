@@ -9,20 +9,21 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"CCountingSemaphore.cpp"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
-  19              		.align	2
-  20              		.weak	_ZNK11ASyncObject7IsValidEv
-  21              		.thumb
-  22              		.thumb_func
-  24              	_ZNK11ASyncObject7IsValidEv:
-  25              	.LFB111:
-  26              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CCountingSemaphore.cpp"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._ZNK11ASyncObject7IsValidEv,"axG",%progbits,_ZNK11ASyncObject7IsValidEv,comdat
+  20              		.align	2
+  21              		.weak	_ZNK11ASyncObject7IsValidEv
+  22              		.thumb
+  23              		.thumb_func
+  25              	_ZNK11ASyncObject7IsValidEv:
+  26              	.LFB111:
+  27              		.file 1 "../FreeRTOS_EC/Source/ASyncObject.h"
    1:../FreeRTOS_EC/Source/ASyncObject.h **** /**
    2:../FreeRTOS_EC/Source/ASyncObject.h ****  * @file   ASyncObject.h
    3:../FreeRTOS_EC/Source/ASyncObject.h ****  * @class  ASyncObject
@@ -65,111 +66,111 @@
   40:../FreeRTOS_EC/Source/ASyncObject.h **** 
   41:../FreeRTOS_EC/Source/ASyncObject.h **** inline
   42:../FreeRTOS_EC/Source/ASyncObject.h **** bool ASyncObject::IsValid() const {
-  27              		.loc 1 42 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 8
-  30              		@ frame_needed = 1, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-  32 0000 80B4     		push	{r7}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 4
-  35              		.cfi_offset 7, -4
-  36 0002 83B0     		sub	sp, sp, #12
-  37              	.LCFI1:
-  38              		.cfi_def_cfa_offset 16
-  39 0004 00AF     		add	r7, sp, #0
-  40              	.LCFI2:
-  41              		.cfi_def_cfa_register 7
-  42 0006 7860     		str	r0, [r7, #4]
+  28              		.loc 1 42 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
   43:../FreeRTOS_EC/Source/ASyncObject.h **** 	return m_handleSemaphore != NULL;
-  43              		.loc 1 43 0
-  44 0008 7B68     		ldr	r3, [r7, #4]
-  45 000a 5B68     		ldr	r3, [r3, #4]
-  46 000c 002B     		cmp	r3, #0
-  47 000e 0CBF     		ite	eq
-  48 0010 0023     		moveq	r3, #0
-  49 0012 0123     		movne	r3, #1
-  50 0014 DBB2     		uxtb	r3, r3
+  44              		.loc 1 43 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 5B68     		ldr	r3, [r3, #4]
+  47 000c 002B     		cmp	r3, #0
+  48 000e 0CBF     		ite	eq
+  49 0010 0023     		moveq	r3, #0
+  50 0012 0123     		movne	r3, #1
+  51 0014 DBB2     		uxtb	r3, r3
   44:../FreeRTOS_EC/Source/ASyncObject.h **** }
-  51              		.loc 1 44 0
-  52 0016 1846     		mov	r0, r3
-  53 0018 07F10C07 		add	r7, r7, #12
-  54 001c BD46     		mov	sp, r7
-  55 001e 80BC     		pop	{r7}
-  56 0020 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE111:
-  60 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
-  61              		.align	2
-  62              		.weak	_ZN11ASyncObject6DetachEv
-  63              		.thumb
-  64              		.thumb_func
-  66              	_ZN11ASyncObject6DetachEv:
-  67              	.LFB112:
+  52              		.loc 1 44 0
+  53 0016 1846     		mov	r0, r3
+  54 0018 07F10C07 		add	r7, r7, #12
+  55 001c BD46     		mov	sp, r7
+  56 001e 80BC     		pop	{r7}
+  57 0020 7047     		bx	lr
+  58              		.cfi_endproc
+  59              	.LFE111:
+  61 0022 00BF     		.section	.text._ZN11ASyncObject6DetachEv,"axG",%progbits,_ZN11ASyncObject6DetachEv,comdat
+  62              		.align	2
+  63              		.weak	_ZN11ASyncObject6DetachEv
+  64              		.thumb
+  65              		.thumb_func
+  67              	_ZN11ASyncObject6DetachEv:
+  68              	.LFB112:
   45:../FreeRTOS_EC/Source/ASyncObject.h **** 
   46:../FreeRTOS_EC/Source/ASyncObject.h **** inline
   47:../FreeRTOS_EC/Source/ASyncObject.h **** xGenericHandle ASyncObject::Detach() {
-  68              		.loc 1 47 0
-  69              		.cfi_startproc
-  70              		@ args = 0, pretend = 0, frame = 16
-  71              		@ frame_needed = 1, uses_anonymous_args = 0
-  72              		@ link register save eliminated.
-  73 0000 80B4     		push	{r7}
-  74              	.LCFI3:
-  75              		.cfi_def_cfa_offset 4
-  76              		.cfi_offset 7, -4
-  77 0002 85B0     		sub	sp, sp, #20
-  78              	.LCFI4:
-  79              		.cfi_def_cfa_offset 24
-  80 0004 00AF     		add	r7, sp, #0
-  81              	.LCFI5:
-  82              		.cfi_def_cfa_register 7
-  83 0006 7860     		str	r0, [r7, #4]
-  84              	.LBB2:
+  69              		.loc 1 47 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 16
+  72              		@ frame_needed = 1, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 0000 80B4     		push	{r7}
+  75              	.LCFI3:
+  76              		.cfi_def_cfa_offset 4
+  77              		.cfi_offset 7, -4
+  78 0002 85B0     		sub	sp, sp, #20
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_offset 24
+  81 0004 00AF     		add	r7, sp, #0
+  82              	.LCFI5:
+  83              		.cfi_def_cfa_register 7
+  84 0006 7860     		str	r0, [r7, #4]
+  85              	.LBB2:
   48:../FreeRTOS_EC/Source/ASyncObject.h **** 	xSemaphoreHandle res = m_handleSemaphore;
-  85              		.loc 1 48 0
-  86 0008 7B68     		ldr	r3, [r7, #4]
-  87 000a 5B68     		ldr	r3, [r3, #4]
-  88 000c FB60     		str	r3, [r7, #12]
+  86              		.loc 1 48 0
+  87 0008 7B68     		ldr	r3, [r7, #4]
+  88 000a 5B68     		ldr	r3, [r3, #4]
+  89 000c FB60     		str	r3, [r7, #12]
   49:../FreeRTOS_EC/Source/ASyncObject.h **** 	m_handleSemaphore = NULL;
-  89              		.loc 1 49 0
-  90 000e 7B68     		ldr	r3, [r7, #4]
-  91 0010 4FF00002 		mov	r2, #0
-  92 0014 5A60     		str	r2, [r3, #4]
+  90              		.loc 1 49 0
+  91 000e 7B68     		ldr	r3, [r7, #4]
+  92 0010 4FF00002 		mov	r2, #0
+  93 0014 5A60     		str	r2, [r3, #4]
   50:../FreeRTOS_EC/Source/ASyncObject.h **** 	return res;
-  93              		.loc 1 50 0
-  94 0016 FB68     		ldr	r3, [r7, #12]
-  95              	.LBE2:
+  94              		.loc 1 50 0
+  95 0016 FB68     		ldr	r3, [r7, #12]
+  96              	.LBE2:
   51:../FreeRTOS_EC/Source/ASyncObject.h **** }
-  96              		.loc 1 51 0
-  97 0018 1846     		mov	r0, r3
-  98 001a 07F11407 		add	r7, r7, #20
-  99 001e BD46     		mov	sp, r7
- 100 0020 80BC     		pop	{r7}
- 101 0022 7047     		bx	lr
- 102              		.cfi_endproc
- 103              	.LFE112:
- 105              		.section	.rodata
- 106              		.align	2
- 107              	.LC0:
- 108 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CCountingSemaphore.h\000"
- 108      72656552 
- 108      544F535F 
- 108      45432F53 
- 108      6F757263 
- 109 002b 00       		.align	2
- 110              	.LC1:
- 111 002c 49735661 		.ascii	"IsValid()\000"
- 111      6C696428 
- 111      2900
- 112 0036 0000     		.section	.text._ZN18CCountingSemaphore4TakeEm,"axG",%progbits,_ZN18CCountingSemaphore4TakeEm,comda
- 113              		.align	2
- 114              		.weak	_ZN18CCountingSemaphore4TakeEm
- 115              		.thumb
- 116              		.thumb_func
- 118              	_ZN18CCountingSemaphore4TakeEm:
- 119              	.LFB113:
- 120              		.file 2 "../FreeRTOS_EC/Source/CCountingSemaphore.h"
+  97              		.loc 1 51 0
+  98 0018 1846     		mov	r0, r3
+  99 001a 07F11407 		add	r7, r7, #20
+ 100 001e BD46     		mov	sp, r7
+ 101 0020 80BC     		pop	{r7}
+ 102 0022 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE112:
+ 106              		.section	.rodata
+ 107              		.align	2
+ 108              	.LC0:
+ 109 0000 2E2E2F46 		.ascii	"../FreeRTOS_EC/Source/CCountingSemaphore.h\000"
+ 109      72656552 
+ 109      544F535F 
+ 109      45432F53 
+ 109      6F757263 
+ 110 002b 00       		.align	2
+ 111              	.LC1:
+ 112 002c 49735661 		.ascii	"IsValid()\000"
+ 112      6C696428 
+ 112      2900
+ 113 0036 0000     		.section	.text._ZN18CCountingSemaphore4TakeEm,"axG",%progbits,_ZN18CCountingSemaphore4TakeEm,comda
+ 114              		.align	2
+ 115              		.weak	_ZN18CCountingSemaphore4TakeEm
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	_ZN18CCountingSemaphore4TakeEm:
+ 120              	.LFB113:
+ 121              		.file 2 "../FreeRTOS_EC/Source/CCountingSemaphore.h"
    1:../FreeRTOS_EC/Source/CCountingSemaphore.h **** /**
    2:../FreeRTOS_EC/Source/CCountingSemaphore.h ****  * @file CCountingSemaphore.h
    3:../FreeRTOS_EC/Source/CCountingSemaphore.h ****  * @class CCountingSemaphore
@@ -257,141 +258,141 @@
   85:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 
   86:../FreeRTOS_EC/Source/CCountingSemaphore.h **** inline
   87:../FreeRTOS_EC/Source/CCountingSemaphore.h **** portBASE_TYPE CCountingSemaphore::Take(portTickType xBlockTime) {
- 121              		.loc 2 87 0
- 122              		.cfi_startproc
- 123              		@ args = 0, pretend = 0, frame = 8
- 124              		@ frame_needed = 1, uses_anonymous_args = 0
- 125 0000 80B5     		push	{r7, lr}
- 126              	.LCFI6:
- 127              		.cfi_def_cfa_offset 8
- 128              		.cfi_offset 14, -4
- 129              		.cfi_offset 7, -8
- 130 0002 82B0     		sub	sp, sp, #8
- 131              	.LCFI7:
- 132              		.cfi_def_cfa_offset 16
- 133 0004 00AF     		add	r7, sp, #0
- 134              	.LCFI8:
- 135              		.cfi_def_cfa_register 7
- 136 0006 7860     		str	r0, [r7, #4]
- 137 0008 3960     		str	r1, [r7, #0]
- 138              	.LBB3:
+ 122              		.loc 2 87 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 8
+ 125              		@ frame_needed = 1, uses_anonymous_args = 0
+ 126 0000 80B5     		push	{r7, lr}
+ 127              	.LCFI6:
+ 128              		.cfi_def_cfa_offset 8
+ 129              		.cfi_offset 14, -4
+ 130              		.cfi_offset 7, -8
+ 131 0002 82B0     		sub	sp, sp, #8
+ 132              	.LCFI7:
+ 133              		.cfi_def_cfa_offset 16
+ 134 0004 00AF     		add	r7, sp, #0
+ 135              	.LCFI8:
+ 136              		.cfi_def_cfa_register 7
+ 137 0006 7860     		str	r0, [r7, #4]
+ 138 0008 3960     		str	r1, [r7, #0]
+ 139              	.LBB3:
   88:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 	assert(IsValid());
- 139              		.loc 2 88 0
- 140 000a 7B68     		ldr	r3, [r7, #4]
- 141 000c 1B68     		ldr	r3, [r3, #0]
- 142 000e 1B68     		ldr	r3, [r3, #0]
- 143 0010 7A68     		ldr	r2, [r7, #4]
- 144 0012 1046     		mov	r0, r2
- 145 0014 9847     		blx	r3
- 146 0016 0346     		mov	r3, r0
- 147 0018 002B     		cmp	r3, #0
- 148 001a 0FD1     		bne	.L4
- 149              		.loc 2 88 0 is_stmt 0 discriminator 1
- 150 001c 40F20000 		movw	r0, #:lower16:.LC0
- 151 0020 C0F20000 		movt	r0, #:upper16:.LC0
- 152 0024 4FF05801 		mov	r1, #88
- 153 0028 40F20002 		movw	r2, #:lower16:_ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__
- 154 002c C0F20002 		movt	r2, #:upper16:_ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__
- 155 0030 40F20003 		movw	r3, #:lower16:.LC1
- 156 0034 C0F20003 		movt	r3, #:upper16:.LC1
- 157 0038 FFF7FEFF 		bl	__assert_func
- 158              	.L4:
+ 140              		.loc 2 88 0
+ 141 000a 7B68     		ldr	r3, [r7, #4]
+ 142 000c 1B68     		ldr	r3, [r3, #0]
+ 143 000e 1B68     		ldr	r3, [r3, #0]
+ 144 0010 7A68     		ldr	r2, [r7, #4]
+ 145 0012 1046     		mov	r0, r2
+ 146 0014 9847     		blx	r3
+ 147 0016 0346     		mov	r3, r0
+ 148 0018 002B     		cmp	r3, #0
+ 149 001a 0FD1     		bne	.L4
+ 150              		.loc 2 88 0 is_stmt 0 discriminator 1
+ 151 001c 40F20000 		movw	r0, #:lower16:.LC0
+ 152 0020 C0F20000 		movt	r0, #:upper16:.LC0
+ 153 0024 4FF05801 		mov	r1, #88
+ 154 0028 40F20002 		movw	r2, #:lower16:_ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__
+ 155 002c C0F20002 		movt	r2, #:upper16:_ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__
+ 156 0030 40F20003 		movw	r3, #:lower16:.LC1
+ 157 0034 C0F20003 		movt	r3, #:upper16:.LC1
+ 158 0038 FFF7FEFF 		bl	__assert_func
+ 159              	.L4:
   89:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 
   90:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 	return xSemaphoreTake(m_handleSemaphore, xBlockTime);
- 159              		.loc 2 90 0 is_stmt 1
- 160 003c 7B68     		ldr	r3, [r7, #4]
- 161 003e 5B68     		ldr	r3, [r3, #4]
- 162 0040 1846     		mov	r0, r3
- 163 0042 4FF00001 		mov	r1, #0
- 164 0046 3A68     		ldr	r2, [r7, #0]
- 165 0048 4FF00003 		mov	r3, #0
- 166 004c FFF7FEFF 		bl	xQueueGenericReceive
- 167 0050 0346     		mov	r3, r0
- 168              	.LBE3:
+ 160              		.loc 2 90 0 is_stmt 1
+ 161 003c 7B68     		ldr	r3, [r7, #4]
+ 162 003e 5B68     		ldr	r3, [r3, #4]
+ 163 0040 1846     		mov	r0, r3
+ 164 0042 4FF00001 		mov	r1, #0
+ 165 0046 3A68     		ldr	r2, [r7, #0]
+ 166 0048 4FF00003 		mov	r3, #0
+ 167 004c FFF7FEFF 		bl	xQueueGenericReceive
+ 168 0050 0346     		mov	r3, r0
+ 169              	.LBE3:
   91:../FreeRTOS_EC/Source/CCountingSemaphore.h **** }
- 169              		.loc 2 91 0
- 170 0052 1846     		mov	r0, r3
- 171 0054 07F10807 		add	r7, r7, #8
- 172 0058 BD46     		mov	sp, r7
- 173 005a 80BD     		pop	{r7, pc}
- 174              		.cfi_endproc
- 175              	.LFE113:
- 177              		.section	.text._ZN18CCountingSemaphore4GiveEv,"axG",%progbits,_ZN18CCountingSemaphore4GiveEv,comda
- 178              		.align	2
- 179              		.weak	_ZN18CCountingSemaphore4GiveEv
- 180              		.thumb
- 181              		.thumb_func
- 183              	_ZN18CCountingSemaphore4GiveEv:
- 184              	.LFB114:
+ 170              		.loc 2 91 0
+ 171 0052 1846     		mov	r0, r3
+ 172 0054 07F10807 		add	r7, r7, #8
+ 173 0058 BD46     		mov	sp, r7
+ 174 005a 80BD     		pop	{r7, pc}
+ 175              		.cfi_endproc
+ 176              	.LFE113:
+ 178              		.section	.text._ZN18CCountingSemaphore4GiveEv,"axG",%progbits,_ZN18CCountingSemaphore4GiveEv,comda
+ 179              		.align	2
+ 180              		.weak	_ZN18CCountingSemaphore4GiveEv
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	_ZN18CCountingSemaphore4GiveEv:
+ 185              	.LFB114:
   92:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 
   93:../FreeRTOS_EC/Source/CCountingSemaphore.h **** inline
   94:../FreeRTOS_EC/Source/CCountingSemaphore.h **** portBASE_TYPE CCountingSemaphore::Give() {
- 185              		.loc 2 94 0
- 186              		.cfi_startproc
- 187              		@ args = 0, pretend = 0, frame = 8
- 188              		@ frame_needed = 1, uses_anonymous_args = 0
- 189 0000 80B5     		push	{r7, lr}
- 190              	.LCFI9:
- 191              		.cfi_def_cfa_offset 8
- 192              		.cfi_offset 14, -4
- 193              		.cfi_offset 7, -8
- 194 0002 82B0     		sub	sp, sp, #8
- 195              	.LCFI10:
- 196              		.cfi_def_cfa_offset 16
- 197 0004 00AF     		add	r7, sp, #0
- 198              	.LCFI11:
- 199              		.cfi_def_cfa_register 7
- 200 0006 7860     		str	r0, [r7, #4]
- 201              	.LBB4:
+ 186              		.loc 2 94 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 8
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 0000 80B5     		push	{r7, lr}
+ 191              	.LCFI9:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 14, -4
+ 194              		.cfi_offset 7, -8
+ 195 0002 82B0     		sub	sp, sp, #8
+ 196              	.LCFI10:
+ 197              		.cfi_def_cfa_offset 16
+ 198 0004 00AF     		add	r7, sp, #0
+ 199              	.LCFI11:
+ 200              		.cfi_def_cfa_register 7
+ 201 0006 7860     		str	r0, [r7, #4]
+ 202              	.LBB4:
   95:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 	assert(IsValid());
- 202              		.loc 2 95 0
- 203 0008 7B68     		ldr	r3, [r7, #4]
- 204 000a 1B68     		ldr	r3, [r3, #0]
- 205 000c 1B68     		ldr	r3, [r3, #0]
- 206 000e 7A68     		ldr	r2, [r7, #4]
- 207 0010 1046     		mov	r0, r2
- 208 0012 9847     		blx	r3
- 209 0014 0346     		mov	r3, r0
- 210 0016 002B     		cmp	r3, #0
- 211 0018 0FD1     		bne	.L6
- 212              		.loc 2 95 0 is_stmt 0 discriminator 1
- 213 001a 40F20000 		movw	r0, #:lower16:.LC0
- 214 001e C0F20000 		movt	r0, #:upper16:.LC0
- 215 0022 4FF05F01 		mov	r1, #95
- 216 0026 40F20002 		movw	r2, #:lower16:_ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__
- 217 002a C0F20002 		movt	r2, #:upper16:_ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__
- 218 002e 40F20003 		movw	r3, #:lower16:.LC1
- 219 0032 C0F20003 		movt	r3, #:upper16:.LC1
- 220 0036 FFF7FEFF 		bl	__assert_func
- 221              	.L6:
+ 203              		.loc 2 95 0
+ 204 0008 7B68     		ldr	r3, [r7, #4]
+ 205 000a 1B68     		ldr	r3, [r3, #0]
+ 206 000c 1B68     		ldr	r3, [r3, #0]
+ 207 000e 7A68     		ldr	r2, [r7, #4]
+ 208 0010 1046     		mov	r0, r2
+ 209 0012 9847     		blx	r3
+ 210 0014 0346     		mov	r3, r0
+ 211 0016 002B     		cmp	r3, #0
+ 212 0018 0FD1     		bne	.L6
+ 213              		.loc 2 95 0 is_stmt 0 discriminator 1
+ 214 001a 40F20000 		movw	r0, #:lower16:.LC0
+ 215 001e C0F20000 		movt	r0, #:upper16:.LC0
+ 216 0022 4FF05F01 		mov	r1, #95
+ 217 0026 40F20002 		movw	r2, #:lower16:_ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__
+ 218 002a C0F20002 		movt	r2, #:upper16:_ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__
+ 219 002e 40F20003 		movw	r3, #:lower16:.LC1
+ 220 0032 C0F20003 		movt	r3, #:upper16:.LC1
+ 221 0036 FFF7FEFF 		bl	__assert_func
+ 222              	.L6:
   96:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 
   97:../FreeRTOS_EC/Source/CCountingSemaphore.h **** 	return xSemaphoreGive(m_handleSemaphore);
- 222              		.loc 2 97 0 is_stmt 1
- 223 003a 7B68     		ldr	r3, [r7, #4]
- 224 003c 5B68     		ldr	r3, [r3, #4]
- 225 003e 1846     		mov	r0, r3
- 226 0040 4FF00001 		mov	r1, #0
- 227 0044 4FF00002 		mov	r2, #0
- 228 0048 4FF00003 		mov	r3, #0
- 229 004c FFF7FEFF 		bl	xQueueGenericSend
- 230 0050 0346     		mov	r3, r0
- 231              	.LBE4:
+ 223              		.loc 2 97 0 is_stmt 1
+ 224 003a 7B68     		ldr	r3, [r7, #4]
+ 225 003c 5B68     		ldr	r3, [r3, #4]
+ 226 003e 1846     		mov	r0, r3
+ 227 0040 4FF00001 		mov	r1, #0
+ 228 0044 4FF00002 		mov	r2, #0
+ 229 0048 4FF00003 		mov	r3, #0
+ 230 004c FFF7FEFF 		bl	xQueueGenericSend
+ 231 0050 0346     		mov	r3, r0
+ 232              	.LBE4:
   98:../FreeRTOS_EC/Source/CCountingSemaphore.h **** }
- 232              		.loc 2 98 0
- 233 0052 1846     		mov	r0, r3
- 234 0054 07F10807 		add	r7, r7, #8
- 235 0058 BD46     		mov	sp, r7
- 236 005a 80BD     		pop	{r7, pc}
- 237              		.cfi_endproc
- 238              	.LFE114:
- 240              		.text
- 241              		.align	2
- 242              		.global	_ZN18CCountingSemaphoreC2Ev
- 243              		.thumb
- 244              		.thumb_func
- 246              	_ZN18CCountingSemaphoreC2Ev:
- 247              	.LFB117:
- 248              		.file 3 "../FreeRTOS_EC/Source/CCountingSemaphore.cpp"
+ 233              		.loc 2 98 0
+ 234 0052 1846     		mov	r0, r3
+ 235 0054 07F10807 		add	r7, r7, #8
+ 236 0058 BD46     		mov	sp, r7
+ 237 005a 80BD     		pop	{r7, pc}
+ 238              		.cfi_endproc
+ 239              	.LFE114:
+ 241              		.text
+ 242              		.align	2
+ 243              		.global	_ZN18CCountingSemaphoreC2Ev
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	_ZN18CCountingSemaphoreC2Ev:
+ 248              	.LFB117:
+ 249              		.file 3 "../FreeRTOS_EC/Source/CCountingSemaphore.cpp"
    1:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** /**
    2:../FreeRTOS_EC/Source/CCountingSemaphore.cpp ****  * CCountingSemaphore.cpp
    3:../FreeRTOS_EC/Source/CCountingSemaphore.cpp ****  *
@@ -404,216 +405,216 @@
   10:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** #include <assert.h>
   11:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   12:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** CCountingSemaphore::CCountingSemaphore() {
- 249              		.loc 3 12 0
- 250              		.cfi_startproc
- 251              		@ args = 0, pretend = 0, frame = 8
- 252              		@ frame_needed = 1, uses_anonymous_args = 0
- 253 0000 80B5     		push	{r7, lr}
- 254              	.LCFI12:
- 255              		.cfi_def_cfa_offset 8
- 256              		.cfi_offset 14, -4
- 257              		.cfi_offset 7, -8
- 258 0002 82B0     		sub	sp, sp, #8
- 259              	.LCFI13:
- 260              		.cfi_def_cfa_offset 16
- 261 0004 00AF     		add	r7, sp, #0
- 262              	.LCFI14:
- 263              		.cfi_def_cfa_register 7
- 264 0006 7860     		str	r0, [r7, #4]
- 265              	.LBB5:
- 266              		.loc 3 12 0
- 267 0008 7B68     		ldr	r3, [r7, #4]
- 268 000a 1846     		mov	r0, r3
- 269 000c FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
- 270 0010 7B68     		ldr	r3, [r7, #4]
- 271 0012 044A     		ldr	r2, .L9
- 272 0014 1A60     		str	r2, [r3, #0]
- 273              	.LBE5:
+ 250              		.loc 3 12 0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 8
+ 253              		@ frame_needed = 1, uses_anonymous_args = 0
+ 254 0000 80B5     		push	{r7, lr}
+ 255              	.LCFI12:
+ 256              		.cfi_def_cfa_offset 8
+ 257              		.cfi_offset 14, -4
+ 258              		.cfi_offset 7, -8
+ 259 0002 82B0     		sub	sp, sp, #8
+ 260              	.LCFI13:
+ 261              		.cfi_def_cfa_offset 16
+ 262 0004 00AF     		add	r7, sp, #0
+ 263              	.LCFI14:
+ 264              		.cfi_def_cfa_register 7
+ 265 0006 7860     		str	r0, [r7, #4]
+ 266              	.LBB5:
+ 267              		.loc 3 12 0
+ 268 0008 7B68     		ldr	r3, [r7, #4]
+ 269 000a 1846     		mov	r0, r3
+ 270 000c FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 271 0010 7B68     		ldr	r3, [r7, #4]
+ 272 0012 044A     		ldr	r2, .L9
+ 273 0014 1A60     		str	r2, [r3, #0]
+ 274              	.LBE5:
   13:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 	// TODO Auto-generated constructor stub
   14:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   15:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** }
- 274              		.loc 3 15 0
- 275 0016 7B68     		ldr	r3, [r7, #4]
- 276 0018 1846     		mov	r0, r3
- 277 001a 07F10807 		add	r7, r7, #8
- 278 001e BD46     		mov	sp, r7
- 279 0020 80BD     		pop	{r7, pc}
- 280              	.L10:
- 281 0022 00BF     		.align	2
- 282              	.L9:
- 283 0024 08000000 		.word	_ZTV18CCountingSemaphore+8
- 284              		.cfi_endproc
- 285              	.LFE117:
- 287              		.align	2
- 288              		.global	_ZN18CCountingSemaphoreD2Ev
- 289              		.thumb
- 290              		.thumb_func
- 292              	_ZN18CCountingSemaphoreD2Ev:
- 293              	.LFB120:
+ 275              		.loc 3 15 0
+ 276 0016 7B68     		ldr	r3, [r7, #4]
+ 277 0018 1846     		mov	r0, r3
+ 278 001a 07F10807 		add	r7, r7, #8
+ 279 001e BD46     		mov	sp, r7
+ 280 0020 80BD     		pop	{r7, pc}
+ 281              	.L10:
+ 282 0022 00BF     		.align	2
+ 283              	.L9:
+ 284 0024 08000000 		.word	_ZTV18CCountingSemaphore+8
+ 285              		.cfi_endproc
+ 286              	.LFE117:
+ 288              		.align	2
+ 289              		.global	_ZN18CCountingSemaphoreD2Ev
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	_ZN18CCountingSemaphoreD2Ev:
+ 294              	.LFB120:
   16:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   17:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** CCountingSemaphore::~CCountingSemaphore() {
- 294              		.loc 3 17 0
- 295              		.cfi_startproc
- 296              		@ args = 0, pretend = 0, frame = 8
- 297              		@ frame_needed = 1, uses_anonymous_args = 0
- 298 0028 80B5     		push	{r7, lr}
- 299              	.LCFI15:
- 300              		.cfi_def_cfa_offset 8
- 301              		.cfi_offset 14, -4
- 302              		.cfi_offset 7, -8
- 303 002a 82B0     		sub	sp, sp, #8
- 304              	.LCFI16:
- 305              		.cfi_def_cfa_offset 16
- 306 002c 00AF     		add	r7, sp, #0
- 307              	.LCFI17:
- 308              		.cfi_def_cfa_register 7
- 309 002e 7860     		str	r0, [r7, #4]
- 310              	.LBB6:
- 311              		.loc 3 17 0
- 312 0030 7B68     		ldr	r3, [r7, #4]
- 313 0032 0A4A     		ldr	r2, .L14
- 314 0034 1A60     		str	r2, [r3, #0]
+ 295              		.loc 3 17 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 8
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299 0028 80B5     		push	{r7, lr}
+ 300              	.LCFI15:
+ 301              		.cfi_def_cfa_offset 8
+ 302              		.cfi_offset 14, -4
+ 303              		.cfi_offset 7, -8
+ 304 002a 82B0     		sub	sp, sp, #8
+ 305              	.LCFI16:
+ 306              		.cfi_def_cfa_offset 16
+ 307 002c 00AF     		add	r7, sp, #0
+ 308              	.LCFI17:
+ 309              		.cfi_def_cfa_register 7
+ 310 002e 7860     		str	r0, [r7, #4]
+ 311              	.LBB6:
+ 312              		.loc 3 17 0
+ 313 0030 7B68     		ldr	r3, [r7, #4]
+ 314 0032 0A4A     		ldr	r2, .L14
+ 315 0034 1A60     		str	r2, [r3, #0]
   18:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 	// TODO Auto-generated destructor stub
   19:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** }
- 315              		.loc 3 19 0
- 316 0036 7868     		ldr	r0, [r7, #4]
- 317 0038 FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
- 318              	.LBE6:
- 319 003c 4FF00003 		mov	r3, #0
- 320 0040 03F00103 		and	r3, r3, #1
- 321 0044 DBB2     		uxtb	r3, r3
- 322 0046 002B     		cmp	r3, #0
- 323 0048 02D0     		beq	.L13
- 324              		.loc 3 19 0 is_stmt 0 discriminator 2
- 325 004a 7868     		ldr	r0, [r7, #4]
- 326 004c FFF7FEFF 		bl	_ZdlPv
- 327              	.L13:
- 328              		.loc 3 19 0 discriminator 3
- 329 0050 7B68     		ldr	r3, [r7, #4]
- 330 0052 1846     		mov	r0, r3
- 331 0054 07F10807 		add	r7, r7, #8
- 332 0058 BD46     		mov	sp, r7
- 333 005a 80BD     		pop	{r7, pc}
- 334              	.L15:
- 335              		.align	2
- 336              	.L14:
- 337 005c 08000000 		.word	_ZTV18CCountingSemaphore+8
- 338              		.cfi_endproc
- 339              	.LFE120:
- 341              		.align	2
- 342              		.global	_ZN18CCountingSemaphoreD0Ev
- 343              		.thumb
- 344              		.thumb_func
- 346              	_ZN18CCountingSemaphoreD0Ev:
- 347              	.LFB122:
+ 316              		.loc 3 19 0
+ 317 0036 7868     		ldr	r0, [r7, #4]
+ 318 0038 FFF7FEFF 		bl	_ZN11ASyncObjectD2Ev
+ 319              	.LBE6:
+ 320 003c 4FF00003 		mov	r3, #0
+ 321 0040 03F00103 		and	r3, r3, #1
+ 322 0044 DBB2     		uxtb	r3, r3
+ 323 0046 002B     		cmp	r3, #0
+ 324 0048 02D0     		beq	.L13
+ 325              		.loc 3 19 0 is_stmt 0 discriminator 2
+ 326 004a 7868     		ldr	r0, [r7, #4]
+ 327 004c FFF7FEFF 		bl	_ZdlPv
+ 328              	.L13:
+ 329              		.loc 3 19 0 discriminator 3
+ 330 0050 7B68     		ldr	r3, [r7, #4]
+ 331 0052 1846     		mov	r0, r3
+ 332 0054 07F10807 		add	r7, r7, #8
+ 333 0058 BD46     		mov	sp, r7
+ 334 005a 80BD     		pop	{r7, pc}
+ 335              	.L15:
+ 336              		.align	2
+ 337              	.L14:
+ 338 005c 08000000 		.word	_ZTV18CCountingSemaphore+8
+ 339              		.cfi_endproc
+ 340              	.LFE120:
+ 342              		.align	2
+ 343              		.global	_ZN18CCountingSemaphoreD0Ev
+ 344              		.thumb
+ 345              		.thumb_func
+ 347              	_ZN18CCountingSemaphoreD0Ev:
+ 348              	.LFB122:
   17:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** CCountingSemaphore::~CCountingSemaphore() {
- 348              		.loc 3 17 0 is_stmt 1
- 349              		.cfi_startproc
- 350              		@ args = 0, pretend = 0, frame = 8
- 351              		@ frame_needed = 1, uses_anonymous_args = 0
- 352 0060 80B5     		push	{r7, lr}
- 353              	.LCFI18:
- 354              		.cfi_def_cfa_offset 8
- 355              		.cfi_offset 14, -4
- 356              		.cfi_offset 7, -8
- 357 0062 82B0     		sub	sp, sp, #8
- 358              	.LCFI19:
- 359              		.cfi_def_cfa_offset 16
- 360 0064 00AF     		add	r7, sp, #0
- 361              	.LCFI20:
- 362              		.cfi_def_cfa_register 7
- 363 0066 7860     		str	r0, [r7, #4]
- 364              		.loc 3 19 0
- 365 0068 7868     		ldr	r0, [r7, #4]
- 366 006a FFF7FEFF 		bl	_ZN18CCountingSemaphoreD1Ev
- 367 006e 7868     		ldr	r0, [r7, #4]
- 368 0070 FFF7FEFF 		bl	_ZdlPv
- 369 0074 7B68     		ldr	r3, [r7, #4]
- 370 0076 1846     		mov	r0, r3
- 371 0078 07F10807 		add	r7, r7, #8
- 372 007c BD46     		mov	sp, r7
- 373 007e 80BD     		pop	{r7, pc}
- 374              		.cfi_endproc
- 375              	.LFE122:
- 377              		.align	2
- 378              		.global	_ZN18CCountingSemaphoreC2EPv
- 379              		.thumb
- 380              		.thumb_func
- 382              	_ZN18CCountingSemaphoreC2EPv:
- 383              	.LFB124:
+ 349              		.loc 3 17 0 is_stmt 1
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 8
+ 352              		@ frame_needed = 1, uses_anonymous_args = 0
+ 353 0060 80B5     		push	{r7, lr}
+ 354              	.LCFI18:
+ 355              		.cfi_def_cfa_offset 8
+ 356              		.cfi_offset 14, -4
+ 357              		.cfi_offset 7, -8
+ 358 0062 82B0     		sub	sp, sp, #8
+ 359              	.LCFI19:
+ 360              		.cfi_def_cfa_offset 16
+ 361 0064 00AF     		add	r7, sp, #0
+ 362              	.LCFI20:
+ 363              		.cfi_def_cfa_register 7
+ 364 0066 7860     		str	r0, [r7, #4]
+ 365              		.loc 3 19 0
+ 366 0068 7868     		ldr	r0, [r7, #4]
+ 367 006a FFF7FEFF 		bl	_ZN18CCountingSemaphoreD1Ev
+ 368 006e 7868     		ldr	r0, [r7, #4]
+ 369 0070 FFF7FEFF 		bl	_ZdlPv
+ 370 0074 7B68     		ldr	r3, [r7, #4]
+ 371 0076 1846     		mov	r0, r3
+ 372 0078 07F10807 		add	r7, r7, #8
+ 373 007c BD46     		mov	sp, r7
+ 374 007e 80BD     		pop	{r7, pc}
+ 375              		.cfi_endproc
+ 376              	.LFE122:
+ 378              		.align	2
+ 379              		.global	_ZN18CCountingSemaphoreC2EPv
+ 380              		.thumb
+ 381              		.thumb_func
+ 383              	_ZN18CCountingSemaphoreC2EPv:
+ 384              	.LFB124:
   20:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   21:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** CCountingSemaphore::CCountingSemaphore(xSemaphoreHandle handleSemaphore) {
- 384              		.loc 3 21 0
- 385              		.cfi_startproc
- 386              		@ args = 0, pretend = 0, frame = 8
- 387              		@ frame_needed = 1, uses_anonymous_args = 0
- 388 0080 80B5     		push	{r7, lr}
- 389              	.LCFI21:
- 390              		.cfi_def_cfa_offset 8
- 391              		.cfi_offset 14, -4
- 392              		.cfi_offset 7, -8
- 393 0082 82B0     		sub	sp, sp, #8
- 394              	.LCFI22:
- 395              		.cfi_def_cfa_offset 16
- 396 0084 00AF     		add	r7, sp, #0
- 397              	.LCFI23:
- 398              		.cfi_def_cfa_register 7
- 399 0086 7860     		str	r0, [r7, #4]
- 400 0088 3960     		str	r1, [r7, #0]
- 401              	.LBB7:
- 402              		.loc 3 21 0
- 403 008a 7B68     		ldr	r3, [r7, #4]
- 404 008c 1846     		mov	r0, r3
- 405 008e FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
- 406 0092 7B68     		ldr	r3, [r7, #4]
- 407 0094 064A     		ldr	r2, .L20
- 408 0096 1A60     		str	r2, [r3, #0]
+ 385              		.loc 3 21 0
+ 386              		.cfi_startproc
+ 387              		@ args = 0, pretend = 0, frame = 8
+ 388              		@ frame_needed = 1, uses_anonymous_args = 0
+ 389 0080 80B5     		push	{r7, lr}
+ 390              	.LCFI21:
+ 391              		.cfi_def_cfa_offset 8
+ 392              		.cfi_offset 14, -4
+ 393              		.cfi_offset 7, -8
+ 394 0082 82B0     		sub	sp, sp, #8
+ 395              	.LCFI22:
+ 396              		.cfi_def_cfa_offset 16
+ 397 0084 00AF     		add	r7, sp, #0
+ 398              	.LCFI23:
+ 399              		.cfi_def_cfa_register 7
+ 400 0086 7860     		str	r0, [r7, #4]
+ 401 0088 3960     		str	r1, [r7, #0]
+ 402              	.LBB7:
+ 403              		.loc 3 21 0
+ 404 008a 7B68     		ldr	r3, [r7, #4]
+ 405 008c 1846     		mov	r0, r3
+ 406 008e FFF7FEFF 		bl	_ZN11ASyncObjectC2Ev
+ 407 0092 7B68     		ldr	r3, [r7, #4]
+ 408 0094 064A     		ldr	r2, .L20
+ 409 0096 1A60     		str	r2, [r3, #0]
   22:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 	Attach(handleSemaphore);
- 409              		.loc 3 22 0
- 410 0098 7B68     		ldr	r3, [r7, #4]
- 411 009a 1846     		mov	r0, r3
- 412 009c 3968     		ldr	r1, [r7, #0]
- 413 009e FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
- 414              	.LBE7:
+ 410              		.loc 3 22 0
+ 411 0098 7B68     		ldr	r3, [r7, #4]
+ 412 009a 1846     		mov	r0, r3
+ 413 009c 3968     		ldr	r1, [r7, #0]
+ 414 009e FFF7FEFF 		bl	_ZN11ASyncObject6AttachEPv
+ 415              	.LBE7:
   23:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** }
- 415              		.loc 3 23 0
- 416 00a2 7B68     		ldr	r3, [r7, #4]
- 417 00a4 1846     		mov	r0, r3
- 418 00a6 07F10807 		add	r7, r7, #8
- 419 00aa BD46     		mov	sp, r7
- 420 00ac 80BD     		pop	{r7, pc}
- 421              	.L21:
- 422 00ae 00BF     		.align	2
- 423              	.L20:
- 424 00b0 08000000 		.word	_ZTV18CCountingSemaphore+8
- 425              		.cfi_endproc
- 426              	.LFE124:
- 428              		.align	2
- 429              		.global	_ZN18CCountingSemaphore6CreateEmm
- 430              		.thumb
- 431              		.thumb_func
- 433              	_ZN18CCountingSemaphore6CreateEmm:
- 434              	.LFB126:
+ 416              		.loc 3 23 0
+ 417 00a2 7B68     		ldr	r3, [r7, #4]
+ 418 00a4 1846     		mov	r0, r3
+ 419 00a6 07F10807 		add	r7, r7, #8
+ 420 00aa BD46     		mov	sp, r7
+ 421 00ac 80BD     		pop	{r7, pc}
+ 422              	.L21:
+ 423 00ae 00BF     		.align	2
+ 424              	.L20:
+ 425 00b0 08000000 		.word	_ZTV18CCountingSemaphore+8
+ 426              		.cfi_endproc
+ 427              	.LFE124:
+ 429              		.align	2
+ 430              		.global	_ZN18CCountingSemaphore6CreateEmm
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	_ZN18CCountingSemaphore6CreateEmm:
+ 435              	.LFB126:
   24:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   25:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** bool CCountingSemaphore::Create(unsigned portBASE_TYPE uxMaxCount, unsigned portBASE_TYPE uxInitial
- 435              		.loc 3 25 0
- 436              		.cfi_startproc
- 437              		@ args = 0, pretend = 0, frame = 16
- 438              		@ frame_needed = 1, uses_anonymous_args = 0
- 439 00b4 80B5     		push	{r7, lr}
- 440              	.LCFI24:
- 441              		.cfi_def_cfa_offset 8
- 442              		.cfi_offset 14, -4
- 443              		.cfi_offset 7, -8
- 444 00b6 84B0     		sub	sp, sp, #16
- 445              	.LCFI25:
- 446              		.cfi_def_cfa_offset 24
- 447 00b8 00AF     		add	r7, sp, #0
- 448              	.LCFI26:
- 449              		.cfi_def_cfa_register 7
- 450 00ba F860     		str	r0, [r7, #12]
- 451 00bc B960     		str	r1, [r7, #8]
- 452 00be 7A60     		str	r2, [r7, #4]
+ 436              		.loc 3 25 0
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 16
+ 439              		@ frame_needed = 1, uses_anonymous_args = 0
+ 440 00b4 80B5     		push	{r7, lr}
+ 441              	.LCFI24:
+ 442              		.cfi_def_cfa_offset 8
+ 443              		.cfi_offset 14, -4
+ 444              		.cfi_offset 7, -8
+ 445 00b6 84B0     		sub	sp, sp, #16
+ 446              	.LCFI25:
+ 447              		.cfi_def_cfa_offset 24
+ 448 00b8 00AF     		add	r7, sp, #0
+ 449              	.LCFI26:
+ 450              		.cfi_def_cfa_register 7
+ 451 00ba F860     		str	r0, [r7, #12]
+ 452 00bc B960     		str	r1, [r7, #8]
+ 453 00be 7A60     		str	r2, [r7, #4]
   26:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   27:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** #if (configUSE_COUNTING_SEMAPHORES == 1)
   28:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 	xSemaphoreHandle handle = NULL;
@@ -624,101 +625,101 @@
   33:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** #endif
   34:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 
   35:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** 	return IsValid();
- 453              		.loc 3 35 0
- 454 00c0 FB68     		ldr	r3, [r7, #12]
- 455 00c2 1B68     		ldr	r3, [r3, #0]
- 456 00c4 1B68     		ldr	r3, [r3, #0]
- 457 00c6 FA68     		ldr	r2, [r7, #12]
- 458 00c8 1046     		mov	r0, r2
- 459 00ca 9847     		blx	r3
- 460 00cc 0346     		mov	r3, r0
+ 454              		.loc 3 35 0
+ 455 00c0 FB68     		ldr	r3, [r7, #12]
+ 456 00c2 1B68     		ldr	r3, [r3, #0]
+ 457 00c4 1B68     		ldr	r3, [r3, #0]
+ 458 00c6 FA68     		ldr	r2, [r7, #12]
+ 459 00c8 1046     		mov	r0, r2
+ 460 00ca 9847     		blx	r3
+ 461 00cc 0346     		mov	r3, r0
   36:../FreeRTOS_EC/Source/CCountingSemaphore.cpp **** }
- 461              		.loc 3 36 0
- 462 00ce 1846     		mov	r0, r3
- 463 00d0 07F11007 		add	r7, r7, #16
- 464 00d4 BD46     		mov	sp, r7
- 465 00d6 80BD     		pop	{r7, pc}
- 466              		.cfi_endproc
- 467              	.LFE126:
- 469              		.global	_ZTV18CCountingSemaphore
- 470              		.section	.rodata._ZTV18CCountingSemaphore,"a",%progbits
- 471              		.align	3
- 474              	_ZTV18CCountingSemaphore:
- 475 0000 00000000 		.word	0
- 476 0004 00000000 		.word	0
- 477 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
- 478 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
- 479 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
- 480 0014 00000000 		.word	_ZN18CCountingSemaphoreD1Ev
- 481 0018 00000000 		.word	_ZN18CCountingSemaphoreD0Ev
- 482 001c 00000000 		.word	_ZN18CCountingSemaphore4TakeEm
- 483 0020 00000000 		.word	_ZN18CCountingSemaphore4GiveEv
- 484 0024 00000000 		.section	.rodata._ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__,"a",%progbits
- 485              		.align	2
- 488              	_ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__:
- 489 0000 76697274 		.ascii	"virtual long int CCountingSemaphore::Give()\000"
- 489      75616C20 
- 489      6C6F6E67 
- 489      20696E74 
- 489      2043436F 
- 490              		.section	.rodata._ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__,"a",%progbits
- 491              		.align	2
- 494              	_ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__:
- 495 0000 76697274 		.ascii	"virtual long int CCountingSemaphore::Take(portTickT"
- 495      75616C20 
- 495      6C6F6E67 
- 495      20696E74 
- 495      2043436F 
- 496 0033 79706529 		.ascii	"ype)\000"
- 496      00
- 497              		.global	_ZN18CCountingSemaphoreC1Ev
- 498              		.thumb_set _ZN18CCountingSemaphoreC1Ev,_ZN18CCountingSemaphoreC2Ev
- 499              		.global	_ZN18CCountingSemaphoreD1Ev
- 500              		.thumb_set _ZN18CCountingSemaphoreD1Ev,_ZN18CCountingSemaphoreD2Ev
- 501              		.global	_ZN18CCountingSemaphoreC1EPv
- 502              		.thumb_set _ZN18CCountingSemaphoreC1EPv,_ZN18CCountingSemaphoreC2EPv
- 503              		.text
- 504              	.Letext0:
- 505              		.file 4 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 506              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 507              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 508              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 509              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
- 510              		.file 9 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 462              		.loc 3 36 0
+ 463 00ce 1846     		mov	r0, r3
+ 464 00d0 07F11007 		add	r7, r7, #16
+ 465 00d4 BD46     		mov	sp, r7
+ 466 00d6 80BD     		pop	{r7, pc}
+ 467              		.cfi_endproc
+ 468              	.LFE126:
+ 470              		.global	_ZTV18CCountingSemaphore
+ 471              		.section	.rodata._ZTV18CCountingSemaphore,"a",%progbits
+ 472              		.align	3
+ 475              	_ZTV18CCountingSemaphore:
+ 476 0000 00000000 		.word	0
+ 477 0004 00000000 		.word	0
+ 478 0008 00000000 		.word	_ZNK11ASyncObject7IsValidEv
+ 479 000c 00000000 		.word	_ZN11ASyncObject6AttachEPv
+ 480 0010 00000000 		.word	_ZN11ASyncObject6DetachEv
+ 481 0014 00000000 		.word	_ZN18CCountingSemaphoreD1Ev
+ 482 0018 00000000 		.word	_ZN18CCountingSemaphoreD0Ev
+ 483 001c 00000000 		.word	_ZN18CCountingSemaphore4TakeEm
+ 484 0020 00000000 		.word	_ZN18CCountingSemaphore4GiveEv
+ 485 0024 00000000 		.section	.rodata._ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__,"a",%progbits
+ 486              		.align	2
+ 489              	_ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__:
+ 490 0000 76697274 		.ascii	"virtual long int CCountingSemaphore::Give()\000"
+ 490      75616C20 
+ 490      6C6F6E67 
+ 490      20696E74 
+ 490      2043436F 
+ 491              		.section	.rodata._ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__,"a",%progbits
+ 492              		.align	2
+ 495              	_ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__:
+ 496 0000 76697274 		.ascii	"virtual long int CCountingSemaphore::Take(portTickT"
+ 496      75616C20 
+ 496      6C6F6E67 
+ 496      20696E74 
+ 496      2043436F 
+ 497 0033 79706529 		.ascii	"ype)\000"
+ 497      00
+ 498              		.global	_ZN18CCountingSemaphoreC1Ev
+ 499              		.thumb_set _ZN18CCountingSemaphoreC1Ev,_ZN18CCountingSemaphoreC2Ev
+ 500              		.global	_ZN18CCountingSemaphoreD1Ev
+ 501              		.thumb_set _ZN18CCountingSemaphoreD1Ev,_ZN18CCountingSemaphoreD2Ev
+ 502              		.global	_ZN18CCountingSemaphoreC1EPv
+ 503              		.thumb_set _ZN18CCountingSemaphoreC1EPv,_ZN18CCountingSemaphoreC2EPv
+ 504              		.text
+ 505              	.Letext0:
+ 506              		.file 4 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 507              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
+ 508              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/queue.h"
+ 509              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/semphr.h"
+ 510              		.file 8 "../FreeRTOS_EC/Source/IFreeRTOSProtocol.h"
+ 511              		.file 9 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CCountingSemaphore.cpp
-  C:\Temp\ccdmCpuy.s:19     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
-  C:\Temp\ccdmCpuy.s:24     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
-  C:\Temp\ccdmCpuy.s:61     .text._ZN11ASyncObject6DetachEv:00000000 $t
-  C:\Temp\ccdmCpuy.s:66     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
-  C:\Temp\ccdmCpuy.s:106    .rodata:00000000 $d
-  C:\Temp\ccdmCpuy.s:107    .rodata:00000000 .LC0
-  C:\Temp\ccdmCpuy.s:110    .rodata:0000002c .LC1
-  C:\Temp\ccdmCpuy.s:113    .text._ZN18CCountingSemaphore4TakeEm:00000000 $t
-  C:\Temp\ccdmCpuy.s:118    .text._ZN18CCountingSemaphore4TakeEm:00000000 _ZN18CCountingSemaphore4TakeEm
-  C:\Temp\ccdmCpuy.s:494    .rodata._ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__:00000000 _ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__
-  C:\Temp\ccdmCpuy.s:178    .text._ZN18CCountingSemaphore4GiveEv:00000000 $t
-  C:\Temp\ccdmCpuy.s:183    .text._ZN18CCountingSemaphore4GiveEv:00000000 _ZN18CCountingSemaphore4GiveEv
-  C:\Temp\ccdmCpuy.s:488    .rodata._ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__:00000000 _ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__
-  C:\Temp\ccdmCpuy.s:241    .text:00000000 $t
-  C:\Temp\ccdmCpuy.s:246    .text:00000000 _ZN18CCountingSemaphoreC2Ev
-  C:\Temp\ccdmCpuy.s:283    .text:00000024 $d
-  C:\Temp\ccdmCpuy.s:474    .rodata._ZTV18CCountingSemaphore:00000000 _ZTV18CCountingSemaphore
-  C:\Temp\ccdmCpuy.s:287    .text:00000028 $t
-  C:\Temp\ccdmCpuy.s:292    .text:00000028 _ZN18CCountingSemaphoreD2Ev
-  C:\Temp\ccdmCpuy.s:337    .text:0000005c $d
-  C:\Temp\ccdmCpuy.s:341    .text:00000060 $t
-  C:\Temp\ccdmCpuy.s:346    .text:00000060 _ZN18CCountingSemaphoreD0Ev
-  C:\Temp\ccdmCpuy.s:292    .text:00000028 _ZN18CCountingSemaphoreD1Ev
-  C:\Temp\ccdmCpuy.s:382    .text:00000080 _ZN18CCountingSemaphoreC2EPv
-  C:\Temp\ccdmCpuy.s:424    .text:000000b0 $d
-  C:\Temp\ccdmCpuy.s:428    .text:000000b4 $t
-  C:\Temp\ccdmCpuy.s:433    .text:000000b4 _ZN18CCountingSemaphore6CreateEmm
-  C:\Temp\ccdmCpuy.s:471    .rodata._ZTV18CCountingSemaphore:00000000 $d
-  C:\Temp\ccdmCpuy.s:485    .rodata._ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\ccdmCpuy.s:491    .rodata._ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__:00000000 $d
-  C:\Temp\ccdmCpuy.s:246    .text:00000000 _ZN18CCountingSemaphoreC1Ev
-  C:\Temp\ccdmCpuy.s:382    .text:00000080 _ZN18CCountingSemaphoreC1EPv
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:20     .text._ZNK11ASyncObject7IsValidEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:25     .text._ZNK11ASyncObject7IsValidEv:00000000 _ZNK11ASyncObject7IsValidEv
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:62     .text._ZN11ASyncObject6DetachEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:67     .text._ZN11ASyncObject6DetachEv:00000000 _ZN11ASyncObject6DetachEv
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:107    .rodata:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:108    .rodata:00000000 .LC0
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:111    .rodata:0000002c .LC1
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:114    .text._ZN18CCountingSemaphore4TakeEm:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:119    .text._ZN18CCountingSemaphore4TakeEm:00000000 _ZN18CCountingSemaphore4TakeEm
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:495    .rodata._ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__:00000000 _ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:179    .text._ZN18CCountingSemaphore4GiveEv:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:184    .text._ZN18CCountingSemaphore4GiveEv:00000000 _ZN18CCountingSemaphore4GiveEv
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:489    .rodata._ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__:00000000 _ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:242    .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:247    .text:00000000 _ZN18CCountingSemaphoreC2Ev
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:284    .text:00000024 $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:475    .rodata._ZTV18CCountingSemaphore:00000000 _ZTV18CCountingSemaphore
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:288    .text:00000028 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:293    .text:00000028 _ZN18CCountingSemaphoreD2Ev
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:338    .text:0000005c $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:342    .text:00000060 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:347    .text:00000060 _ZN18CCountingSemaphoreD0Ev
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:293    .text:00000028 _ZN18CCountingSemaphoreD1Ev
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:383    .text:00000080 _ZN18CCountingSemaphoreC2EPv
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:425    .text:000000b0 $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:429    .text:000000b4 $t
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:434    .text:000000b4 _ZN18CCountingSemaphore6CreateEmm
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:472    .rodata._ZTV18CCountingSemaphore:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:486    .rodata._ZZN18CCountingSemaphore4GiveEvE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:492    .rodata._ZZN18CCountingSemaphore4TakeEmE19__PRETTY_FUNCTION__:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:247    .text:00000000 _ZN18CCountingSemaphoreC1Ev
+C:\Users\Alex\AppData\Local\Temp\ccImo9Rp.s:383    .text:00000080 _ZN18CCountingSemaphoreC1EPv
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

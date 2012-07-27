@@ -9,19 +9,20 @@
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
   11              		.eabi_attribute 30, 6
-  12              		.eabi_attribute 18, 4
-  13              		.thumb
-  14              		.file	"stm32f4xx_it.c"
-  15              		.text
-  16              	.Ltext0:
-  17              		.cfi_sections	.debug_frame
-  18              		.align	2
-  19              		.global	NMI_Handler
-  20              		.thumb
-  21              		.thumb_func
-  23              	NMI_Handler:
-  24              	.LFB110:
-  25              		.file 1 "../stm32f4xx_it.c"
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"stm32f4xx_it.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.align	2
+  20              		.global	NMI_Handler
+  21              		.thumb
+  22              		.thumb_func
+  24              	NMI_Handler:
+  25              	.LFB110:
+  26              		.file 1 "../stm32f4xx_it.c"
    1:../stm32f4xx_it.c **** /**
    2:../stm32f4xx_it.c ****   ******************************************************************************
    3:../stm32f4xx_it.c ****   * @file    TIM_TimeBase/stm32f4xx_it.c 
@@ -76,31 +77,31 @@
   52:../stm32f4xx_it.c ****   */
   53:../stm32f4xx_it.c **** void NMI_Handler(void)
   54:../stm32f4xx_it.c **** {
-  26              		.loc 1 54 0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 0
-  29              		@ frame_needed = 1, uses_anonymous_args = 0
-  30              		@ link register save eliminated.
-  31 0000 80B4     		push	{r7}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 4
-  34              		.cfi_offset 7, -4
-  35 0002 00AF     		add	r7, sp, #0
-  36              	.LCFI1:
-  37              		.cfi_def_cfa_register 7
+  27              		.loc 1 54 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_register 7
   55:../stm32f4xx_it.c **** }
-  38              		.loc 1 55 0
-  39 0004 BD46     		mov	sp, r7
-  40 0006 80BC     		pop	{r7}
-  41 0008 7047     		bx	lr
-  42              		.cfi_endproc
-  43              	.LFE110:
-  45 000a 00BF     		.align	2
-  46              		.global	HardFault_Handler
-  47              		.thumb
-  48              		.thumb_func
-  50              	HardFault_Handler:
-  51              	.LFB111:
+  39              		.loc 1 55 0
+  40 0004 BD46     		mov	sp, r7
+  41 0006 80BC     		pop	{r7}
+  42 0008 7047     		bx	lr
+  43              		.cfi_endproc
+  44              	.LFE110:
+  46 000a 00BF     		.align	2
+  47              		.global	HardFault_Handler
+  48              		.thumb
+  49              		.thumb_func
+  51              	HardFault_Handler:
+  52              	.LFB111:
   56:../stm32f4xx_it.c **** 
   57:../stm32f4xx_it.c **** /**
   58:../stm32f4xx_it.c ****   * @brief  This function handles Hard Fault exception.
@@ -109,32 +110,32 @@
   61:../stm32f4xx_it.c ****   */
   62:../stm32f4xx_it.c **** void HardFault_Handler(void)
   63:../stm32f4xx_it.c **** {
-  52              		.loc 1 63 0
-  53              		.cfi_startproc
-  54              		@ args = 0, pretend = 0, frame = 0
-  55              		@ frame_needed = 1, uses_anonymous_args = 0
-  56              		@ link register save eliminated.
-  57 000c 80B4     		push	{r7}
-  58              	.LCFI2:
-  59              		.cfi_def_cfa_offset 4
-  60              		.cfi_offset 7, -4
-  61 000e 00AF     		add	r7, sp, #0
-  62              	.LCFI3:
-  63              		.cfi_def_cfa_register 7
-  64              	.L3:
+  53              		.loc 1 63 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 1, uses_anonymous_args = 0
+  57              		@ link register save eliminated.
+  58 000c 80B4     		push	{r7}
+  59              	.LCFI2:
+  60              		.cfi_def_cfa_offset 4
+  61              		.cfi_offset 7, -4
+  62 000e 00AF     		add	r7, sp, #0
+  63              	.LCFI3:
+  64              		.cfi_def_cfa_register 7
+  65              	.L3:
   64:../stm32f4xx_it.c ****   /* Go to infinite loop when Hard Fault exception occurs */
   65:../stm32f4xx_it.c ****   while (1)
   66:../stm32f4xx_it.c ****   {}
-  65              		.loc 1 66 0 discriminator 1
-  66 0010 FEE7     		b	.L3
-  67              		.cfi_endproc
-  68              	.LFE111:
-  70 0012 00BF     		.align	2
-  71              		.global	MemManage_Handler
-  72              		.thumb
-  73              		.thumb_func
-  75              	MemManage_Handler:
-  76              	.LFB112:
+  66              		.loc 1 66 0 discriminator 1
+  67 0010 FEE7     		b	.L3
+  68              		.cfi_endproc
+  69              	.LFE111:
+  71 0012 00BF     		.align	2
+  72              		.global	MemManage_Handler
+  73              		.thumb
+  74              		.thumb_func
+  76              	MemManage_Handler:
+  77              	.LFB112:
   67:../stm32f4xx_it.c **** }
   68:../stm32f4xx_it.c **** 
   69:../stm32f4xx_it.c **** /**
@@ -144,32 +145,32 @@
   73:../stm32f4xx_it.c ****   */
   74:../stm32f4xx_it.c **** void MemManage_Handler(void)
   75:../stm32f4xx_it.c **** {
-  77              		.loc 1 75 0
-  78              		.cfi_startproc
-  79              		@ args = 0, pretend = 0, frame = 0
-  80              		@ frame_needed = 1, uses_anonymous_args = 0
-  81              		@ link register save eliminated.
-  82 0014 80B4     		push	{r7}
-  83              	.LCFI4:
-  84              		.cfi_def_cfa_offset 4
-  85              		.cfi_offset 7, -4
-  86 0016 00AF     		add	r7, sp, #0
-  87              	.LCFI5:
-  88              		.cfi_def_cfa_register 7
-  89              	.L5:
+  78              		.loc 1 75 0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 1, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+  83 0014 80B4     		push	{r7}
+  84              	.LCFI4:
+  85              		.cfi_def_cfa_offset 4
+  86              		.cfi_offset 7, -4
+  87 0016 00AF     		add	r7, sp, #0
+  88              	.LCFI5:
+  89              		.cfi_def_cfa_register 7
+  90              	.L5:
   76:../stm32f4xx_it.c ****   /* Go to infinite loop when Memory Manage exception occurs */
   77:../stm32f4xx_it.c ****   while (1)
   78:../stm32f4xx_it.c ****   {}
-  90              		.loc 1 78 0 discriminator 1
-  91 0018 FEE7     		b	.L5
-  92              		.cfi_endproc
-  93              	.LFE112:
-  95 001a 00BF     		.align	2
-  96              		.global	BusFault_Handler
-  97              		.thumb
-  98              		.thumb_func
- 100              	BusFault_Handler:
- 101              	.LFB113:
+  91              		.loc 1 78 0 discriminator 1
+  92 0018 FEE7     		b	.L5
+  93              		.cfi_endproc
+  94              	.LFE112:
+  96 001a 00BF     		.align	2
+  97              		.global	BusFault_Handler
+  98              		.thumb
+  99              		.thumb_func
+ 101              	BusFault_Handler:
+ 102              	.LFB113:
   79:../stm32f4xx_it.c **** }
   80:../stm32f4xx_it.c **** 
   81:../stm32f4xx_it.c **** /**
@@ -179,32 +180,32 @@
   85:../stm32f4xx_it.c ****   */
   86:../stm32f4xx_it.c **** void BusFault_Handler(void)
   87:../stm32f4xx_it.c **** {
- 102              		.loc 1 87 0
- 103              		.cfi_startproc
- 104              		@ args = 0, pretend = 0, frame = 0
- 105              		@ frame_needed = 1, uses_anonymous_args = 0
- 106              		@ link register save eliminated.
- 107 001c 80B4     		push	{r7}
- 108              	.LCFI6:
- 109              		.cfi_def_cfa_offset 4
- 110              		.cfi_offset 7, -4
- 111 001e 00AF     		add	r7, sp, #0
- 112              	.LCFI7:
- 113              		.cfi_def_cfa_register 7
- 114              	.L7:
+ 103              		.loc 1 87 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 1, uses_anonymous_args = 0
+ 107              		@ link register save eliminated.
+ 108 001c 80B4     		push	{r7}
+ 109              	.LCFI6:
+ 110              		.cfi_def_cfa_offset 4
+ 111              		.cfi_offset 7, -4
+ 112 001e 00AF     		add	r7, sp, #0
+ 113              	.LCFI7:
+ 114              		.cfi_def_cfa_register 7
+ 115              	.L7:
   88:../stm32f4xx_it.c ****   /* Go to infinite loop when Bus Fault exception occurs */
   89:../stm32f4xx_it.c ****   while (1)
   90:../stm32f4xx_it.c ****   {}
- 115              		.loc 1 90 0 discriminator 1
- 116 0020 FEE7     		b	.L7
- 117              		.cfi_endproc
- 118              	.LFE113:
- 120 0022 00BF     		.align	2
- 121              		.global	UsageFault_Handler
- 122              		.thumb
- 123              		.thumb_func
- 125              	UsageFault_Handler:
- 126              	.LFB114:
+ 116              		.loc 1 90 0 discriminator 1
+ 117 0020 FEE7     		b	.L7
+ 118              		.cfi_endproc
+ 119              	.LFE113:
+ 121 0022 00BF     		.align	2
+ 122              		.global	UsageFault_Handler
+ 123              		.thumb
+ 124              		.thumb_func
+ 126              	UsageFault_Handler:
+ 127              	.LFB114:
   91:../stm32f4xx_it.c **** }
   92:../stm32f4xx_it.c **** 
   93:../stm32f4xx_it.c **** /**
@@ -214,32 +215,32 @@
   97:../stm32f4xx_it.c ****   */
   98:../stm32f4xx_it.c **** void UsageFault_Handler(void)
   99:../stm32f4xx_it.c **** {
- 127              		.loc 1 99 0
- 128              		.cfi_startproc
- 129              		@ args = 0, pretend = 0, frame = 0
- 130              		@ frame_needed = 1, uses_anonymous_args = 0
- 131              		@ link register save eliminated.
- 132 0024 80B4     		push	{r7}
- 133              	.LCFI8:
- 134              		.cfi_def_cfa_offset 4
- 135              		.cfi_offset 7, -4
- 136 0026 00AF     		add	r7, sp, #0
- 137              	.LCFI9:
- 138              		.cfi_def_cfa_register 7
- 139              	.L9:
+ 128              		.loc 1 99 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 133 0024 80B4     		push	{r7}
+ 134              	.LCFI8:
+ 135              		.cfi_def_cfa_offset 4
+ 136              		.cfi_offset 7, -4
+ 137 0026 00AF     		add	r7, sp, #0
+ 138              	.LCFI9:
+ 139              		.cfi_def_cfa_register 7
+ 140              	.L9:
  100:../stm32f4xx_it.c ****   /* Go to infinite loop when Usage Fault exception occurs */
  101:../stm32f4xx_it.c ****   while (1)
  102:../stm32f4xx_it.c ****   {}
- 140              		.loc 1 102 0 discriminator 1
- 141 0028 FEE7     		b	.L9
- 142              		.cfi_endproc
- 143              	.LFE114:
- 145 002a 00BF     		.align	2
- 146              		.global	DebugMon_Handler
- 147              		.thumb
- 148              		.thumb_func
- 150              	DebugMon_Handler:
- 151              	.LFB115:
+ 141              		.loc 1 102 0 discriminator 1
+ 142 0028 FEE7     		b	.L9
+ 143              		.cfi_endproc
+ 144              	.LFE114:
+ 146 002a 00BF     		.align	2
+ 147              		.global	DebugMon_Handler
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	DebugMon_Handler:
+ 152              	.LFB115:
  103:../stm32f4xx_it.c **** }
  104:../stm32f4xx_it.c **** 
  105:../stm32f4xx_it.c **** /**
@@ -249,30 +250,30 @@
  109:../stm32f4xx_it.c ****   */
  110:../stm32f4xx_it.c **** void DebugMon_Handler(void)
  111:../stm32f4xx_it.c **** {}
- 152              		.loc 1 111 0
- 153              		.cfi_startproc
- 154              		@ args = 0, pretend = 0, frame = 0
- 155              		@ frame_needed = 1, uses_anonymous_args = 0
- 156              		@ link register save eliminated.
- 157 002c 80B4     		push	{r7}
- 158              	.LCFI10:
- 159              		.cfi_def_cfa_offset 4
- 160              		.cfi_offset 7, -4
- 161 002e 00AF     		add	r7, sp, #0
- 162              	.LCFI11:
- 163              		.cfi_def_cfa_register 7
- 164              		.loc 1 111 0
- 165 0030 BD46     		mov	sp, r7
- 166 0032 80BC     		pop	{r7}
- 167 0034 7047     		bx	lr
- 168              		.cfi_endproc
- 169              	.LFE115:
- 171 0036 00BF     		.align	2
- 172              		.global	EXTI1_IRQHandler
- 173              		.thumb
- 174              		.thumb_func
- 176              	EXTI1_IRQHandler:
- 177              	.LFB116:
+ 153              		.loc 1 111 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 1, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158 002c 80B4     		push	{r7}
+ 159              	.LCFI10:
+ 160              		.cfi_def_cfa_offset 4
+ 161              		.cfi_offset 7, -4
+ 162 002e 00AF     		add	r7, sp, #0
+ 163              	.LCFI11:
+ 164              		.cfi_def_cfa_register 7
+ 165              		.loc 1 111 0
+ 166 0030 BD46     		mov	sp, r7
+ 167 0032 80BC     		pop	{r7}
+ 168 0034 7047     		bx	lr
+ 169              		.cfi_endproc
+ 170              	.LFE115:
+ 172 0036 00BF     		.align	2
+ 173              		.global	EXTI1_IRQHandler
+ 174              		.thumb
+ 175              		.thumb_func
+ 177              	EXTI1_IRQHandler:
+ 178              	.LFB116:
  112:../stm32f4xx_it.c **** 
  113:../stm32f4xx_it.c **** 
  114:../stm32f4xx_it.c **** /**
@@ -321,53 +322,53 @@
  157:../stm32f4xx_it.c ****  */
  158:../stm32f4xx_it.c **** void EXTI1_IRQHandler(void)
  159:../stm32f4xx_it.c **** {
- 178              		.loc 1 159 0
- 179              		.cfi_startproc
- 180              		@ args = 0, pretend = 0, frame = 8
- 181              		@ frame_needed = 1, uses_anonymous_args = 0
- 182 0038 80B5     		push	{r7, lr}
- 183              	.LCFI12:
- 184              		.cfi_def_cfa_offset 8
- 185              		.cfi_offset 14, -4
- 186              		.cfi_offset 7, -8
- 187 003a 82B0     		sub	sp, sp, #8
- 188              	.LCFI13:
- 189              		.cfi_def_cfa_offset 16
- 190 003c 00AF     		add	r7, sp, #0
- 191              	.LCFI14:
- 192              		.cfi_def_cfa_register 7
+ 179              		.loc 1 159 0
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 8
+ 182              		@ frame_needed = 1, uses_anonymous_args = 0
+ 183 0038 80B5     		push	{r7, lr}
+ 184              	.LCFI12:
+ 185              		.cfi_def_cfa_offset 8
+ 186              		.cfi_offset 14, -4
+ 187              		.cfi_offset 7, -8
+ 188 003a 82B0     		sub	sp, sp, #8
+ 189              	.LCFI13:
+ 190              		.cfi_def_cfa_offset 16
+ 191 003c 00AF     		add	r7, sp, #0
+ 192              	.LCFI14:
+ 193              		.cfi_def_cfa_register 7
  160:../stm32f4xx_it.c **** 	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
- 193              		.loc 1 160 0
- 194 003e 4FF00003 		mov	r3, #0
- 195 0042 7B60     		str	r3, [r7, #4]
+ 194              		.loc 1 160 0
+ 195 003e 4FF00003 		mov	r3, #0
+ 196 0042 7B60     		str	r3, [r7, #4]
  161:../stm32f4xx_it.c **** 
  162:../stm32f4xx_it.c **** 	/* Check the click on the accelerometer to Pause/Resume Playing */
  163:../stm32f4xx_it.c **** 	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
- 196              		.loc 1 163 0
- 197 0044 4FF00200 		mov	r0, #2
- 198 0048 FFF7FEFF 		bl	EXTI_GetITStatus
- 199 004c 0346     		mov	r3, r0
- 200 004e 002B     		cmp	r3, #0
- 201 0050 17D0     		beq	.L11
+ 197              		.loc 1 163 0
+ 198 0044 4FF00200 		mov	r0, #2
+ 199 0048 FFF7FEFF 		bl	EXTI_GetITStatus
+ 200 004c 0346     		mov	r3, r0
+ 201 004e 002B     		cmp	r3, #0
+ 202 0050 17D0     		beq	.L11
  164:../stm32f4xx_it.c **** 	{
  165:../stm32f4xx_it.c **** 		/*give sem in FreeRTOS */
  166:../stm32f4xx_it.c **** 		xSemaphoreGiveFromISR(semShock,&xHigherPriorityTaskWoken);
- 202              		.loc 1 166 0
- 203 0052 40F20003 		movw	r3, #:lower16:semShock
- 204 0056 C0F20003 		movt	r3, #:upper16:semShock
- 205 005a 1A68     		ldr	r2, [r3, #0]
- 206 005c 07F10403 		add	r3, r7, #4
- 207 0060 1046     		mov	r0, r2
- 208 0062 4FF00001 		mov	r1, #0
- 209 0066 1A46     		mov	r2, r3
- 210 0068 4FF00003 		mov	r3, #0
- 211 006c FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 203              		.loc 1 166 0
+ 204 0052 40F20003 		movw	r3, #:lower16:semShock
+ 205 0056 C0F20003 		movt	r3, #:upper16:semShock
+ 206 005a 1A68     		ldr	r2, [r3, #0]
+ 207 005c 07F10403 		add	r3, r7, #4
+ 208 0060 1046     		mov	r0, r2
+ 209 0062 4FF00001 		mov	r1, #0
+ 210 0066 1A46     		mov	r2, r3
+ 211 0068 4FF00003 		mov	r3, #0
+ 212 006c FFF7FEFF 		bl	xQueueGenericSendFromISR
  167:../stm32f4xx_it.c **** 
  168:../stm32f4xx_it.c **** 		/* Clear the EXTI line 1 pending bit */
  169:../stm32f4xx_it.c **** 		EXTI_ClearITPendingBit(EXTI_Line1);
- 212              		.loc 1 169 0
- 213 0070 4FF00200 		mov	r0, #2
- 214 0074 FFF7FEFF 		bl	EXTI_ClearITPendingBit
+ 213              		.loc 1 169 0
+ 214 0070 4FF00200 		mov	r0, #2
+ 215 0074 FFF7FEFF 		bl	EXTI_ClearITPendingBit
  170:../stm32f4xx_it.c **** 
  171:../stm32f4xx_it.c **** 		/*
  172:../stm32f4xx_it.c **** 		 * triggers PendSV handler for context switch
@@ -375,27 +376,27 @@
  174:../stm32f4xx_it.c **** 		 * this has no effect until ISR is finished
  175:../stm32f4xx_it.c **** 		 */
  176:../stm32f4xx_it.c **** 		portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
- 215              		.loc 1 176 0
- 216 0078 7B68     		ldr	r3, [r7, #4]
- 217 007a 002B     		cmp	r3, #0
- 218 007c 01D0     		beq	.L11
- 219              		.loc 1 176 0 is_stmt 0 discriminator 1
- 220 007e FFF7FEFF 		bl	vPortYieldFromISR
- 221              	.L11:
+ 216              		.loc 1 176 0
+ 217 0078 7B68     		ldr	r3, [r7, #4]
+ 218 007a 002B     		cmp	r3, #0
+ 219 007c 01D0     		beq	.L11
+ 220              		.loc 1 176 0 is_stmt 0 discriminator 1
+ 221 007e FFF7FEFF 		bl	vPortYieldFromISR
+ 222              	.L11:
  177:../stm32f4xx_it.c **** 	}
  178:../stm32f4xx_it.c **** }
- 222              		.loc 1 178 0 is_stmt 1
- 223 0082 07F10807 		add	r7, r7, #8
- 224 0086 BD46     		mov	sp, r7
- 225 0088 80BD     		pop	{r7, pc}
- 226              		.cfi_endproc
- 227              	.LFE116:
- 229 008a 00BF     		.align	2
- 230              		.global	EXTI0_IRQHandler
- 231              		.thumb
- 232              		.thumb_func
- 234              	EXTI0_IRQHandler:
- 235              	.LFB117:
+ 223              		.loc 1 178 0 is_stmt 1
+ 224 0082 07F10807 		add	r7, r7, #8
+ 225 0086 BD46     		mov	sp, r7
+ 226 0088 80BD     		pop	{r7, pc}
+ 227              		.cfi_endproc
+ 228              	.LFE116:
+ 230 008a 00BF     		.align	2
+ 231              		.global	EXTI0_IRQHandler
+ 232              		.thumb
+ 233              		.thumb_func
+ 235              	EXTI0_IRQHandler:
+ 236              	.LFB117:
  179:../stm32f4xx_it.c **** 
  180:../stm32f4xx_it.c **** /**
  181:../stm32f4xx_it.c ****  * @brief  EXTI0_IRQHandler
@@ -405,53 +406,53 @@
  185:../stm32f4xx_it.c ****  */
  186:../stm32f4xx_it.c **** void EXTI0_IRQHandler(void)
  187:../stm32f4xx_it.c **** {
- 236              		.loc 1 187 0
- 237              		.cfi_startproc
- 238              		@ args = 0, pretend = 0, frame = 8
- 239              		@ frame_needed = 1, uses_anonymous_args = 0
- 240 008c 80B5     		push	{r7, lr}
- 241              	.LCFI15:
- 242              		.cfi_def_cfa_offset 8
- 243              		.cfi_offset 14, -4
- 244              		.cfi_offset 7, -8
- 245 008e 82B0     		sub	sp, sp, #8
- 246              	.LCFI16:
- 247              		.cfi_def_cfa_offset 16
- 248 0090 00AF     		add	r7, sp, #0
- 249              	.LCFI17:
- 250              		.cfi_def_cfa_register 7
+ 237              		.loc 1 187 0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 8
+ 240              		@ frame_needed = 1, uses_anonymous_args = 0
+ 241 008c 80B5     		push	{r7, lr}
+ 242              	.LCFI15:
+ 243              		.cfi_def_cfa_offset 8
+ 244              		.cfi_offset 14, -4
+ 245              		.cfi_offset 7, -8
+ 246 008e 82B0     		sub	sp, sp, #8
+ 247              	.LCFI16:
+ 248              		.cfi_def_cfa_offset 16
+ 249 0090 00AF     		add	r7, sp, #0
+ 250              	.LCFI17:
+ 251              		.cfi_def_cfa_register 7
  188:../stm32f4xx_it.c **** 	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
- 251              		.loc 1 188 0
- 252 0092 4FF00003 		mov	r3, #0
- 253 0096 7B60     		str	r3, [r7, #4]
+ 252              		.loc 1 188 0
+ 253 0092 4FF00003 		mov	r3, #0
+ 254 0096 7B60     		str	r3, [r7, #4]
  189:../stm32f4xx_it.c **** 
  190:../stm32f4xx_it.c **** 	/* Checks whether the User Button EXTI line is asserted*/
  191:../stm32f4xx_it.c **** 	if (EXTI_GetITStatus(EXTI_Line0) != RESET)
- 254              		.loc 1 191 0
- 255 0098 4FF00100 		mov	r0, #1
- 256 009c FFF7FEFF 		bl	EXTI_GetITStatus
- 257 00a0 0346     		mov	r3, r0
- 258 00a2 002B     		cmp	r3, #0
- 259 00a4 17D0     		beq	.L14
+ 255              		.loc 1 191 0
+ 256 0098 4FF00100 		mov	r0, #1
+ 257 009c FFF7FEFF 		bl	EXTI_GetITStatus
+ 258 00a0 0346     		mov	r3, r0
+ 259 00a2 002B     		cmp	r3, #0
+ 260 00a4 17D0     		beq	.L14
  192:../stm32f4xx_it.c **** 	{
  193:../stm32f4xx_it.c **** 		/*give sem in FreeRTOS */
  194:../stm32f4xx_it.c **** 		xSemaphoreGiveFromISR(semUserButton,&xHigherPriorityTaskWoken);
- 260              		.loc 1 194 0
- 261 00a6 40F20003 		movw	r3, #:lower16:semUserButton
- 262 00aa C0F20003 		movt	r3, #:upper16:semUserButton
- 263 00ae 1A68     		ldr	r2, [r3, #0]
- 264 00b0 07F10403 		add	r3, r7, #4
- 265 00b4 1046     		mov	r0, r2
- 266 00b6 4FF00001 		mov	r1, #0
- 267 00ba 1A46     		mov	r2, r3
- 268 00bc 4FF00003 		mov	r3, #0
- 269 00c0 FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 261              		.loc 1 194 0
+ 262 00a6 40F20003 		movw	r3, #:lower16:semUserButton
+ 263 00aa C0F20003 		movt	r3, #:upper16:semUserButton
+ 264 00ae 1A68     		ldr	r2, [r3, #0]
+ 265 00b0 07F10403 		add	r3, r7, #4
+ 266 00b4 1046     		mov	r0, r2
+ 267 00b6 4FF00001 		mov	r1, #0
+ 268 00ba 1A46     		mov	r2, r3
+ 269 00bc 4FF00003 		mov	r3, #0
+ 270 00c0 FFF7FEFF 		bl	xQueueGenericSendFromISR
  195:../stm32f4xx_it.c **** 
  196:../stm32f4xx_it.c **** 		/* Clear the EXTI line 1 pending bit */
  197:../stm32f4xx_it.c **** 		EXTI_ClearITPendingBit(EXTI_Line1);
- 270              		.loc 1 197 0
- 271 00c4 4FF00200 		mov	r0, #2
- 272 00c8 FFF7FEFF 		bl	EXTI_ClearITPendingBit
+ 271              		.loc 1 197 0
+ 272 00c4 4FF00200 		mov	r0, #2
+ 273 00c8 FFF7FEFF 		bl	EXTI_ClearITPendingBit
  198:../stm32f4xx_it.c **** 
  199:../stm32f4xx_it.c **** 		/*
  200:../stm32f4xx_it.c **** 		 * triggers PendSV handler for context switch
@@ -459,33 +460,33 @@
  202:../stm32f4xx_it.c **** 		 * this has no effect until ISR is finished
  203:../stm32f4xx_it.c **** 		 */
  204:../stm32f4xx_it.c **** 		portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
- 273              		.loc 1 204 0
- 274 00cc 7B68     		ldr	r3, [r7, #4]
- 275 00ce 002B     		cmp	r3, #0
- 276 00d0 01D0     		beq	.L14
- 277              		.loc 1 204 0 is_stmt 0 discriminator 1
- 278 00d2 FFF7FEFF 		bl	vPortYieldFromISR
- 279              	.L14:
+ 274              		.loc 1 204 0
+ 275 00cc 7B68     		ldr	r3, [r7, #4]
+ 276 00ce 002B     		cmp	r3, #0
+ 277 00d0 01D0     		beq	.L14
+ 278              		.loc 1 204 0 is_stmt 0 discriminator 1
+ 279 00d2 FFF7FEFF 		bl	vPortYieldFromISR
+ 280              	.L14:
  205:../stm32f4xx_it.c **** 	}
  206:../stm32f4xx_it.c **** 
  207:../stm32f4xx_it.c **** 	/* Clears the EXTI's line pending bit.*/
  208:../stm32f4xx_it.c **** 	EXTI_ClearITPendingBit(EXTI_Line0);
- 280              		.loc 1 208 0 is_stmt 1
- 281 00d6 4FF00100 		mov	r0, #1
- 282 00da FFF7FEFF 		bl	EXTI_ClearITPendingBit
+ 281              		.loc 1 208 0 is_stmt 1
+ 282 00d6 4FF00100 		mov	r0, #1
+ 283 00da FFF7FEFF 		bl	EXTI_ClearITPendingBit
  209:../stm32f4xx_it.c **** }
- 283              		.loc 1 209 0
- 284 00de 07F10807 		add	r7, r7, #8
- 285 00e2 BD46     		mov	sp, r7
- 286 00e4 80BD     		pop	{r7, pc}
- 287              		.cfi_endproc
- 288              	.LFE117:
- 290 00e6 00BF     		.align	2
- 291              		.global	OTG_FS_IRQHandler
- 292              		.thumb
- 293              		.thumb_func
- 295              	OTG_FS_IRQHandler:
- 296              	.LFB118:
+ 284              		.loc 1 209 0
+ 285 00de 07F10807 		add	r7, r7, #8
+ 286 00e2 BD46     		mov	sp, r7
+ 287 00e4 80BD     		pop	{r7, pc}
+ 288              		.cfi_endproc
+ 289              	.LFE117:
+ 291 00e6 00BF     		.align	2
+ 292              		.global	OTG_FS_IRQHandler
+ 293              		.thumb
+ 294              		.thumb_func
+ 296              	OTG_FS_IRQHandler:
+ 297              	.LFB118:
  210:../stm32f4xx_it.c **** 
  211:../stm32f4xx_it.c **** 
  212:../stm32f4xx_it.c **** /**
@@ -495,48 +496,48 @@
  216:../stm32f4xx_it.c ****  */
  217:../stm32f4xx_it.c **** void OTG_FS_IRQHandler(void)
  218:../stm32f4xx_it.c **** {
- 297              		.loc 1 218 0
- 298              		.cfi_startproc
- 299              		@ args = 0, pretend = 0, frame = 0
- 300              		@ frame_needed = 1, uses_anonymous_args = 0
- 301 00e8 80B5     		push	{r7, lr}
- 302              	.LCFI18:
- 303              		.cfi_def_cfa_offset 8
- 304              		.cfi_offset 14, -4
- 305              		.cfi_offset 7, -8
- 306 00ea 00AF     		add	r7, sp, #0
- 307              	.LCFI19:
- 308              		.cfi_def_cfa_register 7
+ 298              		.loc 1 218 0
+ 299              		.cfi_startproc
+ 300              		@ args = 0, pretend = 0, frame = 0
+ 301              		@ frame_needed = 1, uses_anonymous_args = 0
+ 302 00e8 80B5     		push	{r7, lr}
+ 303              	.LCFI18:
+ 304              		.cfi_def_cfa_offset 8
+ 305              		.cfi_offset 14, -4
+ 306              		.cfi_offset 7, -8
+ 307 00ea 00AF     		add	r7, sp, #0
+ 308              	.LCFI19:
+ 309              		.cfi_def_cfa_register 7
  219:../stm32f4xx_it.c **** 	USBH_OTG_ISR_Handler(&USB_OTG_Core);
- 309              		.loc 1 219 0
- 310 00ec 40F20000 		movw	r0, #:lower16:USB_OTG_Core
- 311 00f0 C0F20000 		movt	r0, #:upper16:USB_OTG_Core
- 312 00f4 FFF7FEFF 		bl	USBH_OTG_ISR_Handler
+ 310              		.loc 1 219 0
+ 311 00ec 40F20000 		movw	r0, #:lower16:USB_OTG_Core
+ 312 00f0 C0F20000 		movt	r0, #:upper16:USB_OTG_Core
+ 313 00f4 FFF7FEFF 		bl	USBH_OTG_ISR_Handler
  220:../stm32f4xx_it.c **** }
- 313              		.loc 1 220 0
- 314 00f8 80BD     		pop	{r7, pc}
- 315              		.cfi_endproc
- 316              	.LFE118:
- 318              	.Letext0:
- 319              		.file 2 "d:/elektronik/ides/eclipse/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
- 320              		.file 3 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32_USB_O
- 321              		.file 4 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Devi
- 322              		.file 5 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\STM32_USB_O
- 323              		.file 6 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 324              		.file 7 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\S
- 325              		.file 8 "C:\\Dokumente und Einstellungen\\brand\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Incl
+ 314              		.loc 1 220 0
+ 315 00f8 80BD     		pop	{r7, pc}
+ 316              		.cfi_endproc
+ 317              	.LFE118:
+ 319              	.Letext0:
+ 320              		.file 2 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 321              		.file 3 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32_USB_OTG_Driver\\inc/usb_regs.h"
+ 322              		.file 4 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Device\\STM32F4xx\\Include/stm32f4xx.h"
+ 323              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32_USB_OTG_Driver\\inc/usb_core.h"
+ 324              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/queue.h"
+ 325              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/semphr.h"
+ 326              		.file 8 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_it.c
-  C:\Temp\ccrFgGp8.s:18     .text:00000000 $t
-  C:\Temp\ccrFgGp8.s:23     .text:00000000 NMI_Handler
-  C:\Temp\ccrFgGp8.s:50     .text:0000000c HardFault_Handler
-  C:\Temp\ccrFgGp8.s:75     .text:00000014 MemManage_Handler
-  C:\Temp\ccrFgGp8.s:100    .text:0000001c BusFault_Handler
-  C:\Temp\ccrFgGp8.s:125    .text:00000024 UsageFault_Handler
-  C:\Temp\ccrFgGp8.s:150    .text:0000002c DebugMon_Handler
-  C:\Temp\ccrFgGp8.s:176    .text:00000038 EXTI1_IRQHandler
-  C:\Temp\ccrFgGp8.s:234    .text:0000008c EXTI0_IRQHandler
-  C:\Temp\ccrFgGp8.s:295    .text:000000e8 OTG_FS_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:19     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:24     .text:00000000 NMI_Handler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:51     .text:0000000c HardFault_Handler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:76     .text:00000014 MemManage_Handler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:101    .text:0000001c BusFault_Handler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:126    .text:00000024 UsageFault_Handler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:151    .text:0000002c DebugMon_Handler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:177    .text:00000038 EXTI1_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:235    .text:0000008c EXTI0_IRQHandler
+C:\Users\Alex\AppData\Local\Temp\cc8HvUrh.s:296    .text:000000e8 OTG_FS_IRQHandler
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
