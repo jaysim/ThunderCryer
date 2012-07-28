@@ -356,748 +356,214 @@
  301              		.cfi_endproc
  302              	.LFE116:
  304 00f2 00BF     		.align	2
- 305              		.global	_sbrk_r
+ 305              		.global	_kill_r
  306              		.thumb
  307              		.thumb_func
- 309              	_sbrk_r:
+ 309              	_kill_r:
  310              	.LFB117:
   71:../syscalls.c **** 
-  72:../syscalls.c **** 
+  72:../syscalls.c **** /** see cpp Library hacks
   73:../syscalls.c **** void *_sbrk_r(struct _reent *r, ptrdiff_t incr)
   74:../syscalls.c **** {
- 311              		.loc 1 74 0
- 312              		.cfi_startproc
- 313              		@ args = 0, pretend = 0, frame = 16
- 314              		@ frame_needed = 1, uses_anonymous_args = 0
- 315              		@ link register save eliminated.
- 316 00f4 90B4     		push	{r4, r7}
- 317              	.LCFI21:
- 318              		.cfi_def_cfa_offset 8
- 319              		.cfi_offset 7, -4
- 320              		.cfi_offset 4, -8
- 321 00f6 84B0     		sub	sp, sp, #16
- 322              	.LCFI22:
- 323              		.cfi_def_cfa_offset 24
- 324 00f8 00AF     		add	r7, sp, #0
- 325              	.LCFI23:
- 326              		.cfi_def_cfa_register 7
- 327 00fa 7860     		str	r0, [r7, #4]
- 328 00fc 3960     		str	r1, [r7, #0]
   75:../syscalls.c ****     extern char end;   // provided by the linker script
   76:../syscalls.c **** 
   77:../syscalls.c ****     if (__brkval == 0)
- 329              		.loc 1 77 0
- 330 00fe 40F20003 		movw	r3, #:lower16:__brkval
- 331 0102 C0F20003 		movt	r3, #:upper16:__brkval
- 332 0106 1B68     		ldr	r3, [r3, #0]
- 333 0108 002B     		cmp	r3, #0
- 334 010a 08D1     		bne	.L12
   78:../syscalls.c ****         __brkval = &end;
- 335              		.loc 1 78 0
- 336 010c 40F20003 		movw	r3, #:lower16:__brkval
- 337 0110 C0F20003 		movt	r3, #:upper16:__brkval
- 338 0114 40F20002 		movw	r2, #:lower16:end
- 339 0118 C0F20002 		movt	r2, #:upper16:end
- 340 011c 1A60     		str	r2, [r3, #0]
- 341              	.L12:
   79:../syscalls.c **** 
   80:../syscalls.c ****     if (__brkval + incr > (char*)__get_MSP() - __malloc_margin) {
- 342              		.loc 1 80 0
- 343 011e 40F20003 		movw	r3, #:lower16:__brkval
- 344 0122 C0F20003 		movt	r3, #:upper16:__brkval
- 345 0126 1A68     		ldr	r2, [r3, #0]
- 346 0128 3B68     		ldr	r3, [r7, #0]
- 347 012a D218     		adds	r2, r2, r3
- 348              	.LBB4:
- 349              	.LBB5:
- 350              		.file 2 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cmFunc.h"
-   1:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /**************************************************************************//**
-   2:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @file     core_cmFunc.h
-   3:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @brief    CMSIS Cortex-M Core Function Access Header File
-   4:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @version  V2.10
-   5:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @date     26. July 2011
-   6:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  *
-   7:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @note
-   8:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
-   9:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  *
-  10:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @par
-  11:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
-  12:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * processor based microcontrollers.  This file can be freely distributed 
-  13:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * within development tools that are supporting such ARM based processors. 
-  14:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  *
-  15:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * @par
-  16:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
-  17:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
-  18:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
-  19:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
-  20:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-  21:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  *
-  22:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  ******************************************************************************/
-  23:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  24:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #ifndef __CORE_CMFUNC_H
-  25:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #define __CORE_CMFUNC_H
-  26:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  27:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  28:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /* ###########################  Core Function Access  ########################### */
-  29:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \ingroup  CMSIS_Core_FunctionInterface   
-  30:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
-  31:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   @{
-  32:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
-  33:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  34:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
-  35:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /* ARM armcc specific functions */
-  36:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  37:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #if (__ARMCC_VERSION < 400677)
-  38:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
-  39:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #endif
-  40:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  41:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /* intrinsic void __enable_irq();     */
-  42:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /* intrinsic void __disable_irq();    */
-  43:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  44:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Control Register
-  45:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  46:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the Control Register.
-  47:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  48:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               Control Register value
-  49:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
-  50:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_CONTROL(void)
-  51:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
-  52:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
-  53:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regControl);
-  54:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
-  55:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  56:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  57:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Control Register
-  58:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  59:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function writes the given value to the Control Register.
-  60:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  61:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    control  Control Register value to set
-  62:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
-  63:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_CONTROL(uint32_t control)
-  64:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
-  65:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
-  66:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regControl = control;
-  67:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
-  68:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  69:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  70:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get ISPR Register
-  71:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  72:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the ISPR Register.
-  73:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  74:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               ISPR Register value
-  75:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
-  76:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_IPSR(void)
-  77:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
-  78:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regIPSR          __ASM("ipsr");
-  79:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regIPSR);
-  80:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
-  81:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  82:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  83:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get APSR Register
-  84:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  85:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the APSR Register.
-  86:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  87:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               APSR Register value
-  88:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
-  89:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_APSR(void)
-  90:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
-  91:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regAPSR          __ASM("apsr");
-  92:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regAPSR);
-  93:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
-  94:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  95:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  96:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get xPSR Register
-  97:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
-  98:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the xPSR Register.
-  99:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 100:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               xPSR Register value
- 101:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 102:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_xPSR(void)
- 103:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 104:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regXPSR          __ASM("xpsr");
- 105:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regXPSR);
- 106:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 107:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 108:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 109:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Process Stack Pointer
- 110:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 111:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
- 112:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 113:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               PSP Register value
- 114:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 115:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_PSP(void)
- 116:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 117:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
- 118:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regProcessStackPointer);
- 119:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 120:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 121:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 122:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Process Stack Pointer
- 123:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 124:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
- 125:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 126:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
- 127:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 128:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_PSP(uint32_t topOfProcStack)
- 129:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 130:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
- 131:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regProcessStackPointer = topOfProcStack;
- 132:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 133:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 134:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 135:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Main Stack Pointer
- 136:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 137:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
- 138:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 139:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               MSP Register value
- 140:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 141:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_MSP(void)
- 142:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 143:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
- 144:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regMainStackPointer);
- 145:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 146:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 147:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 148:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Main Stack Pointer
- 149:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 150:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Main Stack Pointer (MSP).
- 151:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 152:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    topOfMainStack  Main Stack Pointer value to set
- 153:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 154:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_MSP(uint32_t topOfMainStack)
- 155:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 156:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
- 157:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regMainStackPointer = topOfMainStack;
- 158:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 159:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 160:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 161:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Priority Mask
- 162:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 163:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current state of the priority mask bit from the Priority Mask Registe
- 164:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 165:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               Priority Mask value
- 166:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 167:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_PRIMASK(void)
- 168:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 169:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
- 170:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regPriMask);
- 171:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 172:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 173:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 174:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Priority Mask
- 175:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 176:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Priority Mask Register.
- 177:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 178:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    priMask  Priority Mask
- 179:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 180:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_PRIMASK(uint32_t priMask)
- 181:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 182:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
- 183:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regPriMask = (priMask);
- 184:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 185:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  
- 186:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 187:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #if       (__CORTEX_M >= 0x03)
- 188:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 189:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Enable FIQ
- 190:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 191:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function enables FIQ interrupts by clearing the F-bit in the CPSR.
- 192:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     Can only be executed in Privileged modes.
- 193:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 194:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #define __enable_fault_irq                __enable_fiq
- 195:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 196:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 197:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Disable FIQ
- 198:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 199:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function disables FIQ interrupts by setting the F-bit in the CPSR.
- 200:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     Can only be executed in Privileged modes.
- 201:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 202:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #define __disable_fault_irq               __disable_fiq
- 203:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 204:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 205:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Base Priority
- 206:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 207:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Base Priority register.
- 208:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 209:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               Base Priority register value
- 210:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 211:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t  __get_BASEPRI(void)
- 212:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 213:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
- 214:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regBasePri);
- 215:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 216:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 217:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 218:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Base Priority
- 219:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 220:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Base Priority register.
- 221:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 222:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    basePri  Base Priority value to set
- 223:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 224:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_BASEPRI(uint32_t basePri)
- 225:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 226:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
- 227:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regBasePri = (basePri & 0xff);
- 228:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 229:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  
- 230:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 231:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Fault Mask
- 232:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 233:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Fault Mask register.
- 234:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 235:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               Fault Mask register value
- 236:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 237:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_FAULTMASK(void)
- 238:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 239:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
- 240:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regFaultMask);
- 241:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 242:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 243:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 244:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Fault Mask
- 245:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 246:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Fault Mask register.
- 247:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 248:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    faultMask  Fault Mask value to set
- 249:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 250:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_FAULTMASK(uint32_t faultMask)
- 251:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 252:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
- 253:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regFaultMask = (faultMask & (uint32_t)1);
- 254:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 255:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 256:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #endif /* (__CORTEX_M >= 0x03) */
- 257:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 258:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 259:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #if       (__CORTEX_M == 0x04)
- 260:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 261:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get FPSCR
- 262:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 263:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Floating Point Status/Control register.
- 264:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 265:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               Floating Point Status/Control register value
- 266:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 267:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE uint32_t __get_FPSCR(void)
- 268:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 269:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
- 270:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
- 271:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(__regfpscr);
- 272:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #else
- 273:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****    return(0);
- 274:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #endif
- 275:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 276:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 277:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 278:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set FPSCR
- 279:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 280:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Floating Point Status/Control register.
- 281:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 282:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    fpscr  Floating Point Status/Control value to set
- 283:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 284:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** static __INLINE void __set_FPSCR(uint32_t fpscr)
- 285:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 286:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
- 287:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
- 288:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __regfpscr = (fpscr);
- 289:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #endif
- 290:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 291:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 292:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #endif /* (__CORTEX_M == 0x04) */
- 293:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 294:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 295:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
- 296:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /* IAR iccarm specific functions */
- 297:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 298:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #include <cmsis_iar.h>
- 299:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 300:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
- 301:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /* GNU gcc specific functions */
- 302:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 303:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Enable IRQ Interrupts
- 304:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 305:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   This function enables IRQ interrupts by clearing the I-bit in the CPSR.
- 306:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   Can only be executed in Privileged modes.
- 307:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 308:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __enable_irq(void)
- 309:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 310:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("cpsie i");
- 311:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 312:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 313:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 314:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Disable IRQ Interrupts
- 315:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 316:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   This function disables IRQ interrupts by setting the I-bit in the CPSR.
- 317:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   Can only be executed in Privileged modes.
- 318:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 319:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __disable_irq(void)
- 320:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 321:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("cpsid i");
- 322:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 323:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 324:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 325:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Control Register
- 326:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 327:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the Control Register.
- 328:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 329:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               Control Register value
- 330:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 331:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_CONTROL(void)
- 332:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 333:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
- 334:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 335:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
- 336:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(result);
- 337:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 338:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 339:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 340:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Control Register
- 341:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 342:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function writes the given value to the Control Register.
- 343:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 344:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    control  Control Register value to set
- 345:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 346:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __set_CONTROL(uint32_t control)
- 347:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 348:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) );
- 349:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 350:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 351:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 352:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get ISPR Register
- 353:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 354:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the ISPR Register.
- 355:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 356:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               ISPR Register value
- 357:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 358:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_IPSR(void)
- 359:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 360:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
- 361:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 362:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
- 363:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(result);
- 364:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 365:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 366:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 367:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get APSR Register
- 368:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 369:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the APSR Register.
- 370:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 371:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               APSR Register value
- 372:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 373:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_APSR(void)
- 374:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 375:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
- 376:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 377:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
- 378:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(result);
- 379:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 380:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 381:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 382:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get xPSR Register
- 383:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 384:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the content of the xPSR Register.
- 385:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 386:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               xPSR Register value
- 387:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 388:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_xPSR(void)
- 389:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 390:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   uint32_t result;
- 391:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 392:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
- 393:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(result);
- 394:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 395:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 396:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 397:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Process Stack Pointer
- 398:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 399:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
- 400:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 401:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               PSP Register value
- 402:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 403:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_PSP(void)
- 404:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 405:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t result;
- 406:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 407:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, psp\n"  : "=r" (result) );
- 408:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(result);
- 409:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 410:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  
- 411:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 412:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Set Process Stack Pointer
- 413:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 414:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
- 415:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 416:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
- 417:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 418:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE void __set_PSP(uint32_t topOfProcStack)
- 419:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 420:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MSR psp, %0\n" : : "r" (topOfProcStack) );
- 421:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** }
- 422:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 423:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 424:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** /** \brief  Get Main Stack Pointer
- 425:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 426:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
- 427:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 428:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****     \return               MSP Register value
- 429:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****  */
- 430:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __get_MSP(void)
- 431:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** {
- 432:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   register uint32_t result;
- 433:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h **** 
- 434:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   __ASM volatile ("MRS %0, msp\n" : "=r" (result) );
- 351              		.loc 2 434 0
- 352              	@ 434 "E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include/core_cmFunc.h" 1
- 353 012c EFF30884 		MRS r4, msp
- 354              	
- 355              	@ 0 "" 2
- 435:E:\Desktop\thundercyer-the-alarm-clock\CMSIS\Include\core_cmFunc.h ****   return(result);
- 356              		.loc 2 435 0
- 357              		.thumb
- 358 0130 2346     		mov	r3, r4
- 359              		.loc 1 80 0
- 360 0132 1946     		mov	r1, r3
- 361              	.LBE5:
- 362              	.LBE4:
- 363 0134 40F20003 		movw	r3, #:lower16:__malloc_margin
- 364 0138 C0F20003 		movt	r3, #:upper16:__malloc_margin
- 365 013c 1B68     		ldr	r3, [r3, #0]
- 366 013e CB1A     		subs	r3, r1, r3
- 367 0140 9A42     		cmp	r2, r3
- 368 0142 06D9     		bls	.L13
   81:../syscalls.c ****         r->_errno = ENOMEM;
- 369              		.loc 1 81 0
- 370 0144 7B68     		ldr	r3, [r7, #4]
- 371 0146 4FF00C02 		mov	r2, #12
- 372 014a 1A60     		str	r2, [r3, #0]
   82:../syscalls.c ****         return (void*)-1;
- 373              		.loc 1 82 0
- 374 014c 4FF0FF33 		mov	r3, #-1
- 375 0150 12E0     		b	.L14
- 376              	.L13:
   83:../syscalls.c ****     }
   84:../syscalls.c **** 
   85:../syscalls.c ****     void *ret = __brkval;
- 377              		.loc 1 85 0
- 378 0152 40F20003 		movw	r3, #:lower16:__brkval
- 379 0156 C0F20003 		movt	r3, #:upper16:__brkval
- 380 015a 1B68     		ldr	r3, [r3, #0]
- 381 015c FB60     		str	r3, [r7, #12]
   86:../syscalls.c ****     __brkval += incr;
- 382              		.loc 1 86 0
- 383 015e 40F20003 		movw	r3, #:lower16:__brkval
- 384 0162 C0F20003 		movt	r3, #:upper16:__brkval
- 385 0166 1A68     		ldr	r2, [r3, #0]
- 386 0168 3B68     		ldr	r3, [r7, #0]
- 387 016a D218     		adds	r2, r2, r3
- 388 016c 40F20003 		movw	r3, #:lower16:__brkval
- 389 0170 C0F20003 		movt	r3, #:upper16:__brkval
- 390 0174 1A60     		str	r2, [r3, #0]
   87:../syscalls.c **** 
   88:../syscalls.c ****     return ret;
- 391              		.loc 1 88 0
- 392 0176 FB68     		ldr	r3, [r7, #12]
- 393              	.L14:
-  89:../syscalls.c **** }
- 394              		.loc 1 89 0
- 395 0178 1846     		mov	r0, r3
- 396 017a 07F11007 		add	r7, r7, #16
- 397 017e BD46     		mov	sp, r7
- 398 0180 90BC     		pop	{r4, r7}
- 399 0182 7047     		bx	lr
- 400              		.cfi_endproc
- 401              	.LFE117:
- 403              		.align	2
- 404              		.global	_kill_r
- 405              		.thumb
- 406              		.thumb_func
- 408              	_kill_r:
- 409              	.LFB118:
+  89:../syscalls.c **** }*/
   90:../syscalls.c **** 
   91:../syscalls.c **** 
   92:../syscalls.c **** int _kill_r(struct _reent *r, int pid, int signal)
   93:../syscalls.c **** {
- 410              		.loc 1 93 0
- 411              		.cfi_startproc
- 412              		@ args = 0, pretend = 0, frame = 16
- 413              		@ frame_needed = 1, uses_anonymous_args = 0
- 414              		@ link register save eliminated.
- 415 0184 80B4     		push	{r7}
- 416              	.LCFI24:
- 417              		.cfi_def_cfa_offset 4
- 418              		.cfi_offset 7, -4
- 419 0186 85B0     		sub	sp, sp, #20
- 420              	.LCFI25:
- 421              		.cfi_def_cfa_offset 24
- 422 0188 00AF     		add	r7, sp, #0
- 423              	.LCFI26:
- 424              		.cfi_def_cfa_register 7
- 425 018a F860     		str	r0, [r7, #12]
- 426 018c B960     		str	r1, [r7, #8]
- 427 018e 7A60     		str	r2, [r7, #4]
+ 311              		.loc 1 93 0
+ 312              		.cfi_startproc
+ 313              		@ args = 0, pretend = 0, frame = 16
+ 314              		@ frame_needed = 1, uses_anonymous_args = 0
+ 315              		@ link register save eliminated.
+ 316 00f4 80B4     		push	{r7}
+ 317              	.LCFI21:
+ 318              		.cfi_def_cfa_offset 4
+ 319              		.cfi_offset 7, -4
+ 320 00f6 85B0     		sub	sp, sp, #20
+ 321              	.LCFI22:
+ 322              		.cfi_def_cfa_offset 24
+ 323 00f8 00AF     		add	r7, sp, #0
+ 324              	.LCFI23:
+ 325              		.cfi_def_cfa_register 7
+ 326 00fa F860     		str	r0, [r7, #12]
+ 327 00fc B960     		str	r1, [r7, #8]
+ 328 00fe 7A60     		str	r2, [r7, #4]
   94:../syscalls.c ****     r->_errno = ENOSYS;
- 428              		.loc 1 94 0
- 429 0190 FB68     		ldr	r3, [r7, #12]
- 430 0192 4FF05802 		mov	r2, #88
- 431 0196 1A60     		str	r2, [r3, #0]
+ 329              		.loc 1 94 0
+ 330 0100 FB68     		ldr	r3, [r7, #12]
+ 331 0102 4FF05802 		mov	r2, #88
+ 332 0106 1A60     		str	r2, [r3, #0]
   95:../syscalls.c ****     return -1;
- 432              		.loc 1 95 0
- 433 0198 4FF0FF33 		mov	r3, #-1
+ 333              		.loc 1 95 0
+ 334 0108 4FF0FF33 		mov	r3, #-1
   96:../syscalls.c **** }
- 434              		.loc 1 96 0
- 435 019c 1846     		mov	r0, r3
- 436 019e 07F11407 		add	r7, r7, #20
- 437 01a2 BD46     		mov	sp, r7
- 438 01a4 80BC     		pop	{r7}
- 439 01a6 7047     		bx	lr
- 440              		.cfi_endproc
- 441              	.LFE118:
- 443              		.align	2
- 444              		.global	_getpid_r
- 445              		.thumb
- 446              		.thumb_func
- 448              	_getpid_r:
- 449              	.LFB119:
+ 335              		.loc 1 96 0
+ 336 010c 1846     		mov	r0, r3
+ 337 010e 07F11407 		add	r7, r7, #20
+ 338 0112 BD46     		mov	sp, r7
+ 339 0114 80BC     		pop	{r7}
+ 340 0116 7047     		bx	lr
+ 341              		.cfi_endproc
+ 342              	.LFE117:
+ 344              		.align	2
+ 345              		.global	_getpid_r
+ 346              		.thumb
+ 347              		.thumb_func
+ 349              	_getpid_r:
+ 350              	.LFB118:
   97:../syscalls.c **** 
   98:../syscalls.c **** 
   99:../syscalls.c **** int _getpid_r(struct _reent *r)
  100:../syscalls.c **** {
- 450              		.loc 1 100 0
- 451              		.cfi_startproc
- 452              		@ args = 0, pretend = 0, frame = 8
- 453              		@ frame_needed = 1, uses_anonymous_args = 0
- 454              		@ link register save eliminated.
- 455 01a8 80B4     		push	{r7}
- 456              	.LCFI27:
- 457              		.cfi_def_cfa_offset 4
- 458              		.cfi_offset 7, -4
- 459 01aa 83B0     		sub	sp, sp, #12
- 460              	.LCFI28:
- 461              		.cfi_def_cfa_offset 16
- 462 01ac 00AF     		add	r7, sp, #0
- 463              	.LCFI29:
- 464              		.cfi_def_cfa_register 7
- 465 01ae 7860     		str	r0, [r7, #4]
+ 351              		.loc 1 100 0
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 8
+ 354              		@ frame_needed = 1, uses_anonymous_args = 0
+ 355              		@ link register save eliminated.
+ 356 0118 80B4     		push	{r7}
+ 357              	.LCFI24:
+ 358              		.cfi_def_cfa_offset 4
+ 359              		.cfi_offset 7, -4
+ 360 011a 83B0     		sub	sp, sp, #12
+ 361              	.LCFI25:
+ 362              		.cfi_def_cfa_offset 16
+ 363 011c 00AF     		add	r7, sp, #0
+ 364              	.LCFI26:
+ 365              		.cfi_def_cfa_register 7
+ 366 011e 7860     		str	r0, [r7, #4]
  101:../syscalls.c ****     r->_errno = ENOSYS;
- 466              		.loc 1 101 0
- 467 01b0 7B68     		ldr	r3, [r7, #4]
- 468 01b2 4FF05802 		mov	r2, #88
- 469 01b6 1A60     		str	r2, [r3, #0]
+ 367              		.loc 1 101 0
+ 368 0120 7B68     		ldr	r3, [r7, #4]
+ 369 0122 4FF05802 		mov	r2, #88
+ 370 0126 1A60     		str	r2, [r3, #0]
  102:../syscalls.c ****     return -1;
- 470              		.loc 1 102 0
- 471 01b8 4FF0FF33 		mov	r3, #-1
+ 371              		.loc 1 102 0
+ 372 0128 4FF0FF33 		mov	r3, #-1
  103:../syscalls.c **** }
- 472              		.loc 1 103 0
- 473 01bc 1846     		mov	r0, r3
- 474 01be 07F10C07 		add	r7, r7, #12
- 475 01c2 BD46     		mov	sp, r7
- 476 01c4 80BC     		pop	{r7}
- 477 01c6 7047     		bx	lr
- 478              		.cfi_endproc
- 479              	.LFE119:
- 481              		.align	2
- 482              		.global	__malloc_lock
- 483              		.thumb
- 484              		.thumb_func
- 486              	__malloc_lock:
- 487              	.LFB120:
+ 373              		.loc 1 103 0
+ 374 012c 1846     		mov	r0, r3
+ 375 012e 07F10C07 		add	r7, r7, #12
+ 376 0132 BD46     		mov	sp, r7
+ 377 0134 80BC     		pop	{r7}
+ 378 0136 7047     		bx	lr
+ 379              		.cfi_endproc
+ 380              	.LFE118:
+ 382              		.align	2
+ 383              		.global	__malloc_lock
+ 384              		.thumb
+ 385              		.thumb_func
+ 387              	__malloc_lock:
+ 388              	.LFB119:
  104:../syscalls.c **** 
  105:../syscalls.c **** 
  106:../syscalls.c **** void __malloc_lock(struct _reent *r)
  107:../syscalls.c **** {
- 488              		.loc 1 107 0
- 489              		.cfi_startproc
- 490              		@ args = 0, pretend = 0, frame = 8
- 491              		@ frame_needed = 1, uses_anonymous_args = 0
- 492 01c8 80B5     		push	{r7, lr}
- 493              	.LCFI30:
- 494              		.cfi_def_cfa_offset 8
- 495              		.cfi_offset 14, -4
- 496              		.cfi_offset 7, -8
- 497 01ca 82B0     		sub	sp, sp, #8
- 498              	.LCFI31:
- 499              		.cfi_def_cfa_offset 16
- 500 01cc 00AF     		add	r7, sp, #0
- 501              	.LCFI32:
- 502              		.cfi_def_cfa_register 7
- 503 01ce 7860     		str	r0, [r7, #4]
+ 389              		.loc 1 107 0
+ 390              		.cfi_startproc
+ 391              		@ args = 0, pretend = 0, frame = 8
+ 392              		@ frame_needed = 1, uses_anonymous_args = 0
+ 393 0138 80B5     		push	{r7, lr}
+ 394              	.LCFI27:
+ 395              		.cfi_def_cfa_offset 8
+ 396              		.cfi_offset 14, -4
+ 397              		.cfi_offset 7, -8
+ 398 013a 82B0     		sub	sp, sp, #8
+ 399              	.LCFI28:
+ 400              		.cfi_def_cfa_offset 16
+ 401 013c 00AF     		add	r7, sp, #0
+ 402              	.LCFI29:
+ 403              		.cfi_def_cfa_register 7
+ 404 013e 7860     		str	r0, [r7, #4]
  108:../syscalls.c ****     vPortEnterCritical();
- 504              		.loc 1 108 0
- 505 01d0 FFF7FEFF 		bl	vPortEnterCritical
+ 405              		.loc 1 108 0
+ 406 0140 FFF7FEFF 		bl	vPortEnterCritical
  109:../syscalls.c **** }
- 506              		.loc 1 109 0
- 507 01d4 07F10807 		add	r7, r7, #8
- 508 01d8 BD46     		mov	sp, r7
- 509 01da 80BD     		pop	{r7, pc}
- 510              		.cfi_endproc
- 511              	.LFE120:
- 513              		.align	2
- 514              		.global	__malloc_unlock
- 515              		.thumb
- 516              		.thumb_func
- 518              	__malloc_unlock:
- 519              	.LFB121:
+ 407              		.loc 1 109 0
+ 408 0144 07F10807 		add	r7, r7, #8
+ 409 0148 BD46     		mov	sp, r7
+ 410 014a 80BD     		pop	{r7, pc}
+ 411              		.cfi_endproc
+ 412              	.LFE119:
+ 414              		.align	2
+ 415              		.global	__malloc_unlock
+ 416              		.thumb
+ 417              		.thumb_func
+ 419              	__malloc_unlock:
+ 420              	.LFB120:
  110:../syscalls.c **** 
  111:../syscalls.c **** 
  112:../syscalls.c **** void __malloc_unlock(struct _reent *r)
  113:../syscalls.c **** {
- 520              		.loc 1 113 0
- 521              		.cfi_startproc
- 522              		@ args = 0, pretend = 0, frame = 8
- 523              		@ frame_needed = 1, uses_anonymous_args = 0
- 524 01dc 80B5     		push	{r7, lr}
- 525              	.LCFI33:
- 526              		.cfi_def_cfa_offset 8
- 527              		.cfi_offset 14, -4
- 528              		.cfi_offset 7, -8
- 529 01de 82B0     		sub	sp, sp, #8
- 530              	.LCFI34:
- 531              		.cfi_def_cfa_offset 16
- 532 01e0 00AF     		add	r7, sp, #0
- 533              	.LCFI35:
- 534              		.cfi_def_cfa_register 7
- 535 01e2 7860     		str	r0, [r7, #4]
+ 421              		.loc 1 113 0
+ 422              		.cfi_startproc
+ 423              		@ args = 0, pretend = 0, frame = 8
+ 424              		@ frame_needed = 1, uses_anonymous_args = 0
+ 425 014c 80B5     		push	{r7, lr}
+ 426              	.LCFI30:
+ 427              		.cfi_def_cfa_offset 8
+ 428              		.cfi_offset 14, -4
+ 429              		.cfi_offset 7, -8
+ 430 014e 82B0     		sub	sp, sp, #8
+ 431              	.LCFI31:
+ 432              		.cfi_def_cfa_offset 16
+ 433 0150 00AF     		add	r7, sp, #0
+ 434              	.LCFI32:
+ 435              		.cfi_def_cfa_register 7
+ 436 0152 7860     		str	r0, [r7, #4]
  114:../syscalls.c ****     vPortExitCritical();
- 536              		.loc 1 114 0
- 537 01e4 FFF7FEFF 		bl	vPortExitCritical
+ 437              		.loc 1 114 0
+ 438 0154 FFF7FEFF 		bl	vPortExitCritical
  115:../syscalls.c **** }
- 538              		.loc 1 115 0
- 539 01e8 07F10807 		add	r7, r7, #8
- 540 01ec BD46     		mov	sp, r7
- 541 01ee 80BD     		pop	{r7, pc}
- 542              		.cfi_endproc
- 543              	.LFE121:
- 545              	.Letext0:
- 546              		.file 3 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 547              		.file 4 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 548              		.file 5 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 549              		.file 6 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 550              		.file 7 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 551              		.file 8 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 552              		.file 9 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 553              		.file 10 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eab
- 554              		.file 11 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eab
- 555              		.file 12 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 439              		.loc 1 115 0
+ 440 0158 07F10807 		add	r7, r7, #8
+ 441 015c BD46     		mov	sp, r7
+ 442 015e 80BD     		pop	{r7, pc}
+ 443              		.cfi_endproc
+ 444              	.LFE120:
+ 446              	.Letext0:
+ 447              		.file 2 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 448              		.file 3 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 449              		.file 4 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 450              		.file 5 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 451              		.file 6 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 452              		.file 7 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 453              		.file 8 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 454              		.file 9 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
+ 455              		.file 10 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eab
+ 456              		.file 11 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:24     .data.__malloc_margin:00000000 __malloc_margin
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:21     .data.__malloc_margin:00000000 $d
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:24     .data.__malloc_margin:00000000 __malloc_margin
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:21     .data.__malloc_margin:00000000 $d
                             *COM*:00000004 __brkval
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:28     .text:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:33     .text:00000000 _exit
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:63     .text:0000000c _read_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:100    .text:0000002c _write_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:137    .text:0000004c _lseek_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:178    .text:00000074 _close_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:217    .text:00000098 _fstat_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:274    .text:000000d8 _isatty_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:309    .text:000000f4 _sbrk_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:408    .text:00000184 _kill_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:448    .text:000001a8 _getpid_r
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:486    .text:000001c8 __malloc_lock
-C:\Users\Alex\AppData\Local\Temp\ccW3wv0X.s:518    .text:000001dc __malloc_unlock
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:28     .text:00000000 $t
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:33     .text:00000000 _exit
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:63     .text:0000000c _read_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:100    .text:0000002c _write_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:137    .text:0000004c _lseek_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:178    .text:00000074 _close_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:217    .text:00000098 _fstat_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:274    .text:000000d8 _isatty_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:309    .text:000000f4 _kill_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:349    .text:00000118 _getpid_r
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:387    .text:00000138 __malloc_lock
+C:\Users\Alex\AppData\Local\Temp\ccy1WhTU.s:419    .text:0000014c __malloc_unlock
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
-end
 vPortEnterCritical
 vPortExitCritical

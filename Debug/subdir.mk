@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../CLedHeartBeatSTM32F4Disc.cpp \
+../LibraryHacks.cpp \
 ../main.cpp 
 
 C_SRCS += \
@@ -18,6 +19,7 @@ S_UPPER_SRCS += \
 
 OBJS += \
 ./CLedHeartBeatSTM32F4Disc.o \
+./LibraryHacks.o \
 ./main.o \
 ./startup_stm32f4xx.o \
 ./stm32f4xx_it.o \
@@ -36,6 +38,7 @@ S_UPPER_DEPS += \
 
 CPP_DEPS += \
 ./CLedHeartBeatSTM32F4Disc.d \
+./LibraryHacks.d \
 ./main.d 
 
 
