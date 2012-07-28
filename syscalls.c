@@ -69,7 +69,7 @@ int _isatty_r(struct _reent *r, int fd)
     return 1;
 }
 
-
+/** see cpp Library hacks
 void *_sbrk_r(struct _reent *r, ptrdiff_t incr)
 {
     extern char end;   // provided by the linker script
@@ -86,7 +86,7 @@ void *_sbrk_r(struct _reent *r, ptrdiff_t incr)
     __brkval += incr;
 
     return ret;
-}
+}*/
 
 
 int _kill_r(struct _reent *r, int pid, int signal)
