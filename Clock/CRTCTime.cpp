@@ -118,14 +118,14 @@ void CRTCTime::GetTimeFromRTC(){
 	 * get Time and Date from RTC
 	 */
 	RTC_GetTime(RTC_Format_BIN, &RTC_TimeStructure);
-	RTC_GetTime(RTC_Format_BIN, &RTC_DateStructure);
+	RTC_GetDate(RTC_Format_BIN, &RTC_DateStructure);
 
 	/*
 	 * fill std c time struct
 	 */
 	newTime->tm_sec = RTC_TimeStructure.RTC_Seconds;
 	newTime->tm_min = RTC_TimeStructure.RTC_Minutes;
-	newTime->tm_hours = RTC_TimeStructure.RTC_Hours;
+	newTime->tm_hour = RTC_TimeStructure.RTC_Hours;
 	newTime->tm_mday = RTC_DateStructure.RTC_Date;
 	newTime->tm_mon = RTC_DateStructure.RTC_Month;
 	newTime->tm_year = RTC_DateStructure.RTC_Year - 1900;  //counting from 1900
