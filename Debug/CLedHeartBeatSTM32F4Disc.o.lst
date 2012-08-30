@@ -23,326 +23,326 @@
   23              		.thumb_func
   25              	_ZNK5CTask7IsValidEv:
   26              	.LFB132:
-  27              		.file 1 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC\\Source/CTask.h"
-   1:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** /**
-   2:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @file CTask.h
-   3:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @class CTask
-   4:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @ingroup FreeRTOS_Wrapper
-   5:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
-   6:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * The CTask class wraps a native FreeRTOS task handle (xTaskHandle). To create a task instance
-   7:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * an object of this class and then call its CTask::Create method like showed in the following samp
-   8:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \code
-   9:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * CTask g_aTask // global task declaration.
-  10:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
-  11:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * void main()
-  12:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * {
-  13:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * 	g_aTask.Create(task_control_func, "Led2", configMINIMAL_STACK_SIZE, mainFLASH_TASK_PRIORITY);
-  14:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
-  15:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * 	CFreeRTOS::StartScheduler();
-  16:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * }
-  17:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \endcode
-  18:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
-  19:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * Usually the application subclass this class to create an application specific task object.
-  20:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * See the CHelloWorld class for an example.
-  21:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
-  22:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \sa <a href="http://www.freertos.org/taskandcr.html">task documentation</a> in the FreeRTOS web 
-  23:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
-  24:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @date Jul 5, 2010
-  25:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @author Stefano Oliveri (STF12.net)
-  26:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *         E-Mail: software@stf12.net
-  27:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  */
-  28:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  29:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #ifndef CTASK_H_
-  30:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #define CTASK_H_
-  31:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  32:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "FreeRTOS.h"
-  33:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "task.h"
-  34:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "IFreeRTOSProtocol.h"
-  35:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  36:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** class CTask: public IFreeRTOSObj {
-  37:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  38:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  39:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Specifies the native FreeRTOS handle managed by an instance of this class.
-  40:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  41:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	xTaskHandle m_handleTask;
-  42:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  43:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** public:
-  44:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  45:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * The default constructor. It initializes the object without attaching it to a native FreeRTOS ha
-  46:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Call the Create method to allocate a task handle and attach it to the object.
-  47:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  48:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	CTask();
-  49:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  50:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  51:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a CTask instance and attach it to a valid handle.
-  52:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
-  53:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * @param handleTask a valid task handle.
-  54:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  55:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	CTask(xTaskHandle handleTask);
-  56:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  57:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  58:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Delete the native FreeRTOS task.
-  59:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  60:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	virtual ~CTask();
-  61:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  62:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  63:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Retrieve the native FreeRTOS task handle attached to this object.
-  64:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
-  65:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * @return the native FreeRTOS task handle attached to this object.
-  66:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  67:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline operator xTaskHandle() const { return m_handleTask; }
-  68:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  69:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	// FreeRTOS API Wrappers
-  70:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  71:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  72:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a FreeRTOS task and attach its handle to the receiver object.
-  73:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
-  74:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00125.html">xTaskCreate</a> FreeRTOS API function.
-  75:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  76:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	portBASE_TYPE Create(pdTASK_CODE pvTaskCode, const portCHAR * const pcName, unsigned portSHORT usS
-  77:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  78:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  79:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a Memory Protection Unit (MPU) restricted task and attach its handle to the receiver obj
-  80:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
-  81:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/xTaskCreateRestricted.html">xTaskCreateRestricted</a> Free
-  82:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  83:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	portBASE_TYPE CreateRestricted(xTaskParameters *pxTaskDefinition);
-  84:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  85:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  86:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00126.html">vTaskDelete</a>  FreeRTOS API function.
-  87:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  88:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	void Delete();
-  89:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  90:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  91:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00127.html">vTaskDelay</a>  FreeRTOS API function.
-  92:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  93:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline static void Delay(portTickType xTicksToDelay);
-  94:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
-  95:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
-  96:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/vtaskdelayuntil.html">vTaskDelayUntil</a>  FreeRTOS API fu
-  97:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
-  98:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement);
-  99:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 100:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 101:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskYIELD">taskYIELD</a>  FreeRTOS API func
- 102:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 103:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void Yeld() { taskYIELD(); }
- 104:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 105:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 106:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENTER_CRITICAL">taskENTER_CRITICAL</a> 
- 107:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 108:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void EnterCritical() { taskENTER_CRITICAL(); }
- 109:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 110:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 111:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskEXIT_CRITICAL">taskEXIT_CRITICAL</a>  F
- 112:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 113:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void ExitCritical() { taskEXIT_CRITICAL(); }
- 114:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 115:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 116:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskDISABLE_INTERRUPTS">taskDISABLE_INTERRU
- 117:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 118:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void DisableInterrupt() { taskDISABLE_INTERRUPTS(); }
- 119:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 120:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 121:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENABLE_INTERRUPTS">taskENABLE_INTERRUPT
- 122:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 123:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void EnableInterrupt() { taskENABLE_INTERRUPTS(); }
- 124:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 125:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 126:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetCurrentTaskHandle">xTaskGetCurrentT
- 127:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 128:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static xTaskHandle GetCurrentTaskHandle();
- 129:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 130:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 131:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetTickCount">xTaskGetTickCount</a>  F
- 132:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 133:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static portTickType GetTickCount();
- 134:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 135:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 136:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetSchedulerState">xTaskGetSchedulerSt
- 137:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 138:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static portBASE_TYPE GetSchedulerState();
- 139:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 140:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 141:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#usTaskGetNumberOfTasks">uxTaskGetNumberOfTa
- 142:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 143:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static unsigned portBASE_TYPE GetNumberOfTasks();
- 144:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 145:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 146:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskList">vTaskList</a>  FreeRTOS API func
- 147:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 148:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void GetTaskList(portCHAR *pcWriteBuffer);
- 149:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 150:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 151:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskGetRunTimeStats">vTaskGetRunTimeStats<
- 152:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 153:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void GetRunTimeStats(portCHAR *pcWriteBuffer);
- 154:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 155:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 156:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00128.html">uxTaskPriorityGet</a>  FreeRTOS API functi
- 157:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 158:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline unsigned portBASE_TYPE PriorityGet() const;
- 159:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 160:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 161:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00129.html">vTaskPrioritySet</a>  FreeRTOS API functio
- 162:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 163:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void PrioritySet(unsigned portBASE_TYPE uxNewPriority);
- 164:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 165:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 166:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00130.html">vTaskSuspend</a>  FreeRTOS API function.
- 167:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 168:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void Suspend();
- 169:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 170:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 171:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00131.html">vTaskResume</a>  FreeRTOS API function.
- 172:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 173:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void Resume();
- 174:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 175:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 176:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/taskresumefromisr.html">xTaskResumeFromISR</a>  FreeRTO
- 177:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 178:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline portBASE_TYPE ResumeFromISR();
- 179:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 180:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 181:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskSetApplicationTag.html">vTaskSetApplicationTaskTag
- 182:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 183:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void SetApplicationTag(pdTASK_HOOK_CODE pxTagValue);
- 184:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 185:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 186:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/xTaskCallApplicationTaskHook.html">xTaskCallApplication
- 187:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 188:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline portBASE_TYPE CallApplicationTaskHook(void *pvParameter);
- 189:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 190:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
- 191:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskAllocateMPURegions.html">vTaskAllocateMPURegions</
- 192:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
- 193:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void AllocateMPURegions(const xMemoryRegion * const xRegions);
- 194:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 195:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     // FreeRTOS class extension.
- 196:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline bool IsValid() const;
- 197:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	void Attach(xGenericHandle handle);
- 198:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline xGenericHandle Detach();
- 199:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** };
- 200:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 201:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** // inline method
- 202:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** ////////////////
- 203:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 204:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 205:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Delay(portTickType xTicksToDelay) {
- 206:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskDelay == 1 )
- 207:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskDelay(xTicksToDelay);
- 208:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 209:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 210:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 211:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 212:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement) {
- 213:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskDelayUntil == 1 )
- 214:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
- 215:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 216:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 217:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 218:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 219:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** xTaskHandle CTask::GetCurrentTaskHandle() {
- 220:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetCurrentTaskHandle();
- 221:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 222:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 223:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 224:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portTickType CTask::GetTickCount() {
- 225:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetTickCount();
- 226:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 227:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 228:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 229:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::GetSchedulerState() {
- 230:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_xTaskGetSchedulerState == 1 )
- 231:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetSchedulerState();
- 232:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
- 233:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return 0;
- 234:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 235:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 236:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 237:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 238:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** unsigned portBASE_TYPE CTask::GetNumberOfTasks() {
- 239:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return uxTaskGetNumberOfTasks();
- 240:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 241:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 242:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 243:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::GetTaskList(portCHAR *pcWriteBuffer) {
- 244:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_TRACE_FACILITY == 1 )
- 245:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskList((signed portCHAR*)pcWriteBuffer);
- 246:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 247:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 248:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 249:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 250:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::GetRunTimeStats(portCHAR *pcWriteBuffer) {
- 251:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if (configGENERATE_RUN_TIME_STATS == 1)
- 252:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskGetRunTimeStats((signed portCHAR*)pcWriteBuffer);
- 253:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 254:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 255:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 256:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 257:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** unsigned portBASE_TYPE CTask::PriorityGet() const {
- 258:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_uxTaskPriorityGet == 1 )
- 259:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return uxTaskPriorityGet(m_handleTask);
- 260:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
- 261:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return -1;
- 262:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 263:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 264:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 265:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 266:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::PrioritySet(unsigned portBASE_TYPE uxNewPriority) {
- 267:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskPrioritySet == 1 )
- 268:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskPrioritySet(m_handleTask, uxNewPriority);
- 269:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 270:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 271:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 272:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 273:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Suspend() {
- 274:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
- 275:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskSuspend(m_handleTask);
- 276:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 277:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 278:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 279:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 280:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Resume() {
- 281:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
- 282:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskResume(m_handleTask);
- 283:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 284:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 285:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 286:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 287:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::ResumeFromISR() {
- 288:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( ( INCLUDE_xTaskResumeFromISR == 1 ) && ( INCLUDE_vTaskSuspend == 1 ) )
- 289:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskResumeFromISR(m_handleTask);
- 290:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
- 291:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return pdFALSE;
- 292:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 293:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 294:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 295:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 296:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::SetApplicationTag(pdTASK_HOOK_CODE pxTagValue) {
- 297:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
- 298:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskSetApplicationTaskTag(m_handleTask, pxTagValue);
- 299:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 300:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 301:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 302:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 303:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::CallApplicationTaskHook(void *pvParameter) {
- 304:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
- 305:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskCallApplicationTaskHook(m_handleTask, pvParameter);
- 306:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
- 307:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return 0;
- 308:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 309:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 310:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 311:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 312:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::AllocateMPURegions(const xMemoryRegion * const xRegions) {
- 313:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( portUSING_MPU_WRAPPERS == 1 )
- 314:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskAllocateMPURegions(m_handleTask, xRegions);
- 315:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
- 316:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
- 317:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 318:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 319:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** bool CTask::IsValid() const{
+  27              		.file 1 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\FreeRTOS_EC\\Source/CTask.h"
+   1:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** /**
+   2:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @file CTask.h
+   3:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @class CTask
+   4:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @ingroup FreeRTOS_Wrapper
+   5:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+   6:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * The CTask class wraps a native FreeRTOS task handle (xTaskHandle). To create a task instance
+   7:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * an object of this class and then call its CTask::Create method like showed in the following samp
+   8:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \code
+   9:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * CTask g_aTask // global task declaration.
+  10:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  11:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * void main()
+  12:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * {
+  13:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * 	g_aTask.Create(task_control_func, "Led2", configMINIMAL_STACK_SIZE, mainFLASH_TASK_PRIORITY);
+  14:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  15:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * 	CFreeRTOS::StartScheduler();
+  16:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * }
+  17:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \endcode
+  18:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  19:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * Usually the application subclass this class to create an application specific task object.
+  20:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * See the CHelloWorld class for an example.
+  21:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  22:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * \sa <a href="http://www.freertos.org/taskandcr.html">task documentation</a> in the FreeRTOS web 
+  23:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *
+  24:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @date Jul 5, 2010
+  25:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  * @author Stefano Oliveri (STF12.net)
+  26:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  *         E-Mail: software@stf12.net
+  27:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****  */
+  28:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  29:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #ifndef CTASK_H_
+  30:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #define CTASK_H_
+  31:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  32:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "FreeRTOS.h"
+  33:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "task.h"
+  34:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #include "IFreeRTOSProtocol.h"
+  35:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  36:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** class CTask: public IFreeRTOSObj {
+  37:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  38:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  39:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Specifies the native FreeRTOS handle managed by an instance of this class.
+  40:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  41:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	xTaskHandle m_handleTask;
+  42:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  43:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** public:
+  44:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  45:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * The default constructor. It initializes the object without attaching it to a native FreeRTOS ha
+  46:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Call the Create method to allocate a task handle and attach it to the object.
+  47:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  48:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	CTask();
+  49:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  50:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  51:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a CTask instance and attach it to a valid handle.
+  52:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  53:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * @param handleTask a valid task handle.
+  54:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  55:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	CTask(xTaskHandle handleTask);
+  56:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  57:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  58:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Delete the native FreeRTOS task.
+  59:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  60:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	virtual ~CTask();
+  61:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  62:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  63:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Retrieve the native FreeRTOS task handle attached to this object.
+  64:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  65:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * @return the native FreeRTOS task handle attached to this object.
+  66:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  67:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline operator xTaskHandle() const { return m_handleTask; }
+  68:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  69:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	// FreeRTOS API Wrappers
+  70:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  71:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  72:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a FreeRTOS task and attach its handle to the receiver object.
+  73:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  74:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00125.html">xTaskCreate</a> FreeRTOS API function.
+  75:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  76:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	portBASE_TYPE Create(pdTASK_CODE pvTaskCode, const portCHAR * const pcName, unsigned portSHORT usS
+  77:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  78:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  79:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * Create a Memory Protection Unit (MPU) restricted task and attach its handle to the receiver obj
+  80:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 *
+  81:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/xTaskCreateRestricted.html">xTaskCreateRestricted</a> Free
+  82:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  83:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	portBASE_TYPE CreateRestricted(xTaskParameters *pxTaskDefinition);
+  84:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  85:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  86:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00126.html">vTaskDelete</a>  FreeRTOS API function.
+  87:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  88:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	void Delete();
+  89:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  90:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  91:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/a00127.html">vTaskDelay</a>  FreeRTOS API function.
+  92:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  93:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline static void Delay(portTickType xTicksToDelay);
+  94:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+  95:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	/**
+  96:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 * \sa <a href="http://www.freertos.org/vtaskdelayuntil.html">vTaskDelayUntil</a>  FreeRTOS API fu
+  97:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	 */
+  98:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement);
+  99:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 100:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 101:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskYIELD">taskYIELD</a>  FreeRTOS API func
+ 102:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 103:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void Yeld() { taskYIELD(); }
+ 104:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 105:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 106:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENTER_CRITICAL">taskENTER_CRITICAL</a> 
+ 107:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 108:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void EnterCritical() { taskENTER_CRITICAL(); }
+ 109:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 110:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 111:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskEXIT_CRITICAL">taskEXIT_CRITICAL</a>  F
+ 112:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 113:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void ExitCritical() { taskEXIT_CRITICAL(); }
+ 114:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 115:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 116:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskDISABLE_INTERRUPTS">taskDISABLE_INTERRU
+ 117:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 118:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void DisableInterrupt() { taskDISABLE_INTERRUPTS(); }
+ 119:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 120:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 121:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00020.html#taskENABLE_INTERRUPTS">taskENABLE_INTERRUPT
+ 122:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 123:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void EnableInterrupt() { taskENABLE_INTERRUPTS(); }
+ 124:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 125:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 126:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetCurrentTaskHandle">xTaskGetCurrentT
+ 127:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 128:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static xTaskHandle GetCurrentTaskHandle();
+ 129:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 130:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 131:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetTickCount">xTaskGetTickCount</a>  F
+ 132:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 133:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static portTickType GetTickCount();
+ 134:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 135:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 136:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#xTaskGetSchedulerState">xTaskGetSchedulerSt
+ 137:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 138:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static portBASE_TYPE GetSchedulerState();
+ 139:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 140:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 141:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#usTaskGetNumberOfTasks">uxTaskGetNumberOfTa
+ 142:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 143:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static unsigned portBASE_TYPE GetNumberOfTasks();
+ 144:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 145:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 146:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskList">vTaskList</a>  FreeRTOS API func
+ 147:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 148:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void GetTaskList(portCHAR *pcWriteBuffer);
+ 149:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 150:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 151:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00021.html#vTaskGetRunTimeStats">vTaskGetRunTimeStats<
+ 152:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 153:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline static void GetRunTimeStats(portCHAR *pcWriteBuffer);
+ 154:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 155:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 156:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00128.html">uxTaskPriorityGet</a>  FreeRTOS API functi
+ 157:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 158:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline unsigned portBASE_TYPE PriorityGet() const;
+ 159:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 160:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 161:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00129.html">vTaskPrioritySet</a>  FreeRTOS API functio
+ 162:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 163:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void PrioritySet(unsigned portBASE_TYPE uxNewPriority);
+ 164:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 165:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 166:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00130.html">vTaskSuspend</a>  FreeRTOS API function.
+ 167:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 168:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void Suspend();
+ 169:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 170:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 171:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/a00131.html">vTaskResume</a>  FreeRTOS API function.
+ 172:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 173:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void Resume();
+ 174:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 175:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 176:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/taskresumefromisr.html">xTaskResumeFromISR</a>  FreeRTO
+ 177:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 178:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline portBASE_TYPE ResumeFromISR();
+ 179:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 180:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 181:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskSetApplicationTag.html">vTaskSetApplicationTaskTag
+ 182:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 183:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void SetApplicationTag(pdTASK_HOOK_CODE pxTagValue);
+ 184:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 185:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 186:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/xTaskCallApplicationTaskHook.html">xTaskCallApplication
+ 187:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 188:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline portBASE_TYPE CallApplicationTaskHook(void *pvParameter);
+ 189:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 190:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     /**
+ 191:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      * \sa <a href="http://www.freertos.org/vTaskAllocateMPURegions.html">vTaskAllocateMPURegions</
+ 192:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****      */
+ 193:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     inline void AllocateMPURegions(const xMemoryRegion * const xRegions);
+ 194:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 195:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h ****     // FreeRTOS class extension.
+ 196:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline bool IsValid() const;
+ 197:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	void Attach(xGenericHandle handle);
+ 198:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	inline xGenericHandle Detach();
+ 199:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** };
+ 200:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 201:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** // inline method
+ 202:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** ////////////////
+ 203:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 204:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 205:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Delay(portTickType xTicksToDelay) {
+ 206:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskDelay == 1 )
+ 207:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskDelay(xTicksToDelay);
+ 208:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 209:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 210:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 211:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 212:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::DelayUntil(portTickType *pxPreviousWakeTime, portTickType xTimeIncrement) {
+ 213:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskDelayUntil == 1 )
+ 214:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
+ 215:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 216:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 217:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 218:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 219:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** xTaskHandle CTask::GetCurrentTaskHandle() {
+ 220:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetCurrentTaskHandle();
+ 221:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 222:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 223:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 224:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portTickType CTask::GetTickCount() {
+ 225:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetTickCount();
+ 226:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 227:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 228:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 229:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::GetSchedulerState() {
+ 230:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_xTaskGetSchedulerState == 1 )
+ 231:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskGetSchedulerState();
+ 232:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 233:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return 0;
+ 234:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 235:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 236:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 237:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 238:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** unsigned portBASE_TYPE CTask::GetNumberOfTasks() {
+ 239:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return uxTaskGetNumberOfTasks();
+ 240:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 241:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 242:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 243:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::GetTaskList(portCHAR *pcWriteBuffer) {
+ 244:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_TRACE_FACILITY == 1 )
+ 245:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskList((signed portCHAR*)pcWriteBuffer);
+ 246:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 247:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 248:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 249:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 250:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::GetRunTimeStats(portCHAR *pcWriteBuffer) {
+ 251:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if (configGENERATE_RUN_TIME_STATS == 1)
+ 252:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskGetRunTimeStats((signed portCHAR*)pcWriteBuffer);
+ 253:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 254:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 255:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 256:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 257:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** unsigned portBASE_TYPE CTask::PriorityGet() const {
+ 258:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_uxTaskPriorityGet == 1 )
+ 259:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return uxTaskPriorityGet(m_handleTask);
+ 260:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 261:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return -1;
+ 262:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 263:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 264:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 265:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 266:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::PrioritySet(unsigned portBASE_TYPE uxNewPriority) {
+ 267:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskPrioritySet == 1 )
+ 268:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskPrioritySet(m_handleTask, uxNewPriority);
+ 269:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 270:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 271:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 272:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 273:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Suspend() {
+ 274:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
+ 275:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskSuspend(m_handleTask);
+ 276:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 277:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 278:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 279:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 280:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::Resume() {
+ 281:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( INCLUDE_vTaskSuspend == 1 )
+ 282:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskResume(m_handleTask);
+ 283:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 284:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 285:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 286:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 287:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::ResumeFromISR() {
+ 288:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( ( INCLUDE_xTaskResumeFromISR == 1 ) && ( INCLUDE_vTaskSuspend == 1 ) )
+ 289:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskResumeFromISR(m_handleTask);
+ 290:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 291:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return pdFALSE;
+ 292:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 293:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 294:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 295:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 296:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::SetApplicationTag(pdTASK_HOOK_CODE pxTagValue) {
+ 297:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
+ 298:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskSetApplicationTaskTag(m_handleTask, pxTagValue);
+ 299:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 300:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 301:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 302:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 303:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** portBASE_TYPE CTask::CallApplicationTaskHook(void *pvParameter) {
+ 304:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( configUSE_APPLICATION_TASK_TAG == 1 )
+ 305:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return xTaskCallApplicationTaskHook(m_handleTask, pvParameter);
+ 306:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #else
+ 307:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return 0;
+ 308:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 309:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 310:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 311:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 312:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** void CTask::AllocateMPURegions(const xMemoryRegion * const xRegions) {
+ 313:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #if ( portUSING_MPU_WRAPPERS == 1 )
+ 314:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	vTaskAllocateMPURegions(m_handleTask, xRegions);
+ 315:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** #endif
+ 316:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 317:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 318:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 319:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** bool CTask::IsValid() const{
   28              		.loc 1 319 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 8
@@ -359,7 +359,7 @@
   41              	.LCFI2:
   42              		.cfi_def_cfa_register 7
   43 0006 7860     		str	r0, [r7, #4]
- 320:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return m_handleTask != NULL;
+ 320:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return m_handleTask != NULL;
   44              		.loc 1 320 0
   45 0008 7B68     		ldr	r3, [r7, #4]
   46 000a 5B68     		ldr	r3, [r3, #4]
@@ -368,7 +368,7 @@
   49 0010 0023     		moveq	r3, #0
   50 0012 0123     		movne	r3, #1
   51 0014 DBB2     		uxtb	r3, r3
- 321:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 321:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
   52              		.loc 1 321 0
   53 0016 1846     		mov	r0, r3
   54 0018 07F10C07 		add	r7, r7, #12
@@ -384,9 +384,9 @@
   65              		.thumb_func
   67              	_ZN5CTask6DetachEv:
   68              	.LFB133:
- 322:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
- 323:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
- 324:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** xGenericHandle CTask::Detach() {
+ 322:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 
+ 323:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** inline
+ 324:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** xGenericHandle CTask::Detach() {
   69              		.loc 1 324 0
   70              		.cfi_startproc
   71              		@ args = 0, pretend = 0, frame = 16
@@ -404,21 +404,21 @@
   83              		.cfi_def_cfa_register 7
   84 0006 7860     		str	r0, [r7, #4]
   85              	.LBB2:
- 325:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	xTaskHandle res = m_handleTask;
+ 325:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	xTaskHandle res = m_handleTask;
   86              		.loc 1 325 0
   87 0008 7B68     		ldr	r3, [r7, #4]
   88 000a 5B68     		ldr	r3, [r3, #4]
   89 000c FB60     		str	r3, [r7, #12]
- 326:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	m_handleTask = NULL;
+ 326:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	m_handleTask = NULL;
   90              		.loc 1 326 0
   91 000e 7B68     		ldr	r3, [r7, #4]
   92 0010 4FF00002 		mov	r2, #0
   93 0014 5A60     		str	r2, [r3, #4]
- 327:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return res;
+ 327:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** 	return res;
   94              		.loc 1 327 0
   95 0016 FB68     		ldr	r3, [r7, #12]
   96              	.LBE2:
- 328:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
+ 328:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\CTask.h **** }
   97              		.loc 1 328 0
   98 0018 1846     		mov	r0, r3
   99 001a 07F11407 		add	r7, r7, #20
@@ -434,106 +434,106 @@
  110              		.thumb_func
  112              	_ZN12AManagedTask8OnCreateEPKctm:
  113              	.LFB135:
- 114              		.file 2 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC\\Source/AManagedTask.h"
-   1:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** /**
-   2:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @file AManagedTask.h
-   3:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @class AManagedTask
-   4:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
-   5:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * This class extend the CTask in order to provide a more structured and simple to use framework fo
-   6:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * FreeRTOS programming. All AManagedTask derived objects are grouped in linked list. Please note t
-   7:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * this data structure can be modified in a next release. The framework manage these task objects
-   8:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * by calling their methods during the application life cycle.
-   9:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
-  10:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * The application extend this abstract class to create a managed task and provide its control loop
-  11:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * \code
-  12:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * class CMyPipe: public AManagedTask
-  13:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * {
-  14:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *   // Task private variables.
-  15:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
-  16:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * public:
-  17:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *   void Run() {  task control loop  };
-  18:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * }
-  19:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * \endcode
-  20:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
-  21:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @date Aug 3, 2010
-  22:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @author Stefano Oliveri
-  23:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *         E-Mail: software@stf12.net
-  24:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  */
-  25:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  26:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** /**
-  27:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @defgroup FreeRTOS_Managed FreeRTOS Managed Class Extension
-  28:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @ingroup FreeRTOS_CPP_EXT
-  29:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * The FreeRTOS Managed Class Extension are a set of class that provide a structured and
-  30:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * managed framework to develop a FreeRTOS application.
-  31:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @{
-  32:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  */
-  33:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  34:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #ifndef AMANAGEDTASK_H_
-  35:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #define AMANAGEDTASK_H_
-  36:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  37:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #include "CTask.h"
-  38:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  39:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** class AManagedTask: public CTask {
-  40:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	friend class CFreeRTOS;
-  41:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  42:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  43:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Specifies the head of the linked list used to group all application managed task.
-  44:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  45:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	static AManagedTask *s_pManagedTaskListHead;
-  46:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  47:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  48:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Specifies the next managed task in the list or NULL if this is the last managed task.
-  49:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  50:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	AManagedTask *m_pNextManagedTask;
-  51:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  52:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** public:
-  53:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  54:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  55:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Default constructor.
-  56:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  57:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	AManagedTask();
-  58:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  59:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  60:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Destructor.
-  61:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  62:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual ~AManagedTask();
-  63:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  64:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  65:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Create the FreeRTOS task attached to this object.
-  66:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
-  67:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param pcName name of the task. Need only for debug purpose.
-  68:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param usStackDepth size in word of the task stack.
-  69:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param uxPriority task priority. Valid value ar between taskIDLE_PRIORITY and configMAX_PRIORIT
-  70:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
-  71:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @sa CTask::Create
-  72:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  73:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	portBASE_TYPE Create(const portCHAR * const pcName, unsigned portSHORT usStackDepth, unsigned port
-  74:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  75:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  76:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * The framework calls this function before the scheduler start. The default implementation simply
-  77:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Override this method to perform task specific hardware initialization that does not use FreeRTO
-  78:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
-  79:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @return true if success, false otherwise.
-  80:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  81:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual bool HardwareInit() { return true; }
-  82:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  83:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  84:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Task control loop.
-  85:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  86:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual void Run() =0;
-  87:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
-  88:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
-  89:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * The framework calls this function before the task is created to give a chance to a managed task
-  90:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * own initialization code and stop the task creation process if needed.
-  91:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
-  92:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param pcName specifies the task name.
-  93:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param usStackDepth specifies the task stack depth.
-  94:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param uxPriority specifies the task priority.
-  95:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
-  96:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @return pdTRUE if success, pdFALSE otherwise. If the method return pdFALSE the task creation pr
-  97:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * is stopped and no FreeRTOS resource are allocated.
-  98:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
-  99:E:\Desktop\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual portBASE_TYPE OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth, uns
+ 114              		.file 2 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\FreeRTOS_EC\\Source/AManagedTask.h
+   1:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** /**
+   2:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @file AManagedTask.h
+   3:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @class AManagedTask
+   4:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+   5:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * This class extend the CTask in order to provide a more structured and simple to use framework fo
+   6:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * FreeRTOS programming. All AManagedTask derived objects are grouped in linked list. Please note t
+   7:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * this data structure can be modified in a next release. The framework manage these task objects
+   8:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * by calling their methods during the application life cycle.
+   9:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+  10:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * The application extend this abstract class to create a managed task and provide its control loop
+  11:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * \code
+  12:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * class CMyPipe: public AManagedTask
+  13:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * {
+  14:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *   // Task private variables.
+  15:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+  16:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * public:
+  17:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *   void Run() {  task control loop  };
+  18:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * }
+  19:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * \endcode
+  20:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *
+  21:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @date Aug 3, 2010
+  22:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @author Stefano Oliveri
+  23:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  *         E-Mail: software@stf12.net
+  24:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  */
+  25:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  26:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** /**
+  27:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @defgroup FreeRTOS_Managed FreeRTOS Managed Class Extension
+  28:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @ingroup FreeRTOS_CPP_EXT
+  29:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * The FreeRTOS Managed Class Extension are a set of class that provide a structured and
+  30:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * managed framework to develop a FreeRTOS application.
+  31:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  * @{
+  32:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h ****  */
+  33:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  34:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #ifndef AMANAGEDTASK_H_
+  35:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #define AMANAGEDTASK_H_
+  36:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  37:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** #include "CTask.h"
+  38:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  39:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** class AManagedTask: public CTask {
+  40:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	friend class CFreeRTOS;
+  41:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  42:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  43:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Specifies the head of the linked list used to group all application managed task.
+  44:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  45:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	static AManagedTask *s_pManagedTaskListHead;
+  46:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  47:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  48:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Specifies the next managed task in the list or NULL if this is the last managed task.
+  49:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  50:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	AManagedTask *m_pNextManagedTask;
+  51:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  52:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** public:
+  53:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  54:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  55:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Default constructor.
+  56:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  57:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	AManagedTask();
+  58:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  59:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  60:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Destructor.
+  61:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  62:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual ~AManagedTask();
+  63:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  64:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  65:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Create the FreeRTOS task attached to this object.
+  66:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  67:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param pcName name of the task. Need only for debug purpose.
+  68:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param usStackDepth size in word of the task stack.
+  69:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param uxPriority task priority. Valid value ar between taskIDLE_PRIORITY and configMAX_PRIORIT
+  70:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  71:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @sa CTask::Create
+  72:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  73:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	portBASE_TYPE Create(const portCHAR * const pcName, unsigned portSHORT usStackDepth, unsigned port
+  74:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  75:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  76:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * The framework calls this function before the scheduler start. The default implementation simply
+  77:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Override this method to perform task specific hardware initialization that does not use FreeRTO
+  78:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  79:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @return true if success, false otherwise.
+  80:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  81:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual bool HardwareInit() { return true; }
+  82:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  83:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  84:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * Task control loop.
+  85:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  86:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual void Run() =0;
+  87:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 
+  88:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	/**
+  89:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * The framework calls this function before the task is created to give a chance to a managed task
+  90:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * own initialization code and stop the task creation process if needed.
+  91:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  92:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param pcName specifies the task name.
+  93:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param usStackDepth specifies the task stack depth.
+  94:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @param uxPriority specifies the task priority.
+  95:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 *
+  96:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * @return pdTRUE if success, pdFALSE otherwise. If the method return pdFALSE the task creation pr
+  97:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 * is stopped and no FreeRTOS resource are allocated.
+  98:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	 */
+  99:D:\Elektronik\Projekte\thundercyer-the-alarm-clock\FreeRTOS_EC\Source\AManagedTask.h **** 	virtual portBASE_TYPE OnCreate(const portCHAR * const pcName, unsigned portSHORT usStackDepth, uns
  115              		.loc 2 99 0
  116              		.cfi_startproc
  117              		@ args = 0, pretend = 0, frame = 16
@@ -983,37 +983,37 @@
  486              		.thumb_set _ZN24CLedHeartBeatSTM32F4DiscD1Ev,_ZN24CLedHeartBeatSTM32F4DiscD2Ev
  487              		.text
  488              	.Letext0:
- 489              		.file 4 "c:\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib/gcc/arm-none-eabi
- 490              		.file 5 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../Source/portable
- 491              		.file 6 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
- 492              		.file 7 "E:\\Desktop\\thundercyer-the-alarm-clock\\FreeRTOS_EC\\Source/IFreeRTOSProtocol.h"
+ 489              		.file 4 "d:\\elektronik\\ides\\chibistudio\\tools\\gnu tools arm embedded\\4.6 2012q2\\bin\\../lib
+ 490              		.file 5 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/../../So
+ 491              		.file 6 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\FreeRTOS\\Source\\include/task.h"
+ 492              		.file 7 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\FreeRTOS_EC\\Source/IFreeRTOSProto
  493              		.file 8 "../CLedHeartBeatSTM32F4Disc.h"
- 494              		.file 9 "E:\\Desktop\\thundercyer-the-alarm-clock\\STM32F4-Discovery/stm32f4_discovery.h"
- 495              		.file 10 "E:\\Desktop\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
+ 494              		.file 9 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\STM32F4-Discovery/stm32f4_discover
+ 495              		.file 10 "D:\\Elektronik\\Projekte\\thundercyer-the-alarm-clock\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CLedHeartBeatSTM32F4Disc.cpp
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:20     .text._ZNK5CTask7IsValidEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:25     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:62     .text._ZN5CTask6DetachEv:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:67     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:107    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:112    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:146    .text:00000000 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:151    .text:00000000 _ZN24CLedHeartBeatSTM32F4DiscC2Em
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:197    .text:00000034 $d
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:472    .rodata._ZTV24CLedHeartBeatSTM32F4Disc:00000000 _ZTV24CLedHeartBeatSTM32F4Disc
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:201    .text:00000038 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:206    .text:00000038 _ZN24CLedHeartBeatSTM32F4DiscD2Ev
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:251    .text:0000006c $d
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:255    .text:00000070 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:260    .text:00000070 _ZN24CLedHeartBeatSTM32F4DiscD0Ev
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:206    .text:00000038 _ZN24CLedHeartBeatSTM32F4DiscD1Ev
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:296    .text:00000090 _ZN24CLedHeartBeatSTM32F4Disc12HardwareInitEv
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:341    .text:000000c8 _ZN24CLedHeartBeatSTM32F4Disc3RunEv
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:369    .text:000000e0 $d
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:375    .text:000000f0 $t
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:469    .rodata._ZTV24CLedHeartBeatSTM32F4Disc:00000000 $d
-C:\Users\Alex\AppData\Local\Temp\ccUp9vF5.s:151    .text:00000000 _ZN24CLedHeartBeatSTM32F4DiscC1Em
+  C:\TEMP\ccwVo5dW.s:20     .text._ZNK5CTask7IsValidEv:00000000 $t
+  C:\TEMP\ccwVo5dW.s:25     .text._ZNK5CTask7IsValidEv:00000000 _ZNK5CTask7IsValidEv
+  C:\TEMP\ccwVo5dW.s:62     .text._ZN5CTask6DetachEv:00000000 $t
+  C:\TEMP\ccwVo5dW.s:67     .text._ZN5CTask6DetachEv:00000000 _ZN5CTask6DetachEv
+  C:\TEMP\ccwVo5dW.s:107    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 $t
+  C:\TEMP\ccwVo5dW.s:112    .text._ZN12AManagedTask8OnCreateEPKctm:00000000 _ZN12AManagedTask8OnCreateEPKctm
+  C:\TEMP\ccwVo5dW.s:146    .text:00000000 $t
+  C:\TEMP\ccwVo5dW.s:151    .text:00000000 _ZN24CLedHeartBeatSTM32F4DiscC2Em
+  C:\TEMP\ccwVo5dW.s:197    .text:00000034 $d
+  C:\TEMP\ccwVo5dW.s:472    .rodata._ZTV24CLedHeartBeatSTM32F4Disc:00000000 _ZTV24CLedHeartBeatSTM32F4Disc
+  C:\TEMP\ccwVo5dW.s:201    .text:00000038 $t
+  C:\TEMP\ccwVo5dW.s:206    .text:00000038 _ZN24CLedHeartBeatSTM32F4DiscD2Ev
+  C:\TEMP\ccwVo5dW.s:251    .text:0000006c $d
+  C:\TEMP\ccwVo5dW.s:255    .text:00000070 $t
+  C:\TEMP\ccwVo5dW.s:260    .text:00000070 _ZN24CLedHeartBeatSTM32F4DiscD0Ev
+  C:\TEMP\ccwVo5dW.s:206    .text:00000038 _ZN24CLedHeartBeatSTM32F4DiscD1Ev
+  C:\TEMP\ccwVo5dW.s:296    .text:00000090 _ZN24CLedHeartBeatSTM32F4Disc12HardwareInitEv
+  C:\TEMP\ccwVo5dW.s:341    .text:000000c8 _ZN24CLedHeartBeatSTM32F4Disc3RunEv
+  C:\TEMP\ccwVo5dW.s:369    .text:000000e0 $d
+  C:\TEMP\ccwVo5dW.s:375    .text:000000f0 $t
+  C:\TEMP\ccwVo5dW.s:469    .rodata._ZTV24CLedHeartBeatSTM32F4Disc:00000000 $d
+  C:\TEMP\ccwVo5dW.s:151    .text:00000000 _ZN24CLedHeartBeatSTM32F4DiscC1Em
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
