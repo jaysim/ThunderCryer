@@ -1,6 +1,6 @@
 /**
  ******************************************************************************
- * @file        CGUIPage.h
+ * @file        CGUI.h
  * @author      Tecnologic86
  * @version     V0.0.0
  * @date        30.08.2012
@@ -8,30 +8,29 @@
  ******************************************************************************
  */
 
-#ifndef CGUIPAGE_H_
-#define CGUIPAGE_H_
+#ifndef CGUI_H_
+#define CGUI_H_
 
 namespace ThunderCryerGUI {
 
-  class CGUIPage {
+  class CGUI {
   private:
-    /**
-     * Actors on Page
-     */
-    CGUIActorList* _action;
-
-    /**
-     * true if Page has focus
-     */
-    bool focus;
+    CGUIPage* _lastPage;
+    CGUIPage* _currentPage;
+    CGUIPage* _homePage;
 
   public:
+    /**
+     * basic constructor sets home screen
+     *
+     * @param homePage  pointer to home screen page
+     */
+    CGUI(CGUIPage* homePage);
 
-    CGUIPage();
-    virtual ~CGUIPage();
+    virtual ~CGUI();
 
     /**
-     * initialise GUI and draw start page
+     * Initialize GUI and draw start page
      */
     void Init();
 
@@ -42,9 +41,8 @@ namespace ThunderCryerGUI {
 
     /**
      * Input handler function for back command
-     * @return false if back not possible
      */
-    bool Back();
+    void Back();
 
     /**
      * Input handler function for select command
@@ -62,6 +60,11 @@ namespace ThunderCryerGUI {
     void Prev();
 
     /**
+     * Goto homescreen
+     */
+    void GoHome();
+
+    /**
      * handle changes in display data to keep screen up to date
      */
     void ChangeHandler();
@@ -69,4 +72,4 @@ namespace ThunderCryerGUI {
   };
 
 } /* namespace ThunderCryerGUI */
-#endif /* CGUIPAGE_H_ */
+#endif /* CGUI_H_ */
