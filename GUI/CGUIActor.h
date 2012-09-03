@@ -25,7 +25,7 @@ namespace ThunderCryerGUI {
     /**
      * focus indicator, true when actor is selected
      */
-    bool focus;
+    bool _focus;
 
   public:
 
@@ -39,19 +39,13 @@ namespace ThunderCryerGUI {
     virtual ~CGUIActor();
 
     /**
-     * function operator reimplementated by a subclass as actors action
-     * @return this object
-     */
-    virtual CGUIActor operator()();
-
-    /**
      * simple getters für next an prev object
      */
-    const CGUIActor Next();
-    const CGUIActor Prev();
+    CGUIActor* GetNext();
+    CGUIActor* GetPrev();
 
     /**
-     * virtual setter for focus, subclass has to implement this function
+     * setter for focus, subclass has to implement this function
      */
     void SetFocus(bool newFocus);
 
@@ -59,6 +53,24 @@ namespace ThunderCryerGUI {
      * handle changes in display data to keep screen up to date
      */
     virtual void ChangeHandler();
+
+    /**
+     * draw actor
+     */
+    virtual void Draw();
+
+    /**
+     * Input handler function for back command
+     *
+     * @return false if not possible
+     */
+    virtual bool Back();
+
+    /**
+     * Input handler function for select command
+     */
+    virtual bool Select();
+
   };
 
 } /* namespace ThunderCryerGUI */

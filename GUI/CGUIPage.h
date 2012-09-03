@@ -11,6 +11,8 @@
 #ifndef CGUIPAGE_H_
 #define CGUIPAGE_H_
 
+#include "CGUIActorList.h"
+
 namespace ThunderCryerGUI {
 
   class CGUIPage {
@@ -20,20 +22,10 @@ namespace ThunderCryerGUI {
      */
     CGUIActorList* _action;
 
-    /**
-     * true if Page has focus
-     */
-    bool focus;
-
   public:
 
-    CGUIPage();
+    CGUIPage(CGUIActorList* actorList);
     virtual ~CGUIPage();
-
-    /**
-     * initialise GUI and draw start page
-     */
-    void Init();
 
     /**
      * redraw actual display content

@@ -39,6 +39,7 @@ Menue \
 HelixMP3/real \
 HelixMP3 \
 GraphicLCD \
+GUI \
 FreeRTOS_EC/Source \
 FreeRTOS/Source \
 FreeRTOS/Source/portable/GCC/ARM_CM4F \

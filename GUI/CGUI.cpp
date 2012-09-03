@@ -29,13 +29,6 @@ namespace ThunderCryerGUI {
   }
 
   /**
-   * Initialize GUI and draw start page
-   */
-  void CGUI::Init(){
-    _homePage->Init();
-  }
-
-  /**
    * redraw actual display content
    */
   void CGUI::Draw(){
@@ -59,28 +52,38 @@ namespace ThunderCryerGUI {
    * Input handler function for select command
    */
   void CGUI::Select(){
-
+    _currentPage->Select();
   }
 
   /**
    * Input handler function for next command
    */
-  void CGUI::Next();
+  void CGUI::Next(){
+    _currentPage->Next();
+  }
 
   /**
    * Input handler function for Prev command
    */
-  void CGUI::Prev();
+  void CGUI::Prev(){
+    _currentPage->Prev();
+  }
 
   /**
    * Goto homescreen
    */
-  void CGUI::GoHome();
+  void CGUI::GoHome(){
+    _currentPage = _homePage;
+    //redraw screen
+    Draw();
+  }
 
   /**
    * handle changes in display data to keep screen up to date
    */
-  void ChangeHandler();
+  void CGUI::ChangeHandler(){
+    _currentPage->ChangeHandler();
+  }
 
 
 

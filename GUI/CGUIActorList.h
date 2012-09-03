@@ -12,6 +12,8 @@
 #ifndef CGUIACTORLIST_H_
 #define CGUIACTORLIST_H_
 
+#include "CGUIActor.h"
+
 namespace ThunderCryerGUI {
 
   class CGUIActorList {
@@ -23,15 +25,12 @@ namespace ThunderCryerGUI {
   public:
     /**
      * simple constuctor with start element of the list
+     *
+     * @param start  pointer to start element of the list
      */
     CGUIActorList(CGUIActor* start);
 
     virtual ~CGUIActorList();
-
-    /**
-     * initialise GUI and draw start page
-     */
-    void Init();
 
     /**
      * redraw actual display content
@@ -40,23 +39,34 @@ namespace ThunderCryerGUI {
 
     /**
      * Input handler function for back command
+     *
+     * @return false if not possible
      */
-    void Back();
+    bool Back();
 
     /**
      * Input handler function for select command
      */
-    void Select();
+    bool Select();
 
     /**
      * Input handler function for next command
+     *
+     * @return false if not possible
      */
-    void Next();
+    bool Next();
 
     /**
      * Input handler function for Prev command
+     *
+     * @return false if not possible
      */
-    void Prev();
+    bool Prev();
+
+    /**
+     * handle changes in display data to keep screen up to date
+     */
+    void ChangeHandler();
 
   };
 

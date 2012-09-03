@@ -17,6 +17,7 @@ RM := rm -rf
 -include HelixMP3/real/subdir.mk
 -include HelixMP3/subdir.mk
 -include GraphicLCD/subdir.mk
+-include GUI/subdir.mk
 -include FreeRTOS_EC/Source/subdir.mk
 -include FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
 -include FreeRTOS/Source/subdir.mk

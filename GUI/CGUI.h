@@ -11,6 +11,8 @@
 #ifndef CGUI_H_
 #define CGUI_H_
 
+#include "CGUIPage.h"
+
 namespace ThunderCryerGUI {
 
   class CGUI {
@@ -28,11 +30,6 @@ namespace ThunderCryerGUI {
     CGUI(CGUIPage* homePage);
 
     virtual ~CGUI();
-
-    /**
-     * Initialize GUI and draw start page
-     */
-    void Init();
 
     /**
      * redraw actual display content
