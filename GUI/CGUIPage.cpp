@@ -14,8 +14,7 @@ namespace ThunderCryerGUI {
    *
    * @param actorList  list of actors on page
    */
-  CGUIPage::CGUIPage(CGUIActorList* actorList): _action(actorList),
-                                                _focus(false) {
+  CGUIPage::CGUIPage(CGUIActorList* actorList): _action(actorList){
   }
 
   /**
@@ -43,28 +42,28 @@ namespace ThunderCryerGUI {
    * Input handler function for select command
    */
   void CGUIPage::Select(){
-    return _action->Select();
+    _action->Select();
   }
 
   /**
    * Input handler function for next command
    */
   void CGUIPage::Next(){
-    return _action->Next();
+    _action->Next();
   }
 
   /**
    * Input handler function for Prev command
    */
   void CGUIPage::Prev(){
-    return _action->Prev();
+    _action->Prev();
   }
 
   /**
    * handle changes in display data to keep screen up to date
    */
   void CGUIPage::ChangeHandler(){
-    return _action->ChangeHandler();
+    _action->ChangeHandler();
   }
 
 } /* namespace ThunderCryerGUI */
