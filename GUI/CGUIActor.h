@@ -11,6 +11,7 @@
 #ifndef CGUIACTOR_H_
 #define CGUIACTOR_H_
 
+#include "CGraphicLCD.h"
 
 namespace ThunderCryerGUI {
 
@@ -26,6 +27,11 @@ namespace ThunderCryerGUI {
      * focus indicator, true when actor is selected
      */
     bool _focus;
+
+    /**
+     * pointer to display interface
+     */
+    CGraphicLCD* _display;
 
   public:
 
@@ -68,8 +74,24 @@ namespace ThunderCryerGUI {
 
     /**
      * Input handler function for select command
+     *
+     * @return false if actor is not able to execute command
      */
     virtual bool Select();
+
+    /**
+     * Input handler function for next command
+     *
+     * @return false if actor is not able to execute command
+     */
+    virtual bool Next();
+
+    /**
+     * Input handler function for prev command
+     *
+     * @return false if actor is not able to execute command
+     */
+    virtual bool Prev();
 
   };
 

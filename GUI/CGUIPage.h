@@ -12,6 +12,7 @@
 #define CGUIPAGE_H_
 
 #include "CGUIActorList.h"
+#include "CGraphicLCD.h"
 
 namespace ThunderCryerGUI {
 
@@ -21,6 +22,11 @@ namespace ThunderCryerGUI {
      * Actors on Page
      */
     CGUIActorList* _action;
+
+    /**
+     * pointer to display interface
+     */
+    CGraphicLCD* _display;
 
   public:
 
