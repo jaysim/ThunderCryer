@@ -3,7 +3,7 @@
  * @file        CGUIButton.h
  * @author      Tecnologic86
  * @version     V0.0.0
- * @date        30.08.2012
+ * @date        03.09.2012
  * @project ThunderCryer
  ******************************************************************************
  */
@@ -33,7 +33,7 @@ namespace ThunderCryerGUI {
     char* _textReleased;
 
     /*
-     * Button coordinates (upper right to lower left)
+     * Button coordinates (upper right corner)
      */
     int _x, _y, _width, _heigth;
 
@@ -47,14 +47,19 @@ namespace ThunderCryerGUI {
      */
     bool _toggle;
 
+    /*
+     * true when button is in focus
+     */
+    bool _focus;
+
   public:
     /**
      * main constructor
      */
     CGUIButton(CGUIActor* prevActor, CGUIActor* nextActor,
-               void (*actionCallback)(void),char* textPressed,
-               char *textReleased, int x1, int y1, int x2, int y2,
-               bool state, bool toggle);
+                 void (*actionCallback)(void),char* textPressed,
+                 char *textReleased, int x, int y, int width, int height,
+                 bool state, bool toggle, CGraphicLCD *display);
 
 
 
@@ -70,9 +75,9 @@ namespace ThunderCryerGUI {
     /**
      * Set position
      *
-     * @param x1/y1 upper left corner, x2/y2 lower right corner
+     * @param x1/y1 upper left corner
      */
-    void SetPosition(int x1, int y1, int x2, int y2);
+    void SetPosition(int x1, int y1);
 
     /**
      * handle changes in display data to keep screen up to date
@@ -111,6 +116,11 @@ namespace ThunderCryerGUI {
      * @return false if actor is not able to execute command
      */
     bool Prev();
+
+    /**
+     * setter for focus
+     */
+    void SetFocus(bool newFocus);
 
 
   };

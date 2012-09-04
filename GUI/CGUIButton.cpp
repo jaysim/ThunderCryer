@@ -1,8 +1,11 @@
-/*
- * CGUIButton.cpp
- *
- *  Created on: 03.09.2012
- *      Author: brand
+/**
+ ******************************************************************************
+ * @file        CGUIButton.cpp
+ * @author      Tecnologic86
+ * @version     V0.0.0
+ * @date        03.09.2012
+ * @project ThunderCryer
+ ******************************************************************************
  */
 
 #include "CGUIButton.h"
@@ -21,7 +24,7 @@ namespace ThunderCryerGUI {
           : _prev(prevActor), _next(nextActor), _actionCallback(actionCallback),
             _textPressed(textPressed), _textReleased(textReleased), _x(x), _y(y),
             _width(width), _heigth(heigth), _state(state), _toggle(toggle),
-            _display(display)  {
+            _focus(false), _display(display)  {
 
   }
 
@@ -59,6 +62,11 @@ namespace ThunderCryerGUI {
    * draw actor
    */
   void CGUIButton::Draw(){
+    bool inverseState = _display->Inverse();
+
+    // invert in _focus = true, non invert on _focus = false
+    _display->Inverse(inverseState ^ _focus);
+
     _display->SectorClear(_x, _y, _width, _heigth);
     if(state){ //Pressed
        _display->Rectangle(_x,_y,_width, _heigth,true);
@@ -84,6 +92,9 @@ namespace ThunderCryerGUI {
       _display->WriteString(_textReleased, c_FontSansSerif12,_x+5,
                             _y +_width/2 + 6);
     }
+
+    // set back to original setting
+    _display->Inverse(inverseState);
   }
 
   /**
@@ -123,6 +134,16 @@ namespace ThunderCryerGUI {
    */
   bool CGUIButton::Prev(){
     return false;
+  }
+
+  /**
+   * setter for focus
+   */
+  void CGUIButton::SetFocus(bool newFocus){
+    if(_focus != newFocus){
+      _focus = newFocus;
+      Draw();
+    }
   }
 
 } /* namespace ThunderCryerGUI */
