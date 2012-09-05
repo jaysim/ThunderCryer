@@ -18,8 +18,10 @@ namespace ThunderCryerGUI {
    * @param prevActor is the previous Actor in the list
    * @param nextActor is the next Actor in the list
    */
-  CGUIActor::CGUIActor(CGUIActor* prevActor, CGUIActor* nextActor):
-                      _next(nextActor),_prev(prevActor),_focus(false){
+  CGUIActor::CGUIActor(CGUIActor* prevActor, CGUIActor* nextActor,
+                       CGraphicLCD * display) :
+                      _next(nextActor),_prev(prevActor),_focus(false),
+                      _display(display){
 
   }
 
@@ -39,11 +41,13 @@ namespace ThunderCryerGUI {
   }
 
   /**
-   * setter for focus, subclass has to implement this function
+   * setter for focus
    */
   void CGUIActor::SetFocus(bool newFocus){
-    _focus = newFocus;
-    Draw();
+    if(_focus != newFocus){
+      _focus = newFocus;
+      Draw();
+    }
   }
 
 } /* namespace ThunderCryerGUI */

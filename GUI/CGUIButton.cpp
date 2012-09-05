@@ -21,10 +21,9 @@ namespace ThunderCryerGUI {
              char *textReleased, int x, int y, int width, int height,
              bool state, bool toggle, CGraphicLCD *display)
 
-          : _prev(prevActor), _next(nextActor), _actionCallback(actionCallback),
+          : CGUIActor(prevActor, nextActor, display), _actionCallback(actionCallback),
             _textPressed(textPressed), _textReleased(textReleased), _x(x), _y(y),
-            _width(width), _heigth(heigth), _state(state), _toggle(toggle),
-            _focus(false), _display(display)  {
+            _width(width), _heigth(height), _state(state), _toggle(toggle) {
 
   }
 
@@ -68,8 +67,13 @@ namespace ThunderCryerGUI {
     _display->Inverse(inverseState ^ _focus);
 
     _display->SectorClear(_x, _y, _width, _heigth);
-    if(state){ //Pressed
-       _display->Rectangle(_x,_y,_width, _heigth,true);
+
+    //unfilled Rect with shadow
+    _display->Rectangle(_x,_y ,_width-1, _heigth-1,false);
+    _display->Rectangle(_x+1,_y+1 ,_width-1, _heigth-1,false);
+
+    if(_state){ //Pressed
+       _display->Rectangle(_x+3,_y+3,_width-3, _heigth-3,true);
 
        // text needs to be inverted on filled rect
        // in whatever inverted state the driver is
@@ -78,19 +82,16 @@ namespace ThunderCryerGUI {
        //place text 5 pixels from left edge
        //and in the middle of the Button
        _display->WriteString(_textPressed, c_FontSansSerif12,_x+5,
-                             _y +_width/2 + 6);
+                             _y +_width/2 - 9);
        // set back to normal
        _display->Inverse(displayState);
 
     } else {    //Released
-      //unfilled Rect with shadow
-      _display->Rectangle(_x,_y ,_width-1, _heigth-1,false);
-      _display->Rectangle(_x+1,_y+1 ,_width-1, _heigth-1,false);
 
       //place text 5 pixels from left edge
       //and in the middle of the Button
-      _display->WriteString(_textReleased, c_FontSansSerif12,_x+5,
-                            _y +_width/2 + 6);
+      _display->WriteString(_textReleased, c_FontSansSerif12,_x+4,
+                            _y +_heigth/2 - 9);
     }
 
     // set back to original setting
@@ -116,6 +117,7 @@ namespace ThunderCryerGUI {
       _state = !_state;
     }
     _actionCallback();
+    return true;
   }
 
   /**
@@ -134,16 +136,6 @@ namespace ThunderCryerGUI {
    */
   bool CGUIButton::Prev(){
     return false;
-  }
-
-  /**
-   * setter for focus
-   */
-  void CGUIButton::SetFocus(bool newFocus){
-    if(_focus != newFocus){
-      _focus = newFocus;
-      Draw();
-    }
   }
 
 } /* namespace ThunderCryerGUI */

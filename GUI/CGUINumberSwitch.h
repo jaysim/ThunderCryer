@@ -19,7 +19,7 @@ namespace ThunderCryerGUI {
     /*
      * pointer to select event callback-function
      */
-    void (*_actionCallback)(void);
+    void (*_actionCallback)(unsigned int value);
 
     /*
      * Button coordinates (upper right corner)
@@ -27,19 +27,9 @@ namespace ThunderCryerGUI {
     int _x, _y;
 
     /*
-     * true if actor is in editing mode
-     */
-    bool _editing;
-
-    /*
      * set able value
      */
     unsigned int _value;
-
-    /*
-     * digits of the set able value
-     */
-    unsigned int _digits;
 
     /*
      * lower limit for value
@@ -51,14 +41,29 @@ namespace ThunderCryerGUI {
      */
     unsigned int _limitHigh;
 
+    /*
+     * digits of the set able value
+     */
+    unsigned int _digits;
+
+    /*
+     * zero fill for text
+     */
+    bool _zeroFill;
+
+    /*
+     * true if actor is in editing mode
+     */
+    bool _editing;
+
   public:
 
     /**
      * main constructor
      */
     CGUINumberSwitch(CGUIActor* prevActor, CGUIActor* nextActor,
-               void (*actionCallback)(void), int x, int y,
-               unsigned int startValue, unsigned int digits,
+               void (*actionCallback)(unsigned int value), int x, int y,
+               unsigned int startValue, unsigned int digits, bool zeroFill,
                unsigned int limitLow, unsigned int limitHigh,
                CGraphicLCD *display);
 

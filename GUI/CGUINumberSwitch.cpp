@@ -9,6 +9,8 @@
  */
 
 #include "CGUINumberSwitch.h"
+#include "SansSerif12.h"
+#include <cstdio>
 
 namespace ThunderCryerGUI {
 
@@ -16,15 +18,15 @@ namespace ThunderCryerGUI {
    * main constructor
    */
   CGUINumberSwitch::CGUINumberSwitch(CGUIActor* prevActor, CGUIActor* nextActor,
-                   void (*actionCallback)(void), int x, int y,
-                   unsigned int startValue, unsigned int digits,
+                   void (*actionCallback)(unsigned int value), int x, int y,
+                   unsigned int startValue, unsigned int digits, bool zeroFill,
                    unsigned int limitLow, unsigned int limitHigh,
                    CGraphicLCD *display)
-                  :_prev(prevActor), _next(nextActor),
-                   _actionCallback(actionCallback), _x(x), _y(y),
+                  : CGUIActor(prevActor,nextActor, display),
+                    _actionCallback(actionCallback), _x(x), _y(y),
                    _value(startValue), _limitLow(limitLow),
-                   _limitHigh(limitHigh), _digits(digits), _display(display),
-                   _editing(false) {
+                   _limitHigh(limitHigh), _digits(digits), _zeroFill(zeroFill),
+                   _editing(false){
 
   }
 
@@ -61,7 +63,36 @@ namespace ThunderCryerGUI {
    * draw actor
    */
   void CGUINumberSwitch::Draw(){
+    bool inverseState = _display->Inverse();
+    char bufferFormatString[5];
+    char bufferDisplayString[10];
 
+    //build format string for display text
+    if(_zeroFill){
+      sprintf(bufferFormatString,"%%0%dd",_digits);
+    }else{
+      sprintf(bufferFormatString,"%%%dd",_digits);
+    }
+    // build text with calculated format
+    sprintf(bufferDisplayString,bufferFormatString,_value);
+
+    // invert in _focus = true, non invert on _focus = false
+    _display->Inverse(inverseState ^ _focus);
+
+    // one digit is 9 pix wide, and 18 high
+    _display->SectorClear(_x, _y, 9*_digits + 4, 24);
+    if(_editing){ // when editing
+      //mark rectangle
+      _display->Rectangle(_x+1,_y+1,9*_digits + 2, 22,false);
+
+    }
+
+    //place text 3 pixels from left edge
+    //and in the middle of the Button
+    _display->WriteString(bufferDisplayString, c_FontSansSerif12,_x+3, _y + 4);
+
+    // set back to original setting
+    _display->Inverse(inverseState);
   }
 
   /**
@@ -73,6 +104,7 @@ namespace ThunderCryerGUI {
     if(_editing){
       _editing = false;
       Draw(); //redraw in non editing mode
+      _actionCallback(_value);
       return true;
     }
     return false;
@@ -122,7 +154,7 @@ namespace ThunderCryerGUI {
 
       _value--;
       //wrap around, even on overflow
-      if((value > _limitHigh) || (value < _limitLow)){
+      if((_value > _limitHigh) || (_value < _limitLow)){
         _value = _limitHigh;
       }
 

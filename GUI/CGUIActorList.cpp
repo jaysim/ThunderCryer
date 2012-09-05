@@ -65,6 +65,7 @@ namespace ThunderCryerGUI {
       //no action possible
       _current = _current->GetNext();
     }
+    return true;
   }
 
   /**
@@ -78,6 +79,7 @@ namespace ThunderCryerGUI {
       //no action possible
       _current = _current->GetPrev();
     }
+    return true;
   }
 
   /**

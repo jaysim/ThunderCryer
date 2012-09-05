@@ -47,11 +47,6 @@ namespace ThunderCryerGUI {
      */
     bool _toggle;
 
-    /*
-     * true when button is in focus
-     */
-    bool _focus;
-
   public:
     /**
      * main constructor
@@ -116,12 +111,6 @@ namespace ThunderCryerGUI {
      * @return false if actor is not able to execute command
      */
     bool Prev();
-
-    /**
-     * setter for focus
-     */
-    void SetFocus(bool newFocus);
-
 
   };
 

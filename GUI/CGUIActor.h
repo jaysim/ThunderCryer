@@ -16,7 +16,7 @@
 namespace ThunderCryerGUI {
 
   class CGUIActor {
-  private:
+  protected:
     /*
      * pointers for linked list elements
      */
@@ -24,14 +24,14 @@ namespace ThunderCryerGUI {
     CGUIActor* _prev;
 
     /**
-     * focus indicator, true when actor is selected
-     */
-    bool _focus;
-
-    /**
      * pointer to display interface
      */
     CGraphicLCD* _display;
+
+    /*
+     * true when button is in focus
+     */
+    bool _focus;
 
   public:
 
@@ -41,7 +41,7 @@ namespace ThunderCryerGUI {
      * @param prevActor is the previous Actor in the list
      * @param nextActor is the next Actor in the list
      */
-    CGUIActor(CGUIActor* prevActor, CGUIActor* nextActor);
+    CGUIActor(CGUIActor* prevActor, CGUIActor* nextActor, CGraphicLCD *display);
     virtual ~CGUIActor();
 
     /**
@@ -49,11 +49,6 @@ namespace ThunderCryerGUI {
      */
     CGUIActor* GetNext();
     CGUIActor* GetPrev();
-
-    /**
-     * setter for focus, subclass has to implement this function
-     */
-    void SetFocus(bool newFocus);
 
     /**
      * handle changes in display data to keep screen up to date
@@ -92,6 +87,11 @@ namespace ThunderCryerGUI {
      * @return false if actor is not able to execute command
      */
     virtual bool Prev();
+
+    /**
+     * setter for focus
+     */
+    void SetFocus(bool newFocus);
 
   };
 
