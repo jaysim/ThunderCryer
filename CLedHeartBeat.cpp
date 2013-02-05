@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file      	CLedHeartBeatSTM32F4Disc.cpp
+  * @file      	CLedHeartBeat.cpp
   * @author    	Tecnologic86
   * @version   	V0.0.0
   * @date      	14.02.12
@@ -9,9 +9,8 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "CLedHeartBeatSTM32F4Disc.h"
-#include "stm32f4xx.h"
-#include "stm32f4_discovery.h"
+#include "CLedHeartBeat.hpp"
+#include "hal.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -20,7 +19,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 
-CLedHeartBeatSTM32F4Disc::CLedHeartBeatSTM32F4Disc(portTickType newRate) {
+CLedHeartBeatSTM32F4Disc::CLedHeartBeatSTM32F4Disc(systime_t newRate) {
 	ledState = LED_Up;
 	ledRate = newRate;
 }
