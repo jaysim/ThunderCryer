@@ -61,10 +61,10 @@ endif
 #
 
 # Define project name here
-PROJECT = ch
+PROJECT = ThunderCryer
 
 # Imported source files and paths
-CHIBIOS = ../..
+CHIBIOS = ../Chibios
 include $(CHIBIOS)/boards/ST_STM32F4_DISCOVERY/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
@@ -119,7 +119,8 @@ ASMSRC = $(PORTASM)
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
          $(CHIBIOS)/os/various/devices_lib/accel \
-         $(CHIBIOS)/os/various
+         $(CHIBIOS)/os/various \
+         $(CHCPPINC)
 
 #
 # Project, sources and paths
