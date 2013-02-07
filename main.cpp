@@ -11,11 +11,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ch.hpp"
 #include "hal.h"
-
+#include "CLedHeartBeat.hpp"
+/* namespaces ----------------------------------------------------------------*/
+using namespace chibios_rt;
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+static CLedHeartBeat heartBeatThread(NORMALPRIO,"HeartBeat");
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -29,6 +32,12 @@
 int main(void){
 	unsigned int u;
 
+	/*
+	 * init every thing
+	 */
+	halInit();
+	System::init();
+	ManagedTask::startAll();
 
 
 	while(1){

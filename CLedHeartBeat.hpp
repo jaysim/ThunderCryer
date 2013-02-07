@@ -12,7 +12,7 @@
 #ifndef CLEDHEARTBEAT_HPP_
 #define CLEDHEARTBEAT_HPP_
 /* Includes ------------------------------------------------------------------*/
-#include "ManagedTask.h"
+#include "chManagedTask.hpp"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
@@ -30,7 +30,7 @@ typedef enum {
 /**
   * @brief  Class for Led blinking on STM32F4Discovery board
   */
-class CLedHeartBeat: public ManagedTask {
+class CLedHeartBeat: public chibios_rt::ManagedTask<128> {
 
 private:
 
