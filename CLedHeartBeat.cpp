@@ -19,71 +19,46 @@
 /* Private functions ---------------------------------------------------------*/
 
 
-CLedHeartBeatSTM32F4Disc::CLedHeartBeatSTM32F4Disc(systime_t newRate) {
-	ledState = LED_Up;
-	ledRate = newRate;
+CLedHeartBeat::CLedHeartBeat(systime_t newRate) {
+  ledState = LED_Up;
+  ledRate = newRate;
 }
 
-CLedHeartBeatSTM32F4Disc::~CLedHeartBeatSTM32F4Disc() {
-	// nothing to destroy
+CLedHeartBeat::~CLedHeartBeat() {
+  // nothing to destroy
 }
+
 
 /**
-  * @brief  HardwareInit called before Scheduler starts
-  * @param  None
-  * @retval true on succsess
-  */
-bool CLedHeartBeatSTM32F4Disc::HardwareInit(){
-
-	STM_EVAL_LEDInit(LED3);
-	STM_EVAL_LEDInit(LED4);
-	STM_EVAL_LEDInit(LED5);
-	STM_EVAL_LEDInit(LED6);
-	return true;
-}
-
-/**
-  * @brief  task function for Led Heartbeat
-  * @param  None
-  * @retval None
-  */
-void CLedHeartBeatSTM32F4Disc::Run(){
-	while(1){
-		switch(ledState){
-		case LED_Up:
-			STM_EVAL_LEDOn(LED3);
-			STM_EVAL_LEDOff(LED5);
-			STM_EVAL_LEDOff(LED6);
-			STM_EVAL_LEDOff(LED4);
-			ledState = LED_Right;
-			break;
-		case LED_Right:
-			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOn(LED5);
-			STM_EVAL_LEDOff(LED6);
-			STM_EVAL_LEDOff(LED4);
-			ledState = LED_Down;
-			break;
-		case LED_Down:
-			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOff(LED5);
-			STM_EVAL_LEDOn(LED6);
-			STM_EVAL_LEDOff(LED4);
-			ledState = LED_Left;
-			break;
-		case LED_Left:
-			STM_EVAL_LEDOff(LED3);
-			STM_EVAL_LEDOff(LED5);
-			STM_EVAL_LEDOff(LED6);
-			STM_EVAL_LEDOn(LED4);
-			ledState = LED_Up;
-			break;
-		default:
-			ledState = LED_Up;
-			break;
-		}
-		vTaskDelay(ledRate); // 500ms delay
-	}
+ * @brief  task function for Led Heartbeat
+ * @param  None
+ * @retval None
+ */
+msg_t CLedHeartBeat::main(){
+  while(1){
+    switch(ledState){
+    case LED_Up:
+      palWriteGroup(GPIOD,0x0F,GPIOD_LED4,1);
+      ledState = LED_Right;
+      break;
+    case LED_Right:
+      palWriteGroup(GPIOD,0x0F,GPIOD_LED4,4);
+      ledState = LED_Down;
+      break;
+    case LED_Down:
+      palWriteGroup(GPIOD,0x0F,GPIOD_LED4,8);
+      ledState = LED_Left;
+      break;
+    case LED_Left:
+      palWriteGroup(GPIOD,0x0F,GPIOD_LED4,2);
+      ledState = LED_Up;
+      break;
+    default:
+      ledState = LED_Up;
+      break;
+    }
+    sleep(ledRate); // delay
+  }
 }
 
 /**

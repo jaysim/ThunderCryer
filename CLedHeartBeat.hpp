@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file      	CLedHeartBeatSTM32F4Disc.h
+  * @file      	CLedHeartBeat.hpp
   * @author    	Tecnologic86
   * @version   	V0.0.0
   * @date      	14.02.12
@@ -9,10 +9,10 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef CLEDHEARTBEATSTM32F4DISC_H_
-#define CLEDHEARTBEATSTM32F4DISC_H_
+#ifndef CLEDHEARTBEAT_HPP_
+#define CLEDHEARTBEAT_HPP_
 /* Includes ------------------------------------------------------------------*/
-#include "AManagedTask.h"
+#include "ManagedTask.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
@@ -30,20 +30,20 @@ typedef enum {
 /**
   * @brief  Class for Led blinking on STM32F4Discovery board
   */
-class CLedHeartBeatSTM32F4Disc: public AManagedTask {
+class CLedHeartBeat: public ManagedTask {
 
 private:
 
 	eLedState ledState;
-	portTickType ledRate;
+	systime_t ledRate;
 
 public:
-	CLedHeartBeatSTM32F4Disc(portTickType newRate);
-	virtual ~CLedHeartBeatSTM32F4Disc();
-	bool HardwareInit();
-	void Run();
-	void Rate(portTickType newRate);
-	portTickType Rate() const;
+	CLedHeartBeat(systime_t newRate);
+	virtual ~CLedHeartBeat();
+	void onCreate();
+	msg_t main();
+	void Rate(systime_t newRate);
+	systime_t Rate() const;
 	eLedState State() const;
 };
 
