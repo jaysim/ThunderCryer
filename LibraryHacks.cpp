@@ -16,7 +16,6 @@
  *  Author: Andy  */
 
 #include <cstdlib>
-#include <sys/types.h>
 
 /*
  * The default pulls in 70K of garbage
@@ -53,6 +52,9 @@ void operator delete[](void *p) {
 	free(p);
 }
 
+
+#if 0
+
 /*
  * sbrk function for getting space for malloc and friends
  */
@@ -73,3 +75,4 @@ caddr_t _sbrk ( int incr ) {
 }
 }
 
+#endif

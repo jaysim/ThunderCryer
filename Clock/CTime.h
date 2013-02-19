@@ -13,7 +13,7 @@
 #define CTIME_H_
 
 /* Includes ------------------------------------------------------------------*/
-#include <cstdint>
+#include <stdint.h>
 #include <ctime>
 /* namespace -----------------------------------------------------------------*/
 namespace Time {
