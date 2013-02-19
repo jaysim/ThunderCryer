@@ -1,6 +1,8 @@
 /*
-    FreeRTOS V7.0.2 - Copyright (C) 2011 Real Time Engineers Ltd.
-	
+    FreeRTOS V7.3.0 - Copyright (C) 2012 Real Time Engineers Ltd.
+
+    FEATURES AND PORTS ARE ADDED TO FREERTOS ALL THE TIME.  PLEASE VISIT 
+    http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
 
     ***************************************************************************
      *                                                                       *
@@ -40,15 +42,28 @@
     FreeRTOS WEB site.
 
     1 tab == 4 spaces!
+    
+    ***************************************************************************
+     *                                                                       *
+     *    Having a problem?  Start by reading the FAQ "My application does   *
+     *    not run, what could be wrong?"                                     *
+     *                                                                       *
+     *    http://www.FreeRTOS.org/FAQHelp.html                               *
+     *                                                                       *
+    ***************************************************************************
 
-    http://www.FreeRTOS.org - Documentation, latest information, license and
-    contact details.
+    
+    http://www.FreeRTOS.org - Documentation, training, latest versions, license 
+    and contact details.  
+    
+    http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
+    including FreeRTOS+Trace - an indispensable productivity tool.
 
-    http://www.SafeRTOS.com - A version that is certified for use in safety
-    critical systems.
-
-    http://www.OpenRTOS.com - Commercial support, development, porting,
-    licensing and training services.
+    Real Time Engineers ltd license FreeRTOS to High Integrity Systems, who sell 
+    the code with commercial support, indemnification, and middleware, under 
+    the OpenRTOS brand: http://www.OpenRTOS.com.  High Integrity Systems also
+    provide a safety engineered and independently SIL3 certified version under 
+    the SafeRTOS brand: http://www.SafeRTOS.com.
 */
 
 #ifndef INC_FREERTOS_H
@@ -65,6 +80,12 @@
 
 /* Application specific configuration options. */
 #include "FreeRTOSConfig.h"
+
+/* configUSE_PORT_OPTIMISED_TASK_SELECTION must be defined before portable.h
+is included as it is used by the port layer. */
+#ifndef configUSE_PORT_OPTIMISED_TASK_SELECTION
+	#define configUSE_PORT_OPTIMISED_TASK_SELECTION 0
+#endif
 
 /* Definitions specific to the port being used. */
 #include "portable.h"
@@ -136,6 +157,10 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 	#define INCLUDE_xTimerGetTimerDaemonTaskHandle 0
 #endif
 
+#ifndef INCLUDE_xQueueGetMutexHolder
+	#define INCLUDE_xQueueGetMutexHolder 0
+#endif
+
 #ifndef INCLUDE_pcTaskGetTaskName
 	#define INCLUDE_pcTaskGetTaskName 0
 #endif
@@ -146,6 +171,10 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 
 #ifndef INCLUDE_uxTaskGetStackHighWaterMark
 	#define INCLUDE_uxTaskGetStackHighWaterMark 0
+#endif
+
+#ifndef INCLUDE_eTaskStateGet
+	#define INCLUDE_eTaskStateGet 0
 #endif
 
 #ifndef configUSE_RECURSIVE_MUTEXES
@@ -192,6 +221,10 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 	#define configASSERT( x )
 #endif
 
+#ifndef portALIGNMENT_ASSERT_pxCurrentTCB
+	#define portALIGNMENT_ASSERT_pxCurrentTCB configASSERT
+#endif
+
 /* The timers module relies on xTaskGetSchedulerState(). */
 #if configUSE_TIMERS == 1
 
@@ -226,6 +259,13 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 	#define portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedStatusValue ) ( void ) uxSavedStatusValue
 #endif
 
+#ifndef portCLEAN_UP_TCB
+	#define portCLEAN_UP_TCB( pxTCB ) ( void ) pxTCB
+#endif
+
+#ifndef portSETUP_TCB
+	#define portSETUP_TCB( pxTCB ) ( void ) pxTCB
+#endif
 
 #ifndef configQUEUE_REGISTRY_SIZE
 	#define configQUEUE_REGISTRY_SIZE 0U
@@ -265,6 +305,23 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 	#define traceTASK_SWITCHED_OUT()
 #endif
 
+#ifndef traceTASK_PRIORITY_INHERIT
+	/* Called when a task attempts to take a mutex that is already held by a
+	lower priority task.  pxTCBOfMutexHolder is a pointer to the TCB of the task
+	that holds the mutex.  uxInheritedPriority is the priority the mutex holder
+	will inherit (the priority of the task that is attempting to obtain the
+	muted. */
+	#define traceTASK_PRIORITY_INHERIT( pxTCBOfMutexHolder, uxInheritedPriority )
+#endif
+
+#ifndef traceTASK_PRIORITY_DISINHERIT
+	/* Called when a task releases a mutex, the holding of which had resulted in
+	the task inheriting the priority of a higher priority task.  
+	pxTCBOfMutexHolder is a pointer to the TCB of the task that is releasing the
+	mutex.  uxOriginalPriority is the task's configured (base) priority. */
+	#define traceTASK_PRIORITY_DISINHERIT( pxTCBOfMutexHolder, uxOriginalPriority )
+#endif
+
 #ifndef traceBLOCKING_ON_QUEUE_RECEIVE
 	/* Task is about to block because it cannot read from a
 	queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
@@ -287,12 +344,16 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 
 /* The following event macros are embedded in the kernel API calls. */
 
+#ifndef traceMOVED_TASK_TO_READY_STATE
+	#define traceMOVED_TASK_TO_READY_STATE( pxTCB )
+#endif
+
 #ifndef traceQUEUE_CREATE	
 	#define traceQUEUE_CREATE( pxNewQueue )
 #endif
 
 #ifndef traceQUEUE_CREATE_FAILED
-	#define traceQUEUE_CREATE_FAILED()
+	#define traceQUEUE_CREATE_FAILED( ucQueueType )
 #endif
 
 #ifndef traceCREATE_MUTEX
@@ -467,6 +528,18 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 
 #ifndef vPortFreeAligned
 	#define vPortFreeAligned( pvBlockToFree ) vPortFree( pvBlockToFree )
+#endif
+
+#ifndef portSUPPRESS_TICKS_AND_SLEEP
+	#define portSUPPRESS_TICKS_AND_SLEEP( xExpectedIdleTime )
+#endif
+
+#ifndef configPRE_SLEEP_PROCESSING
+	#define configPRE_SLEEP_PROCESSING( x )
+#endif
+
+#ifndef configPOST_SLEEP_PROCESSING
+	#define configPOST_SLEEP_PROCESSING( x )
 #endif
 
 #endif /* INC_FREERTOS_H */
