@@ -16,6 +16,7 @@
  *  Author: Andy  */
 
 #include <cstdlib>
+#include <cross_studio_io.h>
 
 /*
  * The default pulls in 70K of garbage
@@ -53,26 +54,19 @@ void operator delete[](void *p) {
 }
 
 
-#if 0
-
-/*
- * sbrk function for getting space for malloc and friends
- */
-extern int  _end;
-
 extern "C" {
-caddr_t _sbrk ( int incr ) {
-	static unsigned char *heap = NULL;
-	unsigned char *prev_heap;
 
-	if (heap == NULL) {
-		heap = (unsigned char *)&_end;
-	}     prev_heap = heap;
 
-	/* check removed to show basic approach */
-	heap += incr;
-	return (caddr_t) prev_heap;
+/*! \brief User defined behaviour for the assert macro \ingroup Functions \synopsis
+
+ \desc There is no default implementation of \b \this. Keeping \b \this 
+  out of the library means that you can can customize its behaviour without rebuilding 
+  the library. You must implement this function where \a expression is the stringized
+  expression, \a filename is the filename of the source file and \a line
+  is the linenumber of the failed assertion.
+*/
+void __assert(const char *__expression, const char *__filename, int __line){
 }
+	debug_printf("%s in file: %s, at line: %s", __expression, __filename, __line);
 }
 
-#endif
