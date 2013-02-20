@@ -66,7 +66,9 @@ extern "C" {
   is the linenumber of the failed assertion.
 */
 void __assert(const char *__expression, const char *__filename, int __line){
-}
+
 	debug_printf("%s in file: %s, at line: %s", __expression, __filename, __line);
+}
+
 }
 
