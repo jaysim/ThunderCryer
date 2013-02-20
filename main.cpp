@@ -28,8 +28,8 @@
 CLedHeartBeatSTM32F4Disc g_LedTast(200/portTICK_RATE_MS);
 CT6963_GPIO_Interface g_Display;
 CMenue	g_Menue(&g_Display);
-CFileHandler g_FileHandler;
-CUSB_MassStorage g_MSC;
+//CFileHandler g_FileHandler;
+//CUSB_MassStorage g_MSC;
 
 /* Private function prototypes -----------------------------------------------*/
 extern "C" {
@@ -53,16 +53,16 @@ int main(void){
 	/**
 	 * Unit Tests
 	 */
-	Time::CTimeUnitTest();
+	//Time::CTimeUnitTest();
 
 	/**
 	 * create Led Heartbeat task with minimal stack size and priority
 	 * 1 higher than idle task
 	 */
 	g_LedTast.Create("Led Heartbeat",configMINIMAL_STACK_SIZE,tskIDLE_PRIORITY+3);
-	g_MSC.Create("USB Massstorage", configMINIMAL_STACK_SIZE * 10, tskIDLE_PRIORITY +1);
-	g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+3);
-	g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 20,tskIDLE_PRIORITY+1);
+	//g_MSC.Create("USB Massstorage", configMINIMAL_STACK_SIZE * 10, tskIDLE_PRIORITY +1);
+	g_Menue.Create("Menue",configMINIMAL_STACK_SIZE * 2,tskIDLE_PRIORITY+1);
+	//g_FileHandler.Create("FileHandler",configMINIMAL_STACK_SIZE * 20,tskIDLE_PRIORITY+2);
 
 	/**
 	 * Initialize the hardware for all Tasks and

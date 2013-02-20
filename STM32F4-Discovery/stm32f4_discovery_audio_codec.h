@@ -76,7 +76,7 @@
    Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition 
    occurs during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */   
-/* #define USE_DEFAULT_TIMEOUT_CALLBACK */
+#define USE_DEFAULT_TIMEOUT_CALLBACK
 
 /* Enable this define to use the I2S DMA for writing into DAC register */
 //#define DAC_USE_I2S_DMA
