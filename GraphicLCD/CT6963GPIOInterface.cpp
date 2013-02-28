@@ -38,6 +38,16 @@
 #define GLCD_CD			GPIO_Pin_4
 #define GLCD_RESET		GPIO_Pin_11
 
+// aux pins
+#define GLCD_CONTRAST_PORT 	GPIOB
+#define GLCD_CONTRAST_MASK 	(GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2)
+
+#define GLCD_AUX_PORT		GPIOA
+#define GLCD_LED			GPIO_Pin_3
+#define GLCD_BACKLIGHT		GPIO_Pin_1
+#define GLCD_BUZZER			GPIO_Pin_2
+
+
 const unsigned long c_iDelayFore = 2;
 const unsigned long c_iDelayAfter = 1;
 
@@ -97,6 +107,7 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 	// activate Clock for Io Ports used
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA , ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB , ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC , ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE , ENABLE);
@@ -122,6 +133,25 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 	//Set all Control pins to high level
 	GPIO_SetBits(GLCD_CTRL_PORT_CD_RD , GLCD_CD | GLCD_RD);	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_WR | GLCD_CE );
 
+
+	/*
+	 * setup Aux Pins for Bl and so on
+	 */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_25MHz;
+	GPIO_InitStructure.GPIO_Pin = GLCD_CONTRAST_MASK;
+	GPIO_Init(GLCD_CONTRAST_PORT,&GPIO_InitStructure);
+	// set contrast to 4 off 8
+	GPIO_SetBits(GLCD_CONTRAST_PORT, (GLCD_CONTRAST_MASK & 4));
+
+	// set light pins
+	GPIO_InitStructure.GPIO_Pin = GLCD_LED | GLCD_BACKLIGHT | GLCD_BUZZER;
+	GPIO_Init(GLCD_AUX_PORT,&GPIO_InitStructure);
+	// "Festtagsbeleuchtung"
+	GPIO_SetBits(GLCD_AUX_PORT, GLCD_LED | GLCD_BACKLIGHT | GLCD_BUZZER);
+
 	init_us_timer(); //delay timer init
 
 }
@@ -134,9 +164,11 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 void CT6963_GPIO_Interface::Reset(void){
 
 	GPIO_ResetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
+	GPIO_SetBits(GLCD_AUX_PORT, GLCD_BUZZER);
 
 	vTaskDelay(20);  // sleep 20 ms
 
+	GPIO_ResetBits(GLCD_AUX_PORT, GLCD_BUZZER);
 	GPIO_SetBits(GLCD_CTRL_PORT_WR_CE , GLCD_RESET | GLCD_CE );
 
 }
