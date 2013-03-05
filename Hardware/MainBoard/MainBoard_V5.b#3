@@ -26,7 +26,7 @@
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
@@ -3096,24 +3096,18 @@ design rules under a new name.</description>
 <contactref element="J1" pad="4"/>
 <contactref element="X3" pad="R5"/>
 <contactref element="X3" pad="R6"/>
-<contactref element="X3" pad="L3"/>
-<contactref element="X3" pad="L4"/>
-<contactref element="X3" pad="R22"/>
 <contactref element="C5" pad="1"/>
 <wire x1="36.83" y1="67.31" x2="36.83" y2="64.77" width="0.3048" layer="16"/>
 <wire x1="83.82" y1="95.25" x2="84.96" y2="95.25" width="0.3048" layer="16"/>
 <wire x1="84.96" y1="95.25" x2="87.63" y2="95.38" width="0.3048" layer="16"/>
 <wire x1="83.82" y1="95.25" x2="83.82" y2="76.2" width="0.3048" layer="16"/>
 <wire x1="83.82" y1="76.2" x2="90.17" y2="69.85" width="0.3048" layer="16"/>
-<wire x1="34.29" y1="16.51" x2="34.29" y2="13.97" width="0.3048" layer="16"/>
 <wire x1="36.83" y1="67.31" x2="36.83" y2="69.85" width="0.3048" layer="16"/>
 <via x="36.83" y="69.85" extent="1-16" drill="0.8"/>
 <wire x1="36.83" y1="69.85" x2="57.15" y2="69.85" width="0.3048" layer="1"/>
 <via x="90.17" y="69.85" extent="1-16" drill="0.8"/>
 <wire x1="57.15" y1="69.85" x2="90.17" y2="69.85" width="0.3048" layer="1"/>
 <via x="57.15" y="69.85" extent="1-16" drill="0.8"/>
-<wire x1="57.15" y1="67.31" x2="57.15" y2="69.85" width="0.3048" layer="16"/>
-<wire x1="34.29" y1="16.51" x2="36.83" y2="64.77" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
 <contactref element="J2" pad="1"/>
@@ -3142,6 +3136,13 @@ design rules under a new name.</description>
 <contactref element="X3" pad="L40"/>
 <wire x1="80.01" y1="16.51" x2="81.28" y2="15.24" width="0.3048" layer="16"/>
 <wire x1="81.28" y1="15.24" x2="81.28" y2="3.81" width="0.3048" layer="16"/>
+</signal>
+<signal name="VDD">
+<contactref element="X3" pad="L3"/>
+<contactref element="X3" pad="L4"/>
+<contactref element="X3" pad="R22"/>
+<wire x1="34.29" y1="16.51" x2="57.15" y2="67.31" width="0" layer="19" extent="1-1"/>
+<wire x1="34.29" y1="13.97" x2="34.29" y2="16.51" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
