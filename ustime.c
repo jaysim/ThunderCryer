@@ -1,5 +1,6 @@
 #include "ustime.h"
 #include <FreeRTOS.h>
+#include "task.h"
 #include "stm32f4xx.h"
 
 /**
@@ -40,6 +41,7 @@ uint64_t get_us_time()
 void delay_us(unsigned long us)
 {
     uint16_t  t0 = TIM7->CNT;
+    taskYIELD();
     for (;;) {
         int  t = TIM7->CNT;
         if (t < t0)
