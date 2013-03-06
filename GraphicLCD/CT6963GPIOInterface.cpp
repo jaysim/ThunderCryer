@@ -143,7 +143,7 @@ void CT6963_GPIO_Interface::HardwareInit(void){
 
 	// set contrast to 4 off 8
 	GPIO_SetBits(GLCD_CONTRAST_PORT, (GLCD_CONTRAST_MASK & 4));
-        GPIO_SetBits(GLCD_CONTRAST_PORT, GLCD_LED);
+        GPIO_ResetBits(GLCD_CONTRAST_PORT, GLCD_LED);
 
 	// set light pins
 	GPIO_InitStructure.GPIO_Pin = GLCD_BACKLIGHT | GLCD_BUZZER;
