@@ -61,7 +61,7 @@ void CUSB_MassStorage::Run(void){
 	while(1){
 	    /* Host Task handler */
 	    USBH_Process(&USB_OTG_Core, &USB_Host);
-            CTask::Delay(10);
+            CTask::Delay(25 / portTICK_RATE_MS);
 	}
 }
 
