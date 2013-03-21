@@ -1,6 +1,6 @@
 function add_task(task, state)
 {
-  var tcb, task_name, current_task, regs, stack;
+  var tcb, task_name, current_task, regs, stack, runtime;
 
   current_task = Debug.evaluate("pxCurrentTCB");
   tcb = Debug.evaluate("*(tskTCB *)" + task);
@@ -8,9 +8,12 @@ function add_task(task, state)
   task_name = Debug.evaluate("(char*)&(*(tskTCB *)" + task + ").pcTaskName[0]");
   task_name = " \"" + task_name + "\"";
 
-  stack = tcb.pxTopOfStack - tcb.pxStack ;
+  stack = tcb.pxTopOfStack - tcb.pxStack;
 
-  Threads.add(task_name, tcb.uxPriority, state, stack, regs);
+  runtime = 100 * (tcb.ulRunTimeCounter / Debug.evaluate("ulRunTimeCounter"));
+
+
+  Threads.add(task_name, tcb.uxPriority, state, stack, runtime, regs);
 }
 
 function add_list(list, state)
@@ -37,7 +40,7 @@ function add_list(list, state)
 
 function init()
 {
-  Threads.setColumns("Name", "Priority", "State", "Stack");
+  Threads.setColumns("Name", "Priority", "State", "rem. Stack", "Runtime");
 }
 
 
