@@ -3,6 +3,11 @@
 #include "task.h"
 #include "stm32f4xx.h"
 
+/*
+ * debug Runtime Counter
+ */ 
+volatile uint64_t ulRunTimeCounter = 0;
+
 /**
  * Get time count in microseconds.
  *
@@ -14,7 +19,6 @@
 uint64_t get_us_time()
 {
     static uint16_t t0;
-    static uint64_t tickcount;
 
     vPortEnterCritical();
 
@@ -22,12 +26,12 @@ uint64_t get_us_time()
     if (t < t0)
         t += 0x10000;
 
-    tickcount += t - t0;
+    ulRunTimeCounter += t - t0;
     t0 = t;
 
     vPortExitCritical();
 
-    return tickcount;
+    return ulRunTimeCounter;
 }
 
 
@@ -41,7 +45,6 @@ uint64_t get_us_time()
 void delay_us(unsigned long us)
 {
     uint16_t  t0 = TIM7->CNT;
-    taskYIELD();
     for (;;) {
         int  t = TIM7->CNT;
         if (t < t0)
@@ -52,6 +55,7 @@ void delay_us(unsigned long us)
 
         us -= t - t0;
         t0  = t;
+        taskYIELD();
     }
 }
 
