@@ -1,42 +1,16 @@
-function decode_stack(sp)
-{
-  var i;
-  var a = new Array();
-
-  sp += 4; /* skip stored ulCriticalNesting */
-
-  a[16] = Debug.evaluate("*(unsigned long*)" + sp); 
-
-  for (i = 0; i <= 15; i++)
-  {
-    sp += 4;
-    a[i] = Debug.evaluate("*(unsigned long*)" + sp); 
-  }
-
-  return a;
-}
-
 function add_task(task, state)
 {
-  var tcb, task_name, current_task, regs;
+  var tcb, task_name, current_task, regs, stack;
 
   current_task = Debug.evaluate("pxCurrentTCB");
   tcb = Debug.evaluate("*(tskTCB *)" + task);
 
   task_name = Debug.evaluate("(char*)&(*(tskTCB *)" + task + ").pcTaskName[0]");
-  task_name = "#" + tcb.uxTCBNumber + " \"" + task_name + "\"";
+  task_name = " \"" + task_name + "\"";
 
-  if (task == current_task)
-  {
-    state = "executing";
-    regs = [];
-  }
-  else
-  {
-    regs = decode_stack(tcb.pxTopOfStack);
-  }
+  stack = tcb.pxTopOfStack - tcb.pxStack ;
 
-  Threads.add(task_name, tcb.uxPriority, state, regs);
+  Threads.add(task_name, tcb.uxPriority, state, stack, regs);
 }
 
 function add_list(list, state)
@@ -60,6 +34,12 @@ function add_list(list, state)
     }
   }
 }
+
+function init()
+{
+  Threads.setColumns("Name", "Priority", "State", "Stack");
+}
+
 
 function update() 
 {
@@ -102,4 +82,3 @@ function update()
   }
 
 }
-
