@@ -16,6 +16,12 @@ function decode_stack(sp)
   return a;
 }
 
+function init()
+{
+  Threads.setColumns("Name", "Priority", "State", "Stack");
+  Threads.setSortByNumber("Priority");
+}
+
 function add_task(task, state)
 {
   var tcb, task_name, current_task, regs;
@@ -24,7 +30,7 @@ function add_task(task, state)
   tcb = Debug.evaluate("*(tskTCB *)" + task);
 
   task_name = Debug.evaluate("(char*)&(*(tskTCB *)" + task + ").pcTaskName[0]");
-  task_name = "#" + tcb.uxTCBNumber + " \"" + task_name + "\"";
+  task_name = " \"" + task_name + "\"";
 
   if (task == current_task)
   {
