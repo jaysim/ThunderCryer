@@ -50,7 +50,7 @@ void CMenue::Run(void){
 	int x = 0;
 
 	glcd->Init();
-	glcd->Inverse(true);
+	glcd->Inverse(false);
 	glcd->Clear();
 
 

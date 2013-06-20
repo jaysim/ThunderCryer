@@ -83,7 +83,7 @@ void CLedHeartBeatSTM32F4Disc::Run(){
 			ledState = LED_Up;
 			break;
 		}
-		vTaskDelay(ledRate); // 500ms delay
+		CTask::Delay(ledRate); // 500ms delay
 	}
 }
 

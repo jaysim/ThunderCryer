@@ -9,6 +9,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
+#include "CBinarySemaphore.h"
 #include "CFileHandler.h"
 #include "CUSBMassStorage.h"
 #include "string.h"
@@ -24,9 +25,9 @@ static const UINT PCM_OUT_SIZE = MAX_NGRAN * MAX_NGRAN * MAX_NSAMP; // max Outpu
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern CUSB_MassStorage g_MSC;
-xSemaphoreHandle semI2SDMAFinished;
-xSemaphoreHandle semUserButton;
-xSemaphoreHandle semShock;
+CBinarySemaphore semI2SDMAFinished;
+CBinarySemaphore semUserButton;
+CBinarySemaphore semShock;
 
 static uint8_t  uiReadBuffer[READBUF_SIZE];
 static int16_t  iPCMBuffer1[PCM_OUT_SIZE]= {0x0000}; //double Buffering
@@ -60,11 +61,17 @@ CFileHandler::~CFileHandler() {
   * @retval true on succsess
   */
 bool CFileHandler::HardwareInit(){
-	vSemaphoreCreateBinary(semShock);
-	vSemaphoreCreateBinary(semUserButton);
-	// ensure that the semaphores are taken
-	xSemaphoreTake(semShock,0);
-	xSemaphoreTake(semUserButton,0);
+	semShock.Create();
+        semUserButton.Create();
+        semI2SDMAFinished.Create();
+        // ensure that the semaphores are taken
+        semShock.Take(0);
+        semUserButton.Take(0);
+        semI2SDMAFinished.Take(0);
+        // give first dma sem to start play
+        semI2SDMAFinished.Give();
+	
+
 
 	/*
 	 * configure onboard accelerometer to drive
@@ -91,17 +98,18 @@ bool CFileHandler::HardwareInit(){
   * @retval None
   */
 void CFileHandler::Run(){
-	vSemaphoreCreateBinary(semI2SDMAFinished);
+
 
 	/*
 	 * Read configuration from file on startup
 	 */
 	ReadConfig();
 
-	/*
+        /*
 	 * start mp3 player, will not leave this function
 	 */
 	MP3Player();
+               
 
 }
 
@@ -166,137 +174,144 @@ void CFileHandler::MP3Player(){
 	int i;
 	bool bFileIsMP3 = false;
 
-	// get release from USB stack
-	GetUSBRelease(portMAX_DELAY);
+        // run for ever
+        while(1){
 
-	//operate files only when device connected
-	while(GetUSBConnected()){
+          // get release from USB stack
+          GetUSBRelease(portMAX_DELAY);
 
-		switch(ePlayerState){
-/*------------------------------------------------------------------------------*/
-		case OPEN_DIR:
+          //operate files only when device connected
+          while(GetUSBConnected()){
 
-			/* Open the directory */
-			fsresult = f_opendir(&dir, path);
-			if (fsresult == FR_OK) {
-				/* get new file on success */
-				ePlayerStatePrev = ePlayerState;
-				ePlayerState = GET_FILE;
+                  switch(ePlayerState){
+  /*------------------------------------------------------------------------------*/
+                  case OPEN_DIR:
 
-				if(bStop){
-					ePlayerState = STOP;
-					bStop = false;
-				}
-			}
-			break;
-/*------------------------------------------------------------------------------*/
-		case GET_FILE:
-			/* Read a directory item */
-			fsresult = f_readdir(&dir, &fileInfo);
-			if (fsresult != FR_OK || fileInfo.fname[0] == 0){
-				break;  /* Break on error or end of dir */
-			}
-			if (fileInfo.fname[0] == '.'){
-				continue;             /* Ignore dot entry */
-			}
-			if (fileInfo.fattrib & AM_DIR) {
-				/* It is a directory */
-				/* copy dir Path in Path var */
-				strcpy(path,fileInfo.fname);
-				/* open the new Folder */
-				ePlayerStatePrev = ePlayerState;
-				ePlayerState = OPEN_DIR;
+                          /* Open the directory */
+                          fsresult = f_opendir(&dir, path);
+                          if (fsresult == FR_OK) {
+                                  /* get new file on success */
+                                  ePlayerStatePrev = ePlayerState;
+                                  ePlayerState = GET_FILE;
 
-				/* get next file on next flag */
-				if(bNext) {
-					ePlayerState = GET_FILE;
-					bNext = false;
-				}
+                                  if(bStop){
+                                          ePlayerState = STOP;
+                                          bStop = false;
+                                  }
+                          }
+                          break;
+  /*------------------------------------------------------------------------------*/
+                  case GET_FILE:
+                          /* Read a directory item */
+                          fsresult = f_readdir(&dir, &fileInfo);
+                          if (fsresult != FR_OK || fileInfo.fname[0] == 0){
+                                  break;  /* Break on error or end of dir */
+                          }
+                          if (fileInfo.fname[0] == '.'){
+                                  continue;             /* Ignore dot entry */
+                          }
+                          if (fileInfo.fattrib & AM_DIR) {
+                                  /* It is a directory */
+                                  /* copy dir Path in Path var */
+                                  strcpy(path,fileInfo.fname);
+                                  /* open the new Folder */
+                                  ePlayerStatePrev = ePlayerState;
+                                  ePlayerState = OPEN_DIR;
 
-				if(bStop){
-					ePlayerState = STOP;
-					bStop = false;
-				}
-			} else {
-				/* It is a file. */
-				bFileIsMP3 = false;
-				/* check filetype */
-				for(i=sizeof(fileInfo.fname)-4;i>=0;i--){
-					if(fileInfo.fname[i] == '.'){
-						if((toupper(fileInfo.fname[i+1]) == 'M') &&
-							(toupper(fileInfo.fname[i+2]) == 'P') &&
-							((fileInfo.fname[i+3]) == '3')){
-							/* Fileending is .MP3, so play it */
-							bFileIsMP3 = true;
-							break;
-						}
-					}
-				}
-				ePlayerStatePrev = ePlayerState;
-				/* check if its an MP3 */
-				if(bFileIsMP3){
-					/* play MP3 */
-					ePlayerState = PLAY_FILE;
+                                  /* get next file on next flag */
+                                  if(bNext) {
+                                          ePlayerState = GET_FILE;
+                                          bNext = false;
+                                  }
 
-					/* get next file on next flag */
-					if(bNext) {
-						ePlayerState = GET_FILE;
-						bNext = false;
-					}
+                                  if(bStop){
+                                          ePlayerState = STOP;
+                                          bStop = false;
+                                  }
+                          } else {
+                                  /* It is a file. */
+                                  bFileIsMP3 = false;
+                                  /* check filetype */
+                                  for(i=sizeof(fileInfo.fname)-4;i>=0;i--){
+                                          if(fileInfo.fname[i] == '.'){
+                                                  if((toupper(fileInfo.fname[i+1]) == 'M') &&
+                                                          (toupper(fileInfo.fname[i+2]) == 'P') &&
+                                                          ((fileInfo.fname[i+3]) == '3')){
+                                                          /* Fileending is .MP3, so play it */
+                                                          bFileIsMP3 = true;
+                                                          break;
+                                                  }
+                                          }
+                                  }
+                                  ePlayerStatePrev = ePlayerState;
+                                  /* check if its an MP3 */
+                                  if(bFileIsMP3){
+                                          /* play MP3 */
+                                          ePlayerState = PLAY_FILE;
 
-				} else {
-					/*get next file*/
-					ePlayerState = GET_FILE;
+                                          /* get next file on next flag */
+                                          if(bNext) {
+                                                  ePlayerState = GET_FILE;
+                                                  bNext = false;
+                                          }
 
-					if(bStop){
-						ePlayerState = STOP;
-						bStop = false;
-					}
+                                  } else {
+                                          /*get next file*/
+                                          ePlayerState = GET_FILE;
 
-				}
-			}
+                                          if(bStop){
+                                                  ePlayerState = STOP;
+                                                  bStop = false;
+                                          }
 
-			break;
-/*------------------------------------------------------------------------------*/
-		case PLAY_FILE:
+                                  }
+                          }
 
-			PlayMP3(fileInfo.fname);
+                          break;
+  /*------------------------------------------------------------------------------*/
+                  case PLAY_FILE:
 
-			ePlayerStatePrev = ePlayerState;
+                          PlayMP3(fileInfo.fname);
 
-			if(bStop){
-				ePlayerState = STOP;
-				bStop = false;
-			}
+                          ePlayerStatePrev = ePlayerState;
 
-			/*get next file*/
-			ePlayerState = GET_FILE;
+                          if(bStop){
+                                  ePlayerState = STOP;
+                                  bStop = false;
+                          }
 
-			break;
-/*------------------------------------------------------------------------------*/
-		case STOP:
-			/* start playing again */
-			if(bPlay){
-				/*check for stop loop */
-				if(ePlayerStatePrev == STOP)
-					ePlayerStatePrev = OPEN_DIR;
-				/* go back to previous state */
-				ePlayerState = ePlayerStatePrev;
-				ePlayerStatePrev = STOP;
-				/*clear Flag*/
-				bPlay = false;
-			}
-			break;
-/*------------------------------------------------------------------------------*/
-		default:
-			ePlayerStatePrev = ePlayerState;
-			ePlayerState = OPEN_DIR;
-			break;
-		}
-	}
+                          /*get next file*/
+                          ePlayerState = GET_FILE;
 
-	// give control back to USB stack
-	ReleaseUSB();
+                          break;
+  /*------------------------------------------------------------------------------*/
+                  case STOP:
+                          /* start playing again */
+                          if(bPlay){
+                                  /*check for stop loop */
+                                  if(ePlayerStatePrev == STOP)
+                                          ePlayerStatePrev = OPEN_DIR;
+                                  /* go back to previous state */
+                                  ePlayerState = ePlayerStatePrev;
+                                  ePlayerStatePrev = STOP;
+                                  /*clear Flag*/
+                                  bPlay = false;
+                          }
+                          break;
+  /*------------------------------------------------------------------------------*/
+                  default:
+                          ePlayerStatePrev = ePlayerState;
+                          ePlayerState = OPEN_DIR;
+                          break;
+                  }
+          }
+
+          // give control back to USB stack
+          ReleaseUSB();
+
+          //delay next check for Usb device
+          CTask::Delay(1000);
+      }
 }
 
 /**
@@ -309,7 +324,8 @@ bool CFileHandler::GetUSBRelease(portTickType delay){
 	 * get sem from USB Application layer
 	 * to process without disturbing USB handling
 	 */
-	xSemaphoreTake(semUSBApplication,delay);
+        xSemaphoreTake(semUSBApplication, delay);
+
 
 	/*
 	 * check if Device is Connected
@@ -343,7 +359,8 @@ void CFileHandler::ReleaseUSB(){
 	/*
 	 * Application layer needs to give back the sem when ever possible
 	 */
-	xSemaphoreGive(semUSBApplication);
+        xSemaphoreGive(semUSBApplication);
+	
 }
 
 /**
@@ -372,7 +389,7 @@ bool CFileHandler::PlayMP3(const char* filename){
 			if(fsresult != FR_OK)
 				break;
 
-			f_sync(&file); //see app note from chan
+			//f_sync(&file); //see app note from chan
 
 			if(!RefillBuffer()) // read data from file
 				break;
@@ -474,7 +491,7 @@ bool CFileHandler::PlayMP3(const char* filename){
 
 /*------------------------------------------------------------------------------*/
 		case PLAYBACK:
-			if(xSemaphoreTake(semI2SDMAFinished , portMAX_DELAY ) == pdTRUE){
+			if(semI2SDMAFinished.Take( portMAX_DELAY ) == pdTRUE){
 				/*
 				 * start playing the samples
 				 */
@@ -697,7 +714,7 @@ void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size)
 
 	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
-	xSemaphoreGiveFromISR(semI2SDMAFinished,&xHigherPriorityTaskWoken);
+	semI2SDMAFinished.GiveFromISR(&xHigherPriorityTaskWoken);
 
 	/*
 	 * triggers PendSV handler for context switch
