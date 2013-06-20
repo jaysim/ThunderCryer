@@ -80,12 +80,12 @@
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 256 )
 #define configMAX_TASK_NAME_LEN		( 16 )
 #define configUSE_16_BIT_TICKS		0
-#define configIDLE_SHOULD_YIELD		1
+#define configIDLE_SHOULD_YIELD		0
 #define configUSE_APPLICATION_TASK_TAG      1
 #define configUSE_MUTEXES               1
 
 #define configCHECK_FOR_STACK_OVERFLOW  1
-#define configGENERATE_RUN_TIME_STATS               1
+#define configGENERATE_RUN_TIME_STATS               0
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS      init_us_timer
 #define portGET_RUN_TIME_COUNTER_VALUE              get_us_time
 
@@ -125,7 +125,7 @@ NVIC value of 255. */
 #define pvPortMalloc            malloc
 #define vPortFree               free
 
-#define portREMOVE_STATIC_QUALIFIER 1
+
 
 
 
