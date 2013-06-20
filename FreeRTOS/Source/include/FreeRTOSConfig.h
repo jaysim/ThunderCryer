@@ -125,6 +125,8 @@ NVIC value of 255. */
 #define pvPortMalloc            malloc
 #define vPortFree               free
 
+#define portREMOVE_STATIC_QUALIFIER 1
+
 
 
 #endif /* FREERTOS_CONFIG_H */
