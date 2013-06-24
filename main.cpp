@@ -108,4 +108,4 @@ extern "C" {
 	}
 } // extern "C"
 
-}//Somewhere is a { open i think i left one #ifdef __cplusplus  closing brance
+//Somewhere is a { open i think i left one #ifdef __cplusplus  closing brance

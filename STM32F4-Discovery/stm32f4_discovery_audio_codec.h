@@ -24,6 +24,10 @@
 #ifndef __STM32F4_DISCOVERY_AUDIOCODEC_H
 #define __STM32F4_DISCOVERY_AUDIOCODEC_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif 
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
@@ -284,6 +288,10 @@ void EVAL_AUDIO_Error_CallBack(void* pData);
    Typically the user implementation of this callback should reset I2C peripheral
    and re-initialize communication or in worst case reset all the application. */
 uint32_t Codec_TIMEOUT_UserCallback(void);
+
+#ifdef __cplusplus
+}
+#endif 
 
 #endif /* __STM32F4_DISCOVERY_AUDIOCODEC_H */
 

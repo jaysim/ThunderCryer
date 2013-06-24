@@ -693,50 +693,50 @@ void CFileHandler::EXTILine_Config(void)
 
 
 extern "C" {
-/*--------------------------------
-Callbacks implementation:
-the callbacks prototypes are defined in the stm324xg_eval_audio_codec.h file
-and their implementation should be done in the user code if they are needed.
-Below some examples of callback implementations.
---------------------------------------------------------*/
-/**
- * @brief  Calculates the remaining file size and new position of the pointer.
- * @param  None
- * @retval None
- */
-void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size)
-{
-	/* Calculate the remaining audio data in the file and the new size
-  for the DMA transfer. If the Audio files size is less than the DMA max
-  data transfer size, so there is no calculation to be done, just restart
-  from the beginning of the file ... */
-	/* Check if the end of file has been reached */
+    /*--------------------------------
+    Callbacks implementation:
+    the callbacks prototypes are defined in the stm324xg_eval_audio_codec.h file
+    and their implementation should be done in the user code if they are needed.
+    Below some examples of callback implementations.
+    --------------------------------------------------------*/
+    /**
+     * @brief  Calculates the remaining file size and new position of the pointer.
+     * @param  None
+     * @retval None
+     */
+    void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size)
+    {
+            /* Calculate the remaining audio data in the file and the new size
+      for the DMA transfer. If the Audio files size is less than the DMA max
+      data transfer size, so there is no calculation to be done, just restart
+      from the beginning of the file ... */
+            /* Check if the end of file has been reached */
 
-	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+            portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
-	semI2SDMAFinished.GiveFromISR(&xHigherPriorityTaskWoken);
+            semI2SDMAFinished.GiveFromISR(&xHigherPriorityTaskWoken);
 
-	/*
-	 * triggers PendSV handler for context switch
-	 * but when DMA Handler has higher Priority
-	 * this has no effect until ISR is finished
-	 */
-	portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+            /*
+             * triggers PendSV handler for context switch
+             * but when DMA Handler has higher Priority
+             * this has no effect until ISR is finished
+             */
+            portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+    }
+
+
+    /**
+     * @brief  Get next data sample callback
+     * @param  None
+     * @retval Next data sample to be sent
+     */
+    uint16_t EVAL_AUDIO_GetSampleCallBack(void)
+    {
+            return 0;
+    }
+
 }
 
-
-/**
- * @brief  Get next data sample callback
- * @param  None
- * @retval Next data sample to be sent
- */
-uint16_t EVAL_AUDIO_GetSampleCallBack(void)
-{
-	return 0;
-}
-
-}
-}
 
 
 

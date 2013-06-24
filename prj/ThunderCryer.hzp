@@ -1,7 +1,7 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution Name="ThunderCryer" target="8" version="2">
   <project Name="ThunderCryer">
-    <configuration Name="Common" Placement="Flash" Target="STM32F407VG" arm_architecture="v7EM" arm_core_type="Cortex-M4" arm_fp_abi="Hard" arm_fpu_type="FPv4-SP-D16" arm_gcc_target="arm-unknown-eabi" arm_keep_assembly="Yes" arm_linker_heap_size="65536" arm_linker_jtag_pad_pre_dr="1" arm_linker_jtag_pad_pre_ir="5" arm_linker_process_stack_size="256" arm_linker_stack_size="1024" arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory.dll" arm_simulator_memory_simulation_parameter="STM32F407VG;0x100000;0x20000" arm_target_connect_with_reset="Yes" arm_target_debug_interface_type="ADIv5" arm_target_interface_type="Default" arm_target_loader_applicable_loaders="Flash" arm_target_loader_default_loader="Flash" arm_target_restrict_memory_accesses="Yes" c_preprocessor_definitions="STARTUP_FROM_RESET;USE_USB_OTG_FS" c_user_include_directories=".;../;../STM32F4xx_StdPeriph_Driver\\inc;../STM32F4-Discovery;../STM32_USB_OTG_Driver\\inc;../STM32_USB_HOST_Library\\Core\\inc;../STM32_USB_HOST_Library\\Class\\MSC\\inc;../Menue;../HelixMP3;../HelixMP3/real;../HelixMP3/pub;../GUI;../GraphicLCD;../FreeRTOS_EC\\Source;../FreeRTOS\\Source;../FreeRTOS\\Source\\include;../FreeRTOS\\Source\\portable\\GCC\\ARM_CM4F;../CMSIS\\Device\\STM32F4xx\\Include;../CMSIS\\Include;../Clock;../Audio_MP3;../Audio_MP3/USB_MSC;../Audio_MP3/FatFs\\src;../Audio_MP3/FatFs\\src\\option;$(TargetsDir)/STM32;$(TargetsDir)/STM32/include;$(TargetsDir)/CMSIS_3/CMSIS/Include" linker_memory_map_file="$(TargetsDir)/STM32/STM32F407VG_MemoryMap.xml" linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml" project_directory="" project_type="Executable" property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml" target_get_partname_script="GetPartName()" target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)" target_reset_script="Reset()" target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)"/>
+    <configuration Name="Common" Placement="Flash" Target="STM32F407VG" arm_architecture="v7EM" arm_core_type="Cortex-M4" arm_fp_abi="Hard" arm_fpu_type="FPv4-SP-D16" arm_gcc_target="arm-unknown-eabi" arm_keep_assembly="Yes" arm_linker_heap_size="65536" arm_linker_jtag_pad_pre_dr="1" arm_linker_jtag_pad_pre_ir="5" arm_linker_process_stack_size="256" arm_linker_stack_size="1024" arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory.dll" arm_simulator_memory_simulation_parameter="STM32F407VG;0x100000;0x20000" arm_target_connect_with_reset="Yes" arm_target_debug_interface_type="ADIv5" arm_target_interface_type="Default" arm_target_loader_applicable_loaders="Flash" arm_target_loader_default_loader="Flash" arm_target_restrict_memory_accesses="Yes" c_preprocessor_definitions="STARTUP_FROM_RESET;USE_USB_OTG_FS" c_user_include_directories=".;../;../STM32F4xx_StdPeriph_Driver\\inc;../STM32F4-Discovery;../STM32_USB_OTG_Driver\\inc;../STM32_USB_HOST_Library\\Core\\inc;../STM32_USB_HOST_Library\\Class\\MSC\\inc;../Menue;../HelixMP3;../HelixMP3/real;../HelixMP3/pub;../GUI;../GraphicLCD;../FreeRTOS_EC\\Source;../FreeRTOS\\Source;../FreeRTOS\\Source\\include;../FreeRTOS\\Source\\portable\\GCC\\ARM_CM4F;../CMSIS\\Device\\STM32F4xx\\Include;../CMSIS\\Include;../Clock;../Audio_MP3;../Audio_MP3/USB_MSC;../Audio_MP3/FatFs\\src;../Audio_MP3/FatFs\\src\\option;$(TargetsDir)/STM32;$(TargetsDir)/STM32/include;$(TargetsDir)/CMSIS_3/CMSIS/Include" double_is_float="Yes" gcc_optimization_level="None" linker_memory_map_file="$(TargetsDir)/STM32/STM32F407VG_MemoryMap.xml" linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml" project_directory="" project_type="Executable" property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml" target_get_partname_script="GetPartName()" target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)" target_reset_script="Reset()" target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)"/>
     <configuration Name="Flash" arm_target_flash_loader_file_path="$(TargetsDir)/STM32/Release/STM32F2xx_Loader_rpc.elf" arm_target_flash_loader_type="LIBMEM RPC Loader" arm_target_loader_can_erase_all="Yes" arm_target_loader_can_lock_all="No" arm_target_loader_can_lock_range="No" arm_target_loader_can_unlock_all="No" arm_target_loader_can_unlock_range="No" target_reset_script="FLASHReset()"/>
     <folder Name="Source Files" file_name="">
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc"/>
@@ -125,21 +125,9 @@
           <file file_name="../STM32_USB_OTG_Driver/inc/usb_regs.h"/>
         </folder>
         <folder Name="src" filter="*.c;*.h;*.cpp" recurse="Yes">
-          <file file_name="../STM32_USB_OTG_Driver/src/usb_bsp_template.c">
-            <configuration Name="THUMB Debug" build_exclude_from_build="Yes"/>
-          </file>
           <file file_name="../STM32_USB_OTG_Driver/src/usb_core.c"/>
-          <file file_name="../STM32_USB_OTG_Driver/src/usb_dcd.c">
-            <configuration Name="THUMB Debug" build_exclude_from_build="Yes"/>
-          </file>
-          <file file_name="../STM32_USB_OTG_Driver/src/usb_dcd_int.c">
-            <configuration Name="THUMB Debug" build_exclude_from_build="Yes"/>
-          </file>
           <file file_name="../STM32_USB_OTG_Driver/src/usb_hcd.c"/>
           <file file_name="../STM32_USB_OTG_Driver/src/usb_hcd_int.c"/>
-          <file file_name="../STM32_USB_OTG_Driver/src/usb_otg.c">
-            <configuration Name="THUMB Debug" build_exclude_from_build="Yes"/>
-          </file>
         </folder>
       </folder>
       <folder Name="STM32F4-Discovery" filter="*.c;*.h;*.cpp" path="../STM32F4-Discovery" recurse="Yes"/>

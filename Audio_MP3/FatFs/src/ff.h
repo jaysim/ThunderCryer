@@ -12,9 +12,6 @@
 /   personal, non-profit or commercial product UNDER YOUR RESPONSIBILITY.
 / * Redistributions of source code must retain the above copyright notice.
 /----------------------------------------------------------------------------*/
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 
 #include "integer.h"
@@ -28,6 +25,12 @@ extern "C" {
 /----------------------------------------------------------------------------*/
 #ifndef _FATFS
 #define _FATFS	0x007C
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 #define _WORD_ACCESS	0
 /* The _WORD_ACCESS option defines which access method is used to the word

@@ -70,6 +70,11 @@
 #define INC_FREERTOS_H
 
 
+#ifdef __cplusplus
+  extern "C" {
+#endif
+
+
 /*
  * Include the generic headers required for the FreeRTOS port being used.
  */
@@ -540,6 +545,10 @@ typedef portBASE_TYPE (*pdTASK_HOOK_CODE)( void * );
 
 #ifndef configPOST_SLEEP_PROCESSING
 	#define configPOST_SLEEP_PROCESSING( x )
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif /* INC_FREERTOS_H */
