@@ -50,10 +50,10 @@ DLIBS =
 # 
 # Define project name and Ram/Flash mode here
 PROJECT        = test
-RUN_FROM_FLASH = 0
+RUN_FROM_FLASH = 1
 USE_HARD_FPU   = 1
-HEAP_SIZE      = 8192
-STACK_SIZE     = 2048
+HEAP_SIZE      = 64256
+STACK_SIZE     = 1024
 
 #
 # Define linker script file here
