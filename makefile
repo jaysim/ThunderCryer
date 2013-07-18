@@ -77,12 +77,13 @@ endif
 
 
 # List all user C define here, like -D_DEBUG=1
-UDEFS = 
+UDEFS = -DUSE_USB_OTG_FS
 
 # Define ASM defines here
 UADEFS = 
 
 # List C source files here
+AUDIO
 SRC  = ./cmsis/device/system_stm32f4xx.c \
        ./src/syscalls.c \
        ./src/main.c
