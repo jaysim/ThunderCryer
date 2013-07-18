@@ -87,7 +87,59 @@ CLOCK_SRC = ./Clock/CRTCHandler.cpp \
             ./Clock/CRTCTime.cpp \
             ./Clock/CTime.cpp
             
+FREERTOS_SRC = ./FreeRTOS/croutine.c \
+               ./FreeRTOS/list.c \
+               ./FreeRTOS/queue.c \
+               ./FreeRTOS/tasks.c \
+               ./FreeRTOS/timers.c \
+               ./FreeRTOS/portable/GCC/ARM_CM4F/port.c
 
+FREERTOS_EC_SRC = ./FreeRTOS_EC/Source/AManagedTask.cpp \
+                  ./FreeRTOS_EC/Source/ASyncObject.cpp \
+                  ./FreeRTOS_EC/Source/ATimer.cpp \
+                  ./FreeRTOS_EC/Source/ABinarySemaphore.cpp \
+                  ./FreeRTOS_EC/Source/CCountingSemaphore.cpp \
+                  ./FreeRTOS_EC/Source/CFreeRTOS.cpp \
+                  ./FreeRTOS_EC/Source/CMessageTask.cpp \
+                  ./FreeRTOS_EC/Source/CMutex.cpp \
+                  ./FreeRTOS_EC/Source/CQueue.cpp \
+                  ./FreeRTOS_EC/Source/CRecursiveMutex.cpp \
+                  ./FreeRTOS_EC/Source/CTask.cpp 
+                  
+GRAPHIC_LCD_SRC = ./GraphicLCD/GraphicLCD.cpp \
+                  ./GraphicLCD/CT6963CDriver.cpp \
+                  ./GraphicLCD/CT6963GPIOInterface.cpp \
+                  ./GraphicLCD/SansSerif12.cpp \
+                  ./GraphicLCD/SansSerif26.cpp
+                  
+GUI_SRC =         ./GUI/CGUI.cpp \
+                  ./GUI/CGUIActor.cpp \
+                  ./GUI/CGUIActorList.cpp \
+                  ./GUI/CGUIAlarmSubPage.cpp \
+                  ./GUI/CGUIButton.cpp \
+                  ./GUI/CGUINumberSwitch.cpp \
+                  ./GUI/CGUIPage.cpp \
+              
+HELIX_SRC =       ./HelixMP3/mp3dec.c \
+                  ./HelixMP3/mp3tabs.c \
+                  ./HelixMP3/real/bitstream.c \
+                  ./HelixMP3/real/buffer.c \
+                  ./HelixMP3/real/dct32.c \
+                  ./HelixMP3/real/dequant.c \
+                  ./HelixMP3/real/dqchan.c \
+                  ./HelixMP3/real/huffman.c \
+                  ./HelixMP3/real/hufftabs.c \
+                  ./HelixMP3/real/imdct.c \
+                  ./HelixMP3/real/polyphase.c \
+                  ./HelixMP3/real/scalfact.c \
+                  ./HelixMP3/real/stproc.c \
+                  ./HelixMP3/real/subband.c \
+                  ./HelixMP3/real/trigtabs.c
+                  
+MENUE_SRC =       ./Menue/CMenue.cpp
+
+
+                        
 SRC  = ./cmsis/device/system_stm32f4xx.c \
        ./src/syscalls.c \
        ./src/main.c
