@@ -17,7 +17,7 @@
 #
 
 TRGT = arm-none-eabi-
-CC   = $(TRGT)gcc
+CC   = $(TRGT)g++
 CP   = $(TRGT)objcopy
 AS   = $(TRGT)gcc -x assembler-with-cpp
 BIN  = $(CP) -O ihex 
@@ -83,7 +83,11 @@ UDEFS = -DUSE_USB_OTG_FS
 UADEFS = 
 
 # List C source files here
-AUDIO
+CLOCK_SRC = ./Clock/CRTCHandler.cpp \
+            ./Clock/CRTCTime.cpp \
+            ./Clock/CTime.cpp
+            
+
 SRC  = ./cmsis/device/system_stm32f4xx.c \
        ./src/syscalls.c \
        ./src/main.c
