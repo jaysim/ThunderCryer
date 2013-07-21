@@ -138,14 +138,51 @@ HELIX_SRC =       ./HelixMP3/mp3dec.c \
                   
 MENUE_SRC =       ./Menue/CMenue.cpp
 
+USB_HOST_SRC =    ./STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_core.c \
+                  ./STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_fatfs.c \ 
+                  ./STM32_USB_HOST_Library/Core/src/usbh_core.c \
+                  ./STM32_USB_HOST_Library/Core/src/usbh_hcs.c \
+                  ./STM32_USB_HOST_Library/Core/src/usbh_ioreq.c \
+                  ./STM32_USB_HOST_Library/Core/src/usbh_stdreq.c \
+                  ./STM32_USB_HOST_Library/FatFs/src/ff.c \
+                  ./STM32_USB_HOST_Library/FatFs/src/option/syscall.c \
+                  ./STM32_USB_HOST_Library/Core/src/option/ccsbcs.c \
+                  ./STM32_USB_HOST_Library/USB_MSC/CFileHandler.cpp \
+                  ./STM32_USB_HOST_Library/USB_MSC/CUSBMassStorage.cpp \
+                  ./STM32_USB_HOST_Library/USB_MSC/fattime.c \
+                  ./STM32_USB_HOST_Library/USB_MSC/usb_bsp.c \
+                  ./STM32_USB_HOST_Library/USB_MSC/usb_usr.c \
+                  ./STM32_USB_OTG_Driver/src/usb_core.c \
+                  ./STM32_USB_OTG_Driver/src/usb_hcd.c \
+                  ./STM32_USB_OTG_Driver/src/usb_hcd_int.c 
+                  ./STM32F4-Discovery/stm32f4_discovery_audio_codec.c \
+                  ./STM32F4-Discovery/stm32f4_discovery_lis302dl.c \
+                  ./STM32F4-Discovery/stm32f4_discovery.c
+                  
+STM32DRV_SRC =    ./STM32F4xx_StdPeriph_Driver/src/misc.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+
+
 
                         
-SRC  = ./cmsis/device/system_stm32f4xx.c \
-       ./src/syscalls.c \
-       ./src/main.c
+SRC  = 
+
+
 
 # List ASM source files here
-ASRC = ./cmsis/device/startup_stm32f4xx.s
+ASRC = ./startup_stm32f4xx.s
 
 # List all user directories here
 UINCDIR = ./inc \
