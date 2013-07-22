@@ -120,6 +120,8 @@ HELIX_SRC =       ./HelixMP3/mp3dec.c \
 
 USB_HOST_SRC =    ./STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_core.c \
                   ./STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_fatfs.c \
+                  ./STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_bot.c \
+                  ./STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_scsi.c \
                   ./STM32_USB_HOST_Library/Core/src/usbh_core.c \
                   ./STM32_USB_HOST_Library/Core/src/usbh_hcs.c \
                   ./STM32_USB_HOST_Library/Core/src/usbh_ioreq.c \
@@ -150,7 +152,11 @@ STM32DRV_SRC =    ./STM32F4xx_StdPeriph_Driver/src/misc.c \
                   ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c \
                   ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c \
                   ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c \
-                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c \
+                  ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
+                  
+                  
+SRC           =  ./stm32f4xx_it.c ./system_stm32f4xx.c ./ustime.c
 #
 # End of C Code Section
 ##############################################################################################
@@ -167,7 +173,7 @@ MENUE_SRC =       ./Menue/CMenue.cpp
 FREERTOS_EC_SRC = ./FreeRTOS_EC/Source/AManagedTask.cpp \
                   ./FreeRTOS_EC/Source/ASyncObject.cpp \
                   ./FreeRTOS_EC/Source/ATimer.cpp \
-                  ./FreeRTOS_EC/Source/ABinarySemaphore.cpp \
+                  ./FreeRTOS_EC/Source/CBinarySemaphore.cpp \
                   ./FreeRTOS_EC/Source/CCountingSemaphore.cpp \
                   ./FreeRTOS_EC/Source/CFreeRTOS.cpp \
                   ./FreeRTOS_EC/Source/CMessageTask.cpp \
@@ -193,12 +199,14 @@ GUI_SRC =         ./GUI/CGUI.cpp \
 CLOCK_SRC = ./Clock/CRTCHandler.cpp \
             ./Clock/CRTCTime.cpp \
             ./Clock/CTime.cpp
+            
+CPP_SRC  = ./CLedHeartBeatSTM32F4Disc.cpp ./main.cpp ./LibraryHacks.cpp
 #
 # End of Cpp Code Section
 ##############################################################################################
 
-CC_SRC       = $(STM32DRV_SRC) $(USB_HOST_SRC) $(HELIX_SRC) $(FREERTOS_SRC)
-CPPC_SRC     = $(USB_CPP_SRC) $(GRAPHIC_LCD_SRC) $(CLOCK_SRC)
+CC_SRC       = $(STM32DRV_SRC) $(USB_HOST_SRC) $(HELIX_SRC) $(FREERTOS_SRC) $(SRC)
+CPPC_SRC     = $(USB_CPP_SRC) $(GRAPHIC_LCD_SRC) $(CLOCK_SRC) $(CPP_SRC) $(FREERTOS_EC_SRC)
 #$(GUI_SRC)
 
 
@@ -248,7 +256,7 @@ ASFLAGS  = $(MCFLAGS) $(OPT) -g -gdwarf-2 -Wa,-amhls=$(<:.s=.lst) $(ADEFS)
 CPFLAGS  = $(MCFLAGS) $(OPT) -gdwarf-2 -Wall -Wstrict-prototypes -fverbose-asm 
 CPFLAGS += -ffunction-sections -fdata-sections -Wa,-ahlms=$(<:.c=.lst) $(DEFS)
 
-CPPFLAGS = $(MCFLAGS) $(OPT) -gdwarf-2 -Wall -fverbose-asm 
+CPPFLAGS = $(MCFLAGS) $(OPT) -gdwarf-2 -Wall 
 CPPFLAGS += $(CPPOPT) -ffunction-sections -fdata-sections $(DEFS)
 
 LDFLAGS  = $(MCFLAGS) -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--gc-sections,--no-warn-mismatch $(LIBDIR)
