@@ -206,7 +206,8 @@ CPP_SRC  = ./CLedHeartBeatSTM32F4Disc.cpp ./main.cpp ./LibraryHacks.cpp
 ##############################################################################################
 
 CC_SRC       = $(STM32DRV_SRC) $(USB_HOST_SRC) $(HELIX_SRC) $(FREERTOS_SRC) $(SRC)
-CPPC_SRC     = $(USB_CPP_SRC) $(GRAPHIC_LCD_SRC) $(CLOCK_SRC) $(CPP_SRC) $(FREERTOS_EC_SRC)
+CPPC_SRC     = $(USB_CPP_SRC) $(GRAPHIC_LCD_SRC) $(CLOCK_SRC) $(CPP_SRC) \
+               $(FREERTOS_EC_SRC) $(MENUE_SRC)
 #$(GUI_SRC)
 
 

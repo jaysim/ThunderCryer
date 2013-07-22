@@ -55,7 +55,7 @@ void operator delete[](void *p) {
 
 
 extern "C" {
-
+  void *__dso_handle = 0;
 
 /*! \brief User defined behaviour for the assert macro \ingroup Functions \synopsis
 
