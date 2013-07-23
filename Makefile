@@ -64,18 +64,22 @@ endif
 PROJECT = ch
 
 # Imported source files and paths
-CHIBIOS = ../..
-include $(CHIBIOS)/boards/ST_STM32F4_DISCOVERY/board.mk
+CHIBIOS = ./Chibios
+GFXLIB = ./uGFX
+include $(CHIBIOS)/boards/ThunderCryer/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F4xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
 include $(CHIBIOS)/os/various/cpp_wrappers/kernel.mk
-include $(CHIBIOS)/test/test.mk
+include $(GFXLIB)/gfx.mk
+include $(GFXLIB)/drivers/gdisp/T6963C/gdisp_lld.mk		# your display driver
+include $(GFXLIB)/drivers/ginput/toggle/Pal/ginput_lld.mk	# your input driver
+#include $(CHIBIOS)/test/test.mk
 
 # Define linker script file here
-LDSCRIPT= $(PORTLD)/STM32F407xG.ld
-#LDSCRIPT= $(PORTLD)/STM32F407xG_CCM.ld
+#LDSCRIPT= $(PORTLD)/STM32F407xG.ld
+LDSCRIPT= $(PORTLD)/STM32F407xG_CCM.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
