@@ -87,6 +87,7 @@ CSRC = $(PORTSRC) \
        $(KERNSRC) \
        $(TESTSRC) \
        $(HALSRC) \
+       $(GFXSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC)
 
@@ -121,6 +122,7 @@ ASMSRC = $(PORTASM)
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
          $(CHCPPINC) \
+         $(GFXINC) \
          $(CHIBIOS)/os/various
 
 #
