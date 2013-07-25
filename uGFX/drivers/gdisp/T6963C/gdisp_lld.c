@@ -6,8 +6,8 @@
  */
 
 /**
- * @file    drivers/gdisp/HX8347D/gdisp_lld.c
- * @brief   GDISP Graphics Driver subsystem low level driver source for the HX8347D display.
+ * @file    drivers/gdisp/ILI9320/gdisp_lld.c
+ * @brief   GDISP Graphics Driver subsystem low level driver source for the ILI9320 display.
  *
  * @addtogroup GDISP
  * @{
@@ -15,263 +15,297 @@
 
 #include "gfx.h"
 
-#include "HX8347D.h"
-
 #if GFX_USE_GDISP /*|| defined(__DOXYGEN__)*/
 
 /* Include the emulation code for things we don't support */
 #include "gdisp/lld/emulation.c"
 
+#include "gdisp_lld_board.h"
+
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
 
-#ifndef GDISP_SCREEN_HEIGHT
-	#define GDISP_SCREEN_HEIGHT		320
+/* This controller is only ever used with a 240 x 320 display */
+#if defined(GDISP_SCREEN_HEIGHT)
+	#warning "GDISP: This low level driver does not support setting a screen size. It is being ignored."
+	#undef GDISP_SCREEN_HEIGHT
 #endif
-#ifndef GDISP_SCREEN_WIDTH
-	#define GDISP_SCREEN_WIDTH		240
+#if defined(GDISP_SCREEN_WIDTH)
+	#warning "GDISP: This low level driver does not support setting a screen size. It is being ignored."
+	#undef GDISP_SCREEN_WIDTH
 #endif
 
+#define GDISP_SCREEN_WIDTH		240
+#define GDISP_SCREEN_HEIGHT		320
+
 #define GDISP_INITIAL_CONTRAST	50
-#define GDISP_INITIAL_BACKLIGHT	50
+#define GDISP_INITIAL_BACKLIGHT	100
+
+/*===========================================================================*/
+/* Driver exported variables.                                                */
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* Driver local variables.                                                   */
+/*===========================================================================*/
+uint32_t DISPLAY_CODE;
 
 /*===========================================================================*/
 /* Driver local functions.                                                   */
 /*===========================================================================*/
-
-#include "gdisp_lld_board.h"
-
-// Some common routines and macros
-#define write_reg(reg, data)		{ write_index(reg); write_data(data); }
-#define write_ram(color1, color2)   { write_index(0x22); write_ram8(color1,color2); }
-#define stream_start()				{ write_index(0x22); spiStart(&SPID1, &spi1cfg2);      }
-#define stream_stop()               {while(((SPI1->SR & SPI_SR_TXE) == 0) || ((SPI1->SR & SPI_SR_BSY) != 0));palSetPad(GPIOA, 4);spiStart(&SPID1, &spi1cfg1); }
-#define delay(us)					gfxSleepMicroseconds(us)
-#define delayms(ms)					gfxSleepMilliseconds(ms)
-
-static inline void set_cursor(coord_t x, coord_t y) {
-			write_reg(HX8347D_REG_SCL, (uint8_t) x);
-		    write_reg(HX8347D_REG_SCH, (uint8_t) (x >> 8));
-		    write_reg(HX8347D_REG_SPL, (uint8_t) y);
-		    write_reg(HX8347D_REG_SPH, (uint8_t) (y >> 8));
+static inline void lld_lcdDelay(uint16_t us) {
+	gfxSleepMicroseconds(us);
 }
 
-static void set_viewport(coord_t x, coord_t y, coord_t cx, coord_t cy) {
-		    write_reg(HX8347D_REG_SCL, (uint8_t) x);
-		    write_reg(HX8347D_REG_SCH, (uint8_t) (x >> 8));
-		    write_reg(HX8347D_REG_ECL, (uint8_t) (x + cx -1));
-		    write_reg(HX8347D_REG_ECH, (uint8_t) ((x + cx -1) >> 8));
-		    write_reg(HX8347D_REG_SPL, (uint8_t) y);
-		    write_reg(HX8347D_REG_SPH, (uint8_t) (y >> 8));
-		    write_reg(HX8347D_REG_EPL, (uint8_t) (y + cy -1));
-		    write_reg(HX8347D_REG_EPH, (uint8_t) ((y + cy -1) >> 8));
+static inline void lld_lcdWriteIndex(uint16_t index) {
+	gdisp_lld_write_index(index);
 }
 
-static inline void reset_viewport(void) {
-	set_viewport(0, 0, GDISP.Width, GDISP.Height);
+static inline void lld_lcdWriteData(uint16_t data) {
+	gdisp_lld_write_data(data);
 }
 
-/*===========================================================================*/
-/* Driver interrupt handlers.                                                */
-/*===========================================================================*/
+static inline void lld_lcdWriteReg(uint16_t lcdReg, uint16_t lcdRegValue) {
+	gdisp_lld_write_index(lcdReg);
+	gdisp_lld_write_data(lcdRegValue);
+}
 
-/*===========================================================================*/
-/* Driver exported functions.                                                */
-/*===========================================================================*/
+static inline uint16_t lld_lcdReadData(void) {
+	return gdisp_lld_read_data();
+}
 
-/* ---- Required Routines ---- */
-/*
-	The following 2 routines are required.
-	All other routines are optional.
-*/
+static inline uint16_t lld_lcdReadReg(uint16_t lcdReg) {
+    volatile uint16_t dummy;
 
-/**
- * @brief   Low level GDISP driver initialization.
- *
- * @notapi
- */
+    gdisp_lld_write_index(lcdReg);
+    dummy = lld_lcdReadData();
+    (void)dummy;
+
+    return lld_lcdReadData();
+}
+
+static inline void lld_lcdWriteStreamStart(void) {
+	lld_lcdWriteIndex(0x0022);
+}
+	
+static inline void lld_lcdWriteStreamStop(void) {
+
+}
+
+static inline void lld_lcdWriteStream(uint16_t *buffer, uint16_t size) {
+	uint16_t i;
+
+	for(i = 0; i < size; i++)
+		lld_lcdWriteData(buffer[i]);
+}
+
+static inline void lld_lcdReadStreamStart(void) {
+	lld_lcdWriteIndex(0x0022);
+}
+
+static inline void lld_lcdReadStreamStop(void) {
+
+}
+
+static inline void lld_lcdReadStream(uint16_t *buffer, size_t size) {
+	uint16_t i;
+	volatile uint16_t dummy;
+
+	dummy = lld_lcdReadData();
+	(void)dummy;
+
+	for(i = 0; i < size; i++)
+		buffer[i] = lld_lcdReadData();
+}
+
 bool_t gdisp_lld_init(void) {
 	/* Initialise your display */
-	init_board();
+	gdisp_lld_init_board();
 
-	// Hardware reset
-	setpin_reset(TRUE);
-	delayms(1);
-	setpin_reset(FALSE);
-	delayms(5);
+	/* Hardware reset */
+	gdisp_lld_reset_pin(TRUE);
+	lld_lcdDelay(1000);
+	gdisp_lld_reset_pin(FALSE);
+	lld_lcdDelay(1000);
 
-	// Get the bus for the following initialisation commands
-	acquire_bus();
+    DISPLAY_CODE = lld_lcdReadReg(0);
+    lld_lcdWriteReg(0x0000, 0x0001); //start Int. osc
+    lld_lcdDelay(500);
+    lld_lcdWriteReg(0x0001, 0x0100); //Set SS bit (shift direction of outputs is from S720 to S1)
+    lld_lcdWriteReg(0x0002, 0x0700); //select  the line inversion
+    lld_lcdWriteReg(0x0003, 0x1038); //Entry mode(Horizontal : increment,Vertical : increment, AM=1)
+    lld_lcdWriteReg(0x0004, 0x0000); //Resize control(No resizing)
+    lld_lcdWriteReg(0x0008, 0x0202); //front and back porch 2 lines
+    lld_lcdWriteReg(0x0009, 0x0000); //select normal scan
+    lld_lcdWriteReg(0x000A, 0x0000); //display control 4
+    lld_lcdWriteReg(0x000C, 0x0000); //system interface(2 transfer /pixel), internal sys clock,     
+    lld_lcdWriteReg(0x000D, 0x0000); //Frame marker position
+    lld_lcdWriteReg(0x000F, 0x0000); //selects clk, enable and sync signal polarity,
+    lld_lcdWriteReg(0x0010, 0x0000); //  
+    lld_lcdWriteReg(0x0011, 0x0000); //power control 2 reference voltages = 1:1,
+    lld_lcdWriteReg(0x0012, 0x0000); //power control 3 VRH
+    lld_lcdWriteReg(0x0013, 0x0000); //power control 4 VCOM amplitude
+    lld_lcdDelay(500);
+    lld_lcdWriteReg(0x0010, 0x17B0); //power control 1 BT,AP
+    lld_lcdWriteReg(0x0011, 0x0137); //power control 2 DC,VC
+    lld_lcdDelay(500);
+    lld_lcdWriteReg(0x0012, 0x0139); //power control 3 VRH
+    lld_lcdDelay(500);
+    lld_lcdWriteReg(0x0013, 0x1d00); //power control 4 vcom amplitude
+    lld_lcdWriteReg(0x0029, 0x0011); //power control 7 VCOMH
+    lld_lcdDelay(500);
+    lld_lcdWriteReg(0x0030, 0x0007);
+    lld_lcdWriteReg(0x0031, 0x0403);
+    lld_lcdWriteReg(0x0032, 0x0404);
+    lld_lcdWriteReg(0x0035, 0x0002);
+    lld_lcdWriteReg(0x0036, 0x0707);
+    lld_lcdWriteReg(0x0037, 0x0606);
+    lld_lcdWriteReg(0x0038, 0x0106);
+    lld_lcdWriteReg(0x0039, 0x0007);
+    lld_lcdWriteReg(0x003c, 0x0700);
+    lld_lcdWriteReg(0x003d, 0x0707);
+    lld_lcdWriteReg(0x0020, 0x0000); //starting Horizontal GRAM Address
+    lld_lcdWriteReg(0x0021, 0x0000); //starting Vertical GRAM Address
+    lld_lcdWriteReg(0x0050, 0x0000); //Horizontal GRAM Start Position
+    lld_lcdWriteReg(0x0051, 0x00EF); //Horizontal GRAM end Position
+    lld_lcdWriteReg(0x0052, 0x0000); //Vertical GRAM Start Position
+    lld_lcdWriteReg(0x0053, 0x013F); //Vertical GRAM end Position
+	switch (DISPLAY_CODE) {   
+		case 0x9320:
+        	lld_lcdWriteReg(0x0060, 0x2700); //starts scanning from G1, and 320 drive lines
+        	break;
+      	case 0x9325:
+     		lld_lcdWriteReg(0x0060, 0xA700); //starts scanning from G1, and 320 drive lines
+			break;
+	}
 
-	/* Start Initial Sequence ----------------------------------------------------*/
-	write_reg(HX8347D_REG_STBAH, 0x00);                 /* Reset Power Control 1                */
-	write_reg(HX8347D_REG_STBAL, 0x20);                 /* Power Control 2                      */
-	write_reg(HX8347D_REG_PTBAH, 0x0C);                 /* Power Control 1                      */
-	write_reg(HX8347D_REG_PTBAL, 0xC4);                 /* Power Control 2                      */
-	write_reg(HX8347D_REG_OPONN, 0x40);                 /* Source OPON_N                        */
-	write_reg(HX8347D_REG_OPONI, 0x38);                 /* Source OPON_I                        */
-	write_reg(HX8347D_REG_DC2, 0xA3);                   /* Display Control 2                    */
+    lld_lcdWriteReg(0x0061, 0x0001); //fixed base display
+    lld_lcdWriteReg(0x006a, 0x0000); //no scroll
+    lld_lcdWriteReg(0x0090, 0x0010); //set Clocks/Line =16, Internal Operation Clock Frequency=fosc/1,
+    lld_lcdWriteReg(0x0092, 0x0000); //set gate output non-overlap period=0
+    lld_lcdWriteReg(0x0093, 0x0003); //set Source Output Position=3
+    lld_lcdWriteReg(0x0095, 0x0110); //RGB interface(Clocks per line period=16 clocks)
+    lld_lcdWriteReg(0x0097, 0x0110); //set Gate Non-overlap Period 0 locksc
+    lld_lcdWriteReg(0x0098, 0x0110); //
+    lld_lcdWriteReg(0x0007, 0x0173); //display On
 
-	/* Power On sequence ---------------------------------------------------------*/
-	write_reg(HX8347D_REG_PWC2, 0x1B);                  /* Power Control 2                      */
-	write_reg(HX8347D_REG_PWC1, 0x01);                  /* Power Control 1                      */
-	write_reg(HX8347D_REG_VMH, 0x2F);                   /* Vcom Control 2                       */
-	write_reg(HX8347D_REG_VML, 0x57);                   /* Vcom Control 3                       */
-	write_reg(HX8347D_REG_VMF, 0x8D);                   /* Vcom Control 1                       */
+	// Turn on the backlight
+	gdisp_lld_backlight(GDISP_INITIAL_BACKLIGHT);
+	
+    /* Initialise the GDISP structure */
+    GDISP.Width = GDISP_SCREEN_WIDTH;
+    GDISP.Height = GDISP_SCREEN_HEIGHT;
+    GDISP.Orientation = GDISP_ROTATE_0;
+    GDISP.Powermode = powerOn;
+    GDISP.Backlight = GDISP_INITIAL_BACKLIGHT;
+    GDISP.Contrast = GDISP_INITIAL_CONTRAST;
+    #if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
+	GDISP.clipx0 = 0;
+	GDISP.clipy0 = 0;
+	GDISP.clipx1 = GDISP.Width;
+	GDISP.clipy1 = GDISP.Height;
+    #endif
 
-	/* Gamma settings  -----------------------------------------------------------*/
-	write_reg(HX8347D_REG_VRP0,0x01);   //   default setup
-	write_reg(HX8347D_REG_VRP1,0x0e);   //
-	write_reg(HX8347D_REG_VRP2,0x11);   //
-	write_reg(HX8347D_REG_VRP3,0x1a);   //
-	write_reg(HX8347D_REG_VRP4,0x18);   //
-	write_reg(HX8347D_REG_VRP5,0x24);   //
-	write_reg(HX8347D_REG_PRP0,0x15);   //
-	write_reg(HX8347D_REG_PRP1,0x65);   //
-	write_reg(HX8347D_REG_PKP0,0x0b);   //
-	write_reg(HX8347D_REG_PKP1,0x18);   //
-	write_reg(HX8347D_REG_PKP2,0x19);   //
-	write_reg(HX8347D_REG_PKP3,0x1a);   //
-	write_reg(HX8347D_REG_PKP4,0x18);   //
-	write_reg(HX8347D_REG_VRN0,0x1b);   //
-	write_reg(HX8347D_REG_VRN1,0x27);   //
-	write_reg(HX8347D_REG_VRN2,0x25);   //
-	write_reg(HX8347D_REG_VRN3,0x2e);   //
-	write_reg(HX8347D_REG_VRN4,0x31);   //
-	write_reg(HX8347D_REG_VRN5,0x3e);   //
-	write_reg(HX8347D_REG_PRN0,0x1a);   //
-	write_reg(HX8347D_REG_PRN1,0x6a);   //
-	write_reg(HX8347D_REG_PKN0,0x07);   //
-	write_reg(HX8347D_REG_PKN1,0x05);   //
-	write_reg(HX8347D_REG_PKN2,0x06);   //
-	write_reg(HX8347D_REG_PKN3,0x0b);   //
-	write_reg(HX8347D_REG_PKN4,0x14);   //
-	write_reg(HX8347D_REG_CGM,0xcc);    //
-
-	/* Power + Osc ---------------------------------------------------------------*/
-	write_reg(HX8347D_REG_OSCCH, 0x36);                  /* OSC Control 1                        */
-	write_reg(HX8347D_REG_OSCCL, 0x01);                  /* OSC Control 2                        */
-	write_reg(HX8347D_REG_DMODE, 0x00);                  /* Display Mode Control                 */
-	write_reg(HX8347D_REG_PWC6, 0x88);                   /* Power Control 6                      */
-	delayms(5);                                          /* Delay 5 ms                           */
-	write_reg(HX8347D_REG_PWC6, 0x80);                   /* Power Control 6                      */
-	delayms(5);                                          /* Delay 5 ms                           */
-	write_reg(HX8347D_REG_PWC6, 0x90);                   /* Power Control 6                      */
-	delayms(5);                                          /* Delay 5 ms                           */
-	write_reg(HX8347D_REG_PWC6, 0xD0);                   /* Power Control 6                      */
-	delayms(5);                                          /* Delay 5 ms                           */
-	write_reg(HX8347D_REG_COLMOD, 0x05);                 /* Colmod 16Bit/Pixel                   */
-	write_reg(HX8347D_REG_PCH, 0x00);                    /* Panel Characteristic                 */
-	write_reg(HX8347D_REG_DC3, 0x38);                    /* Display Control 3                    */
-	delayms(40);
-	write_reg(HX8347D_REG_DC3, 0x3C);                    /* Display Control 3                    */
-	write_reg(HX8347D_REG_MAC, 0x08);                    /* Memory access control                */
-
-	write_reg(HX8347D_REG_SCL, 0x00);
-	write_reg(HX8347D_REG_SCH, 0x00);
-	write_reg(HX8347D_REG_ECL, 0xef);
-	write_reg(HX8347D_REG_ECH, 0x00);
-	write_reg(HX8347D_REG_SPL, 0x00);
-	write_reg(HX8347D_REG_SPH, 0x00);
-	write_reg(HX8347D_REG_EPL, 0x3f);
-	write_reg(HX8347D_REG_EPH, 0x01);
-
- 	// Release the bus
-	release_bus();
-
-	/* Turn on the backlight */
-	set_backlight(GDISP_INITIAL_BACKLIGHT);
-
-   /* Initialise the GDISP structure */
-	GDISP.Width = GDISP_SCREEN_WIDTH;
-	GDISP.Height = GDISP_SCREEN_HEIGHT;
-	GDISP.Orientation = GDISP_ROTATE_0;
-	GDISP.Powermode = powerOn;
-	GDISP.Backlight = GDISP_INITIAL_BACKLIGHT;
-	GDISP.Contrast = GDISP_INITIAL_CONTRAST;
-	#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
-		GDISP.clipx0 = 0;
-		GDISP.clipy0 = 0;
-		GDISP.clipx1 = GDISP.Width;
-		GDISP.clipy1 = GDISP.Height;
-	#endif
 	return TRUE;
 }
 
-/**
- * @brief   Draws a pixel on the display.
- *
- * @param[in] x        X location of the pixel
- * @param[in] y        Y location of the pixel
- * @param[in] color    The color of the pixel
- *
- * @notapi
- */
-void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
-	#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
-		if (x < GDISP.clipx0 || y < GDISP.clipy0 || x >= GDISP.clipx1 || y >= GDISP.clipy1) return;
-	#endif
-	
-	acquire_bus();
-	set_cursor(x, y);
-	write_ram((color >> 8) & 0xFF, color & 0xFF);
-	release_bus();
+static void lld_lcdSetCursor(uint16_t x, uint16_t y) {
+
+	switch(GDISP.Orientation) {
+		case GDISP_ROTATE_0:
+			lld_lcdWriteReg(0x0020, x);
+			lld_lcdWriteReg(0x0021, y);
+			break;
+
+		case GDISP_ROTATE_90:
+			lld_lcdWriteReg(0x0020, y);
+			lld_lcdWriteReg(0x0021, x);
+			break;
+
+		case GDISP_ROTATE_180:
+			lld_lcdWriteReg(0x0020, x);
+			lld_lcdWriteReg(0x0021, y);
+			break;
+
+		case GDISP_ROTATE_270:
+			lld_lcdWriteReg(0x0020, y);
+			lld_lcdWriteReg(0x0021, x);
+			break;
+	}
 }
 
-/* ---- Optional Routines ---- */
-/*
-	All the below routines are optional.
-	Defining them will increase speed but everything
-	will work if they are not defined.
-	If you are not using a routine - turn it off using
-	the appropriate GDISP_HARDWARE_XXXX macro.
-	Don't bother coding for obvious similar routines if
-	there is no performance penalty as the emulation software
-	makes a good job of using similar routines.
-		eg. If gfillarea() is defined there is little
-			point in defining clear() unless the
-			performance bonus is significant.
-	For good performance it is suggested to implement
-		fillarea() and blitarea().
-*/
+static void lld_lcdSetViewPort(uint16_t x, uint16_t y, uint16_t cx, uint16_t cy) {
+	switch(GDISP.Orientation) {
+		case GDISP_ROTATE_0:
+			lld_lcdWriteReg(0x0050, x);
+			lld_lcdWriteReg(0x0051, x + cx - 1);
+			lld_lcdWriteReg(0x0052, y);
+			lld_lcdWriteReg(0x0053, y + cy - 1);
+			break;
+
+		case GDISP_ROTATE_90:
+			lld_lcdWriteReg(0x0050, y);
+			lld_lcdWriteReg(0x0051, y + cy - 1);
+			lld_lcdWriteReg(0x0052, x);
+			lld_lcdWriteReg(0x0053, x + cx - 1);
+			break;
+
+		case GDISP_ROTATE_180:
+			lld_lcdWriteReg(0x0050, x);
+			lld_lcdWriteReg(0x0051, x + cx - 1);
+			lld_lcdWriteReg(0x0052, y);
+			lld_lcdWriteReg(0x0053, y + cy - 1);
+			break;
+
+		case GDISP_ROTATE_270:
+			lld_lcdWriteReg(0x0050, y);
+			lld_lcdWriteReg(0x0051, y + cy - 1);
+			lld_lcdWriteReg(0x0052, x);
+			lld_lcdWriteReg(0x0053, x + cx - 1);
+			break;
+	}
+
+	lld_lcdSetCursor(x, y);
+}
+
+static inline void lld_lcdResetViewPort(void) { 
+    switch(GDISP.Orientation) {
+        case GDISP_ROTATE_0:
+        case GDISP_ROTATE_180:
+            lld_lcdSetViewPort(0, 0, GDISP_SCREEN_WIDTH, GDISP_SCREEN_HEIGHT);
+            break;
+        case GDISP_ROTATE_90:
+        case GDISP_ROTATE_270:
+           	lld_lcdSetViewPort(0, 0, GDISP_SCREEN_HEIGHT, GDISP_SCREEN_WIDTH);
+            break;
+    }
+}
+
+void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
+    #if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
+        if (x < GDISP.clipx0 || y < GDISP.clipy0 || x >= GDISP.clipx1 || y >= GDISP.clipy1) return;
+    #endif
+    lld_lcdSetCursor(x, y);
+    lld_lcdWriteReg(0x0022, color);
+}
 
 #if GDISP_HARDWARE_CLEARS || defined(__DOXYGEN__)
-	/**
-	 * @brief   Clear the display.
-	 * @note    Optional - The high level driver can emulate using software.
-	 *
-	 * @param[in] color    The color of the pixel
-	 *
-	 * @notapi
-	 */
 	void gdisp_lld_clear(color_t color) {
-		unsigned i;
+	    unsigned i;
 
-		acquire_bus();
-		reset_viewport();
-		stream_start();
-		for(i = 0; i < GDISP_SCREEN_WIDTH * GDISP_SCREEN_HEIGHT; i++)
-		  write_ram16(color);
-		stream_stop();
-		release_bus();
+	    lld_lcdSetCursor(0, 0);
+	    lld_lcdWriteStreamStart();
+
+	    for(i = 0; i < GDISP_SCREEN_WIDTH * GDISP_SCREEN_HEIGHT; i++)
+	    	lld_lcdWriteData(color);
+
+	    lld_lcdWriteStreamStop();
 	}
 #endif
 
 #if GDISP_HARDWARE_FILLS || defined(__DOXYGEN__)
-	/**
-	 * @brief   Fill an area with a color.
-	 * @note    Optional - The high level driver can emulate using software.
-	 *
-	 * @param[in] x, y     The start filled area
-	 * @param[in] cx, cy   The width and height to be filled
-	 * @param[in] color    The color of the fill
-	 *
-	 * @notapi
-	 */
 	void gdisp_lld_fill_area(coord_t x, coord_t y, coord_t cx, coord_t cy, color_t color) {
-		unsigned i, area;
-
 		#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
 			if (x < GDISP.clipx0) { cx -= GDISP.clipx0 - x; x = GDISP.clipx0; }
 			if (y < GDISP.clipy0) { cy -= GDISP.clipy0 - y; y = GDISP.clipy0; }
@@ -280,31 +314,19 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
 			if (y+cy > GDISP.clipy1)	cy = GDISP.clipy1 - y;
 		#endif
 
-		area = cx*cy;
+		unsigned i, area;
 
-		acquire_bus();
-		set_viewport(x, y, cx, cy);
-		stream_start();
+		area = cx*cy;
+		lld_lcdSetViewPort(x, y, cx, cy);
+		lld_lcdWriteStreamStart();
 		for(i = 0; i < area; i++)
-		  write_ram16(color);
-		stream_stop();
-		release_bus();
+			lld_lcdWriteData(color);
+		lld_lcdWriteStreamStop();
+		lld_lcdResetViewPort();
 	}
 #endif
 
 #if GDISP_HARDWARE_BITFILLS || defined(__DOXYGEN__)
-	/**
-	 * @brief   Fill an area with a bitmap.
-	 * @note    Optional - The high level driver can emulate using software.
-	 *
-	 * @param[in] x, y     The start filled area
-	 * @param[in] cx, cy   The width and height to be filled
-	 * @param[in] srcx, srcy   The bitmap position to start the fill from
-	 * @param[in] srccx    The width of a line in the bitmap.
-	 * @param[in] buffer   The pixels to use to fill the area.
-	 *
-	 * @notapi
-	 */
 	void gdisp_lld_blit_area_ex(coord_t x, coord_t y, coord_t cx, coord_t cy, coord_t srcx, coord_t srcy, coord_t srccx, const pixel_t *buffer) {
 		coord_t endx, endy;
 		unsigned lg;
@@ -318,9 +340,8 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
 			if (y+cy > GDISP.clipy1)	cy = GDISP.clipy1 - y;
 		#endif
 
-		acquire_bus();
-		set_viewport(x, y, cx, cy);
-		stream_start();
+		lld_lcdSetViewPort(x, y, cx, cy);
+		lld_lcdWriteStreamStart();
 
 		endx = srcx + cx;
 		endy = y + cy;
@@ -328,50 +349,37 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
 		buffer += srcx + srcy * srccx;
 		for(; y < endy; y++, buffer += lg)
 			for(x=srcx; x < endx; x++)
-				write_data(*buffer++);
-		stream_stop();
-		release_bus();
+				lld_lcdWriteData(*buffer++);
+		lld_lcdWriteStreamStop();
+		lld_lcdResetViewPort();
 	}
 #endif
 
 #if (GDISP_NEED_PIXELREAD && GDISP_HARDWARE_PIXELREAD) || defined(__DOXYGEN__)
-	/**
-	 * @brief   Get the color of a particular pixel.
-	 * @note    Optional.
-	 * @note    If x,y is off the screen, the result is undefined.
-	 *
-	 * @param[in] x, y     The pixel to be read
-	 *
-	 * @notapi
-	 */
 	color_t gdisp_lld_get_pixel_color(coord_t x, coord_t y) {
 		color_t color;
 
 		#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
 			if (x < 0 || x >= GDISP.Width || y < 0 || y >= GDISP.Height) return 0;
 		#endif
-}
+
+		lld_lcdSetCursor(x, y);
+		lld_lcdWriteStreamStart();
+
+		color = lld_lcdReadData();
+		color = lld_lcdReadData();
+
+		lld_lcdWriteStreamStop();
+
+		return color;
+	}
 #endif
 
 #if (GDISP_NEED_SCROLL && GDISP_HARDWARE_SCROLL) || defined(__DOXYGEN__)
-	/**
-	 * @brief   Scroll vertically a section of the screen.
-	 * @note    Optional.
-	 * @note    If x,y + cx,cy is off the screen, the result is undefined.
-	 * @note    If lines is >= cy, it is equivelent to a area fill with bgcolor.
-	 *
-	 * @param[in] x, y     The start of the area to be scrolled
-	 * @param[in] cx, cy   The size of the area to be scrolled
-	 * @param[in] lines    The number of lines to scroll (Can be positive or negative)
-	 * @param[in] bgcolor  The color to fill the newly exposed area.
-	 *
-	 * @notapi
-	 */
 	void gdisp_lld_vertical_scroll(coord_t x, coord_t y, coord_t cx, coord_t cy, int lines, color_t bgcolor) {
 		static color_t buf[((GDISP_SCREEN_HEIGHT > GDISP_SCREEN_WIDTH ) ? GDISP_SCREEN_HEIGHT : GDISP_SCREEN_WIDTH)];
 		coord_t row0, row1;
-		unsigned i, abslines, j;
-		static int gap;
+		unsigned i, gap, abslines;
 
 		#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
 			if (x < GDISP.clipx0) { cx -= GDISP.clipx0 - x; x = GDISP.clipx0; }
@@ -381,84 +389,174 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
 			if (y+cy > GDISP.clipy1)	cy = GDISP.clipy1 - y;
 		#endif
 
+		abslines = lines < 0 ? -lines : lines;
+
+		if (abslines >= cy) {
+			abslines = cy;
+			gap = 0;
+		} else {
+			gap = cy - abslines;
+			for(i = 0; i < gap; i++) {
+				if(lines > 0) {
+					row0 = y + i + lines;
+					row1 = y + i;
+				} else {
+					row0 = (y - i - 1) + lines;
+					row1 = (y - i - 1);
+				}
+
+				/* read row0 into the buffer and then write at row1*/
+				lld_lcdSetViewPort(x, row0, cx, 1);
+				lld_lcdReadStreamStart();
+				lld_lcdReadStream(buf, cx);
+				lld_lcdReadStreamStop();
+
+				lld_lcdSetViewPort(x, row1, cx, 1);
+				lld_lcdWriteStreamStart();
+				lld_lcdWriteStream(buf, cx);
+				lld_lcdWriteStreamStop();
+			}
+		}
+
+		/* fill the remaining gap */
+		lld_lcdSetViewPort(x, lines > 0 ? (y+gap) : y, cx, abslines);
+		lld_lcdWriteStreamStart();
+		gap = cx*abslines;
+		for(i = 0; i < gap; i++) lld_lcdWriteData(bgcolor);
+		lld_lcdWriteStreamStop();
+		lld_lcdResetViewPort();
 	}
 #endif
 
 #if (GDISP_NEED_CONTROL && GDISP_HARDWARE_CONTROL) || defined(__DOXYGEN__)
-	/**
-	 * @brief	Driver Control
-	 * @details	Unsupported control codes are ignored.
-	 * @note	The value parameter should always be typecast to (void *).
-	 * @note	There are some predefined and some specific to the low level driver.
-	 * @note	GDISP_CONTROL_POWER			- Takes a gdisp_powermode_t
-	 * 			GDISP_CONTROL_ORIENTATION	- Takes a gdisp_orientation_t
-	 * 			GDISP_CONTROL_BACKLIGHT		- Takes an int from 0 to 100. For a driver
-	 * 											that only supports off/on anything other
-	 * 											than zero is on.
-	 *
-	 * @param[in] what		What to do.
-	 * @param[in] value		The value to use (always cast to a void *).
-	 *
-	 * @notapi
-	 */
 	void gdisp_lld_control(unsigned what, void *value) {
 		switch(what) {
+			case GDISP_CONTROL_POWER:
+				if(GDISP.Powermode == (gdisp_powermode_t)value)
+					return;
+				switch((gdisp_powermode_t)value) {
+					case powerOff:
+						acquire_bus();
+						lld_lcdWriteReg(0x0007, 0x0000);
+						lld_lcdWriteReg(0x0010, 0x0000);
+						lld_lcdWriteReg(0x0011, 0x0000);
+						lld_lcdWriteReg(0x0012, 0x0000);
+						lld_lcdWriteReg(0x0013, 0x0000);
+						release_bus();
+
+						gdisp_lld_backlight(0);
+						break;
+			
+					case powerOn:
+						//*************Power On sequence ******************//
+						acquire_bus();
+						lld_lcdWriteReg(0x0010, 0x0000); /* SAP, BT[3:0], AP, DSTB, SLP, STB */
+						lld_lcdWriteReg(0x0011, 0x0000); /* DC1[2:0], DC0[2:0], VC[2:0] */
+						lld_lcdWriteReg(0x0012, 0x0000); /* VREG1OUT voltage */
+						lld_lcdWriteReg(0x0013, 0x0000); /* VDV[4:0] for VCOM amplitude */
+						lld_lcdDelay(2000);            /* Dis-charge capacitor power voltage */
+						lld_lcdWriteReg(0x0010, 0x17B0); /* SAP, BT[3:0], AP, DSTB, SLP, STB */
+						lld_lcdWriteReg(0x0011, 0x0147); /* DC1[2:0], DC0[2:0], VC[2:0] */
+						lld_lcdDelay(500);
+						lld_lcdWriteReg(0x0012, 0x013C); /* VREG1OUT voltage */
+						lld_lcdDelay(500);
+						lld_lcdWriteReg(0x0013, 0x0E00); /* VDV[4:0] for VCOM amplitude */
+						lld_lcdWriteReg(0x0029, 0x0009); /* VCM[4:0] for VCOMH */
+						lld_lcdDelay(500);
+						lld_lcdWriteReg(0x0007, 0x0173); /* 262K color and display ON */
+						release_bus();
+
+						gdisp_lld_backlight(GDISP.Backlight);
+						if(GDISP.Powermode != powerSleep || GDISP.Powermode != powerDeepSleep)
+							gdisp_lld_init();
+						break;
+	
+					case powerSleep:
+						acquire_bus();
+	             		lld_lcdWriteReg(0x0007, 0x0000); /* display OFF */
+	                   	lld_lcdWriteReg(0x0010, 0x0000); /* SAP, BT[3:0], APE, AP, DSTB, SLP */
+	                  	lld_lcdWriteReg(0x0011, 0x0000); /* DC1[2:0], DC0[2:0], VC[2:0] */
+	                  	lld_lcdWriteReg(0x0012, 0x0000); /* VREG1OUT voltage */
+	                  	lld_lcdWriteReg(0x0013, 0x0000); /* VDV[4:0] for VCOM amplitude */
+	                  	lld_lcdDelay(2000); /* Dis-charge capacitor power voltage */
+	                   	lld_lcdWriteReg(0x0010, 0x0002); /* SAP, BT[3:0], APE, AP, DSTB, SLP */				
+						release_bus();
+
+						gdisp_lld_backlight(0);
+						break;
+
+					case powerDeepSleep:
+						acquire_bus();
+					    lld_lcdWriteReg(0x0007, 0x0000); /* display OFF */
+					    lld_lcdWriteReg(0x0010, 0x0000); /* SAP, BT[3:0], APE, AP, DSTB, SLP */
+					    lld_lcdWriteReg(0x0011, 0x0000); /* DC1[2:0], DC0[2:0], VC[2:0] */
+	   					lld_lcdWriteReg(0x0012, 0x0000); /* VREG1OUT voltage */
+	   					lld_lcdWriteReg(0x0013, 0x0000); /* VDV[4:0] for VCOM amplitude */
+	   					lld_lcdDelay(2000); /* Dis-charge capacitor power voltage */
+	  					lld_lcdWriteReg(0x0010, 0x0004); /* SAP, BT[3:0], APE, AP, DSTB, SLP */
+	  					release_bus();
+
+						gdisp_lld_backlight(0);
+						break;
+
+					default:
+						return;
+				}
+				GDISP.Powermode = (gdisp_powermode_t)value;
+				return;
+
 			case GDISP_CONTROL_ORIENTATION:
-				if (GDISP.Orientation == (gdisp_orientation_t)value)
+				if(GDISP.Orientation == (gdisp_orientation_t)value)
 					return;
 				switch((gdisp_orientation_t)value) {
 					case GDISP_ROTATE_0:
 						acquire_bus();
-						write_reg(HX8347D_REG_MAC, 0x08);                    /* Memory access control */
-		                write_reg(HX8347D_REG_ECL, 0xef);
-		                write_reg(HX8347D_REG_ECH, 0x00);
-		                write_reg(HX8347D_REG_EPL, 0x3f);
-		                write_reg(HX8347D_REG_EPH, 0x01);
+						lld_lcdWriteReg(0x0001, 0x0100);
+						lld_lcdWriteReg(0x0003, 0x1038);
+						lld_lcdWriteReg(0x0060, 0x2700);
 						release_bus();
+
 						GDISP.Height = GDISP_SCREEN_HEIGHT;
 						GDISP.Width = GDISP_SCREEN_WIDTH;
 						break;
 
 					case GDISP_ROTATE_90:
 						acquire_bus();
-						write_reg(HX8347D_REG_MAC, 0x68);                    /* Memory access control */
-                        write_reg(HX8347D_REG_ECL, 0x3f);
-                        write_reg(HX8347D_REG_ECH, 0x01);
-                        write_reg(HX8347D_REG_EPL, 0xef);
-                        write_reg(HX8347D_REG_EPH, 0x00);
+						lld_lcdWriteReg(0x0001, 0x0100);
+						lld_lcdWriteReg(0x0003, 0x1030);
+						lld_lcdWriteReg(0x0060, 0x2700);
 						release_bus();
+
 						GDISP.Height = GDISP_SCREEN_WIDTH;
 						GDISP.Width = GDISP_SCREEN_HEIGHT;
 						break;
-
+			
 					case GDISP_ROTATE_180:
 						acquire_bus();
-						write_reg(HX8347D_REG_MAC, 0xc8);                    /* Memory access control */
-		                write_reg(HX8347D_REG_ECL, 0xef);
-		                write_reg(HX8347D_REG_ECH, 0x00);
-		                write_reg(HX8347D_REG_EPL, 0x3f);
-		                write_reg(HX8347D_REG_EPH, 0x01);
+						lld_lcdWriteReg(0x0001, 0x0000);
+						lld_lcdWriteReg(0x0003, 0x1030);
+						lld_lcdWriteReg(0x0060, 0x2700);
 						release_bus();
+
 						GDISP.Height = GDISP_SCREEN_HEIGHT;
 						GDISP.Width = GDISP_SCREEN_WIDTH;
 						break;
-
+		
 					case GDISP_ROTATE_270:
 						acquire_bus();
-						write_reg(HX8347D_REG_MAC, 0xa8);                    /* Memory access control */
-                        write_reg(HX8347D_REG_ECL, 0x3f);
-                        write_reg(HX8347D_REG_ECH, 0x01);
-                        write_reg(HX8347D_REG_EPL, 0xef);
-                        write_reg(HX8347D_REG_EPH, 0x00);
+						lld_lcdWriteReg(0x0001, 0x0000);
+						lld_lcdWriteReg(0x0003, 0x1038);
+						lld_lcdWriteReg(0x0060, 0xA700);
 						release_bus();
-                        GDISP.Height = GDISP_SCREEN_WIDTH;
-                        GDISP.Width = GDISP_SCREEN_HEIGHT;
-						break;
 
+						GDISP.Height = GDISP_SCREEN_WIDTH;
+						GDISP.Width = GDISP_SCREEN_HEIGHT;
+						break;
+			
 					default:
 						return;
 				}
-
+			
 				#if GDISP_NEED_CLIP || GDISP_NEED_VALIDATION
 				GDISP.clipx0 = 0;
 				GDISP.clipy0 = 0;
@@ -469,17 +567,18 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
 				return;
 
 			case GDISP_CONTROL_BACKLIGHT:
-				if ((unsigned)value > 100)
-					value = (void *)100;
-				set_backlight((unsigned)value);
+				if((unsigned)value > 100) value = (void *)100;
+				gdisp_lld_backlight((unsigned)value);
 				GDISP.Backlight = (unsigned)value;
-				return;
-
+				break;
+			
 			default:
 				return;
 		}
 	}
+
 #endif
 
 #endif /* GFX_USE_GDISP */
 /** @} */
+
