@@ -14,32 +14,38 @@
 #ifndef _GFXCONF_H
 #define _GFXCONF_H
 
+/* The operating system to use - one of these must be defined */
+#define GFX_USE_OS_CHIBIOS		FALSE
+#define GFX_USE_OS_WIN32		FALSE
+#define GFX_USE_OS_POSIX		FALSE
+
 /* GFX subsystems to turn on */
-#define GFX_USE_GDISP				FALSE
-#define GFX_USE_TDISP				TRUE
-#define GFX_USE_GWIN				FALSE
-#define GFX_USE_GEVENT				FALSE
-#define GFX_USE_GTIMER				FALSE
-#define GFX_USE_GINPUT				FALSE
-#define GFX_USE_GADC				FALSE
-#define GFX_USE_GAUDIN				FALSE
-#define GFX_USE_GAUDOUT				FALSE
-#define GFX_USE_GMISC				FALSE
+#define GFX_USE_GDISP			FALSE
+#define GFX_USE_TDISP			FALSE
+#define GFX_USE_GWIN			FALSE
+#define GFX_USE_GEVENT			FALSE
+#define GFX_USE_GTIMER			FALSE
+#define GFX_USE_GQUEUE			FALSE
+#define GFX_USE_GINPUT			FALSE
+#define GFX_USE_GADC			FALSE
+#define GFX_USE_GAUDIN			FALSE
+#define GFX_USE_GAUDOUT			FALSE
+#define GFX_USE_GMISC			FALSE
 
 /* Features for the GDISP subsystem */
-#define GDISP_NEED_VALIDATION			TRUE
+#define GDISP_NEED_VALIDATION		TRUE
 #define GDISP_NEED_CLIP				TRUE
 #define GDISP_NEED_TEXT				TRUE
 #define GDISP_NEED_CIRCLE			TRUE
 #define GDISP_NEED_ELLIPSE			TRUE
 #define GDISP_NEED_ARC				FALSE
-#define GDISP_NEED_CONVEX_POLYGON		FALSE
+#define GDISP_NEED_CONVEX_POLYGON	FALSE
 #define GDISP_NEED_SCROLL			FALSE
-#define GDISP_NEED_PIXELREAD			FALSE
+#define GDISP_NEED_PIXELREAD		FALSE
 #define GDISP_NEED_CONTROL			FALSE
 #define GDISP_NEED_QUERY			FALSE
 #define GDISP_NEED_IMAGE			FALSE
-#define GDISP_NEED_MULTITHREAD			FALSE
+#define GDISP_NEED_MULTITHREAD		FALSE
 #define GDISP_NEED_ASYNC			FALSE
 #define GDISP_NEED_MSGAPI			FALSE
 
@@ -48,14 +54,15 @@
 #define GDISP_INCLUDE_FONT_LARGER		FALSE
 #define GDISP_INCLUDE_FONT_UI1			FALSE
 #define GDISP_INCLUDE_FONT_UI2			TRUE
-#define GDISP_INCLUDE_FONT_LARGENUMBERS		FALSE
+#define GDISP_INCLUDE_FONT_LARGENUMBERS	FALSE
 
 /* GDISP image decoders */
-#define GDISP_NEED_IMAGE_NATIVE			FALSE
-#define GDISP_NEED_IMAGE_GIF			FALSE
-#define GDISP_NEED_IMAGE_BMP			FALSE
-#define GDISP_NEED_IMAGE_JPG			FALSE
-#define GDISP_NEED_IMAGE_PNG			FALSE
+#define GDISP_NEED_IMAGE_NATIVE		FALSE
+#define GDISP_NEED_IMAGE_GIF		FALSE
+#define GDISP_NEED_IMAGE_BMP		FALSE
+#define GDISP_NEED_IMAGE_JPG		FALSE
+#define GDISP_NEED_IMAGE_PNG		FALSE
+#define GDISP_NEED_IMAGE_ACCOUNTING	FALSE
 
 /* Optional image support that can be turned off */
 /*
@@ -69,42 +76,36 @@
 	#define GDISP_NEED_IMAGE_BMP_32		TRUE
 */
 
-/* Features for the TDISP subsystem.
- */
-/* Set this to TRUE if need a custom board file.
- * The name of your board file must be "tdisp-lld-board.h" */
-#define TDISP_USE_CUSTOM_BOARD			TRUE
-/* Set to TRUE if multi threads need to read or
- * write to the display. If not, set this to FALSE */
-#define TDISP_NEED_MULTITHREAD			FALSE
-/* If you use the busy flag or you want to read 
- * from the display, set this to TRUE otherwise
- * leaf it to FALSE. Most users do not use the
- * read function of the display */
-#define TDISP_NEED_READ				FALSE
-/* Number of colums of the connected display */
-#define TDISP_COLUMNS				20
-/* Number of rows of the connect display */
-#define TDISP_ROWS				4
-/* Use dimming of backlight */
-#define TDISP_USE_BACKLIGHT			TRUE
+/* Features for the TDISP subsystem. */
+#define TDISP_NEED_MULTITHREAD	FALSE
 
 /* Features for the GWIN subsystem. */
-#define GWIN_NEED_BUTTON			FALSE
-#define GWIN_NEED_CONSOLE			FALSE
-#define GWIN_NEED_GRAPH				FALSE
+#define GWIN_NEED_WINDOWMANAGER	FALSE
+#define GWIN_NEED_CONSOLE		FALSE
+#define GWIN_NEED_GRAPH			FALSE
+#define GWIN_NEED_WIDGET		FALSE
+#define GWIN_NEED_BUTTON		FALSE
+#define GWIN_NEED_SLIDER		FALSE
+#define GWIN_NEED_CHECKBOX		FALSE
+#define GWIN_NEED_IMAGE			FALSE
+#define GWIN_NEED_RADIO			FALSE
 
 /* Features for the GEVENT subsystem. */
-#define GEVENT_ASSERT_NO_RESOURCE		FALSE
+#define GEVENT_ASSERT_NO_RESOURCE	FALSE
 
 /* Features for the GTIMER subsystem. */
 /* NONE */
 
+/* Features for the GQUEUE subsystem. */
+#define GQUEUE_NEED_ASYNC		FALSE
+#define GQUEUE_NEED_GSYNC		FALSE
+#define GQUEUE_NEED_FSYNC		FALSE
+
 /* Features for the GINPUT subsystem. */
-#define GINPUT_NEED_MOUSE			FALSE
-#define GINPUT_NEED_KEYBOARD			FALSE
-#define GINPUT_NEED_TOGGLE			FALSE
-#define GINPUT_NEED_DIAL			FALSE
+#define GINPUT_NEED_MOUSE		FALSE
+#define GINPUT_NEED_KEYBOARD	FALSE
+#define GINPUT_NEED_TOGGLE		FALSE
+#define GINPUT_NEED_DIAL		FALSE
 
 /* Features for the GADC subsystem. */
 /* NONE */
@@ -116,7 +117,9 @@
 /* NONE */
 
 /* Features for the GMISC subsystem. */
-#define GMISC_NEED_ARRAYOPS			FALSE
+#define GMISC_NEED_ARRAYOPS		FALSE
+#define GMISC_NEED_FASTTRIG		FALSE
+#define GMISC_NEED_FIXEDTRIG	FALSE
 
 /* Optional Parameters for various subsystems */
 /*
@@ -126,6 +129,9 @@
 	#define GTIMER_THREAD_WORKAREA_SIZE		512
 	#define GADC_MAX_LOWSPEED_DEVICES		4
 	#define GWIN_BUTTON_LAZY_RELEASE		FALSE
+	#define GWIN_CONSOLE_USE_BASESTREAM		FALSE
+	#define GWIN_CONSOLE_USE_FLOAT			FALSE
+	#define GWIN_NEED_IMAGE_ANIMATION		FALSE
 */
 
 /* Optional Low Level Driver Definitions */
