@@ -20,7 +20,7 @@
 /* Include the emulation code for things we don't support */
 #include "gdisp/lld/emulation.c"
 
-#include "gdisp_lld_board.h"
+#include "gdisp_lld_board_ThunderCryer.h"
 
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
@@ -37,10 +37,10 @@
 #endif
 
 #define GDISP_SCREEN_WIDTH		240
-#define GDISP_SCREEN_HEIGHT		320
+#define GDISP_SCREEN_HEIGHT		128
 
 #define GDISP_INITIAL_CONTRAST	50
-#define GDISP_INITIAL_BACKLIGHT	100
+#define GDISP_INITIAL_BACKLIGHT	50
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */

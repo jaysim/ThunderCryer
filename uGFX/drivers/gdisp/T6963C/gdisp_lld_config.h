@@ -22,7 +22,7 @@
 /* Driver hardware support.                                                  */
 /*===========================================================================*/
 
-#define GDISP_DRIVER_NAME				"ILI9320"
+#define GDISP_DRIVER_NAME				"T6963C"
 
 #define GDISP_HARDWARE_CLEARS			TRUE
 #define GDISP_HARDWARE_FILLS			TRUE
@@ -31,7 +31,7 @@
 #define GDISP_HARDWARE_PIXELREAD		TRUE
 #define GDISP_HARDWARE_CONTROL			TRUE
 
-#define GDISP_PIXELFORMAT				GDISP_PIXELFORMAT_RGB565
+#define GDISP_PIXELFORMAT				GDISP_PIXELFORMAT_NONO
 
 #endif	/* GFX_USE_GDISP */
 
