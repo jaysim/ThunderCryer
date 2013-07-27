@@ -16,7 +16,7 @@
 
 #include "ch.hpp"
 #include "hal.h"
-#include "test.h"
+
 
 using namespace chibios_rt;
 
@@ -119,26 +119,9 @@ public:
   }
 };
 
-/*
- * Tester thread class. This thread executes the test suite.
- */
-class TesterThread : public BaseStaticThread<256> {
 
-protected:
-  virtual msg_t main(void) {
-
-    setName("tester");
-
-    return TestThread(&SD2);
-  }
-
-public:
-  TesterThread(void) : BaseStaticThread<256>() {
-  }
-};
 
 /* Static threads instances.*/
-static TesterThread tester;
 static SequencerThread blinker1(LED3_sequence);
 static SequencerThread blinker2(LED4_sequence);
 static SequencerThread blinker3(LED5_sequence);
@@ -180,10 +163,6 @@ int main(void) {
    * Serves timer events.
    */
   while (true) {
-    if (palReadPad(GPIOA, GPIOA_BUTTON)) {
-      tester.start(NORMALPRIO);
-      tester.wait();
-    };
     BaseThread::sleep(MS2ST(500));
   }
 
