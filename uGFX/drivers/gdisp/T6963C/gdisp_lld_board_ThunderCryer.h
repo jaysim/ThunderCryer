@@ -76,7 +76,8 @@ static PWMConfig pwmconf9 = {
     {PWM_OUTPUT_DISABLED , NULL},
     {PWM_OUTPUT_DISABLED , NULL},
     {PWM_OUTPUT_DISABLED , NULL}
-   }
+   },
+   0
 };
 
 const unsigned long c_iDelayFore = 2;
