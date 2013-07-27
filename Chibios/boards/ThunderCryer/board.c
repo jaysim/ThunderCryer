@@ -104,23 +104,9 @@ bool_t mmc_lld_is_write_protected(MMCDriver *mmcp) {
 }
 #endif
 
-static PWMConfig pwmconf9 = {
-   1e6,
-   100,
-   NULL,
-   {
-    {PWM_OUTPUT_ACTIVE_HIGH , NULL},
-    {PWM_OUTPUT_ACTIVE_HIGH , NULL},
-    {PWM_OUTPUT_DISABLED , NULL},
-    {PWM_OUTPUT_DISABLED , NULL}
-   }
-};
-
 /**
  * @brief   Board-specific initialization code.
  * @todo    Add your board-specific code, if any.
  */
 void boardInit(void) {
-  /* activate Backlight and Buzzer PWM */
-  pwmStart(&PWMD9,&pwmconf9);
 }

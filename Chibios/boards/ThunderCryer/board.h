@@ -49,7 +49,7 @@
  * Board voltages.
  * Required for performance limits calculation.
  */
-#define STM32_VDD                   330
+#define STM32_VDD                   300
 
 /*
  * MCU type as defined in the ST header file stm32f4xx.h.
@@ -110,9 +110,9 @@
 #define GPIOC_PIN14                 14
 #define GPIOC_PIN15                 15
 
-#define GPIOD_LED1                  0
-#define GPIOD_LED2                  1
-#define GPIOD_LED3                  2
+#define GPIOD_TC_LED1               0
+#define GPIOD_TC_LED2               1
+#define GPIOD_TC_ED3                2
 #define GPIOD_PIN3                  3
 #define GPIOD_RESET                 4
 #define GPIOD_OVER_CURRENT          5
@@ -588,9 +588,9 @@
 /*
  * GPIOD setup:
  *
- * PD0  - LED1                      (output pushpull maximum).
- * PD1  - LED2                      (output pushpull maximum).
- * PD2  - LED3                      (output pushpull maximum).
+ * PD0  - TC_LED1                   (output pushpull maximum).
+ * PD1  - TC_LED2                   (output pushpull maximum).
+ * PD2  - TC_ED3                    (output pushpull maximum).
  * PD3  - PIN3                      (input pullup).
  * PD4  - RESET                     (output pushpull maximum).
  * PD5  - OVER_CURRENT              (input floating).
@@ -605,9 +605,9 @@
  * PD14 - LED5                      (output pushpull maximum).
  * PD15 - LED6                      (output pushpull maximum).
  */
-#define VAL_GPIOD_MODER             (PIN_MODE_OUTPUT(GPIOD_LED1) |          \
-                                     PIN_MODE_OUTPUT(GPIOD_LED2) |          \
-                                     PIN_MODE_OUTPUT(GPIOD_LED3) |          \
+#define VAL_GPIOD_MODER             (PIN_MODE_OUTPUT(GPIOD_TC_LED1) |       \
+                                     PIN_MODE_OUTPUT(GPIOD_TC_LED2) |       \
+                                     PIN_MODE_OUTPUT(GPIOD_TC_ED3) |        \
                                      PIN_MODE_INPUT(GPIOD_PIN3) |           \
                                      PIN_MODE_OUTPUT(GPIOD_RESET) |         \
                                      PIN_MODE_INPUT(GPIOD_OVER_CURRENT) |   \
@@ -621,9 +621,9 @@
                                      PIN_MODE_OUTPUT(GPIOD_LED3) |          \
                                      PIN_MODE_OUTPUT(GPIOD_LED5) |          \
                                      PIN_MODE_OUTPUT(GPIOD_LED6))
-#define VAL_GPIOD_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOD_LED1) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOD_LED2) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOD_LED3) |       \
+#define VAL_GPIOD_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOD_TC_LED1) |    \
+                                     PIN_OTYPE_PUSHPULL(GPIOD_TC_LED2) |    \
+                                     PIN_OTYPE_PUSHPULL(GPIOD_TC_ED3) |     \
                                      PIN_OTYPE_PUSHPULL(GPIOD_PIN3) |       \
                                      PIN_OTYPE_PUSHPULL(GPIOD_RESET) |      \
                                      PIN_OTYPE_PUSHPULL(GPIOD_OVER_CURRENT) |\
@@ -637,9 +637,9 @@
                                      PIN_OTYPE_PUSHPULL(GPIOD_LED3) |       \
                                      PIN_OTYPE_PUSHPULL(GPIOD_LED5) |       \
                                      PIN_OTYPE_PUSHPULL(GPIOD_LED6))
-#define VAL_GPIOD_OSPEEDR           (PIN_OSPEED_100M(GPIOD_LED1) |          \
-                                     PIN_OSPEED_100M(GPIOD_LED2) |          \
-                                     PIN_OSPEED_100M(GPIOD_LED3) |          \
+#define VAL_GPIOD_OSPEEDR           (PIN_OSPEED_100M(GPIOD_TC_LED1) |       \
+                                     PIN_OSPEED_100M(GPIOD_TC_LED2) |       \
+                                     PIN_OSPEED_100M(GPIOD_TC_ED3) |        \
                                      PIN_OSPEED_100M(GPIOD_PIN3) |          \
                                      PIN_OSPEED_100M(GPIOD_RESET) |         \
                                      PIN_OSPEED_100M(GPIOD_OVER_CURRENT) |  \
@@ -653,9 +653,9 @@
                                      PIN_OSPEED_100M(GPIOD_LED3) |          \
                                      PIN_OSPEED_100M(GPIOD_LED5) |          \
                                      PIN_OSPEED_100M(GPIOD_LED6))
-#define VAL_GPIOD_PUPDR             (PIN_PUPDR_FLOATING(GPIOD_LED1) |       \
-                                     PIN_PUPDR_FLOATING(GPIOD_LED2) |       \
-                                     PIN_PUPDR_FLOATING(GPIOD_LED3) |       \
+#define VAL_GPIOD_PUPDR             (PIN_PUPDR_FLOATING(GPIOD_TC_LED1) |    \
+                                     PIN_PUPDR_FLOATING(GPIOD_TC_LED2) |    \
+                                     PIN_PUPDR_FLOATING(GPIOD_TC_ED3) |     \
                                      PIN_PUPDR_PULLUP(GPIOD_PIN3) |         \
                                      PIN_PUPDR_FLOATING(GPIOD_RESET) |      \
                                      PIN_PUPDR_FLOATING(GPIOD_OVER_CURRENT) |\
@@ -669,9 +669,9 @@
                                      PIN_PUPDR_FLOATING(GPIOD_LED3) |       \
                                      PIN_PUPDR_FLOATING(GPIOD_LED5) |       \
                                      PIN_PUPDR_FLOATING(GPIOD_LED6))
-#define VAL_GPIOD_ODR               (PIN_ODR_HIGH(GPIOD_LED1) |             \
-                                     PIN_ODR_HIGH(GPIOD_LED2) |             \
-                                     PIN_ODR_HIGH(GPIOD_LED3) |             \
+#define VAL_GPIOD_ODR               (PIN_ODR_HIGH(GPIOD_TC_LED1) |          \
+                                     PIN_ODR_HIGH(GPIOD_TC_LED2) |          \
+                                     PIN_ODR_HIGH(GPIOD_TC_ED3) |           \
                                      PIN_ODR_HIGH(GPIOD_PIN3) |             \
                                      PIN_ODR_HIGH(GPIOD_RESET) |            \
                                      PIN_ODR_HIGH(GPIOD_OVER_CURRENT) |     \
@@ -685,9 +685,9 @@
                                      PIN_ODR_LOW(GPIOD_LED3) |              \
                                      PIN_ODR_LOW(GPIOD_LED5) |              \
                                      PIN_ODR_LOW(GPIOD_LED6))
-#define VAL_GPIOD_AFRL              (PIN_AFIO_AF(GPIOD_LED1, 0) |           \
-                                     PIN_AFIO_AF(GPIOD_LED2, 0) |           \
-                                     PIN_AFIO_AF(GPIOD_LED3, 0) |           \
+#define VAL_GPIOD_AFRL              (PIN_AFIO_AF(GPIOD_TC_LED1, 0) |        \
+                                     PIN_AFIO_AF(GPIOD_TC_LED2, 0) |        \
+                                     PIN_AFIO_AF(GPIOD_TC_ED3, 0) |         \
                                      PIN_AFIO_AF(GPIOD_PIN3, 0) |           \
                                      PIN_AFIO_AF(GPIOD_RESET, 0) |          \
                                      PIN_AFIO_AF(GPIOD_OVER_CURRENT, 0) |   \
