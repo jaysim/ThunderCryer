@@ -16,6 +16,8 @@
 #ifndef GDISP_LLD_CONFIG_H
 #define GDISP_LLD_CONFIG_H
 
+#include "gfx.h"
+
 #if GFX_USE_GDISP
 
 /*===========================================================================*/
@@ -31,7 +33,7 @@
 #define GDISP_HARDWARE_PIXELREAD		FALSE
 #define GDISP_HARDWARE_CONTROL			TRUE
 
-#define GDISP_PIXELFORMAT				GDISP_PIXELFORMAT_NONO
+#define GDISP_PIXELFORMAT				GDISP_PIXELFORMAT_MONO
 
 #endif	/* GFX_USE_GDISP */
 
