@@ -59,21 +59,6 @@
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
 
-/* This controller is only ever used with a 240 x 320 display */
-#if defined(GDISP_SCREEN_HEIGHT)
-    #warning "GDISP: This low level driver does not support setting a screen size. It is being ignored."
-    #undef GDISP_SCREEN_HEIGHT
-#endif
-#if defined(GDISP_SCREEN_WIDTH)
-    #warning "GDISP: This low level driver does not support setting a screen size. It is being ignored."
-    #undef GDISP_SCREEN_WIDTH
-#endif
-
-#define GDISP_SCREEN_WIDTH      240
-#define GDISP_SCREEN_HEIGHT     128
-
-#define GDISP_INITIAL_CONTRAST  50
-#define GDISP_INITIAL_BACKLIGHT 50
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/

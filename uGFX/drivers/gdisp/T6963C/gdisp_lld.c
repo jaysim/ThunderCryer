@@ -27,7 +27,6 @@
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
-#if 0 /* defined in Board header */
 /* This controller is only ever used with a 240 x 320 display */
 #if defined(GDISP_SCREEN_HEIGHT)
 	#warning "GDISP: This low level driver does not support setting a screen size. It is being ignored."
@@ -43,7 +42,65 @@
 
 #define GDISP_INITIAL_CONTRAST	50
 #define GDISP_INITIAL_BACKLIGHT	50
-#endif
+
+#define GLCD_NUMBER_OF_LINES            128
+#define GLCD_PIXELS_PER_LINE            240
+#define GLCD_FONT_WIDTH                 8
+
+#define GLCD_GRAPHIC_AREA               (GLCD_PIXELS_PER_LINE / GLCD_FONT_WIDTH)
+#define GLCD_TEXT_AREA                  (GLCD_PIXELS_PER_LINE / GLCD_FONT_WIDTH)
+#define GLCD_GRAPHIC_SIZE               (GLCD_GRAPHIC_AREA * GLCD_NUMBER_OF_LINES)
+#define GLCD_TEXT_SIZE                  (GLCD_TEXT_AREA * (GLCD_NUMBER_OF_LINES/8))
+
+#define GLCD_TEXT_HOME                  0
+#define GLCD_GRAPHIC_HOME               (GLCD_TEXT_HOME + GLCD_TEXT_SIZE)
+#define GLCD_OFFSET_REGISTER            2
+#define  GLCD_EXTERNAL_CG_HOME          (GLCD_OFFSET_REGISTER << 11)
+
+
+#define T6963_SET_CURSOR_POINTER        0x21
+#define T6963_SET_OFFSET_REGISTER       0x22
+#define T6963_SET_ADDRESS_POINTER       0x24
+
+#define T6963_SET_TEXT_HOME_ADDRESS     0x40
+#define T6963_SET_TEXT_AREA             0x41
+#define T6963_SET_GRAPHIC_HOME_ADDRESS  0x42
+#define T6963_SET_GRAPHIC_AREA          0x43
+
+#define T6963_MODE_SET                  0x80
+
+#define T6963_DISPLAY_MODE              0x90
+    #define T6963_CURSOR_BLINK_ON       0x01
+    #define T6963_CURSOR_DISPLAY_ON     0x02
+    #define T6963_TEXT_DISPLAY_ON       0x04
+    #define T6963_GRAPHIC_DISPLAY_ON    0x08
+
+
+#define T6963_CURSOR_PATTERN_SELECT     0xA0
+    #define T6963_CURSOR_1_LINE         0x00
+    #define T6963_CURSOR_2_LINE         0x01
+    #define T6963_CURSOR_3_LINE         0x02
+    #define T6963_CURSOR_4_LINE         0x03
+    #define T6963_CURSOR_5_LINE         0x04
+    #define T6963_CURSOR_6_LINE         0x05
+    #define T6963_CURSOR_7_LINE         0x06
+    #define T6963_CURSOR_8_LINE         0x07
+
+#define T6963_SET_DATA_AUTO_WRITE       0xB0
+#define T6963_SET_DATA_AUTO_READ        0xB1
+#define T6963_AUTO_RESET                0xB2
+#define T6963_DATA_WRITE_AND_INCREMENT  0xC0
+#define T6963_DATA_READ_AND_INCREMENT   0xC1
+#define T6963_DATA_WRITE_AND_DECREMENT  0xC2
+#define T6963_DATA_READ_AND_DECREMENT   0xC3
+#define T6963_DATA_WRITE_AND_NONVARIALBE 0xC4
+#define T6963_DATA_READ_AND_NONVARIABLE 0xC5
+
+#define T6963_SCREEN_PEEK               0xE0
+#define T6963_SCREEN_COPY               0xE8
+
+#define T6963_BIT_SET                   0xF8
+#define T6963_BIT_RESET                 0xF0
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -59,8 +116,8 @@
   * @brief  polled timer supported us delay
   * @param  us micro seconds to wait
   */
-static inline void lld_lcdDelay(uint16_t us) {
-  gptPolledDelay(&GPTD14, (us) * 10));
+static inline void gdisp_lld_lcdDelay(uint16_t us) {
+  gptPolledDelay(&GPTD14, (us) * 10);
 }
 
 /**
@@ -78,13 +135,13 @@ bool gdisp_lld_check_status(void)
 
     palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CE);
 
-    US_DELAY(c_iDelayFore);
+    gdisp_lld_lcdDelay(c_iDelayFore);
 
-    tmp = ((palReadPort(GLCD_DATA_PORT)(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
+    tmp = ((palReadPort(GLCD_DATA_PORT)& GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
     palSetPort(GLCD_CTRL_PORT,  GLCD_RD | GLCD_CE);
 
-    US_DELAY(c_iDelayAfter);
+    gdisp_lld_lcdDelay(c_iDelayAfter);
 
     GLCD_DATA_OUTPUT;
 
@@ -103,7 +160,7 @@ static inline void gdisp_lld_init_board(void) {
   * @param  None
   * @retval None
   */
-static inline void gdisp_lld_reset() {
+static inline void gdisp_lld_reset(void) {
   palClearPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
 
   chThdSleepMilliseconds(100);
@@ -120,16 +177,16 @@ static inline void gdisp_lld_write_command(uint16_t cmd) {
   while(!gdisp_lld_check_status());
 
   palClearPort(GLCD_DATA_PORT,GLCD_DATA_PORT_MASK);
-  GLCD_DATA_PORT->ODR |= (command << (GLCD_DATA_OFFSET)); // lowbyte will stay as is in this write
+  GLCD_DATA_PORT->ODR |= (cmd << (GLCD_DATA_OFFSET)); // lowbyte will stay as is in this write
 
   palClearPort(GLCD_CTRL_PORT, GLCD_WR | GLCD_CE);
 
-  US_DELAY(c_iDelayFore);   // time for display to read the data
+  gdisp_lld_lcdDelay(c_iDelayFore);   // time for display to read the data
 
   palSetPort(GLCD_CTRL_PORT , GLCD_WR | GLCD_CE);
 
 
-  US_DELAY(c_iDelayAfter);
+  gdisp_lld_lcdDelay(c_iDelayAfter);
 }
 
 /**
@@ -145,11 +202,11 @@ static inline void gdisp_lld_write_data(uint16_t data) {
 
   palClearPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
 
-  US_DELAY(c_iDelayFore);
+  gdisp_lld_lcdDelay(c_iDelayFore);
 
   palSetPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
 
-  US_DELAY(c_iDelayAfter);
+  gdisp_lld_lcdDelay(c_iDelayAfter);
 }
 
 /**
@@ -158,7 +215,7 @@ static inline void gdisp_lld_write_data(uint16_t data) {
   * @retval None
   */
 static inline void gdisp_lld_write_data_inc(uint16_t data) {
-  gdisp_lld_write_data(x);
+  gdisp_lld_write_data(data);
   gdisp_lld_write_command(T6963_DATA_WRITE_AND_INCREMENT);
 }
 
@@ -175,13 +232,13 @@ static inline uint16_t gdisp_lld_read_data(void) {
 
   palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CD | GLCD_CE);
 
-  US_DELAY(c_iDelayFore);
+  gdisp_lld_lcdDelay(c_iDelayFore);
 
   tmp = ((palReadPort(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
   palSetPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CD | GLCD_CE );
 
-  US_DELAY(c_iDelayAfter);
+  gdisp_lld_lcdDelay(c_iDelayAfter);
 
   GLCD_DATA_OUTPUT;
   return (unsigned char)tmp;
@@ -199,11 +256,11 @@ static inline void gdisp_lld_backlight(uint8_t percent) {
   * @brief  sets the address pointer to a specific address
   * @param  address     new address for the address pointer
   */
-static inline void glcd_lld_set_address_pointer(uint16_t address){
+static inline void gdisp_lld_set_address_pointer(uint16_t address){
   address += 2; // display offset
-  glcd_lld_write_data(address & 0xFF);
-  glcd_lld_write_data(address >> 8);
-  glcd_lld_write_command(T6963_SET_ADDRESS_POINTER);
+  gdisp_lld_write_data(address & 0xFF);
+  gdisp_lld_write_data(address >> 8);
+  gdisp_lld_write_command(T6963_SET_ADDRESS_POINTER);
 }
 
 /**
@@ -211,11 +268,11 @@ static inline void glcd_lld_set_address_pointer(uint16_t address){
   * @param  x   new cursor x coordinate
   * @param  y   new cursor y coordinate
   */
-static inline void glcd_lld_set_cursor(uint16_t x, uint16_t y){
+static inline void gdisp_lld_set_cursor(uint16_t x, uint16_t y){
   uint16_t address;
 
   address = GLCD_GRAPHIC_HOME + (x / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y);
-  glcd_lld_set_address_pointer(address);
+  gdisp_lld_set_address_pointer(address);
 }
 
 
@@ -224,38 +281,38 @@ bool_t gdisp_lld_init(void) {
 	/* Initialise your display */
 	gdisp_lld_init_board();
 
-	glcd_lld_reset();
+	gdisp_lld_reset();
 
 	// Graphic home address
-	glcd_lld_write_data(GLCD_GRAPHIC_HOME & 0xFF);
-	glcd_lld_write_data(GLCD_GRAPHIC_HOME >> 8);
-	glcd_lld_write_command(T6963_SET_GRAPHIC_HOME_ADDRESS);
+	gdisp_lld_write_data(GLCD_GRAPHIC_HOME & 0xFF);
+	gdisp_lld_write_data(GLCD_GRAPHIC_HOME >> 8);
+	gdisp_lld_write_command(T6963_SET_GRAPHIC_HOME_ADDRESS);
 
 	//graphic line length
-	glcd_lld_write_data(GLCD_GRAPHIC_AREA);
-	glcd_lld_write_data(0x00);
-	glcd_lld_write_command(T6963_SET_GRAPHIC_AREA);
+	gdisp_lld_write_data(GLCD_GRAPHIC_AREA);
+	gdisp_lld_write_data(0x00);
+	gdisp_lld_write_command(T6963_SET_GRAPHIC_AREA);
 
 	//text home address
-	glcd_lld_write_data(GLCD_TEXT_HOME & 0xFF);
-	glcd_lld_write_data(GLCD_TEXT_HOME >> 8);
-	glcd_lld_write_command(T6963_SET_TEXT_HOME_ADDRESS);
+	gdisp_lld_write_data(GLCD_TEXT_HOME & 0xFF);
+	gdisp_lld_write_data(GLCD_TEXT_HOME >> 8);
+	gdisp_lld_write_command(T6963_SET_TEXT_HOME_ADDRESS);
 
 	//text line length
-	glcd_lld_write_data(GLCD_TEXT_AREA);
-	glcd_lld_write_data(0x00);
-	glcd_lld_write_command(T6963_SET_TEXT_AREA);
+	gdisp_lld_write_data(GLCD_TEXT_AREA);
+	gdisp_lld_write_data(0x00);
+	gdisp_lld_write_command(T6963_SET_TEXT_AREA);
 
 	//write offset register  (no effect)
-	glcd_lld_write_data(GLCD_OFFSET_REGISTER);
-	glcd_lld_write_data(0x00);
-	glcd_lld_write_command(T6963_SET_OFFSET_REGISTER);
+	gdisp_lld_write_data(GLCD_OFFSET_REGISTER);
+	gdisp_lld_write_data(0x00);
+	gdisp_lld_write_command(T6963_SET_OFFSET_REGISTER);
 
 	// display in XOR Mode
-	glcd_lld_write_command(T6963_MODE_SET | 1);
+	gdisp_lld_write_command(T6963_MODE_SET | 1);
 
 	//Graphic and no Text mode
-	glcd_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON );
+	gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON );
 
 
 	// Turn on the backlight
@@ -286,21 +343,21 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
     unsigned char tmp;
 
 
-    glcd_lld_set_cursor(x,y);
+    gdisp_lld_set_cursor(x,y);
 
     tmp = (GLCD_FONT_WIDTH - 1) - (x % GLCD_FONT_WIDTH);
 
     if(color)
-      glcd_lld_write_command(T6963_BIT_RESET | tmp);
+      gdisp_lld_write_command(T6963_BIT_RESET | tmp);
     else
-      glcd_lld_write_command(T6963_BIT_SET | tmp);
+      gdisp_lld_write_command(T6963_BIT_SET | tmp);
 }
 
 #if GDISP_HARDWARE_CLEARS || defined(__DOXYGEN__)
 void gdisp_lld_clear(color_t color) {
   unsigned int i;
   // Graphics and Text are different mem pools in this Controller
-  glcd_lld_set_address_pointer(GLCD_GRAPHIC_HOME);
+  gdisp_lld_set_address_pointer(GLCD_GRAPHIC_HOME);
 
   for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
   {
@@ -449,18 +506,18 @@ void gdisp_lld_clear(color_t color) {
 	      if(GDISP.Powermode != powerSleep || GDISP.Powermode != powerDeepSleep)
 	        gdisp_lld_init();
 	      else
-	        glcd_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON);
+	        gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON);
 	      break;
 
 	    case powerSleep:
 	      //deactivate graphic display
-	      glcd_lld_write_command(T6963_DISPLAY_MODE);
+	      gdisp_lld_write_command(T6963_DISPLAY_MODE);
 	      gdisp_lld_backlight(0);
 	      break;
 
 	    case powerDeepSleep:
 	      //deactivate graphic display
-	      glcd_lld_write_command(T6963_DISPLAY_MODE);
+	      gdisp_lld_write_command(T6963_DISPLAY_MODE);
 	      gdisp_lld_backlight(0);
 	      break;
 
