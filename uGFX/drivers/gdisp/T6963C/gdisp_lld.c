@@ -27,7 +27,7 @@
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
-
+#if 0 /* defined in Board header */
 /* This controller is only ever used with a 240 x 320 display */
 #if defined(GDISP_SCREEN_HEIGHT)
 	#warning "GDISP: This low level driver does not support setting a screen size. It is being ignored."
@@ -43,7 +43,7 @@
 
 #define GDISP_INITIAL_CONTRAST	50
 #define GDISP_INITIAL_BACKLIGHT	50
-
+#endif
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -51,80 +51,211 @@
 /*===========================================================================*/
 /* Driver local variables.                                                   */
 /*===========================================================================*/
-uint32_t DISPLAY_CODE;
 
 /*===========================================================================*/
 /* Driver local functions.                                                   */
 /*===========================================================================*/
+/**
+  * @brief  polled timer supported us delay
+  * @param  us micro seconds to wait
+  */
 static inline void lld_lcdDelay(uint16_t us) {
-	gfxSleepMicroseconds(us);
+  gptPolledDelay(&GPTD14, (us) * 10));
 }
 
-static inline void lld_lcdWriteIndex(uint16_t index) {
-	gdisp_lld_write_index(index);
+/**
+  * @brief  reads T6963C status byte
+  * @param  None
+  * @retval true for display ready
+  */
+bool gdisp_lld_check_status(void)
+{
+
+    uint16_t tmp;
+    // set data pins as input
+    GLCD_DATA_INPUT;
+
+
+    palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CE);
+
+    US_DELAY(c_iDelayFore);
+
+    tmp = ((palReadPort(GLCD_DATA_PORT)(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
+
+    palSetPort(GLCD_CTRL_PORT,  GLCD_RD | GLCD_CE);
+
+    US_DELAY(c_iDelayAfter);
+
+    GLCD_DATA_OUTPUT;
+
+    return ((tmp&0x03)==0x03);
 }
 
-static inline void lld_lcdWriteData(uint16_t data) {
-	gdisp_lld_write_data(data);
+static inline void gdisp_lld_init_board(void) {
+  // init us delay timer
+  gptStart(&GPTD14,&gptConf14);
+  pwmEnableChannel(&PWMD9, 0, 0);
 }
 
-static inline void lld_lcdWriteReg(uint16_t lcdReg, uint16_t lcdRegValue) {
-	gdisp_lld_write_index(lcdReg);
-	gdisp_lld_write_data(lcdRegValue);
+
+/**
+  * @brief  Reset the Display
+  * @param  None
+  * @retval None
+  */
+static inline void gdisp_lld_reset() {
+  palClearPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
+
+  chThdSleepMilliseconds(100);
+
+  palSetPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
 }
 
-static inline uint16_t lld_lcdReadData(void) {
-	return gdisp_lld_read_data();
+/**
+  * @brief  writes a command
+  * @param  command
+  * @retval None
+  */
+static inline void gdisp_lld_write_command(uint16_t cmd) {
+  while(!gdisp_lld_check_status());
+
+  palClearPort(GLCD_DATA_PORT,GLCD_DATA_PORT_MASK);
+  GLCD_DATA_PORT->ODR |= (command << (GLCD_DATA_OFFSET)); // lowbyte will stay as is in this write
+
+  palClearPort(GLCD_CTRL_PORT, GLCD_WR | GLCD_CE);
+
+  US_DELAY(c_iDelayFore);   // time for display to read the data
+
+  palSetPort(GLCD_CTRL_PORT , GLCD_WR | GLCD_CE);
+
+
+  US_DELAY(c_iDelayAfter);
 }
 
-static inline uint16_t lld_lcdReadReg(uint16_t lcdReg) {
-    volatile uint16_t dummy;
+/**
+  * @brief  writes data
+  * @param  data
+  * @retval None
+  */
+static inline void gdisp_lld_write_data(uint16_t data) {
+  while(!gdisp_lld_check_status());
 
-    gdisp_lld_write_index(lcdReg);
-    dummy = lld_lcdReadData();
-    (void)dummy;
+  palClearPort(GLCD_DATA_PORT,GLCD_DATA_PORT_MASK);
+  GLCD_DATA_PORT->ODR |= ((uint16_t)data << GLCD_DATA_OFFSET); // lowbyte will stay as is in this write
 
-    return lld_lcdReadData();
+  palClearPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
+
+  US_DELAY(c_iDelayFore);
+
+  palSetPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
+
+  US_DELAY(c_iDelayAfter);
 }
 
-static inline void lld_lcdWriteStreamStart(void) {
-	lld_lcdWriteIndex(0x0022);
-}
-	
-static inline void lld_lcdWriteStreamStop(void) {
-
-}
-
-static inline void lld_lcdWriteStream(uint16_t *buffer, uint16_t size) {
-	uint16_t i;
-
-	for(i = 0; i < size; i++)
-		lld_lcdWriteData(buffer[i]);
+/**
+  * @brief  writes data with increment of the address pointer
+  * @param  data
+  * @retval None
+  */
+static inline void gdisp_lld_write_data_inc(uint16_t data) {
+  gdisp_lld_write_data(x);
+  gdisp_lld_write_command(T6963_DATA_WRITE_AND_INCREMENT);
 }
 
-static inline void lld_lcdReadStreamStart(void) {
-	lld_lcdWriteIndex(0x0022);
+/**
+  * @brief  reads data from display
+  * @param  None
+  * @retval data from display
+  */
+static inline uint16_t gdisp_lld_read_data(void) {
+  uint16_t tmp;
+  while(!gdisp_lld_check_status());
+
+  GLCD_DATA_INPUT;
+
+  palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CD | GLCD_CE);
+
+  US_DELAY(c_iDelayFore);
+
+  tmp = ((palReadPort(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
+
+  palSetPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CD | GLCD_CE );
+
+  US_DELAY(c_iDelayAfter);
+
+  GLCD_DATA_OUTPUT;
+  return (unsigned char)tmp;
 }
 
-static inline void lld_lcdReadStreamStop(void) {
-
+/**
+  * @brief  sets backlight
+  * @param  percent     Backlight level in percent
+  */
+static inline void gdisp_lld_backlight(uint8_t percent) {
+    pwmEnableChannel(&PWMD9, 0, percent );
 }
 
-static inline void lld_lcdReadStream(uint16_t *buffer, size_t size) {
-	uint16_t i;
-	volatile uint16_t dummy;
-
-	dummy = lld_lcdReadData();
-	(void)dummy;
-
-	for(i = 0; i < size; i++)
-		buffer[i] = lld_lcdReadData();
+/**
+  * @brief  sets the address pointer to a specific address
+  * @param  address     new address for the address pointer
+  */
+static inline void glcd_lld_set_address_pointer(uint16_t address){
+  address += 2; // display offset
+  glcd_lld_write_data(address & 0xFF);
+  glcd_lld_write_data(address >> 8);
+  glcd_lld_write_command(T6963_SET_ADDRESS_POINTER);
 }
+
+/**
+  * @brief  sets the cursor to a specific coordinate
+  * @param  x   new cursor x coordinate
+  * @param  y   new cursor y coordinate
+  */
+static inline void glcd_lld_set_cursor(uint16_t x, uint16_t y){
+  uint16_t address;
+
+  address = GLCD_GRAPHIC_HOME + (x / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y);
+  glcd_lld_set_address_pointer(address);
+}
+
+
 
 bool_t gdisp_lld_init(void) {
 	/* Initialise your display */
 	gdisp_lld_init_board();
 
+	glcd_lld_reset();
+
+	// Graphic home address
+	glcd_lld_write_data(GLCD_GRAPHIC_HOME & 0xFF);
+	glcd_lld_write_data(GLCD_GRAPHIC_HOME >> 8);
+	glcd_lld_write_command(T6963_SET_GRAPHIC_HOME_ADDRESS);
+
+	//graphic line length
+	glcd_lld_write_data(GLCD_GRAPHIC_AREA);
+	glcd_lld_write_data(0x00);
+	glcd_lld_write_command(T6963_SET_GRAPHIC_AREA);
+
+	//text home address
+	glcd_lld_write_data(GLCD_TEXT_HOME & 0xFF);
+	glcd_lld_write_data(GLCD_TEXT_HOME >> 8);
+	glcd_lld_write_command(T6963_SET_TEXT_HOME_ADDRESS);
+
+	//text line length
+	glcd_lld_write_data(GLCD_TEXT_AREA);
+	glcd_lld_write_data(0x00);
+	glcd_lld_write_command(T6963_SET_TEXT_AREA);
+
+	//write offset register  (no effect)
+	glcd_lld_write_data(GLCD_OFFSET_REGISTER);
+	glcd_lld_write_data(0x00);
+	glcd_lld_write_command(T6963_SET_OFFSET_REGISTER);
+
+	// display in XOR Mode
+	glcd_lld_write_command(T6963_MODE_SET | 1);
+
+	//Graphic and no Text mode
+	glcd_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON );
 
 
 	// Turn on the backlight
@@ -136,6 +267,7 @@ bool_t gdisp_lld_init(void) {
     GDISP.Orientation = GDISP_ROTATE_0;
     GDISP.Powermode = powerOn;
     GDISP.Backlight = GDISP_INITIAL_BACKLIGHT;
+    gdisp_lld_backlight(GDISP.Backlight);
     GDISP.Contrast = GDISP_INITIAL_CONTRAST;
     #if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
 	GDISP.clipx0 = 0;
@@ -147,38 +279,37 @@ bool_t gdisp_lld_init(void) {
 	return TRUE;
 }
 
-static void lld_lcdSetCursor(uint16_t x, uint16_t y) {
-
-
-}
-
-static void lld_lcdSetViewPort(uint16_t x, uint16_t y, uint16_t cx, uint16_t cy) {
-
-}
-
-static inline void lld_lcdResetViewPort(void) { 
-
-}
-
 void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
     #if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
         if (x < GDISP.clipx0 || y < GDISP.clipy0 || x >= GDISP.clipx1 || y >= GDISP.clipy1) return;
     #endif
+    unsigned char tmp;
 
+
+    glcd_lld_set_cursor(x,y);
+
+    tmp = (GLCD_FONT_WIDTH - 1) - (x % GLCD_FONT_WIDTH);
+
+    if(color)
+      glcd_lld_write_command(T6963_BIT_RESET | tmp);
+    else
+      glcd_lld_write_command(T6963_BIT_SET | tmp);
 }
 
 #if GDISP_HARDWARE_CLEARS || defined(__DOXYGEN__)
-	void gdisp_lld_clear(color_t color) {
-	    unsigned i;
+void gdisp_lld_clear(color_t color) {
+  unsigned int i;
+  // Graphics and Text are different mem pools in this Controller
+  glcd_lld_set_address_pointer(GLCD_GRAPHIC_HOME);
 
-	    lld_lcdSetCursor(0, 0);
-	    lld_lcdWriteStreamStart();
-
-	    for(i = 0; i < GDISP_SCREEN_WIDTH * GDISP_SCREEN_HEIGHT; i++)
-	    	lld_lcdWriteData(color);
-
-	    lld_lcdWriteStreamStop();
-	}
+  for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
+  {
+    if(color)
+      gdisp_lld_write_data_inc(0xFF);
+    else
+      gdisp_lld_write_data_inc(0x00);
+  }
+}
 #endif
 
 #if GDISP_HARDWARE_FILLS || defined(__DOXYGEN__)
@@ -300,50 +431,55 @@ void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
 
 #if (GDISP_NEED_CONTROL && GDISP_HARDWARE_CONTROL) || defined(__DOXYGEN__)
 	void gdisp_lld_control(unsigned what, void *value) {
-		switch(what) {
-			case GDISP_CONTROL_POWER:
-				if(GDISP.Powermode == (gdisp_powermode_t)value)
-					return;
-				switch((gdisp_powermode_t)value) {
-					case powerOff:
+	  switch(what) {
+	  case GDISP_CONTROL_POWER:
+	    if(GDISP.Powermode == (gdisp_powermode_t)value)
+	      return;
+	    switch((gdisp_powermode_t)value) {
+	    case powerOff:
 
-						gdisp_lld_backlight(0);
-						break;
-			
-					case powerOn:
-						//*************Power On sequence ******************//
+	      gdisp_lld_backlight(0);
+	      break;
 
-						gdisp_lld_backlight(GDISP.Backlight);
-						if(GDISP.Powermode != powerSleep || GDISP.Powermode != powerDeepSleep)
-							gdisp_lld_init();
-						break;
-	
-					case powerSleep:
+	    case powerOn:
+	      //*************Power On sequence ******************//
 
-						gdisp_lld_backlight(0);
-						break;
+	      gdisp_lld_backlight(GDISP.Backlight);
 
-					case powerDeepSleep:
+	      if(GDISP.Powermode != powerSleep || GDISP.Powermode != powerDeepSleep)
+	        gdisp_lld_init();
+	      else
+	        glcd_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON);
+	      break;
 
-						gdisp_lld_backlight(0);
-						break;
+	    case powerSleep:
+	      //deactivate graphic display
+	      glcd_lld_write_command(T6963_DISPLAY_MODE);
+	      gdisp_lld_backlight(0);
+	      break;
 
-					default:
-						return;
-				}
-				GDISP.Powermode = (gdisp_powermode_t)value;
-				return;
+	    case powerDeepSleep:
+	      //deactivate graphic display
+	      glcd_lld_write_command(T6963_DISPLAY_MODE);
+	      gdisp_lld_backlight(0);
+	      break;
+
+	    default:
+	      return;
+	    }
+	    GDISP.Powermode = (gdisp_powermode_t)value;
+	    return;
 
 
-			case GDISP_CONTROL_BACKLIGHT:
-				if((unsigned)value > 100) value = (void *)100;
-				gdisp_lld_backlight((unsigned)value);
-				GDISP.Backlight = (unsigned)value;
-				break;
-			
-			default:
-				return;
-		}
+	    case GDISP_CONTROL_BACKLIGHT:
+	      if((unsigned)value > 100) value = (void *)100;
+	      gdisp_lld_backlight((unsigned)value);
+	      GDISP.Backlight = (unsigned)value;
+	      break;
+
+	    default:
+	      return;
+	  }
 	}
 
 #endif
