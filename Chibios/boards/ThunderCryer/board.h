@@ -437,7 +437,7 @@
                                      PIN_PUPDR_FLOATING(GPIOB_CD))
 #define VAL_GPIOB_ODR               (PIN_ODR_LOW(GPIOB_CONTRAST_A0) |       \
                                      PIN_ODR_LOW(GPIOB_CONTRAST_A1) |       \
-                                     PIN_ODR_LOW(GPIOB_CONTRAST_A2) |       \
+                                     PIN_ODR_HIGH(GPIOB_CONTRAST_A2) |      \
                                      PIN_ODR_HIGH(GPIOB_SWO) |              \
                                      PIN_ODR_HIGH(GPIOB_PIN4) |             \
                                      PIN_ODR_HIGH(GPIOB_PIN5) |             \
