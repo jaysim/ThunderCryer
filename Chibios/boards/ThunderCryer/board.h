@@ -711,7 +711,7 @@
  * PE3  - CS_SPI                    (output pushpull maximum).
  * PE4  - PIN4                      (input floating).
  * PE5  - LCD_BACKLIGHT             (alternate 3).
- * PE6  - BUZZER                    (alternate 3).
+ * PE6  - BUZZER                    (output pushpull maximum).
  * PE7  - PIN7                      (input floating).
  * PE8  - D0                        (output pushpull maximum).
  * PE9  - D1                        (output pushpull maximum).
@@ -728,7 +728,7 @@
                                      PIN_MODE_OUTPUT(GPIOE_CS_SPI) |        \
                                      PIN_MODE_INPUT(GPIOE_PIN4) |           \
                                      PIN_MODE_ALTERNATE(GPIOE_LCD_BACKLIGHT) |\
-                                     PIN_MODE_ALTERNATE(GPIOE_BUZZER) |     \
+                                     PIN_MODE_OUTPUT(GPIOE_BUZZER) |        \
                                      PIN_MODE_INPUT(GPIOE_PIN7) |           \
                                      PIN_MODE_OUTPUT(GPIOE_D0) |            \
                                      PIN_MODE_OUTPUT(GPIOE_D1) |            \
@@ -808,7 +808,7 @@
                                      PIN_AFIO_AF(GPIOE_CS_SPI, 0) |         \
                                      PIN_AFIO_AF(GPIOE_PIN4, 0) |           \
                                      PIN_AFIO_AF(GPIOE_LCD_BACKLIGHT, 3) |  \
-                                     PIN_AFIO_AF(GPIOE_BUZZER, 3) |         \
+                                     PIN_AFIO_AF(GPIOE_BUZZER, 0) |         \
                                      PIN_AFIO_AF(GPIOE_PIN7, 0))
 #define VAL_GPIOE_AFRH              (PIN_AFIO_AF(GPIOE_D0, 0) |             \
                                      PIN_AFIO_AF(GPIOE_D1, 0) |             \

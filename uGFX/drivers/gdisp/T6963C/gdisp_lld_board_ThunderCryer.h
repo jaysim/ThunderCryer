@@ -63,8 +63,20 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static GPTConfig gptConf14 = {
-    10e6,  //timer clock
+    2e6,  //timer clock
     NULL   //timer callback
+};
+
+static PWMConfig pwmconf9 = {
+   1e6,
+   100,
+   NULL,
+   {
+    {PWM_OUTPUT_ACTIVE_HIGH , NULL},
+    {PWM_OUTPUT_DISABLED , NULL},
+    {PWM_OUTPUT_DISABLED , NULL},
+    {PWM_OUTPUT_DISABLED , NULL}
+   }
 };
 
 const unsigned long c_iDelayFore = 2;

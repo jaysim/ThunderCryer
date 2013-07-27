@@ -117,7 +117,7 @@
   * @param  us micro seconds to wait
   */
 static inline void gdisp_lld_lcdDelay(uint16_t us) {
-  gptPolledDelay(&GPTD14, (us) * 10);
+  gptPolledDelay(&GPTD14, (us) * 2);
 }
 
 /**
@@ -151,6 +151,8 @@ bool gdisp_lld_check_status(void)
 static inline void gdisp_lld_init_board(void) {
   // init us delay timer
   gptStart(&GPTD14,&gptConf14);
+  /* activate Backlight PWM */
+  pwmStart(&PWMD9,&pwmconf9);
   pwmEnableChannel(&PWMD9, 0, 0);
 }
 
