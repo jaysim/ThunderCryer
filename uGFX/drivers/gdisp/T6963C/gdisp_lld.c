@@ -13,11 +13,14 @@
  * @{
  */
 
+#include "ch.h"
+#include "hal.h"
 #include "gfx.h"
+#include "stm32f4xx.h"
 
 
 
-#if GFX_USE_GDISP /*|| defined(__DOXYGEN__)*/
+#if 1//GFX_USE_GDISP /*|| defined(__DOXYGEN__)*/
 
 /* Include the emulation code for things we don't support */
 #include "gdisp/lld/emulation.c"
@@ -132,14 +135,16 @@ bool gdisp_lld_check_status(void)
     // set data pins as input
     GLCD_DATA_INPUT;
 
-
-    palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CE);
+    GLCD_CTRL_PORT->BSRR.H.clear = (GLCD_RD | GLCD_CE);
+    //palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CE);
 
     gdisp_lld_lcdDelay(c_iDelayFore);
 
-    tmp = ((palReadPort(GLCD_DATA_PORT)& GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
+    tmp = GLCD_DATA_PORT->IDR;
+    tmp = ((tmp & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
-    palSetPort(GLCD_CTRL_PORT,  GLCD_RD | GLCD_CE);
+    //palSetPort(GLCD_CTRL_PORT,  GLCD_RD | GLCD_CE);
+    GLCD_CTRL_PORT->BSRR.H.set = (GLCD_RD | GLCD_CE);
 
     gdisp_lld_lcdDelay(c_iDelayAfter);
 
@@ -163,11 +168,13 @@ static inline void gdisp_lld_init_board(void) {
   * @retval None
   */
 static inline void gdisp_lld_reset(void) {
-  palClearPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
+  //palClearPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
+  GLCD_CTRL_PORT->BSRR.H.clear =(GLCD_RESET | GLCD_CE);
 
   chThdSleepMilliseconds(100);
 
-  palSetPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
+  //palSetPort(GLCD_CTRL_PORT, GLCD_RESET | GLCD_CE );
+  GLCD_CTRL_PORT->BSRR.H.set = (GLCD_RESET | GLCD_CE);
 }
 
 /**
@@ -178,15 +185,16 @@ static inline void gdisp_lld_reset(void) {
 static inline void gdisp_lld_write_command(uint16_t cmd) {
   while(!gdisp_lld_check_status());
 
-  palClearPort(GLCD_DATA_PORT,GLCD_DATA_PORT_MASK);
-  GLCD_DATA_PORT->ODR |= (cmd << (GLCD_DATA_OFFSET)); // lowbyte will stay as is in this write
+  GLCD_DATA_PORT->BSRR.H.clear = GLCD_DATA_PORT_MASK; //Clear Data pins
+  GLCD_DATA_PORT->BSRR.H.set = (cmd << (GLCD_DATA_OFFSET)); // lowbyte will stay as is in this write
 
-  palClearPort(GLCD_CTRL_PORT, GLCD_WR | GLCD_CE);
+  //palClearPort(GLCD_CTRL_PORT, GLCD_WR | GLCD_CE);
+  GLCD_CTRL_PORT->BSRR.H.clear = (GLCD_WR | GLCD_CE);
 
   gdisp_lld_lcdDelay(c_iDelayFore);   // time for display to read the data
 
-  palSetPort(GLCD_CTRL_PORT , GLCD_WR | GLCD_CE);
-
+  //palSetPort(GLCD_CTRL_PORT , GLCD_WR | GLCD_CE);
+  GLCD_CTRL_PORT->BSRR.H.set = (GLCD_WR | GLCD_CE);
 
   gdisp_lld_lcdDelay(c_iDelayAfter);
 }
@@ -199,14 +207,16 @@ static inline void gdisp_lld_write_command(uint16_t cmd) {
 static inline void gdisp_lld_write_data(uint16_t data) {
   while(!gdisp_lld_check_status());
 
-  palClearPort(GLCD_DATA_PORT,GLCD_DATA_PORT_MASK);
-  GLCD_DATA_PORT->ODR |= ((uint16_t)data << GLCD_DATA_OFFSET); // lowbyte will stay as is in this write
+  GLCD_DATA_PORT->BSRR.H.clear = GLCD_DATA_PORT_MASK; //Clear Data pins
+  GLCD_DATA_PORT->BSRR.H.set = ((uint16_t)data << GLCD_DATA_OFFSET); // lowbyte will stay as is in this write
 
-  palClearPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
+  //palClearPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
+  GLCD_CTRL_PORT->BSRR.H.clear = (GLCD_CD | GLCD_WR | GLCD_CE);
 
   gdisp_lld_lcdDelay(c_iDelayFore);
 
-  palSetPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
+  //palSetPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
+  GLCD_CTRL_PORT->BSRR.H.set = (GLCD_CD | GLCD_WR | GLCD_CE);
 
   gdisp_lld_lcdDelay(c_iDelayAfter);
 }
@@ -232,13 +242,13 @@ static inline uint16_t gdisp_lld_read_data(void) {
 
   GLCD_DATA_INPUT;
 
-  palClearPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CD | GLCD_CE);
+  GLCD_CTRL_PORT->BSRR.H.clear = (GLCD_RD | GLCD_CD | GLCD_CE);
 
   gdisp_lld_lcdDelay(c_iDelayFore);
 
   tmp = ((palReadPort(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
-  palSetPort(GLCD_CTRL_PORT, GLCD_RD | GLCD_CD | GLCD_CE );
+  GLCD_CTRL_PORT->BSRR.H.set =  GLCD_RD | GLCD_CD | GLCD_CE ;
 
   gdisp_lld_lcdDelay(c_iDelayAfter);
 
@@ -314,7 +324,7 @@ bool_t gdisp_lld_init(void) {
 	gdisp_lld_write_command(T6963_MODE_SET | 1);
 
 	//Graphic and no Text mode
-	gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON );
+	gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON | T6963_TEXT_DISPLAY_ON );
 
 
 	// Turn on the backlight

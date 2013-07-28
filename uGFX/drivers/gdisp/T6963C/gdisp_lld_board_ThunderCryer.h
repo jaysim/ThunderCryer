@@ -28,30 +28,26 @@
 #define GLCD_DATA_PORT_MASK     0xff00
 #define GLCD_DATA_OFFSET        8
 
-#define GLCD_DATA_INPUT         palSetGroupMode(GLCD_DATA_PORT, GPIOE_D0 | \
-                                        GPIOE_D1 | GPIOE_D2 | GPIOE_D3 | \
-                                        GPIOE_D4 | GPIOE_D5 | GPIOE_D6 | \
-                                        GPIOE_D7,0, PAL_MODE_INPUT)
-
-#define GLCD_DATA_OUTPUT        palSetGroupMode(GLCD_DATA_PORT, GPIOE_D0 | \
-                                        GPIOE_D1 | GPIOE_D2 | GPIOE_D3 | \
-                                        GPIOE_D4 | GPIOE_D5 | GPIOE_D6 | \
-                                        GPIOE_D7,0, PAL_MODE_OUTPUT_PUSHPULL)
+#define GLCD_DATA_MODE_MASK_IN  0xffff0000
+#define GLCD_DATA_MODE_MASK_OUT 0x55550000
+#define GLCD_DATA_INPUT         GLCD_DATA_PORT->MODER &= ~GLCD_DATA_MODE_MASK_IN;
+#define GLCD_DATA_OUTPUT        GLCD_DATA_PORT->MODER |= GLCD_DATA_MODE_MASK_OUT;
 
 // control port
 #define GLCD_CTRL_PORT          GPIOB
 
 // control signals
-#define GLCD_RD         GPIOB_RD
-#define GLCD_WR         GPIOB_WR
-#define GLCD_RESET      GPIOB_RST
-#define GLCD_CE         GPIOB_CE
-#define GLCD_CD         GPIOB_CD
+#define GLCD_RD         (1<<GPIOB_RD)
+#define GLCD_WR         (1<<GPIOB_WR)
+#define GLCD_RESET      (1<<GPIOB_RST)
+#define GLCD_CE         (1<<GPIOB_CE)
+#define GLCD_CD         (1<<GPIOB_CD)
 
 
 // aux pins
 #define GLCD_CONTRAST_PORT  GPIOB
-#define GLCD_CONTRAST_MASK  (GPIOB_CONTRAST_A0 | GPIOB_CONTRAST_A1 | GPIOB_CONTRAST_A2)
+#define GLCD_CONTRAST_MASK  ((1<<GPIOB_CONTRAST_A0) | (1<<GPIOB_CONTRAST_A1) | \
+                             (1<<GPIOB_CONTRAST_A2))
 #define GLCD_LED            GPIOB_LED
 
 
