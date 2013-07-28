@@ -446,11 +446,11 @@
                                      PIN_ODR_HIGH(GPIOB_PIN8) |             \
                                      PIN_ODR_HIGH(GPIOB_SDA) |              \
                                      PIN_ODR_HIGH(GPIOB_CLK_IN) |           \
-                                     PIN_ODR_LOW(GPIOB_RD) |                \
-                                     PIN_ODR_LOW(GPIOB_WR) |                \
+                                     PIN_ODR_HIGH(GPIOB_RD) |               \
+                                     PIN_ODR_HIGH(GPIOB_WR) |               \
                                      PIN_ODR_LOW(GPIOB_RST) |               \
-                                     PIN_ODR_LOW(GPIOB_CE) |                \
-                                     PIN_ODR_LOW(GPIOB_CD))
+                                     PIN_ODR_HIGH(GPIOB_CE) |               \
+                                     PIN_ODR_HIGH(GPIOB_CD))
 #define VAL_GPIOB_AFRL              (PIN_AFIO_AF(GPIOB_CONTRAST_A0, 0) |    \
                                      PIN_AFIO_AF(GPIOB_CONTRAST_A1, 0) |    \
                                      PIN_AFIO_AF(GPIOB_CONTRAST_A2, 0) |    \
@@ -779,13 +779,13 @@
                                      PIN_PUPDR_FLOATING(GPIOE_BUZZER) |     \
                                      PIN_PUPDR_FLOATING(GPIOE_PIN7) |       \
                                      PIN_PUPDR_FLOATING(GPIOE_D0) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D1) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D2) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D3) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D4) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D5) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D6) |         \
-                                     PIN_PUPDR_FLOATING(GPIOE_D7))
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D1) |         \
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D2) |         \
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D3) |         \
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D4) |         \
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D5) |         \
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D6) |         \
+                                     PIN_PUPDR_PULLDOWN(GPIOE_D7))
 #define VAL_GPIOE_ODR               (PIN_ODR_HIGH(GPIOE_INT1) |             \
                                      PIN_ODR_HIGH(GPIOE_INT2) |             \
                                      PIN_ODR_HIGH(GPIOE_PIN2) |             \
