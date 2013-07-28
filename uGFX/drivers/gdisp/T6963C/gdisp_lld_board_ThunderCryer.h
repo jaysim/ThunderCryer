@@ -59,7 +59,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static GPTConfig gptConf14 = {
-    2e6,  //timer clock
+    4e6,  //timer clock
     NULL   //timer callback
 };
 
@@ -77,7 +77,7 @@ static PWMConfig pwmconf9 = {
 };
 
 const unsigned long c_iDelayFore = 2;
-const unsigned long c_iDelayAfter = 1;
+const unsigned long c_iDelayAfter = 2;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 

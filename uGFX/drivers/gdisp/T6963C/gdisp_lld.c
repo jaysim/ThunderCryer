@@ -17,7 +17,7 @@
 #include "hal.h"
 #include "gfx.h"
 #include "stm32f4xx.h"
-
+#include "gdisp_lld_config.h"
 
 
 #if 1//GFX_USE_GDISP /*|| defined(__DOXYGEN__)*/
@@ -117,10 +117,10 @@
 /*===========================================================================*/
 /**
   * @brief  polled timer supported us delay
-  * @param  us micro seconds to wait
+  * @param  us micro seconds to wait depents on timer frequency
   */
 static inline void gdisp_lld_lcdDelay(uint16_t us) {
-  gptPolledDelay(&GPTD14, (us) * 2);
+  gptPolledDelay(&GPTD14, (us) );
 }
 
 /**
@@ -324,7 +324,7 @@ bool_t gdisp_lld_init(void) {
 	gdisp_lld_write_command(T6963_MODE_SET | 1);
 
 	//Graphic and no Text mode
-	gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON | T6963_TEXT_DISPLAY_ON );
+	gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON );
 
 
 	// Turn on the backlight
@@ -391,15 +391,19 @@ void gdisp_lld_clear(color_t color) {
 			if (y+cy > GDISP.clipy1)	cy = GDISP.clipy1 - y;
 		#endif
 
-		unsigned i, area;
+        unsigned int i;
 
-		area = cx*cy;
-		lld_lcdSetViewPort(x, y, cx, cy);
-		lld_lcdWriteStreamStart();
-		for(i = 0; i < area; i++)
-			lld_lcdWriteData(color);
-		lld_lcdWriteStreamStop();
-		lld_lcdResetViewPort();
+        gdisp_lld_set_cursor(x,y);
+
+        for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
+        {
+          if(color)
+            gdisp_lld_write_data_inc(0xFF);
+          else
+            gdisp_lld_write_data_inc(0x00);
+        }
+
+
 	}
 #endif
 

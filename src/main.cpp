@@ -136,7 +136,7 @@ GHandle GW1, GW2, GW3;
  */
 int main(void) {
   uint8_t i = 0;
-  font_t  font1, font2;
+  font_t  font1;
   /*
    * System initializations.
    * - HAL initialization, this also initializes the configured device drivers
@@ -152,7 +152,6 @@ int main(void) {
 
   /* Set some fonts */
   font1 = gdispOpenFont("Small");
-  font2 = gdispOpenFont("UI2 Double");
   gwinSetDefaultFont(font1);
 
   /* create the three console windows */
@@ -160,29 +159,18 @@ int main(void) {
     GWindowInit     wi;
 
     wi.show = TRUE;
-    wi.x = 0; wi.y = 0; wi.width = gdispGetWidth(); wi.height = gdispGetHeight()/2;
+    wi.x = 0; wi.y = 0; wi.width = gdispGetWidth(); wi.height = gdispGetHeight();
     GW1 = gwinConsoleCreate(NULL, &wi);
-    wi.y = gdispGetHeight()/2; wi.width = gdispGetWidth()/2; wi.height = gdispGetHeight();
-    GW2 = gwinConsoleCreate(NULL, &wi);
-    wi.x = gdispGetWidth()/2; wi.height = gdispGetHeight();
-    GW3 = gwinConsoleCreate(NULL, &wi);
+
   }
 
-  /* Use a special font for GW1 */
-  gwinSetFont(GW1, font2);
-
   /* Set the fore- and background colors for each console */
-  gwinSetColor(GW1, White);
-  gwinSetBgColor(GW1, Black);
-  gwinSetColor(GW2, Black);
-  gwinSetBgColor(GW2, White);
-  gwinSetColor(GW3, White);
-  gwinSetBgColor(GW3, Black);
+  gwinSetColor(GW1, Black);
+  gwinSetBgColor(GW1, White);
 
   /* clear all console windows - to set background */
   gwinClear(GW1);
-  gwinClear(GW2);
-  gwinClear(GW3);
+
 
   /*
    * Activates the serial driver 2 using the driver default configuration.
@@ -207,12 +195,6 @@ int main(void) {
   while (true) {
     /* Output some data on the first console */
     gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
-
-    /* Output some data on the second console */
-    gwinPrintf(GW2, "Message Nr.: %d\r\n", i+1);
-
-    /* Output some data on the third console */
-    gwinPrintf(GW3, "Message Nr.: %d\r\n", i+1);
 
     i++;
     BaseThread::sleep(MS2ST(500));
