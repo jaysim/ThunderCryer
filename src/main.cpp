@@ -188,15 +188,12 @@ int main(void) {
   blinker2.start(NORMALPRIO + 10);
   blinker3.start(NORMALPRIO + 10);
   blinker4.start(NORMALPRIO + 10);
-
+  /* Output some data on the first console */
+  gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
   /*
    * Serves timer events.
    */
   while (true) {
-    /* Output some data on the first console */
-    gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
-
-    i++;
     BaseThread::sleep(MS2ST(500));
   }
 
