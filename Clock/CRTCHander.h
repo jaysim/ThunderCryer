@@ -13,7 +13,28 @@
 
 namespace chibios_rt {
 
-  class CRTCHander : public BaseStaticThread<128>{
+  /**
+   * @class CRTCHander
+   *
+   * @brief this class implements a thread which handles RTC Alarms
+   *        DCF77 and so on
+   *
+   * supply 3 alarm options:
+   *  - single weekdays the alarm is armed
+   *  - alarm time
+   *  - light time
+   *  - alarm song
+   *  - alarm mode
+   *  - snooze time
+   *  - snooze enable method
+   *
+   *  thread checks for next armed alarm
+   *
+   *  check DCF77 input for signal
+   *   - build DCF77 time and set RTC accordingly
+   *
+   */
+  class CRTCHander : public BaseStaticThread<1024>{
   public:
     CRTCHander();
     virtual ~CRTCHander();
