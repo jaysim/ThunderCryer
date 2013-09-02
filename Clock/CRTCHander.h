@@ -11,6 +11,9 @@
 #ifndef CRTCHANDER_H_
 #define CRTCHANDER_H_
 
+#include "ch.hpp"
+#include "hal.h"
+
 namespace chibios_rt {
 
   /**
@@ -35,6 +38,9 @@ namespace chibios_rt {
    *
    */
   class CRTCHander : public BaseStaticThread<1024>{
+
+  protected:
+    virtual msg_t main(void);
   public:
     CRTCHander();
     virtual ~CRTCHander();
