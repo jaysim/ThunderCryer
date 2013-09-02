@@ -15,7 +15,7 @@ endif
 
 # C++ specific options here (added to USE_OPT).
 ifeq ($(USE_CPPOPT),)
-  USE_CPPOPT = -fno-rtti -fno-exceptions
+  USE_CPPOPT = -fno-rtti -fno-exceptions -std=gnu++11
 endif
 
 # Enable this if you want the linker to remove unused code and data
@@ -94,7 +94,12 @@ CSRC = $(PORTSRC) \
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(CHCPPSRC) \
-         ./src/main.cpp
+         ./src/main.cpp \
+         ./Clock/CDCF77.cpp \
+         ./Clock/CLighthandler.cpp \
+         ./Clock/CRTCAlarm.cpp \
+         ./Clock/CRTCAlarmHandler.cpp \
+         ./Clock/CRTCHandler.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
