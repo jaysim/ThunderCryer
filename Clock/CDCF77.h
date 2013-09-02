@@ -48,17 +48,17 @@ using namespace std;
 
 typedef struct
 {
-    uint8_t second;
-    uint8_t minute;
-    uint8_t hour;
-    uint8_t day;
-    uint8_t day_of_week;
-    uint8_t month;
-    uint8_t year;
+  uint8_t second;
+  uint8_t minute;
+  uint8_t hour;
+  uint8_t day;
+  uint8_t day_of_week;
+  uint8_t month;
+  uint8_t year;
 #ifdef TIME_MESZ
-    uint8_t mesz;
+  uint8_t mesz;
 #endif // TIME_MESZ
-} dcftime_t __attribute__((__packed__));
+} dcftime_t;
 
 
 /*
@@ -66,44 +66,56 @@ typedef struct
  */
 class CDCF77 {
 private:
-	// In newtime wird die neue Zeit-Information aufgebaut
-	dcftime_t newtime;
 
-	// Bei korrekt empfangener Zeit wird die Zeit nach *ptime kopiert.
-	//
-	// !!! *ptime MUSS AUSSERHALB DES DCF77-MODULS GESETZT WERDEN  !!!
-	// !!! ANSONSTEN WIRD DIE ZEIT NICHT HINEINKOPIERT             !!!
-	dcftime_t *ptime;
 
-	// Wenn die neue Zeit nach *ptime kopiert wird, wird time_changed
-	// auf 1 gesetzt. Die Anwendung kann time_changed wieder auf
-	// 0 zurücksetzten. So kann die Anwendung erkennen, daß ein neues
-	// Zeit/Datums-Paket angekommen ist.
-	uint8_t time_changed;
+  /* Codiert die DCF-Bits 17..58 bzw. 21...58 (je nachdem, ob MESZ
+   empfangen werden soll) und deren Position in time_t.
+   Low-Nibble     : Offset relativ zu .minute
+   Bit 4 (NEWVAL) : Neuer Wert fängt an, d.h. die Speicherposition
+                    muss 1 Byte voranschreiten. */
+  uint8_t dcf_byteno[50];
 
-	// Für interne Verwendung in dcf77.c
 
-	// Parity wird on the fly mitberechnet
-	uint8_t parity;
 
-	// Es gab einen Fehler: error != 0
-	uint8_t error;
 
-	// Wertigkeit des aktuellen BCD-Bits: 1, 2, 4, 8, 10, 20, 40, 80.
-	uint8_t bitval;
+  // In newtime wird die neue Zeit-Information aufgebaut
+  dcftime_t newtime;
 
-	// Dauer der aktuellen Sekunde in Einheiten von 10ms (1 Tick)
-	uint8_t ticks;
+  // Bei korrekt empfangener Zeit wird die Zeit nach *ptime kopiert.
+  //
+  // !!! *ptime MUSS AUSSERHALB DES DCF77-MODULS GESETZT WERDEN  !!!
+  // !!! ANSONSTEN WIRD DIE ZEIT NICHT HINEINKOPIERT             !!!
+  dcftime_t *ptime;
 
-	// Letzter poll-Wert vom Aufruf von dcf77_tick() zur
-	// Flankenerkennung.
-	uint8_t poll;
+  // Wenn die neue Zeit nach *ptime kopiert wird, wird time_changed
+  // auf 1 gesetzt. Die Anwendung kann time_changed wieder auf
+  // 0 zurücksetzten. So kann die Anwendung erkennen, daß ein neues
+  // Zeit/Datums-Paket angekommen ist.
+  uint8_t time_changed;
 
-	uint8_t byteno;
+  // Für interne Verwendung in dcf77.c
 
-	void StartBit (uint8_t);
-	void StoreBit (uint8_t);
-	void EndBit (uint8_t);
+  // Parity wird on the fly mitberechnet
+  uint8_t parity;
+
+  // Es gab einen Fehler: error != 0
+  uint8_t error;
+
+  // Wertigkeit des aktuellen BCD-Bits: 1, 2, 4, 8, 10, 20, 40, 80.
+  uint8_t bitval;
+
+  // Dauer der aktuellen Sekunde in Einheiten von 10ms (1 Tick)
+  uint8_t ticks;
+
+  // Letzter poll-Wert vom Aufruf von dcf77_tick() zur
+  // Flankenerkennung.
+  uint8_t poll;
+
+  uint8_t byteno;
+
+	void StartBit(uint8_t ticks);
+	void StoreBit(uint8_t ticks);
+	void EndBit(uint8_t bit);
 public:
 	CDCF77();
 	virtual ~CDCF77();

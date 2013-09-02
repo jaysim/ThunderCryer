@@ -15,7 +15,7 @@
 #include "stdint.h"
 
 typedef union {
-	struct{
+	struct {
 		bool bMonday:1;
 		bool bTuesdey:1;
 		bool bWednesday:1;
@@ -24,7 +24,7 @@ typedef union {
 		bool bSaturday:1;
 		bool bSunday:1;
 		bool bArmed:1;
-	}sDays __attribute__((__packed__));
+	} __attribute__((packed));
 	uint8_t bDays;
 }sWeekdaysArm ;
 
@@ -95,25 +95,25 @@ public:
 	 * @param tod Time of the day
 	 * @return next alarm time
 	 */
-	CTime GetNextAlarm(CTime tod);
+	time_t GetNextAlarm(time_t tod);
 
 	/**
 	 * determine the next time this alarm triggers sound
 	 * @return next alarm time
 	 */
-	CTime GetAlarmTime(void);
+	time_t GetAlarmTime(void);
 
 	/**
 	 * determine the next time this alarm triggers in snooze mode
 	 * @return next alarm time
 	 */
-	CTime GetNextSnoozeTime(void);
+	time_t GetNextSnoozeTime(void);
 
 	/**
 	 * determine the next time this alarm triggers light
 	 * @return next light alarm time
 	 */
-	CTime GetLightAlarmTime(void);
+	time_t GetLightAlarmTime(void);
 
 	/**
 	 * get the state of light alarm enable
@@ -148,7 +148,9 @@ public:
 	 * @param light				enable for light alarm
 	 * @param snooze			enable for snooze
 	 */
-	void SetAlarm(sWeekdaysArm triggers, CTime alarm, uint8_t lightMinutes, uint8_t snoozeintervall, bool light, bool snooze);
+	void SetAlarm(sWeekdaysArm triggers, time_t alarm,
+                  uint8_t lightMinutes, uint8_t snoozeintervall,
+                  bool light, bool snooze, time_t tod);
 
 
 };

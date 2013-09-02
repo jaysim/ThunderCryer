@@ -39,13 +39,13 @@
 
 #include "CDCF77.h"
 
+
 #define PARITY 0xff
 #define IGNORE 0xfe
 #define NEWVAL 0x10
 
-// Adressdifferenz von .N zu .minute in time_t
+#define X(N) ((uint8_t)(&newtime.N - &newtime.minute))
 
-#define X(N) ((uint8_t)(&dcf77.newtime.N - &dcf77.newtime.minute))
 
 #define X0 X(minute)
 #define X1 X(hour)
@@ -55,8 +55,37 @@
 #define X5 X(year)
 #define X6 X(mesz)
 
-CDCF77::CDCF77() {
-	// TODO Auto-generated constructor stub
+
+CDCF77::CDCF77():dcf_byteno{
+  #ifdef TIME_MESZ
+   // Zeitzone: MEZ/MESZ (Winter-/Sommerzeit): 2 Bits an Offset 6
+   NEWVAL | X6, X6,
+   // Ankündigung Schaltsekunde
+   IGNORE,
+   // Parity Zeitzone (immer 1)
+   PARITY,
+  #endif // TIME_MESZ
+
+   // Minute: 7 Bits an Offset 0
+   NEWVAL | X0, X0, X0, X0, X0, X0, X0,
+   // Parity Minute
+   PARITY,
+   // Stunde: 6 Bits an Offset 1
+   NEWVAL | X1, X1, X1, X1, X1, X1,
+   // Parity Stunde
+   PARITY,
+   // Tag: 6 Bits an Offset 2
+   NEWVAL | X2, X2, X2, X2, X2, X2,
+   // Wochentag: 3 Bits an Offset 3
+   NEWVAL | X3, X3, X3,
+   // Monat: 5 Bits an Offset 4
+   NEWVAL | X4, X4, X4, X4, X4,
+   // Jahr: 8 Bits an Offset 5
+   NEWVAL | X5, X5, X5, X5, X5, X5, X5, X5,
+   // Parity Datum
+   PARITY
+  }
+{
 
 }
 
@@ -64,61 +93,8 @@ CDCF77::~CDCF77() {
 	// TODO Auto-generated destructor stub
 }
 
-#include "dcf77.h"
 
 
-
-#define PARITY 0xff
-#define IGNORE 0xfe
-#define NEWVAL 0x10
-
-#define X(N) ((uint8_t)(&this->newtime.N - &this->newtime.minute))
-
-
-#define X0 X(minute)
-#define X1 X(hour)
-#define X2 X(day)
-#define X3 X(day_of_week)
-#define X4 X(month)
-#define X5 X(year)
-#define X6 X(mesz)
-
-
-/* Codiert die DCF-Bits 17..58 bzw. 21...58 (je nachdem, ob MESZ
-   empfangen werden soll) und deren Position in time_t.
-   Low-Nibble     : Offset relativ zu .minute
-   Bit 4 (NEWVAL) : Neuer Wert fängt an, d.h. die Speicherposition
-                    muss 1 Byte voranschreiten. */
-static const uint8_t dcf_byteno[] =
-{
-#ifdef TIME_MESZ
-    // Zeitzone: MEZ/MESZ (Winter-/Sommerzeit): 2 Bits an Offset 6
-    NEWVAL | X6, X6,
-    // Ankündigung Schaltsekunde
-    IGNORE,
-    // Parity Zeitzone (immer 1)
-    PARITY,
-#endif // TIME_MESZ
-
-    // Minute: 7 Bits an Offset 0
-    NEWVAL | X0, X0, X0, X0, X0, X0, X0,
-    // Parity Minute
-    PARITY,
-    // Stunde: 6 Bits an Offset 1
-    NEWVAL | X1, X1, X1, X1, X1, X1,
-    // Parity Stunde
-    PARITY,
-    // Tag: 6 Bits an Offset 2
-    NEWVAL | X2, X2, X2, X2, X2, X2,
-    // Wochentag: 3 Bits an Offset 3
-    NEWVAL | X3, X3, X3,
-    // Monat: 5 Bits an Offset 4
-    NEWVAL | X4, X4, X4, X4, X4,
-    // Jahr: 8 Bits an Offset 5
-    NEWVAL | X5, X5, X5, X5, X5, X5, X5, X5,
-    // Parity Datum
-    PARITY
-};
 
 /*
    Dies ist der Einstiegspunkt für das DCF-Modul. Die Funktion wird alle
@@ -172,7 +148,7 @@ void CDCF77::Tick (uint8_t poll)
    und ist ca. 100 (also etwa 1s) oder nach dem ausgelassenen
    59. Bit ca. 200 (also etwa 2s). */
 
-void CDCF77::StartBit (dcf77_t *dcf, uint8_t ticks)
+void CDCF77::StartBit (uint8_t ticks)
 {
     // Aktuelle Sekunde 0..59 um 1 weiterzählen
     uint8_t second = this->newtime.second;
@@ -226,7 +202,7 @@ void CDCF77::StartBit (dcf77_t *dcf, uint8_t ticks)
    und ist für gültige 0-Bits ca. 10 (100ms) und für
    gültige 1-Bits ca. 20 (200ms). */
 
-static void CDCF77::EndBit (uint8_t ticks)
+void CDCF77::EndBit (uint8_t ticks)
 {
     uint8_t bit = 0;
 
@@ -247,7 +223,7 @@ static void CDCF77::EndBit (uint8_t ticks)
 
 /* Speichert BIT in der DCF-Struktur */
 
-static void CDCF77::StoreBbit (uint8_t bit)
+void CDCF77::StoreBit (uint8_t bit)
 {
     // Nur Bits 17..58 bzw. 21..58 decodieren. Die aktuelle Sekunde,
     // vermindert um 17/21, dient als Index ins Feld dcf_byteno[],

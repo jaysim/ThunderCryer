@@ -133,7 +133,7 @@ uint8_t CRTCAlarm::GetLightMinutes(void){
  * @param arm - arm state of the alarm
  */
 void CRTCAlarm::SetAlarmArmed(bool arm){
-	sAlarmTriggers.sDays.bArmed = arm;
+	sAlarmTriggers.bArmed = arm;
 }
 
 /**
@@ -146,7 +146,9 @@ void CRTCAlarm::SetAlarmArmed(bool arm){
  * @param snooze			Enable for snooze
  * @param tod 				Time of the day
  */
-void CRTCAlarm::SetAlarm(sWeekdaysArm triggers, time_t alarm, uint8_t lightMinutes, uint8_t snoozeintervall, bool light, bool snooze, time_t tod){
+void CRTCAlarm::SetAlarm(sWeekdaysArm triggers, time_t alarm,
+                         uint8_t lightMinutes, uint8_t snoozeintervall,
+                         bool light, bool snooze, time_t tod){
 	sAlarmTriggers = triggers;
 	AlarmTime = alarm;
 	u8SnoozeIntervall = snoozeintervall;

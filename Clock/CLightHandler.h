@@ -32,15 +32,16 @@ private:
 	 */
 	uint16_t u16LightLevel;
 
+    /**
+     * semaphore to regulate light level access
+     */
+    BinarySemaphore semLightLevelSet;
+
+
 	/**
 	 * light in alarm mode
 	 */
 	bool bLightAlarm;
-
-	/**
-	 * semaphore to regulate light level access
-	 */
-	BinarySemaphore semLightLevelSet;
 
 	/**
 	 * pwm frequency for light pwm
@@ -51,7 +52,6 @@ private:
 	 * pwm maximum value
 	 */
 	const uint16_t u16LightPWMMax = 1000;
-
 protected:
 	virtual msg_t main(void);
 
