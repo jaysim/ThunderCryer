@@ -8,7 +8,7 @@
  ******************************************************************************
  */
 
-#include "CRTCHander.h"
+#include "CRTCHandler.h"
 
 namespace chibios_rt {
 
