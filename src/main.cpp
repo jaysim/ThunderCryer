@@ -127,6 +127,7 @@ static SequencerThread blinker1(LED3_sequence);
 static SequencerThread blinker2(LED4_sequence);
 static SequencerThread blinker3(LED5_sequence);
 static SequencerThread blinker4(LED6_sequence);
+static CDCF77 dcfHandlerThread();
 
 /* The handles for our three consoles */
 GHandle GW1, GW2, GW3;
@@ -188,6 +189,7 @@ int main(void) {
   blinker2.start(NORMALPRIO + 10);
   blinker3.start(NORMALPRIO + 10);
   blinker4.start(NORMALPRIO + 10);
+  dcfHandlerThread.start(NORMALPRIO + 5);
   /* Output some data on the first console */
   gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
   /*

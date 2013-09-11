@@ -45,6 +45,7 @@
 
 using namespace std;
 
+namespace chibios_rt {
 
 typedef struct
 {
@@ -64,7 +65,7 @@ typedef struct
 /*
  *
  */
-class CDCF77 {
+class CDCF77 : public BaseStaticThread<128>{
 private:
 
 
@@ -113,21 +114,17 @@ private:
 
   uint8_t byteno;
 
-	void StartBit(uint8_t ticks);
-	void StoreBit(uint8_t ticks);
-	void EndBit(uint8_t bit);
+static	void StartBit(uint8_t ticks);
+static	void StoreBit(uint8_t ticks);
+static	void EndBit(uint8_t bit);
+protected:
+  virtual msg_t main(void);
+
 public:
 	CDCF77();
 	virtual ~CDCF77();
-
-	/* Obwohl es nur eine dcf77-Struktur gibt, wird nicht direkt
-	   mittels dcf77.xxx darauf zugegriffen, sondern durch dcf->xxx.
-	   Grund ist, daß auf AVR durch indirekten Zugriff ein kürzerer
-	   Code möglich ist als durch direkten Zugriff. Dazu darf gcc die
-	   Adresse von dcf77 nicht zu sehen bekommen; ansonsten macht er
-	   auch bei dcf->xxx einen direkten Zugriff. */
-	void Tick (uint8_t poll);
 };
 
+} /* namespace chibios_rt */
 #endif /* CDCF77_H_ */
 

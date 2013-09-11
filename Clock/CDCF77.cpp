@@ -38,6 +38,8 @@
  */
 
 #include "CDCF77.h"
+#include "ch.h"
+#include "hal.h"
 
 
 #define PARITY 0xff
@@ -102,43 +104,64 @@ CDCF77::~CDCF77() {
 
    poll = 0: Träger ist abgesenkt (erste 100ms oder 200ms einer Sekunde)
    poll = 1: Voller Träger */
+msg_t CDCF77::main(void){
+  static systime_t tCycleStart;
+  uint32_t dcf_pin;
 
-void CDCF77::Tick (uint8_t poll)
-{
+  /*
+   * activate DCF77 receiver
+   */
+  palWritePad(GPIOC,GPIOC_DCF_PON,PAL_HIGH);
+
+
+  setName("DCF_Handler");
+
+  while(true){
+    tCycleStart = System::getTime();
+
     // Diese Funktion wird zu jedem Tick -- also alle 10ms --
     // aufgerufen. Ticks um 1 weiterzählen.
 
-    uint8_t ticks = 1 + this->ticks;
+    /*
+     * get pin level
+     */
+    dcf_pin = palReadPad(GPIOC,GPIOC_DCF_DATA);
+
+
+    ticks++;
 
     // Überlauf der Ticks, z.B. bei schlechtem Signal oder nicht-
     // angeschlossenem Empfänger. Ticks bleiben dann bei 255 stehen.
 
     if (ticks == 0)
-        ticks = UINT8_MAX;
+      ticks = UINT8_MAX;
 
-    this->ticks = ticks;
-
-    // poll normieren auf 0 oder !0
-    poll = !!poll;
+    // dcf signal normieren auf 0 oder !0
+    dcf_pin = !!dcf_pin;
 
     // Flanke?
-    if (poll != this->poll)
+    if (dcf_pin != poll)
     {
-        // Ja. poll-Wert zur Erkennung der nächsten Flanke merken.
-        this->poll = poll;
+      // Ja. poll-Wert zur Erkennung der nächsten Flanke merken.
+      poll = dcf_pin;
 
-        if (poll)
-        {
-            // Flanke 0->1: Bit-Ende 100ms oder 200ms nach Sekundenstart
-        	CDCF77::EndBit (ticks);
-        }
-        else
-        {
-            // Flanke 1->0: Bit-Anfang, Sekundenstart
-            CDCF77::StartBit (ticks);
-            this->ticks = 0;
-        }
+      if (poll)
+      {
+        // Flanke 0->1: Bit-Ende 100ms oder 200ms nach Sekundenstart
+        CDCF77::EndBit (ticks);
+      }
+      else
+      {
+        // Flanke 1->0: Bit-Anfang, Sekundenstart
+        CDCF77::StartBit (ticks);
+        ticks = 0;
+      }
     }
+    /*
+     * cycle with 10 msec period
+     */
+    sleepUntil(tCycleStart + MS2ST(10));
+  }
 }
 
 
