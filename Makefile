@@ -128,7 +128,8 @@ INCDIR = ./inc $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
          $(CHCPPINC) \
          $(GFXINC) \
-         $(CHIBIOS)/os/various
+         $(CHIBIOS)/os/various \
+         ./Clock
 
 #
 # Project, sources and paths
