@@ -38,15 +38,18 @@
  */
 
 #include "CDCF77.h"
-#include "ch.h"
+#include "ch.hpp"
 #include "hal.h"
+
+
+using namespace chibios_rt;
 
 
 #define PARITY 0xff
 #define IGNORE 0xfe
 #define NEWVAL 0x10
 
-#define X(N) ((uint8_t)(&newtime.N - &newtime.minute))
+#define X(N) ((uint8_t)(&CDCF77::newtime.N - &CDCF77::newtime.minute))
 
 
 #define X0 X(minute)
@@ -57,45 +60,48 @@
 #define X5 X(year)
 #define X6 X(mesz)
 
+const uint8_t CDCF77::dcf_byteno[] = {
+#ifdef TIME_MESZ
+  // Zeitzone: MEZ/MESZ (Winter-/Sommerzeit): 2 Bits an Offset 6
+  NEWVAL | X6, X6,
+  // Ankündigung Schaltsekunde
+  IGNORE,
+  // Parity Zeitzone (immer 1)
+  PARITY,
+#endif // TIME_MESZ
 
-CDCF77::CDCF77():dcf_byteno{
-  #ifdef TIME_MESZ
-   // Zeitzone: MEZ/MESZ (Winter-/Sommerzeit): 2 Bits an Offset 6
-   NEWVAL | X6, X6,
-   // Ankündigung Schaltsekunde
-   IGNORE,
-   // Parity Zeitzone (immer 1)
-   PARITY,
-  #endif // TIME_MESZ
+  // Minute: 7 Bits an Offset 0
+  NEWVAL | X0, X0, X0, X0, X0, X0, X0,
+  // Parity Minute
+  PARITY,
+  // Stunde: 6 Bits an Offset 1
+  NEWVAL | X1, X1, X1, X1, X1, X1,
+  // Parity Stunde
+  PARITY,
+  // Tag: 6 Bits an Offset 2
+  NEWVAL | X2, X2, X2, X2, X2, X2,
+  // Wochentag: 3 Bits an Offset 3
+  NEWVAL | X3, X3, X3,
+  // Monat: 5 Bits an Offset 4
+  NEWVAL | X4, X4, X4, X4, X4,
+  // Jahr: 8 Bits an Offset 5
+  NEWVAL | X5, X5, X5, X5, X5, X5, X5, X5,
+  // Parity Datum
+  PARITY
+};
 
-   // Minute: 7 Bits an Offset 0
-   NEWVAL | X0, X0, X0, X0, X0, X0, X0,
-   // Parity Minute
-   PARITY,
-   // Stunde: 6 Bits an Offset 1
-   NEWVAL | X1, X1, X1, X1, X1, X1,
-   // Parity Stunde
-   PARITY,
-   // Tag: 6 Bits an Offset 2
-   NEWVAL | X2, X2, X2, X2, X2, X2,
-   // Wochentag: 3 Bits an Offset 3
-   NEWVAL | X3, X3, X3,
-   // Monat: 5 Bits an Offset 4
-   NEWVAL | X4, X4, X4, X4, X4,
-   // Jahr: 8 Bits an Offset 5
-   NEWVAL | X5, X5, X5, X5, X5, X5, X5, X5,
-   // Parity Datum
-   PARITY
-  }
-{
-
-}
-
-CDCF77::~CDCF77() {
-	// TODO Auto-generated destructor stub
-}
-
-
+dcftime_t CDCF77::newtime = {
+                             .second = 0,
+                             .minute = 0,
+                             .hour = 0,
+                             .day = 1,
+                             .day_of_week = 0,
+                             .month = 1,
+                             .year = 13
+                           #ifdef TIME_MESZ
+                             ,.mesz = 0
+                           #endif // TIME_MESZ
+};
 
 
 /*
@@ -162,6 +168,7 @@ msg_t CDCF77::main(void){
      */
     sleepUntil(tCycleStart + MS2ST(10));
   }
+  return 0;
 }
 
 
@@ -174,12 +181,12 @@ msg_t CDCF77::main(void){
 void CDCF77::StartBit (uint8_t ticks)
 {
     // Aktuelle Sekunde 0..59 um 1 weiterzählen
-    uint8_t second = this->newtime.second;
+    uint8_t second = newtime.second;
 
     if (second < 60)
         second++;
 
-    this->newtime.second = second;
+    newtime.second = second;
 
     if (ticks > 200-10 && ticks < 200+10)
     {
@@ -187,7 +194,7 @@ void CDCF77::StartBit (uint8_t ticks)
         // nicht abgesenkt. Nun beginnt eine neue Absenkung, d.h.
         // eine neue Minute beginnt.
 
-        this->newtime.second = 0;
+        newtime.second = 0;
 
         if (this->error == 0 && second == 59)
         {
@@ -255,7 +262,7 @@ void CDCF77::StoreBit (uint8_t bit)
 
     const uint8_t nbits = sizeof (dcf_byteno) / sizeof (dcf_byteno[0]);
 
-    uint8_t i = this->newtime.second - (59-nbits);
+    uint8_t i = newtime.second - (59-nbits);
 
     if (i >= nbits)
         return;
@@ -285,7 +292,7 @@ void CDCF77::StoreBit (uint8_t bit)
     // Low-Nibble -> Offset des Bytes (relativ zu .minute),
     // zu dem das Bit gehört
     uint8_t offset = i & 0xf;
-    uint8_t *d = &this->newtime.minute + offset;
+    uint8_t *d = &newtime.minute + offset;
 
     uint8_t val = *d;
 
@@ -312,5 +319,3 @@ void CDCF77::StoreBit (uint8_t bit)
     if (bitval == 8  &&  val >= 10)
         this->error = val;
 }
-
-

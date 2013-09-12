@@ -40,12 +40,14 @@
 #ifndef CDCF77_H_
 #define CDCF77_H_
 
+#include "ch.hpp"
 #include <ctime>
 #include <stdint.h>
 
 using namespace std;
 
 namespace chibios_rt {
+
 
 typedef struct
 {
@@ -67,20 +69,15 @@ typedef struct
  */
 class CDCF77 : public BaseStaticThread<128>{
 private:
-
-
   /* Codiert die DCF-Bits 17..58 bzw. 21...58 (je nachdem, ob MESZ
-   empfangen werden soll) und deren Position in time_t.
-   Low-Nibble     : Offset relativ zu .minute
-   Bit 4 (NEWVAL) : Neuer Wert fängt an, d.h. die Speicherposition
-                    muss 1 Byte voranschreiten. */
-  uint8_t dcf_byteno[50];
-
-
-
+ empfangen werden soll) und deren Position in time_t.
+ Low-Nibble     : Offset relativ zu .minute
+ Bit 4 (NEWVAL) : Neuer Wert fängt an, d.h. die Speicherposition
+                  muss 1 Byte voranschreiten. */
+  static const uint8_t dcf_byteno[];
 
   // In newtime wird die neue Zeit-Information aufgebaut
-  dcftime_t newtime;
+  static dcftime_t newtime;
 
   // Bei korrekt empfangener Zeit wird die Zeit nach *ptime kopiert.
   //
@@ -114,15 +111,16 @@ private:
 
   uint8_t byteno;
 
-static	void StartBit(uint8_t ticks);
-static	void StoreBit(uint8_t ticks);
-static	void EndBit(uint8_t bit);
+  void StartBit(uint8_t ticks);
+  void StoreBit(uint8_t ticks);
+  void EndBit(uint8_t bit);
 protected:
+
+
   virtual msg_t main(void);
 
 public:
-	CDCF77();
-	virtual ~CDCF77();
+
 };
 
 } /* namespace chibios_rt */
