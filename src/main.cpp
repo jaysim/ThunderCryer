@@ -17,6 +17,7 @@
 #include "ch.hpp"
 #include "hal.h"
 #include "gfx.h"
+#include "CDCF77.h"
 
 
 using namespace chibios_rt;
@@ -127,7 +128,7 @@ static SequencerThread blinker1(LED3_sequence);
 static SequencerThread blinker2(LED4_sequence);
 static SequencerThread blinker3(LED5_sequence);
 static SequencerThread blinker4(LED6_sequence);
-static CDCF77 dcfHandlerThread();
+static CDCF77 dcfHandlerThread;
 
 /* The handles for our three consoles */
 GHandle GW1, GW2, GW3;
@@ -136,7 +137,6 @@ GHandle GW1, GW2, GW3;
  * Application entry point.
  */
 int main(void) {
-  uint8_t i = 0;
   font_t  font1;
   /*
    * System initializations.
