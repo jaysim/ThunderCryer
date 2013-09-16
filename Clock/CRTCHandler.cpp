@@ -9,6 +9,9 @@
  */
 
 #include "CRTCHandler.h"
+#include "CDCF77.h"
+#include "ch.hpp"
+#include "hal.h"
 
 namespace chibios_rt {
 
@@ -24,6 +27,7 @@ namespace chibios_rt {
 
   msg_t CRTCHander::main(void){
 	  static systime_t tCycleStart;
+	  static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
 
 
 	  setName("RTC_Handler");
@@ -37,10 +41,17 @@ namespace chibios_rt {
 		  // check for new dcf77 time
 		  	  // if new time available
 		  	  // set it
+		  if(listenerDCF.available()){
+		    CDCFNewTimeArrived* dcf = listenerDCF.get();
+		    rtcSetTimeUnixSec(&RTCD1, dcf->newTime);
+		  }
+
+
 		  	  // check next alarm
 		  	  // and set it
 		  	  // Time of day notification
 		  	  // next alarm notification
+
 
 
 	  	  //check for alarm
