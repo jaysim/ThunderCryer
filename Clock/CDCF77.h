@@ -83,7 +83,8 @@ private:
   //
   // !!! *ptime MUSS AUSSERHALB DES DCF77-MODULS GESETZT WERDEN  !!!
   // !!! ANSONSTEN WIRD DIE ZEIT NICHT HINEINKOPIERT             !!!
-  dcftime_t *ptime;
+  dcftime_t ptime;
+
 
   // Wenn die neue Zeit nach *ptime kopiert wird, wird time_changed
   // auf 1 gesetzt. Die Anwendung kann time_changed wieder auf
@@ -116,12 +117,26 @@ private:
   void EndBit(uint8_t bit);
 protected:
 
-
   virtual msg_t main(void);
 
-public:
-
 };
+
+
+/**
+ * @class CDCFNewTimeArrived
+ *
+ * @brief signal for incomming new dcf time
+ *
+ */
+class CDCFNewTimeArrived : public NotifierMsg<CDCFNewTimeArrived> {
+public:
+    time_t newTime;
+};
+
+
+Notifier<CDCFNewTimeArrived> notifyDCFTime;
+
+
 
 } /* namespace chibios_rt */
 #endif /* CDCF77_H_ */

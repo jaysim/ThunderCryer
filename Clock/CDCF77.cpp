@@ -40,6 +40,7 @@
 #include "CDCF77.h"
 #include "ch.hpp"
 #include "hal.h"
+#include "time.h"
 
 
 using namespace chibios_rt;
@@ -49,7 +50,7 @@ using namespace chibios_rt;
 #define IGNORE 0xfe
 #define NEWVAL 0x10
 
-#define X(N) ((uint8_t)(&CDCF77::newtime.N - &CDCF77::newtime.minute))
+#define X(N) ((uint8_t)(&chibios_rt::CDCF77::newtime.N - &chibios_rt::CDCF77::newtime.minute))
 
 
 #define X0 X(minute)
@@ -110,7 +111,7 @@ dcftime_t CDCF77::newtime = {
 
    poll = 0: Träger ist abgesenkt (erste 100ms oder 200ms einer Sekunde)
    poll = 1: Voller Träger */
-msg_t CDCF77::main(void){
+msg_t chibios_rt::CDCF77::main(void){
   static systime_t tCycleStart;
   uint32_t dcf_pin;
 
@@ -178,50 +179,67 @@ msg_t CDCF77::main(void){
    und ist ca. 100 (also etwa 1s) oder nach dem ausgelassenen
    59. Bit ca. 200 (also etwa 2s). */
 
-void CDCF77::StartBit (uint8_t ticks)
+void chibios_rt::CDCF77::StartBit (uint8_t ticks)
 {
-    // Aktuelle Sekunde 0..59 um 1 weiterzählen
-    uint8_t second = newtime.second;
+  static CDCFNewTimeArrived *newDcfTime;
+  static struct tm tmp;
+  static time_t newTime;
 
-    if (second < 60)
-        second++;
+  // Aktuelle Sekunde 0..59 um 1 weiterzählen
+  uint8_t second = newtime.second;
 
-    newtime.second = second;
+  if (second < 60)
+    second++;
 
-    if (ticks > 200-10 && ticks < 200+10)
+  newtime.second = second;
+
+  if (ticks > 200-10 && ticks < 200+10)
+  {
+    // 59. Sekunde: Der Träger wurde für ca. 200 Ticks (2s)
+    // nicht abgesenkt. Nun beginnt eine neue Absenkung, d.h.
+    // eine neue Minute beginnt.
+
+    newtime.second = 0;
+
+    if (this->error == 0 && second == 59)
     {
-        // 59. Sekunde: Der Träger wurde für ca. 200 Ticks (2s)
-        // nicht abgesenkt. Nun beginnt eine neue Absenkung, d.h.
-        // eine neue Minute beginnt.
+      // Während einer ganzen Minute wurden korrekte
+      // Bits empfangen --> aktuelle Zeit/Datum speichern
 
-        newtime.second = 0;
+      this->time_changed = 1;
 
-        if (this->error == 0 && second == 59)
-        {
-            // Während einer ganzen Minute wurden korrekte
-            // Bits empfangen --> aktuelle Zeit/Datum speichern
+      // broadcast new arrived time
+      // get new element on mailbox
+      newDcfTime = notifyDCFTime.alloc();
 
-            this->time_changed = 1;
+      tmp.tm_sec =   newtime.second;
+      tmp.tm_min =   newtime.minute;
+      tmp.tm_hour =  newtime.hour;
+      tmp.tm_mday =  newtime.day;
+      tmp.tm_mon =   newtime.month;
+      tmp.tm_yday =  newtime.year;
 
-            // !!! FÜR .ptime SIEHE DEN KOMMENTAR IN dcf77.h     !!!
-
-            if (this->ptime)
-                *(this->ptime) = this->newtime;
-        }
-
-        // Eine Minuten-Marke bewirkt ein Neubeginn der
-        // DCF-Auswertung; daher das Fehler-Flag zurücksetzen.
-
-        this->error = 0;
+      newTime = mktime(&tmp);
+      newDcfTime->newTime = newTime;
+      // final broadcast if sufficient memory
+      if(newDcfTime != NULL){
+        notifyDCFTime.broadcast(newDcfTime);
+      }
     }
-    else
-    {
-        // Eine "normale" Sekunde ist vergangen. Deren Länge
-        // ist ca. 100 Ticks (1s). Andernfalls ist's ein Fehler.
 
-        if (ticks < 100-10 || ticks > 100+10)
-            this->error = 1;
-    }
+    // Eine Minuten-Marke bewirkt ein Neubeginn der
+    // DCF-Auswertung; daher das Fehler-Flag zurücksetzen.
+
+    this->error = 0;
+  }
+  else
+  {
+    // Eine "normale" Sekunde ist vergangen. Deren Länge
+    // ist ca. 100 Ticks (1s). Andernfalls ist's ein Fehler.
+
+    if (ticks < 100-10 || ticks > 100+10)
+      this->error = 1;
+  }
 }
 
 
@@ -232,7 +250,7 @@ void CDCF77::StartBit (uint8_t ticks)
    und ist für gültige 0-Bits ca. 10 (100ms) und für
    gültige 1-Bits ca. 20 (200ms). */
 
-void CDCF77::EndBit (uint8_t ticks)
+void chibios_rt::CDCF77::EndBit (uint8_t ticks)
 {
     uint8_t bit = 0;
 
@@ -253,7 +271,7 @@ void CDCF77::EndBit (uint8_t ticks)
 
 /* Speichert BIT in der DCF-Struktur */
 
-void CDCF77::StoreBit (uint8_t bit)
+void chibios_rt::CDCF77::StoreBit (uint8_t bit)
 {
     // Nur Bits 17..58 bzw. 21..58 decodieren. Die aktuelle Sekunde,
     // vermindert um 17/21, dient als Index ins Feld dcf_byteno[],
@@ -318,4 +336,19 @@ void CDCF77::StoreBit (uint8_t bit)
     // Kleiner Konsistenztest: Testet Einer auf gültiges BCD-Format
     if (bitval == 8  &&  val >= 10)
         this->error = val;
+}
+
+/**
+ * @brief get flag for new time available
+ *
+ * note: flag will be cleared an call
+ *
+ * @return true on new time available
+ */
+bool chibios_rt::CDCF77::TimeChanged(void) {
+  if(time_changed != 0){
+    time_changed = 0;
+    return true;
+  }
+  return false;
 }
