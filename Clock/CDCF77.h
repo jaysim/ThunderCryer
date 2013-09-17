@@ -43,6 +43,7 @@
 #include "ch.hpp"
 #include <ctime>
 #include <stdint.h>
+#include "Notifier.h"
 
 using namespace std;
 
@@ -134,7 +135,7 @@ public:
 };
 
 
-Notifier<CDCFNewTimeArrived> notifyDCFTime;
+extern Notifier<CDCFNewTimeArrived> notifyDCFTime;
 
 
 

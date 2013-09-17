@@ -61,6 +61,8 @@ using namespace chibios_rt;
 #define X5 X(year)
 #define X6 X(mesz)
 
+Notifier<CDCFNewTimeArrived> chibios_rt::notifyDCFTime;
+
 const uint8_t CDCF77::dcf_byteno[] = {
 #ifdef TIME_MESZ
   // Zeitzone: MEZ/MESZ (Winter-/Sommerzeit): 2 Bits an Offset 6
@@ -338,17 +340,3 @@ void chibios_rt::CDCF77::StoreBit (uint8_t bit)
         this->error = val;
 }
 
-/**
- * @brief get flag for new time available
- *
- * note: flag will be cleared an call
- *
- * @return true on new time available
- */
-bool chibios_rt::CDCF77::TimeChanged(void) {
-  if(time_changed != 0){
-    time_changed = 0;
-    return true;
-  }
-  return false;
-}
