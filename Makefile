@@ -89,7 +89,9 @@ CSRC = $(PORTSRC) \
        $(HALSRC) \
        $(GFXSRC) \
        $(PLATFORMSRC) \
-       $(BOARDSRC)
+       $(BOARDSRC) \
+       $(CHIBIOS)/os/various/chprintf.c \
+       $(CHIBIOS)/os/various/chrtclib.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -129,7 +131,8 @@ INCDIR = ./inc $(PORTINC) $(KERNINC) $(TESTINC) \
          $(CHCPPINC) \
          $(GFXINC) \
          $(CHIBIOS)/os/various \
-         ./Clock
+         ./Clock \
+         $(CHIBIOS)/os/various/
 
 #
 # Project, sources and paths
