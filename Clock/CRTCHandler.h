@@ -13,6 +13,8 @@
 
 #include "ch.hpp"
 #include "hal.h"
+#include "Notifier.h"
+#include "chrtclib.h"
 
 namespace chibios_rt {
 
@@ -45,6 +47,22 @@ namespace chibios_rt {
     CRTCHander();
     virtual ~CRTCHander();
   };
+
+/**
+ * @class CActualTime
+ *
+ * @brief one second broadcast of actual time
+ *
+ */
+class CActualTime : public NotifierMsg<CActualTime> {
+public:
+    time_t tod;
+};
+
+
+extern Notifier<CActualTime> notifyActTime;
+
+
 
 } /* namespace chibios_rt */
 #endif /* CRTCHANDER_H_ */

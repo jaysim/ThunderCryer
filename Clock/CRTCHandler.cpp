@@ -12,8 +12,12 @@
 #include "CDCF77.h"
 #include "ch.hpp"
 #include "hal.h"
+#include "chrtclib.h"
 
 namespace chibios_rt {
+
+  Notifier<CActualTime> notifyActTime;
+
 
   CRTCHander::CRTCHander() {
     // TODO Auto-generated constructor stub
@@ -28,6 +32,7 @@ namespace chibios_rt {
   msg_t CRTCHander::main(void){
 	  static systime_t tCycleStart;
 	  static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
+	  static CActualTime *tod;
 
 
 	  setName("RTC_Handler");
@@ -63,6 +68,11 @@ namespace chibios_rt {
 		  	   	  // search and set next armed alarm
 		  	   	  // send alarm notification
 
+	      // broadcast new tod
+	      // get new element on mailbox
+	      tod = notifyActTime.alloc();
+	      tod->tod = rtcGetTimeUnixSec(&RTCD1);
+	      notifyActTime.broadcast(tod);
 
 		  /*
 		   * cycle with 1 sec period
