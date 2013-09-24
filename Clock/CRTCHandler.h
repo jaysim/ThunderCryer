@@ -70,9 +70,20 @@ public:
   protected:
     virtual msg_t main(void);
   public:
-	void SetAlarm(uint8_t index, sWeekdaysArm triggers, time_t alarm,
-                  uint8_t lightMinutes, uint8_t snoozeintervall,
-                  bool light, bool snooze, time_t tod);
+    /**
+     * Setup the alarm
+     * @param index               index of alarm to set
+     * @param triggers            Weekday triggers
+     * @param alarm               Alarm time
+     * @param lightMinutes        Minutes of light fade in before alarm
+     * @param snoozeintervall   Minutes between snooze alarms
+     * @param light               Enable for light alarm
+     * @param snooze          Enable for snooze
+     * @param tod                 Time of the day
+     */
+    void SetAlarm(t_Alarms index, sWeekdaysArm triggers, time_t alarm,
+                             uint8_t lightMinutes, uint8_t snoozeintervall,
+                             bool light, bool snooze, time_t tod);
     CRTCHander();
     virtual ~CRTCHander();
   };

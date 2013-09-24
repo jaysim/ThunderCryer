@@ -47,7 +47,7 @@ namespace chibios_rt {
                            bool light, bool snooze, time_t tod){
 
 	  alarms[index].SetAlarm(triggers, alarm, lightMinutes, snoozeintervall,
-			  	  	  	  	  light, snooze, tod->time);
+			  	  	  	  	  light, snooze, tod);
 
   }
 
@@ -90,11 +90,11 @@ namespace chibios_rt {
 	      todAlarmDiff = tod->time; // init diff value with very high value
 	      minTodAlarmDiff = tod->time;
 
-		  for (t_Alarms i = 0; i < NUM_OF_ALARMS; ++i) {
+		  for (int i = 0; i < NUM_OF_ALARMS; ++i) {
 			  todAlarmDiff = alarms[i].GetNextAlarm(tod->time) - tod->time;
 			  if(minTodAlarmDiff < todAlarmDiff){
 				  minTodAlarmDiff = todAlarmDiff;  // save next alarm
-				  nextAlarm = i;
+				  nextAlarm = (t_Alarms)i;
 			  }
 		  }
 
