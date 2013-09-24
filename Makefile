@@ -100,7 +100,6 @@ CPPSRC = $(CHCPPSRC) \
          ./Clock/CDCF77.cpp \
          ./Clock/CLighthandler.cpp \
          ./Clock/CRTCAlarm.cpp \
-         ./Clock/CRTCAlarmHandler.cpp \
          ./Clock/CRTCHandler.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
