@@ -12,11 +12,13 @@
 #include "CDCF77.h"
 #include "ch.hpp"
 #include "hal.h"
+#include "time.h"
 #include "chrtclib.h"
 
 namespace chibios_rt {
 
   Notifier<CActualTime> notifyActTime;
+  Notifier<CActualTime> notifyActAlarm;
 
 
   CRTCHander::CRTCHander() {
@@ -29,10 +31,33 @@ namespace chibios_rt {
   }
 
 
+  /**
+   * Setup the alarm
+   * @param index				index of alarm to set
+   * @param triggers 			Weekday triggers
+   * @param alarm				Alarm time
+   * @param lightMinutes		Minutes of light fade in before alarm
+   * @param snoozeintervall   Minutes between snooze alarms
+   * @param light				Enable for light alarm
+   * @param snooze			Enable for snooze
+   * @param tod 				Time of the day
+   */
+  void CRTCHander::SetAlarm(t_Alarms index, sWeekdaysArm triggers, time_t alarm,
+                           uint8_t lightMinutes, uint8_t snoozeintervall,
+                           bool light, bool snooze, time_t tod){
+
+	  alarms[index].SetAlarm(triggers, alarm, lightMinutes, snoozeintervall,
+			  	  	  	  	  light, snooze, tod->time);
+
+  }
+
+
   msg_t CRTCHander::main(void){
 	  static systime_t tCycleStart;
 	  static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
-	  static CActualTime *tod;
+	  static time_t todAlarmDiff;
+	  static time_t minTodAlarmDiff;
+	  static t_Alarms nextAlarm;
 
 
 	  setName("RTC_Handler");
@@ -52,11 +77,33 @@ namespace chibios_rt {
 		  }
 
 
-		  	  // check next alarm
-		  	  // and set it
-		  	  // Time of day notification
-		  	  // next alarm notification
+	      // broadcast new tod
+	      // get new element on mailbox
+	      tod = notifyActTime.alloc();
+	      tod->time = rtcGetTimeUnixSec(&RTCD1);
+	      notifyActTime.broadcast(tod);
 
+
+	  	  // check next alarm
+	  	  	  // and set it
+	  	  	  // next alarm notification
+	      todAlarmDiff = tod->time; // init diff value with very high value
+	      minTodAlarmDiff = tod->time;
+
+		  for (t_Alarms i = 0; i < NUM_OF_ALARMS; ++i) {
+			  todAlarmDiff = alarms[i].GetNextAlarm(tod->time) - tod->time;
+			  if(minTodAlarmDiff < todAlarmDiff){
+				  minTodAlarmDiff = todAlarmDiff;  // save next alarm
+				  nextAlarm = i;
+			  }
+		  }
+
+		  if(activeAlarm != nextAlarm){
+			  // broadcast new alarm
+			  alarm = notifyActAlarm.alloc();
+			  alarm->time = alarms[nextAlarm].GetAlarmTime();
+			  notifyActAlarm.broadcast(alarm);
+		  }
 
 
 	  	  //check for alarm
@@ -68,11 +115,7 @@ namespace chibios_rt {
 		  	   	  // search and set next armed alarm
 		  	   	  // send alarm notification
 
-	      // broadcast new tod
-	      // get new element on mailbox
-	      tod = notifyActTime.alloc();
-	      tod->tod = rtcGetTimeUnixSec(&RTCD1);
-	      notifyActTime.broadcast(tod);
+
 
 		  /*
 		   * cycle with 1 sec period

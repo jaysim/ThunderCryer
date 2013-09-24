@@ -15,8 +15,30 @@
 #include "hal.h"
 #include "Notifier.h"
 #include "chrtclib.h"
+#include "CRTCAlarm.h"
 
 namespace chibios_rt {
+
+
+typedef enum{
+	ALARM_1 = 0,
+	ALARM_2,
+	ALARM_3,
+	NUM_OF_ALARMS
+}t_Alarms;
+
+
+/**
+ * @class CActualTime
+ *
+ * @brief one second broadcast of actual time
+ *
+ */
+class CActualTime : public NotifierMsg<CActualTime> {
+public:
+    time_t time;
+};
+
 
   /**
    * @class CRTCHander
@@ -40,27 +62,26 @@ namespace chibios_rt {
    *
    */
   class CRTCHander : public BaseStaticThread<1024>{
-
+  private:
+	  t_Alarms		activeAlarm;
+	  CRTCAlarm		alarms[NUM_OF_ALARMS];
+	  CActualTime *tod;
+	  CActualTime *alarm;
   protected:
     virtual msg_t main(void);
   public:
+	void SetAlarm(uint8_t index, sWeekdaysArm triggers, time_t alarm,
+                  uint8_t lightMinutes, uint8_t snoozeintervall,
+                  bool light, bool snooze, time_t tod);
     CRTCHander();
     virtual ~CRTCHander();
   };
 
-/**
- * @class CActualTime
- *
- * @brief one second broadcast of actual time
- *
- */
-class CActualTime : public NotifierMsg<CActualTime> {
-public:
-    time_t tod;
-};
 
 
 extern Notifier<CActualTime> notifyActTime;
+extern Notifier<CActualTime> notifyActAlarm;
+
 
 
 
