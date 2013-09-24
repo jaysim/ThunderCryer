@@ -28,6 +28,12 @@ typedef union {
 	uint8_t bDays;
 }sWeekdaysArm ;
 
+typedef enum{
+	IN_ACTIVE,
+	W4LIGHT,
+	W4ALARM,
+	W4SNOOZE
+}t_AlarmState;
 
  /**
    * @class CRTCAlarm
@@ -82,9 +88,29 @@ private:
 	bool bSnoozeEnable;
 
 	/**
-	 * enalbe flag for light
+	 * enable flag for light
 	 */
 	bool bLightEnable;
+
+	/**
+	 * alarm is snoozing
+	 */
+	bool bSnoozing;
+
+	/**
+	 * next snooze alarm time
+	 */
+	time_t SnoozeAlarmTime;
+
+	/**
+	 * snooze counter
+	 */
+	uint8_t u8SnoozeCount;
+
+	/**
+	 * alarm state for alarm statemachine
+	 */
+	t_AlarmState state;
 
 public:
 	CRTCAlarm();
@@ -97,23 +123,28 @@ public:
 	 */
 	time_t GetNextAlarm(time_t tod);
 
+
+	/**
+	 * trigger the alarm to change alarm state and
+	 * send the alarm signals to the hole system
+	 */
+	void TriggerAlarm(void);
+
+	/**
+	 * go to snooze mode
+	 */
+	void Snooze(void);
+
+	/**
+	 * stop alarm
+	 */
+	void StopAlarm(void);
+
 	/**
 	 * determine the next time this alarm triggers sound
 	 * @return next alarm time
 	 */
 	time_t GetAlarmTime(void);
-
-	/**
-	 * determine the next time this alarm triggers in snooze mode
-	 * @return next alarm time
-	 */
-	time_t GetNextSnoozeTime(void);
-
-	/**
-	 * determine the next time this alarm triggers light
-	 * @return next light alarm time
-	 */
-	time_t GetLightAlarmTime(void);
 
 	/**
 	 * get the state of light alarm enable
@@ -126,6 +157,12 @@ public:
 	 * @return true - snooze alarm is enabled, false - otherwise
 	 */
 	bool GetSnoozeEnable(void);
+
+	/**
+	 * get Alarm state
+	 * @return actual alarm state
+	 */
+	t_AlarmState GetAlarmState(void);
 
 	/**
 	 * get the minutes light starts before sound alarm
