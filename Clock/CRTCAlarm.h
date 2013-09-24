@@ -30,6 +30,7 @@ typedef union {
 
 typedef enum{
 	IN_ACTIVE,
+	SKIP_ALARM,
 	W4LIGHT,
 	W4ALARM,
 	W4SNOOZE
@@ -123,13 +124,6 @@ public:
 	 */
 	time_t GetNextAlarm(time_t tod);
 
-
-	/**
-	 * trigger the alarm to change alarm state and
-	 * send the alarm signals to the hole system
-	 */
-	void TriggerAlarm(void);
-
 	/**
 	 * go to snooze mode
 	 */
@@ -139,6 +133,11 @@ public:
 	 * stop alarm
 	 */
 	void StopAlarm(void);
+
+    /**
+     * skip alarm following alarm
+     */
+    void SkipAlarm(void);
 
 	/**
 	 * determine the next time this alarm triggers sound

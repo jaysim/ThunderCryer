@@ -27,8 +27,8 @@ CRTCAlarm::~CRTCAlarm() {
  * @return next alarm time
  */
 time_t CRTCAlarm::GetNextAlarm(time_t tod){
-	struct tm sTodTime;
-	struct tm sAlarmTime;
+	struct tm *sTodTime;
+	struct tm *sAlarmTime;
 	time_t newAlarm;
 	time_t diffLight, diffAlarm;
 	int i = 0;
@@ -38,20 +38,20 @@ time_t CRTCAlarm::GetNextAlarm(time_t tod){
 	if(sAlarmTriggers.bDays > (1<<7)){
 
 		sTodTime = gmtime(&tod);
-		sTodTime.tm_hour += 1;	// our time zone
-		sTodTime.tm_wday += 1;    // monday is 0
+		sTodTime->tm_hour += 1;	// our time zone
+		sTodTime->tm_wday += 1;    // monday is 0
 
 		sAlarmTime = gmtime(&AlarmTime);
 
 		// determine next weekday to trigger
 		for (i = 0; i < 7; ++i) {
-			sTodTime.tm_wday += i; // go through the weekdays
+			sTodTime->tm_wday += i; // go through the weekdays
 
-			if(sTodTime.tm_wday > 6){ // warp around on sunday
-				sTodTime.tm_wday = 0;
+			if(sTodTime->tm_wday > 6){ // warp around on sunday
+				sTodTime->tm_wday = 0;
 			}
 			// check if alarm should trigger
-			if(((1<<sTodTime.tm_wday) & sAlarmTriggers.bDays)!=0){
+			if(((1<<sTodTime->tm_wday) & sAlarmTriggers.bDays)!=0){
 				break; // exit loop
 			}
 
@@ -59,12 +59,12 @@ time_t CRTCAlarm::GetNextAlarm(time_t tod){
 
 		// add the days no alarm triggers to date
 		// note: if mday is out of range date will be corrected to next month
-		sTodTime.tm_mday += i;
+		sTodTime->tm_mday += i;
 
 		// copy alarm time in full date
-		sTodTime.tm_hour = sAlarmTime.tm_hour;
-		sTodTime.tm_min = sAlarmTime.tm_min;
-		AlarmTime = mktime(&sTodTime);
+		sTodTime->tm_hour = sAlarmTime->tm_hour;
+		sTodTime->tm_min = sAlarmTime->tm_min;
+		AlarmTime = mktime(sTodTime);
 		//build light alarm time, sub according seconds from alarm time
 		LightTime = AlarmTime - ((time_t)u8LightMinutes)*60;
 
@@ -72,20 +72,23 @@ time_t CRTCAlarm::GetNextAlarm(time_t tod){
 		diffLight = LightTime - tod;
 		diffAlarm = AlarmTime - tod;
 
-		if((diffLight > 0)&&(bLightEnable == true)){
+		if((diffLight > 0)&&(bLightEnable == true)&&(state != SKIP_ALARM)){
 			// light alarm is in future and enabled
 			newAlarm = LightTime;
 			state = W4LIGHT;
 		}else{
-			// not light alarm or in past
-			if(diffAlarm > 0){
+			// not light alarm or in past or skiped
+			if((diffAlarm > 0)&&(state != SKIP_ALARM)){
 				//Alarm is in Future
 				newAlarm = AlarmTime;
 				SnoozeAlarmTime = AlarmTime + ((time_t)u8SnoozeIntervall)*60;
 				u8SnoozeCount = 0;
 				state = W4ALARM;
 			}else{
-				// Snooze, alarm does not go to snooze on its own
+			    // wait for alarm in the past to release next alarm
+				if((diffAlarm < 0)){
+				  state = IN_ACTIVE;
+				}
 			}
 		}
 
@@ -105,6 +108,20 @@ time_t CRTCAlarm::GetNextAlarm(time_t tod){
 	}
 
 	return newAlarm;
+}
+
+/**
+ * go to snooze mode
+ */
+void CRTCAlarm::Snooze(void){
+  state = W4SNOOZE;
+}
+
+/**
+ * stop alarm
+ */
+void CRTCAlarm::StopAlarm(void){
+  state = IN_ACTIVE;
 }
 
 /**
@@ -145,6 +162,13 @@ uint8_t CRTCAlarm::GetLightMinutes(void){
  */
 void CRTCAlarm::SetAlarmArmed(bool arm){
 	sAlarmTriggers.bArmed = arm;
+}
+
+/**
+ * skip alarm following alarm
+ */
+void CRTCAlarm::SkipAlarm(void){
+  state = SKIP_ALARM;
 }
 
 
