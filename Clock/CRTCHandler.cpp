@@ -19,6 +19,7 @@ namespace chibios_rt {
 
   Notifier<CActualTime> notifyActTime;
   Notifier<CActualTime> notifyActAlarm;
+  static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
 
 
   CRTCHander::CRTCHander() {
@@ -54,7 +55,7 @@ namespace chibios_rt {
 
   msg_t CRTCHander::main(void){
 	  static systime_t tCycleStart;
-	  static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
+
 	  static time_t todAlarmDiff;
 	  static time_t minTodAlarmDiff;
 	  static t_Alarms nextAlarm;
@@ -74,6 +75,7 @@ namespace chibios_rt {
 		  if(listenerDCF.available()){
 		    CDCFNewTimeArrived* dcf = listenerDCF.get();
 		    rtcSetTimeUnixSec(&RTCD1, dcf->newTime);
+		    listenerDCF.release(dcf);
 		  }
 
 
