@@ -207,7 +207,7 @@ else
 	@echo Done
 	@echo 
 	@echo Codesizes
-	@$(SIZE) $< $@
+	@$(SIZE) $<
 endif
 
 clean:
