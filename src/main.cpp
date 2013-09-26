@@ -18,6 +18,9 @@
 #include "hal.h"
 #include "gfx.h"
 #include "CDCF77.h"
+#include "CRTCHandler.h"
+#include "CRTCAlarm.h"
+#include <ctime>
 
 
 using namespace chibios_rt;
@@ -129,6 +132,10 @@ static SequencerThread blinker2(LED4_sequence);
 static SequencerThread blinker3(LED5_sequence);
 static SequencerThread blinker4(LED6_sequence);
 static CDCF77 dcfHandlerThread;
+static CRTCHander rtcHandlerThread;
+static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
+static Listener<CActualTime,5> listenerActTime(&notifyActTime);
+static Listener<CActualTime,5> listenerActAlarm(&notifyActAlarm);
 
 /* The handles for our three consoles */
 GHandle GW1, GW2, GW3;
@@ -190,6 +197,7 @@ int main(void) {
   blinker3.start(NORMALPRIO + 10);
   blinker4.start(NORMALPRIO + 10);
   dcfHandlerThread.start(NORMALPRIO + 5);
+  rtcHandlerThread.start(NORMALPRIO + 4);
   /* Output some data on the first console */
   gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
   /*
@@ -197,6 +205,31 @@ int main(void) {
    */
   while (true) {
     BaseThread::sleep(MS2ST(500));
+
+    if(listenerDCF.available()){
+      CDCFNewTimeArrived* dcf = listenerDCF.get();
+      gwinPrintf(GW1, "DCF: ");
+      gwinPrintf(GW1, ctime(&dcf->newTime));
+      gwinPrintf(GW1, "\r\n");
+      listenerDCF.release(dcf);
+    }
+
+    if(listenerActTime.available()){
+      CActualTime* time = listenerActTime.get();
+      gwinPrintf(GW1, "Time : ");
+      gwinPrintf(GW1, ctime(&time->time));
+      gwinPrintf(GW1, "\r\n");
+      notifyActTime.release(time);
+    }
+
+    if(listenerActAlarm.available()){
+      CActualTime* time = listenerActAlarm.get();
+      gwinPrintf(GW1, "Alarm: ");
+      gwinPrintf(GW1, ctime(&time->time));
+      gwinPrintf(GW1, "\r\n");
+      listenerActAlarm.release(time);
+    }
+
   }
 
   return 0;
