@@ -38,7 +38,7 @@ time_t CRTCAlarm::GetNextAlarm(time_t tod){
 	if(sAlarmTriggers.bDays > (1<<7)){
 
 		sTodTime = gmtime(&tod);
-		sTodTime->tm_hour += UTC + 1;	// our time zone
+		sTodTime->tm_hour += 1;	// our time zone
 		sTodTime->tm_wday += 1;    // monday is 0
 
 		sAlarmTime = gmtime(&AlarmTime);
