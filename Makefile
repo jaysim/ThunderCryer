@@ -91,12 +91,14 @@ CSRC = $(PORTSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/chprintf.c \
-       $(CHIBIOS)/os/various/chrtclib.c
+       $(CHIBIOS)/os/various/chrtclib.c \
+       $(CHIBIOS)/os/various/syscalls.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(CHCPPSRC) \
          ./src/main.cpp \
+         ./src/LibraryHacks.cpp \
          ./Clock/CDCF77.cpp \
          ./Clock/CLighthandler.cpp \
          ./Clock/CRTCAlarm.cpp \
