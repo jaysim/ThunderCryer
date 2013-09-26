@@ -188,7 +188,6 @@ ifeq ($(USE_VERBOSE_COMPILE),yes)
 else
 	@echo Creating $@
 	@$(HEX) $< $@
-	@$(SIZE) $< $@
 endif
 
 %.bin: %.elf $(LDSCRIPT)
@@ -206,6 +205,9 @@ else
 	@echo Creating $@
 	@$(OD) $(ODFLAGS) $< > $@
 	@echo Done
+	@echo 
+	@echo Codesizes
+	@$(SIZE) $< $@
 endif
 
 clean:
