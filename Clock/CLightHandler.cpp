@@ -56,8 +56,8 @@ msg_t CLightHandler::main(void){
 	static uint16_t pwmStep = 0;
 
 	/* config listener to alarm notification */
-	static CLightAlarmNotification *alarm;
-	static Listener<CLightAlarmNotification,5> listenerAlarm(&notifyLightAlarm);
+	CLightAlarmNotification *alarm;
+	Listener<CLightAlarmNotification,5> listenerAlarm(&notifyLightAlarm);
 
 	/* pwm configuration */
 	static PWMConfig pwmcfg = {

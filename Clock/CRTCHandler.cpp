@@ -19,7 +19,7 @@ namespace chibios_rt {
 
   Notifier<CActualTime> notifyActTime;
   Notifier<CActualTime> notifyActAlarm;
-  static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
+
 
 
   CRTCHander::CRTCHander() {
@@ -55,10 +55,10 @@ namespace chibios_rt {
 
   msg_t CRTCHander::main(void){
 	  static systime_t tCycleStart;
-
 	  static time_t todAlarmDiff;
 	  static time_t minTodAlarmDiff;
 	  static t_Alarms nextAlarm;
+	  Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
 
 
 	  setName("RTC_Handler");
@@ -82,9 +82,10 @@ namespace chibios_rt {
 	      // broadcast new tod
 	      // get new element on mailbox
 	      tod = notifyActTime.alloc();
-	      tod->time = rtcGetTimeUnixSec(&RTCD1);
-	      notifyActTime.broadcast(tod);
-
+	      if(tod != NULL){
+	        tod->time = rtcGetTimeUnixSec(&RTCD1);
+	        notifyActTime.broadcast(tod);
+	      }
 
 	  	  // check next alarm
 	  	  	  // and set it
@@ -103,8 +104,10 @@ namespace chibios_rt {
 		  if(activeAlarm != nextAlarm){
 			  // broadcast new alarm
 			  alarm = notifyActAlarm.alloc();
-			  alarm->time = alarms[nextAlarm].GetAlarmTime();
-			  notifyActAlarm.broadcast(alarm);
+			  if(alarm != NULL){
+			    alarm->time = alarms[nextAlarm].GetAlarmTime();
+			    notifyActAlarm.broadcast(alarm);
+			  }
 		  }
 
 
