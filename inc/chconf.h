@@ -313,7 +313,7 @@
  *          appropriate documentation.
  */
 #if !defined(CH_USE_MALLOC_HEAP) || defined(__DOXYGEN__)
-#define CH_USE_MALLOC_HEAP              FALSE
+#define CH_USE_MALLOC_HEAP              TRUE
 #endif
 
 /**
