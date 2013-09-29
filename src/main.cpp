@@ -125,6 +125,84 @@ public:
 };
 
 
+class ConsoleThread : public BaseStaticThread<2048> {
+private:
+  /* The handles for our three consoles */
+  GHandle GW1;
+
+protected:
+  virtual msg_t main(void) {
+    font_t  font1;
+    Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
+    Listener<CActualTime,10> listenerActTime(&notifyActTime);
+    Listener<CActualTime,5> listenerActAlarm(&notifyActAlarm);
+
+    setName("Console");
+
+    /* Set some fonts */
+    font1 = gdispOpenFont("Small");
+    gwinSetDefaultFont(font1);
+
+    /* create the three console windows */
+    {
+      GWindowInit     wi;
+
+      wi.show = TRUE;
+      wi.x = 0; wi.y = 0; wi.width = gdispGetWidth(); wi.height = gdispGetHeight();
+      GW1 = gwinConsoleCreate(NULL, &wi);
+
+    }
+
+    /* Set the fore- and background colors for each console */
+    gwinSetColor(GW1, Black);
+    gwinSetBgColor(GW1, White);
+
+    /* clear all console windows - to set background */
+    gwinClear(GW1);
+
+    /* Output some data on the first console */
+    gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
+    /*
+     * Serves timer events.
+     */
+    while (true) {
+      BaseThread::sleep(MS2ST(500));
+
+      if(listenerDCF.available()){
+        CDCFNewTimeArrived* dcf = listenerDCF.get();
+        gwinPrintf(GW1, "DCF: ");
+        gwinPrintf(GW1, ctime(&dcf->newTime));
+        gwinPrintf(GW1, "\r\n");
+        listenerDCF.release(dcf);
+      }
+
+      if(listenerActTime.available()){
+        CActualTime* time = listenerActTime.get();
+        gwinPrintf(GW1, "Time : ");
+        gwinPrintf(GW1, ctime(&time->time));
+        gwinPrintf(GW1, "\r\n");
+        notifyActTime.release(time);
+      }
+
+      if(listenerActAlarm.available()){
+        CActualTime* time = listenerActAlarm.get();
+        gwinPrintf(GW1, "Alarm: ");
+        gwinPrintf(GW1, ctime(&time->time));
+        gwinPrintf(GW1, "\r\n");
+        listenerActAlarm.release(time);
+      }
+
+    }
+    return 0;
+  }
+
+public:
+  ConsoleThread() {
+
+  }
+};
+
+
 
 /* Static threads instances.*/
 static SequencerThread blinker1(LED3_sequence);
@@ -133,18 +211,15 @@ static SequencerThread blinker3(LED5_sequence);
 static SequencerThread blinker4(LED6_sequence);
 static CDCF77 dcfHandlerThread;
 static CRTCHander rtcHandlerThread;
-static Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
-static Listener<CActualTime,5> listenerActTime(&notifyActTime);
-static Listener<CActualTime,5> listenerActAlarm(&notifyActAlarm);
+static ConsoleThread console;
 
-/* The handles for our three consoles */
-GHandle GW1, GW2, GW3;
+
+
 
 /*
  * Application entry point.
  */
 int main(void) {
-  font_t  font1;
   /*
    * System initializations.
    * - HAL initialization, this also initializes the configured device drivers
@@ -158,35 +233,6 @@ int main(void) {
   /* initialize and clear the display */
   gfxInit();
 
-  /* Set some fonts */
-  font1 = gdispOpenFont("Small");
-  gwinSetDefaultFont(font1);
-
-  /* create the three console windows */
-  {
-    GWindowInit     wi;
-
-    wi.show = TRUE;
-    wi.x = 0; wi.y = 0; wi.width = gdispGetWidth(); wi.height = gdispGetHeight();
-    GW1 = gwinConsoleCreate(NULL, &wi);
-
-  }
-
-  /* Set the fore- and background colors for each console */
-  gwinSetColor(GW1, Black);
-  gwinSetBgColor(GW1, White);
-
-  /* clear all console windows - to set background */
-  gwinClear(GW1);
-
-
-  /*
-   * Activates the serial driver 2 using the driver default configuration.
-   * PA2(TX) and PA3(RX) are routed to USART2.
-   */
-  sdStart(&SD2, NULL);
-  palSetPadMode(GPIOA, 2, PAL_MODE_ALTERNATE(7));
-  palSetPadMode(GPIOA, 3, PAL_MODE_ALTERNATE(7));
 
   /*
    * Starts several instances of the SequencerThread class, each one operating
@@ -198,37 +244,13 @@ int main(void) {
   blinker4.start(NORMALPRIO + 10);
   dcfHandlerThread.start(NORMALPRIO + 5);
   rtcHandlerThread.start(NORMALPRIO + 4);
-  /* Output some data on the first console */
-  gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
+  console.start(NORMALPRIO + 3);
+
   /*
    * Serves timer events.
    */
   while (true) {
     BaseThread::sleep(MS2ST(500));
-
-    if(listenerDCF.available()){
-      CDCFNewTimeArrived* dcf = listenerDCF.get();
-      gwinPrintf(GW1, "DCF: ");
-      gwinPrintf(GW1, ctime(&dcf->newTime));
-      gwinPrintf(GW1, "\r\n");
-      listenerDCF.release(dcf);
-    }
-
-    if(listenerActTime.available()){
-      CActualTime* time = listenerActTime.get();
-      gwinPrintf(GW1, "Time : ");
-      gwinPrintf(GW1, ctime(&time->time));
-      gwinPrintf(GW1, "\r\n");
-      notifyActTime.release(time);
-    }
-
-    if(listenerActAlarm.available()){
-      CActualTime* time = listenerActAlarm.get();
-      gwinPrintf(GW1, "Alarm: ");
-      gwinPrintf(GW1, ctime(&time->time));
-      gwinPrintf(GW1, "\r\n");
-      listenerActAlarm.release(time);
-    }
 
   }
 
