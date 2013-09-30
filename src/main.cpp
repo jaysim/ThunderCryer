@@ -140,7 +140,7 @@ protected:
     setName("Console");
 
     /* Set some fonts */
-    font1 = gdispOpenFont("Small");
+    font1 = gdispOpenFont("DejaVu*");
     gwinSetDefaultFont(font1);
 
     /* create the three console windows */
