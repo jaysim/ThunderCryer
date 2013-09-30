@@ -64,8 +64,8 @@ endif
 PROJECT = ch
 
 # Imported source files and paths
-CHIBIOS = ./Chibios
-GFXLIB = ./uGFX
+CHIBIOS = ./lib/Chibios
+GFXLIB = ./lib/uGFX
 include $(CHIBIOS)/boards/ThunderCryer/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
