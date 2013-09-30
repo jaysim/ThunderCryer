@@ -13,6 +13,8 @@
  * @{
  */
 
+#include "stdint.h"
+#include "string.h"
 #include "ch.h"
 #include "hal.h"
 #include "gfx.h"
@@ -46,8 +48,8 @@
 #define GDISP_INITIAL_CONTRAST	50
 #define GDISP_INITIAL_BACKLIGHT	100
 
-#define GLCD_NUMBER_OF_LINES            128
-#define GLCD_PIXELS_PER_LINE            240
+#define GLCD_NUMBER_OF_LINES            GDISP_SCREEN_HEIGHT
+#define GLCD_PIXELS_PER_LINE            GDISP_SCREEN_WIDTH
 #define GLCD_FONT_WIDTH                 8
 
 #define GLCD_GRAPHIC_AREA               (GLCD_PIXELS_PER_LINE / GLCD_FONT_WIDTH)
@@ -104,6 +106,11 @@
 
 #define T6963_BIT_SET                   0xF8
 #define T6963_BIT_RESET                 0xF0
+
+#define GDISP_LLD_THREAD_STACK_SIZE     1024
+
+
+
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -111,10 +118,13 @@
 /*===========================================================================*/
 /* Driver local variables.                                                   */
 /*===========================================================================*/
-
+static uint8_t FrameBuffer[GLCD_GRAPHIC_SIZE];
+static WORKING_AREA(wa_gdisp_lld_thread, GDISP_LLD_THREAD_STACK_SIZE);
+static Mutex gdisp_draw_mtx; /* Mutex declaration */
 /*===========================================================================*/
 /* Driver local functions.                                                   */
 /*===========================================================================*/
+
 /**
   * @brief  polled timer supported us delay
   * @param  us micro seconds to wait depents on timer frequency
@@ -146,7 +156,7 @@ bool gdisp_lld_check_status(void)
     //palSetPort(GLCD_CTRL_PORT,  GLCD_RD | GLCD_CE);
     GLCD_CTRL_PORT->BSRR.H.set = (GLCD_RD | GLCD_CE);
 
-    gdisp_lld_lcdDelay(c_iDelayAfter);
+
 
     GLCD_DATA_OUTPUT;
 
@@ -218,7 +228,6 @@ static inline void gdisp_lld_write_data(uint16_t data) {
   //palSetPort(GLCD_CTRL_PORT, GLCD_CD | GLCD_WR | GLCD_CE);
   GLCD_CTRL_PORT->BSRR.H.set = (GLCD_CD | GLCD_WR | GLCD_CE);
 
-  gdisp_lld_lcdDelay(c_iDelayAfter);
 }
 
 /**
@@ -249,8 +258,6 @@ static inline uint16_t gdisp_lld_read_data(void) {
   tmp = ((palReadPort(GLCD_DATA_PORT) & GLCD_DATA_PORT_MASK) >> GLCD_DATA_OFFSET);
 
   GLCD_CTRL_PORT->BSRR.H.set =  GLCD_RD | GLCD_CD | GLCD_CE ;
-
-  gdisp_lld_lcdDelay(c_iDelayAfter);
 
   GLCD_DATA_OUTPUT;
   return (unsigned char)tmp;
@@ -287,7 +294,44 @@ static inline void gdisp_lld_set_cursor(uint16_t x, uint16_t y){
   gdisp_lld_set_address_pointer(address);
 }
 
+/*
+ * draw display farme buffer thread
+ */
+static msg_t gdisp_lld_thread(void *arg) {
+	static int i;
+	static systime_t tCycleStart;
 
+	(void)arg;
+
+	chRegSetThreadName("gdisp_lld_thread");
+
+	while (TRUE) {
+		/* get system time */
+		tCycleStart = chTimeNow();
+
+		/*
+		 * only draw buffer when not drawing
+		 */
+		chMtxLock(&gdisp_draw_mtx);
+
+		// Graphics and Text are different mem pools in this Controller
+		gdisp_lld_set_address_pointer(GLCD_GRAPHIC_HOME);
+
+		for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
+		{
+			/* draw the buffer */
+			gdisp_lld_write_data_inc(FrameBuffer[i]);
+		}
+		/*
+		 * release mutex
+		 */
+		chMtxUnlock();
+
+		/* wait for cyclic run through */
+		chThdSleepUntil(MS2ST(100) + tCycleStart);
+	}
+	return 0;
+}
 
 bool_t gdisp_lld_init(void) {
 	/* Initialise your display */
@@ -345,39 +389,45 @@ bool_t gdisp_lld_init(void) {
 	GDISP.clipy1 = GDISP.Height;
     #endif
 
+
+	chMtxInit(&gdisp_draw_mtx); /* Mutex initialization before use */
+
+	/* Starting the frame buffer draw thread*/
+	(void)chThdCreateStatic(wa_gdisp_lld_thread, sizeof(wa_gdisp_lld_thread),
+						  NORMALPRIO + 1, gdisp_lld_thread, NULL);
+
 	return TRUE;
 }
 
 void gdisp_lld_draw_pixel(coord_t x, coord_t y, color_t color) {
-    #if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
-        if (x < GDISP.clipx0 || y < GDISP.clipy0 || x >= GDISP.clipx1 || y >= GDISP.clipy1) return;
-    #endif
-    unsigned char tmp;
+#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
+	if (x < GDISP.clipx0 || y < GDISP.clipy0 || x >= GDISP.clipx1 || y >= GDISP.clipy1) return;
+#endif
+	unsigned char tmp;
+	tmp = (GLCD_FONT_WIDTH - 1) - (x % GLCD_FONT_WIDTH);
 
-
-    gdisp_lld_set_cursor(x,y);
-
-    tmp = (GLCD_FONT_WIDTH - 1) - (x % GLCD_FONT_WIDTH);
-
-    if(color)
-      gdisp_lld_write_command(T6963_BIT_RESET | tmp);
-    else
-      gdisp_lld_write_command(T6963_BIT_SET | tmp);
+	chMtxLock(&gdisp_draw_mtx);
+	/* lock framebuffer access */
+	if(color){ /* reset bit */
+		FrameBuffer[(x / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y)] &= ~(1<<tmp);
+	}else{ /* set bit */
+		FrameBuffer[(x / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y)] |= (1<<tmp);
+	}
+	/* unlock framebuffer access */
+	chMtxUnlock();
 }
 
 #if GDISP_HARDWARE_CLEARS || defined(__DOXYGEN__)
 void gdisp_lld_clear(color_t color) {
-  unsigned int i;
-  // Graphics and Text are different mem pools in this Controller
-  gdisp_lld_set_address_pointer(GLCD_GRAPHIC_HOME);
-
-  for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
-  {
-    if(color)
-      gdisp_lld_write_data_inc(0xFF);
-    else
-      gdisp_lld_write_data_inc(0x00);
-  }
+	chMtxLock(&gdisp_draw_mtx);
+	/* lock framebuffer access */
+	if(color){
+		memset(FrameBuffer,0,sizeof(FrameBuffer));
+	}else{
+		memset(FrameBuffer,0xFF,sizeof(FrameBuffer));
+	}
+	/* unlock framebuffer access */
+	chMtxUnlock();
 }
 #endif
 
@@ -391,18 +441,13 @@ void gdisp_lld_clear(color_t color) {
 			if (y+cy > GDISP.clipy1)	cy = GDISP.clipy1 - y;
 		#endif
 
-        unsigned int i;
+		chMtxLock(&gdisp_draw_mtx);
+		/* lock framebuffer access */
 
-        gdisp_lld_set_cursor(x,y);
+		// TODO: unsuported,
 
-        for(i = 0; i < GLCD_GRAPHIC_SIZE; i++)
-        {
-          if(color)
-            gdisp_lld_write_data_inc(0xFF);
-          else
-            gdisp_lld_write_data_inc(0x00);
-        }
-
+		/* unlock framebuffer access */
+		chMtxUnLock();
 
 	}
 #endif
@@ -440,10 +485,25 @@ void gdisp_lld_clear(color_t color) {
 	color_t gdisp_lld_get_pixel_color(coord_t x, coord_t y) {
 		color_t color;
 
-		#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
-			if (x < 0 || x >= GDISP.Width || y < 0 || y >= GDISP.Height) return 0;
-		#endif
+#if GDISP_NEED_VALIDATION || GDISP_NEED_CLIP
+		if (x < 0 || x >= GDISP.Width || y < 0 || y >= GDISP.Height) return 0;
+#endif
 
+		unsigned char tmp;
+		tmp = (GLCD_FONT_WIDTH - 1) - (x % GLCD_FONT_WIDTH);
+
+		chMtxLock(&gdisp_draw_mtx);
+		/* lock framebuffer access */
+		color = FrameBuffer[(x / GLCD_FONT_WIDTH) + (GLCD_GRAPHIC_AREA * y)] & (1<<tmp);
+
+		/* unlock framebuffer access */
+		chMtxUnLock();
+
+		if(color){
+			color = Black;
+		}else{
+			color = White;
+		}
 
 		return color;
 	}
@@ -516,25 +576,31 @@ void gdisp_lld_clear(color_t color) {
 
 	    case powerOn:
 	      //*************Power On sequence ******************//
-
+	      chMtxLock(&gdisp_draw_mtx);
 	      gdisp_lld_backlight(GDISP.Backlight);
 
 	      if(GDISP.Powermode != powerSleep || GDISP.Powermode != powerDeepSleep)
 	        gdisp_lld_init();
 	      else
 	        gdisp_lld_write_command(T6963_DISPLAY_MODE | T6963_GRAPHIC_DISPLAY_ON);
+
+	      chMtxUnlock();
 	      break;
 
 	    case powerSleep:
+	      chMtxLock(&gdisp_draw_mtx);
 	      //deactivate graphic display
 	      gdisp_lld_write_command(T6963_DISPLAY_MODE);
 	      gdisp_lld_backlight(0);
+	      chMtxUnlock();
 	      break;
 
 	    case powerDeepSleep:
+	      chMtxLock(&gdisp_draw_mtx);
 	      //deactivate graphic display
 	      gdisp_lld_write_command(T6963_DISPLAY_MODE);
 	      gdisp_lld_backlight(0);
+	      chMtxUnlock();
 	      break;
 
 	    default:
