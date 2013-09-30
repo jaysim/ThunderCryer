@@ -70,7 +70,9 @@ msg_t CLightHandler::main(void){
 					{PWM_OUTPUT_DISABLED, NULL},
 					{PWM_OUTPUT_DISABLED, NULL}
 			},
-			0};
+			0,
+			0
+	};
 
 	/*
 	 * start pwm with 0 level
