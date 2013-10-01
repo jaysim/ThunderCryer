@@ -117,13 +117,17 @@ msg_t chibios_rt::CDCF77::main(void){
   static systime_t tCycleStart;
   uint32_t dcf_pin;
 
+  setName("DCF_Handler");
+
   /*
    * activate DCF77 receiver
    */
   palWritePad(GPIOC,GPIOC_DCF_PON,PAL_HIGH);
+  sleep(MS2ST(1000));
+  palWritePad(GPIOC,GPIOC_DCF_PON,PAL_LOW);
 
 
-  setName("DCF_Handler");
+
 
   while(true){
     tCycleStart = System::getTime();
@@ -136,6 +140,12 @@ msg_t chibios_rt::CDCF77::main(void){
      */
     dcf_pin = palReadPad(GPIOC,GPIOC_DCF_DATA);
 
+    if(dcf_pin != 0)
+    {
+      palWritePad(GPIOD, GPIOD_LED3, PAL_HIGH);
+    }else{
+      palWritePad(GPIOD, GPIOD_LED3, PAL_LOW);
+    }
 
     ticks++;
 
