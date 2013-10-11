@@ -20,12 +20,7 @@
 namespace chibios_rt {
 
 
-typedef enum{
-	ALARM_1 = 0,
-	ALARM_2,
-	ALARM_3,
-	NUM_OF_ALARMS
-}t_Alarms;
+
 
 
 /**

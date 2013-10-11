@@ -9,16 +9,21 @@
  */
 
 #include "CRTCAlarm.h"
+#include "CLightHandler.h"
+#include "ch.hpp"
+#include "hal.h"
+#include "stm32f4xx.h"
 
 using namespace std;
 
-CRTCAlarm::CRTCAlarm() {
-	// TODO Auto-generated constructor stub
+static t_Alarms CRTCAlarm::InstanceCount = ALARM_A;
 
+CRTCAlarm::CRTCAlarm():Instance(InstanceCount){
+  InstanceCount++;
 }
 
 CRTCAlarm::~CRTCAlarm() {
-	// TODO Auto-generated destructor stub
+
 }
 
 /**
@@ -27,87 +32,114 @@ CRTCAlarm::~CRTCAlarm() {
  * @return next alarm time
  */
 time_t CRTCAlarm::GetNextAlarm(time_t tod){
-	struct tm *sTodTime;
-	struct tm *sAlarmTime;
-	time_t newAlarm;
-	time_t diffLight, diffAlarm;
-	int i = 0;
+  struct tm *sTodTime;
+  struct tm *sAlarmTime;
+  time_t newAlarm;
+  time_t diffLight, diffAlarm;
+  int i = 0;
+  RTCAlarm rtcAlarm;
+  bool alarmChanged = false;
 
-	// check if alarm is valid armed
-	// general arm is bit 7, and also one of the bits 0-6 are needed
-	if(sAlarmTriggers.bDays > (1<<7)){
+  // check if alarm is valid armed
+  // general arm is bit 7, and also one of the bits 0-6 are needed
+  if(sAlarmTriggers.bDays > (1<<7)){
 
-		sTodTime = gmtime(&tod);
-		sTodTime->tm_hour += 1;	// our time zone
-		sTodTime->tm_wday += 1;    // monday is 0
+    sTodTime = gmtime(&tod);
+    sTodTime->tm_hour += 1;	// our time zone
 
-		sAlarmTime = gmtime(&AlarmTime);
+    sAlarmTime = gmtime(&AlarmTime);
+    sAlarmTime->tm_hour += 1; // our time zone
 
-		// determine next weekday to trigger
-		for (i = 0; i < 7; ++i) {
-			sTodTime->tm_wday += i; // go through the weekdays
+    // determine next weekday to trigger
+    for (i = 0; i < 7; ++i) {
+      sTodTime->tm_wday += i; // go through the weekdays
 
-			if(sTodTime->tm_wday > 6){ // warp around on sunday
-				sTodTime->tm_wday = 0;
-			}
-			// check if alarm should trigger
-			if(((1<<sTodTime->tm_wday) & sAlarmTriggers.bDays)!=0){
-				break; // exit loop
-			}
+      if(sTodTime->tm_wday > 6){ // warp around on sunday
+        sTodTime->tm_wday = 0;
+      }
+      // check if alarm should trigger
+      if(((1<<sTodTime->tm_wday) & sAlarmTriggers.bDays)!=0){
+        break; // exit loop
+      }
 
-		}
+    }
 
-		// add the days no alarm triggers to date
-		// note: if mday is out of range date will be corrected to next month
-		sTodTime->tm_mday += i;
+    // add the days no alarm triggers to date
+    // note: if mday is out of range date will be corrected to next month
+    sTodTime->tm_mday += i;
 
-		// copy alarm time in full date
-		sTodTime->tm_hour = sAlarmTime->tm_hour;
-		sTodTime->tm_min = sAlarmTime->tm_min;
-		AlarmTime = mktime(sTodTime);
-		//build light alarm time, sub according seconds from alarm time
-		LightTime = AlarmTime - ((time_t)u8LightMinutes)*60;
+    // copy alarm time in full date
+    sTodTime->tm_hour = sAlarmTime->tm_hour;
+    sTodTime->tm_min = sAlarmTime->tm_min;
+    AlarmTime = mktime(sTodTime);
+    //build light alarm time, sub according seconds from alarm time
+    LightTime = AlarmTime - ((time_t)u8LightMinutes)*60;
 
-		// build differences to tod and check in which phase we are
-		diffLight = LightTime - tod;
-		diffAlarm = AlarmTime - tod;
+    // build differences to tod and check in which phase we are
+    diffLight = LightTime - tod;
+    diffAlarm = AlarmTime - tod;
 
-		if((diffLight > 0)&&(bLightEnable == true)&&(state != SKIP_ALARM)){
-			// light alarm is in future and enabled
-			newAlarm = LightTime;
-			state = W4LIGHT;
-		}else{
-			// not light alarm or in past or skiped
-			if((diffAlarm > 0)&&(state != SKIP_ALARM)){
-				//Alarm is in Future
-				newAlarm = AlarmTime;
-				SnoozeAlarmTime = AlarmTime + ((time_t)u8SnoozeIntervall)*60;
-				u8SnoozeCount = 0;
-				state = W4ALARM;
-			}else{
-			    // wait for alarm in the past to release next alarm
-				if((diffAlarm < 0)){
-				  state = IN_ACTIVE;
-				}
-			}
-		}
+    if((diffLight > 0)&&(bLightEnable == true)&&(state != SKIP_ALARM)){
+      // light alarm is in future and enabled
+      newAlarm = LightTime;
+      alarmChanged = true;
+      state = W4LIGHT;
+    }else{
+      // not light alarm or in past or skiped
+      if((diffAlarm > 0)&&(state != SKIP_ALARM)){
+        //Alarm is in Future
+        newAlarm = AlarmTime;
+        alarmChanged = true;
+        SnoozeAlarmTime = AlarmTime + ((time_t)u8SnoozeIntervall)*60;
+        u8SnoozeCount = 0;
+        state = W4ALARM;
+      }else{
+        // wait for alarm in the past to release next alarm
+        if((diffAlarm < 0)){
+          state = IN_ACTIVE;
+        }
+      }
+    }
 
-	}else{
-		// set alarm to inactive
-		state = IN_ACTIVE;
-	}
+    /* Alarm is in Snooze Mode then return snooze time */
+    if(state == W4SNOOZE){
+      while(SnoozeAlarmTime - tod < 0){
+        // as long as snooze is not in future
+        // add one intervall
+        SnoozeAlarmTime = SnoozeAlarmTime + ((time_t)u8SnoozeIntervall)*60;
+        alarmChanged = true;
+        u8SnoozeCount++;
+      }
+    }
 
-	/* Alarm is in Snooze Mode then return snooze time */
-	if(state == W4SNOOZE){
-		while(SnoozeAlarmTime - tod < 0){
-			// as long as snooze is not in future
-			// add one intervall
-			SnoozeAlarmTime = SnoozeAlarmTime + ((time_t)u8SnoozeIntervall)*60;
-			u8SnoozeCount++;
-		}
-	}
+    /*
+     * do we have to set new alarm in rtc
+     */
+    if(alarmChanged == true){
+      // convert new time to time struct
+      sAlarmTime = gmtime(&newTime);
 
-	return newAlarm;
+      rtcAlarm = (RTC_ALRMAR_MSK1);
+      rtcAlarm |= ((sAlarmTime->tm_min%10)<<8); // minutes units
+      rtcAlarm |= ((sAlarmTime->tm_min/10)<<12); // minutes tens
+      rtcAlarm |= ((sAlarmTime->tm_hour%10)<<16); // hour units
+      rtcAlarm |= ((sAlarmTime->tm_hour/10)<<20); // hour tens
+      rtcAlarm |= ((sAlarmTime->tm_mday%10)<<24); // mday units
+      rtcAlarm |= ((sAlarmTime->tm_mday/10)<<28); // mday tens
+
+      /*
+       * set the alarm in hardware
+       */
+      rtcSetAlarm(&RTCD1, Instance + 1, &rtcAlarm);
+
+    }
+
+  }else{
+    // set alarm to inactive
+    state = IN_ACTIVE;
+  }
+
+  return newAlarm;
 }
 
 /**
@@ -129,7 +161,7 @@ void CRTCAlarm::StopAlarm(void){
  * @return next alarm time
  */
 time_t CRTCAlarm::GetAlarmTime(void){
-	return AlarmTime;
+  return AlarmTime;
 }
 
 /**
@@ -137,7 +169,7 @@ time_t CRTCAlarm::GetAlarmTime(void){
  * @return true - light alarm is enabled, false - otherwise
  */
 bool CRTCAlarm::GetLightEnable(void){
-	return bLightEnable;
+  return bLightEnable;
 }
 
 /**
@@ -145,7 +177,7 @@ bool CRTCAlarm::GetLightEnable(void){
  * @return true - snooze alarm is enabled, false - otherwise
  */
 bool CRTCAlarm::GetSnoozeEnable(void){
-	return bSnoozeEnable;
+  return bSnoozeEnable;
 }
 
 /**
@@ -153,7 +185,7 @@ bool CRTCAlarm::GetSnoozeEnable(void){
  * @return minutes of light fade in before alarm
  */
 uint8_t CRTCAlarm::GetLightMinutes(void){
-	return u8LightMinutes;
+  return u8LightMinutes;
 }
 
 /**
@@ -161,7 +193,7 @@ uint8_t CRTCAlarm::GetLightMinutes(void){
  * @param arm - arm state of the alarm
  */
 void CRTCAlarm::SetAlarmArmed(bool arm){
-	sAlarmTriggers.bArmed = arm;
+  sAlarmTriggers.bArmed = arm;
 }
 
 /**
@@ -170,6 +202,54 @@ void CRTCAlarm::SetAlarmArmed(bool arm){
 void CRTCAlarm::SkipAlarm(void){
   state = SKIP_ALARM;
 }
+
+
+/**
+ * handle an Alarm interrupt
+ *
+ * @param tod               Time of the Day
+ */
+void CRTCAlarm::HandleAlarm(time_t tod){
+  CLightAlarmNotification *light;
+
+  /* handle the alarm states */
+  switch(state){
+  case IN_ACTIVE:
+    /* why there was an interrupt? */
+    /* deactivate alarm */
+    rtcSetAlarm(&RTCD1, Instance + 1, NULL);
+    break;
+  case SKIP_ALARM:
+    /* alarm skipped then go to inavtive */
+    state = IN_ACTIVE;
+    break;
+  case W4LIGHT:
+    /* was waiting for light, then god be good let there be light */
+    state = W4ALARM;
+    /* bread cast light alarm request */
+    light = notifyLightAlarm.alloc();
+    if(light != NULL){
+      light->u8LightMinutes = u8LightMinutes;
+      notifyLightAlarm.broadcast(light);
+    }
+    break;
+  case W4ALARM:
+    // TODO: not implementated yet
+    break;
+  case W4SNOOZE:
+    // TODO: not implementated yet
+    break;
+  default:
+    /* should not happen but if get constent by setting inactive */
+    state = IN_ACTIVE;
+    break;
+
+  }
+
+  /* update Alarms and Hardware */
+  GetNextAlarm(tod);
+}
+
 
 
 /**
@@ -185,14 +265,15 @@ void CRTCAlarm::SkipAlarm(void){
 void CRTCAlarm::SetAlarm(sWeekdaysArm triggers, time_t alarm,
                          uint8_t lightMinutes, uint8_t snoozeintervall,
                          bool light, bool snooze, time_t tod){
-	sAlarmTriggers = triggers;
-	AlarmTime = alarm;
-	u8SnoozeIntervall = snoozeintervall;
-	bSnoozeEnable = snooze;
-	bLightEnable = light;
-	u8LightMinutes = lightMinutes;
 
-	// build all alarm times accordingly to tod
-	GetNextAlarm(tod);
+  sAlarmTriggers = triggers;
+  AlarmTime = alarm;
+  u8SnoozeIntervall = snoozeintervall;
+  bSnoozeEnable = snooze;
+  bLightEnable = light;
+  u8LightMinutes = lightMinutes;
+
+  // build all alarm times accordingly to tod
+  GetNextAlarm(tod);
 
 }

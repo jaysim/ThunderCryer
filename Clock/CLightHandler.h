@@ -76,6 +76,6 @@ public:
 };
 
 
-Notifier<CLightAlarmNotification> notifyLightAlarm;
+extern Notifier<CLightAlarmNotification> notifyLightAlarm;
 
 #endif /* CLIGHTHANDLER_H_ */
