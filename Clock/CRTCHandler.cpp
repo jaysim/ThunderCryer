@@ -20,50 +20,14 @@ namespace chibios_rt {
 
   Notifier<CActualTime> notifyActTime;
   Notifier<CActualTime> notifyActAlarm;
-  BinarySemaphore OneSecTick(true);
+  BinarySemaphore OneSecTick(false);
   BinarySemaphore AlarmTick[NUM_OF_ALARMS] =
-                  {BinarySemaphore(true), BinarySemaphore(true)};
+                  {BinarySemaphore(false), BinarySemaphore(false)};
+
+  void extcbAlarm(EXTDriver *extp, expchannel_t channel);
+  void extcbOneSec(EXTDriver *extp, expchannel_t channel);
 
 
-  /* Triggered when RTC has an event*/
-  void extcb1(EXTDriver *extp, expchannel_t channel) {
-    (void)extp;
-    (void)channel;
-
-    /*
-     * 1 sec Wakeup interupt
-     */
-    if((RTC->ISR & RTC_ISR_WUTF) != 0){
-      RTC->ISR &= ~RTC_ISR_WUTF; // clear Flag
-      /*
-       * Signal Handler to send new Time broadcast
-       */
-      OneSecTick.signalI();
-    }
-
-    /*
-     * Alarm A Interrupt
-     */
-    if((RTC->ISR & RTC_ISR_ALRAF) != 0){
-      RTC->ISR &= ~RTC_ISR_ALRAF; // clear Flag
-      /*
-       * Signal handler Alarm A was there
-       */
-      AlarmTick[ALARM_A].signalI();
-    }
-
-    /*
-     * Alarm B Interrupt
-     */
-    if((RTC->ISR & RTC_ISR_ALRBF) != 0){
-      RTC->ISR &= ~RTC_ISR_ALRBF; // clear Flag
-      /*
-       * Signal handler Alarm B was there
-       */
-      AlarmTick[ALARM_B].signalI();
-    }
-
-  }
 
   static const EXTConfig extcfg = {
                                    {
@@ -84,14 +48,65 @@ namespace chibios_rt {
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcb1},
+                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcbAlarm},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL}
+                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcbOneSec}
                                    }
   };
+
+
+  /* Triggered when RTC has an event*/
+  void extcbAlarm(EXTDriver *extp, expchannel_t channel) {
+    (void)extp;
+    (void)channel;
+
+    /*
+     * Alarm A Interrupt
+     */
+    if((RTC->ISR & RTC_ISR_ALRAF) != 0){
+      RTC->ISR &= ~RTC_ISR_ALRAF; // clear Flag
+      /*
+       * Signal handler Alarm A was there
+       */
+      AlarmTick[ALARM_A].signal();
+    }
+
+    /*
+     * Alarm B Interrupt
+     */
+    if((RTC->ISR & RTC_ISR_ALRBF) != 0){
+      RTC->ISR &= ~RTC_ISR_ALRBF; // clear Flag
+      /*
+       * Signal handler Alarm B was there
+       */
+      AlarmTick[ALARM_B].signal();
+    }
+
+  }
+
+
+  /* Triggered when RTC has an event*/
+  void extcbOneSec(EXTDriver *extp, expchannel_t channel) {
+    (void)extp;
+    (void)channel;
+
+    /*
+     * 1 sec Wakeup interupt
+     */
+    if((RTC->ISR & RTC_ISR_WUTF) != 0){
+      RTC->ISR &= ~RTC_ISR_WUTF; // clear Flag
+      /*
+       * Signal Handler to send new Time broadcast
+       */
+      System::lockFromIsr();
+      OneSecTick.signalI();
+      System::unlockFromIsr();
+    }
+  }
+
 
   CRTCHander::CRTCHander() {
     // TODO Auto-generated constructor stub
@@ -146,7 +161,7 @@ namespace chibios_rt {
     /* set wakeup */
     /* for time update every second */
     wakeupspec.wakeup = ((uint32_t)3) << 16; /* select RTC clk/2 clock source */
-    wakeupspec.wakeup |= (32768*2)-1; /* set counter value to 65535 Period will be 1 second. */
+    wakeupspec.wakeup |= (32768/2)-1; /* set counter value to 65535 Period will be 1 second. */
     rtcSetPeriodicWakeup_v2(&RTCD1, &wakeupspec);
 
 
