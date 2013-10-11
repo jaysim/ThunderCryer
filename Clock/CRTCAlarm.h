@@ -192,11 +192,6 @@ public:
   void SetAlarmArmed(bool arm);
 
   /**
-   * skip alarm following alarm
-   */
-  void SkipAlarm(void);
-
-  /**
    * handle an Alarm interrupt
    *
    * @param tod               Time of the Day

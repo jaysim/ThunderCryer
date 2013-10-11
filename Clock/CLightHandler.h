@@ -62,7 +62,6 @@ public:
 	void SetLightLevel(uint8_t level);
 };
 
-} /* namespace chibios_rt */
 
 /**
  * @class CLightLevelNotification
@@ -77,5 +76,7 @@ public:
 
 
 extern Notifier<CLightAlarmNotification> notifyLightAlarm;
+
+} /* namespace chibios_rt */
 
 #endif /* CLIGHTHANDLER_H_ */

@@ -15,11 +15,12 @@
 #include "stm32f4xx.h"
 
 using namespace std;
+using namespace chibios_rt;
 
-static t_Alarms CRTCAlarm::InstanceCount = ALARM_A;
+t_Alarms CRTCAlarm::InstanceCount = ALARM_A;
 
 CRTCAlarm::CRTCAlarm():Instance(InstanceCount){
-  InstanceCount++;
+  InstanceCount = ALARM_B;
 }
 
 CRTCAlarm::~CRTCAlarm() {
@@ -117,15 +118,15 @@ time_t CRTCAlarm::GetNextAlarm(time_t tod){
      */
     if(alarmChanged == true){
       // convert new time to time struct
-      sAlarmTime = gmtime(&newTime);
+      sAlarmTime = gmtime(&newAlarm);
 
-      rtcAlarm = (RTC_ALRMAR_MSK1);
-      rtcAlarm |= ((sAlarmTime->tm_min%10)<<8); // minutes units
-      rtcAlarm |= ((sAlarmTime->tm_min/10)<<12); // minutes tens
-      rtcAlarm |= ((sAlarmTime->tm_hour%10)<<16); // hour units
-      rtcAlarm |= ((sAlarmTime->tm_hour/10)<<20); // hour tens
-      rtcAlarm |= ((sAlarmTime->tm_mday%10)<<24); // mday units
-      rtcAlarm |= ((sAlarmTime->tm_mday/10)<<28); // mday tens
+      rtcAlarm.tv_datetime = (RTC_ALRMAR_MSK1);
+      rtcAlarm.tv_datetime |= ((sAlarmTime->tm_min%10)<<8); // minutes units
+      rtcAlarm.tv_datetime |= ((sAlarmTime->tm_min/10)<<12); // minutes tens
+      rtcAlarm.tv_datetime |= ((sAlarmTime->tm_hour%10)<<16); // hour units
+      rtcAlarm.tv_datetime |= ((sAlarmTime->tm_hour/10)<<20); // hour tens
+      rtcAlarm.tv_datetime |= ((sAlarmTime->tm_mday%10)<<24); // mday units
+      rtcAlarm.tv_datetime |= ((sAlarmTime->tm_mday/10)<<28); // mday tens
 
       /*
        * set the alarm in hardware

@@ -20,42 +20,13 @@ namespace chibios_rt {
 
   Notifier<CActualTime> notifyActTime;
   Notifier<CActualTime> notifyActAlarm;
-  BinarySemaphore OneSecTick;
-  BinarySemaphore AlarmTick[NUM_OF_ALARMS];
-
-
-
-  static const EXTConfig extcfg = {
-                                   {
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcb1},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL}
-                                   }
-  };
+  BinarySemaphore OneSecTick(true);
+  BinarySemaphore AlarmTick[NUM_OF_ALARMS] =
+                  {BinarySemaphore(true), BinarySemaphore(true)};
 
 
   /* Triggered when RTC has an event*/
-  static void extcb1(EXTDriver *extp, expchannel_t channel) {
+  void extcb1(EXTDriver *extp, expchannel_t channel) {
     (void)extp;
     (void)channel;
 
@@ -94,6 +65,33 @@ namespace chibios_rt {
 
   }
 
+  static const EXTConfig extcfg = {
+                                   {
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcb1},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_DISABLED, NULL}
+                                   }
+  };
 
   CRTCHander::CRTCHander() {
     // TODO Auto-generated constructor stub
@@ -127,11 +125,11 @@ namespace chibios_rt {
 
 
   msg_t CRTCHander::main(void){
-    static systime_t tCycleStart;
     static time_t todAlarmDiff;
     static time_t minTodAlarmDiff;
     static time_t nextAlarmTime;
     static t_Alarms nextAlarm;
+    static RTCWakeup wakeupspec;
     Listener<CDCFNewTimeArrived,5> listenerDCF(&notifyDCFTime);
 
 
@@ -184,12 +182,12 @@ namespace chibios_rt {
       todAlarmDiff = tod->time; // init diff value with very high value
       minTodAlarmDiff = tod->time;
 
-      for (t_Alarms i = 0; i < NUM_OF_ALARMS; ++i) {
+      for (int i = 0; i < NUM_OF_ALARMS; ++i) {
         nextAlarmTime = alarms[i].GetNextAlarm(tod->time);
         todAlarmDiff = nextAlarmTime - tod->time;
         if(minTodAlarmDiff < todAlarmDiff){
           minTodAlarmDiff = todAlarmDiff;  // save next alarm
-          nextAlarm = i;
+          nextAlarm = (t_Alarms)i;
         }
       }
 
@@ -206,9 +204,9 @@ namespace chibios_rt {
        * check for alarm interrupts
        * and let the objects handle them
        */
-      for(t_Alarms i; i < NUM_OF_ALARMS; i++){
+      for(int i; i < NUM_OF_ALARMS; i++){
         if(AlarmTick[i].waitTimeout(TIME_IMMEDIATE) == RDY_OK){
-          alarms[i].HandleAlarm(tod);
+          alarms[i].HandleAlarm(tod->time);
         }
       }
 

@@ -9,6 +9,7 @@
  */
 
 #include "CLightHandler.h"
+#include "Notifier.h"
 
 
 namespace chibios_rt {
