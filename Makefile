@@ -100,7 +100,7 @@ CPPSRC = $(CHCPPSRC) \
          ./src/main.cpp \
          ./src/LibraryHacks.cpp \
          ./Clock/CDCF77.cpp \
-         ./Clock/CLighthandler.cpp \
+         ./Clock/CLightHandler.cpp \
          ./Clock/CRTCAlarm.cpp \
          ./Clock/CRTCHandler.cpp
 
