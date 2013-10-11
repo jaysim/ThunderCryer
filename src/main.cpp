@@ -29,6 +29,8 @@ class ConsoleThread : public BaseStaticThread<2048> {
 private:
   /* The handles for our three consoles */
   GHandle GW1;
+  GHandle ghLabel1;
+  GLabelObject gwLabel1;
 
 protected:
   virtual msg_t main(void) {
@@ -43,25 +45,45 @@ protected:
     font1 = gdispOpenFont("DejaVuSans10");
     gwinSetDefaultFont(font1);
 
-    /* create the three console windows */
-    {
-      GWindowInit     wi;
-
-      wi.show = TRUE;
-      wi.x = 0; wi.y = 0; wi.width = gdispGetWidth(); wi.height = gdispGetHeight();
-      GW1 = gwinConsoleCreate(NULL, &wi);
-
-    }
+    gwinSetDefaultStyle(&WhiteWidgetStyle, FALSE);
 
     /* Set the fore- and background colors for each console */
     gwinSetColor(GW1, Black);
     gwinSetBgColor(GW1, White);
 
+    /* create the three console windows */
+    {
+      GWindowInit     wi;
+      GWidgetInit     wgi;
+
+      // Apply some default values for GWIN
+      wgi.customDraw = 0;
+      wgi.customParam = 0;
+      wgi.customStyle = 0;
+      wgi.g.show = TRUE;
+
+      // Apply the label parameters
+      wgi.g.y = 0;
+      wgi.g.x = 0;
+      wgi.g.width = gdispGetWidth();
+      wgi.g.height = 20;
+      wgi.text = "Hello ChibiOS/GFX!";
+
+      // Create the actual label
+      ghLabel1 = gwinLabelCreate(&gwLabel1, &wgi);
+
+      wi.show = TRUE;
+      wi.x = 0; wi.y = 20; wi.width = gdispGetWidth(); wi.height = gdispGetHeight()-20;
+      GW1 = gwinConsoleCreate(NULL, &wi);
+
+    }
+
+
     /* clear all console windows - to set background */
     gwinClear(GW1);
 
     /* Output some data on the first console */
-    gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
+    gwinPrintf(GW1, "Hello ChibiOS/GFX!\n");
     /*
      * Serves timer events.
      */
@@ -77,8 +99,7 @@ protected:
 
       if(listenerActTime.available()){
         CActualTime* time = listenerActTime.get();
-        gwinPrintf(GW1, "Time : ");
-        gwinPrintf(GW1, ctime(&time->time));
+        gwinSetText(ghLabel1, ctime(&time->time), FALSE);
         notifyActTime.release(time);
       }
 
