@@ -20,19 +20,14 @@ namespace chibios_rt {
   /*
    * Endpoints to be used for USBD2.
    */
-  #define USBD2_DATA_REQUEST_EP           1
-  #define USBD2_DATA_AVAILABLE_EP         1
-  #define USBD2_INTERRUPT_REQUEST_EP      2
-
-  /*
-   * Serial over USB Driver structure.
-   */
-  static SerialUSBDriver SDU2;
+  static const uint8_t CUSBVirtualCom::USBD2_DATA_REQUEST_EP = 1;
+  static const uint8_t CUSBVirtualCom::USBD2_DATA_AVAILABLE_EP = 1;
+  static const uint8_t CUSBVirtualCom::USBD2_INTERRUPT_REQUEST_EP = 2;
 
   /*
    * USB Device Descriptor.
    */
-  static const uint8_t vcom_device_descriptor_data[18] = {
+  static const uint8_t CUSBVirtualCom::vcom_device_descriptor_data[18] = {
     USB_DESC_DEVICE       (0x0110,        /* bcdUSB (1.1).                    */
                            0x02,          /* bDeviceClass (CDC).              */
                            0x00,          /* bDeviceSubClass.                 */
@@ -50,13 +45,13 @@ namespace chibios_rt {
   /*
    * Device Descriptor wrapper.
    */
-  static const USBDescriptor vcom_device_descriptor = {
+  static const USBDescriptor CUSBVirtualCom::vcom_device_descriptor = {
     sizeof vcom_device_descriptor_data,
     vcom_device_descriptor_data
   };
 
   /* Configuration Descriptor tree for a CDC.*/
-  static const uint8_t vcom_configuration_descriptor_data[67] = {
+  static const uint8_t CUSBVirtualCom::vcom_configuration_descriptor_data[67] = {
     /* Configuration Descriptor.*/
     USB_DESC_CONFIGURATION(67,            /* wTotalLength.                    */
                            0x02,          /* bNumInterfaces.                  */
@@ -135,7 +130,7 @@ namespace chibios_rt {
   /*
    * Configuration Descriptor wrapper.
    */
-  static const USBDescriptor vcom_configuration_descriptor = {
+  static const USBDescriptor CUSBVirtualCom::vcom_configuration_descriptor = {
     sizeof vcom_configuration_descriptor_data,
     vcom_configuration_descriptor_data
   };
@@ -143,7 +138,7 @@ namespace chibios_rt {
   /*
    * U.S. English language identifier.
    */
-  static const uint8_t vcom_string0[] = {
+  static const uint8_t CUSBVirtualCom::vcom_string0[] = {
     USB_DESC_BYTE(4),                     /* bLength.                         */
     USB_DESC_BYTE(USB_DESCRIPTOR_STRING), /* bDescriptorType.                 */
     USB_DESC_WORD(0x0409)                 /* wLANGID (U.S. English).          */
@@ -152,7 +147,7 @@ namespace chibios_rt {
   /*
    * Vendor string.
    */
-  static const uint8_t vcom_string1[] = {
+  static const uint8_t CUSBVirtualCom::vcom_string1[] = {
     USB_DESC_BYTE(38),                    /* bLength.                         */
     USB_DESC_BYTE(USB_DESCRIPTOR_STRING), /* bDescriptorType.                 */
     'S', 0, 'T', 0, 'M', 0, 'i', 0, 'c', 0, 'r', 0, 'o', 0, 'e', 0,
@@ -163,7 +158,7 @@ namespace chibios_rt {
   /*
    * Device Description string.
    */
-  static const uint8_t vcom_string2[] = {
+  static const uint8_t CUSBVirtualCom::vcom_string2[] = {
     USB_DESC_BYTE(56),                    /* bLength.                         */
     USB_DESC_BYTE(USB_DESCRIPTOR_STRING), /* bDescriptorType.                 */
     'T', 0, 'h', 0, 'u', 0, 'n', 0, 'd', 0, 'e', 0, 'r', 0, 'C', 0,
@@ -176,7 +171,7 @@ namespace chibios_rt {
    * Serial Number string.
    */
   // TODO: Version anpassen
-  static const uint8_t vcom_string3[] = {
+  static const uint8_t CUSBVirtualCom::vcom_string3[] = {
     USB_DESC_BYTE(8),                     /* bLength.                         */
     USB_DESC_BYTE(USB_DESCRIPTOR_STRING), /* bDescriptorType.                 */
     '0' + CH_KERNEL_MAJOR, 0,
@@ -187,7 +182,7 @@ namespace chibios_rt {
   /*
    * Strings wrappers array.
    */
-  static const USBDescriptor vcom_strings[] = {
+  static const USBDescriptor CUSBVirtualCom::vcom_strings[] = {
     {sizeof vcom_string0, vcom_string0},
     {sizeof vcom_string1, vcom_string1},
     {sizeof vcom_string2, vcom_string2},
@@ -198,7 +193,7 @@ namespace chibios_rt {
    * Handles the GET_DESCRIPTOR callback. All required descriptors must be
    * handled here.
    */
-  static const USBDescriptor *get_descriptor(USBDriver *usbp,
+  static const USBDescriptor *CUSBVirtualCom::get_descriptor(USBDriver *usbp,
                                              uint8_t dtype,
                                              uint8_t dindex,
                                              uint16_t lang) {
@@ -218,19 +213,9 @@ namespace chibios_rt {
   }
 
   /**
-   * @brief   IN EP1 state.
-   */
-  static USBInEndpointState ep1instate;
-
-  /**
-   * @brief   OUT EP1 state.
-   */
-  static USBOutEndpointState ep1outstate;
-
-  /**
    * @brief   EP1 initialization structure (both IN and OUT).
    */
-  static const USBEndpointConfig ep1config = {
+  static const USBEndpointConfig CUSBVirtualCom::ep1config = {
     USB_EP_MODE_TYPE_BULK,
     NULL,
     sduDataTransmitted,
@@ -244,14 +229,9 @@ namespace chibios_rt {
   };
 
   /**
-   * @brief   IN EP2 state.
-   */
-  static USBInEndpointState ep2instate;
-
-  /**
    * @brief   EP2 initialization structure (IN only).
    */
-  static const USBEndpointConfig ep2config = {
+  static const USBEndpointConfig CUSBVirtualCom::ep2config = {
     USB_EP_MODE_TYPE_INTR,
     NULL,
     sduInterruptTransmitted,
@@ -267,7 +247,7 @@ namespace chibios_rt {
   /*
    * Handles the USB driver global events.
    */
-  static void usb_event(USBDriver *usbp, usbevent_t event) {
+  static void CUSBVirtualCom::usb_event(USBDriver *usbp, usbevent_t event) {
 
     switch (event) {
     case USB_EVENT_RESET:
@@ -275,7 +255,7 @@ namespace chibios_rt {
     case USB_EVENT_ADDRESS:
       return;
     case USB_EVENT_CONFIGURED:
-      chSysLockFromIsr();
+      System::lockFromIsr();
 
       /* Enables the endpoints specified into the configuration.
          Note, this callback is invoked from an ISR so I-Class functions
@@ -286,7 +266,7 @@ namespace chibios_rt {
       /* Resetting the state of the CDC subsystem.*/
       sduConfigureHookI(&SDU2);
 
-      chSysUnlockFromIsr();
+      System::unlockFromIsr();
       return;
     case USB_EVENT_SUSPEND:
       return;
@@ -301,7 +281,7 @@ namespace chibios_rt {
   /*
    * USB driver configuration.
    */
-  static const USBConfig usbcfg = {
+  static const USBConfig CUSBVirtualCom::usbcfg = {
     usb_event,
     get_descriptor,
     sduRequestsHook,
@@ -311,7 +291,7 @@ namespace chibios_rt {
   /*
    * Serial over USB driver configuration.
    */
-  static const SerialUSBConfig serusbcfg = {
+  static const SerialUSBConfig CUSBVirtualCom::serusbcfg = {
     &USBD2,
     USBD2_DATA_REQUEST_EP,
     USBD2_DATA_AVAILABLE_EP,
@@ -323,7 +303,6 @@ namespace chibios_rt {
   /*===========================================================================*/
 
   #define SHELL_WA_SIZE   THD_WA_SIZE(2048)
-  #define TEST_WA_SIZE    THD_WA_SIZE(256)
 
   static void cmd_mem(BaseSequentialStream *chp, int argc, char *argv[]) {
     size_t n, size;
@@ -359,23 +338,6 @@ namespace chibios_rt {
     } while (tp != NULL);
   }
 
-  static void cmd_test(BaseSequentialStream *chp, int argc, char *argv[]) {
-    Thread *tp;
-
-    (void)argv;
-    if (argc > 0) {
-      chprintf(chp, "Usage: test\r\n");
-      return;
-    }
-    tp = chThdCreateFromHeap(NULL, TEST_WA_SIZE, chThdGetPriority(),
-                             TestThread, chp);
-    if (tp == NULL) {
-      chprintf(chp, "out of memory\r\n");
-      return;
-    }
-    chThdWait(tp);
-  }
-
   static const ShellCommand commands[] = {
     {"mem", cmd_mem},
     {"threads", cmd_threads},
@@ -396,14 +358,14 @@ namespace chibios_rt {
   static msg_t Thread1(void *arg) {
 
     (void)arg;
-    chRegSetThreadName("blinker");
+    chRegSetThreadName("USB_blinker");
     while (TRUE) {
       systime_t time;
 
       time = serusbcfg.usbp->state == USB_ACTIVE ? 250 : 500;
-      palClearPad(GPIOC, GPIOC_LED);
+      palClearPad(GPIOD, GPIOD_LED4);
       chThdSleepMilliseconds(time);
-      palSetPad(GPIOC, GPIOC_LED);
+      palSetPad(GPIOD, GPIOD_LED4);
       chThdSleepMilliseconds(time);
     }
   }
@@ -418,22 +380,15 @@ namespace chibios_rt {
   }
 
 
-
+  static WORKING_AREA(waThread1, 128);
   /*
-   * Application entry point.
+   * CommandShell and terminal thread
    */
-  int main(void) {
+  msg_t CUSBVirtualCom::main(void)
+  {
     Thread *shelltp = NULL;
 
-    /*
-     * System initializations.
-     * - HAL initialization, this also initializes the configured device drivers
-     *   and performs the board-specific initializations.
-     * - Kernel initialization, the main() function becomes a thread and the
-     *   RTOS is active.
-     */
-    halInit();
-    chSysInit();
+    setName("Shell");
 
     /*
      * Initializes a serial-over-USB CDC driver.
@@ -447,7 +402,7 @@ namespace chibios_rt {
      * after a reset.
      */
     usbDisconnectBus(serusbcfg.usbp);
-    chThdSleepMilliseconds(1500);
+    sleep(1500);
     usbStart(serusbcfg.usbp, &usbcfg);
     usbConnectBus(serusbcfg.usbp);
 
@@ -455,10 +410,10 @@ namespace chibios_rt {
      * Stopping and restarting the USB in order to test the stop procedure. The
      * following lines are not usually required.
      */
-    chThdSleepMilliseconds(3000);
+    sleep(3000);
     usbDisconnectBus(serusbcfg.usbp);
     usbStop(serusbcfg.usbp);
-    chThdSleepMilliseconds(1500);
+    sleep(1500);
     usbStart(serusbcfg.usbp, &usbcfg);
     usbConnectBus(serusbcfg.usbp);
 
@@ -483,7 +438,7 @@ namespace chibios_rt {
         chThdRelease(shelltp);    /* Recovers memory of the previous shell.   */
         shelltp = NULL;           /* Triggers spawning of a new shell.        */
       }
-      chThdSleepMilliseconds(1000);
+      sleep(1000);
     }
   }
 
