@@ -107,7 +107,8 @@ CPPSRC = $(CHCPPSRC) \
          ./Clock/CLightHandler.cpp \
          ./Clock/CRTCAlarm.cpp \
          ./Clock/CRTCHandler.cpp \
-         ./USB/CUSBVirtualCom.cpp
+         ./USB/CUSBVirtualCom.cpp \
+         ./Clock/NTPClient.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
