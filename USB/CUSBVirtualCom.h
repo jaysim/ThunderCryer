@@ -12,13 +12,20 @@
 #define CUSBVIRTUALCOM_H_
 
 #include <stdint.h>
+#include <stdarg.h>
 #include "ch.hpp"
 #include "hal.h"
+#include "shell.h"
+
 
 
 namespace chibios_rt {
 
   class CUSBVirtualCom : public BaseStaticThread<2048>{
+
+  friend msg_t USBBlinker(void *arg);
+
+
   private:
 
     /*===========================================================================*/
@@ -116,6 +123,10 @@ namespace chibios_rt {
      */
     static const SerialUSBConfig serusbcfg;
 
+    static const ShellCommand commands[];
+
+    static const ShellConfig shell_cfg1;
+
 
     /*
      * Handles the GET_DESCRIPTOR callback. All required descriptors must be
@@ -133,7 +144,15 @@ namespace chibios_rt {
   protected:
     virtual msg_t main(void);
 
+
+
   public:
+    /**
+     * wrap chprintf
+     */
+    void print(const char *fmt, ...);
+
+
     CUSBVirtualCom();
     virtual ~CUSBVirtualCom();
   };
