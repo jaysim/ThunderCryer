@@ -20,7 +20,8 @@
 #include "CDCF77.h"
 #include "CRTCHandler.h"
 #include "CRTCAlarm.h"
-#include <ctime>
+#include "main.h"
+#include "CUSBVirtualCom.h"
 
 
 using namespace chibios_rt;
@@ -94,6 +95,7 @@ protected:
         CDCFNewTimeArrived* dcf = listenerDCF.get();
         gwinPrintf(GW1, "DCF: ");
         gwinPrintf(GW1, ctime(&dcf->newTime));
+        SDU2.print("DCF: %s\n\r", ctime(&dcf->newTime));
         listenerDCF.release(dcf);
       }
 
@@ -107,6 +109,7 @@ protected:
         CActualTime* time = listenerActAlarm.get();
         gwinPrintf(GW1, "Alarm: ");
         gwinPrintf(GW1, ctime(&time->time));
+        SDU2.print("Alarm: %s\n\r", ctime(&time->time));
         listenerActAlarm.release(time);
       }
 
@@ -126,6 +129,7 @@ public:
 static CDCF77 dcfHandlerThread;
 static CRTCHander rtcHandlerThread;
 static ConsoleThread console;
+CUSBVirtualCom SDU2;
 
 
 
@@ -155,13 +159,18 @@ int main(void) {
   dcfHandlerThread.start(NORMALPRIO + 5);
   rtcHandlerThread.start(NORMALPRIO + 4);
   console.start(NORMALPRIO + 3);
+  SDU2.start(NORMALPRIO + 2);
+
+  /*
+   * Terminal Greetings
+   */
+  SDU2.print("ThunderCryer Debug Terminal\n\r");
 
   /*
    * Serves timer events.
    */
   while (true) {
     BaseThread::sleep(MS2ST(500));
-
   }
 
   return 0;
