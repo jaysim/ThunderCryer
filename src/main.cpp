@@ -18,10 +18,8 @@
 #include "hal.h"
 #include "gfx.h"
 #include "CDCF77.h"
-#include "CRTCHandler.h"
 #include "CRTCAlarm.h"
 #include "main.h"
-#include "CUSBVirtualCom.h"
 
 
 using namespace chibios_rt;
@@ -127,7 +125,7 @@ public:
 
 /* Static threads instances.*/
 static CDCF77 dcfHandlerThread;
-static CRTCHander rtcHandlerThread;
+CRTCHander rtcHandlerThread;
 static ConsoleThread console;
 CUSBVirtualCom SDU2;
 
