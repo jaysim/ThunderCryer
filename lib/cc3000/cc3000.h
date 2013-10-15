@@ -43,6 +43,7 @@
 
 #include "ch.hpp"
 #include "hal.h"
+#include "main.h"
 #include "cc3000_common.h"
 #include "cc3000_spi.h"
 #include "cc3000_simplelink.h"
@@ -56,21 +57,21 @@
 
 /** Enable debug messages - set 1  */
 // Debug - Socket interface messages
-#define CC3000_DEBUG_SOCKET 0
+#define CC3000_DEBUG_SOCKET 1
 // Debug - HCI TX messages
-#define CC3000_DEBUG_HCI_TX 0
+#define CC3000_DEBUG_HCI_TX 1
 // Debug - HCI Rx messages
-#define CC3000_DEBUG_HCI_RX 0
+#define CC3000_DEBUG_HCI_RX 1
 // Debug - General Debug
-#define CC3000_DEBUG        0
+#define CC3000_DEBUG        1
 // Add colour to the debug messages, requires a VT100 terminal like putty, comment out to remove
-#define VT100_COLOUR        0
+#define VT100_COLOUR        1
 
 #if (CC3000_DEBUG_SOCKET == 1)
     #if (VT100_COLOUR == 1)
-        #define DBG_SOCKET(x, ...) std::printf("\x1b[2;32;40m[CC3000 : SOCKET] "x"\x1b[0;37;40m\r\n", ##__VA_ARGS__);
+        #define DBG_SOCKET(x, ...) SDU2.print("\x1b[2;32;40m[CC3000 : SOCKET] " x "\x1b[0;37;40m\r\n", ##__VA_ARGS__);
     #else
-        #define DBG_SOCKET(x, ...) std::printf("[CC3000 : SOCKET] "x"\r\n", ##__VA_ARGS__);
+        #define DBG_SOCKET(x, ...) SDU2.print("[CC3000 : SOCKET] " x "\r\n", ##__VA_ARGS__);
     #endif
 #else
     #define DBG_SOCKET(x, ...)
@@ -78,9 +79,9 @@
 
 #if (CC3000_DEBUG_HCI_TX == 1)
     #if (VT100_COLOUR == 1)
-        #define DBG_HCI(x, ...) std::printf("\x1b[2;35;40m[CC3000 : HCI RX] "x"\x1b[0;37;40m\r\n", ##__VA_ARGS__);
+        #define DBG_HCI(x, ...) SDU2.print("\x1b[2;35;40m[CC3000 : HCI RX] " x "\x1b[0;37;40m\r\n", ##__VA_ARGS__);
     #else
-        #define DBG_HCI(x, ...) std::printf("[CC3000 : HCI RX] "x"\r\n", ##__VA_ARGS__);
+        #define DBG_HCI(x, ...) SDU2.print("[CC3000 : HCI RX] " x "\r\n", ##__VA_ARGS__);
     #endif
 #else
     #define DBG_HCI(x, ...)
@@ -88,9 +89,9 @@
 
 #if (CC3000_DEBUG_HCI_RX == 1)
     #if (VT100_COLOUR == 1)
-        #define DBG_HCI_CMD(x, ...) std::printf("\x1b[2;36;40m[CC3000 : HCI TX] "x"\x1b[0;37;40m\r\n", ##__VA_ARGS__);
+        #define DBG_HCI_CMD(x, ...) SDU2.print("\x1b[2;36;40m[CC3000 : HCI TX] " x "\x1b[0;37;40m\r\n", ##__VA_ARGS__);
     #else
-        #define DBG_HCI_CMD(x, ...) std::printf("[CC3000 : HCI TX] "x"\r\n", ##__VA_ARGS__);
+        #define DBG_HCI_CMD(x, ...) SDU2.print("[CC3000 : HCI TX] " x "\r\n", ##__VA_ARGS__);
     #endif
 #else
     #define DBG_HCI_CMD(x, ...)
@@ -98,9 +99,9 @@
 
 #if (CC3000_DEBUG == 1)
     #if (VT100_COLOUR == 1)
-        #define DBG_CC(x, ...) std::printf("\x1b[2;32;40m[CC3000] "x"\x1b[0;37;40m\r\n", ##__VA_ARGS__);
+        #define DBG_CC(x, ...) SDU2.print("\x1b[2;32;40m[CC3000] " x "\x1b[0;37;40m\r\n", ##__VA_ARGS__);
     #else
-        #define DBG_CC(x, ...) std::printf("[CC3000] "x"\r\n", ##__VA_ARGS__);
+        #define DBG_CC(x, ...) SDU2.print("[CC3000] " x "\r\n", ##__VA_ARGS__);
     #endif
 #else
     #define DBG_CC(x, ...)
