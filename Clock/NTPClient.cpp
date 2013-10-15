@@ -119,7 +119,7 @@ NTPResult NTPClient::setTime(const char* host, uint16_t port, uint32_t timeout)
     }
   } while( strcmp(outEndpoint.get_address(), inEndpoint.get_address()) != 0 );
 
-  if(ret < sizeof(NTPPacket)) //TODO: Accept chunks
+  if(ret < (int)sizeof(NTPPacket)) //TODO: Accept chunks
   {
     ERR("Receive packet size does not match");
     m_sock.close();
