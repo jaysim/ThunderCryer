@@ -12,10 +12,11 @@
 #define MAIN_H_
 
 #include "CUSBVirtualCom.h"
-
+#include "CRTCHandler.h"
 
 
 extern chibios_rt::CUSBVirtualCom SDU2;
+extern chibios_rt::CRTCHander rtcHandlerThread;
 
 extern void extcbAlarm(EXTDriver *extp, expchannel_t channel);
 extern void extcbOneSec(EXTDriver *extp, expchannel_t channel);
