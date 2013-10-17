@@ -19,6 +19,7 @@
 #include "gfx.h"
 #include "CDCF77.h"
 #include "CRTCAlarm.h"
+#include "CWiFiHandler.h"
 #include "main.h"
 
 
@@ -127,6 +128,7 @@ public:
 static CDCF77 dcfHandlerThread;
 CRTCHander rtcHandlerThread;
 static ConsoleThread console;
+CWiFiHandler wifiHandler;
 CUSBVirtualCom SDU2;
 
 
@@ -156,8 +158,9 @@ int main(void) {
    */
   dcfHandlerThread.start(NORMALPRIO + 5);
   rtcHandlerThread.start(NORMALPRIO + 4);
-  console.start(NORMALPRIO + 3);
-  SDU2.start(NORMALPRIO + 2);
+  wifiHandler.start(NORMALPRIO + 3);
+  console.start(NORMALPRIO + 2);
+  SDU2.start(NORMALPRIO + 1);
 
   /*
    * Terminal Greetings
