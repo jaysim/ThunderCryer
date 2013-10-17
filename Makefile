@@ -108,7 +108,8 @@ CPPSRC = $(CHCPPSRC) \
          ./Clock/CRTCAlarm.cpp \
          ./Clock/CRTCHandler.cpp \
          ./USB/CUSBVirtualCom.cpp \
-         ./Clock/NTPClient.cpp
+         ./Clock/NTPClient.cpp \
+         ./WiFi/CWifiHandler.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
@@ -140,6 +141,7 @@ INCDIR = ./inc $(PORTINC) $(KERNINC) $(TESTINC) \
          $(CHIBIOS)/os/various \
          ./Clock \
          ./USB \
+         ./WiFi \
          $(CC3000INC) \
          $(CHIBIOS)/os/various/
 
