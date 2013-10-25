@@ -43,6 +43,8 @@
 #define NTP_CLIENT_PORT 0 //Random port
 #define NTP_TIMESTAMP_DELTA 2208988800ull //Diff btw a UNIX timestamp (Starting Jan, 1st 1970) and a NTP timestamp (Starting Jan, 1st 1900)
 
+Notifier<CNTPTime> notifyNTPTime;
+
 NTPClient::NTPClient() : m_sock()
 {
 
