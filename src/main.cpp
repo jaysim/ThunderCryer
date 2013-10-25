@@ -128,7 +128,11 @@ public:
 static CDCF77 dcfHandlerThread;
 CRTCHander rtcHandlerThread;
 static ConsoleThread console;
-CWiFiHandler wifiHandler;
+CWiFiHandler wifiHandler(&SPID1, GPIOC, GPIOC_WIFI_SS,
+                                 SPI_CR1_BR_2 | SPI_CR1_CPHA,
+                                 &EXTD1, GPIOC, GPIOC_WIFI_IRQ ,
+                                 GPIOC, GPIOC_WIFI_EN);
+
 CUSBVirtualCom SDU2;
 
 
