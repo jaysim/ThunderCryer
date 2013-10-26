@@ -35,7 +35,7 @@ namespace chibios_rt {
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_DISABLED, NULL},
+                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOC, extcbWifi},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
@@ -105,6 +105,14 @@ namespace chibios_rt {
       OneSecTick.signalI();
       System::unlockFromIsr();
     }
+  }
+
+  /* Triggered when Wifi issues an event*/
+  void extcbWifi(EXTDriver *extp, expchannel_t channel) {
+    (void)extp;
+    (void)channel;
+
+    wifiHandler.WLAN_IRQHandler()
   }
 
 
