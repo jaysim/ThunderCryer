@@ -9,10 +9,12 @@
  */
 
 #include "CLightHandler.h"
+#include "Notifier.h"
 
 
 namespace chibios_rt {
 
+Notifier<CLightAlarmNotification> notifyLightAlarm;
 
 
 CLightHandler::CLightHandler():u16LightLevel(0),semLightLevelSet(false), bLightAlarm(false){

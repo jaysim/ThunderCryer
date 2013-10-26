@@ -61,11 +61,12 @@ endif
 #
 
 # Define project name here
-PROJECT = ch
+PROJECT = ThunderCryer
 
 # Imported source files and paths
 CHIBIOS = ./lib/Chibios
 GFXLIB = ./lib/uGFX
+CC3000 = ./lib/cc3000
 include $(CHIBIOS)/boards/ThunderCryer/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
@@ -75,6 +76,7 @@ include $(CHIBIOS)/os/various/cpp_wrappers/kernel.mk
 include $(GFXLIB)/gfx.mk
 include $(GFXLIB)/drivers/gdisp/T6963C/gdisp_lld.mk		# your display driver
 include $(GFXLIB)/drivers/ginput/toggle/Pal/ginput_lld.mk	# your input driver
+include $(CC3000)/cc3000.mk
 #include $(CHIBIOS)/test/test.mk
 
 # Define linker script file here
@@ -92,17 +94,22 @@ CSRC = $(PORTSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/chprintf.c \
        $(CHIBIOS)/os/various/chrtclib.c \
-       $(CHIBIOS)/os/various/syscalls.c
+       $(CHIBIOS)/os/various/syscalls.c \
+       $(CHIBIOS)/os/various/shell.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(CHCPPSRC) \
+         $(CC3000SRC) \
          ./src/main.cpp \
          ./src/LibraryHacks.cpp \
          ./Clock/CDCF77.cpp \
-         ./Clock/CLighthandler.cpp \
+         ./Clock/CLightHandler.cpp \
          ./Clock/CRTCAlarm.cpp \
-         ./Clock/CRTCHandler.cpp
+         ./Clock/CRTCHandler.cpp \
+         ./USB/CUSBVirtualCom.cpp \
+         ./Clock/NTPClient.cpp \
+         ./WiFi/CWifiHandler.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
@@ -133,6 +140,9 @@ INCDIR = ./inc $(PORTINC) $(KERNINC) $(TESTINC) \
          $(GFXINC) \
          $(CHIBIOS)/os/various \
          ./Clock \
+         ./USB \
+         ./WiFi \
+         $(CC3000INC) \
          $(CHIBIOS)/os/various/
 
 #

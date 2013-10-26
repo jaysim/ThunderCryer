@@ -18,17 +18,20 @@
 #include "hal.h"
 #include "gfx.h"
 #include "CDCF77.h"
-#include "CRTCHandler.h"
 #include "CRTCAlarm.h"
-#include <ctime>
+#include "CWiFiHandler.h"
+#include "main.h"
 
 
 using namespace chibios_rt;
+using namespace mbed_cc3000;
 
 class ConsoleThread : public BaseStaticThread<2048> {
 private:
   /* The handles for our three consoles */
   GHandle GW1;
+  GHandle ghLabel1;
+  GLabelObject gwLabel1;
 
 protected:
   virtual msg_t main(void) {
@@ -43,25 +46,45 @@ protected:
     font1 = gdispOpenFont("DejaVuSans10");
     gwinSetDefaultFont(font1);
 
-    /* create the three console windows */
-    {
-      GWindowInit     wi;
-
-      wi.show = TRUE;
-      wi.x = 0; wi.y = 0; wi.width = gdispGetWidth(); wi.height = gdispGetHeight();
-      GW1 = gwinConsoleCreate(NULL, &wi);
-
-    }
+    gwinSetDefaultStyle(&WhiteWidgetStyle, FALSE);
 
     /* Set the fore- and background colors for each console */
     gwinSetColor(GW1, Black);
     gwinSetBgColor(GW1, White);
 
+    /* create the three console windows */
+    {
+      GWindowInit     wi;
+      GWidgetInit     wgi;
+
+      // Apply some default values for GWIN
+      wgi.customDraw = 0;
+      wgi.customParam = 0;
+      wgi.customStyle = 0;
+      wgi.g.show = TRUE;
+
+      // Apply the label parameters
+      wgi.g.y = 0;
+      wgi.g.x = 0;
+      wgi.g.width = gdispGetWidth();
+      wgi.g.height = 20;
+      wgi.text = "Hello ChibiOS/GFX!";
+
+      // Create the actual label
+      ghLabel1 = gwinLabelCreate(&gwLabel1, &wgi);
+
+      wi.show = TRUE;
+      wi.x = 0; wi.y = 20; wi.width = gdispGetWidth(); wi.height = gdispGetHeight()-20;
+      GW1 = gwinConsoleCreate(NULL, &wi);
+
+    }
+
+
     /* clear all console windows - to set background */
     gwinClear(GW1);
 
     /* Output some data on the first console */
-    gwinPrintf(GW1, "Hello ChibiOS/GFX!\r\n");
+    gwinPrintf(GW1, "Hello ChibiOS/GFX!\n");
     /*
      * Serves timer events.
      */
@@ -72,13 +95,13 @@ protected:
         CDCFNewTimeArrived* dcf = listenerDCF.get();
         gwinPrintf(GW1, "DCF: ");
         gwinPrintf(GW1, ctime(&dcf->newTime));
+        SDU2.print("DCF: %s\n\r", ctime(&dcf->newTime));
         listenerDCF.release(dcf);
       }
 
       if(listenerActTime.available()){
         CActualTime* time = listenerActTime.get();
-        gwinPrintf(GW1, "Time : ");
-        gwinPrintf(GW1, ctime(&time->time));
+        gwinSetText(ghLabel1, ctime(&time->time), FALSE);
         notifyActTime.release(time);
       }
 
@@ -86,6 +109,7 @@ protected:
         CActualTime* time = listenerActAlarm.get();
         gwinPrintf(GW1, "Alarm: ");
         gwinPrintf(GW1, ctime(&time->time));
+        SDU2.print("Alarm: %s\n\r", ctime(&time->time));
         listenerActAlarm.release(time);
       }
 
@@ -103,8 +127,14 @@ public:
 
 /* Static threads instances.*/
 static CDCF77 dcfHandlerThread;
-static CRTCHander rtcHandlerThread;
+CRTCHander rtcHandlerThread;
 static ConsoleThread console;
+CWiFiHandler wifiHandler(&SPID1, GPIOC, GPIOC_WIFI_SS,
+                                 SPI_CR1_BR_2 | SPI_CR1_CPHA,
+                                 &EXTD1, GPIOC, GPIOC_WIFI_IRQ ,
+                                 GPIOC, GPIOC_WIFI_EN);
+
+CUSBVirtualCom SDU2;
 
 
 
@@ -133,14 +163,20 @@ int main(void) {
    */
   dcfHandlerThread.start(NORMALPRIO + 5);
   rtcHandlerThread.start(NORMALPRIO + 4);
-  console.start(NORMALPRIO + 3);
+  wifiHandler.start(NORMALPRIO + 3);
+  console.start(NORMALPRIO + 2);
+  SDU2.start(NORMALPRIO + 1);
+
+  /*
+   * Terminal Greetings
+   */
+  SDU2.print("ThunderCryer Debug Terminal\n\r");
 
   /*
    * Serves timer events.
    */
   while (true) {
     BaseThread::sleep(MS2ST(500));
-
   }
 
   return 0;
