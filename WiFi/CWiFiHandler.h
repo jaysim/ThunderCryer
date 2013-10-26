@@ -17,7 +17,6 @@
 #include "ch.hpp"
 #include "hal.h"
 
-namespace mbed_cc3000 {
 
   class CWiFiHandler : public chibios_rt::BaseStaticThread<2048>  {
   private:
@@ -58,6 +57,12 @@ namespace mbed_cc3000 {
      *  \return none
      */
     void print_cc3000_info();
+
+    /*
+     * callback for exti driver
+     */
+    void WLAN_IRQHandler();
+
     /**
      *  \brief Ctor.
      *  \param spidrv      Pointer to the spi driver resource
@@ -76,5 +81,4 @@ namespace mbed_cc3000 {
     virtual ~CWiFiHandler();
   };
 
-} /* namespace cc3000 */
 #endif /* CWIFIHANDLER_H_ */
