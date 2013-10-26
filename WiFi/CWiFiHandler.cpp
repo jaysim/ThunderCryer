@@ -30,6 +30,9 @@ namespace mbed_cc3000 {
 
 
   }
+  void CWiFiHandler::WLAN_IRQHandler(){
+    wifi._spi.WLAN_IRQHandler();
+  }
 
   CWiFiHandler::~CWiFiHandler() {
     // TODO Auto-generated destructor stub
