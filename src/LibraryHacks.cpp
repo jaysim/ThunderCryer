@@ -16,6 +16,8 @@
  *  Author: Andy  */
 
 #include "ch.hpp"
+#include "hal.h"
+#include "chrtclib.h"
 #include <cstdlib>
 
 
@@ -34,6 +36,17 @@ void __verbose_terminate_handler() {
 extern "C" void __cxa_pure_virtual() {
 	for(;;);
 }
+
+
+/*
+ * time implementation
+ */
+extern "C" int _gettimeofday( struct timeval *ptimeval, void *ptimezone){
+  (void)ptimezone;
+  (void)ptimeval;
+  return (int)rtcGetTimeUnixSec(&RTCD1);
+}
+
 
 /*
  * Implement C++ new/delete operators using the heap
