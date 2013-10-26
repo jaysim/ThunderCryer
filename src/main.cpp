@@ -24,6 +24,7 @@
 
 
 using namespace chibios_rt;
+using namespace mbed_cc3000;
 
 class ConsoleThread : public BaseStaticThread<2048> {
 private:
