@@ -65,7 +65,7 @@ namespace mbed_cc3000 {
   }
 
   void cc3000_spi::assertCS(void){
-    spiAcquireBus(_spidrv);             /* Acquire ownership of the bus.    */
+    //spiAcquireBus(_spidrv);             /* Acquire ownership of the bus.    */
     spiStart(_spidrv, &_spicfg);         /* Setup transfer parameters.       */
     spiSelect(_spidrv);                 /* Slave Select assertion.          */
   }
@@ -73,7 +73,7 @@ namespace mbed_cc3000 {
 
   void cc3000_spi::deassertCS(void){
     spiUnselect(_spidrv);                /* Slave Select de-assertion.       */
-    spiReleaseBus(_spidrv);              /* Ownership release.               */
+    //spiReleaseBus(_spidrv);              /* Ownership release.               */
   }
 
   void cc3000_spi::wlan_irq_enable()
