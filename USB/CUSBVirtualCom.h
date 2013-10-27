@@ -26,7 +26,12 @@ namespace chibios_rt {
   friend msg_t USBBlinker(void *arg);
 
 
-  private:
+  protected:
+    virtual msg_t main(void);
+
+
+
+  public:
 
     /*===========================================================================*/
     /* USB related stuff.                                                        */
@@ -38,11 +43,6 @@ namespace chibios_rt {
     static const uint8_t USBD2_DATA_REQUEST_EP;
     static const uint8_t USBD2_DATA_AVAILABLE_EP;
     static const uint8_t USBD2_INTERRUPT_REQUEST_EP;
-
-    /*
-     * Serial over USB Driver structure.
-     */
-    static SerialUSBDriver SDU2;
 
     /*
      * USB Device Descriptor.
@@ -141,12 +141,7 @@ namespace chibios_rt {
      * Handles the USB driver global events.
      */
     static void usb_event(USBDriver *usbp, usbevent_t event);
-  protected:
-    virtual msg_t main(void);
 
-
-
-  public:
     /**
      * wrap chprintf
      */
