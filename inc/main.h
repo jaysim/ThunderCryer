@@ -13,13 +13,13 @@
 
 #include "CUSBVirtualCom.h"
 #include "CRTCHandler.h"
-#include "CWiFiHandler.h"
 #include "cc3000.h"
+#include "CWiFiHandler.h"
 
 
-extern chibios_rt::CUSBVirtualCom SDU2;
 extern chibios_rt::CRTCHander rtcHandlerThread;
-extern mbed_cc3000::CWiFiHandler wifiHandler;
+extern chibios_rt::CUSBVirtualCom USBCom;
+
 
 extern void extcbAlarm(EXTDriver *extp, expchannel_t channel);
 extern void extcbOneSec(EXTDriver *extp, expchannel_t channel);
