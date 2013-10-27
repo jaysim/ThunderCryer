@@ -66,6 +66,19 @@ void operator delete(void *p) {
 void operator delete[](void *p) {
 	free(p);
 }
+extern SerialUSBDriver SDU2;
+int _write_r(struct _reent *r, int file, char * ptr, int len)
+{
+  (void)r;
+  (void)file;
+  (void)ptr;
+  while(len){
+    chSequentialStreamPut(&SDU2, *ptr);
+    ptr++;
+    len--;
+  }
+  return len;
+}
 
 
 extern "C" {
