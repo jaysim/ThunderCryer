@@ -41,9 +41,8 @@
 #ifndef CC3000_H
 #define CC3000_H
 
-#include "ch.hpp"
+#include "cstdint"
 #include "hal.h"
-#include "main.h"
 #include "cc3000_common.h"
 #include "cc3000_spi.h"
 #include "cc3000_simplelink.h"
@@ -51,21 +50,25 @@
 #include "cc3000_nvmem.h"
 #include "cc3000_socket.h"
 
+
+using std::int32_t;
+
+
 #define MAX_SOCKETS 4
 // cc3000 Ethernet Interface - enabled by default
 #define CC3000_ETH_COMPAT   1
 
 /** Enable debug messages - set 1  */
 // Debug - Socket interface messages
-#define CC3000_DEBUG_SOCKET 1
+#define CC3000_DEBUG_SOCKET 0
 // Debug - HCI TX messages
-#define CC3000_DEBUG_HCI_TX 1
+#define CC3000_DEBUG_HCI_TX 0
 // Debug - HCI Rx messages
-#define CC3000_DEBUG_HCI_RX 1
+#define CC3000_DEBUG_HCI_RX 0
 // Debug - General Debug
-#define CC3000_DEBUG        1
+#define CC3000_DEBUG        0
 // Add colour to the debug messages, requires a VT100 terminal like putty, comment out to remove
-#define VT100_COLOUR        1
+#define VT100_COLOUR        0
 
 #if (CC3000_DEBUG_SOCKET == 1)
     #if (VT100_COLOUR == 1)
@@ -1061,7 +1064,7 @@ private:
 
 /** SPI communication layer
  */
-class cc3000_spi : private chibios_rt::BaseThread {
+class cc3000_spi {
 public:
     /**
      *  \brief Ctor
@@ -1554,7 +1557,7 @@ private:
 
 /** The main object of cc3000 implementation
  */
-class cc3000 : private chibios_rt::BaseThread{
+class cc3000 {
 public:
     /** status structure */
     typedef struct {

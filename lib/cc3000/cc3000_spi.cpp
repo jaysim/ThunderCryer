@@ -106,11 +106,11 @@ namespace mbed_cc3000 {
 
   uint32_t cc3000_spi::first_write(uint8_t *buffer, uint16_t length) {
     assertCS();
-    sleep(MS2ST(50));
+    chibios_rt::BaseThread::sleep(MS2ST(50));
 
     /* first 4 bytes of the data */
     write_synchronous(buffer, 4);
-    sleep(MS2ST(50));
+    chibios_rt::BaseThread::sleep(MS2ST(50));
     write_synchronous(buffer + 4, length - 4);
     _spi_info.spi_state = eSPI_STATE_IDLE;
 

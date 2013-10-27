@@ -177,7 +177,7 @@ void cc3000::start_smart_config(const uint8_t *smart_config_key) {
     //Wait until CC3000 is disconected
     while (_status.connected == 1)
     {
-        sleep(MS2ST(5));
+      chibios_rt::BaseThread::sleep(MS2ST(5));
         _event.hci_unsolicited_event_handler();
     }
 
@@ -191,7 +191,7 @@ void cc3000::start_smart_config(const uint8_t *smart_config_key) {
     // Wait for Smart config finished
     while (_status.smart_config_complete == 0)
     {
-        sleep(MS2ST(100));
+      chibios_rt::BaseThread::sleep(MS2ST(100));
     }
 
     DBG_CC("Smartconfig finished");
@@ -214,7 +214,7 @@ void cc3000::start_smart_config(const uint8_t *smart_config_key) {
     // reset the CC3000
     _wlan.stop();
     _status.enabled = 0;
-    sleep(MS2ST(5));
+    chibios_rt::BaseThread::sleep(MS2ST(5));
     _wlan.start(0);
     _status.enabled = 1;
 
@@ -226,7 +226,7 @@ bool cc3000::connect_secure(const uint8_t *ssid, const uint8_t *key, int32_t sec
     uint32_t ret;
 
     //_wlan.disconnect();
-    sleep(MS2ST(3));
+    chibios_rt::BaseThread::sleep(MS2ST(3));
     ret = _wlan.connect(security_mode, ssid, strlen((const char *)ssid), 0, (uint8_t *)key, strlen((const char *)key));
     if (ret == 0) { /* TODO static internal cc3000 state 0 to TRUE */
       ret = true;
@@ -309,7 +309,7 @@ void cc3000::stop(void) {
 void cc3000::restart(uint8_t patch) {
     _wlan.stop();
     _status.enabled = 0;
-    sleep(MS2ST(500));
+    chibios_rt::BaseThread::sleep(MS2ST(500));
     _wlan.start(patch);
     _status.enabled = 1;
 }
@@ -318,7 +318,7 @@ bool cc3000::connect_open(const uint8_t *ssid) {
     uint32_t ret;
 
     _wlan.disconnect();
-    sleep(MS2ST(3));
+    chibios_rt::BaseThread::sleep(MS2ST(3));
 #ifndef CC3000_TINY_DRIVER
     ret = _wlan.connect(0,ssid, strlen((const char *)ssid), 0, 0, 0);
 #else

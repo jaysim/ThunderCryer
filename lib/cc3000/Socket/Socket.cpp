@@ -18,12 +18,12 @@
 
 #include "Socket.h"
 #include "string.h"
-#include "main.h"
+
 
 Socket::Socket() : _sock_fd(-1), _blocking(true), _timeout(1500) {
     _cc3000_module = cc3000::get_instance();
     if (_cc3000_module == NULL) {
-      SDU2.print("Socket constructor error: no cc3000 instance available!\r\n");
+      DBG_SOCKET("Socket constructor error: no cc3000 instance available!\r\n");
     }
 }
 

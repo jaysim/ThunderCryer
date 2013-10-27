@@ -19,7 +19,6 @@
 #include "Socket/Endpoint.h"
 #include "string.h"
 #include "stdio.h"
-#include "main.h"
 
  #include "cc3000.h"
 
@@ -65,7 +64,7 @@ static char *inet_ntoa_r(const in_addr addr, char *buf, int buflen)
 Endpoint::Endpoint()  {
     _cc3000_module = cc3000::get_instance();
     if (_cc3000_module == NULL) {
-        SDU2.print("Endpoint constructor error: no cc3000 instance available!\r\n");
+      DBG_SOCKET("Endpoint constructor error: no cc3000 instance available!\r\n");
     }
     reset_address();
 }

@@ -17,13 +17,13 @@
  */
 
 #include "TCPSocketConnection.h"
-#include "main.h"
+
 
 
 TCPSocketConnection::TCPSocketConnection() : _is_connected(false) {
     _cc3000_module = cc3000::get_instance();
     if (_cc3000_module == NULL) {
-      SDU2.print("Endpoint constructor error: no cc3000 instance available!\r\n");
+      DBG_SOCKET("Endpoint constructor error: no cc3000 instance available!\r\n");
     }
 }
 
