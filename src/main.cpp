@@ -95,7 +95,7 @@ protected:
         CDCFNewTimeArrived* dcf = listenerDCF.get();
         gwinPrintf(GW1, "DCF: ");
         gwinPrintf(GW1, ctime(&dcf->newTime));
-        SDU2.print("DCF: %s\n\r", ctime(&dcf->newTime));
+        USBCom.print("DCF: %s\n\r", ctime(&dcf->newTime));
         listenerDCF.release(dcf);
       }
 
@@ -109,7 +109,7 @@ protected:
         CActualTime* time = listenerActAlarm.get();
         gwinPrintf(GW1, "Alarm: ");
         gwinPrintf(GW1, ctime(&time->time));
-        SDU2.print("Alarm: %s\n\r", ctime(&time->time));
+        USBCom.print("Alarm: %s\n\r", ctime(&time->time));
         listenerActAlarm.release(time);
       }
 
@@ -134,9 +134,15 @@ CWiFiHandler wifiHandler(&SPID1, GPIOC, GPIOC_WIFI_SS,
                                  &EXTD1, GPIOC, GPIOC_WIFI_IRQ ,
                                  GPIOC, GPIOC_WIFI_EN);
 
-CUSBVirtualCom SDU2;
+CUSBVirtualCom USBCom;
 
+/* Triggered when Wifi issues an event*/
+void extcbWifi(EXTDriver *extp, expchannel_t channel) {
+  (void)extp;
+  (void)channel;
 
+  wifiHandler.WLAN_IRQHandler();
+}
 
 
 /*
@@ -165,12 +171,12 @@ int main(void) {
   rtcHandlerThread.start(NORMALPRIO + 4);
   wifiHandler.start(NORMALPRIO + 3);
   console.start(NORMALPRIO + 2);
-  SDU2.start(NORMALPRIO + 1);
+  USBCom.start(NORMALPRIO + 1);
 
   /*
    * Terminal Greetings
    */
-  SDU2.print("ThunderCryer Debug Terminal\n\r");
+  USBCom.print("ThunderCryer Debug Terminal\n\r");
 
   /*
    * Serves timer events.

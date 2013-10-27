@@ -15,6 +15,7 @@
 #include "time.h"
 #include "chrtclib.h"
 #include "stm32f4xx.h"
+#include "main.h"
 
 namespace chibios_rt {
 
@@ -107,13 +108,7 @@ namespace chibios_rt {
     }
   }
 
-  /* Triggered when Wifi issues an event*/
-  void extcbWifi(EXTDriver *extp, expchannel_t channel) {
-    (void)extp;
-    (void)channel;
 
-    wifiHandler.WLAN_IRQHandler()
-  }
 
 
   CRTCHander::CRTCHander() {
