@@ -36,7 +36,7 @@ namespace chibios_rt {
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
-                                    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOC, extcbWifi},
+                                    {EXT_CH_MODE_FALLING_EDGE | EXT_MODE_GPIOC, extcbWifi},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
                                     {EXT_CH_MODE_DISABLED, NULL},
@@ -160,6 +160,7 @@ namespace chibios_rt {
      * for RTC Interrupt
      */
     extStart(&EXTD1, &extcfg);
+    extChannelDisable(&EXTD1,GPIOC_WIFI_IRQ);
 
     /* set wakeup */
     /* for time update every second */
