@@ -50,6 +50,8 @@ using namespace mbed_cc3000;
 
     wifi.start(0);
 
+    sleep(MS2ST(100));
+
     while(1){
 
       printf("cc3000 NTP client. \r\n");
@@ -87,6 +89,8 @@ using namespace mbed_cc3000;
         {
           printf("Error. \r\n");
         }
+
+        sleep(MS2ST(100));
       }
       wifi.disconnect();
     }
