@@ -22,10 +22,11 @@
 //Enable debug
 #define __DEBUG__
 #include "main.h"
+#include "stdio.h"
 #include "string.h"
-#define DBG(x, ...) SDU2.print("[NTPClient : DBG]" x "\r\n", ##__VA_ARGS__);
-#define WARN(x, ...) SDU2.print("[NTPClient : WARN]" x "\r\n", ##__VA_ARGS__);
-#define ERR(x, ...) SDU2.print("[NTPClient : ERR]" x "\r\n", ##__VA_ARGS__);
+#define DBG(x, ...) printf("[NTPClient : DBG]" x "\r\n", ##__VA_ARGS__);
+#define WARN(x, ...) printf("[NTPClient : WARN]" x "\r\n", ##__VA_ARGS__);
+#define ERR(x, ...) printf("[NTPClient : ERR]" x "\r\n", ##__VA_ARGS__);
 
 #else
 //Disable debug
