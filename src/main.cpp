@@ -169,9 +169,11 @@ int main(void) {
    */
   dcfHandlerThread.start(NORMALPRIO + 5);
   rtcHandlerThread.start(NORMALPRIO + 4);
-  wifiHandler.start(NORMALPRIO + 3);
+
   console.start(NORMALPRIO + 2);
   USBCom.start(NORMALPRIO + 1);
+
+  wifiHandler.start(NORMALPRIO + 10);
 
   /*
    * Terminal Greetings
